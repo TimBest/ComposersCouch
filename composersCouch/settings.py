@@ -40,8 +40,8 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.staticfiles',
 
-    #'autocomplete_light',
-    #'annoying',
+    'autocomplete_light',
+    'annoying',
     #'crispy_forms',
     #'compressor',
     #'djcelery',
