@@ -50,7 +50,7 @@ INSTALLED_APPS = (
     'guardian',
     'pagination',
     'social_auth',
-    #'static_precompiler',
+    'static_precompiler',
 
     #'sorl.thumbnail',
     #'accounts',
