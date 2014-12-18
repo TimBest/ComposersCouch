@@ -46,14 +46,27 @@ INSTALLED_APPS = (
     'compressor',
     'djcelery',
     'embed_video',
-    'feedly',
+    #'feedly',
     'guardian',
     'pagination',
     'social_auth',
     'static_precompiler',
 
     'sorl.thumbnail',
-
+    #'accounts',
+    #'contact',
+    #'customProfile.fan',
+    #'customProfile.musician',
+    #'customProfile.venue',
+    #'feeds',
+    #'messages',
+    #'photos',
+    #'progressbarupload',
+    #'request',
+    #'search',
+    #'schedule',
+    #'tracks',
+    #'userena',
 )
 
 MIDDLEWARE_CLASSES = (
