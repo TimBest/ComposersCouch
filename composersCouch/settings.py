@@ -48,8 +48,8 @@ INSTALLED_APPS = (
     'embed_video',
     #'feedly',
     'guardian',
-    #'pagination',
-    #'social_auth',
+    'pagination',
+    'social_auth',
     #'static_precompiler',
 
     #'sorl.thumbnail',
