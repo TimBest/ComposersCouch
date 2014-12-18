@@ -60,13 +60,13 @@ INSTALLED_APPS = (
     #'customProfile.venue',
     #'feeds',
     #'threaded_messages',
-    #'photos',
-    #'progressbarupload',
-    #'request',
-    #'search',
-    #'schedule',
-    #'tracks',
-    #'userena',
+    'photos',
+    'progressbarupload',
+    'request',
+    'search',
+    'schedule',
+    'tracks',
+    'userena',
 )
 
 MIDDLEWARE_CLASSES = (
