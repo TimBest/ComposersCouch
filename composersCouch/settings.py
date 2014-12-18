@@ -53,7 +53,7 @@ INSTALLED_APPS = (
     'static_precompiler',
 
     'sorl.thumbnail',
-    #'accounts',
+    'accounts',
     #'contact',
     #'customProfile.fan',
     #'customProfile.musician',
