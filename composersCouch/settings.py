@@ -75,8 +75,8 @@ else:
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'ebdb',#os.environ['RDS_DB_NAME'],
             'USER': 'ComposersCouchDB',#os.environ['RDS_USERNAME'],
-            'PASSWORD': '',#os.environ['RDS_PASSWORD'],
-            'HOST': '',#os.environ['RDS_HOSTNAME'],
+            'PASSWORD': '01SynchronousPenitent',#os.environ['RDS_PASSWORD'],
+            'HOST': 'aavtzt0e4v3gsr.c7gjzwck4i8q.us-east-1.rds.amazonaws.com',#os.environ['RDS_HOSTNAME'],
             'PORT': '5432',#os.environ['RDS_PORT'],
         }
     }
