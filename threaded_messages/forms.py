@@ -30,7 +30,8 @@ class ComposeForm(ModelForm):
               User.objects.all(),
               widget=MultipleChoiceWidget(
                   'UserAutocomplete',
-                  autocomplete_js_attributes={'placeholder':''}))
+                  attrs
+={'placeholder':''}))
     subject = forms.CharField(label=_(u"Subject"))
 
     class Meta:

@@ -33,7 +33,8 @@ class MemberForm(ModelForm):
                       required=False,
                       widget=MultipleChoiceWidget(
                           'InstrumentAutocomplete',
-                          autocomplete_js_attributes={'placeholder':''}))
+                          attrs
+={'placeholder':''}))
 
     def __init__(self, *args, **kw):
       super(MemberForm, self).__init__(*args, **kw)

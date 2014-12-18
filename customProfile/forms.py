@@ -104,7 +104,8 @@ class ProfileForm(autocomplete_light.ModelForm):
         required=False,
         widget=autocomplete_light.MultipleChoiceWidget(
             'GenreAutocomplete',
-            autocomplete_js_attributes={'placeholder':''}
+            attrs
+={'placeholder':''}
         )
     )
     def __init__(self, *args, **kwargs):

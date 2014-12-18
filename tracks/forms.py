@@ -18,7 +18,8 @@ class AlbumForm(ModelForm):
                   required=False,
                   widget=MultipleChoiceWidget(
                       'GenreAutocomplete',
-                      autocomplete_js_attributes={'placeholder':''}))
+                      attrs
+={'placeholder':''}))
 
     def __init__(self, *args, **kw):
         super(AlbumForm, self).__init__(*args, **kw)
@@ -181,7 +182,8 @@ class TrackForm(ModelForm):
                   User.objects.all(),
                   widget=ChoiceWidget(
                       'UserAutocomplete',
-                      autocomplete_js_attributes={'placeholder':''}))
+                      attrs
+={'placeholder':''}))
     def __init__(self, *args, **kw):
         super(TrackForm, self).__init__(*args, **kw)
         self.fields['host'].required = False
@@ -203,7 +205,8 @@ class HostTrackForm(ModelForm):
                 required=False,
                 widget=ChoiceWidget(
                     'MusicianProfileAutocomplete',
-                    autocomplete_js_attributes={'placeholder':''}))
+                    attrs
+={'placeholder':''}))
     def __init__(self, *args, **kw):
         super(HostTrackForm, self).__init__(*args, **kw)
         self.helper = FormHelper()

@@ -86,16 +86,19 @@ class UserSelectForm(ModelForm):
     headliner = forms.ModelChoiceField(MusicianProfile.objects.all(),
                     widget=ChoiceWidget(
                         'MusicianProfileAutocomplete',
-                        autocomplete_js_attributes={'placeholder':''}))
+                        attrs
+={'placeholder':''}))
     host = forms.ModelChoiceField(User.objects.all(),
               widget=ChoiceWidget(
                   'UserAutocomplete',
-                  autocomplete_js_attributes={'placeholder':''}))
+                  attrs
+={'placeholder':''}))
     openers = forms.ModelMultipleChoiceField(MusicianProfile.objects.all(),
                   required=False,
                   widget=MultipleChoiceWidget(
                       'MusicianProfileAutocomplete',
-                      autocomplete_js_attributes={'placeholder':''}))
+                      attrs
+={'placeholder':''}))
     def __init__(self, *args, **kwargs):
         kwargs.pop('user', None)
         super(UserSelectForm, self).__init__(*args, **kwargs)
