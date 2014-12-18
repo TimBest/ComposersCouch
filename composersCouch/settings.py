@@ -69,6 +69,7 @@ if DEVELOPMENT:
         }
     }
 else:
+    POSTGIS_VERSION = (2, 1, 1)
     DATABASES = {
         'default': {
             'ENGINE': 'django.contrib.gis.db.backends.postgis',
