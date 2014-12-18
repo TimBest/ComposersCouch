@@ -20,7 +20,7 @@ class Post(models.Model):
     site_votes = models.PositiveIntegerField(default=1)
 
     def create_activity(self):
-        from feedly.activity import Activity
+        from stream_framework.activity import Activity
         from feeds.verbs import Post as PostVerb
         activity = Activity(
             self.user,

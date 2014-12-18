@@ -2,14 +2,14 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.measure import D
 from annoying.functions import get_object_or_None
 
-from stream_framework.feed_managers.base import Feedly, FanoutPriority, add_operation, remove_operation
+from stream_framework.feed_managers.base import Manager, FanoutPriority, add_operation, remove_operation
 
 from models import Follow, Post, Upvote
 from post_feed import AggregatedPostFeed, PostFeed, UserPostFeed, LocalFeed, RegionalFeed
 from contact.models import Zipcode
 
 
-class PostFeedly(Feedly):
+class PostFeedly(Manager):
     feed_classes = dict(
         normal=PostFeed,
         aggregated=AggregatedPostFeed
