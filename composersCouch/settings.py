@@ -133,6 +133,9 @@ else:
         'default': {
             'ENGINE': 'django.contrib.gis.db.backends.postgis',
             'NAME': 'ebdb',#os.environ['RDS_DB_NAME'],
+            'OPTIONS': {
+                'options': '-c search_path=gis,public,pg_catalog'
+            },
             'USER': 'ComposersCouchDB',#os.environ['RDS_USERNAME'],
             'PASSWORD': '01SynchronousPenitent',#os.environ['RDS_PASSWORD'],#
             'HOST': 'aavtzt0e4v3gsr.c7gjzwck4i8q.us-east-1.rds.amazonaws.com',#os.environ['RDS_HOSTNAME'],
