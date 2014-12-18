@@ -42,8 +42,8 @@ INSTALLED_APPS = (
 
     'autocomplete_light',
     'annoying',
-    #'crispy_forms',
-    #'compressor',
+    'crispy_forms',
+    'compressor',
     #'djcelery',
     #'embed_video',
     #'feedly',
