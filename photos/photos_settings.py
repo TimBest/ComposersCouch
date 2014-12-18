@@ -1,0 +1,7 @@
+# Image Store Settings
+PHOTOS_UPLOAD_TO = 'photos/'
+PHOTOS_IMAGES_ON_PAGE = 20
+PHOTOS_SELF_MANAGE = True
+PHOTOS_TEMPLATE = 'base.html'
+PHOTOS_SHOW_USER = True
+PHOTOS_LOAD_CSS = True

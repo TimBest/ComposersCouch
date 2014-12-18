@@ -1,0 +1,245 @@
+Acid Jazz,Funk,Disco,Hip-Hop/Rap,Jazz,R&B/Soul
+Acoustic,Acoustic
+Acoustic Blues,Acoustic,Blues
+Adult Alternative,Alternative,Rock
+Adult Contemporary,Vocal,Rock
+Africa,World
+Afrobeat,Funk,Jazz,World
+Alternative,Alternative
+Alternative Country,Alternative,Country
+Alternative Folk,Alternative,Folk,Singer/Songwriter
+Alternative Rap,Alternative,Hip-Hop/Rap
+Alternative Rock,Alternative,Rock
+Alternative latino,Alternative,Latin
+Ambient,Electronic
+Americana,Country
+American Traditional Rock,Rock
+Arena Rock,Metal,Rock
+Asia,World
+Australia,World
+Avant-Garde,Classical
+Avant-Garde Jazz,Classical,Jazz
+Baladas y Boleros,Latin
+Barbershop,Vocal
+Baroque,Classical
+Big Band,Jazz
+Bluegrass,Country
+Blue Note,Jazz
+Blues,Blues
+Blues-Rock,Blues,Rock
+Bossa Nova,World
+Bounce,Hip-Hop/Rap
+Brass,Brass
+Brazilian,Latin
+Breakbeat,Dance
+British Invasion,Rock
+Britpop,Pop
+Cajun,World
+Caribbean,World
+CCM,Christian & Gospel
+Celtic,World
+Celtic Folk,World
+Chamber Music,Classical
+Chant,Classical
+Chanukah,Holiday
+Chicago Blues,Blues
+Chinese Alternative,Alternative,World
+Children's,Children's
+Choral,Classical
+Christian & Gospel,Christian & Gospel
+Christian Metal,Christian & Gospel,Metal
+Christian Pop,Christian & Gospel,Pop
+Christian Rap,Christian & Gospel,Rap
+Christian Rock,Christian & Gospel,Rock
+Christmas,Holiday
+Cinema,Soundtrack
+Classical,Classical
+Classical Crossover,Classical
+Classic Blues,Blues,Classical
+Classic Christian,Christian & Gospel
+College Rock,Alternative,Rock
+Contemporary,Singer/Songwriter
+Contemporary Bluegrass,Country
+Contemporary Blues,Blues
+Contemporary Celtic,World
+Contemporary Country,Country
+Contemporary Folk,Singer/Songwriter
+Contemporary Gospel,Christian & Gospel
+Contemporary Jazz,Jazz
+Contemporary Latin,Latin
+Contemporary R&B,R&B/Soul
+Comedy,Comedy
+Cool,Jazz
+Country,Country
+Country Blues,Country,Blues
+Country Gospel,Christian & Gospel,Country
+Crossover Jazz,Jazz
+Crunk,Electronic
+Dance,Dance
+Dancehall,Dance,Reggae
+Death Metal/Black Metal,Metal,Rock
+Delta Blues,Blues
+Dirty South,Hip-Hop/Rap
+Disco,Disco
+Dixieland,Jazz
+Doo-wop,Vocal
+Doo Wop,R&B/Soul
+Downtempo,Electronic
+Drinking Songs,World
+Drone,World
+Dub,Reggae
+Dubstep,Dance
+Early Music,Classical
+East Coast Rap,Hip-Hop/Rap
+Easter,Holiday
+Electric Blues,Blues
+Electro,Electronic
+Electronica,Electronic
+Electronic,Electronic
+Electronic Rock,Electronic,Rock
+Environmental,New Age
+Ethio-jazz,Jazz
+Europe,World
+Exercise,Dance
+Experimental Rock,Alternative,Rock
+Folk,Folk
+Folk-Rock,Folk,Rock,Singer/Songwriter
+France,World
+Funk,Funk
+Fusion,Jazz
+Gangsta Rap,Hip-Hop/Rap
+Garage,Rock
+Glam Rock,Rock
+Gospel,Christian & Gospel
+Goth Rock,Alternative, Rock
+Grunge,Punk,Metal
+Post-Grunge,Alternative
+Hair Metal,Metal
+Halloween,Holiday
+Hard Bop,Jazz
+Hardcore,Dance
+Post-Hardcore,Punk,Rock
+Hardcore Punk,Punk,Rock
+Hardcore Rap,Hip-Hop/Rap
+Hard Dance,Dance
+Hard Rock,Alternative
+Hard Rock,Rock
+Hawaii,World
+Healing,New Age
+Hi-NRG/Eurodance,Dance
+High Classical,Classical
+Hip-Hop,Hip-Hop/Rap
+Hip-Hop/Rap,Hip-Hop/Rap
+Holiday,Holiday
+Honky Tonk,Country
+House,Dance
+IDM/Experimental,Electronic
+Impressionist,Classical
+Indian Pop,World
+Indie,Indie
+Indie Rock,Alternative,Rock
+Industrial,Electronic
+Instrumental,Instrumental
+Jackin House,Dance
+Jam Bands,Rock
+Japan,World
+Japanese Pop,World
+Jazz,Jazz
+Jungle/Drum & bass,Dance
+Klezmer,World
+Korean Indie,Alternative
+Latin,Latin
+Latin Jazz,Jazz
+Latin Jazz,Latin
+Latin Rap,Hip-Hop/Rap
+Lullabies,Children's
+Mainstream Jazz,Jazz
+Medieval,Classical
+Meditation,New Age
+Metal,Metal,Rock
+Middle East,World
+Minimalism,Classical
+Modern Composition,Classical
+Motown,R&B/Soul
+Musicals,Soundtrack
+Nature,New Age
+Neo-Soul,R&B/Soul
+New Age,New Age
+New Acoustic,Singer/Songwriter
+New Wave,Alternative
+North America,World
+Novelty,Comedy
+Old School Rap,Hip-Hop/Rap
+Opera,Classical
+Orchestral,Classical
+Original Score,Soundtrack
+Outlaw Country,Country
+Polka,World
+Pop,Pop
+Pop/Rock,Pop,Rock
+Pop Latino,Latin
+Praise & Worship,Christian & Gospel
+Prog-Rock/Art Rock,Rock
+Progressive Rock,Alternative,Rock
+Psychedelic,Rock
+Punk,Alternative,Punk
+Qawwali,Christian & Gospel
+Quiet Storm,R&B/Soul
+R&B,R&B/Soul
+Ragtime,Jazz
+Rap,Hip-Hop/Rap
+Raices,Latin
+Reggae,Reggae
+Reggaeton y Hip-Hop,Latin,Hip-Hop/Rap
+Regional Mexicano,Latin
+Relaxation,New Age
+Renaissance,Classical
+Rock,Rock
+Rock & Roll,Rock
+Rockabilly,Rock
+Rock Latin,Latin,Rock
+Romantic,Classical
+Roots Reggae,Reggae
+Roots Rock,Rock
+Salsa y Tropical,Latin
+Shoegaze,Alternative
+Sing-Along,Children's
+Singer/Songwriter,Rock,Singer/Songwriter
+Ska,Reggae
+Ska Punk,Punk,Reggae,Rock
+Smooth Jazz,Jazz
+Soft Rock,Pop,Rock
+Soul,R&B/Soul
+Soundtrack,Soundtrack
+South Africa,World
+South America,World
+Southern Gospel,Christian & Gospel
+Southern Rock,Rock
+Standards,Vocal
+Steampunk,Alternative
+Stories,Children's
+Surf,Rock
+Techno,Dance
+Teen Pop,Pop
+Tex-Mex,World
+Thanksgiving,Holiday
+Traditional Bluegrass,Country
+Traditional Celtic,World
+Traditional Country,Country
+Traditional Folk,Singer/Songwriter
+Traditional Gospel,Christian & Gospel
+Traditional Pop,Vocal
+Trad Jazz,Jazz
+Trance,Dance
+Travel,New Age
+TV Soundtrack,Soundtrack
+Underground Rap,Hip-Hop/Rap
+Urban Cowboy,Country
+Vocal,Vocal
+Vocal Jazz,Vocal
+Vocal Pop,Vocal
+Wedding Music,Classical
+West Coast Rap,Hip-Hop/Rap
+World,World
+Worldbeat,World
+Zydeco,World

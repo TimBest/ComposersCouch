@@ -1,0 +1,33 @@
+"""Categories"""
+
+Acoustic
+Alternative
+Blues
+Brass
+Children's
+Christian & Gospel
+Classical
+Comedy
+Country
+Dance
+Disco
+Electronic
+Folk
+Funk
+Hip-Hop/Rap
+Holiday
+Indie
+Instrumental
+Jazz
+Latin
+Metal
+New Age
+Pop
+Punk
+R&B/Soul
+Reggae
+Rock
+Singer/Songwriter
+Soundtrack
+Vocal
+World
