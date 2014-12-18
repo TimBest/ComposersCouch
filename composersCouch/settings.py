@@ -41,17 +41,17 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'autocomplete_light',
-    'annoying',
-    'crispy_forms',
-    'compressor',
-    'djcelery',
-    'embed_video',
+    #'annoying',
+    #'crispy_forms',
+    #'compressor',
+    #'djcelery',
+    #'embed_video',
     #'feedly',
-    'guardian',
-    'pagination',
-    'social_auth',
+    #'guardian',
+    #'pagination',
+    #'social_auth',
     #'sorl.thumbnail',
-    'static_precompiler',
+    #'static_precompiler',
 
 )
 
