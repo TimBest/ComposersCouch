@@ -46,7 +46,7 @@ INSTALLED_APPS = (
     'compressor',
     'djcelery',
     'embed_video',
-    #'feedly',
+    'feedly',
     'guardian',
     'pagination',
     'social_auth',
@@ -86,12 +86,34 @@ if DEVELOPMENT:
             'ATOMIC_REQUESTS': True,
         }
     }
-    CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-        'LOCATION': '127.0.0.1:11211',
+    HAYSTACK_CONNECTIONS = {
+        'default': {
+            'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+            'URL': 'http://127.0.0.1:8983/solr',
+            'INCLUDE_SPELLING': True,
+        },
     }
-}
+    FEEDLY_REDIS_CONFIG = {
+        'default': {
+            'host': 'localhost',
+            'port': 6379,
+            'password': '',# Redis Password goes Here
+            'db': 0
+        },
+    }
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': '127.0.0.1:11211',
+        }
+    }
+    # Social Auth
+    TWITTER_CONSUMER_KEY         = 't64bvuxy0triEzEnHcyg'
+    TWITTER_CONSUMER_SECRET      = 'jm41BJqDger9veDu3Aa7jswN4ZgQ9yIktlZIY4cSps'
+    FACEBOOK_APP_ID              = '525965254182714'
+    FACEBOOK_API_SECRET          = 'bdd9cdd707d80d08bd53660852b91c51'
+    GOOGLE_OAUTH2_CLIENT_ID      = '566838544572.apps.googleusercontent.com'
+    GOOGLE_OAUTH2_CLIENT_SECRET  = 'BpAQ6KT37BLQxNc5ETzC0sMS'
 else:
     POSTGIS_VERSION = (2, 1, 1)
     DATABASES = {
