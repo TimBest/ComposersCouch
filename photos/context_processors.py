@@ -13,7 +13,7 @@ def photos_processor(request):
         }
     try:
         ret['photos_index_url'] = reverse('photos:index')
-    except NoReverseMatch: #Bastard django-cms from hell!!!!111
+    except NoReverseMatch: 
         pass
     if template:
         ret['PHOTOS_TEMPLATE'] = template
@@ -21,5 +21,3 @@ def photos_processor(request):
         'add_image': request.user.has_perm('%s.add_%s' % (Image._meta.app_label, Image.__name__)),
     }
     return ret
-
-  

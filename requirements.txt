@@ -30,6 +30,7 @@ oauth2==1.5.211
 psycopg2==2.5.4
 pysolr==3.2.0
 python-dateutil==2.3
+python-memcached==1.53
 python-openid==2.2.5
 pytz==2014.10
 redis==2.10.3

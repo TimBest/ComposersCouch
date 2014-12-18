@@ -55,7 +55,7 @@ urlpatterns += patterns('',
     # WARNING/TODO: media url is hard coded in auto complete templates
     url(r'^media/(?P<path>.*)$','django.views.static.serve',
         {'document_root':  getattr(settings, 'MEDIA_ROOT', '/media')}),
-    url(r'^messages/', include('messages.urls')),
+    url(r'^messages/', include('threaded_messages.urls')),
     url(r'^progressbarupload/', include('progressbarupload.urls')),
     url(r'^request/', include('request.urls')),
     url(r'^search', include('search.urls')),
