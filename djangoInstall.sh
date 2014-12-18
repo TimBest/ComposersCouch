@@ -67,7 +67,6 @@ sudo pip install django-autocomplete-light
 sudo pip install --upgrade django-crispy-forms
 sudo pip install django-embed-video
 sudo pip install django-guardian
-sudo pip install django-tagging
 sudo pip install django-pagination
 sudo pip install django-static-precompiler
 sudo pip install html2text

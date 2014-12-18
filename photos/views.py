@@ -15,8 +15,6 @@ from django.db.models import Q
 from annoying.functions import get_object_or_None
 from accounts.views import loginredirect
 from composersCouch.utils import get_page
-from tagging.models import TaggedItem
-from tagging.utils import get_tag
 from utils import load_class
 
 from photos.models import Image

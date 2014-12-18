@@ -100,22 +100,6 @@ class photosTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.test_user()
 
-    def test_tagging(self):
-        response = self._create_test_album()
-        self.client.login(username='zeus', password='zeus')
-        response = self.client.get(reverse('photos:upload'))
-        self.assertEqual(response.status_code, 200)
-        tree = html.fromstring(response.content)
-        values = dict(tree.xpath('//form[@method="post"]')[0].form_values())
-        values['image'] = self.image_file
-        values['tags'] = 'one, tow, three'
-        values['album'] = Album.objects.filter(user=self.user)[0].id
-        self.client.post(reverse('photos:upload'), values, follow=True)
-        self.assertEqual(response.status_code, 200)
-        response = self.client.get(reverse('photos:tag', kwargs={'tag': 'one'}))
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(len(response.context['image_list']) == 1)
-
     def test_delete(self):
         User.objects.create_user('bad', 'bad@example.com', 'bad')
         response = self._create_test_album()

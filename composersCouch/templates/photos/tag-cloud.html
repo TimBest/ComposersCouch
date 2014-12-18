@@ -1,13 +1,2 @@
-{% load tagging_tags %}
 {% load i18n %}
 {% load url from future %}
-
-{% if PHOTOS_SHOW_TAGS %}
-    <div id="tag-cloud">
-        <h1>{% trans "Tags" %}</h1>
-        {% tag_cloud_for_model photos.Image as image_tags %}
-        {% for tag in image_tags %}
-            <a href={% url 'photos:tag' tag.name %}>{{ tag.name }}</a>
-        {% endfor %}
-    </div>
-{% endif %}

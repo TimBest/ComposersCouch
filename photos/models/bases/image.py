@@ -10,7 +10,6 @@ from django.forms import ValidationError
 
 from sorl.thumbnail import ImageField, get_thumbnail
 from sorl.thumbnail.helpers import ThumbnailError
-from tagging.fields import TagField
 
 try:
     from django.contrib.auth import get_user_model
