@@ -73,6 +73,27 @@ WSGI_APPLICATION = 'composersCouch.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
+        'URL': 'http://127.0.0.1:8983/solr',
+        'INCLUDE_SPELLING': True,
+    },
+}
+FEEDLY_REDIS_CONFIG = {
+    'default': {
+        'host': 'localhost',
+        'port': 6379,
+        'password': '',# Redis Password goes Here
+        'db': 0
+    },
+}
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
 if DEVELOPMENT:
     POSTGIS_VERSION = (2, 1, 4)
     DATABASES = {
@@ -84,27 +105,6 @@ if DEVELOPMENT:
             'HOST': 'localhost',
             'PORT': '',
             'ATOMIC_REQUESTS': True,
-        }
-    }
-    HAYSTACK_CONNECTIONS = {
-        'default': {
-            'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-            'URL': 'http://127.0.0.1:8983/solr',
-            'INCLUDE_SPELLING': True,
-        },
-    }
-    FEEDLY_REDIS_CONFIG = {
-        'default': {
-            'host': 'localhost',
-            'port': 6379,
-            'password': '',# Redis Password goes Here
-            'db': 0
-        },
-    }
-    CACHES = {
-        'default': {
-            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-            'LOCATION': '127.0.0.1:11211',
         }
     }
     # Social Auth
