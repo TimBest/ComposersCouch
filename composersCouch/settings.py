@@ -107,6 +107,13 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
+# Social Auth
+TWITTER_CONSUMER_KEY         = 't64bvuxy0triEzEnHcyg'
+TWITTER_CONSUMER_SECRET      = 'jm41BJqDger9veDu3Aa7jswN4ZgQ9yIktlZIY4cSps'
+FACEBOOK_APP_ID              = '525965254182714'
+FACEBOOK_API_SECRET          = 'bdd9cdd707d80d08bd53660852b91c51'
+GOOGLE_OAUTH2_CLIENT_ID      = '566838544572.apps.googleusercontent.com'
+GOOGLE_OAUTH2_CLIENT_SECRET  = 'BpAQ6KT37BLQxNc5ETzC0sMS'
 if DEVELOPMENT:
     POSTGIS_VERSION = (2, 1, 4)
     DATABASES = {
@@ -120,13 +127,6 @@ if DEVELOPMENT:
             'ATOMIC_REQUESTS': True,
         }
     }
-    # Social Auth
-    TWITTER_CONSUMER_KEY         = 't64bvuxy0triEzEnHcyg'
-    TWITTER_CONSUMER_SECRET      = 'jm41BJqDger9veDu3Aa7jswN4ZgQ9yIktlZIY4cSps'
-    FACEBOOK_APP_ID              = '525965254182714'
-    FACEBOOK_API_SECRET          = 'bdd9cdd707d80d08bd53660852b91c51'
-    GOOGLE_OAUTH2_CLIENT_ID      = '566838544572.apps.googleusercontent.com'
-    GOOGLE_OAUTH2_CLIENT_SECRET  = 'BpAQ6KT37BLQxNc5ETzC0sMS'
 else:
     POSTGIS_VERSION = (2, 1, 1)
     DATABASES = {
