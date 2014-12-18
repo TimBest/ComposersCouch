@@ -1,11 +1,11 @@
+import json
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
-from django.utils.simplejson import dumps
 
 
 def safe_json(data):
-    return mark_safe(dumps(data))
+    return mark_safe(json.dumps(data))
 
 def json_playlist(tracks, album=None, viewname=None, username=None):
     playlist = []

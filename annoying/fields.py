@@ -3,18 +3,8 @@ from django.db.models import OneToOneField
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models.fields.related import SingleRelatedObjectDescriptor
 
-# South support.
-try:
-    from south.modelsinspector import add_introspection_rules
-    SOUTH = True
-except ImportError:
-    SOUTH = False
+import json
 
-# Try to be compatible with Django 1.5+.
-try:
-    import json
-except ImportError:
-    from django.utils import simplejson as json
 
 
 class AutoSingleRelatedObjectDescriptor(SingleRelatedObjectDescriptor):

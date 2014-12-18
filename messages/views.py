@@ -1,5 +1,5 @@
 # -*- coding:utf-8 -*-
-import logging, datetime, simplejson
+import logging, datetime
 
 from django.contrib.auth import login, BACKEND_SESSION_KEY
 from django.http import Http404, HttpResponseRedirect, HttpResponse

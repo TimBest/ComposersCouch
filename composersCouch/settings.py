@@ -21,7 +21,7 @@ SECRET_KEY = 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4&qd$uz_5&a7%q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-DEVELOPMENT = False
+DEVELOPMENT = True
 
 TEMPLATE_DEBUG = True
 
@@ -50,8 +50,9 @@ INSTALLED_APPS = (
     'guardian',
     'pagination',
     'social_auth',
-    #'sorl.thumbnail',
     'static_precompiler',
+
+    'sorl.thumbnail',
 
 )
 
@@ -85,6 +86,12 @@ if DEVELOPMENT:
             'ATOMIC_REQUESTS': True,
         }
     }
+    CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
 else:
     POSTGIS_VERSION = (2, 1, 1)
     DATABASES = {

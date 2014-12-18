@@ -2,10 +2,7 @@
 
 from django.test import TestCase
 
-try:
-    import json
-except ImportError:
-    from django.utils import simplejson as json
+import json
 
 class AJAXRequestTestCase(TestCase):
     """Test cases for ajax_request"""

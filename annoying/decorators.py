@@ -6,14 +6,8 @@ from django.template import RequestContext
 from django.db.models import signals as signalmodule
 from django.http import HttpResponse
 from django.conf import settings
-# Try to be compatible with Django 1.5+.
-try:
-    import json
-except ImportError:
-    from django.utils import simplejson as json
 
-import datetime
-import os
+import os, datetime, json
 
 __all__ = ['render_to', 'signals', 'ajax_request', 'autostrip']
 
