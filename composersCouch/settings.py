@@ -70,6 +70,7 @@ if DEVELOPMENT:
         }
     }
 else:
+    POSTGIS_VERSION = (2, 5, 4)
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
