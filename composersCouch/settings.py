@@ -21,7 +21,7 @@ SECRET_KEY = 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4&qd$uz_5&a7%q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-DEVELOPMENT = True
+DEVELOPMENT = False
 
 TEMPLATE_DEBUG = True
 
@@ -86,7 +86,7 @@ if DEVELOPMENT:
             'ATOMIC_REQUESTS': True,
         }
     }
-    """HAYSTACK_CONNECTIONS = {
+    HAYSTACK_CONNECTIONS = {
         'default': {
             'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
             'URL': 'http://127.0.0.1:8983/solr',
@@ -106,7 +106,7 @@ if DEVELOPMENT:
             'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
             'LOCATION': '127.0.0.1:11211',
         }
-    }"""
+    }
     # Social Auth
     TWITTER_CONSUMER_KEY         = 't64bvuxy0triEzEnHcyg'
     TWITTER_CONSUMER_SECRET      = 'jm41BJqDger9veDu3Aa7jswN4ZgQ9yIktlZIY4cSps'
