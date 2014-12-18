@@ -131,7 +131,7 @@ else:
     POSTGIS_VERSION = (2, 1, 1)
     DATABASES = {
         'default': {
-            'ENGINE': 'django.contrib.gis.db.backends.postgis',
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': 'ebdb',#os.environ['RDS_DB_NAME'],
             'USER': 'ComposersCouchDB',#os.environ['RDS_USERNAME'],
             'PASSWORD': '01SynchronousPenitent',#os.environ['RDS_PASSWORD'],#
