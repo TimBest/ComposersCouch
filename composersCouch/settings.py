@@ -132,11 +132,11 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.contrib.gis.db.backends.postgis',
-            'NAME': os.environ['RDS_DB_NAME'],#'ebdb',
-            'USER': os.environ['RDS_USERNAME'],#'ComposersCouchDB',
-            'PASSWORD': os.environ['RDS_PASSWORD'],#'01SynchronousPenitent',
-            'HOST': os.environ['RDS_HOSTNAME'],#'aavtzt0e4v3gsr.c7gjzwck4i8q.us-east-1.rds.amazonaws.com',
-            'PORT': os.environ['RDS_PORT'],#'5432',
+            'NAME': 'ebdb',#os.environ['RDS_DB_NAME'],
+            'USER': 'ComposersCouchDB',#os.environ['RDS_USERNAME'],
+            'PASSWORD': '01SynchronousPenitent',#os.environ['RDS_PASSWORD'],#
+            'HOST': 'aavtzt0e4v3gsr.c7gjzwck4i8q.us-east-1.rds.amazonaws.com',#os.environ['RDS_HOSTNAME'],
+            'PORT': '5432',#os.environ['RDS_PORT'],#
         }
     }
 
