@@ -2,7 +2,7 @@ from django.conf.urls import include, patterns, url
 from django.views.generic.base import RedirectView
 
 
-urlpatterns = patterns('messages.views',
+urlpatterns = patterns('threaded_messages.views',
     url(r'^$', RedirectView.as_view(url='inbox/')),
     url(r'^inbox/$', 'inbox', name='messages_inbox'),
     url(r'^sent/$', 'sent', name='messages_sent'),
