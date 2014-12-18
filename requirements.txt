@@ -1,5 +1,6 @@
 Django==1.7.1
 Pillow==2.6.1
+Wand==0.3.8
 amqp==1.4.6
 anyjson==0.3.3
 argparse==1.2.1
