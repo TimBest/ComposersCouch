@@ -2,10 +2,7 @@ from __future__ import unicode_literals
 import datetime
 
 from django import VERSION
-try:
-    from django.contrib.auth import get_user_model  # Django 1.5
-except ImportError:
-    from postman.future_1_5 import get_user_model
+from django.contrib.auth.models import User
 from django.http import QueryDict
 from django.template import Node
 from django.template import TemplateSyntaxError
@@ -42,11 +39,10 @@ def or_me(value, arg):
     Typical usage: message.obfuscated_sender|or_me:user
 
     """
-    user_model = get_user_model()
     if not isinstance(value, six.string_types):
-        value = (get_user_representation if isinstance(value, user_model) else force_text)(value)
+        value = (get_user_representation if isinstance(value, User) else force_text)(value)
     if not isinstance(arg, six.string_types):
-        arg = (get_user_representation if isinstance(arg, user_model) else force_text)(arg)
+        arg = (get_user_representation if isinstance(arg, User) else force_text)(arg)
     return _('<me>') if value == arg else value
 
 

@@ -1,19 +1,18 @@
 from django.test import TestCase
 from django.core.management import call_command
-from django.contrib.auth.models import Permission
+from django.contrib.auth.models import Permission, User
 from django.contrib.contenttypes.models import ContentType
 
 from userena.models import UserenaSignup
 from userena.managers import ASSIGNED_PERMISSIONS
 from userena import settings as userena_settings
-from userena.utils import get_profile_model, get_user_model
+from userena.utils import get_profile_model
 
 from guardian.shortcuts import remove_perm
 from guardian.models import UserObjectPermission
 
 import datetime
 
-User = get_user_model()
 
 class CleanExpiredTests(TestCase):
     user_info = {'username': 'alice',
@@ -119,4 +118,3 @@ class CheckPermissionTests(TestCase):
 
         # run the command to check for the warning.
         call_command('check_permissions', test=True)
-

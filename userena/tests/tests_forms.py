@@ -1,9 +1,9 @@
 from django.test import TestCase
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User
 
 from userena import forms
 from userena import settings as userena_settings
-from userena.utils import get_user_model
 
 
 class SignupFormTests(TestCase):
@@ -165,7 +165,7 @@ class ChangeEmailFormTests(TestCase):
     fixtures = ['users']
 
     def test_change_email_form(self):
-        user = get_user_model().objects.get(pk=1)
+        user = User.objects.get(pk=1)
         invalid_data_dicts = [
             # No change in e-mail address
             {'data': {'email': 'john@example.com'},

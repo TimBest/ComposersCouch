@@ -5,17 +5,12 @@ from django.conf import settings
 from django.contrib.auth.models import Permission
 from django.db.models.signals import post_save
 from django.contrib.contenttypes.models import ContentType
+from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import ValidationError
 
 from sorl.thumbnail import ImageField, get_thumbnail
 from sorl.thumbnail.helpers import ThumbnailError
-
-try:
-    from django.contrib.auth import get_user_model
-    User = get_user_model()
-except ImportError:
-    from django.contrib.auth.models import User
 
 try:
     import Image as PILImage

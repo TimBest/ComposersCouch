@@ -1,12 +1,12 @@
 from django.test import TestCase
 from django.core.urlresolvers import reverse
 from django.conf import settings
+from django.contrib.auth.models import User
 
 from userena.contrib.umessages.forms import ComposeForm
 from userena.contrib.umessages.models import Message, MessageRecipient
-from userena.utils import get_user_model
 
-User = get_user_model()
+User = User
 
 
 class MessagesViewsTests(TestCase):

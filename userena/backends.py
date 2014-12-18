@@ -1,7 +1,6 @@
 import django.core.validators
 from django.contrib.auth.backends import ModelBackend
-
-from userena.utils import get_user_model
+from django.contrib.auth.models import User
 
 class UserenaAuthenticationBackend(ModelBackend):
     """
@@ -29,7 +28,6 @@ class UserenaAuthenticationBackend(ModelBackend):
         :return: The signed in :class:`User`.
 
         """
-        User = get_user_model()
         try:
             django.core.validators.validate_email(identification)
             try: user = User.objects.get(email__iexact=identification)
@@ -44,7 +42,6 @@ class UserenaAuthenticationBackend(ModelBackend):
         else: return user
 
     def get_user(self, user_id):
-        User = get_user_model()
         try: return User.objects.get(pk=user_id)
         except User.DoesNotExist:
             return None

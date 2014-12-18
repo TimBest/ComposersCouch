@@ -7,12 +7,12 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.conf import settings
 from django.test import TestCase
 from django.test.utils import override_settings
+from django.contrib.auth.models import User
 
 from userena import forms
 from userena import settings as userena_settings
-from userena.utils import get_user_model
 
-User = get_user_model()
+User = User
 
 
 class UserenaViewsTests(TestCase):
@@ -162,13 +162,13 @@ class UserenaViewsTests(TestCase):
 
         # Back to default
         userena_settings.USERENA_WITHOUT_USERNAMES = False
-        
+
         # Check for 403 with signups disabled
         userena_settings.USERENA_DISABLE_SIGNUP = True
-        
+
         response = self.client.get(reverse('userena_signup'))
         self.assertEqual(response.status_code, 403)
-        
+
         # Back to default
         userena_settings.USERENA_DISABLE_SIGNUP = False
 

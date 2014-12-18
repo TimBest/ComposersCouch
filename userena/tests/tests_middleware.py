@@ -3,13 +3,13 @@ from django.test import TestCase
 from django.utils.importlib import import_module
 from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
+from django.contrib.auth.models import User
 
 from userena.tests.profiles.models import Profile
 from userena.middleware import UserenaLocaleMiddleware
 from userena import settings as userena_settings
-from userena.utils import get_user_model
 
-User = get_user_model()
+User = User
 
 
 class UserenaLocaleMiddlewareTests(TestCase):

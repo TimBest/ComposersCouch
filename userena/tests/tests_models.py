@@ -3,15 +3,15 @@ from django.contrib.sites.models import Site
 from django.core import mail
 from django.conf import settings
 from django.test import TestCase
+from django.contrib.auth.models import User
 
 from userena.models import UserenaSignup, upload_to_mugshot
 from userena import settings as userena_settings
 from userena.tests.profiles.models import Profile
-from userena.utils import get_user_model
 
 import datetime, hashlib, re
 
-User = get_user_model()
+User = User
 
 MUGSHOT_RE = re.compile('^[a-f0-9]{40}$')
 

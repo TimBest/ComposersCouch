@@ -1,10 +1,10 @@
 from django.test import TestCase
+from django.contrib.auth.models import User
 
 from userena.contrib.umessages.models import (Message, MessageContact,
                                               MessageRecipient)
-from userena.utils import get_user_model
 
-User = get_user_model()
+User = User
 
 
 class MessageManagerTests(TestCase):
@@ -53,4 +53,3 @@ class MessageContactManagerTest(TestCase):
         jane = User.objects.get(pk=2)
         self.failUnlessEqual(contacts[0].um_to_user,
                              jane)
-

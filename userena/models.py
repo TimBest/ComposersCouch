@@ -3,6 +3,7 @@
 import datetime, os
 from django.conf import settings
 from django.contrib.sites.models import Site
+from django.contrib.auth.models import User
 from django.db import models
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
@@ -14,7 +15,7 @@ from photos.models import Image
 from userena import settings as userena_settings
 from userena.managers import UserenaManager, UserenaBaseProfileManager
 from userena.utils import get_gravatar, generate_sha1, get_protocol, \
-    get_datetime_now, get_user_model, user_model_label
+    get_datetime_now, user_model_label
 from .mail import send_mail
 
 
@@ -325,7 +326,7 @@ class UserenaBaseProfile(models.Model):
             return True
         # Registered users.
         elif self.privacy == 'registered' \
-        and isinstance(user, get_user_model()):
+        and isinstance(user, User):
             return True
 
         # Checks done by guardian for owner and admins.
