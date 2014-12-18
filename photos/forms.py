@@ -1,7 +1,7 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from autocomplete_light import FixedModelForm
+from autocomplete_light import ModelForm
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Layout, Submit
@@ -9,7 +9,7 @@ from crispy_forms.layout import Div, Layout, Submit
 from models import Image
 
 
-class ImageForm(FixedModelForm):
+class ImageForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(ImageForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -30,7 +30,7 @@ class ImageForm(FixedModelForm):
         }
         fields = ('image','title','description',)
 
-class ImageOnlyForm(FixedModelForm):
+class ImageOnlyForm(ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(ImageOnlyForm, self).__init__(*args, **kwargs)

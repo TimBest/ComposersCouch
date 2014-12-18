@@ -1,6 +1,6 @@
 from django import forms
 
-from autocomplete_light import FixedModelForm, MultipleChoiceWidget
+from autocomplete_light import ModelForm, MultipleChoiceWidget
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Layout
@@ -26,7 +26,7 @@ class BiographyForm(forms.ModelForm):
         }
         fields = ('biography',)
 
-class MemberForm(FixedModelForm):
+class MemberForm(ModelForm):
     remove_member = forms.BooleanField(required=False)
     instruments = forms.ModelMultipleChoiceField(
                       Instrument.objects.all(),

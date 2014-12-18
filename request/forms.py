@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from autocomplete_light import FixedModelForm
+from autocomplete_light import ModelForm
 from autocomplete_light import ChoiceWidget, MultipleChoiceWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Layout
@@ -39,7 +39,7 @@ class MessageForm(forms.Form):
         self.helper.form_tag = False
         self.helper.layout = Layout('body',)
 
-class RequestForm(FixedModelForm):
+class RequestForm(ModelForm):
     date_format = '%m/%d/%Y'
     accept_by = forms.DateField(label=_("Accept by"),
                                 widget=forms.DateInput(format=date_format))

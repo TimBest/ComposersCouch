@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import ugettext as _
 
 from autocomplete_light import MultipleChoiceWidget
-from autocomplete_light import FixedModelForm
+from autocomplete_light import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Field, Layout, Submit
 
@@ -69,7 +69,7 @@ class AvailabilityForm(forms.Form):
             Submit('submit', 'submit', css_class='btn btn-primary pull-right'),
         )
 
-class GenreForm(FixedModelForm):
+class GenreForm(ModelForm):
     usersGenres = forms.BooleanField(label="My genres", required=False)
     genre = forms.ModelMultipleChoiceField(label="",
               queryset=Genre.objects.all(), required=False,

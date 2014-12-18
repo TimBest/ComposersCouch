@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.utils.translation import ugettext_lazy as _
 
-from autocomplete_light import FixedModelForm, ChoiceWidget
+from autocomplete_light.forms import ModelForm, ChoiceWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Layout, Submit
 
@@ -22,7 +22,7 @@ def clean_url(url):
             raise e
     return url
 
-class ZipcodeForm(FixedModelForm):
+class ZipcodeForm(ModelForm):
     zip_code = forms.ModelChoiceField(Zipcode.objects.all(),
           widget=ChoiceWidget(
               'ZipcodeAutocomplete',
@@ -39,7 +39,7 @@ class ZipcodeForm(FixedModelForm):
         model = Location
         fields = ['zip_code']
 
-class LocationForm(FixedModelForm):
+class LocationForm(ModelForm):
     zip_code = forms.ModelChoiceField(Zipcode.objects.all(),
           widget=ChoiceWidget(
               'ZipcodeAutocomplete',

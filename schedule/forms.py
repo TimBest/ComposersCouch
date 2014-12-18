@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
-from autocomplete_light import FixedModelForm
+from autocomplete_light import ModelForm
 from autocomplete_light import ChoiceWidget, MultipleChoiceWidget
 from crispy_forms.bootstrap import PrependedText
 from crispy_forms.helper import FormHelper
@@ -18,7 +18,7 @@ from photos.widgets import ImageSelectWidget
 from schedule.models import DateRange, Event, Show, Info
 
 
-class DateForm(FixedModelForm):
+class DateForm(ModelForm):
     date_format = '%m/%d/%Y'
     time_format = '%I:%M %p'
     start = forms.SplitDateTimeField(label=_("Start"),
@@ -68,7 +68,7 @@ class DateForm(FixedModelForm):
         fields = ('start','end',)
 
 
-class EventForm(FixedModelForm):
+class EventForm(ModelForm):
     def __init__(self, *args, **kwargs):
         kwargs.pop('user', None)
         super(EventForm, self).__init__(*args, **kwargs)
@@ -82,7 +82,7 @@ class EventForm(FixedModelForm):
         model = Event
         fields = ('visible',)
 
-class UserSelectForm(FixedModelForm):
+class UserSelectForm(ModelForm):
     headliner = forms.ModelChoiceField(MusicianProfile.objects.all(),
                     widget=ChoiceWidget(
                         'MusicianProfileAutocomplete',

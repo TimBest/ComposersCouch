@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from autocomplete_light import FixedModelForm
+from autocomplete_light import ModelForm
 from autocomplete_light import MultipleChoiceWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Layout, Submit
@@ -22,7 +22,7 @@ if "notification" in settings.INSTALLED_APPS:
     from notification import models as notification
 WRAP_WIDTH = 55
 
-class ComposeForm(FixedModelForm):
+class ComposeForm(ModelForm):
     """
     A simple default form for private messages.
     """

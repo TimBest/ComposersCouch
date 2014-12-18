@@ -46,7 +46,7 @@ INSTALLED_APPS = (
     'compressor',
     'djcelery',
     'embed_video',
-    #'feedly',
+    'feedly',
     'guardian',
     'pagination',
     'social_auth',

@@ -3,7 +3,7 @@ from django.forms import ModelChoiceField, ModelMultipleChoiceField, Textarea
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from autocomplete_light import ChoiceWidget, MultipleChoiceWidget, FixedModelForm
+from autocomplete_light import ChoiceWidget, MultipleChoiceWidget, ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, HTML, Layout
 
@@ -12,7 +12,7 @@ from embed_video.fields import EmbedVideoFormField
 from tracks.models import Album, Cover, Track, Media, Interview
 
 
-class AlbumForm(FixedModelForm):
+class AlbumForm(ModelForm):
     genre = ModelMultipleChoiceField(
                   Genre.objects.all(),
                   required=False,
@@ -43,7 +43,7 @@ class AlbumForm(FixedModelForm):
         fields = ['title', 'genre', 'year', 'description']
 
 
-class AlbumAudioForm(FixedModelForm):
+class AlbumAudioForm(ModelForm):
     title = forms.CharField(max_length=128)
     audio = forms.FileField(required=False)
     def __init__(self, *args, **kwargs):
@@ -85,7 +85,7 @@ class AlbumAudioForm(FixedModelForm):
         model = Track
         fields = ['album','order',]
 
-class AlbumVideoForm(FixedModelForm):
+class AlbumVideoForm(ModelForm):
     video = EmbedVideoFormField(required=False)
     title = forms.CharField(max_length=128)
     def __init__(self, *args, **kwargs):
@@ -137,7 +137,7 @@ audio_layout = Layout(
     css_class='audio-layout row no-gutter',
   ),
 )
-class AudioForm(FixedModelForm):
+class AudioForm(ModelForm):
     def __init__(self, *args, **kw):
         super(AudioForm, self).__init__(*args, **kw)
         self.helper = FormHelper()
@@ -155,7 +155,7 @@ class AudioForm(FixedModelForm):
         model = Media
         fields = ['audio','live','title',]
 
-class VideoForm(FixedModelForm):
+class VideoForm(ModelForm):
 
     def __init__(self, *args, **kw):
         super(AlbumTrackForm, self).__init__(*args, **kw)
@@ -176,7 +176,7 @@ class VideoForm(FixedModelForm):
 
 
 
-class TrackForm(FixedModelForm):
+class TrackForm(ModelForm):
     host = ModelChoiceField(
                   User.objects.all(),
                   widget=ChoiceWidget(
@@ -198,7 +198,7 @@ class TrackForm(FixedModelForm):
         model = LiveTrack
         fields = ['title', 'host']
 
-class HostTrackForm(FixedModelForm):
+class HostTrackForm(ModelForm):
     musician = ModelChoiceField(MusicianProfile.objects.all(),
                 required=False,
                 widget=ChoiceWidget(
