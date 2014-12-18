@@ -6,10 +6,10 @@ from django.template.defaultfilters import slugify
 from guardian.shortcuts import assign_perm
 
 from models import Profile, FanProfile, MusicianProfile, VenueProfile
+from accounts,models import Profile
 from annoying.functions import get_object_or_None
 from contact.models import ContactInfo, Contact, Location, Zipcode
 from schedule.models import Calendar
-from userena.utils import get_profile_model
 import userena.managers
 
 
@@ -34,8 +34,7 @@ def createProfile(request, backend, user, social_user, is_new=False, new_associa
     try:
         profile = user.profile
     except:
-        profile_model = get_profile_model()
-        profile = profile_model(user=user)
+        profile = Profile(user=user)
         profile.save()
         # TODO: remove this call to get profile type?
         profile_type = request.session.get('profile').profile_type

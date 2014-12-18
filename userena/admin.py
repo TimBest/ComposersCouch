@@ -4,9 +4,9 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 from guardian.admin import GuardedModelAdmin
 
+from accounts.models import Profile
 from userena.models import UserenaSignup
 from userena import settings as userena_settings
-from userena.utils import get_profile_model,
 
 class UserenaSignupInline(admin.StackedInline):
     model = UserenaSignup
@@ -28,4 +28,4 @@ if userena_settings.USERENA_REGISTER_USER:
     admin.site.register(User, UserenaAdmin)
 
 if userena_settings.USERENA_REGISTER_PROFILE:
-    admin.site.register(get_profile_model())
+    admin.site.register(Profile)

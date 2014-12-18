@@ -8,9 +8,9 @@ try:
 except ImportError:
     from django.utils.hashcompat import sha_constructor
 
+from accounts.models import Profile
 from userena import settings as userena_settings
 from userena.models import UserenaSignup
-from userena.utils import get_profile_model
 
 import random
 
@@ -232,7 +232,7 @@ class EditProfileForm(forms.ModelForm):
         self.fields.keyOrder = new_order
 
     class Meta:
-        model = get_profile_model()
+        model = Profile
         exclude = ['user']
 
     def save(self, force_insert=False, force_update=False, commit=True):

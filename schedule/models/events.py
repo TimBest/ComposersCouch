@@ -24,7 +24,7 @@ from django.utils.translation import ugettext as _
 
 from accounts.models import MusicianProfile
 from contact.models import Location
-from messages.models import Thread
+from threaded_messages.models import Thread
 from photos.models import Image
 
 class DateRange(models.Model):

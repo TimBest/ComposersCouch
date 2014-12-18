@@ -3,10 +3,10 @@ from django.core.management import call_command
 from django.contrib.auth.models import Permission, User
 from django.contrib.contenttypes.models import ContentType
 
+from accounts.models import Profile
 from userena.models import UserenaSignup
 from userena.managers import ASSIGNED_PERMISSIONS
 from userena import settings as userena_settings
-from userena.utils import get_profile_model
 
 from guardian.shortcuts import remove_perm
 from guardian.models import UserObjectPermission
@@ -69,8 +69,7 @@ class CheckPermissionTests(TestCase):
 
     def test_incomplete_permissions(self):
         # Delete the neccesary permissions
-        profile_model_obj = get_profile_model()
-        content_type_profile = ContentType.objects.get_for_model(profile_model_obj)
+        content_type_profile = ContentType.objects.get_for_model(Profile)
         content_type_user = ContentType.objects.get_for_model(User)
         for model, perms in ASSIGNED_PERMISSIONS.items():
             if model == "profile":
@@ -114,7 +113,7 @@ class CheckPermissionTests(TestCase):
         user = UserenaSignup.objects.create_user(**self.user_info)
 
         # remove the profile of this user
-        get_profile_model().objects.get(user=user).delete()
+        Profile.objects.get(user=user).delete()
 
         # run the command to check for the warning.
         call_command('check_permissions', test=True)

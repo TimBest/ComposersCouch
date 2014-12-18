@@ -13,9 +13,9 @@ from .models import Application, PrivateRequest, PublicRequest
 from annoying.functions import get_object_or_None
 from composersCouch.views import MultipleFormsView, MultipleModelFormsView
 from customProfile.decorators import is_venue, is_musician
-from messages.models import Message
-from messages.views import MessageView
-from messages.utils import reply_to_thread, create_thread
+from threaded_messages.models import Message
+from threaded_messages.views import MessageView
+from threaded_messages.utils import reply_to_thread, create_thread
 
 
 class RequestView(MessageView):

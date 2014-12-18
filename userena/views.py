@@ -14,12 +14,13 @@ from django.core.exceptions import PermissionDenied
 from django.utils.translation import ugettext as _
 from django.http import Http404, HttpResponseRedirect
 
+from accounts.models import Profile
 from userena.forms import (SignupForm, SignupFormOnlyEmail, AuthenticationForm,
                            ChangeEmailForm, EditProfileForm)
 from userena.models import UserenaSignup
 from userena.decorators import secure_required
 from userena.backends import UserenaAuthenticationBackend
-from userena.utils import signin_redirect, get_profile_model
+from userena.utils import signin_redirect
 from userena import signals as userena_signals
 from userena import settings as userena_settings
 
@@ -69,8 +70,7 @@ class ProfileListView(ListView):
         return context
 
     def get_queryset(self):
-        profile_model = get_profile_model()
-        queryset = profile_model.objects.get_visible_profiles(self.request.user).select_related()
+        queryset = Profile.objects.get_visible_profiles(self.request.user).select_related()
         return queryset
 
 @secure_required
@@ -632,7 +632,7 @@ def password_change(request, username, template_name='userena/password_form.html
     return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
 @secure_required
-@permission_required_or_403('change_profile', (get_profile_model(), 'user__username', 'username'))
+@permission_required_or_403('change_profile', (Profile, 'user__username', 'username'))
 def profile_edit(request, username, edit_profile_form=EditProfileForm,
                  template_name='userena/profile_form.html', success_url=None,
                  extra_context=None, **kwargs):
@@ -737,11 +737,10 @@ def profile_detail(request, username,
     user = get_object_or_404(User,
                              username__iexact=username)
 
-    profile_model = get_profile_model()
     try:
         profile = user.profile
-    except profile_model.DoesNotExist:
-        profile = profile_model.objects.create(user=user)
+    except Profile.DoesNotExist:
+        profile = Profile.objects.create(user=user)
 
     if not profile.can_view_profile(request.user):
         raise PermissionDenied
@@ -803,8 +802,7 @@ def profile_list(request, page=1, template_name='userena/profile_list.html',
        and not request.user.is_staff:
         raise Http404
 
-    profile_model = get_profile_model()
-    queryset = profile_model.objects.get_visible_profiles(request.user)
+    queryset = Profile.objects.get_visible_profiles(request.user)
 
     if not extra_context: extra_context = dict()
     return ProfileListView.as_view(queryset=queryset,

@@ -7,7 +7,7 @@ from django.utils.translation import ugettext as _
 from django.conf import settings
 
 from userena import settings as userena_settings
-from userena.utils import generate_sha1, get_profile_model, get_datetime_now
+from userena.utils import generate_sha1, get_datetime_now
 from userena import signals as userena_signals
 
 from guardian.shortcuts import assign_perm, get_perms
@@ -66,11 +66,11 @@ class UserenaManager(UserManager):
         userena_profile = self.create_userena_profile(new_user)
 
         # All users have an empty profile
-        profile_model = get_profile_model()
+        from accounts.models import Profile
         try:
             new_profile = new_user.profile
-        except profile_model.DoesNotExist:
-            new_profile = profile_model(user=new_user)
+        except Profile.DoesNotExist:
+            new_profile = Profile(user=new_user)
             new_profile.save(using=self._db)
 
         # Give permissions to view and change profile
@@ -244,11 +244,12 @@ class UserenaManager(UserManager):
         changed_permissions = []
         changed_users = []
         warnings = []
+        from accounts.models import Profile
 
         # Check that all the permissions are available.
         for model, perms in ASSIGNED_PERMISSIONS.items():
             if model == 'profile':
-                model_obj = get_profile_model()
+                model_obj = Profile
             else: model_obj = User
 
             model_content_type = ContentType.objects.get_for_model(model_obj)

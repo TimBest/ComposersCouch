@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.utils.functional import wraps
 
 from annoying.functions import get_object_or_None
-from messages.models import Thread
+from threaded_messages.models import Thread
 
 
 def is_participant(function):

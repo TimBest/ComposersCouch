@@ -5,7 +5,7 @@ from django.utils.translation import ugettext as _
 from accounts.models import MusicianProfile
 from annoying.functions import get_object_or_None
 from contact.models import Zipcode
-from messages.models import Thread
+from threaded_messages.models import Thread
 from schedule.models.events import DateRange
 
 

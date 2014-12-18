@@ -17,7 +17,7 @@ register = Library()
 
 
 from django.template import Library, Node, TemplateSyntaxError
-from messages.models import cached_inbox_count_for
+from threaded_messages.models import cached_inbox_count_for
 
 
 class InboxOutput(Node):
