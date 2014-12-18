@@ -6,7 +6,7 @@ from django.template.defaultfilters import slugify
 from guardian.shortcuts import assign_perm
 
 from models import Profile, FanProfile, MusicianProfile, VenueProfile
-from accounts,models import Profile
+from accounts.models import Profile
 from annoying.functions import get_object_or_None
 from contact.models import ContactInfo, Contact, Location, Zipcode
 from schedule.models import Calendar
