@@ -21,7 +21,7 @@ SECRET_KEY = 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4&qd$uz_5&a7%q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-DEVELOPMENT = False
+DEVELOPMENT = True
 
 TEMPLATE_DEBUG = True
 
@@ -46,7 +46,7 @@ INSTALLED_APPS = (
     'compressor',
     'djcelery',
     'embed_video',
-    'feedly',
+    'stream_framework',
     'guardian',
     'pagination',
     'social_auth',
