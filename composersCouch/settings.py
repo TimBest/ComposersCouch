@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
+import os, urlparse
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -21,7 +21,7 @@ SECRET_KEY = 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4&qd$uz_5&a7%q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-DEVELOPMENT = False
+DEVELOPMENT = True
 
 TEMPLATE_DEBUG = True
 
@@ -39,6 +39,20 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.staticfiles',
+
+    'autocomplete_light',
+    'annoying',
+    'crispy_forms',
+    'compressor',
+    'djcelery',
+    'embed_video',
+    #'feedly',
+    'guardian',
+    'pagination',
+    'social_auth',
+    #'sorl.thumbnail',
+    'static_precompiler',
+
 )
 
 MIDDLEWARE_CLASSES = (
@@ -84,6 +98,8 @@ else:
         }
     }
 
+SITE_ID = 1
+
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
@@ -97,8 +113,105 @@ USE_L10N = True
 
 USE_TZ = True
 
+MEDIA_ROOT = os.path.join( BASE_DIR, 'composersCouch/media' )
+#MEDIA_ROOT = '/media/timothy/Elements/test/'
+
+MEDIA_URL = '/media/'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
+STATIC_ROOT = os.path.join( BASE_DIR, 'composersCouch/static/staticfiles/' )
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join( BASE_DIR, 'composersCouch/static' ),
+
+)
+
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#   'django.contrib.staticfiles.finders.DefaultStorageFinder',
+    'static_precompiler.finders.StaticPrecompilerFinder',
+)
+STATIC_PRECOMPILER_COMPILERS = (
+    'static_precompiler.compilers.LESS',
+)
+STATIC_PRECOMPILER_OUTPUT_DIR = 'compiled'
+
+# Templates
+TEMPLATE_DIRS = (
+    os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
+)
+
+FILE_UPLOAD_HANDLERS = (
+    "progressbarupload.uploadhandler.ProgressBarUploadHandler",
+    "django.core.files.uploadhandler.MemoryFileUploadHandler",
+    "django.core.files.uploadhandler.TemporaryFileUploadHandler",
+)
+PROGRESSBARUPLOAD_INCLUDE_JQUERY = False
+
+AUTHENTICATION_BACKENDS = (
+    'social_auth.backends.twitter.TwitterBackend',
+    'social_auth.backends.facebook.FacebookBackend',
+    'social_auth.backends.google.GoogleOAuthBackend',
+    'social_auth.backends.google.GoogleOAuth2Backend',
+    'social_auth.backends.google.GoogleBackend',
+    'userena.backends.UserenaAuthenticationBackend',
+    'guardian.backends.ObjectPermissionBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.csrf',
+    'django.core.context_processors.request',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.contrib.messages.context_processors.messages',
+    'composersCouch.context_processors.now',
+    'social_auth.context_processors.social_auth_by_type_backends',
+    'photos.context_processors.photos_processor',
+)
+
+# over ride user defaults
+ABSOLUTE_URL_OVERRIDES = {
+    'auth.user': lambda u: "/redirect/%s/" % u.username,
+}
+
+
+# Crispy Form Settings
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+CRISPY_FAIL_SILENTLY = not DEBUG
+
+#sorl.thumbnail
+THUMBNAIL_DEBUG = DEBUG
+THUMBNAIL_BACKEND = 'sorl.thumbnail.base.ThumbnailBackend'
+THUMBNAIL_PRESERVE_FORMAT=True
+THUMBNAIL_FORMAT = 'PNG'
+
+# feedly
+CELERY_ALWAYS_EAGER = True
+CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
+
+import djcelery
+djcelery.setup_loader()
+
+# on Heroku redis connection parameters come from environment variables
+redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost:6379'))
+
+try:
+    from accounts.userena_settings import *
+    from accounts.social_auth_settings import *
+    from photos.photos_settings import *
+except ImportError:
+    pass
