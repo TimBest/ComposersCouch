@@ -36,6 +36,5 @@ redis==2.10.3
 requests==2.5.0
 simplejson==3.6.5
 six==1.8.0
-sorl-thumbnail==11.12
 stream-framework==1.1.1
 wsgiref==0.1.2
