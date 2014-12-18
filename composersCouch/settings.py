@@ -52,7 +52,7 @@ INSTALLED_APPS = (
     'social_auth',
     'static_precompiler',
 
-    #'sorl.thumbnail',
+    'sorl.thumbnail',
     #'accounts',
     #'contact',
     #'customProfile.fan',
