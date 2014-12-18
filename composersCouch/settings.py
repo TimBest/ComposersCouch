@@ -21,7 +21,7 @@ SECRET_KEY = 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4&qd$uz_5&a7%q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-DEVELOPMENT = False
+DEVELOPMENT = True
 
 TEMPLATE_DEBUG = True
 
@@ -57,10 +57,16 @@ WSGI_APPLICATION = 'composersCouch.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 if DEVELOPMENT:
+    POSTGIS_VERSION = (2, 1, 4)
     DATABASES = {
         'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+            'ENGINE': 'django.contrib.gis.db.backends.postgis',
+            'NAME': 'composerscouchdb',
+            'USER': 'postgres',
+            'PASSWORD': 'devDatabase', # database Password goes Here
+            'HOST': 'localhost',
+            'PORT': '',
+            'ATOMIC_REQUESTS': True,
         }
     }
 else:
