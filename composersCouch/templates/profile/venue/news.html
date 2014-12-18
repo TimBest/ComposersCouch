@@ -1,0 +1,39 @@
+{% extends 'profile/venue/detail.html' %}
+{% load crispy_forms_tags i18n progress_bar %}
+{% crispy PostForm PostForm.helper %}
+
+{% block newsClass %}active{% endblock %}
+{% block dropdownTitle %}News{% endblock %}
+
+{% block panelBody %}
+  {% if user.is_authenticated %}
+    {% include "profile/_news.html" with post_form=post_form photo_form=photo_form %}
+  {% endif %}
+  {% for activity in activities %}
+    {% include "feeds/_post.html" with post=activity.post %}
+  {% empty %}
+    <p>No news to display.</p>
+  {% endfor %}
+{% endblock %}
+
+{% block script %}
+  {{ block.super }}
+  {% progress_bar_media %}
+  {% include "utils/_image_script.html" with selectorID='#id_photo' uploadDiv='#div_id_image' selectDiv='#div_id_photo' page=request.GET.page images=images %}
+  <script type="text/javascript">
+  $(document).ready(function() {
+    $("#post-form").hide();
+    $("#attach-photo-form").hide();
+    $("#show-post-form").click(function() {
+      $("#post-form").show();
+      $("#show-post-form").hide();
+    });
+
+    $("#attach-photo").click(function() {
+      $("#attach-photo-form").toggle();
+    });
+  });
+  </script>
+
+
+{% endblock %}

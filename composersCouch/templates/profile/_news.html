@@ -1,0 +1,43 @@
+{% load crispy_forms_tags i18n progress_bar %}
+
+<div class="panel panel-default">
+  <div id="show-post-form">
+    <div class="panel-body">
+      <div class="message-row reciver">
+        <div class="message-image-col">
+          <div class="message-image">
+            {% include "utils/_mugshot.html" with profile=request.user.profile height=50 width=50 %}
+          </div>
+        </div>
+        <div class="message-content-col">
+          <div class="message-content">
+            <div class="form-control">
+              <span class="text-muted">Post</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form  method="post" id="post-form" enctype="multipart/form-data">
+    <div class="panel-body">
+      {% crispy post_form %}
+      <div id="attach-photo-form">
+        {% crispy photo_form %}
+        {% if images %}
+          {% include "utils/_image_select.html" with images=images id="photo" label="Photo" %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="panel-footer">
+      <div class="row no-gutter" >
+        <div class="col-xs-12 center" >
+          <button type="button" id="attach-photo" class="btn btn-default"><span class='fa fa-camera'></span> Add Photo</button>
+          <div class="pull-right">
+            <button type="submit" class="btn btn-primary">{% trans 'Post' %}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

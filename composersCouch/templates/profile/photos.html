@@ -1,0 +1,36 @@
+{% load staticfiles %}
+{% load thumbnail %}
+
+<div class="photos">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        {% for image in images %}
+          {% if forloop.counter0|divisibleby:6 %}
+            </div>
+            <div class="row">
+          {% endif %}
+          <div class="col-sm-2">
+            <div class="photo">
+              {% thumbnail image.image "120x120" crop="center" as im %}
+                <div class="image-frame">
+                  <span class="frame-helper"></span>
+                  <a class="thumb" rel='gallery-image[ilist]' href="{{ image.image.url }}">
+                    <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ im.url }}">
+                  </a>
+                </div>
+                {% if image.title %}
+                  <p class="text-center"><a href="{% include 'photos/image-href.html' %}">
+                    {{ image.title }}
+                  </a></p>
+                {% endif %}
+              {% endthumbnail %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% include "utils/_pagination.html" with page=images %}

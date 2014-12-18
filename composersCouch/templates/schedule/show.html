@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block title %}{{ show.info.get_title }}{% endblock %}
+
+{% block content %}
+  {% include "schedule/_show.html" with show=show %}
+{% endblock %}

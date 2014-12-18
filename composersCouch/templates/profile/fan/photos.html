@@ -1,0 +1,18 @@
+{% extends 'profile/fan/detail.html' %}
+{% load i18n %}
+
+{% block photosClass %}active{% endblock %}
+{% block dropdownTitle %}Photos{% endblock %}
+
+{% block panelBody %}
+  <div class="row">
+    <div class="col-xs-12">
+      <a class="{{isEditable}} btn btn-success" href="{% url 'photos:upload' %}">
+        <span class="fa fa-arrow-up"></span> Add Photo
+      </a>
+    </div>
+  </div>
+  <div class="{% if not images %}{{isEditable}}{% endif %}">
+    {% include "profile/photos.html" with images=images %}
+  </div>
+{% endblock %}

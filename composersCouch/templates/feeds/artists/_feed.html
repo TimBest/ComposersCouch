@@ -1,0 +1,10 @@
+<div class="artists">
+  {% for artist in artists %}
+    <div class="artist">
+      {% include "search/_musician.html" with artist=artist %}
+    </div>
+  {% empty %}
+    {% include "feeds/_empty_feed.html" with location=location feed_type="artists" following=following %}
+  {% endfor %}
+  {% include "utils/_pagination.html" with page=artists %}
+</div>

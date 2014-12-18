@@ -1,0 +1,55 @@
+.header{
+  &.thread {
+    color: @white;
+    background-color: @blue;
+    margin-bottom:10px;
+  }
+}
+.content {
+  .message-thread {
+    @media (min-width: @screen-sm-min) {
+      padding: 0px 30px;
+    }
+    .message-list {
+      max-height: 500px;
+      overflow-y: scroll;
+    }
+  }
+}
+.message {
+  .panel {
+    margin-bottom: 10px;
+  }
+}
+
+.message-row {
+  width:100%;
+  overflow:hidden;
+}
+.sender {
+  .message-image-col {
+    width:60px;
+    float: right !important;
+    .message-image {
+      float: right !important;
+    }
+  }
+  .message-content-col {
+    margin-right:65px;
+    .message-content {
+      float: right !important;
+    }
+    .footer {
+      text-align: right;
+    }
+  }
+}
+.reciver {
+  .message-image-col {
+    width:60px;
+    float: left !important;
+  }
+  .message-content-col {
+    margin-left:65px;
+  }
+}

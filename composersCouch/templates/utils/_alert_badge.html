@@ -1,0 +1,9 @@
+{% if count %}
+  <span class="badge alert-badge">
+    {% if count < 100 %}
+      {{ count }}
+    {% else %}
+      99+
+    {% endif %}
+  </span>
+{% endif %}

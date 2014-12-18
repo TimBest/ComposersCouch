@@ -1,0 +1,33 @@
+{% extends 'profile/musician/forms/about_modal.html' %}
+{% load i18n crispy_forms_tags %}
+{% crispy ContactForm ContactForm.helper %}
+{% crispy LocationForm LocationForm.helper %}
+
+{% block title %}{% trans "Add/Edit Contact" %}{% endblock %}
+
+{% block contactClass %}active{% endblock %}
+
+{% block formID %}contactMusicianForm{% endblock %}
+
+{% block formTitle %}{% trans "Edit Contact Info" %}{% endblock %}
+
+{% block form %}
+  <span>Edit: </span>
+  <a class="editMusicianContact" href="{% url 'musician:userContactForm' username %}">
+    Band
+  </a>,
+  <a class="editMusicianContact" href="{% url 'musician:contactForm' username 'booking' %}">
+    Booking
+  </a>,
+  <a class="editMusicianContact" href="{% url 'musician:contactForm' username 'label' %}">
+    Label
+  </a>,
+  <a class="editMusicianContact" href="{% url 'musician:contactForm' username 'management' %}">
+    Management
+  </a>,
+  <a class="editMusicianContact" href="{% url 'musician:contactForm' username 'press' %}">
+    Press
+  </a>
+  {% crispy contactForm %}
+  {% crispy locationForm %}
+{% endblock %}

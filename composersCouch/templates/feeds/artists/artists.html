@@ -1,0 +1,29 @@
+{% extends 'feeds/base.html' %}
+{% block title %}Composers Couch{% endblock %}
+
+{% block artistsClass %}active{% endblock %}
+{% block feedType %}Artists{% endblock %}
+{% block bgColor%}red{% endblock %}
+
+{% block scopeNav %}
+  <li class="{% block localClass %}{% endblock %}">
+    <a href="{% url 'artists' order 'local' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Local</a>
+  </li>
+  <li class="{% block regionalClass %}{% endblock %}">
+    <a href="{% url 'artists' order 'regional' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Regional</a>
+  </li>
+  <li class="{% block globalClass %}{% endblock %}">
+    <a href="{% url 'artists' order 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a>
+  </li>
+  <li class="{% block followingClass %}{% endblock %}">
+    <a href="{% url 'artists' order 'following' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Following</a>
+  </li>
+  <li class="{% block availableClass %}{% endblock %}">
+    <a href="{% url 'available_artists' order 2014 32 32 zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Available</a>
+  </li>
+{% endblock %}
+
+{% block orderOptions %}
+  <li><a href="{% url 'artists' 'all' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a></li>
+  <li><a href="{% url 'artists' 'new' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">New </a></li>
+{% endblock %}

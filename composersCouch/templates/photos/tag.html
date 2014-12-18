@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load thumbnail %}
+
+{% block title %}
+    {% trans "Gallery" %} - {% trans "Tag" %}: {{ tag }}
+{% endblock %}
+
+{% block photos-breadcrumb %}
+    <li>{% trans "Tag" %}: {{ tag }}</li>
+{% endblock %}
+
+{% block content %}
+    <h1>{% trans "Tag" %} - {{ tag }}</h1>
+    {% include "photos/image-list.html" %}
+{% endblock content %}
+
+{% block content-related %}
+    {% include "photos/tag-cloud.html" %}
+{% endblock %}

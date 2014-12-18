@@ -1,0 +1,28 @@
+{% extends 'form.html' %}
+{% load i18n crispy_forms_tags %}
+{% crispy DateForm DateForm.helper %}
+{% crispy PrivateRequestForm PrivateRequestForm.helper %}
+
+{% block title %}{% block formTitle %}
+  {% trans "Edit Request" %}
+{% endblock %}{% endblock %}
+
+{% block formID %}privateRequestEditForm{% endblock %}
+
+{% block form %}
+  {% crispy dateForm %}
+  {% crispy requestForm %}
+{% endblock %}
+
+{% block script %}
+  {{ block.super }}
+  <script type="text/javascript">
+    $(function () {
+      $('#id_start_0').datetimepicker({pickTime: false});
+      $('#id_start_1').datetimepicker({pickDate: false});
+      $('#id_end_0').datetimepicker({pickTime: false});
+      $('#id_end_1').datetimepicker({pickDate: false});
+      $('#id_accept_by').datetimepicker({pickTime: false});
+    });
+  </script>
+{% endblock %}

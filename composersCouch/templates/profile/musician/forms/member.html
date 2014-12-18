@@ -1,0 +1,39 @@
+{% extends 'profile/musician/forms/about_modal.html' %}
+{% load i18n crispy_forms_tags %}
+{% crispy MemberForm MemberForm.helper %}
+
+{% block title %}{% trans "Edit Member" %}{% endblock %}
+
+{% block memberClass %}active{% endblock %}
+
+{% block formID %}membersMusicianForm{% endblock %}
+
+{% block formTitle %}{% trans "Edit Member" %}{% endblock %}
+
+{% block form %}
+  <div>
+    {% if members %}
+      <span>Edit members: </span>
+      {% for m in members %}
+        <a class="{{isEditable}} editMusicianMembers" href="{% url 'musician:memberForm' username m.id %}">
+          {{m.name}},
+        </a>
+      {% endfor %}
+      <span>or </span>
+      <a class="{{isEditable}} editMusicianMembers text-success" href="{% url 'musician:memberForm' username %}">
+        Add New
+      </a>
+    {% endif %}
+  </div>
+  <div class="text-muted">
+    {% if past_members %}
+      <span>Edit past members: </span>
+      {% for m in past_members %}
+        <a class="{{isEditable}} editMusicianMembers link-muted" href="{% url 'musician:memberForm' username m.id %}">
+          {{m.name}}{% if not forloop.last %},{% endif %}
+        </a>
+      {% endfor %}
+    {% endif %}
+  </div>
+  {% crispy form %}
+{% endblock %}

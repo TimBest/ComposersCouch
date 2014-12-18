@@ -1,0 +1,11 @@
+{% extends 'feeds/updates/updates.html' %}
+{% block title %}Composers Couch{% endblock %}
+
+{% block followingClass %}active{% endblock %}
+{% block scopeNavActive %}Who I Follow{% endblock %}
+{% comment %}remove zipcode form from template{% endcomment %}
+{% block zipcodeForm %}{% endblock %}
+
+{% block feed %}
+  {% include "feeds/updates/_feed.html" with title="Following" activities=activities following="Ture" %}
+{% endblock %}

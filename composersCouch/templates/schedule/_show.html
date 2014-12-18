@@ -1,0 +1,81 @@
+{% load i18n scheduletags static thumbnail %}
+
+{% with info=show.info %}
+<div class="show">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-2 col-sm-3">
+          <div class="image-frame">
+            <span class="frame-helper"></span>
+            {% thumbnail info.get_poster "100x100" crop="center" as im %}
+              <img class="image-center" src="{{ MEDIA_URL }}{{ im }}" alt="{{ info.title }}"/>
+            {% empty %}
+              <img class="image-center" src="{% static 'img/navbar.png' %}" alt="{% trans 'Composers Couch logo' %}"  height="" width="" />
+            {% endthumbnail %}
+          </div>
+        </div>
+        <div class="col-lg-8 col-sm-7">
+          <div>
+            {% if info.title %}
+              <h3>{{ info.title }}</h3>
+              {% if info.headliner %}
+                <h4><a class="text-black" href="{% url 'musician:news' info.headliner.user.username  %}" >{{ info.headliner }}</a></h4>
+              {% endif %}
+            {% elif info.headliner %}
+              <h3><a class="text-black" href="{% url 'musician:news' info.headliner.user.username  %}" >{{ info.headliner }}</a></h3>
+            {% endif %}
+            <div class="openers">
+              {% for opener in info.openers.all %}
+                {% if forloop.first %}with:{% else %},{% endif %}
+                <a class="text-black" href="{% url 'musician:news' opener.user.username  %}" > {{ opener }}</a>
+              {% endfor %}
+            </div>
+          </div>
+          <div>
+            <p>
+              <span class="fa fa-map-marker text-muted"></span>
+              <a class="text-black" href="{% url 'redirectToProfile' info.host.username 'about' %}">{{ info.host.profile }}</a>
+            </p>
+          </div>
+          <div>
+            {% if info.age != "All" %}<p>Ages: {{ info.age }}</p>{% endif %}
+            <p>
+              {% if info.advance_price %}
+                Advanced: ${{ info.advance_price }}
+              {% endif %}
+              {% if info.full_price %}
+                Day of: ${{ info.full_price }}
+              {% endif %}
+            <p>{{ info.disciption }}</p>
+          </div>
+        </div>
+        <div class="col-sm-2">
+          <div class="date-block">
+            <a href="{% url 'day_calendar' calendar.slug %}{% querystring_for_date show.date.start 3 %}" class="text-black">
+              {% include "utils/dates/_start_end_visual.html" with start=show.date.start end=show.date.end %}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% ifequal request.user.calendar calendar %}
+      <div class="panel-footer">
+        <div class="pull-right">
+          <form method="POST" class="accept-form inline-block {% if user_accept %}hidden{% endif %}" action="{% url 'show_confirm' %}">
+            {% csrf_token %}
+            <input type="hidden" name="show" value="{{ show.id }}">
+            <button class="btn btn-success" type="submit"><span class="fa fa-check" ></span> {% trans "Confirm" %}</button>
+          </form>
+          <form method="POST" class="decline-form inline-block {% if not user_accept %}hidden{% endif %}" action="{% url 'show_deny' %}">
+            {% csrf_token %}
+            <input type="hidden" name="show" value="{{ show.id }}">
+            <button class="btn btn-danger" type="submit"><span class="fa fa-ban" ></span> {% trans "Deny" %}</button>
+          </form>
+        </div>
+        <p><a href="{% url 'edit_event' calendar.slug show.id %}">Edit</a></p>
+      </div>
+    {% endifequal %}
+  </div>
+</div>
+{% endwith %}

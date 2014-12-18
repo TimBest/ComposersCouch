@@ -1,0 +1,7 @@
+{% load autocomplete_light_tags %}
+
+<span id="{{ widget.html_id }}-deck" class="deck" >
+  {% for choice in choices %}
+    {{ choice|autocomplete_light_choice_html:autocomplete }}
+  {% endfor %}
+</span>

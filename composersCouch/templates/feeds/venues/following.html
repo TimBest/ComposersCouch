@@ -1,0 +1,11 @@
+{% extends 'feeds/venues/venues.html' %}
+{% block title %}Composers Couch{% endblock %}
+
+{% block followingClass %}active{% endblock %}
+{% block scopeNavActive %}Who I Follow{% endblock %}
+{% block zipcodeForm %}{% endblock %}
+{% block availabilityForm %}{% endblock %}
+
+{% block feed %}
+  {% include "feeds/venues/_feed.html" with title="Venues" venues=posts following="Ture" %}
+{% endblock %}

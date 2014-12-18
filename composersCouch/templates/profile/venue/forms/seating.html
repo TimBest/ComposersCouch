@@ -1,0 +1,24 @@
+{% extends 'profile/venue/forms/about_modal.html' %}
+{% load crispy_forms_tags i18n progress_bar %}
+{% crispy SeatingForm SeatingForm.helper %}
+
+{% block title %}{% trans "Edit Seating" %}{% endblock %}
+{% block seatingClass %}active{% endblock %}
+
+{% block formID %}seatingForm{% endblock %}
+{% block formTitle %}Edit Seating{% endblock %}
+{% block enctype %}multipart/form-data{% endblock %}
+{% block form %}
+    {% crispy seatingChartForm %}
+    {% if images %}
+      {% include "utils/_image_select.html" with images=images id="seating_chart" label="Seating chart" %}
+    {% endif %}
+    {% crispy seatingForm %}
+{% endblock %}
+{% block extraSubmit %}{% progress_bar %}{% endblock %}
+
+{% block script %}
+  {{ block.super }}
+  {% progress_bar_media %}
+  {% include "utils/_image_script.html" with selectorID='#id_seating_chart' uploadDiv='#div_id_image' selectDiv='#div_id_seating_chart' page=request.GET.page images=images %}
+{% endblock %}

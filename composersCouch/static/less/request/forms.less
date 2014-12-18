@@ -1,0 +1,30 @@
+#requestForm {
+  #div_id_form-0-start,
+  #div_id_form-0-end,
+  #div_id_form-1-start,
+  #div_id_form-1-end,
+  #div_id_form-2-start,
+  #div_id_form-2-end {
+    &:before {
+      content: " ";
+    }
+    &:after {
+      content: " ";
+      clear: both;
+    }
+    .dateinput,
+    .timeinput {
+      position: relative;
+      min-height: 1px;
+      margin-right: 1%;
+      margin-left: 1%;
+      float: left;
+      width: 48%;
+    }
+    .controls {
+      margin-right: -1%;
+      margin-left: -1%;
+      padding-bottom:15px;
+    }
+  }
+}

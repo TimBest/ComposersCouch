@@ -1,0 +1,27 @@
+{% extends 'form.html' %}
+{% load crispy_forms_tags i18n progress_bar %}
+{% crispy MusicianProfileForm MusicianProfileForm.helper %}
+{% crispy VenueProfileForm VenueProfileForm.helper %}
+{% crispy UserForm UserForm.helper %}
+{% crispy ProfileForm ProfileForm.helper %}
+
+{% block title %}{% block formTitle %}{% trans "Edit Profile" %}{% endblock %}{% endblock %}
+
+{% block formID %}edit-profile-form{% endblock %}
+{% block enctype %}multipart/form-data{% endblock %}
+{% block form %}
+  {% crispy typedForm %}
+  {% crispy usernameForm %}
+  {% if images %}
+    {% include "utils/_image_select.html" with images=images id="mugshot" label="Mugshot" %}
+  {% endif %}
+  {% crispy mugshotFrom %}
+  {% crispy profileForm %}
+{% endblock %}
+{% block extraSubmit %}{% progress_bar %}{% endblock %}
+
+{% block script %}
+  {{ block.super }}
+  {% progress_bar_media %}
+  {% include "utils/_image_script.html" with selectorID='#id_mugshot' uploadDiv='#div_id_image' selectDiv='#div_id_mugshot' page=request.GET.page images=images %}
+{% endblock %}

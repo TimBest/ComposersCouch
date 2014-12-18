@@ -1,0 +1,10 @@
+{% extends 'search/availability.html' %}
+{% load i18n %}
+
+{% block ContentType %}Venues{% endblock %}
+
+{% block content %}
+  {% for venue in results %}
+    {% include "search/_venue.html"  with venue=venue %}
+  {% endfor %}
+{% endblock %}

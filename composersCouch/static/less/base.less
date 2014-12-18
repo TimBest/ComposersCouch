@@ -1,0 +1,287 @@
+/*header and footer CSS*/
+@footer-height: 100px;
+
+html {
+  /* The html and body elements cannot have any padding or margin. */
+  position:relative;
+  min-height: 110%;
+}
+body {
+  font-family: PT-sans, sans-serif;
+  margin-bottom: @footer-height;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: Ubuntu, sans-serif;
+  padding-top:5px;
+  padding-bottom:5px;
+  margin:0;
+}
+h1 {
+  padding:0;
+  margin:0;
+}
+
+
+/* Navbar */
+.navbar {
+  margin-bottom:0px;
+  .box-shadow(0px 0px 3px rgba(0,0,0,.5));
+  .container-fluid {
+    padding-left: 15px;
+    padding-right: 5px;
+    @media (min-width: @screen-sm-min) {
+      padding-left: 15px;
+      padding-right: 65px;
+    }
+    @media (min-width: @screen-md-min) {
+      padding-left: 65px;
+      padding-right: 70px;
+    }
+
+  }
+  .navbar-brand {
+    .composers {
+      color:@gray;
+    }
+    .couch {
+      color: @blue;
+      font-weight:bold;
+    }
+    .beta-badge {
+      color: @red-darker;
+      font-size: 14px;
+      font-family: PT-sans, sans-serif;
+    }
+    &:hover,
+    &:focus,
+    &:active,
+    &.active {
+      background-color: @silver-light;
+    }
+  }
+  .navbar-form {
+    border-left: 1px solid @silver-light;
+    #search {
+      border-width: 0px;
+      box-shadow: none;
+    }
+    .fa {
+      color: @gray-light;
+    }
+  }
+  .mobile-dropdown-menu {
+    li {
+      a {
+        /* TODO: fix this hack */
+        padding-left: 30px;
+        padding-right: 30px;
+      }
+    }
+  }
+}
+
+/* Header */
+.header {
+  background-color: @header-bg;
+  padding-top:20px;
+  padding-bottom: 10px;
+  min-height: 100px;
+}
+
+/* Navigation */
+.navigation {
+  margin-bottom: 15px;
+  font-size: 110%;
+  .main-nav {
+    height:43px;
+    background-color: @blue-dark;
+    padding-bottom:0px;
+    margin-bottom:25px;
+    .navTabHover(){
+      background-color: @white;
+      color:@black;
+      border-top: @white;
+    }
+
+    .nav-tabs {
+      height:42px;
+      background-color: @blue-dark;
+      border-width: 0px;
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      border-radius: 0px;
+      li {
+        a {
+          color:@silver-light;
+          margin-right: 0;
+          -webkit-border-radius: 0px;
+          -moz-border-radius: 0px;
+          border-radius: 0px;
+        }
+        a:hover,
+        a:focus {
+          .navTabHover();
+        }
+      }
+      li.active a,
+      li.active a:hover,
+      li.active a:focus {
+        .navTabHover();
+
+      }
+    }
+  }
+  .sub-nav {
+    height:43px;
+    background-color: @white;
+    margin-top:-25px;
+    .subNavActive(){
+      border: 1px solid @white;
+      background-color: @white;
+      color:@black;
+    }
+    .nav-tabs {
+      height:42px;
+      background-color: @white;
+      border-width: 0px;
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      border-radius: 0px;
+      li {
+        a {
+          color:@blue;
+          margin-right: 0;
+          -webkit-border-radius: 0px;
+          -moz-border-radius: 0px;
+          border-radius: 0px;
+        }
+        a:hover,
+        a:focus {
+          .subNavActive();
+        }
+      }
+      li.active a,
+      li.active a:hover,
+      li.active a:focus {
+        .subNavActive();
+      }
+    }
+  }
+}
+
+/* Container sizeing */
+.container-fluid {
+  padding-right: 0px;
+  padding-left: 0px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.header {
+  .container-fluid {
+    padding-left: 15px;
+    padding-right: 65px;
+    @media (min-width: @screen-md-min) {
+      padding-left: 65px;
+      padding-right: 65px;
+    }
+  }
+}
+.navigation {
+  .container-fluid {
+    padding-left: 15px;
+    @media (min-width: @screen-sm-min) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    @media (min-width: @screen-md-min) {
+      padding-left: 65px;
+      padding-right: 65px;
+    }
+  }
+}
+.content {
+  .container-fluid {
+    @media (min-width: @screen-sm-min) {
+      padding-left: 15px;
+      padding-right: 15px;
+    }
+    @media (min-width: @screen-md-min) {
+      padding-left: 65px;
+      padding-right: 65px;
+    }
+  }
+}
+
+
+/* Right Hand Navigation*/
+.rightNav {
+  z-index: 1000;
+  width:50px;
+  //float: right;
+  position:absolute;
+  right:0;
+  .box-shadow(1px 3px 3px rgba(0,0,0,.5));
+  a.rightNavItem {
+    color: @black;
+    &:hover, &:focus, &:active,.active {
+      &.request {
+        color:@blue;
+      }
+      &.calendar {
+        color:@green-dark;
+      }
+    }
+  }
+
+ .rightNavItem {
+    position: relative;
+    display: block;
+    padding: 10px 10px;
+    margin-bottom: -1px;
+    background-color: @white;
+    border: 0px solid @black;
+    border-right: 0px;
+    &:first-child {
+      border-top-left-radius: 0px;
+      border-top-right-radius: 0px;
+    }
+    &:last-child {
+      margin-bottom: 0;
+      border-bottom-right-radius: 0px;
+      border-bottom-left-radius: 0px;
+    }
+  }
+  span.fa, span.glyphicon{
+    font-size: 2em;
+  }
+  .comingSoon {
+    -webkit-transform: rotate(-45deg);
+       -moz-transform: rotate(-45deg);
+        -ms-transform: rotate(-45deg);
+         -o-transform: rotate(-45deg);
+            transform: rotate(-45deg);
+              font-size: 8px;
+              /*height: 200px;
+              width: 200px;
+              float: left;
+              vertical-align:top; */
+  }
+}
+
+
+/* Footer */
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: @footer-height;
+  background-color: @white;
+  color: @black;
+
+  .container {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+}

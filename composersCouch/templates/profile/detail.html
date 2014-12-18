@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block header %}
+  <div class="detail">
+    <div class="panel panel-default nametag">
+      <div class="panel-body">
+        <div class="nametagImg">
+          {% include "utils/_mugshot.html" with profile=profile height=100 width=100 class="verticalAlign center-block"%}
+        </div>
+        <div class="nametagInfo">
+          <h2 class="name">{% block name %}{% endblock %}</h2>
+          <div class="row">
+            <form method="POST" action="{% url 'follow' %}">
+              {% csrf_token %}
+              <input type="hidden" name="target" value="{{ profile.user.id }}">
+              <button class="btn btn-primary {{isFollowing}}" type="submit">
+                <span class="follow">Follow</span>
+                <span class="following">Following</span>
+                <span class="unfollow">Unfollow</span>
+              </button>
+            </form>
+            <a  href="{% url 'request_write' username %}" class="btn btn-default">{% trans "Request" %}</a>
+          </div>
+          <div class="row">
+            {% block editNametag %}
+              <a href="{% url 'profile_edit' username %}" class="{{isEditable}} edit-profile pull-right">
+                Edit
+              </a>
+            {% endblock %}
+            {% if not profile.has_owner and not user.is_authenticated %}
+              <a href="{% url 'claim_profile_verify' username %}" class="claim-profile pull-right">Claim this profile</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block navigation %}
+  <div class="detail">
+    <div class="navigation">
+      <div class="container-fluid">
+        <ul class="nav nav-tabs visible-lg visible-md visible-sm">
+          {% block tabs %}{% endblock %}
+        </ul>
+        <ul class="nav nav-tabs visible-xs">
+          <li class="dropdown active">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">
+              {% block dropdownTitle %}{% endblock %} <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+              {% block dropdownTabs %}{% endblock %}
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="detail">
+    <div>
+      {% block panelBody %}
+      {% endblock %}
+    </div>
+  </div>
+{% endblock %}

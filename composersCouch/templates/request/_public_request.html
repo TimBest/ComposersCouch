@@ -1,0 +1,43 @@
+{% load i18n %}
+
+<div class="request">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-lg-2 col-sm-3">
+          <div class="image-frame">
+            <span class="frame-helper"></span>
+            {% include "utils/_mugshot.html" with profile=publicRequest.requester.profile width=100 height=100 %}
+          </div>
+        </div>
+        <div class="col-lg-8 col-sm-7">
+          <a class="text-black" href="{% url 'redirectToProfile' publicRequest.requester.username 'about' %}">
+            <h3>{{ publicRequest.requester.profile }}</h3>
+          </a>
+          <div>Accept By: {{ publicRequest.accept_by }}</div>
+          <div>At: {{ publicRequest.zip_code }}</div>
+          {% if publicRequest.applicants %}
+          <div>Looking for {{ publicRequest.applicants.left }} bands</div>
+          {% endif %}
+          <p>{{ publicRequest.details }}</p>
+        </div>
+        <div class="col-sm-2">
+          <div class="date-block">
+            {% include "utils/dates/_start_end_visual.html" with start=publicRequest.date.start end=publicRequest.date.end %}
+          </div>
+        </div>
+      </div>
+    </div>
+    {% if user.is_authenticated and not noApply and not publicRequest.fulfilled %}
+      {% if publicRequest.applicants and user.profile.profile_type == 'm' %}
+        <div class="panel-footer text-right">
+          <a href="{% url 'request_appy_to_venue' publicRequest.id %}" class="btn btn-default">Apply</a>
+        </div>
+      {% elif not publicRequest.applicants %}
+        <div class="panel-footer text-right">
+          <a href="{% url 'request_appy_to_band' publicRequest.id %}" class="btn btn-default">Apply</a>
+        </div>
+      {% endif %}
+    {% endif %}
+  </div>
+</div>

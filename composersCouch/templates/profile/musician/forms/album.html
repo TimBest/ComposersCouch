@@ -1,0 +1,25 @@
+{% extends 'form.html' %}
+{% load crispy_forms_tags i18n progress_bar %}
+{% crispy AlbumForm AlbumForm.helper %}
+{% crispy AlbumArtForm AlbumArtForm.helper %}
+
+{% block title %}
+  {% block formTitle %}{% trans "Add Album" %}{% endblock %}
+{% endblock %}
+
+{% block formID %}album-form{% endblock %}
+{% block enctype %}multipart/form-data{% endblock %}
+{% block form %}
+    {% crispy albumArtForm %}
+    {% if images %}
+      {% include "utils/_image_select.html" with images=images id="album_art" label="Album Art" %}
+    {% endif %}
+    {% crispy albumForm %}
+{% endblock %}
+{% block extraSubmit %}{% progress_bar %}{% endblock %}
+
+{% block script %}
+  {{ block.super }}
+  {% progress_bar_media %}
+  {% include "utils/_image_script.html" with selectorID='#id_album_art' uploadDiv='#div_id_image' selectDiv='#div_id_album_art' page=request.GET.page images=images %}
+{% endblock %}

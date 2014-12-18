@@ -1,0 +1,31 @@
+{% extends 'profile/detail.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{{ musicianProfile.name}}{% endblock %}
+{% block content_title %}<h2>{{ musicianProfile.name }}</h2>{% endblock %}
+
+{% block name %}{{ musicianProfile.name }}{% endblock %}
+
+{% block tabs %}
+  {% block dropdownTabs %}
+    <li class="left {% block aboutClass %}{% endblock %}">
+      <a href="{% url 'musician:about' username  %}">About</a>
+    </li>
+    <li class="{% block newsClass %}{% endblock %}">
+      <a href="{% url 'musician:news' username  %}">News</a>
+    </li>
+    <li class="{% block showsClass %}{% endblock %}">
+      <a href="{% url 'musician:shows' username  %}">Shows</a>
+    </li>
+    <li class="{% block musicClass %}{% endblock %}">
+      <a href="{% url 'musician:music' username  %}">Music</a>
+    </li>
+    <li class="{% block photosClass %}{% endblock %}">
+      <a href="{% url 'musician:photos' username  %}">Photos</a>
+    </li>
+    <li class="{% block videosClass %}{% endblock %}">
+      <a href="{% url 'musician:videos' username  %}">Videos</a>
+    </li>
+  {% endblock %}
+{% endblock %}

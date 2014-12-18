@@ -1,0 +1,25 @@
+{% extends 'profile/detail.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block title %}{{ venueProfile.name}}{% endblock %}
+{% block content_title %}<h2>{{ venueProfile.name}}</h2>{% endblock %}
+
+{% block name %}{{ venueProfile.name}} {% endblock %}
+
+{% block tabs %}
+  {% block dropdownTabs %}
+    <li class="left {% block aboutClass %}{% endblock %}">
+      <a href="{% url 'venue:about' username  %}">About</a>
+    </li>
+    <li class="{% block newsClass %}{% endblock %}">
+      <a href="{% url 'venue:news' username  %}">News</a>
+    </li>
+    <li class="{% block showsClass %}{% endblock %}">
+      <a href="{% url 'venue:shows' username  %}">Shows</a>
+    </li>
+    <li class="{% block photosClass %}{% endblock %}">
+      <a href="{% url 'venue:photos' username  %}">Photos</a>
+    </li>
+  {% endblock %}
+{% endblock %}

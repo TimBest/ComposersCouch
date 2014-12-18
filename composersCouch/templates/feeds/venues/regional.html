@@ -1,0 +1,10 @@
+{% extends 'feeds/venues/venues.html' %}
+{% block title %}Composers Couch{% endblock %}
+
+{% block regionalClass %}active{% endblock %}
+{% block scopeNavActive %}Regional{% endblock %}
+{% block availabilityForm %}{% endblock %}
+
+{% block feed %}
+  {% include "feeds/venues/_feed.html" with title="Venues" venues=posts %}
+{% endblock %}

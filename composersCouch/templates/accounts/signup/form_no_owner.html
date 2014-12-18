@@ -1,0 +1,22 @@
+{% extends 'form.html' %}
+{% load i18n crispy_forms_tags static %}
+{% crispy signupForm signupForm.helper %}
+{% crispy CreateUserForm CreateUserForm.helper %}
+
+{% block title %}
+  {% block formTitle %}Create User{% endblock %}
+{% endblock %}
+
+{% block formID %}sign-up-form{% endblock %}
+
+{% block form %}
+  {% crispy signupForm %}
+  {% crispy zipcodeForm %}
+{% endblock %}
+
+{% block submit %}<button type="submit" class="btn btn-primary">Save</button>{% endblock %}
+
+{% block script %}
+  {{ block.super }}
+  <script type="text/javascript" src="{% static 'js/signup.js' %}"></script>
+{% endblock %}

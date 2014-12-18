@@ -1,0 +1,27 @@
+{% load i18n staticfiles %}
+
+<div class="venue">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-3">
+          <div class="image-frame">
+            <span class="frame-helper"></span>
+            {% include "utils/_mugshot.html" with profile=venue.profile height=125 width=125  %}
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <h3><a class="text-black" href="{% url 'venue:home' venue.profile.user.username %}">
+            {{ venue.name }}
+          </a></h3>
+          {% if venue.biography %}
+            <p>{{ venue.biography }}</p>
+          {% endif %}
+        </div>
+        <div class="col-sm-3">
+          {% include "profile/_contact.html" with contact_info=venue.profile.contact_info %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

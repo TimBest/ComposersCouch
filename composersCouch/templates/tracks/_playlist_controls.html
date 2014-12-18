@@ -1,0 +1,38 @@
+{% load i18n %}
+<div class="jplayer-controls">
+  <div id="jp_container_{{ id }}" class="jp-audio">
+
+
+    {% comment %}
+    <div class="jp-time-holder">
+      <span class="jp-current-time pull-left">00:00</span>
+      <span class="jp-duration pull-right">-03:29</span>
+    </div>
+    {% endcomment %}
+
+    <div class="row no-gutter">
+      <div class="col-sm-2 left">
+        <div class="jp-controls" >
+          <a href="javascript:;" class="jp-play jp-button" tabindex="1"><span class="fa fa-play"></span></a>
+          <a style="display: none;" href="javascript:;" class="jp-pause jp-button" tabindex="1"><span class="fa fa-pause"></span></a>
+        </div>
+      </div>
+      <div class="col-sm-8 center">
+        <div class="jp-progress">
+          <div style="width: 100%;" class="jp-seek-bar">
+            <div style="width: 0%;" class="jp-play-bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-2 right">
+        <div class="jp-controls">
+          <a href="javascript:;" class="jp-mute jp-button" tabindex="1" title="mute"><span class="fa fa-volume-up"></span></a>
+          <a href="javascript:;" class="jp-unmute jp-button" tabindex="1" title="unmute"><span class="fa fa-volume-off"></span></a>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+</div>

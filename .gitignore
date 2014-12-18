@@ -1,1 +1,8 @@
+*~
+*.swp
+*.pyc
+*.pyo
+
+*composersCouch/media/
+
 .elasticbeanstalk/

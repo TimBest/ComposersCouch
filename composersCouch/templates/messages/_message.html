@@ -1,0 +1,24 @@
+{% load inbox  %}
+<div class="message">
+  <div class="panel">
+    <div class="panel-body">
+      <div class="message-row {% if message.sender == user %}sender{% else %}reciver{% endif %}">
+        <div class="message-image-col">
+          <div class="message-image">
+            {% include "utils/_mugshot.html" with profile=message.sender.profile height=50 width=50 %}
+          </div>
+        </div>
+        <div class="message-content-col">
+          <div class="message-content">
+            <div class="body"><p>{{ message.body|safe|linebreaksbr }}</p></div>
+            <div class="footer text-muted">
+              <span class="sender">{{ message.sender.profile }}</span>
+              <span> | </span>
+              <span class="date">{{ message.sent_at|compact_date:_("g:i A,M j,n/j/y") }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

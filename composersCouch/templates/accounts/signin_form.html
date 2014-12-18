@@ -1,0 +1,45 @@
+{% extends 'form.html' %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% crispy SigninForm SigninForm.helper %}
+
+{% block title %}
+  {% block formTitle %}{% trans "Signin" %}{% endblock %}
+{% endblock %}
+
+{% block headerClass %}authentication{% endblock %}
+{% block formID %}sign-in-form{% endblock %}
+
+{% block form %}
+<div class="sign-in">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <ul class="social-links text-center">
+        <li>
+          <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter" role="button">
+            <i class="fa fa-twitter"></i>
+            <span>Twitter</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook" role="button">
+            <i class="fa fa-facebook"></i>
+            <span>Facebook</span>
+          </a>
+        </li>
+        <li>
+          <a href="{% url 'socialauth_begin' 'google' %}" class="btn btn-google" role="button">
+            <i class="fa fa-google-plus"></i>
+            <span>Google</span>
+          </a>
+        </li>
+      </div>
+    </ul>
+    <div class="col-md-9 col-sm-8">
+      {% crispy form %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block submit %}<button type="submit" class="btn btn-primary">Sign in</button>{% endblock %}

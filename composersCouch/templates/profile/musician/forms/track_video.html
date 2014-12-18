@@ -1,0 +1,18 @@
+{% extends 'form.html' %}
+{% load i18n crispy_forms_tags %}
+{% crispy AlbumTrackVideoForm AlbumTrackVideoForm.helper %}
+
+{% block title %}
+  {% block formTitle %}{% trans "Add Tracks" %}{% endblock %}
+{% endblock %}
+
+{% block formID %}tracks-form{% endblock %}
+
+{% block form %}
+  {% csrf_token %}
+  {{ formset.management_form }}
+  {% for form in formset %}
+    {{ form.id }}
+    {% crispy form %}
+  {% endfor %}
+{% endblock %}

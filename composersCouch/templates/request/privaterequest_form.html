@@ -1,0 +1,32 @@
+{% extends 'form.html' %}
+{% load i18n crispy_forms_tags %}
+{% crispy DateForm DateForm.helper %}
+{% crispy MessageForm MessageForm.helper %}
+{% crispy PrivateRequestForm PrivateRequestForm.helper %}
+
+{% block title %}{% block formTitle %}
+  {% trans "Send Request" %}
+{% endblock %}{% endblock %}
+
+{% block formID %}privateRequestForm{% endblock %}
+
+{% block form %}
+  {% crispy dateForm %}
+  {% crispy requestForm %}
+  {% crispy messageForm %}
+{% endblock %}
+
+{% block submit %}<button type="submit" class="btn btn-primary">{% trans 'Send' %}</button>{% endblock %}
+
+{% block script %}
+  {{ block.super }}
+  <script type="text/javascript">
+    $(function () {
+        $('#id_start_0').datetimepicker({pickTime: false});
+        $('#id_start_1').datetimepicker({pickDate: false});
+        $('#id_end_0').datetimepicker({pickTime: false});
+        $('#id_end_1').datetimepicker({pickDate: false});
+        $('#id_accept_by').datetimepicker({pickTime: false});
+    });
+  </script>
+{% endblock %}

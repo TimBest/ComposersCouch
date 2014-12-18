@@ -1,0 +1,10 @@
+{% extends 'feeds/shows/shows.html' %}
+{% block title %}Composers Couch{% endblock %}
+
+{% block globalClass %}active{% endblock %}
+{% block scopeNavActive %}All{% endblock %}
+{% block zipcodeForm %}{% block zipcodeText %}{% endblock %}{% endblock %}
+
+{% block feed %}
+  {% include "feeds/shows/_feed.html" with title="All Shows" shows=posts %}
+{% endblock %}

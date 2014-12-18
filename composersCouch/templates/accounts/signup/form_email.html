@@ -1,0 +1,27 @@
+{% extends 'form.html' %}
+{% load i18n crispy_forms_tags static %}
+{% crispy signupForm signupForm.helper %}
+{% crispy zipcodeForm zipcodeForm.helper %}
+{% crispy emailForm emailForm.helper %}
+
+{% block title %}
+  {% block formTitle %}{% trans "Join" %} Composers Couch{% endblock %}
+{% endblock %}
+
+{% block headerClass %}authentication{% endblock %}
+{% block formID %}sign-up-form{% endblock %}
+
+{% block form %}
+  <div class="sign-up">
+    {% crispy signupForm %}
+    {% crispy zipcodeForm %}
+    {% crispy emailForm %}
+  </div>
+{% endblock %}
+
+{% block submit %}<button type="submit" class="btn btn-primary">Sign up</button>{% endblock %}
+
+{% block script %}
+  {{ block.super }}
+  <script type="text/javascript" src="{% static 'js/signup.js' %}"></script>
+{% endblock %}

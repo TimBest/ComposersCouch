@@ -1,0 +1,18 @@
+{% if zipcode %}
+  <p>No {{ feed_type }} in your area</p>
+{% else %}
+  {% if following %}
+    {% if user.is_authenticated %}
+      <p>No post from whom your following</p>
+    {% else %}
+      <p>Please sign up</p>
+      <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" class="btn btn-info">Sign Up</a>
+    {% endif %}
+  {% else %}
+    <p>Please sign up or enter your zipcode</p>
+    <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" class="btn btn-info">Sign Up</a>
+  {% endif %}
+{% endif %}
+{% if usersGenres or genres %}
+  <a class="text-danger" href="{{ request.path }}"><span class="fa fa-filter"><span> <u>Remove Filters</u></a>
+{% endif %}

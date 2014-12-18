@@ -1,0 +1,9 @@
+{% extends 'feeds/updates/updates.html' %}
+{% block title %}Composers Couch{% endblock %}
+
+{% block localClass %}active{% endblock %}
+{% block scopeNavActive %}Local{% endblock %}
+
+{% block feed %}
+  {% include "feeds/updates/_feed.html" with title="Local Activities" activities=activities %}
+{% endblock %}

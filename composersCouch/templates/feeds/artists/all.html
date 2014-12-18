@@ -1,0 +1,11 @@
+{% extends 'feeds/artists/artists.html' %}
+{% block title %}Composers Couch{% endblock %}
+
+{% block globalClass %}active{% endblock %}
+{% block scopeNavActive %}All{% endblock %}
+{% block zipcodeForm %}{% block zipcodeText %}{% endblock %}{% endblock %}
+{% block availabilityForm %}{% endblock %}
+
+{% block feed %}
+  {% include "feeds/artists/_feed.html" with title="All Artists" artists=posts %}
+{% endblock %}

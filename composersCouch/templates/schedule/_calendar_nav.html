@@ -1,0 +1,61 @@
+{% load scheduletags i18n %}
+
+<div class="col-xs-10 right">
+  <div class="btn-toolbar hidden-xs" role="toolbar">
+    <div class="btn-group pull-right">
+      <a href="{% url 'day_calendar' calendar.slug %}{% querystring_for_date date 3 %}" class="btn btn-default {% if day %}active{% endif %}">
+        {% trans "Day" %}
+      </a>
+      <a href="{% url 'week_calendar' calendar.slug %}{% querystring_for_date date 3 %}" class="btn btn-default {% if week %}active{% endif %}">
+        {% trans "Week" %}
+      </a>
+      <a href="{% url 'month_calendar' calendar.slug %}{% querystring_for_date date 2 %}" class="btn btn-default {% if month %}active{% endif %}">
+        {% trans "Month" %}
+      </a>
+      <a href="{% url 'year_calendar' calendar.slug %}{% querystring_for_date date 1 %}" class="btn btn-default {% if year %}active{% endif %}">
+        {% trans "Year" %}
+      </a>
+    </div>
+    <div class="btn-group pull-right">
+      <a href="{% url 'month_calendar' calendar.slug %}" class="btn btn-default">
+        {% trans "Today" %}
+      </a>
+    </div>
+  </div>
+  <div class="btn-toolbar visible-xs" role="toolbar">
+    <div class="btn-group pull-right">
+      <div class="btn-group pull-right">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          {% if day %}Day{% elif week %}Week{% elif month %}Month{% elif year %}Year{% endif %} <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+          <li class="{% if day %}active{% endif %}">
+            <a href="{% url 'day_calendar' calendar.slug %}{% querystring_for_date date 3 %}">
+              {% trans "Day" %}
+            </a>
+          </li>
+          <li class="{% if week %}active{% endif %}">
+            <a href="{% url 'week_calendar' calendar.slug %}{% querystring_for_date date 3 %}">
+              {% trans "Week" %}
+            </a>
+          </li>
+          <li class="{% if month %}active{% endif %}">
+            <a href="{% url 'month_calendar' calendar.slug %}{% querystring_for_date date 2 %}" >
+              {% trans "Month" %}
+            </a>
+          </li>
+          <li class="{% if year %}active{% endif %}">
+            <a href="{% url 'year_calendar' calendar.slug %}{% querystring_for_date date 1 %}">
+              {% trans "Year" %}
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="btn-group pull-right">
+      <a href="{% url 'month_calendar' calendar.slug %}" class="btn btn-default">
+        {% trans "Today" %}
+      </a>
+    </div>
+  </div>
+</div>

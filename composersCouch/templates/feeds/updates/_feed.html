@@ -1,0 +1,10 @@
+<div class="activities">
+  {% for activity in activities %}
+    <div class="activity">
+      {% include "feeds/_post.html" with post=activity.post %}
+    </div>
+  {% empty %}
+    {% include "feeds/_empty_feed.html" with location=location feed_type="posts" following=following %}
+  {% endfor %}
+  {% include "utils/_pagination.html" with page=activities %}
+</div>

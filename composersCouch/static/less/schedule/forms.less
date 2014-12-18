@@ -1,0 +1,28 @@
+#div_id_start,
+#div_id_end {
+  &:before {
+    content: " ";
+  }
+  &:after {
+    content: " ";
+    clear: both;
+  }
+  .form-control {
+    position: relative;
+    min-height: 1px;
+    margin-right: 1%;
+    margin-left: 1%;
+    float: left;
+    width: 48%;
+  }
+  .controls {
+    margin-right: -1%;
+    margin-left: -1%;
+  }
+}
+#eventForm {
+  &.modal-dialog {
+    width:100%;
+    max-width:1250px;
+  }
+}

@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load crispy_forms_tags %}
+{% crispy EditProfileForm EditProfileForm.helper %}
+{% load url from future %}
+
+{% block title %}{% trans "Account edit" %}{% endblock %}
+
+{% block content_title %}<h2>{% blocktrans with profile.user.username as username %}Account &raquo; {{ username }}{% endblocktrans %}</h2>{% endblock %}
+
+{% block header %}
+  <div class="container">
+    <h2>{% trans "Edit Profile" %}</h2>
+    {% crispy form %}
+  </div>
+{% endblock %}

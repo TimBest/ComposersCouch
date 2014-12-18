@@ -1,0 +1,13 @@
+<div id="div_id_{{ id }}" class="form-group">
+  <label for="id_{{ id }}" class="control-label ">{{ label }}</label>
+  <div class="controls ">
+    <select class="image-picker imageselectwidget form-control" id="id_{{ id }}" name="{{ id }}">
+      <option value="" selected="selected">---------</option>
+      {% for image in images %}
+          <option value="{{ image.id }}" data-img-src="{{ MEDIA_URL }}{{ image.image }}">{{ image.title }}</option>
+      {% endfor %}
+    </select>
+    {% include "utils/_pagination.html" with page=images %}
+  </div>
+
+</div>

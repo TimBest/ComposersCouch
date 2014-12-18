@@ -1,0 +1,10 @@
+{% extends 'feeds/requests/requests.html' %}
+{% block title %}Composers Couch{% endblock %}
+
+{% block followingClass %}active{% endblock %}
+{% block scopeNavActive %}Who I Follow{% endblock %}
+{% block zipcodeForm %}{% endblock %}
+
+{% block feed %}
+  {% include "feeds/requests/_feed.html" with title="Requests" requests=posts following="Ture" %}
+{% endblock %}

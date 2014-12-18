@@ -1,0 +1,69 @@
+{% extends "form.html" %}
+{% load crispy_forms_tags i18n progress_bar %}
+{% crispy DateForm DateForm.helper %}
+{% crispy EventForm EventForm.helper %}
+{% crispy ShowInfoForm ShowInfoForm.helper %}
+
+{% block title %}
+  {% block formTitle %}{% trans "Create Event" %}{% endblock %}
+{% endblock %}
+
+{% block formID %}eventForm{% endblock %}
+{% block enctype %}multipart/form-data{% endblock %}
+{% block form %}
+  <div id="poster-form">
+    {% crispy poster_form %}
+    {% if images %}
+      {% include "utils/_image_select.html" with images=images id="poster" label="Poster" %}
+    {% endif %}
+  </div>
+  <div class="row">
+    <div class="col-sm-6">
+      {% crispy show_info_form %}
+    </div>
+    <div class="col-sm-6">
+      {% crispy date_form %}
+      {% crispy event_form %}
+    </div>
+  </div>
+{% endblock %}
+{% block extraSubmit %}{% progress_bar %}{% endblock %}
+
+
+{% block script %}
+  {{ block.super }}
+  {% progress_bar_media %}
+  <script type="text/javascript">
+    {% comment %}Date picker{% endcomment %}
+    $(function () {
+        $('#id_start_0').datetimepicker({pickTime: false});
+        $('#id_start_1').datetimepicker({pickDate: false});
+        $('#id_end_0').datetimepicker({pickTime: false});
+        $('#id_end_1').datetimepicker({pickDate: false});
+        $('#id_end_recurring_period').datetimepicker({pickTime: false});
+    });
+    {% comment %}End recurrence data{% endcomment %}
+    $("#id_recurrence").on('change', function(){
+      var inputValue = this.value;
+      if(inputValue=="ONCE"){
+        $("#div_id_end_recurring_period").hide();
+      }
+      else{
+        $("#div_id_end_recurring_period").show();
+      }
+    }).change();
+    {% comment %}End recurrence data{% endcomment %}
+    function show_image_form() {
+      $('#add-poster').hide();
+      $('#poster-form').show();
+    }
+    $(document).ready(function() {
+      $('#poster-form').hide();
+      $('#poster-form').before(function() {
+        return $("<p id='add-poster'><button type='button' class='btn btn-link'><span class='text-muted fa fa-picture-o fa-3x'></span> Attach Photo</button></p>").click(show_image_form);
+      })
+    });
+  </script>
+  {% comment %}Image picker{% endcomment %}
+  {% include "utils/_image_script.html" with selectorID='#id_poster' uploadDiv='#div_id_image' selectDiv='#div_id_poster' page=request.GET.page images=images %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block title %}
+  Search: {{ q }}
+{% endblock %}
+
+{% block header %}
+  <h2>Search results for: {{ q }}</h2>
+{% endblock %}
+
+{% block content %}
+  {% for musician in musicians %}
+    {% include "search/_musician.html"  with artist=musician %} 
+  {% endfor %}
+  {% for venue in venues %}
+    {% include "search/_venue.html"  with venue=venue %} 
+  {% endfor %}
+{% endblock %}
+
+

@@ -1,0 +1,15 @@
+{% extends 'formModal.html' %}
+
+{% block modalNav %}
+  <ul class="nav nav-pills">
+    <li class="{% block biographyClass %}{% endblock %}">
+      <a class="editMusicianBiography" href="{% url 'musician:biographyForm' username  %}">Biography</a>
+    </li>
+    <li class="{% block memberClass %}{% endblock %}">
+      <a class="editMusicianMembers" href="{% url 'musician:memberForm' username %}">Members</a>
+    </li>
+    <li class="{% block contactClass %}{% endblock %}">
+      <a class="editMusicianContact" href="{% url 'musician:userContactForm' username %}">Contact</a>
+    </li>
+  </ul>
+{% endblock %}

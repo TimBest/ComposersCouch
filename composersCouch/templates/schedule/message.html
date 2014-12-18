@@ -1,0 +1,4 @@
+{% extends "messages/view.html" %}
+
+{% block from %}{% endblock %}
+{% block card %}{% include "schedule/_show.html" with show=thread.show calendar=calendar %}{% endblock %}

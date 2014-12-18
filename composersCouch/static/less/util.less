@@ -1,0 +1,107 @@
+/* remove padding on grid system columns. used in crispy forms and in profile display
+ * credit to: Skelly*/
+.no-gutter {
+  .left {
+    padding-left:0;
+    padding-right:5px;
+  }
+  .right {
+    padding-right:0;
+    padding-left:5px;
+  }
+  .center {
+    padding-right:5px;
+    padding-left:5px;
+  }
+}
+@media (max-width: 767px) {
+  .no-gutter {
+    .left, .right, .center {
+      padding-left:0;
+      padding-right:0;
+    }
+  }
+}
+
+/* creates 5 even columns for grid system
+ * credit to: stackoverflow's fizzix*/
+.col-xs-5ths,
+.col-sm-5ths,
+.col-md-5ths,
+.col-lg-5ths {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+.col-xs-5ths {
+    width: 20%;
+    float: left;
+}
+@media (min-width: 768px) {
+.col-sm-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 992px) {
+    .col-md-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+@media (min-width: 1200px) {
+    .col-lg-5ths {
+        width: 20%;
+        float: left;
+    }
+}
+/* all columns in row the same height */
+.row-eq-height {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+}
+/* Other Utils */
+.no-side-padding {
+  padding-left:0;
+  padding-right:0;
+}
+
+.text-black {
+  color:@black;
+  &:hover,
+  &:focus {
+    color:#000;
+  }
+}
+.text-white {
+  color:@white;
+  &:hover,
+  &:focus {
+    color:#FFF;
+  }
+}
+.link-muted {
+  color:@blue-light;
+  &:hover,
+  &:focus {
+    color:@blue;
+  }
+}
+.alert-badge {
+  color: @white;
+  background-color: @red;
+  position:absolute;
+  right:5px;
+  top:5px;
+  padding: 3px 2px;
+  border-radius: 2px;
+}
+.inline-block {
+  display: inline-block;
+}
+.add-user {
+  margin-top: 35px;
+}

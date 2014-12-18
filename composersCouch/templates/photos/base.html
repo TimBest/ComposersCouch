@@ -1,0 +1,44 @@
+{% extends base.html %}
+{% load i18n %}
+{% load url from future %}
+
+{% block head %}
+    {% if PHOTOS_LOAD_CSS %}
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}photos.css" media="screen" />
+    {% endif %}
+{% endblock %}
+
+{% block breadcrumb %}
+    <ul class='breadcrumb'>
+        {% if request.path != '/' %}
+            <li><a href="/">{% trans "Home" %}</a> <span class="divider">/</span></li>
+        {% endif %}
+        {% if request.path != photos_index_url %}
+            <li><a href="{{ photos_index_url }}">{% trans "Gallery" %}</a> <span class="divider">/</span></li>
+        {% endif %}
+        {% block photos-breadcrumb %}
+    {% endblock %}
+    </ul>
+{% endblock %}
+
+{% block content %}
+{% endblock content %}
+
+{% block content-related %}
+        {% block photos-info %}
+        {% endblock %}
+        <div id="controls">
+            <ul>
+                {% if photos_perms.add_image or request.user.is_superuser %}
+                    <li><a href={% url 'photos:upload' %}>{% trans "Upload image" %}</a></li>
+                {% endif %}
+                {% if photos_perms.add_album or request.user.is_superuser %}
+                    <li><a href={% url 'photos:create-album' %}>{% trans "Create new album" %}</a></li>
+                {% endif %}
+                {% block controls %}
+                {% endblock controls %}
+            </ul>
+        </div>
+        {% block photos-related %}
+        {% endblock %}
+{% endblock %}

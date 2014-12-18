@@ -1,0 +1,16 @@
+{% extends 'profile/detail.html' %}
+{% load i18n %}
+
+{% block title %}{{ profile.user.get_full_name }}{% endblock %}
+{% block content_title %}<h2>{{ profile.user.get_full_name }}</h2>{% endblock %}
+
+{% block name %}{{ profile.user.get_full_name }}{% endblock %}
+
+{% block tabs %}{% block dropdownTabs %}
+  <li class="{% block newsClass %}{% endblock %}">
+    <a href="{% url 'fan:news' username  %}">News</a>
+  </li>
+  <li class="{% block photosClass %}{% endblock %}">
+    <a href="{% url 'fan:photos' username  %}">Photos</a>
+  </li>
+{% endblock %}{% endblock %}

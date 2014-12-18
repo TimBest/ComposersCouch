@@ -1,0 +1,5 @@
+{% for genre in genres %}
+  <a class="div choice" href="?genre={{ genre.slug }}">
+    {{ genre.name }}
+  </a>
+{% endfor %}

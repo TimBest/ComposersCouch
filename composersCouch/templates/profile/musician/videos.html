@@ -1,0 +1,162 @@
+{% extends 'profile/musician/detail.html' %}
+{% load i18n %}
+{% load url from future %}
+{% load embed_video_tags %}
+{% load thumbnail %}
+
+{% block videosClass %}active{% endblock %}
+{% block dropdownTitle %}Videos{% endblock %}
+
+{% block panelBody %}
+  <div class="videos">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="pull-right"><p>
+          {% with social=profile.social_links %}
+              {% if social.vimeo %}<a href="{{ social.vimeo }}" target="_blank" class="btn btn-vimeo"><span class="fa fa-vimeo-square"></span></a>{% endif %}
+              {% if social.youtube %}<a href="{{ social.youtube }}" target="_blank" class="btn btn-youtube"><span class="fa fa-youtube-play"></span></a>{% endif %}
+          {% endwith %}
+          <a href="{% url 'musician:videoLinksForm' username  %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
+        </p></div>
+      </div>
+    </div>
+    {% for album in musicianProfile.albums.all %}
+      <div class="album">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4>{{ album.title }} {% if album.year %}({{album.year}}){% endif %}</h4>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-sm-2">
+                <div id="image-thumbnails">
+                  <div class='image-preview'>
+                    {% thumbnail album.album_art.image "120x120" as im %}
+                      <img style="margin:{{ im|margin:'120x120' }}" width="{{im.x}}" height="{{im.y}}" alt="{{ album.title }} Album Art" src="{{media_url}}{{ im }}">
+                    {% endthumbnail %}
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-10">
+                <div class="jp-playlist">
+                  <ul class="jp-track-list">
+                    {% for track in album.track_set.all %}
+                      <li>
+                        <h5 class="video-title">{{ track.media.title }}</h5>
+                        {% if track.media.video %}
+                          <a href="javascript:;" id="toggle-album-video-{{track.id}}" class="btn btn-default btn-video">
+                            <span class="fa fa-video-camera"></span> <sub class="caret"></sub>
+                          </a>
+                          <div style="display: none;" id="album-video-{{track.id}}" >
+                            {% video  track.media.video 'tiny' %}
+                          </div>
+                        {% endif %}
+                      </li>
+                    {% endfor %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-2">
+                <a class="text-primary {{isEditable}}" href="{% url 'musician:video_edit_album' username album %}">
+                  {% include "_editLink.html" with text='Edit Album' %}
+                </a>
+              </div>
+              <div class="col-sm-10">
+                <a class="text-primary {{isEditable}}" href="{% url 'musician:video_tracks_form' username album %}">
+                  {% include "_editLink.html" with text='Edit Tracks' %}
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+    {% comment %}
+    <div class="panel panel-default {% if not live_tracks %}{{isEditable}}{% endif %}">
+      <div class="panel-heading">
+        <h3>Live Recordings</h3>
+      </div>
+      <div class="panel-body">
+        <div class="jp-playlist">
+          <ul class="jp-track-list">
+            {% for track in live_tracks %}
+              <li>
+                <h5 class="video-title">{{ track.title }}</h5>
+                {% if track.video %}
+                  <a href="javascript:;" id="toggle-live-video-{{track.id}}" class="btn btn-default btn-video" >
+                    <span class="fa fa-video-camera"></span> <sub class="caret"></sub>
+                  </a>
+                  <div style="display: none;" id="live-video-{{track.id}}" >
+                    {% video  track.video 'tiny' %}
+                  </div>
+                {% endif %}
+                <a class="edit-track pull-right {{isEditable}}" href="{% url 'musician:live_video_form' username track.id %}">
+                  Edit
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <a class="pull-right {{isEditable}}" href="{% url 'musician:live_video_form' username %}">
+          {% include "_addLink.html" with text='Add Live Track' %}
+        </a>
+      </div>
+    </div>
+    <div class="panel panel-default {% if not interviews %}{{isEditable}}{% endif %}">
+      <div class="panel-heading">
+        <h3>Interviews</h3>
+      </div>
+      <div class="panel-body">
+        <div class="jp-playlist">
+          <ul class="jp-track-list">
+            {% for track in interviews %}
+              <li>
+                <h5 class="video-title">{{ track.title }}</h5>
+                {% if track.video %}
+                  <a href="javascript:;" id="toggle-interview-{{track.id}}" class="btn btn-default btn-video" >
+                    <span class="fa fa-video-camera"></span> <sub class="caret"></sub>
+                  </a>
+                  <div style="display: none;" id="interview-{{track.id}}" >
+                    {% video  track.video 'tiny' %}
+                  </div>
+                {% endif %}
+
+                <a class="edit-track pull-right {{isEditable}}" href="{% url 'musician:interview_video_form' username track.id %}">
+                  Edit
+                </a>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+        <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:interview_video_form' username %}">
+          {% include "_addLink.html" with text='Add Interview' %}
+        </a>
+      </div>
+    </div>
+    {% endcomment %}
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script type="text/javascript">
+    {% for album in musicianProfile.albums.all %}
+      {% for track in album.track_set.all %}
+        $("#toggle-album-video-{{track.id}}").click(function() {
+            $("#album-video-{{track.id}}").toggle();
+        });
+      {% endfor %}
+    {% endfor %}
+    {% for track in live_tracks %}
+      $("#toggle-live-video-{{track.id}}").click(function() {
+          $("#live-video-{{track.id}}").toggle();
+      });
+    {% endfor %}
+    {% for track in interviews %}
+      $("#toggle-interview-{{track.id}}").click(function() {
+          $("#interview-{{track.id}}").toggle();
+      });
+    {% endfor %}
+  </script>
+{% endblock %}

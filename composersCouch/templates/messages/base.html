@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% load i18n inbox %}
+
+{% block title %}{% trans "Requests" %}{% endblock %}
+
+{% block headerClass %}thread{% endblock %}
+
+{% block header%}
+  <div class="messages">
+    <h2>{% block page_title %}{% trans "Requests" %}{% endblock %}</h2>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="messages">
+    <form action="{% url 'messages_batch_update' %}" method="post">{% csrf_token %}
+      <a href="{% url 'request_write' %}" class="btn btn-primary">{% trans "Send Request" %}</a>
+      <div class="btn-group request-folder-actions pull-right">
+        {% block markAsRead %}
+        <button type="submit" name="action" value="read" class="btn btn-default">{% trans "mark as read" %}</button>
+        <button type="submit" name="action" value="unread" class="btn btn-default">{% trans "mark as unread" %}</button>
+        {% endblock %}
+        {% block delete %}
+        <button type="submit" name="action" value="delete" class="btn btn-default">
+          <span class="fa fa-trash-o"></span> {% trans "delete" %}
+        </button>
+        {% endblock %}
+        {% block restore %}
+        <button type="submit" name="action" value="restore" class="btn btn-default">
+          <span class="fa fa-reply"></span> {% trans "restore" %}
+        </button>
+        {% endblock %}
+      </div>
+      <p></p>
+      <div class ="panel">
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="{% block inboxClass %}{% endblock %}">
+            <a href="{% url 'messages_inbox' %}"><span class="fa fa-inbox"></span> {% trans "Inbox" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a>
+          </li>
+          <li class="{% block sentClass %}{% endblock %}">
+            <a href="{% url 'messages_sent' %}"><span class="fa fa-send"></span> {% trans "Sent" %}</a>
+          </li>
+          <li class="{% block trashClass %}{% endblock %}">
+            <a href="{% url 'messages_trash' %}"><span class="fa fa-trash-o"></span> {% trans "Trash" %}</a>
+          </li>
+        </ul>
+        <table class="table table-hover">
+          <tbody>
+            {% for message in message_list %}
+              <tr class="message {% if message.new %}unread{% endif %}">
+                <td><input class="request-folder-checkbox" name="batchupdateids" type="checkbox" value="{{message.thread.pk}}" /></td>
+                <td>
+                  {% for participant in message.others.all %}
+                    <a href="{{ participant.user.get_absolute_url }}">{{ participant.user.profile }}</a>
+                    {% if not forloop.last %},{% endif %}
+                  {% empty %}
+                    <a href="{{ message.thread.latest_msg.sender.get_absolute_url }}">{{ message.thread.latest_msg.sender.profile }}</a>
+                  {% endfor %}
+                </td>
+                <td>
+                  <a href="{{ message.thread.get_absolute_url }}">{% if message.new %}<b>{% endif %}
+                  {% with message.thread.subject|truncatewords:5 as truncated_subject %}
+                    <span class="text-black">{{ truncated_subject }}</span>
+                    {% with truncated_subject|wordcount as subject_wc %}{% with 12|sub:subject_wc as wc %}
+                      {% if message.thread.latest_msg.body and wc > 0 %} - <span class="text-muted">{{ message.thread.latest_msg.body|safe|truncatewords:wc }}</span>{% endif %}
+                    {% endwith %}{% endwith %}
+                  {% endwith %}
+                  {% if message.new %}</b>{% endif %}</a>
+                </td>
+                <td>
+                  <span class="date pull-right">{{ message.thread.latest_msg.sent_at|compact_date:_("g:i A,M j,n/j/y") }}</span>
+                </td>
+              </tr>
+            {% empty %}
+              <tr class="message unread">
+                <td class="no-message">{% trans "No messages" %}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </form>
+    {% include "utils/_pagination.html" with page=thread_list %}
+  </div>
+{% endblock %}

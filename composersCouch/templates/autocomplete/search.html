@@ -1,0 +1,8 @@
+<h6>Artists</h6> 
+{% for musician in musicians %}
+  {% include "autocomplete/_musician_search.html"  with artist=musician %} 
+{% endfor %}
+<h6>Venues</h6>
+{% for venue in venues %}
+  {% include "autocomplete/_venue_search.html"  with venue=venue %} 
+{% endfor %}

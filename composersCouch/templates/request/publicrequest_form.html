@@ -1,0 +1,32 @@
+{% extends 'form.html' %}
+{% load i18n crispy_forms_tags %}
+{% crispy DateForm DateForm.helper %}
+{% crispy PublicRequestForm PublicRequestForm.helper %}
+{% crispy NumberOfApplicantsForm NumberOfApplicantsForm.helper %}
+
+{% block title %}{% block formTitle %}
+  {% trans "Create Request" %}
+{% endblock %}{% endblock %}
+
+{% block formID %}publicRequestForm{% endblock %}
+
+{% block form %}
+    {% crispy dateForm %}
+    {% if numApplicantsForm %}
+      {% crispy numApplicantsForm %}
+    {% endif %}
+    {% crispy requestForm %}
+{% endblock %}
+
+{% block script %}
+  {{ block.super }}
+  <script type="text/javascript">
+    $(function () {
+        $('#id_start_0').datetimepicker({pickTime: false});
+        $('#id_start_1').datetimepicker({pickDate: false});
+        $('#id_end_0').datetimepicker({pickTime: false});
+        $('#id_end_1').datetimepicker({pickDate: false});
+        $('#id_accept_by').datetimepicker({pickTime: false});
+    });
+  </script>
+{% endblock %}

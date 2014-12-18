@@ -1,0 +1,19 @@
+{% extends "schedule/base.html" %}
+{% load scheduletags i18n %}
+
+{% block title %}{{ date|date:"F" }}{% endblock %}
+
+{% block previousUrl %}{% prev_url "month_calendar" calendar.slug periods.month %}{% endblock %}
+{% block nextUrl %}{% next_url "month_calendar" calendar.slug periods.month %}{% endblock %}
+{% block periodName %}
+  <span class="hidden-xs">{{ date|date:"F" }}</span>
+  <span class="visible-xs">{{ date|date:"M" }}</span>
+{% endblock %}
+
+{% block calendarNav %}
+  {% include "schedule/_calendar_nav.html" with date=periods.month.start month="Month" %}
+{% endblock %}
+
+{% block body %}
+  {% month_table calendar periods.month "regular" %}
+{% endblock %}

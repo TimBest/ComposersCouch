@@ -1,0 +1,34 @@
+{% with contact=contact_info.contact location=contact_info.location %}
+  <address>
+    {% if contact.name %}
+      <strong>{{ contact.name }}</strong><br>
+    {% endif %}
+    {% if location.address_1 and location.address_2 %}
+      <span>{{ location.address_1 }},</span>
+      <span> {{ location.address_2 }}</span><br>
+    {% elif location.address_1 or location.address_2 %}
+      <span>{{ location.address_1 }}</span>
+      <span>{{ location.address_2 }}</span><br>
+    {% endif %}
+    {% if location.city and location.state %}
+      <span>{{ location.city }},</span>
+      <span> {{ location.state }}</span>
+      <span> {{ location.zip_code.code }}</span><br>
+    {% elif location.city or location.state or location.zip_code %}
+      <span>{{ location.city }} </span>
+      <span>{{ location.state }}</span>
+      <span>{{ location.zip_code.code }}</span><br>
+    {% endif %}
+    {% with phone=contact.phone email=contact.email url=contact.url %}
+      {% if phone %}
+        <abbr class="fa fa-phone" title="Phone">:</abbr> {{ phone }}<br>
+      {% endif %}
+      {% if email %}
+        <a href="mailto:{{ email }}"><abbr title="email" class="fa fa-envelope-o text-black">:</abbr> {{ email }}</a><br>
+      {% endif %}
+      {% if url %}
+        <a href="{{ url }}"><abbr title="email" class="fa fa-globe text-black">:</abbr> {{ url }}</a>
+      {% endif %}
+    {% endwith %}
+  </address>
+{% endwith %}

@@ -1,0 +1,13 @@
+{% extends 'profile/venue/forms/about_modal.html' %}
+{% load i18n crispy_forms_tags %}
+{% crispy ContactForm ContactForm.helper %}
+{% crispy NonUserLocationForm NonUserLocationForm.helper %}
+
+{% block title %}{% block formTitle %}{% trans "Add/Edit Contact" %}{% endblock %}{% endblock %}
+{% block formID %}contactForm{% endblock %}
+{% block contactClass %}active{% endblock %}
+
+{% block form %}
+  {% crispy contactForm %}
+  {% crispy locationForm %}
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load i18n inbox crispy_forms_tags %}
+{% crispy ReplyForm ReplyForm.helper %}
+
+{% block page_title %}{% endblock %}
+
+{% block headerClass %}thread{% endblock %}
+
+{% block header %}
+  <h3>
+    <a href="{% url 'messages_inbox' %}" class="text-white"><span class="fa fa-arrow-left" ></span></a>
+    {{ thread.subject }}
+  </h3>
+  {% block from %}
+    <h5>
+      {% for participant in participant.others %}
+      <a href="{{ participant.user.get_absolute_url }}" class="text-white">{{ participant.user.profile }}</a>
+      {% if not forloop.last %},{% endif %}
+      {% endfor %}
+    </h5>
+  {% endblock %}
+{% endblock %}
+
+{% block content %}
+  {% block card %}{% endblock %}
+  <div class="message-thread">
+    <div class="message-list">
+      {% for message_tuple in message_list %}
+        {% with message_tuple.0 as message %}
+          {% include "messages/_message.html" with message=message user=user %}
+        {% endwith %}
+      {% endfor %}
+    </div>
+    <form action="{% url 'message_reply' thread.pk %}?next={{ request.path }}" class="reply-form" method="post">
+      {% crispy form %}
+      <button type="submit" class="btn btn-primary"><span class="fa fa-send" ></span> {% trans 'Send' %}</button>
+    </form>
+  </div>
+{% endblock %}
+
+{% block script %}
+  {{ block.super }}
+  <script type="text/javascript">
+    $(".reply-form").submit(function(e) {
+      var postData = $(this).serializeArray();
+      var formURL = $(this).attr("action");
+      $.ajax({
+        url : formURL,
+        type: "POST",
+        data : postData,
+        success:function(data, textStatus, jqXHR){
+          $('.reply-form').removeClass("ajax-form-disabled")
+          $('.message-list').append(data)
+          $(".reply-form")[0].reset();
+          updateScroll();
+         },
+         error: function(jqXHR, textStatus, errorThrown)
+         {
+           //if fails
+         }
+       });
+       e.preventDefault(); //STOP default action
+       e.unbind('click');; //unbind. to stop multiple form submit.
+     });
+     function updateScroll(){
+       $('.message-list').scrollTop($('.message-list')[0].scrollHeight);
+     }
+     updateScroll();
+  </script>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "form.html" %}
+{% load i18n crispy_forms_tags %}
+{% crispy ComposeForm ComposeForm.helper %}
+
+{% block title %}{% block formTitle %}
+  {% trans "Compose Message" %}
+{% endblock %}{% endblock %}
+
+{% block form %}
+  {% crispy form %}
+{% endblock %}
+
+{% block submit %}<button type="submit" class="btn btn-primary">{% trans 'Send' %}</button>{% endblock %}

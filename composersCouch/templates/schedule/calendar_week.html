@@ -1,0 +1,33 @@
+{% extends "schedule/base.html" %}
+{% load scheduletags i18n %}
+
+{% block title %}Week of {{ periods.week.start|date:"F d" }}{% endblock %}
+
+{% block previousUrl %}{% prev_url "week_calendar" calendar.slug periods.week %}{% endblock %}
+{% block nextUrl %}{% next_url "week_calendar" calendar.slug periods.week %}{% endblock %}
+{% block periodName %}
+  <span class="hidden-xs">{{ periods.week.start|date:"F j" }} -</span>
+  <span class="visible-xs">{{ periods.week.start|date:"M j" }} -</span>
+  {% ifequal periods.week.end.month periods.week.start.month %}
+    {{ periods.week.end|date:"d" }}
+  {% else %}
+    <span class="hidden-xs">{{ periods.week.end|date:"F j" }}</span>
+    <span class="visible-xs">{{ periods.week.end|date:"M j" }}</span>
+  {% endifequal %}
+{% endblock %}
+
+{% block calendarNav %}
+  {% include "schedule/_calendar_nav.html" with date=periods.week.start week="Week" %}
+{% endblock %}
+
+{% block body %}
+  <div id="week">
+    {% for day in periods.week.get_days %}
+      <div class="weekday weekday{{forloop.counter}}">
+        <div class="weekdaytable">
+          {% daily_table day %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}

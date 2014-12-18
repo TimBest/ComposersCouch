@@ -1,0 +1,54 @@
+{% extends 'feeds/base.html' %}
+{% block title %}Composers Couch{% endblock %}
+
+{% block requestsClass %}active{% endblock %}
+{% block feedType %}Requests{% endblock %}
+{% block bgColor%}blue{% endblock %}
+
+{% block addFeedItem %}
+  {% if user.profile.profile_type == 'm' %}
+    <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="pull-right btn btn-success">Create Request</a>
+  {% elif user.profile.profile_type == 'v' %}
+    <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="pull-right btn btn-success">Create Request</a>
+  {% endif %}
+{% endblock %}
+
+{% block scopeNav %}
+  <li class="{% block localClass %}{% endblock %}">
+    <a href="{% url 'requests' order for 'local' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Local</a>
+  </li>
+  <li class="{% block regionalClass %}{% endblock %}">
+    <a href="{% url 'requests' order for 'regional' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Regional</a>
+  </li>
+  <li class="{% block globalClass %}{% endblock %}">
+    <a href="{% url 'requests' order for 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a>
+  </li>
+  <li class="{% block followingClass %}{% endblock %}">
+    <a href="{% url 'requests' order for 'following' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Following</a>
+  </li>
+{% endblock %}
+
+{% block forForm %}
+  <p class="nav-text hidden-xs">requests for {{scope}}</p>
+  <li class="dropdown">
+    <button class="btn btn-transparent dropdown-toggle toggle" data-toggle="dropdown" >
+      <b>{{ for|capfirst }}s</b> <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li class="{% if for == 'band' %}active{% endif %}">
+        <a href="{% url 'requests' order 'band' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Bands</a>
+      </li>
+      <li class="{% if for == 'venue' %}active{% endif %}">
+        <a href="{% url 'requests' order 'venue' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Venues</a>
+      </li>
+    </ul>
+  </li>
+{% endblock %}
+
+{% block orderOptions %}
+  <li><a href="{% url 'requests' 'all' for 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a></li>
+  <li><a href="{% url 'requests' 'expiring' for 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Expiring</a></li>
+  <li><a href="{% url 'requests' 'new' for 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">New </a></li>
+{% endblock %}
+
+{% block availabilityForm %}{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'feeds/artists/artists.html' %}
+{% block title %}Composers Couch{% endblock %}
+
+{% block regionalClass %}active{% endblock %}
+{% block scopeNavActive %}Regional{% endblock %}
+{% block availabilityForm %}{% endblock %}
+
+{% block feed %}
+  {% include "feeds/artists/_feed.html" with title="Regional Artists" artists=posts %}
+{% endblock %}

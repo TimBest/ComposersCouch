@@ -1,0 +1,11 @@
+{% extends 'feeds/artists/artists.html' %}
+{% block title %}Composers Couch{% endblock %}
+
+{% block followingClass %}active{% endblock %}
+{% block scopeNavActive %}Who I Follow{% endblock %}
+{% block zipcodeForm %}{% endblock %}
+{% block availabilityForm %}{% endblock %}
+
+{% block feed %}
+  {% include "feeds/artists/_feed.html" with title="Artists" artists=posts following="Ture" %}
+{% endblock %}

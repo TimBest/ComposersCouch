@@ -1,0 +1,56 @@
+{% extends "messages/view.html" %}
+{% load i18n %}
+
+{% block from %}{% endblock %}
+
+{% block card %}
+  <h3>Request</h3>
+  {% include "request/_public_request.html" with publicRequest=public_request noApply=True %}
+  <h3>Applicant</h3>
+  {% with applicant=application.applicant %}
+    <div class="applicant">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-lg-2 col-sm-3">
+              <div class="image-frame">
+                <span class="frame-helper"></span>
+                {% include "utils/_mugshot.html" with profile=applicant.profile width=75 height=75 %}
+              </div>
+            </div>
+            <div class="col-lg-8 col-sm-7">
+              <a class="text-black" href="{% url 'venue:about' application.applicant.username  %}">
+                <h3>{{ applicant.profile }}</h3>
+              </a>
+              {% if applicant.biography %}
+                <p>{{ applicant.biography }}</p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+        {% if user == public_request.requester %}
+        <div class="panel-footer">
+          <div class="text-right">
+            <form method="POST" class="accept-form inline-block {% if application.approved %}hidden{% endif %}" action="{% url 'approve_public_request' %}">
+              {% csrf_token %}
+              <input type="hidden" name="application" value="{{ application.id }}">
+              <button class="btn btn-success" type="submit"><span class="fa fa-check" ></span> {% trans "Accept" %}</button>
+            </form>
+            <form method="POST" class="decline-form inline-block {% if application.approved %}{% elif application.approved != None %}hidden{% endif %}" action="{% url 'deny_public_request' %}">
+              {% csrf_token %}
+              <input type="hidden" name="application" value="{{ application.id }}">
+              <button class="btn btn-danger" type="submit"><span class="fa fa-ban" ></span> {% trans "Decline" %}</button>
+            </form>
+          </div>
+          {% comment %}
+          <a href="{% url 'calendar_request_to_event' user.calendar.slug request.id %}" class="btn btn-link">{% trans "Add to Calendar" %}</a>
+          {% endcomment %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% if publicRequest.applicants %}
+    {% endif %}
+  {% endwith %}
+
+{% endblock %}

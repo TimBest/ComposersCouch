@@ -1,0 +1,9 @@
+{% extends 'feeds/requests/requests.html' %}
+{% block title %}Composers Couch{% endblock %}
+
+{% block regionalClass %}active{% endblock %}
+{% block scopeNavActive %}Regional{% endblock %}
+
+{% block feed %}
+  {% include "feeds/requests/_feed.html" with title="Regional Requests" requests=posts %}
+{% endblock %}

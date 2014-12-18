@@ -1,0 +1,43 @@
+{% extends "schedule/base.html" %}
+{% load scheduletags i18n %}
+
+{% block toptitle %}{% endblock %}
+{% block title %}{{ periods.year }}{% endblock %}
+
+{% block previousUrl %}{% prev_url "year_calendar" calendar.slug periods.year %}{% endblock %}
+{% block nextUrl %}{% next_url "year_calendar" calendar.slug periods.year %}{% endblock %}
+{% block periodName %}{{ periods.year }}{% endblock %}
+
+{% block calendarNav %}
+  {% include "schedule/_calendar_nav.html" with date=periods.year.start year="Year" %}
+{% endblock %}
+
+{% block body %}
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        {% for month in periods.year.get_months %}
+          <div class="col-md-4">
+            <a href="{% url 'month_calendar' calendar.slug %}{% querystring_for_date month.start 2 %}" class="text-black">
+              <h3>{{month.name}}</h3>
+            </a>
+            {% month_table calendar month "small" %}
+          </div>
+          {% ifequal forloop.counter 3  %}
+            </div>
+            <div class="row">
+          {% endifequal %}
+          {% ifequal forloop.counter 6  %}
+            </div>
+            <div class="row">
+          {% endifequal %}
+          {% ifequal forloop.counter  9 %}
+            </div>
+            <div class="row">
+          {% endifequal %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

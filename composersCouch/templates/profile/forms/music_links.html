@@ -1,0 +1,12 @@
+{% extends 'form.html' %}
+{% load crispy_forms_tags i18n %}
+{% crispy MusicLinksForm MusicLinksForm.helper %}
+
+{% block title %}
+  {% block formTitle %}{% trans "Edit Links" %}{% endblock %}
+{% endblock %}
+
+{% block formID %}links-form{% endblock %}
+{% block form %}
+    {% crispy form %}
+{% endblock %}

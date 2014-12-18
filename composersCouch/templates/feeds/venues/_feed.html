@@ -1,0 +1,12 @@
+{% if venues %}
+  <div class="venues">
+    {% for venue in venues %}
+      <div class="venue">
+        {% include "search/_venue.html" with venue=venue %}
+      </div>
+    {% endfor %}
+    {% include "utils/_pagination.html" with page=venues %}
+  </div>
+{% else %}
+  {% include "feeds/_empty_feed.html" with location=location feed_type="venues" following=following %}
+{% endif %}

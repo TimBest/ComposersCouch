@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load i18n crispy_forms_tags %}
+
+{% block title %}{% trans "Form" %}{% endblock %}
+
+{% block header %}
+<form id="{% block formID %}{% endblock %}" method="post"
+      enctype="{% block enctype %}{% endblock %}" class="modal-dialog"
+      action="{% block FormURL %}{{ request.path }}{% endblock %}">
+    <div class="modal-content">
+        <div class="modal-header">
+          <h3>{% block formTitle %}{% trans 'Form' %}{% endblock %}</h3>
+          {% block modalNav %}
+          {% endblock %}
+        </div>
+        <div class="modal-body">
+          {% block form %}
+            {% csrf_token %}
+            {% crispy form %}
+          {% endblock %}
+          <input type="hidden" name="next" value="{{next|default:""}}"/>
+        </div>
+        <div class="modal-footer">
+          {% block extraSubmit %}{% endblock %}
+          {% block submit %}<button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>{% endblock %}
+        </div>
+    </div>
+</form>
+{% endblock %}

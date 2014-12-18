@@ -1,0 +1,16 @@
+{% if usersGenres %}
+?usersGenres={{usersGenres}}
+{% for genre in genres %}
+&genre={{genre}}
+{% endfor %}
+{% else %}
+{% if genres %}
+{% for genre in genres %}
+{% if forloop.first %}
+?genre={{genre}}
+{% else %}
+&genre={{genre}}
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endif %}

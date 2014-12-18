@@ -1,0 +1,26 @@
+{% extends 'profile/venue/detail.html' %}
+{% load i18n %}
+{% load url from future %}
+
+{% block photosClass %}active{% endblock %}
+{% block dropdownTitle %}Photos{% endblock %}
+
+{% block panelBody %}
+  <div class="row">
+    <div class="col-xs-12">
+      <a class="{{isEditable}} btn btn-success" href="{% url 'photos:upload' %}">
+        <span class="fa fa-arrow-up"></span> Add Photo
+      </a>
+      <div class="pull-right"><p>
+        {% with social=profile.social_links %}
+          {% if social.instagram %}<a href="{{ social.instagram }}" target="_blank" class="btn btn-instagram"><span class="fa fa-instagram"></span></a>{% endif %}
+          {% if social.tumblr %}<a href="{{ social.tumblr }}" target="_blank" class="btn btn-tumblr"><span class="fa fa-tumblr"></span></a>{% endif %}
+        {% endwith %}
+        <a href="{% url 'venue:photoLinksForm' username  %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
+      </p></div>
+    </div>
+  </div>
+  <div class="{% if not images %}{{isEditable}}{% endif %}">
+    {% include "profile/photos.html" with images=images %}
+  </div>
+{% endblock %}

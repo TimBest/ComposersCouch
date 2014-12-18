@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n crispy_forms_tags %}
+{% crispy ContactForm ContactForm.helper %}
+{% crispy LocationForm LocationForm.helper %}
+
+{% block title %}{% trans "Add/Edit Contact" %}{% endblock %}
+
+{% block header %}
+  <div class="container">
+    <form method="post">
+      {% crispy contactForm %}
+      {% crispy locationForm %}
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+{% endblock %}
