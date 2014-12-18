@@ -51,7 +51,7 @@ class PrivateRequest(Request):
 class Accept(models.Model):
     user = models.ForeignKey(User, related_name='accepter')
     request = models.ForeignKey(PrivateRequest, related_name='accepted_request')
-    accepted = models.BooleanField()
+    accepted = models.BooleanField(default=False)
 
 class PublicRequest(Request):
     zip_code = models.ForeignKey(Zipcode, verbose_name=_("Zipcode"))
