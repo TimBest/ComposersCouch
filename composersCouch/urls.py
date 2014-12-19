@@ -16,9 +16,9 @@ urlpatterns += patterns('',
 )
 
 urlpatterns += patterns('composersCouch.views',
-    #url(r'^$',
-    #    'home',
-    #    name='home'),
+    url(r'^$',
+        'home',
+        name='home'),
     url(r'^team/$',
         'load_template',
         {'template_name': 'footer/team.html'},
@@ -32,7 +32,7 @@ urlpatterns += patterns('composersCouch.views',
         {'template_name': 'footer/colors.html'},
         name='colors'),
 )
-"""
+
 urlpatterns += patterns('',
     url(r'^f/(?P<username>[-\w]+)/',
         include('customProfile.fan.urls', namespace='fan')),
@@ -59,4 +59,4 @@ urlpatterns += patterns('',
     url(r'^progressbarupload/', include('progressbarupload.urls')),
     url(r'^request/', include('request.urls')),
     url(r'^search', include('search.urls')),
-)"""
+)
