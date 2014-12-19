@@ -116,7 +116,7 @@ if DEVELOPMENT:
     }
     # on Heroku redis connection parameters come from environment variables
     redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost:6379'))
-    FEEDLY_REDIS_CONFIG = {
+    STREAM_REDIS_CONFIG = {
         'default': {
             'host': 'localhost',
             'port': 6379,
@@ -153,8 +153,8 @@ else:
         },
     }
     # on Heroku redis connection parameters come from environment variables
-    redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://aws-my-1pu2uz0351jv0.og7bpd.0001.use1.cache.amazonaws.com:6379'))
-    FEEDLY_REDIS_CONFIG = {
+    redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'aws-my-1pu2uz0351jv0.og7bpd.0001.use1.cache.amazonaws.com:6379'))
+    STREAM_REDIS_CONFIG = {
         'default': {
             'host': 'aws-my-1pu2uz0351jv0.og7bpd.0001.use1.cache.amazonaws.com',
             'port': 6379,
@@ -274,9 +274,10 @@ THUMBNAIL_FORMAT = 'PNG'
 CELERY_ALWAYS_EAGER = True
 CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
+print redis_url
+
 import djcelery
 djcelery.setup_loader()
-
 
 try:
     from accounts.userena_settings import *
