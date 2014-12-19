@@ -114,6 +114,8 @@ if DEVELOPMENT:
             'INCLUDE_SPELLING': True,
         },
     }
+    # on Heroku redis connection parameters come from environment variables
+    redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost:6379'))
     FEEDLY_REDIS_CONFIG = {
         'default': {
             'host': 'localhost',
@@ -150,6 +152,8 @@ else:
             'INCLUDE_SPELLING': True,
         },
     }
+    # on Heroku redis connection parameters come from environment variables
+    redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://aws-my-1pu2uz0351jv0.og7bpd.0001.use1.cache.amazonaws.com:6379'))
     FEEDLY_REDIS_CONFIG = {
         'default': {
             'host': 'aws-my-1pu2uz0351jv0.og7bpd.0001.use1.cache.amazonaws.com',
@@ -273,8 +277,6 @@ CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 import djcelery
 djcelery.setup_loader()
 
-# on Heroku redis connection parameters come from environment variables
-redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost:6379'))
 
 try:
     from accounts.userena_settings import *
