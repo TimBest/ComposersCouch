@@ -112,10 +112,8 @@ class SignupFormOnlyEmail(SignupForm):
         while True:
             username = sha_constructor(str(random.random())).hexdigest()[:5]
             try:
-                User
-.objects.get(username__iexact=username)
-            except User
-.DoesNotExist: break
+                User.objects.get(username__iexact=username)
+            except User.DoesNotExist: break
 
         self.cleaned_data['username'] = username
         return super(SignupFormOnlyEmail, self).save()
@@ -195,18 +193,15 @@ class ChangeEmailForm(forms.Form):
 
         """
         super(ChangeEmailForm, self).__init__(*args, **kwargs)
-        if not isinstance(user, User
-):
-            raise TypeError("user must be an instance of %s" % User
-.__name__)
+        if not isinstance(user, User):
+            raise TypeError("user must be an instance of %s" % User.__name__)
         else: self.user = user
 
     def clean_email(self):
         """ Validate that the email is not already registered with another user """
         if self.cleaned_data['email'].lower() == self.user.email:
             raise forms.ValidationError(_(u'You\'re already known under this email.'))
-        if User
-.objects.filter(email__iexact=self.cleaned_data['email']).exclude(email__iexact=self.user.email):
+        if User.objects.filter(email__iexact=self.cleaned_data['email']).exclude(email__iexact=self.user.email):
             raise forms.ValidationError(_(u'This email is already in use. Please supply a different email.'))
         return self.cleaned_data['email']
 
