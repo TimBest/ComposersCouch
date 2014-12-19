@@ -152,7 +152,7 @@ else:
     }
     FEEDLY_REDIS_CONFIG = {
         'default': {
-            'host': 'ec2-54-174-202-254.compute-1.amazonaws.com',
+            'host': 'aws-my-1pu2uz0351jv0',
             'port': 6379,
             'password': '',# Redis Password goes Here
             'db': 0
