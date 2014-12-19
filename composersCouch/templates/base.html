@@ -13,7 +13,10 @@
     {% comment %}
     {% compress css %}<link rel="stylesheet" type='text/css' href="{{ STATIC_URL }}{% less 'less/theme.less' %}" >{% endcompress %}
     {% endcomment %}
-    {% compress css %}<link rel="stylesheet" type='text/css' href="{{ STATIC_URL }}staticfiles/compiled/less/theme.css" >{% endcompress %}
+    {% compress css %}
+      <link rel="stylesheet" type='text/css' href="{{ STATIC_URL }}staticfiles/compiled/less/theme.css" >
+      <link rel="stylesheet" type='text/css' href="{{ STATIC_URL }}autocomplete_light/style.css" >
+    {% endcompress %}
   </head>
   <body>
     <div class="navbar navbar-default navbar-static-top" role="navigation">
@@ -135,7 +138,10 @@
       <script type="text/javascript" src="{% static 'js/profile/musician/about.js' %}"></script>
       <script type="text/javascript" src="{% static 'js/request/folder.js' %}"></script>
       <script type="text/javascript" src="{% static 'js/schedule/expand-day.js' %}"></script>
-      {% include 'autocomplete_light/static.html' %}
+      <script type="text/javascript" src="{% static 'autocomplete_light/addanother.js' %}"></script>
+      <script type="text/javascript" src="{% static 'autocomplete_light/autocomplete.js' %}"></script>
+      <script type="text/javascript" src="{% static 'autocomplete_light/text_widget.js' %}"></script>
+      <script type="text/javascript" src="{% static 'autocomplete_light/widget.js' %}"></script>
       <script type="text/javascript">
         $(document).ready(function() {
             $('#search').yourlabsAutocomplete({
