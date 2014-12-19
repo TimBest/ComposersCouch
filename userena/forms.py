@@ -62,8 +62,7 @@ class SignupForm(forms.Form):
 
     def clean_email(self):
         """ Validate that the e-mail address is unique. """
-        if User
-.objects.filter(email__iexact=self.cleaned_data['email']):
+        if User.objects.filter(email__iexact=self.cleaned_data['email']):
             if userena_settings.USERENA_ACTIVATION_REQUIRED and UserenaSignup.objects.filter(user__email__iexact=self.cleaned_data['email']).exclude(activation_key=userena_settings.USERENA_ACTIVATED):
                 raise forms.ValidationError(_('This email is already in use but not confirmed. Please check your email for verification steps.'))
             raise forms.ValidationError(_('This email is already in use. Please supply a different email.'))
