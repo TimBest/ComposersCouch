@@ -54,16 +54,5 @@
         </div>
       </div>
     </div>
-    {% comment %}
-    {% if user.is_authenticated %}
-      <div class="panel-footer">
-        <form method="POST" action="{% url 'upvote' %}">
-          {% csrf_token %}
-          <input type="hidden" name="post" value="{{ post.id }}">
-          <button class="btn btn-sm btn-default-warning" type="submit"><span class="fa fa-arrow-up"></span><span> {{ post.site_votes }}</span></button>
-        </form>
-      </div>
-    {% endif %}
-    {% endcomment %}
   </div>
 </div>

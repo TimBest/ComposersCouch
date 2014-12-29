@@ -129,37 +129,6 @@ def genre(request, template_name='autocomplete/genre.html', ajax_template='autoc
         url = resolve(urlparse(path)[2])
         return url
 
-"""@login_required
-@require_POST
-def up_vote(request):
-    '''
-    A view to upvotes post
-    '''
-    data = request.POST.copy()
-    form = UpvoteForm(data=data)
-    user = request.user
-    post = Post.objects.get(id=request.POST['post'])
-
-    if form.is_valid():
-        vote = form.save(user=user,post=post)
-
-        voterLocation = request.user.profile.contact_info.location.zip_code.point
-        postLocation = post.user.profile.contact_info.location.zip_code.point
-        postDistance = voterLocation.distance(postLocation)
-
-        if postDistance <= LocalFeed.distance:
-            post.local_votes += vote
-            post.regional_votes += vote
-            post.site_votes += vote
-        elif postDistance <= RegionalFeed:
-            post.regional_votes += vote
-            post.site_votes += vote
-        else:
-            post.site_votes += vote
-        post.save()
-
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))"""
-
 @login_required
 @require_POST
 def follow(request):
