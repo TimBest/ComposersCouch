@@ -1,58 +1,55 @@
 {% extends 'base.html' %}
 {% block title %}Color Scheme{% endblock %}
 
-{% block content %}
+{% block header %}
   <h2>Color Scheme</h2>
-  <h3>Colors</h3>
+{% endblock %}
+
+{% block content %}
   <div class="row">
     <div class="col col-md-1 white">
       <p class="color" id="black">white</p>
     </div>
     <div class="col col-md-1 silver-light">
-      <p class="color" id="black">silver-light</p>
+      <p class="color" id="black">light-silver</p>
     </div>
-
     <div class="col col-md-1 blue-lighter">
-      <p class="color" id="white">blue-lighter</p>
+      <p class="color" id="white">sky-blue</p>
     </div>
     <div class="col col-md-1 blue-light">
-      <p class="color" id="white">blue-light</p>
+      <p class="color" id="white">light-blue</p>
     </div>
-
     <div class="col col-md-1 purple-lighter" >
-      <p class="color" id="white">purple-lighter</p>
+      <p class="color" id="white">lavender</p>
     </div>
     <div class="col col-md-1 purple-light" >
-      <p class="color" id="white">purple-light</p>
+      <p class="color" id="white">light-purple</p>
     </div>
-
     <div class="col col-md-1 green-lighter">
-      <p class="color" id="white">green-lighter</p>
-    </div> 
-    <div class="col col-md-1 green-light">
-      <p class="color" id="white">green-light</p>
+      <p class="color" id="white">grass-green</p>
     </div>
-
+    <div class="col col-md-1 green-light">
+      <p class="color" id="white">light-green</p>
+    </div>
     <div class="col col-md-1 orange-lighter">
-      <p class="color" id="white">orange-lighter</p>
+      <p class="color" id="white">muted-orange</p>
     </div>
     <div class="col col-md-1 orange-light">
-      <p class="color" id="white">orange-light</p>
+      <p class="color" id="white">light-orange</p>
     </div>
-
     <div class="col col-md-1 red-lighter">
-      <p class="color" id="white">red-lighter</p>
+      <p class="color" id="white">pink</p>
     </div>
     <div class="col col-md-1 red-light">
-      <p class="color" id="white">red-light</p>
+      <p class="color" id="white">light-red</p>
     </div>
   </div>
   <div class="row">
-    <div class="col col-md-1 gray-light">
-      <p class="color" id="white">gray</p>
-    </div>
     <div class="col col-md-1 silver">
       <p class="color" id="black">silver</p>
+    </div>
+    <div class="col col-md-1 gray-light">
+      <p class="color" id="white">gray</p>
     </div>
     <div class="col col-md-2 blue">
       <p class="color" id="white">blue</p>
@@ -70,66 +67,42 @@
       <p class="color" id="white">red</p>
     </div>
   </div>
-
-    <div class="row">
+  <div class="row">
     <div class="col col-md-1 black-light">
-      <p class="color" id="white">black-light</p>
+      <p class="color" id="white">charcoal</p>
     </div>
     <div class="col col-md-1 black">
       <p class="color" id="white">black</p>
     </div>
-
-    <div class="col col-md-1 blue-darker">
-      <p class="color" id="white">blue-darker</p>
-    </div>
     <div class="col col-md-1 blue-dark">
-      <p class="color" id="white">blue-dark</p>
+      <p class="color" id="white">dark-blue</p>
     </div>
-
-    <div class="col col-md-1 purple-darker" >
-      <p class="color" id="white">purple-darker</p>
+    <div class="col col-md-1 blue-darker">
+      <p class="color" id="white">indigo</p>
     </div>
     <div class="col col-md-1 purple-dark" >
-      <p class="color" id="white">purple-dark</p>
+      <p class="color" id="white">dark-purple</p>
     </div>
-
-    <div class="col col-md-1 green-darker">
-      <p class="color" id="white">green-darker</p>
-    </div> 
+    <div class="col col-md-1 purple-darker" >
+      <p class="color" id="white">violet</p>
+    </div>
     <div class="col col-md-1 green-dark">
-      <p class="color" id="white">green-dark</p>
+      <p class="color" id="white">dark-green</p>
     </div>
-
-    <div class="col col-md-1 orange-darker">
-      <p class="color" id="white">orange-darker</p>
+    <div class="col col-md-1 green-darker">
+      <p class="color" id="white">pine-green</p>
     </div>
     <div class="col col-md-1 orange-dark">
-      <p class="color" id="white">orange-dark</p>
+      <p class="color" id="white">dark-orange</p>
     </div>
-
-    <div class="col col-md-1 red-darker">
-      <p class="color" id="white">red-darker</p>
+    <div class="col col-md-1 orange-darker">
+      <p class="color" id="white">burnt-orange</p>
     </div>
     <div class="col col-md-1 red-dark">
-      <p class="color" id="white">red-dark</p>
+      <p class="color" id="white">muted-red</p>
+    </div>
+    <div class="col col-md-1 red-darker">
+      <p class="color" id="white">dark-red</p>
     </div>
   </div>
-  
-  </br>
-  <h3>Seasonal Colors</h3>
-  <div class="row">
-    <div class="col col-md-3 winter">
-      <p class="color" id="white">Winter</p>
-    </div>
-    <div class="col col-md-3 spring">
-      <p class="color" id="white">Spring</p>
-    </div>
-    <div class="col col-md-3 summer">
-      <p class="color" id="white">Summer</p>
-    </div>
-    <div class="col col-md-3 fall">
-      <p class="color" id="white">Fall</p>
-    </div>
-  </div>
-  </br>
 {% endblock %}
