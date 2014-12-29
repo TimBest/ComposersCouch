@@ -27,7 +27,6 @@ class Category(models.Model):
         return u'{0}'.format(self.name)
 
 def get_audio_upload_path(instance, filename):
-    #try:
     if hasattr(instance, 'upload_to_info'):
         username, track_type, album_title = instance.upload_to_info
         if album_title:

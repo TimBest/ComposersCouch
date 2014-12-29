@@ -56,7 +56,7 @@ class LocationForm(ModelForm):
         ),
         Div(
           Div('city',css_class='col-sm-4 left',),
-          Div('state',css_class='col-sm-4 right',),
+          Div('state',css_class='col-sm-4 center',),
           Div('zip_code',css_class='col-sm-4 right',),
           css_class='row no-gutter',
         ),
