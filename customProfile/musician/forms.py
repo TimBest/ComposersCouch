@@ -1,11 +1,9 @@
 from django import forms
 
-from autocomplete_light import ModelForm, MultipleChoiceWidget
-from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Layout
 
-from models import Member, Instrument
+from models import Member
 from accounts.models import MusicianProfile
 from annoying.functions import get_object_or_None
 
@@ -26,15 +24,8 @@ class BiographyForm(forms.ModelForm):
         }
         fields = ('biography',)
 
-class MemberForm(ModelForm):
+class MemberForm(forms.ModelForm):
     remove_member = forms.BooleanField(required=False)
-    instruments = forms.ModelMultipleChoiceField(
-                      Instrument.objects.all(),
-                      required=False,
-                      widget=MultipleChoiceWidget(
-                          'InstrumentAutocomplete',
-                          attrs
-={'placeholder':''}))
 
     def __init__(self, *args, **kw):
       super(MemberForm, self).__init__(*args, **kw)
@@ -42,7 +33,6 @@ class MemberForm(ModelForm):
       self.helper.form_tag = False
       self.helper.layout = Layout(
         'name',
-        'instruments',
         Field('biography',spellcheck="true"),
         Div(
           Div('current_member',css_class='col-sm-6 left',),
@@ -68,7 +58,5 @@ class MemberForm(ModelForm):
 
     class Meta:
         model = Member
-        widgets = {
-          'biography' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
-        }
-        fields = ('name','current_member','instruments','biography',)
+        widgets = {'biography':forms.Textarea(attrs={'rows': 2, 'cols': 19}),}
+        fields = ('name','current_member','biography',)

@@ -36,6 +36,7 @@ class SignupForm(forms.Form):
                              label=_("Email"))
     password1 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict,
                                                            render_value=False),
+                                min_length=5,
                                 label=_("Create password"))
     password2 = forms.CharField(widget=forms.PasswordInput(attrs=attrs_dict,
                                                            render_value=False),

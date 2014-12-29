@@ -43,8 +43,7 @@ class LocationForm(ModelForm):
     zip_code = forms.ModelChoiceField(Zipcode.objects.all(),
           widget=ChoiceWidget(
               'ZipcodeAutocomplete',
-              attrs
-={'placeholder':''}))
+              attrs={'placeholder':''}))
     def __init__(self, *args, **kw):
       super(LocationForm, self).__init__(*args, **kw)
       self.helper = FormHelper()
