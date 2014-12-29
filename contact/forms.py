@@ -92,6 +92,7 @@ class ContactForm(forms.ModelForm):
 
     class Meta:
         model = Contact
+        fields = ['name','email','phone','url',]
 
 class SocialLinksForm(forms.ModelForm):
 
