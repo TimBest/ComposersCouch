@@ -32,7 +32,7 @@ class BiographyView(ProfileFormMixin, UpdateView):
         return self.user.profile.musicianProfile
 
     def get_success_url(self):
-        return reverse(self.success_url, kwargs={'username': self.username})
+        return reverse(self.success_url, kwargs={'username': self.user.username})
 
 biography = BiographyView.as_view()
 
@@ -67,7 +67,7 @@ class MemberView(ProfileFormMixin, UpdateView):
         if member:
             member.musician_profile = self.user.profile.musicianProfile
             member.save()
-        return redirect(self.success_url, username=self.username)
+        return redirect(self.success_url, username=self.user.username)
 
 members = MemberView.as_view()
 

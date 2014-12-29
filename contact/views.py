@@ -53,4 +53,4 @@ class ContactView(ProfileFormMixin, MultipleFormsView):
                                                       contact=contact)
         contact_info.save()
         self.set_contact_info(contact_info)
-        return redirect(self.success_url, username=self.kwargs.get('username'))
+        return redirect(self.success_url, username=self.user.username)
