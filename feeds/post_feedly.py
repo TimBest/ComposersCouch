@@ -4,7 +4,7 @@ from annoying.functions import get_object_or_None
 
 from stream_framework.feed_managers.base import Manager, FanoutPriority, add_operation, remove_operation
 
-from models import Follow, Post, Upvote
+from models import Follow, Post#, Upvote
 from post_feed import AggregatedPostFeed, PostFeed, UserPostFeed, LocalFeed, RegionalFeed
 from contact.models import Zipcode
 
@@ -31,8 +31,8 @@ class PostFeedly(Manager):
     def create_and_add_post(self, user, target, title, message):
         post = Post(user=user, target=target, title=title, message=message)
         post.save()
-        upvote = Upvote(user=user, post=post)
-        upvote.save()
+        #upvote = Upvote(user=user, post=post)
+        #upvote.save()
         zip_code = user.profile.contact_info.location.zip_code
         self.add_post(post=post)
         return post

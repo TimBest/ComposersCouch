@@ -129,7 +129,7 @@ def genre(request, template_name='autocomplete/genre.html', ajax_template='autoc
         url = resolve(urlparse(path)[2])
         return url
 
-@login_required
+"""@login_required
 @require_POST
 def up_vote(request):
     '''
@@ -158,7 +158,7 @@ def up_vote(request):
             post.site_votes += vote
         post.save()
 
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))"""
 
 @login_required
 @require_POST

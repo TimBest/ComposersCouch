@@ -41,11 +41,11 @@ class Follow(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='following_set')
     target = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='follower_set')
 
-class Upvote(models.Model):
+"""class Upvote(models.Model):
     '''
     A simple table mapping an post to the user who voted for it
     '''
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='voter')
-    post = models.ForeignKey(Post, related_name='voted_for')
+    post = models.ForeignKey(Post, related_name='voted_for')"""
 
 from feeds import verbs

@@ -54,6 +54,7 @@
         </div>
       </div>
     </div>
+    {% comment %}
     {% if user.is_authenticated %}
       <div class="panel-footer">
         <form method="POST" action="{% url 'upvote' %}">
@@ -63,5 +64,6 @@
         </form>
       </div>
     {% endif %}
+    {% endcomment %}
   </div>
 </div>

@@ -6,7 +6,7 @@ from autocomplete_light import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Field, Layout, Submit
 
-from models import Follow, Post, Upvote
+from models import Follow, Post#, Upvote
 from post_feedly import feedly
 from annoying.functions import get_object_or_None
 from contact.forms import ZipcodeForm
@@ -117,7 +117,7 @@ class FollowForm(forms.Form):
         feedly.follow_user(follow.user_id, follow.target_id)
         return follow
 
-class UpvoteForm(forms.Form):
+"""class UpvoteForm(forms.Form):
 
     class Meta:
         model = Upvote
@@ -129,4 +129,4 @@ class UpvoteForm(forms.Form):
             return -1
         else:
             vote = Upvote.objects.create(user=user, post_id=post.id)
-            return 1
+            return 1"""
