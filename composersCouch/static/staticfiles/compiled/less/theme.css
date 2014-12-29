@@ -7130,6 +7130,7 @@ h1 {
 /* Navbar */
 .navbar {
   margin-bottom: 0px;
+  height: 75px;
   -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
 }
@@ -7148,13 +7149,6 @@ h1 {
     padding-left: 65px;
     padding-right: 70px;
   }
-}
-.navbar .navbar-brand .composers {
-  color: #555555;
-}
-.navbar .navbar-brand .couch {
-  color: #2161a8;
-  font-weight: bold;
 }
 .navbar .navbar-brand .beta-badge {
   color: #6c0d08;
