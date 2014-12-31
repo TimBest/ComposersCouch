@@ -57,10 +57,6 @@ class AvailabilityFormView(FormView):
         path = self.request.POST.get('path')
         path = resolve(urlparse(path)[2])
         url_name = path.url_name
-        if 'artistis':
-            url_name = 'available_artists'
-        elif 'venues':
-            url_name = 'available_venues'
         kwargs = path.kwargs
         if date:
             kwargs['year'] = date.year
