@@ -25,12 +25,11 @@ def clean_url(url):
 class ZipcodeForm(ModelForm):
 
     def __init__(self, *args, **kw):
-      super(ZipcodeForm, self).__init__(*args, **kw)
-      self.helper = FormHelper()
-      self.helper.form_tag = False
-      self.helper.layout = Layout(
-        'zip_code',
-      )
+        super(ZipcodeForm, self).__init__(*args, **kw)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout('zip_code',)
+        self.fields['zip_code'].required = True
 
     class Meta:
         model = Location
