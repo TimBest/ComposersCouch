@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
+import autocomplete_light
 from autocomplete_light import ModelForm
 from autocomplete_light import ChoiceWidget, MultipleChoiceWidget
 from crispy_forms.bootstrap import PrependedText
@@ -83,22 +84,6 @@ class EventForm(ModelForm):
         fields = ('visible',)
 
 class UserSelectForm(ModelForm):
-    headliner = forms.ModelChoiceField(MusicianProfile.objects.all(),
-                    widget=ChoiceWidget(
-                        'MusicianProfileAutocomplete',
-                        attrs
-={'placeholder':''}))
-    host = forms.ModelChoiceField(User.objects.all(),
-              widget=ChoiceWidget(
-                  'UserAutocomplete',
-                  attrs
-={'placeholder':''}))
-    openers = forms.ModelMultipleChoiceField(MusicianProfile.objects.all(),
-                  required=False,
-                  widget=MultipleChoiceWidget(
-                      'MusicianProfileAutocomplete',
-                      attrs
-={'placeholder':''}))
     def __init__(self, *args, **kwargs):
         kwargs.pop('user', None)
         super(UserSelectForm, self).__init__(*args, **kwargs)
@@ -120,7 +105,6 @@ class UserSelectForm(ModelForm):
               css_class='row no-gutter',
             ),
         )
-
 
 class ShowInfoForm(UserSelectForm):
     def __init__(self, *args, **kwargs):

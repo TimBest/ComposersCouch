@@ -99,15 +99,7 @@ class UsernameForm(forms.ModelForm):
         fields = ('username',)
 
 class ProfileForm(autocomplete_light.ModelForm):
-    genre = forms.ModelMultipleChoiceField(
-        queryset=Genre.objects.all(),
-        required=False,
-        widget=autocomplete_light.MultipleChoiceWidget(
-            'GenreAutocomplete',
-            attrs
-={'placeholder':''}
-        )
-    )
+
     def __init__(self, *args, **kwargs):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
