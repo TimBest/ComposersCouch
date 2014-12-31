@@ -35,14 +35,14 @@ class ZipcodeForm(ModelForm):
         model = Location
         fields = ['zip_code']
 
-    def clean(self):
+    """def clean(self):
         print "cleaning"
         print self.cleaned_data
         cleaned_data = super(ContactForm, self).clean()
         print "dfgdfg"
         print "cleaned_data"
 
-    """def clean_zip_code(self):
+    def clean_zip_code(self):
         print self.cleaned_data.get("zip_code", "not found")
         print self.cleaned_data.ge
         print "cleanig"
