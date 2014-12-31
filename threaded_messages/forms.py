@@ -28,10 +28,7 @@ class ComposeForm(ModelForm):
     """
     recipients = forms.ModelMultipleChoiceField(
               User.objects.all(),
-              widget=MultipleChoiceWidget(
-                  'UserAutocomplete',
-                  attrs
-={'placeholder':''}))
+              widget=MultipleChoiceWidget('UserAutocomplete',))
     subject = forms.CharField(label=_(u"Subject"))
 
     class Meta:

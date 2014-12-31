@@ -23,10 +23,7 @@ def clean_url(url):
     return url
 
 class ZipcodeForm(ModelForm):
-    zip_code = forms.ModelChoiceField(Zipcode.objects.all(),
-          widget=ChoiceWidget(
-              'ZipcodeAutocomplete',
-              attrs = {'placeholder':''}))
+
     def __init__(self, *args, **kw):
       super(ZipcodeForm, self).__init__(*args, **kw)
       self.helper = FormHelper()
@@ -40,10 +37,7 @@ class ZipcodeForm(ModelForm):
         fields = ['zip_code']
 
 class LocationForm(ModelForm):
-    zip_code = forms.ModelChoiceField(Zipcode.objects.all(),
-          widget=ChoiceWidget(
-              'ZipcodeAutocomplete',
-              attrs={'placeholder':''}))
+
     def __init__(self, *args, **kw):
       super(LocationForm, self).__init__(*args, **kw)
       self.helper = FormHelper()

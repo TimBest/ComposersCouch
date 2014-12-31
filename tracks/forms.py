@@ -13,13 +13,6 @@ from tracks.models import Album, Cover, Track, Media, Interview
 
 
 class AlbumForm(ModelForm):
-    genre = ModelMultipleChoiceField(
-                  Genre.objects.all(),
-                  required=False,
-                  widget=MultipleChoiceWidget(
-                      'GenreAutocomplete',
-                      attrs
-={'placeholder':''}))
 
     def __init__(self, *args, **kw):
         super(AlbumForm, self).__init__(*args, **kw)
@@ -178,12 +171,7 @@ class VideoForm(ModelForm):
 
 
 class TrackForm(ModelForm):
-    host = ModelChoiceField(
-                  User.objects.all(),
-                  widget=ChoiceWidget(
-                      'UserAutocomplete',
-                      attrs
-={'placeholder':''}))
+
     def __init__(self, *args, **kw):
         super(TrackForm, self).__init__(*args, **kw)
         self.fields['host'].required = False
@@ -201,12 +189,7 @@ class TrackForm(ModelForm):
         fields = ['title', 'host']
 
 class HostTrackForm(ModelForm):
-    musician = ModelChoiceField(MusicianProfile.objects.all(),
-                required=False,
-                widget=ChoiceWidget(
-                    'MusicianProfileAutocomplete',
-                    attrs
-={'placeholder':''}))
+
     def __init__(self, *args, **kw):
         super(HostTrackForm, self).__init__(*args, **kw)
         self.helper = FormHelper()

@@ -96,11 +96,7 @@ class EditPrivateRequestForm(RequestForm):
         fields = ('accept_by',)
 
 class PublicRequestForm(RequestForm):
-    zip_code = forms.ModelChoiceField(Zipcode.objects.all(),
-              widget=ChoiceWidget(
-                  'ZipcodeAutocomplete',
-                  attrs
-={'placeholder':''}))
+
     def __init__(self, *args, **kw):
       super(PublicRequestForm, self).__init__(*args, **kw)
       self.helper = FormHelper()
