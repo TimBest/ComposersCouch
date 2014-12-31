@@ -18,7 +18,7 @@ def edit_show(function):
             show = get_object_or_None(Show, pk=kwargs.get('show_id', None))
             calendar = get_object_or_None(Calendar, slug=kwargs.get('calendar_slug', None))
             if show and calendar:
-                event = get_object_or_None(Event, show=show, calendar=calendar)
+                event = get_object_or_None(Event, show=show, calendar=request.user.calendar)
                 if not event:
                     raise PermissionDenied
             else:
@@ -30,11 +30,11 @@ def view_show(function):
     @wraps(function)
     def decorator(request, *args, **kwargs):
         from schedule.models import Calendar, Event, Show
-        show = get_object_or_None(Show, pk=kwargs.get('show_id', None))
         calendar = get_object_or_None(Calendar, slug=kwargs.get('calendar_slug', None))
+        show = get_object_or_None(Show, pk=kwargs.get('show_id', None))
         if show and calendar:
-            event = get_object_or_None(Event, show=show, calendar=calendar)
-            if show.visible == False and not user_event:
+            event = get_object_or_None(Event, show=show, calendar=request.user.calendar)
+            if show.visible == False and not event:
                 raise PermissionDenied
         else:
             raise Http404
