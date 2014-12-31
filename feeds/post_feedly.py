@@ -22,7 +22,6 @@ class PostFeedly(Manager):
 
     def add_post(self, post):
         activity = post.create_activity()
-        print post.target.profile.contact_info.id
         zipcode = post.target.profile.contact_info.location.zip_code
         # Add activity to geo based feeds
         self.add_geo_activity(zipcode, activity)
