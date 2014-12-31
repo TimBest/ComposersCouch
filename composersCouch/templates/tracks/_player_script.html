@@ -3,7 +3,7 @@
     jPlayer: "#jquery_jplayer_{{ id }}",
     cssSelectorAncestor: "#jp_container_{{ id }}"
   },
-  {{ playlist }},
+{% if playlist %}{{ playlist }},{% endif %}
   {
     playlistOptions: {
       enableRemoveControls: false

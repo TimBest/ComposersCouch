@@ -35,7 +35,7 @@
         <div class="navbar-collapse collapse">
           <form class="navbar-form navbar-left" action="{% url 'search' %}" method="get" role="search">
             <span class="fa fa-search"></span>
-            <input type="search" name="q" id="search" class="form-control" />
+            <input type="search" name="q" id="search" placeholder="Search" class="form-control" />
           </form>
           <div class="navbar-right">
             {% if user.is_authenticated %}
@@ -123,13 +123,11 @@
     {% compress js inline %}
       {% comment %}<script type="text/javascript" src="{% static 'js/jquery-1.11.0.min.js' %}"></script>{% endcomment %}
       <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-      {% comment %}<script type="text/javascript" src="{% static 'js/jquery-ui-1.10.4.min.js' %}"></script>{% endcomment %}
       <script type="text/javascript" src="{% static 'js/jquery.jplayer.min.js' %}"></script>
       <script type="text/javascript" src="{% static 'js/jplayer.playlist.js' %}"></script>
       <script type="text/javascript" src="{% static 'js/moment.min.js' %}"></script>
       <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
       <script type="text/javascript" src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
-      {% comment %}<script type="text/javascript" src="{% static 'js/jquery.timepicker.min.js' %}"></script>{% endcomment %}
       <script type="text/javascript" src="{% static 'js/image-picker.js' %}"></script>
       <script type="text/javascript" src="{% static 'js/modalForms.js' %}"></script>
       <script type="text/javascript" src="{% static 'js/profile/venue/about.js' %}"></script>
@@ -144,7 +142,7 @@
         $(document).ready(function() {
             $('#search').yourlabsAutocomplete({
                 url: "{% url 'search' %}",
-                placeholder: "Search",
+                placeholder: 'Search',
                 choiceSelector: 'a',
             }).input.bind('selectChoice', function(e, choice, autocomplete) {
                 document.location.href = choice.attr('href');
