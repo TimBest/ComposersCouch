@@ -53,6 +53,7 @@ class CalendarView(TemplateView):
         context['weekday_names'] = weekday_names
         context['here'] = quote(self.request.get_full_path()),
         return context
+
 month = CalendarView.as_view()
 
 class YearView(CalendarView):

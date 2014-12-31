@@ -166,7 +166,7 @@ class Year(Period):
         return start, end
 
     def __unicode__(self):
-        return self.start.year
+        return str(self.start.year)
 
 
 class Month(Period):
