@@ -59,13 +59,15 @@ class Info(models.Model):
         return participants
 
     def get_poster(self):
-        if self.poster:
-            return self.poster.image
-        elif self.headliner:
-            return self.headliner.profile.mugshot.image
-        elif self.host:
-            return self.host.profile.mugshot.image
-        return None
+        try:
+            if self.poster:
+                return self.poster.image
+            elif self.headliner:
+                return self.headliner.profile.mugshot.image
+            elif self.host:
+                return self.host.profile.mugshot.image
+        except:
+            return None
 
     def get_title(self):
         if self.title:

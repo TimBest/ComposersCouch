@@ -98,7 +98,6 @@ class ShowMessageView(MessageView):
 show_message = ShowMessageView.as_view()
 
 
-
 """ Forms """
 class EventFormView(ImageFormMixin, MultipleModelFormsView):
     form_classes = {
@@ -156,7 +155,7 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
             participants=participants,
             sender=self.request.user,
             subject="Event Thread",
-            body="View the shows details: <a href="+"url"+">here</a>",
+            body=str(self.request.user.profile) + " added you in an event",
         )
         show = Show(info=info, date=date, thread=thread, approved=False)
         show.save()
