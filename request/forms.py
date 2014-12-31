@@ -3,7 +3,6 @@ from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from autocomplete_light import ModelForm
-from autocomplete_light import ChoiceWidget, MultipleChoiceWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Layout
 

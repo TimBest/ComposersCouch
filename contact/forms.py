@@ -3,7 +3,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import URLValidator
 from django.utils.translation import ugettext_lazy as _
 
-from autocomplete_light.forms import ModelForm, ChoiceWidget
+from autocomplete_light.forms import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Layout, Submit
 
