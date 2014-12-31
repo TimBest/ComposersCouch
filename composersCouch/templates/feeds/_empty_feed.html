@@ -6,11 +6,11 @@
       <p>No post from whom your following</p>
     {% else %}
       <p>Please sign up</p>
-      <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" class="btn btn-info">Sign Up</a>
+      <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" class="btn btn-primary">Sign Up</a>
     {% endif %}
   {% else %}
     <p>Please sign up or enter your zipcode</p>
-    <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" class="btn btn-info">Sign Up</a>
+    <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" class="btn btn-primary">Sign Up</a>
   {% endif %}
 {% endif %}
 {% if usersGenres or genres %}
