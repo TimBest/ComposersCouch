@@ -92,11 +92,11 @@ class RequestFormView(MultipleFormsView):
             'requestForm': request_data,
         }
 
-    def get_success_url(self):
+    def get_success_url(self, private_request=None):
         # TODO: extend this guy to accept next urls
-        thread = self.private_request.messages
+        thread = private_request.messages
         if thread:
-            return redirect('messages_detail', thread_id=thread.id)
+            return redirect('request_detail', thread_id=thread.id)
         else:
             return redirect(success_url)
 
@@ -111,8 +111,8 @@ class RequestFormView(MultipleFormsView):
             subject="Show Request",
             body=forms['messageForm'].cleaned_data['body']
         )
-        self.private_request = private_request.save()
-        return self.get_success_url()
+        private_request.save()
+        return self.get_success_url(private_request)
 
 requestForm = login_required(RequestFormView.as_view())
 
