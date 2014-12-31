@@ -98,10 +98,13 @@ class MultipleFormsView(FormView):
         return initial
 
     def get_success_url(self, **kwargs):
-        if self.request.POST.has_key('next'):
-            return HttpResponseRedirect(self.request.POST['next'])
-        else:
-            return redirect(self.success_url, **kwargs)
+        try:
+            next = self.request.POST['next']
+            if next:
+                return HttpResponseRedirect(next)
+        except:
+            pass
+        return redirect(self.success_url, **kwargs)
 
     def post(self, request, **kwargs):
         forms = self.get_forms()
