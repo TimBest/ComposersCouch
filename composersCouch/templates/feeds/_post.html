@@ -6,7 +6,7 @@
       <div class="message-row reciver">
         <div class="message-image-col">
           <div class="message-image">
-            <a href="{% url 'redirectToProfile' post.user.username %}">
+            <a href="{% if post.user %}{% url 'redirectToProfile' post.user.username %}{% endif %}">
               {% include "utils/_mugshot.html" with profile=post.user.profile height=50 width=50 %}
             </a>
           </div>

@@ -41,13 +41,9 @@
             {% if user.is_authenticated %}
               <ul class="nav navbar-nav navbar-right">
                 <li>
-                  {% if user.profile.profile_type == 'f' %}
-                    <a href="{% url 'fan:home' user.username %}">{{ user.get_full_name }}</a>
-                  {% elif user.profile.profile_type == 'm' %}
-                    <a href="{% url 'musician:home' user.username %}">{{ user.profile.musicianProfile.name }}</a>
-                  {% elif user.profile.profile_type == 'v' %}
-                    <a href="{% url 'venue:home' user.username %}">{{ user.profile.venueProfile.name }}</a>
-                  {% endif %}
+                  <a href="{% url 'redirectToProfile' user.username %}">
+                    {{ user.profile }}
+                  </a>
                 </li>
                 <li class="dropdown hidden-xs">
                   <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>

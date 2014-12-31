@@ -7,7 +7,7 @@
         <div class="col-sm-3">
           <div class="image-frame">
             <span class="frame-helper"></span>
-            <a href="{% url 'redirectToProfile' artist.profile.user.username %}">
+            <a href="{% url 'musician:home' artist.profile.user.username %}">
               {% include "utils/_mugshot.html" with profile=artist.profile height=125 width=125 %}
             </a>
           </div>
