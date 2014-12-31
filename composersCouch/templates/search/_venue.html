@@ -7,7 +7,9 @@
         <div class="col-sm-3">
           <div class="image-frame">
             <span class="frame-helper"></span>
-            {% include "utils/_mugshot.html" with profile=venue.profile height=125 width=125  %}
+            <a href="{% url 'redirectToProfile' venue.profile.user.username %}">
+              {% include "utils/_mugshot.html" with profile=venue.profile height=125 width=125  %}
+            </a>
           </div>
         </div>
         <div class="col-sm-6">

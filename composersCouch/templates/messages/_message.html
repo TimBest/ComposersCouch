@@ -5,7 +5,9 @@
       <div class="message-row {% if message.sender == user %}sender{% else %}reciver{% endif %}">
         <div class="message-image-col">
           <div class="message-image">
-            {% include "utils/_mugshot.html" with profile=message.sender.profile height=50 width=50 %}
+            <a href="{% url 'redirectToProfile' message.sender.username %}">
+              {% include "utils/_mugshot.html" with profile=message.sender.profile height=50 width=50 %}
+            </a>
           </div>
         </div>
         <div class="message-content-col">

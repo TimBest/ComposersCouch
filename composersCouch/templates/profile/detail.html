@@ -6,7 +6,9 @@
     <div class="panel panel-default nametag">
       <div class="panel-body">
         <div class="nametagImg">
-          {% include "utils/_mugshot.html" with profile=profile height=100 width=100 class="verticalAlign center-block"%}
+          <a href="{{ profile.mugshot.image.url }}">
+            {% include "utils/_mugshot.html" with profile=profile height=100 width=100 class="verticalAlign center-block"%}
+          </a>
         </div>
         <div class="nametagInfo">
           <h2 class="name">{% block name %}{% endblock %}</h2>

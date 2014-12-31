@@ -15,7 +15,9 @@
             <div class="col-lg-2 col-sm-3">
               <div class="image-frame">
                 <span class="frame-helper"></span>
-                {% include "utils/_mugshot.html" with profile=applicant.profile width=75 height=75 %}
+                <a href="{% url 'redirectToProfile' applicant.username %}">
+                  {% include "utils/_mugshot.html" with profile=applicant.profile width=75 height=75 %}
+                </a>
               </div>
             </div>
             <div class="col-lg-8 col-sm-7">

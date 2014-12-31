@@ -6,7 +6,9 @@
       <div class="message-row reciver">
         <div class="message-image-col">
           <div class="message-image">
-            {% include "utils/_mugshot.html" with profile=request.user.profile height=50 width=50 %}
+            <a href="{% url 'redirectToProfile' request.user.username %}">
+              {% include "utils/_mugshot.html" with profile=request.user.profile height=50 width=50 %}
+            </a>
           </div>
         </div>
         <div class="message-content-col">

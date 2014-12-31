@@ -1,10 +1,10 @@
 {% load i18n staticfiles thumbnail %}
 
-
 {% if profile.mugshot %}
   {% with height=height|stringformat:"s" width=width|stringformat:"s" %}
     {% with geometry=height|add:"x"|add:width %}
       {% thumbnail profile.mugshot.image geometry crop="center" as im %}
+
         <img class="mugshot {{class}}" src="{{ im.url }}" alt="{% trans 'Profile mugshot' %}"/>
       {% endthumbnail %}
     {% endwith %}
