@@ -43,4 +43,5 @@ $(document).ready(function() {
     profileType();
   });
   $("input[type=radio]").change(profileType()).change();
+
 });

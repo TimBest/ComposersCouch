@@ -19,9 +19,18 @@
   </div>
 {% endblock %}
 
-{% block submit %}<button type="submit" class="btn btn-primary">Sign up</button>{% endblock %}
+{% block submit %}
+<button id="sign-up-submit" type="submit" class="btn btn-primary">Sign up</button>
+{% endblock %}
 
 {% block script %}
   {{ block.super }}
+  <script type="text/javascript">
+    $("#sign-up-submit").on('click', function() {
+      code = $("#id_zip_code-autocomplete").val();
+      $("#id_zip_code").append("<option value='"+code+"' selected='selected'>"+code+"</option>");
+    });
+  </script>
   <script type="text/javascript" src="{% static 'js/signup.js' %}"></script>
+
 {% endblock %}
