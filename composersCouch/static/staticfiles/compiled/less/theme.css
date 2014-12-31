@@ -7150,9 +7150,12 @@ h1 {
   }
 }
 .navbar .navbar-brand {
-  padding: 10px 15px;
+  padding: 10px 40px 10px 15px;
+  position: relative;
 }
 .navbar .navbar-brand .beta-badge {
+  position: absolute;
+  bottom: 8px;
   color: #6c0d08;
   font-size: 14px;
   font-family: PT-sans, sans-serif;
