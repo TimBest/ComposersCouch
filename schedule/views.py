@@ -82,7 +82,7 @@ class ShowView(TemplateView):
         calendar_slug = kwargs.get('calendar_slug', None)
         context['show'] = show = get_object_or_None(Show, id=show_id)
         context['calendar'] = calendar = get_object_or_None(Calendar, slug=calendar_slug)
-        event = get_object_or_None(Event, show=show, calendar=calendar)
+        event = get_object_or_None(Event, show=show, calendar=self.request.user.calendar)
         context['user_accept'] = event.approved
         return context
 
@@ -94,7 +94,10 @@ class ShowMessageView(MessageView):
 
     def get_context_data(self, **kwargs):
         context = super(ShowMessageView, self).get_context_data(**kwargs)
-        context['calendar'] = self.request.user.calendar
+        context['calendar'] = calendar = self.request.user.calendar
+        context['show'] = show = self.thread.show
+        event = get_object_or_None(Event, show=show, calendar=self.request.user.calendar)
+        context['user_accept'] = event.approved
         return context
 
 show_message = ShowMessageView.as_view()
@@ -265,7 +268,7 @@ def confirm(request, approved=True):
     if event:
         event.approved=approved
         event.save()
-    return redirect('messages_detail', thread_id=show.thread.id)
+    return redirect('show_message', thread_id=show.thread.id)
 
 def deny(request):
     return  confirm(request, approved=False)
