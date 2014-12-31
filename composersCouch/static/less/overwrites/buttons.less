@@ -59,24 +59,14 @@
   .social-media-btn(@vimeo);
 }
 
-.btn-default-primary {
-  .button-variant(@btn-default-color; @btn-default-bg; @btn-default-border);
+.btn-danger-inv {
+  .button-variant(@muted-red; @white; @muted-red);
   &:hover,
   &:focus,
   .open .dropdown-toggle& {
-    color: @btn-primary-bg;
-    background-color: @btn-primary-color;
-    border-color: @btn-primary-border;
-  }
-}
-.btn-default-warning {
-  .button-variant(@btn-default-color; @btn-default-bg; @btn-default-border);
-  &:hover,
-  &:focus,
-  .open .dropdown-toggle& {
-    color: @btn-warning-bg;
-    background-color: @btn-warning-color;
-    border-color: @btn-warning-border;
+    color: @red;
+    background-color: @white;
+    border-color: @red;
   }
 }
 .btn-transparent {

@@ -70,7 +70,7 @@
             <form method="POST" class="decline-form inline-block {% if user_accept %}{% elif user_accept != None %}hidden{% endif %}" action="{% url 'request_decline' %}">
               {% csrf_token %}
               <input type="hidden" name="private_request" value="{{ request.id }}">
-              <button class="btn btn-danger" type="submit"><span class="fa fa-ban" ></span> {% trans "Decline" %}</button>
+              <button class="btn btn-danger-inv" type="submit"><span class="fa fa-ban" ></span> {% trans "Decline" %}</button>
             </form>
           </div>
           <a href="{% url 'calendar_request_to_event' user.calendar.slug request.id %}" class="btn btn-link">{% trans "Add to Calendar" %}</a>

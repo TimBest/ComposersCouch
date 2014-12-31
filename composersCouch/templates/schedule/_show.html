@@ -67,10 +67,10 @@
             <input type="hidden" name="show" value="{{ show.id }}">
             <button class="btn btn-success" type="submit"><span class="fa fa-check" ></span> {% trans "Confirm" %}</button>
           </form>
-          <form method="POST" class="decline-form inline-block {% if not user_accept %}hidden{% endif %}" action="{% url 'show_deny' %}">
+          <form method="POST" class="decline-form inline-block {% if user_accept %}{% elif user_accept != None %}hidden{% endif %}" action="{% url 'show_deny' %}">
             {% csrf_token %}
             <input type="hidden" name="show" value="{{ show.id }}">
-            <button class="btn btn-danger" type="submit"><span class="fa fa-ban" ></span> {% trans "Deny" %}</button>
+            <button class="btn btn-danger-inv" type="submit"><span class="fa fa-ban" ></span> {% trans "Deny" %}</button>
           </form>
         </div>
         <p><a href="{% url 'edit_event' calendar.slug show.id %}">Edit</a></p>

@@ -95,7 +95,7 @@ class ShowMessageView(MessageView):
     def get_context_data(self, **kwargs):
         context = super(ShowMessageView, self).get_context_data(**kwargs)
         context['calendar'] = calendar = self.request.user.calendar
-        context['show'] = show = self.thread.show
+        context['show'] = show = context['thread'].show
         event = get_object_or_None(Event, show=show, calendar=self.request.user.calendar)
         context['user_accept'] = event.approved
         return context
