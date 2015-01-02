@@ -1,4 +1,5 @@
 function profileType() {
+  /* controls what form fields are visible based on profile type */
   var inputValue = $("input[type=radio]:checked").val();
   if (inputValue=="f") {
     $("#div_id_first_name").show();
@@ -20,6 +21,7 @@ function profileType() {
   }
 }
 $(document).ready(function() {
+  /* Alows for a button group to be used as a radio input */
   $(".profile-type").show();
   $("#div_id_profile_type").hide();
   var inputValue = "#" + $("input[type=radio]:checked").val();
@@ -44,4 +46,9 @@ $(document).ready(function() {
   });
   $("input[type=radio]").change(profileType()).change();
 
+  /* Fixes edge case when user submits the form before autocomplete can select an option */
+  $("#sign-up-submit").on('click', function() {
+    code = $("#id_zip_code-autocomplete").val();
+    $("#id_zip_code").append("<option value='"+code+"' selected='selected'>"+code+"</option>");
+  });
 });
