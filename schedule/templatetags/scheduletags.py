@@ -14,13 +14,7 @@ register = template.Library()
 
 
 @register.inclusion_tag("schedule/_month_table.html", takes_context=True)
-def month_table(context, calendar, month, size="regular", shift=None):
-    if shift:
-        if shift == -1:
-            month = month.prev()
-        if shift == 1:
-            month = month.next()
-
+def month_table(context, calendar, month, size="regular"):
     context['weekday_abbrs'] = weekday_abbrs
     context['weekday_names'] = weekday_names
     context['calendar'] = calendar
@@ -37,23 +31,6 @@ def day_cell(context, calendar, day, month, size="regular"):
         'month': month,
         'size': size
     })
-    return context
-
-@register.inclusion_tag("schedule/_event_options.html", takes_context=True)
-def options(context, occurrence):
-    context.update({
-        'occurrence': occurrence,
-        'MEDIA_URL': getattr(settings, "MEDIA_URL"),
-    })
-    context['view_occurrence'] = occurrence.get_absolute_url()
-    user = context['request'].user
-    if CHECK_EVENT_PERM_FUNC(occurrence.event, user) and CHECK_EVENT_PERM_FUNC(occurrence.event.calendar, user):
-        context['edit_occurrence'] = occurrence.get_edit_url()
-        context['cancel_occurrence'] = occurrence.get_cancel_url()
-        context['delete_event'] = reverse('delete_event', args=(occurrence.event.id,))
-        context['edit_event'] = reverse('edit_event', args=(occurrence.event.calendar.slug, occurrence.event.id,))
-    else:
-        context['edit_event'] = context['delete_event'] = ''
     return context
 
 class CalendarNode(template.Node):

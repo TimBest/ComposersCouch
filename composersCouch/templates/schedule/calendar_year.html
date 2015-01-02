@@ -23,18 +23,10 @@
             </a>
             {% month_table calendar month "small" %}
           </div>
-          {% ifequal forloop.counter 3  %}
+          {% if forloop.counter|divisibleby:3 %}
             </div>
             <div class="row">
-          {% endifequal %}
-          {% ifequal forloop.counter 6  %}
-            </div>
-            <div class="row">
-          {% endifequal %}
-          {% ifequal forloop.counter  9 %}
-            </div>
-            <div class="row">
-          {% endifequal %}
+          {% endif %}
         {% endfor %}
       </div>
     </div>
