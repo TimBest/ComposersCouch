@@ -7925,6 +7925,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .detail .nametag {
   display: inline-block;
+  margin-bottom: 0px;
 }
 .detail .nametag .nametagImg {
   float: left;
