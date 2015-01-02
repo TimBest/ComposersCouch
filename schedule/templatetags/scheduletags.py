@@ -1,12 +1,9 @@
-import datetime
 
 from django.conf import settings
 from django import template
 from django.core.urlresolvers import reverse
 from django.utils.dateformat import format
-from django.utils.six.moves import zip_longest
 
-from schedule.conf.settings import CHECK_EVENT_PERM_FUNC, CHECK_CALENDAR_PERM_FUNC
 from schedule.models import Calendar
 from schedule.periods import weekday_names, weekday_abbrs
 
@@ -20,17 +17,6 @@ def month_table(context, calendar, month, size="regular"):
     context['calendar'] = calendar
     context['month'] = month
     context['size'] = size
-    return context
-
-
-@register.inclusion_tag("schedule/_day_cell.html", takes_context=True)
-def day_cell(context, calendar, day, month, size="regular"):
-    context.update({
-        'calendar': calendar,
-        'day': day,
-        'month': month,
-        'size': size
-    })
     return context
 
 class CalendarNode(template.Node):

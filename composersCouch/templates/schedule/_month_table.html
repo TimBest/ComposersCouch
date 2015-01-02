@@ -1,32 +1,30 @@
 {% load scheduletags %}
 <div class="calendar {{month}}">
-  {% if weekday_abbrs or weekday_names %}
-    <div class="cal-row-fluid cal-row-head">
-      {% ifequal size "small" %}
-        {% for day_name in weekday_names %}
-          <div class="visible-sm cal-cell1">
-            <h5>{{ day_name }}</h5>
-          </div>
-        {% endfor %}
-        {% for day_name in weekday_abbrs %}
-          <div class="hidden-sm cal-cell1">
-            <h5>{{ day_name }}</h5>
-          </div>
-        {% endfor %}
-      {% else %}
-        {% for day_name in weekday_names %}
-          <div class="hidden-xs cal-cell1">
-            <h5>{{ day_name }}</h5>
-          </div>
-        {% endfor %}
-        {% for day_name in weekday_abbrs %}
-          <div class="visible-xs cal-cell1">
-            <h5>{{ day_name }}</h5>
-          </div>
-        {% endfor %}
-      {% endifequal %}
-    </div>
-  {% endif %}
+  <div class="cal-row-fluid cal-row-head">
+    {% ifequal size "small" %}
+      {% for day_name in weekday_names %}
+        <div class="visible-sm cal-cell1">
+          <h5>{{ day_name }}</h5>
+        </div>
+      {% endfor %}
+      {% for day_name in weekday_abbrs %}
+        <div class="hidden-sm cal-cell1">
+          <h5>{{ day_name }}</h5>
+        </div>
+      {% endfor %}
+    {% else %}
+      {% for day_name in weekday_names %}
+        <div class="hidden-xs cal-cell1">
+          <h5>{{ day_name }}</h5>
+        </div>
+      {% endfor %}
+      {% for day_name in weekday_abbrs %}
+        <div class="visible-xs cal-cell1">
+          <h5>{{ day_name }}</h5>
+        </div>
+      {% endfor %}
+    {% endifequal %}
+  </div>
   <div class="cal-month-box">
     {% for week in month.get_weeks %}
       <div class="week">
@@ -37,7 +35,7 @@
             </a>
           </div>
           {% for day in week.get_days %}
-            {% day_cell calendar day month size %}
+            {% include "schedule/_day_cell.html" with day=day %}
           {% endfor %}
         </div>
         <div class="row expanded-day">

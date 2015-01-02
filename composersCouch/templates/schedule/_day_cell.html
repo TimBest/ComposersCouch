@@ -1,10 +1,10 @@
 {% load scheduletags %}
 
-<div id="expand-day" class="{{size}} cal-cell1 cal-cell day-cell expand-day
+<div id="expand-day" class="cal-cell1 cal-cell day-cell expand-day
 {% if now.day == day.start.day and now.month == day.start.month %}cal-day-today{% endif %}
 {% if month.start.month != day.start.month %}cal-day-outmonth noday{% endif %}">
   <div class="dayNumber">
-    <a href="{% url 'day_calendar' calendar.slug %}{% querystring_for_date day.start 3 %}">
+    <a href="{% url 'day_calendar' request.user.calendar.slug %}{% querystring_for_date day.start 3 %}">
       <span>{{day.start.day}}</span>
     </a>
   </div>
