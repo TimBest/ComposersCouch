@@ -26,7 +26,10 @@ class ZipcodeFormView(FormView):
         return redirect(path)
 
     def form_valid(self, form):
-        zipcode = form.save(commit=False).zip_code.code
+        try:
+            zipcode = form.save(commit=False).zip_code.code
+        except:
+            zipcode = self.request.POST.get('zip_code-autocomplete')
         path = self.request.POST.get('path')
         path = resolve(urlparse(path)[2])
         url_name = path.url_name
@@ -36,6 +39,8 @@ class ZipcodeFormView(FormView):
             url_name = homeCategory
         if zipcode:
             kwargs['zipcode'] = zipcode
+        if not kwargs.get('order'):
+            kwargs['order'] = 'expiring'
         url = reverse(url_name, kwargs=kwargs)
         return redirect(url)
 

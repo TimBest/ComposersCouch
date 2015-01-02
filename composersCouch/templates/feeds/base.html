@@ -97,17 +97,10 @@
           <button id="genre-select" class="btn btn-link toggle">Genre <span class="caret"></span></button>
           <div class="head hide">Genres</div>
           <div class="content hide">
-            <form class=" genre-form" role="filter" method="POST" action="{% url 'filter' %}">
+            <form class="genre-form" role="filter" method="POST" action="{% url 'filter' %}">
               <input type="hidden" name="path" value="{% firstof request.path '/' %}">
               {% crispy genreForm %}
             </form>
-            {% comment %}
-            {% if user.is_authenticated %}
-            <a class="" href="{% url 'profile_edit' user.username %}">
-              Add Genres
-            </a>
-            {% endif %}
-            {% endcomment %}
           </div>
         </li>
         {% endblock %}
@@ -125,7 +118,6 @@
       </ul>
     </div>
     <div class="cards">
-
       {% block feed %}{% endblock %}
     </div>
   </div>
