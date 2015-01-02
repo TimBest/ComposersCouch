@@ -1,7 +1,7 @@
 {% load scheduletags %}
 
 <div id="cal-day-box">
-  {% for o in day.get_occurrence_partials %}
+  {% for o in day.get_event_partials %}
     {% include "schedule/_show.html" with show=o.show %}
   {% endfor %}
 </div>

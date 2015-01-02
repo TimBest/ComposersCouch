@@ -237,9 +237,9 @@ def _cook_occurrences(period, occs):
     last = {}
     # find out which occurrences overlap
     for o in occs:
-        o.data = period.classify_occurrence(o)
+        o.data = period.classify_event(o)
         if not o.data:
-            occs.remove(o)
+            #occs.remove(o)
             continue
         o.level = -1
         o.max = 0

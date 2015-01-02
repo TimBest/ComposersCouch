@@ -59,36 +59,25 @@ class Period(object):
     def _get_tzinfo(self, tzinfo):
         return tzinfo if settings.USE_TZ else None
 
-    def _get_sorted_events(self):
-        return sorted(self.events)
-
-    def cached_get_sorted_events(self):
+    def cached_get_events(self):
         if hasattr(self, '_occurrences'):
             return self._occurrences
-        occs = self._get_sorted_events()
-        self._occurrences = occs
-        return occs
-    occurrences = property(cached_get_sorted_events)
+        self._occurrences = self.events
+        return self.events
+    occurrences = property(cached_get_events)
 
-    def get_persisted_occurrences(self):
-        if hasattr(self, '_persisted_occurrenes'):
-            return self._persisted_occurrences
-        else:
-            self._persisted_occurrences = self.events
-            return self._persisted_occurrences
-
-    def classify_occurrence(self, occurrence):
-        if occurrence.show.date.start > self.end or occurrence.show.date.end < self.start:
+    def classify_event(self, event):
+        if event.show.date.start > self.end or event.show.date.end < self.start:
             return None
-        return occurrence
+        return event
 
-    def get_occurrence_partials(self):
-        occurrence_dicts = []
-        for occurrence in self.occurrences:
-            occurrence = self.classify_occurrence(occurrence)
-            if occurrence:
-                occurrence_dicts.append(occurrence)
-        return occurrence_dicts
+    def get_event_partials(self):
+        event_dicts = []
+        for event in self.events:
+            event = self.classify_event(event)
+            if event:
+                event_dicts.append(event)
+        return event_dicts
 
     def get_occurrences(self):
         return self.occurrences
@@ -96,7 +85,7 @@ class Period(object):
     def has_occurrences(self):
         if self.occurrences:
             return True
-        return any(self.classify_occurrence(o) for o in self.occurrences)
+        return any(self.classify_event(o) for o in self.occurrences)
 
     def get_time_slot(self, start, end):
         if start >= self.start and end <= self.end:
