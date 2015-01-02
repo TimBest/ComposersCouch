@@ -39,28 +39,6 @@ def day_cell(context, calendar, day, month, size="regular"):
     })
     return context
 
-
-@register.inclusion_tag("schedule/_daily_table.html", takes_context=True)
-def daily_table(context, day, start=8, end=20, increment=30):
-    """
-      Display a nice table with occurrences and action buttons.
-      Arguments:
-      start - hour at which the day starts
-      end - hour at which the day ends
-      increment - size of a time slot (in minutes)
-    """
-    user = context['request'].user
-    addable = CHECK_EVENT_PERM_FUNC(None, user)
-    CHECK_EVENT_PERM_FUNC(None, user)
-    if 'calendar' in context:
-        addable &= CHECK_CALENDAR_PERM_FUNC(context['calendar'], user)
-    context['addable'] = addable
-
-    day_part = day.get_time_slot(day.start + datetime.timedelta(hours=start), day.start + datetime.timedelta(hours=end))
-    events = day_part.events
-    events = _cook_occurrences(day_part, events)
-    return context
-
 @register.inclusion_tag("schedule/_event_options.html", takes_context=True)
 def options(context, occurrence):
     context.update({

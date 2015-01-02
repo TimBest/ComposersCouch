@@ -25,7 +25,9 @@
     {% for day in periods.week.get_days %}
       <div class="weekday weekday{{forloop.counter}}">
         <div class="weekdaytable">
-          {% daily_table day %}
+          {% for event in day.get_event_partials %}
+            {% include "schedule/_show.html" with show=event.show user_accept=event.approved %}
+          {% endfor %}
         </div>
       </div>
     {% endfor %}

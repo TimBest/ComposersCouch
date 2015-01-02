@@ -15,7 +15,7 @@
 {% endblock %}
 
 {% block body %}
-  {% with day=periods.day %}
-    {% daily_table day %}
-  {% endwith %}
+  {% for event in periods.day.get_event_partials %}
+    {% include "schedule/_show.html" with show=event.show user_accept=event.approved %}
+  {% endfor %}
 {% endblock %}
