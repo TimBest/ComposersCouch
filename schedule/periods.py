@@ -59,16 +59,16 @@ class Period(object):
     def _get_tzinfo(self, tzinfo):
         return tzinfo if settings.USE_TZ else None
 
-    def _get_sorted_occurrences(self):
+    def _get_sorted_events(self):
         return sorted(self.events)
 
-    def cached_get_sorted_occurrences(self):
+    def cached_get_sorted_events(self):
         if hasattr(self, '_occurrences'):
             return self._occurrences
-        occs = self._get_sorted_occurrences()
+        occs = self._get_sorted_events()
         self._occurrences = occs
         return occs
-    occurrences = property(cached_get_sorted_occurrences)
+    occurrences = property(cached_get_sorted_events)
 
     def get_persisted_occurrences(self):
         if hasattr(self, '_persisted_occurrenes'):

@@ -82,7 +82,7 @@ class ShowView(TemplateView):
         try:
             event = get_object_or_None(Event, show=self.show, calendar=self.request.user.calendar)
         except:
-            pass
+            event = None
         if event:
             return redirect('show_message', thread_id=self.show.thread.id)
         else:
