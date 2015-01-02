@@ -61,15 +61,6 @@ def daily_table(context, day, start=8, end=20, increment=30):
     events = _cook_occurrences(day_part, events)
     return context
 
-
-@register.inclusion_tag("schedule/_event_title.html", takes_context=True)
-def title(context, occurrence):
-    context.update({
-        'occurrence': occurrence,
-    })
-    return context
-
-
 @register.inclusion_tag("schedule/_event_options.html", takes_context=True)
 def options(context, occurrence):
     context.update({
@@ -86,22 +77,6 @@ def options(context, occurrence):
     else:
         context['edit_event'] = context['delete_event'] = ''
     return context
-
-
-@register.inclusion_tag("schedule/_create_event_options.html", takes_context=True)
-def create_event_url(context, calendar, slot):
-    context.update({
-        'calendar': calendar,
-        'MEDIA_URL': getattr(settings, "MEDIA_URL"),
-    })
-    lookup_context = {
-        'calendar_slug': calendar.slug,
-    }
-    context['create_event_url'] = "%s%s" % (
-        reverse("calendar_create_event", kwargs=lookup_context),
-        querystring_for_date(slot))
-    return context
-
 
 class CalendarNode(template.Node):
     def __init__(self, content_object, distinction, context_var, create=False):
@@ -211,15 +186,6 @@ def prevnext(target, slug, period, fmt=None):
         'target': target,
     }
     return context
-
-
-@register.inclusion_tag("schedule/_detail.html")
-def detail(occurrence):
-    context = {
-        'occurrence': occurrence,
-    }
-    return context
-
 
 def _cook_occurrences(period, occs):
     """ Prepare occurrences to be displayed.

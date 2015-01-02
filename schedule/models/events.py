@@ -108,10 +108,3 @@ class Event(models.Model):
         if not location:
             location = self.show.info.host.profile.contact_info.location
         return location
-
-    def get_occurrences(self, start, end):
-        """
-        TODO: return all events in range
-        """
-
-        return None
