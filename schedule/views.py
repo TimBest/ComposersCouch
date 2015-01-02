@@ -76,13 +76,24 @@ day = DayView.as_view()
 class ShowView(TemplateView):
     template_name="schedule/show.html"
 
+    def dispatch(self, *args, **kwargs):
+        show_id = self.kwargs.get('show_id', None)
+        self.show = get_object_or_None(Show, id=show_id)
+        try:
+            event = get_object_or_None(Event, show=self.show, calendar=self.request.user.calendar)
+        except:
+            pass
+        if event:
+            return redirect('show_message', thread_id=self.show.thread.id)
+        else:
+            return super(ShowView, self).dispatch(*args, **kwargs)
+
     def get_context_data(self, *args, **kwargs):
         context = super(ShowView, self).get_context_data(*args, **kwargs)
-        show_id = kwargs.get('show_id', None)
-        calendar_slug = kwargs.get('calendar_slug', None)
-        context['show'] = show = get_object_or_None(Show, id=show_id)
-        context['calendar'] = calendar = get_object_or_None(Calendar, slug=calendar_slug)
-        event = get_object_or_None(Event, show=show, calendar=self.request.user.calendar)
+        calendar_slug = self.kwargs.get('calendar_slug', None)
+        context['calendar'] = get_object_or_None(Calendar, slug=calendar_slug)
+        context['show'] = self.show
+        event = get_object_or_None(Event, show=self.show, calendar=self.request.user.calendar)
         context['user_accept'] = event.approved
         return context
 

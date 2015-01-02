@@ -35,7 +35,10 @@ def view_show(function):
         calendar = get_object_or_None(Calendar, slug=kwargs.get('calendar_slug', None))
         show = get_object_or_None(Show, pk=kwargs.get('show_id', None))
         if show and calendar:
-            event = get_object_or_None(Event, show=show, calendar=request.user.calendar)
+            try:
+                event = get_object_or_None(Event, show=show, calendar=request.user.calendar)
+            except:
+                event = None
             if show.visible == False and not event:
                 raise PermissionDenied
         else:
