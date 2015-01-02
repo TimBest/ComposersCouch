@@ -21,6 +21,7 @@
 {% block script %}
   {{ block.super }}
   <script type="text/javascript">
+    zipcode_fix();
     $(function () {
         $('#id_start_0').datetimepicker({pickTime: false});
         $('#id_start_1').datetimepicker({pickDate: false});
