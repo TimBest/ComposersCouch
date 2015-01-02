@@ -38,6 +38,10 @@ function bindModalEvents(url, modalForm, deleteTriger){
 function saveForm(url, modalForm, deleteTriger){
     //bind the form. prevent default behavior and submit form via ajax instead
     $(modalForm).submit(function(e){
+        /*  */
+        code = $("#id_zip_code-autocomplete").val();
+        $("#id_zip_code").append("<option value='"+code+"' selected='selected'>"+code+"</option>");
+
         e.preventDefault();
         $.ajax({
           type: $(this).attr('method'),

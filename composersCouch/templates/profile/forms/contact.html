@@ -1,16 +1,21 @@
-{% extends 'base.html' %}
+{% extends 'profile/musician/forms/about_modal.html' %}
 {% load i18n crispy_forms_tags %}
 {% crispy ContactForm ContactForm.helper %}
-{% crispy LocationForm LocationForm.helper %}
+{% crispy NonUserLocationForm NonUserLocationForm.helper %}
 
-{% block title %}{% trans "Add/Edit Contact" %}{% endblock %}
+{% block title %}{% block formTitle %}{% trans "Edit Contact Info" %}{% endblock %}{% endblock %}
 
-{% block header %}
-  <div class="container">
-    <form method="post">
-      {% crispy contactForm %}
-      {% crispy locationForm %}
-      <button type="submit" class="btn btn-primary">Save</button>
-    </form>
-  </div>
+{% block form %}
+  {% crispy contactForm %}
+  {% crispy locationForm %}
+{% endblock %}
+
+
+{% block script %}
+  {{ script.super }}
+  <script type="text/javascript" >
+    $(document).ready(function() {
+      zipcode_fix();
+    });
+  </script>
 {% endblock %}

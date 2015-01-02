@@ -5,7 +5,7 @@ $(document).ready(function() {
     });
 });
 
-$( document ).ajaxStop( function() {
+$(document).ajaxStop(function() {
     musicianAboutModals();
 });
 
@@ -14,4 +14,3 @@ function musicianAboutModals() {
     modalConnect('.editMusicianContact','#contactMusicianForm');
     modalConnect('.editMusicianMembers','#membersMusicianForm');
 }
-

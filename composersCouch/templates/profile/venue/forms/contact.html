@@ -3,11 +3,20 @@
 {% crispy ContactForm ContactForm.helper %}
 {% crispy NonUserLocationForm NonUserLocationForm.helper %}
 
-{% block title %}{% block formTitle %}{% trans "Add/Edit Contact" %}{% endblock %}{% endblock %}
-{% block formID %}contactForm{% endblock %}
 {% block contactClass %}active{% endblock %}
 
+{% block title %}{% block formTitle %}{% trans "Edit Contact Info" %}{% endblock %}{% endblock %}
+{% block formID %}contactForm{% endblock %}
 {% block form %}
   {% crispy contactForm %}
   {% crispy locationForm %}
+{% endblock %}
+
+{% block script %}
+  {{ script.super }}
+  <script type="text/javascript" >
+    $(document).ready(function() {
+      zipcode_fix();
+    });
+  </script>
 {% endblock %}
