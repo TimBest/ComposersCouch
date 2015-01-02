@@ -15,5 +15,5 @@
 {% endblock %}
 
 {% block body %}
-  {% month_table calendar periods.month "regular" %}
+  {% include "schedule/_month_table.html" with month=periods.month weekday_names=weekday_names %}
 {% endblock %}

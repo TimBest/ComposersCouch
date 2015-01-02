@@ -21,7 +21,7 @@
             <a href="{% url 'month_calendar' calendar.slug %}{% querystring_for_date month.start 2 %}" class="text-black">
               <h3>{{month.name}}</h3>
             </a>
-            {% month_table calendar month "small" %}
+            {% include "schedule/_month_table.html" with month=month weekday_names=weekday_names size=small %}
           </div>
           {% if forloop.counter|divisibleby:3 %}
             </div>

@@ -3,24 +3,17 @@
   <div class="cal-row-fluid cal-row-head">
     {% ifequal size "small" %}
       {% for day_name in weekday_names %}
-        <div class="visible-sm cal-cell1">
-          <h5>{{ day_name }}</h5>
-        </div>
-      {% endfor %}
-      {% for day_name in weekday_abbrs %}
-        <div class="hidden-sm cal-cell1">
-          <h5>{{ day_name }}</h5>
+        <div class="cal-cell1">
+          <h5 class="visible-sm">{{ day_name }}</h5>
+          <h5 class="hidden-sm">{{ day_name|slice:"3" }}
+          </h5>
         </div>
       {% endfor %}
     {% else %}
       {% for day_name in weekday_names %}
-        <div class="hidden-xs cal-cell1">
-          <h5>{{ day_name }}</h5>
-        </div>
-      {% endfor %}
-      {% for day_name in weekday_abbrs %}
-        <div class="visible-xs cal-cell1">
-          <h5>{{ day_name }}</h5>
+        <div class="cal-cell1">
+          <h5 class="hidden-xs">{{ day_name }}</h5>
+          <h5 class="visible-xs">{{ day_name|slice:"3" }}</h5>
         </div>
       {% endfor %}
     {% endifequal %}
@@ -30,9 +23,7 @@
       <div class="week">
         <div class="cal-row-fluid row-eq-height cal-day-row">
           <div id="week-link">
-            <a href="{% url 'week_calendar' calendar.slug %}{% querystring_for_date week.start %}">
-              Week
-            </a>
+            <a href="{% url 'week_calendar' request.user.calendar.slug %}{% querystring_for_date week.start %}">Week</a>
           </div>
           {% for day in week.get_days %}
             {% include "schedule/_day_cell.html" with day=day %}

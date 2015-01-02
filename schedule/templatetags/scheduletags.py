@@ -9,16 +9,6 @@ from schedule.periods import weekday_names, weekday_abbrs
 
 register = template.Library()
 
-
-@register.inclusion_tag("schedule/_month_table.html", takes_context=True)
-def month_table(context, calendar, month, size="regular"):
-    context['weekday_abbrs'] = weekday_abbrs
-    context['weekday_names'] = weekday_names
-    context['calendar'] = calendar
-    context['month'] = month
-    context['size'] = size
-    return context
-
 class CalendarNode(template.Node):
     def __init__(self, content_object, distinction, context_var, create=False):
         self.content_object = template.Variable(content_object)
