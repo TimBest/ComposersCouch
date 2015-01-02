@@ -57,11 +57,8 @@ def daily_table(context, day, start=8, end=20, increment=30):
     context['addable'] = addable
 
     day_part = day.get_time_slot(day.start + datetime.timedelta(hours=start), day.start + datetime.timedelta(hours=end))
-    events = day_part.get_occurrences()
+    events = day_part.events
     events = _cook_occurrences(day_part, events)
-    # get slots to display on the left
-    slots = _cook_slots(day_part, increment)
-    context['slots_events'] = zip_longest(slots, events)
     return context
 
 
@@ -270,28 +267,6 @@ def _cook_occurrences(period, occs):
         #o.height = int(height * (float((o.real_end - o.real_start).seconds) / (period.end - period.start).seconds))
         #o.height = min(o.height, height - o.top) # trim what extends beyond the area
     return occs
-
-
-def _cook_slots(period, increment):
-    """
-        Prepare slots to be displayed on the left hand side
-        calculate dimensions (in px) for each slot.
-        Arguments:
-        period - time period for the whole series
-        increment - slot size in minutes
-    """
-    tdiff = datetime.timedelta(minutes=increment)
-    num = (period.end - period.start).seconds / tdiff.seconds
-    s = period.start
-    slots = []
-    for i in range(num):
-        sl = period.get_time_slot(s, s + tdiff)
-        #sl.top = int(height / float(num)) * i
-        #sl.height = int(height / float(num))
-        slots.append(sl)
-        s = s + tdiff
-    return slots
-
 
 @register.simple_tag
 def hash_occurrence(occ):
