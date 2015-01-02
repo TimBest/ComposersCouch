@@ -134,6 +134,7 @@
       <script type="text/javascript" src="{% static 'autocomplete_light/autocomplete.js' %}"></script>
       <script type="text/javascript" src="{% static 'autocomplete_light/text_widget.js' %}"></script>
       <script type="text/javascript" src="{% static 'autocomplete_light/widget.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/autocomplete_fixes.js' %}"></script>
       <script type="text/javascript">
         $(document).ready(function() {
             $('#search').yourlabsAutocomplete({
@@ -145,7 +146,7 @@
             });
         });
       </script>
+      {% block script %}{% endblock %}
     {% endcompress %}
-    {% block script %}{% endblock %}
   </body>
 </html>

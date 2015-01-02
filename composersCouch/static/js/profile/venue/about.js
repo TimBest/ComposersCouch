@@ -18,4 +18,3 @@ function venueAboutModals() {
     modalConnect('.editEquipment','#equipmentForm', '.deleteEquipment');
     modalConnect('.editHours','#hoursForm');
 }
-
