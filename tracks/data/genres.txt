@@ -85,6 +85,7 @@ Dixieland,Jazz
 Doo-wop,Vocal
 Doo Wop,R&B/Soul
 Downtempo,Electronic
+Dream Pop,Pop
 Drinking Songs,World
 Drone,World
 Dub,Reggae
@@ -137,6 +138,7 @@ IDM/Experimental,Electronic
 Impressionist,Classical
 Indian Pop,World
 Indie,Indie
+Indie Pop,Alternative,Rock
 Indie Rock,Alternative,Rock
 Industrial,Electronic
 Instrumental,Instrumental
@@ -215,6 +217,7 @@ South Africa,World
 South America,World
 Southern Gospel,Christian & Gospel
 Southern Rock,Rock
+Space Rock,Rock
 Standards,Vocal
 Steampunk,Alternative
 Stories,Children's
