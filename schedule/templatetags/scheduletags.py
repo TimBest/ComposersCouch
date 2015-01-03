@@ -13,13 +13,13 @@ def querystring_for_date(date, num=3):
     return query_string
 
 @register.simple_tag
-def prev_url(period):
+def prev_url(period, filter):
     return '%s%s' % (
-        reverse("calendar", kwargs=dict(period=period.__class__.__name__.lower())),
+        reverse("calendar", kwargs=dict(period=period.__class__.__name__.lower(), filter=filter)),
         querystring_for_date(period.prev().start))
 
 @register.simple_tag
-def next_url(period):
+def next_url(period, filter):
     return '%s%s' % (
-        reverse("calendar", kwargs=dict(period=period.__class__.__name__.lower())),
+        reverse("calendar", kwargs=dict(period=period.__class__.__name__.lower(), filter=filter)),
         querystring_for_date(period.next().start))

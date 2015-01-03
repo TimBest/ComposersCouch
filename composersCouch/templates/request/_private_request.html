@@ -1,0 +1,73 @@
+<div class="request text-left">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="Headliner">
+            <b>Headliner:</b>
+            <a class="text-black" href="{% url 'redirectToProfile' request.headliner.profile.user.username 'about' %}">
+              {{ request.headliner.name }}
+            </a>
+            {% include "request/_accepted.html" with accepted=headliner_accept %}
+          </div>
+          {% if request.openers.first %}
+          <div class="Performers">
+            <b>Performers:</b>
+            {% for o in openers_accept %}
+            <a class="text-black" href="{% url 'redirectToProfile' o.0.profile.user.username 'about' %}">
+              {{ o.0 }}
+            </a>
+            {% include "request/_accepted.html" with accepted=o.1 %}
+            {% endfor %}
+          </div>
+          {% endif %}
+          {% with host=request.host %}
+          <div class="host">
+            <b>Host:</b>
+            <a class="text-black" href="{% url 'redirectToProfile' host.username 'about' %}">{{ host.profile }}</a>
+            {% include "request/_accepted.html" with accepted=host_accept %}
+          </div>
+          {% endwith %}
+          <p>Accept by: {{ request.accept_by }}</p>
+        </div>
+        <div class="col-sm-6">
+          <h4>Suggested dates:</h4>
+          <p>
+            {% include "utils/dates/_start_end_full.html" with start=request.date.start end=request.date.end %}
+          </p>
+          <div>
+            {% for event in events %}
+            {% ifchanged event.show.date.start.day %}
+            <p><b>{{ event.show.date.start|date:'N j' }}</b></p>
+            {% endifchanged %}
+            <p>
+              {{ event.show.date.start|date:'fA' }} - {{ event.show.info.title }} {{ event.show.info.headliner }}
+              {% if event.approved == None %}
+              <span class="label label-warning">pending</span>
+              {% endif %}
+            </p>
+            {% empty %}
+            <p>Your calendar is free</p>
+            {% endfor %}
+          </div>
+          <a href="{% url 'request_edit' request.id %}" class="">Edit</a>
+        </div>
+      </div>
+    </div>
+    <div class="panel-footer">
+      <div class="pull-right">
+        <form method="POST" class="accept-form inline-block {% if user_accept %}hidden{% endif %}" action="{% url 'request_accept' %}">
+          {% csrf_token %}
+          <input type="hidden" name="private_request" value="{{ request.id }}">
+          <button class="btn btn-success" type="submit"><span class="fa fa-check" ></span> Accept</button>
+        </form>
+        <form method="POST" class="decline-form inline-block {% if user_accept %}{% elif user_accept != None %}hidden{% endif %}" action="{% url 'request_decline' %}">
+          {% csrf_token %}
+          <input type="hidden" name="private_request" value="{{ request.id }}">
+          <button class="btn btn-danger-inv" type="submit"><span class="fa fa-ban" ></span> Decline</button>
+        </form>
+      </div>
+      <a href="{% url 'calendar_request_to_event' user.calendar.slug request.id %}" class="btn btn-primary">Publish as show</a>
+    </div>
+  </div>
+</div>
