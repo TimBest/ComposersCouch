@@ -43,15 +43,7 @@ class CalendarView(TemplateView):
     @login_required_m
     def dispatch(self, *args, **kwargs):
         period = kwargs.get('period', None)
-        if period == 'day':
-            period = Day
-            template_name = 'schedule/calendar_day.html'
-        elif period == 'week':
-            period = Week
-            template_name = 'schedule/calendar_week.html'
-        elif period == 'year':
-            period = Year
-            template_name = 'schedule/calendar_year.html'
+        self.period, self.template_name = PERIODS.get(period, (Month, 'schedule/calendar_month.html'))
         filter = kwargs.get('filter', None)
         self.calendar = self.request.user.calendar
         return super(CalendarView, self).dispatch(*args, **kwargs)
@@ -69,49 +61,6 @@ class CalendarView(TemplateView):
         return context
 
 calendar = CalendarView.as_view()
-
-class CalendarView(TemplateView):
-    period = Month
-    template_name = 'schedule/calendar_month.html'
-
-    @login_required_m
-    def dispatch(self, *args, **kwargs):
-        calendar_slug = kwargs.get('calendar_slug', None)
-        self.calendar = get_object_or_None(Calendar, slug=calendar_slug)
-        if self.calendar != self.request.user.calendar:
-            path = self.request.path_info
-            url = resolve(urlparse(path)[2])
-            return redirect(url.url_name, calendar_slug=self.request.user.calendar.slug)
-        return super(CalendarView, self).dispatch(*args, **kwargs)
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(CalendarView, self).get_context_data(*args, **kwargs)
-        context['calendar'] = self.calendar
-        context['date'] = coerce_date_dict(self.request.GET)
-        event_list = self.calendar.events.filter(approved=True)
-        #from request.models import models
-        #event_list = PrivateRequest.objects.all()
-        context['periods'] = dict([(self.period.__name__.lower(), self.period(event_list, context['date']))])
-        context['weekday_names'] = weekday_names
-        context['here'] = quote(self.request.get_full_path()),
-        return context
-
-month = CalendarView.as_view()
-
-class YearView(CalendarView):
-    period = Year
-    template_name = 'schedule/calendar_year.html'
-year = YearView.as_view()
-
-class WeekView(CalendarView):
-    period = Week
-    template_name = 'schedule/calendar_week.html'
-week = WeekView.as_view()
-
-class DayView(CalendarView):
-    period = Day
-    template_name = 'schedule/calendar_day.html'
-day = DayView.as_view()
 
 """ Show Views """
 class ShowView(TemplateView):
@@ -164,7 +113,7 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
       'poster_form': PosterForm,
     }
     template_name='schedule/create_event.html'
-    success_url = 'month_calendar'
+    success_url = 'calendar'
     images_on_page = 6
 
     @login_required_m
@@ -234,7 +183,7 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
 create_event = EventFormView.as_view()
 
 class EditEventFormView(EventFormView):
-    success_url = 'month_calendar'
+    success_url = 'calendar'
 
     @edit_show_m
     def dispatch(self, *args, **kwargs):

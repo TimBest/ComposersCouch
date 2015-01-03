@@ -4,8 +4,8 @@
 {% block toptitle %}{% endblock %}
 {% block title %}{{ periods.year }}{% endblock %}
 
-{% block previousUrl %}{% prev_url "year_calendar" calendar.slug periods.year %}{% endblock %}
-{% block nextUrl %}{% next_url "year_calendar" calendar.slug periods.year %}{% endblock %}
+{% block previousUrl %}{% prev_url "calendar" 'year' periods.year %}{% endblock %}
+{% block nextUrl %}{% next_url "calendar" 'year' periods.year %}{% endblock %}
 {% block periodName %}{{ periods.year }}{% endblock %}
 
 {% block calendarNav %}
@@ -17,7 +17,7 @@
     <div class="row no-gutter">
       {% for month in periods.year.get_months %}
         <div class="col-md-4 center">
-          <a href="{% url 'month_calendar' calendar.slug %}{% querystring_for_date month.start 2 %}" class="text-black">
+          <a href="{% url 'calendar' month %}{% querystring_for_date month.start 2 %}" class="text-black">
             <h3>{{month.name}}</h3>
           </a>
           {% include "schedule/_month_table.html" with month=month weekday_names=weekday_names size="small" %}

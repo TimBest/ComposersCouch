@@ -72,7 +72,7 @@
         {% inbox_count as unread_count %}
         {% include "utils/_alert_badge.html" with count=unread_count %}
       </a>
-      <a href="{% url 'month_calendar' user.calendar.slug %}" class="rightNavItem calendar">
+      <a href="{% url 'calendar' %}" class="rightNavItem calendar">
         <span class="fa fa-calendar-o"></span>
       </a>
       {% endif %}

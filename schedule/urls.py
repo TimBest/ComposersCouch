@@ -4,10 +4,6 @@ from django.conf.urls import include, patterns, url
 view_location = 'schedule.views'
 urlpatterns = patterns(view_location,
     url(r'^calendar/', include(patterns(view_location,
-        url(r'^year/(?P<calendar_slug>[-\w]+)/$', 'year', name="year_calendar"),
-        url(r'^month/(?P<calendar_slug>[-\w]+)/$', 'month', name="month_calendar"),
-        url(r'^week/(?P<calendar_slug>[-\w]+)/$', 'week', name="week_calendar"),
-        url(r'^day/(?P<calendar_slug>[-\w]+)/$', 'day', name="day_calendar"),
         url(r'^$', 'calendar', name="calendar"),
         url(r'^(?P<period>[-\w]+)/$', 'calendar', name="calendar"),
         url(r'^(?P<period>[-\w]+)/(?P<filter>[-\w]+)/$', 'calendar', name="calendar"),
