@@ -1,22 +1,24 @@
 {% load scheduletags %}
 <div class="calendar {{month}}">
   <div class="cal-row-fluid cal-row-head">
-    {% ifequal size "small" %}
-      {% for day_name in weekday_names %}
-        <div class="cal-cell1">
-          <h5 class="visible-sm">{{ day_name }}</h5>
-          <h5 class="hidden-sm">{{ day_name|slice:"3" }}
-          </h5>
-        </div>
-      {% endfor %}
-    {% else %}
-      {% for day_name in weekday_names %}
-        <div class="cal-cell1">
-          <h5 class="hidden-xs">{{ day_name }}</h5>
-          <h5 class="visible-xs">{{ day_name|slice:"3" }}</h5>
-        </div>
-      {% endfor %}
-    {% endifequal %}
+    <div class="hidden-xs {% if size == 'small' %}hidden-md{% endif %}">
+      <div class="cal-cell1"><h5>Sunday</h5></div>
+      <div class="cal-cell1"><h5>Monday</h5></div>
+      <div class="cal-cell1"><h5>Tuesday</h5></div>
+      <div class="cal-cell1"><h5>Wednesday</h5></div>
+      <div class="cal-cell1"><h5>Thrusday</h5></div>
+      <div class="cal-cell1"><h5>Friday</h5></div>
+      <div class="cal-cell1"><h5>Saturday</h5></div>
+    </div>
+    <div class="visible-xs {% if size == 'small' %}visible-md{% endif %}">
+      <div class="cal-cell1"><h5>Sun</h5></div>
+      <div class="cal-cell1"><h5>Mon</h5></div>
+      <div class="cal-cell1"><h5>Tue</h5></div>
+      <div class="cal-cell1"><h5>Wed</h5></div>
+      <div class="cal-cell1"><h5>Thr</h5></div>
+      <div class="cal-cell1"><h5>Fri</h5></div>
+      <div class="cal-cell1"><h5>Sat</h5></div>
+    </div>
   </div>
   <div class="cal-month-box">
     {% for week in month.get_weeks %}

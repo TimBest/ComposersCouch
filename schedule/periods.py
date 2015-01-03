@@ -4,25 +4,7 @@ import calendar as standardlib_calendar
 from django.conf import settings
 from django.template.defaultfilters import date as date_filter
 from django.utils.translation import ugettext
-from django.utils.dates import WEEKDAYS, WEEKDAYS_ABBR
 from django.utils import timezone
-
-from schedule.conf.settings import FIRST_DAY_OF_WEEK
-
-weekday_names = []
-weekday_abbrs = []
-if FIRST_DAY_OF_WEEK == 1:
-    # The calendar week starts on Monday
-    for i in range(7):
-        weekday_names.append(WEEKDAYS[i])
-        weekday_abbrs.append(WEEKDAYS_ABBR[i])
-else:
-    # The calendar week starts on Sunday, not Monday
-    weekday_names.append(WEEKDAYS[6])
-    weekday_abbrs.append(WEEKDAYS_ABBR[6])
-    for i in range(6):
-        weekday_names.append(WEEKDAYS[i])
-        weekday_abbrs.append(WEEKDAYS_ABBR[i])
 
 
 class Period(object):
@@ -250,15 +232,10 @@ class Week(Period):
             week = week.date()
         # Adjust the start datetime to midnight of the week datetime
         naive_start = datetime.datetime.combine(week, datetime.time.min)
-        # Adjust the start datetime to Monday or Sunday of the current week
-        if FIRST_DAY_OF_WEEK == 1:
-            # The week begins on Monday
-            sub_days = naive_start.isoweekday() - 1
-        else:
-            # The week begins on Sunday
-            sub_days = naive_start.isoweekday()
-            if sub_days == 7:
-                sub_days = 0
+        # Adjust the start datetime to Sunday of the current week
+        sub_days = naive_start.isoweekday()
+        if sub_days == 7:
+            sub_days = 0
         if sub_days > 0:
             naive_start = naive_start - datetime.timedelta(days=sub_days)
         naive_end = naive_start + datetime.timedelta(days=7)

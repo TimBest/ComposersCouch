@@ -22,7 +22,7 @@ from photos.views import ImageFormMixin
 from request.models import PrivateRequest
 from schedule.forms import DateForm, EventForm, ShowInfoForm
 from schedule.models import Calendar, Event, Show
-from schedule.periods import weekday_names, Year, Month, Week, Day
+from schedule.periods import Year, Month, Week, Day
 from schedule.utils import view_show, edit_show, coerce_date_dict
 
 edit_show_m = decorators.method_decorator(edit_show)
@@ -42,22 +42,20 @@ class CalendarView(TemplateView):
 
     @login_required_m
     def dispatch(self, *args, **kwargs):
-        period = kwargs.get('period', None)
-        self.period, self.template_name = PERIODS.get(period, (Month, 'schedule/calendar_month.html'))
-        filter = kwargs.get('filter', None)
-        self.calendar = self.request.user.calendar
+        period_name = kwargs.get('period', None)
+        self.period, self.template_name = PERIODS.get(period_name, (self.period, self.template_name))
         return super(CalendarView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
         context = super(CalendarView, self).get_context_data(*args, **kwargs)
         context['calendar'] = self.request.user.calendar
         context['date'] = coerce_date_dict(self.request.GET)
-        event_list = self.calendar.events.filter(approved=True)
-        #from request.models import models
-        #event_list = PrivateRequest.objects.all()
+        filter = kwargs.get('filter', None)
+        if filter == 'requests':
+            event_list = PrivateRequest.objects.all()
+        else:
+            event_list = self.request.user.calendar.events.filter(approved=True)
         context['periods'] = dict([(self.period.__name__.lower(), self.period(event_list, context['date']))])
-        context['weekday_names'] = weekday_names
-        context['here'] = quote(self.request.get_full_path()),
         return context
 
 calendar = CalendarView.as_view()
