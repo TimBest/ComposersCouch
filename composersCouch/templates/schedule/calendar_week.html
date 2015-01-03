@@ -3,8 +3,8 @@
 
 {% block title %}Week of {{ periods.week.start|date:"F d" }}{% endblock %}
 
-{% block previousUrl %}{% prev_url "calendar" 'week' periods.week %}{% endblock %}
-{% block nextUrl %}{% next_url "calendar" 'week' periods.week %}{% endblock %}
+{% block previousUrl %}{% prev_url periods.week %}{% endblock %}
+{% block nextUrl %}{% next_url periods.week %}{% endblock %}
 {% block periodName %}
   <span class="hidden-xs">{{ periods.week.start|date:"F j" }} -</span>
   <span class="visible-xs">{{ periods.week.start|date:"M j" }} -</span>

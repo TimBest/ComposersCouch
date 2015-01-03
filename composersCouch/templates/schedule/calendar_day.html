@@ -3,8 +3,8 @@
 
 {% block title %}{{ date|date:"F d" }}{% endblock %}
 
-{% block previousUrl %}{% prev_url "calendar" 'day' periods.day %}{% endblock %}
-{% block nextUrl %}{% next_url "calendar" 'day' periods.day %}{% endblock %}
+{% block previousUrl %}{% prev_url periods.day %}{% endblock %}
+{% block nextUrl %}{% next_url periods.day %}{% endblock %}
 {% block periodName %}
   <span class="hidden-xs">{{ date|date:"l, F j" }}</span>
   <span class="visible-xs">{{ date|date:"D, M j" }}</span>

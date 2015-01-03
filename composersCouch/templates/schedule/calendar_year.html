@@ -4,8 +4,8 @@
 {% block toptitle %}{% endblock %}
 {% block title %}{{ periods.year }}{% endblock %}
 
-{% block previousUrl %}{% prev_url "calendar" 'year' periods.year %}{% endblock %}
-{% block nextUrl %}{% next_url "calendar" 'year' periods.year %}{% endblock %}
+{% block previousUrl %}{% prev_url periods.year %}{% endblock %}
+{% block nextUrl %}{% next_url periods.year %}{% endblock %}
 {% block periodName %}{{ periods.year }}{% endblock %}
 
 {% block calendarNav %}
