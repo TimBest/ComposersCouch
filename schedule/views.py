@@ -28,8 +28,48 @@ from schedule.utils import view_show, edit_show, coerce_date_dict
 edit_show_m = decorators.method_decorator(edit_show)
 login_required_m = decorators.method_decorator(login_required)
 
+PERIODS = {
+    'day'   : (Day,  'schedule/calendar_day.html'),
+    'week'  : (Week, 'schedule/calendar_week.html'),
+    'month' : (Month,'schedule/calendar_month.html'),
+    'year'  : (Year, 'schedule/calendar_year.html'),
+}
 
 """ Calendar Views """
+class CalendarView(TemplateView):
+    period = Month
+    template_name = 'schedule/calendar_month.html'
+
+    @login_required_m
+    def dispatch(self, *args, **kwargs):
+        period = kwargs.get('period', None)
+        if period == 'day':
+            period = Day
+            template_name = 'schedule/calendar_day.html'
+        elif period == 'week':
+            period = Week
+            template_name = 'schedule/calendar_week.html'
+        elif period == 'year':
+            period = Year
+            template_name = 'schedule/calendar_year.html'
+        filter = kwargs.get('filter', None)
+        self.calendar = self.request.user.calendar
+        return super(CalendarView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(CalendarView, self).get_context_data(*args, **kwargs)
+        context['calendar'] = self.request.user.calendar
+        context['date'] = coerce_date_dict(self.request.GET)
+        event_list = self.calendar.events.filter(approved=True)
+        #from request.models import models
+        #event_list = PrivateRequest.objects.all()
+        context['periods'] = dict([(self.period.__name__.lower(), self.period(event_list, context['date']))])
+        context['weekday_names'] = weekday_names
+        context['here'] = quote(self.request.get_full_path()),
+        return context
+
+calendar = CalendarView.as_view()
+
 class CalendarView(TemplateView):
     period = Month
     template_name = 'schedule/calendar_month.html'
