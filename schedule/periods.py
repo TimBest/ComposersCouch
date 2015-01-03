@@ -42,8 +42,12 @@ class Period(object):
         return tzinfo if settings.USE_TZ else None
 
     def classify_event(self, event):
-        if event.show.date.start > self.end or event.show.date.end < self.start:
-            return None
+        if hasattr(event, 'show'):
+            if event.show.date.start > self.end or event.show.date.end < self.start:
+                return None
+        else:
+            if event.date.start > self.end or event.date.end < self.start:
+                return None
         return event
 
     def get_event_partials(self):

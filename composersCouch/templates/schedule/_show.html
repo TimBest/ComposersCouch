@@ -52,7 +52,7 @@
         </div>
         <div class="col-sm-2">
           <div class="date-block">
-            <a href="{% url 'calendar' 'day' %}{% querystring_for_date show.date.start 3 %}" class="text-black">
+            <a href="{% url 'calendar' 'day' %}{% querystring_for_date show.date.start %}" class="text-black">
               {% include "utils/dates/_start_end_visual.html" with start=show.date.start end=show.date.end %}
             </a>
           </div>

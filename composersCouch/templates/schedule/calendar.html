@@ -1,9 +1,0 @@
-{% extends "schedule/base.html" %}
-{% load scheduletags %}
-
-{% block tabs %}{% block dropdownTabs %}
-    <a class="{% block dayClass %}{% endblock %} btn btn-default" href="{% url 'calendar' 'day' %}{% querystring_for_date date 3 %}">Day</a>
-    <a class="{% block weekClass %}{% endblock %} btn btn-default" href="{% url 'calendar' 'week' %}{% querystring_for_date date 3 %}">Week</a>
-    <a class="{% block monthClass %}{% endblock %} btn btn-default" href="{% url 'calendar' 'month' %}{% querystring_for_date date 2 %}" >Month</a>
-    <a class="{% block yearClass %}{% endblock %} btn btn-default" href="{% url 'calendar' 'year' %}{% querystring_for_date date 1 %}">Year</a>
-{% endblock %}{% endblock %}

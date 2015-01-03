@@ -5,7 +5,7 @@ from django.core.urlresolvers import reverse
 register = template.Library()
 
 @register.simple_tag
-def querystring_for_date(date, num=6):
+def querystring_for_date(date, num=3):
     query_string = '?'
     qs_parts = ['year=%d', 'month=%d', 'day=%d', 'hour=%d', 'minute=%d', 'second=%d']
     qs_vars = (date.year, date.month, date.day, date.hour, date.minute, date.second)
