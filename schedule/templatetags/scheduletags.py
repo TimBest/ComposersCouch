@@ -1,79 +1,8 @@
-
-from django.conf import settings
 from django import template
 from django.core.urlresolvers import reverse
-from django.utils.dateformat import format
 
-from schedule.models import Calendar
-from schedule.periods import weekday_names, weekday_abbrs
 
 register = template.Library()
-
-class CalendarNode(template.Node):
-    def __init__(self, content_object, distinction, context_var, create=False):
-        self.content_object = template.Variable(content_object)
-        self.distinction = distinction
-        self.context_var = context_var
-
-    def render(self, context):
-        calendar = Calendar.objects.get_calendar_for_object(self.content_object.resolve(context), self.distinction)
-        context[self.context_var] = Calendar.objects.get_calendar_for_object(self.content_object.resolve(context), self.distinction)
-        return ''
-
-
-def do_get_calendar_for_object(parser, token):
-    contents = token.split_contents()
-    if len(contents) == 4:
-        tag_name, content_object, _, context_var = contents
-        distinction = None
-    elif len(contents) == 5:
-        tag_name, content_object, distinction, _, context_var = token.split_contents()
-    else:
-        raise template.TemplateSyntaxError, "%r tag follows form %r <content_object> as <context_var>" % (token.contents.split()[0], token.contents.split()[0])
-    return CalendarNode(content_object, distinction, context_var)
-
-
-class CreateCalendarNode(template.Node):
-    def __init__(self, content_object, distinction, context_var, name):
-        self.content_object = template.Variable(content_object)
-        self.distinction = distinction
-        self.context_var = context_var
-        self.name = name
-
-    def render(self, context):
-        context[self.context_var] = Calendar.objects.get_or_create_calendar_for_object(self.content_object.resolve(context), self.distinction, name=self.name)
-        return ''
-
-
-def do_get_or_create_calendar_for_object(parser, token):
-    contents = token.split_contents()
-    if len(contents) > 2:
-        tag_name = contents[0]
-        obj = contents[1]
-        if 'by' in contents:
-            by_index = contents.index('by')
-            distinction = contents[by_index + 1]
-        else:
-            distinction = None
-        if 'named' in contents:
-            named_index = contents.index('named')
-            name = contents[named_index + 1]
-            if name[0] == name[-1]:
-                name = name[1:-1]
-        else:
-            name = None
-        if 'as' in contents:
-            as_index = contents.index('as')
-            context_var = contents[as_index + 1]
-        else:
-            raise template.TemplateSyntaxError, "%r tag requires an a context variable: %r <content_object> [named <calendar name>] [by <distinction>] as <context_var>" % (token.split_contents()[0], token.split_contents()[0])
-    else:
-        raise template.TemplateSyntaxError, "%r tag follows form %r <content_object> [named <calendar name>] [by <distinction>] as <context_var>" % (token.split_contents()[0], token.split_contents()[0])
-    return CreateCalendarNode(obj, distinction, context_var, name)
-
-register.tag('get_calendar', do_get_calendar_for_object)
-register.tag('get_or_create_calendar', do_get_or_create_calendar_for_object)
-
 
 @register.simple_tag
 def querystring_for_date(date, num=6):
@@ -84,87 +13,13 @@ def querystring_for_date(date, num=6):
     return query_string
 
 @register.simple_tag
-def month_shift(month, shift=None):
-    if shift:
-        if shift == -1:
-            month = month.prev()
-        if shift == 1:
-            month = month.next()
-    return month
-
-@register.simple_tag
 def prev_url(target, slug, period):
     return '%s%s' % (
         reverse(target, kwargs=dict(calendar_slug=slug)),
         querystring_for_date(period.prev().start))
-
 
 @register.simple_tag
 def next_url(target, slug, period):
     return '%s%s' % (
         reverse(target, kwargs=dict(calendar_slug=slug)),
         querystring_for_date(period.next().start))
-
-
-@register.inclusion_tag("schedule/_prevnext.html")
-def prevnext(target, slug, period, fmt=None):
-    if fmt is None:
-        fmt = settings.DATE_FORMAT
-    context = {
-        'slug': slug,
-        'period': period,
-        'period_name': format(period.start, fmt),
-        'target': target,
-    }
-    return context
-
-def _cook_occurrences(period, occs):
-    """ Prepare occurrences to be displayed.
-        Calculate dimensions and position (in px) for each occurrence.
-        The algorithm tries to fit overlapping occurrences so that they require a minimum
-        number of "columns".
-        Arguments:
-        period - time period for the whole series
-        occs - occurrences to be displayed
-        increment - slot size in minutes
-    """
-    last = {}
-    # find out which occurrences overlap
-    for o in occs:
-        o.data = period.classify_event(o)
-        if not o.data:
-            #occs.remove(o)
-            continue
-        o.level = -1
-        o.max = 0
-        if not last:
-            last[0] = o
-            o.level = 0
-        else:
-            for k in sorted(last.keys()):
-                if last[k].date.end <= o.date.start:
-                    o.level = k
-                    last[k] = o
-                    break
-            if o.level == -1:
-                k = k + 1
-                last[k] = o
-                o.level = k
-    # calculate position and dimensions
-    for o in occs:
-        # number of overlapping occurrences
-        o.max = len([n for n in occs if not(n.show.date.end <= o.show.date.start or n.show.date.start >= o.show.date.end)])
-    for o in occs:
-        o.real_start = max(o.show.date.start, period.start)
-        o.real_end = min(o.show.date.end, period.end)
-        # number of "columns" is a minimum number of overlaps for each overlapping group
-        o.max = min([n.max for n in occs if not(n.show.date.end <= o.show.date.start or n.show.date.start >= o.show.date.end)] or [1])
-
-        #o.top = int(height * (float((o.real_start - period.start).seconds) / (period.end - period.start).seconds))
-        #o.height = int(height * (float((o.real_end - o.real_start).seconds) / (period.end - period.start).seconds))
-        #o.height = min(o.height, height - o.top) # trim what extends beyond the area
-    return occs
-
-@register.simple_tag
-def hash_occurrence(occ):
-    return '%s_%s' % (occ.start.strftime('%Y%m%d%H%M%S'), occ.event.id)

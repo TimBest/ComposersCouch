@@ -36,8 +36,8 @@
       <div class="container-fluid">
         <div class="row no-gutter">
           <div class="col-xs-2 left">
-            <a href="{% url 'calendar_create_event' request.user.calendar.slug %}?next={% firstof request.path '/' %}{% block createEventOn %}&year={{date.year}}&month={{date.month}}&day={{date.day}}&hour=19{% endblock %}
-" class="btn btn-primary pull-left" role="button">Create Show</a>
+            <a href="{% url 'calendar_create_event' request.user.calendar.slug %}{% querystring_for_date date 3 %}&hour=19&next={% firstof request.path '/' %}"
+               class="btn btn-primary pull-left" role="button">Create Show</a>
           </div>
           {% block calendarNav %}
           {% endblock %}
