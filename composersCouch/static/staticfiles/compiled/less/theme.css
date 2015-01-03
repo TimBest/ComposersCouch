@@ -8686,6 +8686,9 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   bottom: 5px;
   z-index: 1;
 }
+.calendar-wrapper .year {
+  padding-top: 10px;
+}
 .event {
   text-align: left;
 }

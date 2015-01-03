@@ -13,22 +13,20 @@
 {% endblock %}
 
 {% block body %}
-  <div class="panel panel-default">
-    <div class="panel-body">
-      <div class="row">
-        {% for month in periods.year.get_months %}
-          <div class="col-md-4">
-            <a href="{% url 'month_calendar' calendar.slug %}{% querystring_for_date month.start 2 %}" class="text-black">
-              <h3>{{month.name}}</h3>
-            </a>
-            {% include "schedule/_month_table.html" with month=month weekday_names=weekday_names size=small %}
+  <div class="panel year">
+    <div class="row no-gutter">
+      {% for month in periods.year.get_months %}
+        <div class="col-md-4 center">
+          <a href="{% url 'month_calendar' calendar.slug %}{% querystring_for_date month.start 2 %}" class="text-black">
+            <h3>{{month.name}}</h3>
+          </a>
+          {% include "schedule/_month_table.html" with month=month weekday_names=weekday_names size="small" %}
+        </div>
+        {% if forloop.counter|divisibleby:3 %}
           </div>
-          {% if forloop.counter|divisibleby:3 %}
-            </div>
-            <div class="row">
-          {% endif %}
-        {% endfor %}
-      </div>
+          <div class="row">
+        {% endif %}
+      {% endfor %}
     </div>
   </div>
 
