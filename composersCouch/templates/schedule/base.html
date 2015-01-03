@@ -40,22 +40,30 @@
           <div class="text-right">
            <div class="btn-toolbar" role="toolbar">
               <a href="{% url 'calendar' %}" class="btn btn-default">Today</a>
-              <a href="{% url 'calendar' %}" class="btn btn-default pull-right"><span class="fa fa-filter"></span></a>
+              <div class="btn-group pull-right">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  <span class="fa fa-filter"></span> <span class="text-muted caret"></span>
+                </button>
+                <ul class="dropdown-menu text-left" role="menu">
+                  <li class=""><a href="{% url 'calendar' period_name 'events' %}">Events</a></li>
+                  <li class=""><a href="{% url 'calendar' period_name 'requests' %}">Requests</a></li>
+                </ul>
+              </div>
               <div class="btn-group pull-right hidden-xs">
-                <a class="{% block dayClass %}{% endblock %} btn btn-default" href="{% url 'calendar' 'day' %}{% querystring_for_date date 3 %}">Day</a>
-                <a class="{% block weekClass %}{% endblock %} btn btn-default" href="{% url 'calendar' 'week' %}{% querystring_for_date date 3 %}">Week</a>
-                <a class="{% block monthClass %}{% endblock %} btn btn-default" href="{% url 'calendar' 'month' %}{% querystring_for_date date 2 %}" >Month</a>
-                <a class="{% block yearClass %}{% endblock %} btn btn-default" href="{% url 'calendar' 'year' %}{% querystring_for_date date 1 %}">Year</a>
+                <a class="{% block dayClass %}{% endblock %} btn btn-default" href="{% url 'calendar' 'day' filter %}{% querystring_for_date date 3 %}">Day</a>
+                <a class="{% block weekClass %}{% endblock %} btn btn-default" href="{% url 'calendar' 'week' filter %}{% querystring_for_date date 3 %}">Week</a>
+                <a class="{% block monthClass %}{% endblock %} btn btn-default" href="{% url 'calendar' 'month' filter %}{% querystring_for_date date 2 %}" >Month</a>
+                <a class="{% block yearClass %}{% endblock %} btn btn-default" href="{% url 'calendar' 'year' filter %}{% querystring_for_date date 1 %}">Year</a>
               </div>
               <div class="btn-group pull-right visible-xs">
                 <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
                   {% block dropdownTitle %}{% endblock %} <span class="text-muted caret"></span>
                 </button>
                 <ul class="dropdown-menu text-left" role="menu">
-                  <li class="{% block dayClassDD %}{% endblock %}"><a href="{% url 'calendar' 'day' %}{% querystring_for_date date 3 %}">Day</a></li>
-                  <li class="{% block weekClassDD %}{% endblock %}"><a href="{% url 'calendar' 'week' %}{% querystring_for_date date 3 %}">Week</a></li>
-                  <li class="{% block monthClassDD %}{% endblock %}"><a href="{% url 'calendar' 'month' %}{% querystring_for_date date 2 %}" >Month</a></li>
-                  <li class="{% block yearClassDD %}{% endblock %}"><a href="{% url 'calendar' 'year' %}{% querystring_for_date date 1 %}">Year</a></li>
+                  <li class="{% block dayClassDD %}{% endblock %}"><a href="{% url 'calendar' 'day' filter %}{% querystring_for_date date 3 %}">Day</a></li>
+                  <li class="{% block weekClassDD %}{% endblock %}"><a href="{% url 'calendar' 'week' filter %}{% querystring_for_date date 3 %}">Week</a></li>
+                  <li class="{% block monthClassDD %}{% endblock %}"><a href="{% url 'calendar' 'month' filter %}{% querystring_for_date date 2 %}" >Month</a></li>
+                  <li class="{% block yearClassDD %}{% endblock %}"><a href="{% url 'calendar' 'year' filter %}{% querystring_for_date date 1 %}">Year</a></li>
                 </ul>
               </div>
             </div>

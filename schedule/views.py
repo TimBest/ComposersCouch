@@ -50,12 +50,13 @@ class CalendarView(TemplateView):
         context = super(CalendarView, self).get_context_data(*args, **kwargs)
         context['calendar'] = self.request.user.calendar
         context['date'] = coerce_date_dict(self.request.GET)
-        filter = kwargs.get('filter', None)
+        context['filte'] = filter = kwargs.get('filter', None)
         if filter == 'requests':
             event_list = PrivateRequest.objects.all()
         else:
             event_list = self.request.user.calendar.events.filter(approved=True)
         context['period'] = self.period(event_list, context['date'])
+        context['period_name'] = self.period.__name__.lower()
         return context
 
 calendar = CalendarView.as_view()
