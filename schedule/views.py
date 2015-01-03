@@ -48,10 +48,9 @@ class CalendarView(TemplateView):
         context = super(CalendarView, self).get_context_data(*args, **kwargs)
         context['calendar'] = self.calendar
         context['date'] = coerce_date_dict(self.request.GET)
-        print context['date']
-        #event_list = self.calendar.events.filter(approved=True)
-        from request.models import models
-        event_list = PrivateRequest.objects.all()
+        event_list = self.calendar.events.filter(approved=True)
+        #from request.models import models
+        #event_list = PrivateRequest.objects.all()
         context['periods'] = dict([(self.period.__name__.lower(), self.period(event_list, context['date']))])
         context['weekday_names'] = weekday_names
         context['here'] = quote(self.request.get_full_path()),
