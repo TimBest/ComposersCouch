@@ -1,5 +1,5 @@
-{% extends "schedule/base.html" %}
-{% load scheduletags i18n %}
+{% extends "schedule/calendar.html" %}
+{% load scheduletags %}
 
 {% block toptitle %}{% endblock %}
 {% block title %}{{ periods.year }}{% endblock %}
@@ -8,9 +8,8 @@
 {% block nextUrl %}{% next_url periods.year %}{% endblock %}
 {% block periodName %}{{ periods.year }}{% endblock %}
 
-{% block calendarNav %}
-  {% include "schedule/_calendar_nav.html" with date=periods.year.start year="Year" %}
-{% endblock %}
+{% block dropdownTitle %}Year{% endblock %}
+{% block yearClass %}active{% endblock %}
 
 {% block body %}
   <div class="panel year">

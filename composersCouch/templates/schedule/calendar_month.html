@@ -1,5 +1,5 @@
-{% extends "schedule/base.html" %}
-{% load scheduletags i18n %}
+{% extends "schedule/calendar.html" %}
+{% load scheduletags %}
 
 {% block title %}{{ date|date:"F" }}{% endblock %}
 
@@ -10,9 +10,8 @@
   <span class="visible-xs">{{ date|date:"M" }}</span>
 {% endblock %}
 
-{% block calendarNav %}
-  {% include "schedule/_calendar_nav.html" with date=periods.month.start month="Month" %}
-{% endblock %}
+{% block dropdownTitle %}Month{% endblock %}
+{% block monthClass %}active{% endblock %}
 
 {% block body %}
   {% include "schedule/_month_table.html" with month=periods.month %}

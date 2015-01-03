@@ -1,4 +1,4 @@
-{% extends "schedule/base.html" %}
+{% extends "schedule/calendar.html" %}
 {% load scheduletags i18n %}
 
 {% block title %}{{ date|date:"F d" }}{% endblock %}
@@ -10,9 +10,8 @@
   <span class="visible-xs">{{ date|date:"D, M j" }}</span>
 {% endblock %}
 
-{% block calendarNav %}
-  {% include "schedule/_calendar_nav.html" with date=periods.day.start day="Day" %}
-{% endblock %}
+{% block dropdownTitle %}Day{% endblock %}
+{% block dayClass %}active{% endblock %}
 
 {% block body %}
   {% for event in periods.day.get_event_partials %}

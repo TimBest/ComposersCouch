@@ -1,5 +1,5 @@
-{% extends "schedule/base.html" %}
-{% load scheduletags i18n %}
+{% extends "schedule/calendar.html" %}
+{% load scheduletags %}
 
 {% block title %}Week of {{ periods.week.start|date:"F d" }}{% endblock %}
 
@@ -16,9 +16,8 @@
   {% endifequal %}
 {% endblock %}
 
-{% block calendarNav %}
-  {% include "schedule/_calendar_nav.html" with date=periods.week.start week="Week" %}
-{% endblock %}
+{% block dropdownTitle %}Week{% endblock %}
+{% block weekClass %}active{% endblock %}
 
 {% block body %}
   <div id="week">

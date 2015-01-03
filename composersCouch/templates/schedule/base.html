@@ -35,12 +35,21 @@
     <div class="navigation">
       <div class="container-fluid">
         <div class="row no-gutter">
-          <div class="col-xs-2 left">
-            <a href="{% url 'calendar_create_event' request.user.calendar.slug %}{% querystring_for_date date 3 %}&hour=19&next={% firstof request.path '/' %}"
-               class="btn btn-primary pull-left" role="button">Create Show</a>
+          <a href="{% url 'calendar_create_event' request.user.calendar.slug %}{% querystring_for_date date 3 %}&hour=19&next={% firstof request.path '/' %}"
+             class="btn btn-primary pull-left" role="button">Create Show</a>
+          <div class="text-right">
+           <div class="btn-toolbar" role="toolbar">
+              <a href="{% url 'calendar' %}" class="btn btn-default">Today</a>
+              <a href="{% url 'calendar' %}" class="btn btn-default pull-right"><span class="fa fa-filter"></span></a>
+              <div class="btn-group pull-right hidden-xs">{% block tabs %}{% endblock %}</div>
+              <div class="btn-group pull-right visible-xs">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                  {% block dropdownTitle %}{% endblock %} <span class="text-muted caret"></span>
+                </button>
+                <ul class="dropdown-menu text-left" role="menu">{% block dropdownTabs %}{% endblock %}</ul>
+              </div>
+            </div>
           </div>
-          {% block calendarNav %}
-          {% endblock %}
         </div>
       </div>
     </div>
