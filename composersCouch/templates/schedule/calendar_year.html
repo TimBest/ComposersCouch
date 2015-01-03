@@ -1,4 +1,4 @@
-{% extends "schedule/calendar.html" %}
+{% extends "schedule/base.html" %}
 {% load scheduletags %}
 
 {% block toptitle %}{% endblock %}
@@ -9,7 +9,7 @@
 {% block periodName %}{{ periods.year }}{% endblock %}
 
 {% block dropdownTitle %}Year{% endblock %}
-{% block yearClass %}active{% endblock %}
+{% block yearClass %}{% block yearClassDD %}active{% endblock %}{% endblock %}
 
 {% block body %}
   <div class="panel year">

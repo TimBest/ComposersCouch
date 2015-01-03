@@ -1,4 +1,4 @@
-{% extends "schedule/calendar.html" %}
+{% extends "schedule/base.html" %}
 {% load scheduletags %}
 
 {% block title %}Week of {{ periods.week.start|date:"F d" }}{% endblock %}
@@ -6,18 +6,16 @@
 {% block previousUrl %}{% prev_url periods.week %}{% endblock %}
 {% block nextUrl %}{% next_url periods.week %}{% endblock %}
 {% block periodName %}
-  <span class="hidden-xs">{{ periods.week.start|date:"F j" }} -</span>
-  <span class="visible-xs">{{ periods.week.start|date:"M j" }} -</span>
-  {% ifequal periods.week.end.month periods.week.start.month %}
-    {{ periods.week.end|date:"d" }}
-  {% else %}
-    <span class="hidden-xs">{{ periods.week.end|date:"F j" }}</span>
-    <span class="visible-xs">{{ periods.week.end|date:"M j" }}</span>
-  {% endifequal %}
+  <span class="hidden-xs">
+    {{ periods.week.start|date:"F j" }} - {% ifequal periods.week.end.month periods.week.start.month %}{{ periods.week.end|date:"d" }}{% else %}{{ periods.week.end|date:"F j" }}{% endifequal %}
+  </span>
+  <span class="visible-xs">
+    {{ periods.week.start|date:"M j" }} - {% ifequal periods.week.end.month periods.week.start.month %}{{ periods.week.end|date:"d" }}{% else %}{{ periods.week.end|date:"M j" }}{% endifequal %}
+  </span>
 {% endblock %}
 
 {% block dropdownTitle %}Week{% endblock %}
-{% block weekClass %}active{% endblock %}
+{% block weekClass %}{% block weekClassDD %}active{% endblock %}{% endblock %}
 
 {% block body %}
   <div id="week">

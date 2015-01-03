@@ -1,4 +1,4 @@
-{% extends "schedule/calendar.html" %}
+{% extends "schedule/base.html" %}
 {% load scheduletags i18n %}
 
 {% block title %}{{ date|date:"F d" }}{% endblock %}
@@ -11,7 +11,7 @@
 {% endblock %}
 
 {% block dropdownTitle %}Day{% endblock %}
-{% block dayClass %}active{% endblock %}
+{% block dayClass %}{% block dayClassDD %}active{% endblock %}{% endblock %}
 
 {% block body %}
   {% for event in periods.day.get_event_partials %}
