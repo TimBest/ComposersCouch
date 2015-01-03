@@ -55,7 +55,7 @@ class CalendarView(TemplateView):
             event_list = PrivateRequest.objects.all()
         else:
             event_list = self.request.user.calendar.events.filter(approved=True)
-        context['periods'] = dict([(self.period.__name__.lower(), self.period(event_list, context['date']))])
+        context['period'] = self.period(event_list, context['date'])
         return context
 
 calendar = CalendarView.as_view()

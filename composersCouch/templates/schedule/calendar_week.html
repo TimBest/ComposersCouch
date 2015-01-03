@@ -1,16 +1,13 @@
 {% extends "schedule/base.html" %}
 {% load scheduletags %}
 
-{% block title %}Week of {{ periods.week.start|date:"F d" }}{% endblock %}
 
-{% block previousUrl %}{% prev_url periods.week %}{% endblock %}
-{% block nextUrl %}{% next_url periods.week %}{% endblock %}
 {% block periodName %}
   <span class="hidden-xs">
-    {{ periods.week.start|date:"F j" }} - {% ifequal periods.week.end.month periods.week.start.month %}{{ periods.week.end|date:"d" }}{% else %}{{ periods.week.end|date:"F j" }}{% endifequal %}
+    {{ period.start|date:"F j" }} - {% ifequal period.end.month period.start.month %}{{ period.end|date:"d" }}{% else %}{{ period.end|date:"F j" }}{% endifequal %}
   </span>
   <span class="visible-xs">
-    {{ periods.week.start|date:"M j" }} - {% ifequal periods.week.end.month periods.week.start.month %}{{ periods.week.end|date:"d" }}{% else %}{{ periods.week.end|date:"M j" }}{% endifequal %}
+    {{ period.start|date:"M j" }} - {% ifequal period.end.month period.start.month %}{{ period.end|date:"d" }}{% else %}{{ period.end|date:"M j" }}{% endifequal %}
   </span>
 {% endblock %}
 
@@ -19,7 +16,7 @@
 
 {% block body %}
   <div id="week">
-    {% for day in periods.week.get_days %}
+    {% for day in period.get_days %}
       <div class="weekday weekday{{forloop.counter}}">
         <div class="weekdaytable">
           {% for event in day.get_event_partials %}

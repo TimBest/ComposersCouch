@@ -1,10 +1,7 @@
 {% extends "schedule/base.html" %}
 {% load scheduletags %}
 
-{% block title %}{{ date|date:"F" }}{% endblock %}
 
-{% block previousUrl %}{% prev_url periods.month %}{% endblock %}
-{% block nextUrl %}{% next_url periods.month %}{% endblock %}
 {% block periodName %}
   <span class="hidden-xs">{{ date|date:"F" }}</span>
   <span class="visible-xs">{{ date|date:"M" }}</span>
@@ -14,5 +11,5 @@
 {% block monthClass %}{% block monthClassDD %}active{% endblock %}{% endblock %}
 
 {% block body %}
-  {% include "schedule/_month_table.html" with month=periods.month %}
+  {% include "schedule/_month_table.html" with month=period %}
 {% endblock %}

@@ -1,10 +1,7 @@
 {% extends "schedule/base.html" %}
 {% load scheduletags i18n %}
 
-{% block title %}{{ date|date:"F d" }}{% endblock %}
 
-{% block previousUrl %}{% prev_url periods.day %}{% endblock %}
-{% block nextUrl %}{% next_url periods.day %}{% endblock %}
 {% block periodName %}
   <span class="hidden-xs">{{ date|date:"l, F j" }}</span>
   <span class="visible-xs">{{ date|date:"D, M j" }}</span>
@@ -14,7 +11,8 @@
 {% block dayClass %}{% block dayClassDD %}active{% endblock %}{% endblock %}
 
 {% block body %}
-  {% for event in periods.day.get_event_partials %}
+  {{ periods }}
+  {% for event in period.get_event_partials %}
     {% include "schedule/_show.html" with show=event.show user_accept=event.approved %}
   {% endfor %}
 {% endblock %}

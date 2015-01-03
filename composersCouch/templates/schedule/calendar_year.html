@@ -1,12 +1,10 @@
 {% extends "schedule/base.html" %}
 {% load scheduletags %}
 
-{% block toptitle %}{% endblock %}
-{% block title %}{{ periods.year }}{% endblock %}
 
-{% block previousUrl %}{% prev_url periods.year %}{% endblock %}
-{% block nextUrl %}{% next_url periods.year %}{% endblock %}
-{% block periodName %}{{ periods.year }}{% endblock %}
+{% block toptitle %}{% endblock %}
+
+{% block periodName %}{{ period }}{% endblock %}
 
 {% block dropdownTitle %}Year{% endblock %}
 {% block yearClass %}{% block yearClassDD %}active{% endblock %}{% endblock %}
@@ -14,7 +12,7 @@
 {% block body %}
   <div class="panel year">
     <div class="row no-gutter">
-      {% for month in periods.year.get_months %}
+      {% for month in period.get_months %}
         <div class="col-md-4 center">
           <a href="{% url 'calendar' month %}{% querystring_for_date month.start 2 %}" class="text-black">
             <h3>{{month.name}}</h3>
@@ -25,5 +23,4 @@
       {% endfor %}
     </div>
   </div>
-
 {% endblock %}
