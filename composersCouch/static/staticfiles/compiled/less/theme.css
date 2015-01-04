@@ -7886,13 +7886,11 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .header.thread .nav li a:hover,
 .header.thread .nav li a:focus {
   background-color: transparent;
-  border-radius: 0px;
-  border-bottom: 3px solid #5490d3;
   color: #fbfcfc;
 }
 .header.thread .nav li.active a,
-.header.thread .nav li.active a:hover,
-.header.thread .nav li.active a:focus {
+.header.thread .nav li.active a:focus,
+.header.thread .nav li.active a:hover {
   background-color: transparent;
   border-radius: 0px;
   border-bottom: 3px solid #5490d3;

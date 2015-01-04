@@ -6,24 +6,24 @@
     margin-bottom:10px;
     .nav {
       .navHover(){
-        background-color: transparent;
-        border-radius:0px;
-        border-bottom: 3px solid @light-blue;
-        color: @white;
+
       }
       li {
         a {
           color: @silver;
+          &:hover, &:focus {
+            background-color: transparent;
+            color: @white;
+          }
         }
-        a:hover,
-        a:focus {
-          .navHover();
+        &.active {
+          a, a:focus, a:hover  {
+            background-color: transparent;
+            border-radius:0px;
+            border-bottom: 3px solid @light-blue;
+            color: @white;
+          }
         }
-      }
-      li.active a,
-      li.active a:hover,
-      li.active a:focus {
-        .navHover();
       }
     }
   }
