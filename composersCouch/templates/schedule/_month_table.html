@@ -44,9 +44,9 @@
                       <span class="hidden-xs">
                         <b>{{ event.show.date.start|date:'fA' }}:</b>
                         {% if event.show.info.title %}
-                        {{ event.show.info.title }}
+                          {{ event.show.info.title }}
                         {% else %}
-                        {{ event.show.info.headliner.name }}
+                          {{ event.show.info.headliner.name }}
                         {% endif %}
                       </span>
                     </a>
@@ -55,15 +55,15 @@
                     <li class="events"><a class="show-title" href="{% url 'show' request.user.calendar.slug event.show.id %}">
                       <b>{{ event.show.date.start|date:'fA' }}:</b>
                       {% if event.show.info.title %}
-                      {{ event.show.info.title }}
+                        {{ event.show.info.title }}
                       {% else %}
-                      {{ event.show.info.headliner.name }}
+                        {{ event.show.info.headliner.name }}
                       {% endif %}
                     </a></li>
                   </div>
                 {% else %}
                   <div class="center-block cal-event">
-                    <a href="">
+                    <a href="{% url 'request_detail' event.messages.id %}">
                       <span class="visible-xs">{{ event.show.date.start|date:'g:i' }}</span>
                       <span class="hidden-xs">
                         <b>{{ event.date.start|date:'fA' }}:</b>
@@ -74,6 +74,16 @@
                         {% endif %}
                       </span>
                     </a>
+                  </div>
+                  <div class="hidden">
+                    <li class="events"><a class="show-title" href="{% url 'request_detail' event.messages.id %}">
+                      <b>{{ event.date.start|date:'fA' }}:</b>
+                      {% if user.profile.profile_type == 'v' %}
+                        {{ event.headliner.profile }}
+                      {% else %}
+                        {{ event.host.profile }}
+                      {% endif %}
+                    </a></li>
                   </div>
                 {% endifequal %}
               {% endfor %}
