@@ -14,7 +14,7 @@ from .models import Application, PrivateRequest, PublicRequest
 from annoying.functions import get_object_or_None
 from composersCouch.views import MultipleFormsView, MultipleModelFormsView
 from customProfile.decorators import is_venue, is_musician
-from threaded_messages.models import Message
+from threaded_messages.models import Message, Participant
 from threaded_messages.views import MessageView
 from threaded_messages.utils import reply_to_thread, create_thread
 
@@ -24,7 +24,7 @@ class PrivateRequestView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PrivateRequestView, self).get_context_data(**kwargs)
-        context['requests'] = PrivateRequest.objects.filter(requester=self.request.user)
+        context['participants'] = Participant.objects.filter(user=self.request.user)
         return context
 
 private_requests = login_required(PrivateRequestView.as_view())

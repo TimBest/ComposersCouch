@@ -17,8 +17,8 @@
 {% block content %}
   <div class="messages">
     <form action="{% url 'messages_batch_update' %}" method="post">{% csrf_token %}
-      <a href="{% url 'request_write' %}" class="btn btn-primary">{% trans "Send Request" %}</a>
-      <div class="btn-group request-folder-actions pull-right">
+      <a href="{% url 'messages_compose' %}" class="btn btn-primary">Send message</a>
+            <div class="btn-group request-folder-actions pull-right">
         {% block markAsRead %}
         <button type="submit" name="action" value="read" class="btn btn-default">{% trans "mark as read" %}</button>
         <button type="submit" name="action" value="unread" class="btn btn-default">{% trans "mark as unread" %}</button>

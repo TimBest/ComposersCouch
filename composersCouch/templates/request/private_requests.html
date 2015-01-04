@@ -4,7 +4,10 @@
 {% block privateClass %}active{% endblock %}
 
 {% block content %}
-  {% for r in requests %}
-    {{ r }}
+  <a href="{% url 'request_write' %}" class="btn btn-primary">{% trans "Send Request" %}</a>
+  {% for p in participants %}
+    {{ p.thread.private_request }}
+  {% empty %}
+    <p>No Public Requests</p>
   {% endfor %}
 {% endblock %}
