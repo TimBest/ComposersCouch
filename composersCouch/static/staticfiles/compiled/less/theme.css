@@ -7876,8 +7876,27 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .header.thread {
   color: #fbfcfc;
-  background-color: #2161a8;
+  background-color: #474747;
+  padding-top: 10px;
   margin-bottom: 10px;
+}
+.header.thread .nav li a {
+  color: #cbcfd3;
+}
+.header.thread .nav li a:hover,
+.header.thread .nav li a:focus {
+  background-color: transparent;
+  border-radius: 0px;
+  border-bottom: 3px solid #5490d3;
+  color: #fbfcfc;
+}
+.header.thread .nav li.active a,
+.header.thread .nav li.active a:hover,
+.header.thread .nav li.active a:focus {
+  background-color: transparent;
+  border-radius: 0px;
+  border-bottom: 3px solid #5490d3;
+  color: #fbfcfc;
 }
 @media (min-width: 768px) {
   .content .message-thread {

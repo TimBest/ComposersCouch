@@ -1,8 +1,31 @@
-.header{
+.header {
   &.thread {
     color: @white;
-    background-color: @blue;
+    background-color: @black-light;
+    padding-top:10px;
     margin-bottom:10px;
+    .nav {
+      .navHover(){
+        background-color: transparent;
+        border-radius:0px;
+        border-bottom: 3px solid @light-blue;
+        color: @white;
+      }
+      li {
+        a {
+          color: @silver;
+        }
+        a:hover,
+        a:focus {
+          .navHover();
+        }
+      }
+      li.active a,
+      li.active a:hover,
+      li.active a:focus {
+        .navHover();
+      }
+    }
   }
 }
 .content {

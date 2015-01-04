@@ -6,9 +6,12 @@
 {% block headerClass %}thread{% endblock %}
 
 {% block header%}
-  <div class="messages">
-    <h2>{% block page_title %}{% trans "Requests" %}{% endblock %}</h2>
-  </div>
+  <h2>Message Manager</h2>
+  <ul class="nav nav-pills">
+    <li class="active"><a href="#">Messages</a></li>
+    <li><a href="#">Private Requests</a></li>
+    <li><a href="#">Public Request</a></li>
+  </ul>
 {% endblock %}
 
 {% block content %}
