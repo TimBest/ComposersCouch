@@ -1,5 +1,6 @@
 {% extends "messages/base.html" %}
 
-{% block inboxClass %}active{% endblock %}
+
+{% block messageClass %}{% block inboxClass %}active{% endblock %}{% endblock %}
 {% block participant %}{% endblock %}
 {% block restore %}{% endblock %}

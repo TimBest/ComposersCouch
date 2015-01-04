@@ -1,6 +1,7 @@
 {% extends "messages/base.html" %}
 
-{% block sentClass %}active{% endblock %}
+
+{% block messageClass %}{% block sentClass %}active{% endblock %}{% endblock %}
 {% block markAsRead %}{% endblock %}
 {% block sender %}{% endblock %}
 {% block restore %}{% endblock %}

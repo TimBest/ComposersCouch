@@ -8,9 +8,9 @@
 {% block header%}
   <h2>Message Manager</h2>
   <ul class="nav nav-pills">
-    <li class="active"><a href="#">Messages</a></li>
-    <li><a href="#">Private Requests</a></li>
-    <li><a href="#">Public Request</a></li>
+    <li class="{% block messageClass %}{% endblock %}"><a href="{% url 'messages_inbox' %}">Messages</a></li>
+    <li class="{% block privateClass %}{% endblock %}"><a href="{% url 'private_requests' %}">Private Requests</a></li>
+    <li class="{% block publicClass %}{% endblock %}"><a href="{% url 'public_requests' %}">Public Request</a></li>
   </ul>
 {% endblock %}
 

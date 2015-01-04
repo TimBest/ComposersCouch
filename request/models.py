@@ -12,6 +12,8 @@ from schedule.models.events import DateRange
 class Request(models.Model):
     accept_by = models.DateField(_("accept_by"))
     date = models.ForeignKey(DateRange, verbose_name=_("dateRange"))
+    requester = models.ForeignKey(User, verbose_name=_("requester"))
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -29,7 +31,7 @@ class PrivateRequest(Request):
                                      verbose_name=_("openers"),
                                      related_name='request_for_opening',
                                      null=True, blank=True)
-    host = models.ForeignKey(User, verbose_name=_("host"))
+    host = models.ForeignKey(User, verbose_name=_("host"), related_name='request_for_hosting',)
 
     def participants(self):
         participants = []
@@ -56,7 +58,6 @@ class Accept(models.Model):
 class PublicRequest(Request):
     zip_code = models.ForeignKey(Zipcode, verbose_name=_("Zipcode"))
     details = models.TextField(_("description"))
-    requester = models.ForeignKey(User, verbose_name=_("requester"))
     fulfilled = models.BooleanField(_('fulfilled'), default=False)
     objects = models.GeoManager()
 

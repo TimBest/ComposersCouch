@@ -2,6 +2,8 @@ from django.conf.urls import include, patterns, url
 
 
 urlpatterns = patterns('request.views',
+    url(r'^$', 'private_requests', name='private_requests'),
+    url(r'^public/$', 'public_requests', name='public_requests'),
     url(r'^view/(?P<thread_id>[\d]+)/$', 'view', name='request_detail'),
     url(r'^application/view/(?P<thread_id>[\d]+)/$', 'application_view', name='application_view'),
     # Forms

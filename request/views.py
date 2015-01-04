@@ -6,6 +6,7 @@ from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
 from django.views.decorators.http import require_POST
 from django.views.generic import FormView
+from django.views.generic.base import TemplateView
 
 from . import forms
 from .decorators import is_participant
@@ -17,6 +18,26 @@ from threaded_messages.models import Message
 from threaded_messages.views import MessageView
 from threaded_messages.utils import reply_to_thread, create_thread
 
+
+class PrivateRequestView(TemplateView):
+    template_name='request/private_requests.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PrivateRequestView, self).get_context_data(**kwargs)
+        context['requests'] = PrivateRequest.objects.filter(requester=self.request.user)
+        return context
+
+private_requests = login_required(PrivateRequestView.as_view())
+
+class PublicRequestView(TemplateView):
+    template_name='request/public_requests.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PublicRequestView, self).get_context_data(**kwargs)
+        context['requests'] = PublicRequest.objects.filter(requester=self.request.user)
+        return context
+
+public_requests = login_required(PublicRequestView.as_view())
 
 class RequestView(MessageView):
     success_url='request_detail'

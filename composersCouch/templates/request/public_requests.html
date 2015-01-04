@@ -1,0 +1,10 @@
+{% extends "messages/base.html" %}
+
+
+{% block publicClass %}active{% endblock %}
+
+{% block content %}
+  {% for r in requests %}
+    {{ r }}
+  {% endfor %}
+{% endblock %}
