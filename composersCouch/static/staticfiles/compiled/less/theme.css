@@ -7905,6 +7905,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .navigation.thread {
   background-color: #cbcfd3;
+  height: 45px;
 }
 .navigation.thread .btn {
   margin-top: 5px;
