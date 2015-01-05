@@ -10,7 +10,7 @@
     </div>
     <div>
       {% for p in participants %}
-        {{ p.thread.private_request }}
+        {% include "request/_private_request.html" with request=p.thread.request %}
       {% empty %}
         <p>No Public Requests</p>
       {% endfor %}
