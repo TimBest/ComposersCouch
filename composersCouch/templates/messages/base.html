@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n inbox %}
 
-{% block title %}{% trans "Requests" %}{% endblock %}
+{% block title %}Requests{% endblock %}
 
 {% block headerClass %}thread{% endblock %}
 
@@ -14,39 +14,53 @@
   </ul>
 {% endblock %}
 
+{% block navigation %}
+  <div class="navigation">
+    <div class="container-fluid">
+    <form action="{% url 'messages_batch_update' %}" method="post">{% csrf_token %}
+      <div class="row no-gutter">
+        <div class="col-sm-4 left">
+          <a href="{% url 'messages_compose' %}" class="btn btn-primary">Send message</a>
+        </div>
+        <div class="col-sm-4 center text-center">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="{% block inboxClass %}{% endblock %}">
+              <a href="{% url 'messages_inbox' %}"><span class="fa fa-inbox"></span> {% trans "Inbox" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a>
+            </li>
+            <li class="{% block sentClass %}{% endblock %}">
+              <a href="{% url 'messages_sent' %}"><span class="fa fa-send"></span> {% trans "Sent" %}</a>
+            </li>
+            <li class="{% block trashClass %}{% endblock %}">
+              <a href="{% url 'messages_trash' %}"><span class="fa fa-trash-o"></span> {% trans "Trash" %}</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-sm-4 right">
+          <div class="btn-group request-folder-actions pull-right">
+            {% block markAsRead %}
+            <button type="submit" name="action" value="read" class="btn btn-default">read</button>
+            <button type="submit" name="action" value="unread" class="btn btn-default">unread</button>
+            {% endblock %}
+            {% block delete %}
+            <button type="submit" name="action" value="delete" class="btn btn-default">
+              <span class="fa fa-trash-o"></span> delete
+            </button>
+            {% endblock %}
+            {% block restore %}
+            <button type="submit" name="action" value="restore" class="btn btn-default">
+              <span class="fa fa-reply"></span> restore
+            </button>
+            {% endblock %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
   <div class="messages">
-    <form action="{% url 'messages_batch_update' %}" method="post">{% csrf_token %}
-      <a href="{% url 'messages_compose' %}" class="btn btn-primary">Send message</a>
-            <div class="btn-group request-folder-actions pull-right">
-        {% block markAsRead %}
-        <button type="submit" name="action" value="read" class="btn btn-default">{% trans "mark as read" %}</button>
-        <button type="submit" name="action" value="unread" class="btn btn-default">{% trans "mark as unread" %}</button>
-        {% endblock %}
-        {% block delete %}
-        <button type="submit" name="action" value="delete" class="btn btn-default">
-          <span class="fa fa-trash-o"></span> {% trans "delete" %}
-        </button>
-        {% endblock %}
-        {% block restore %}
-        <button type="submit" name="action" value="restore" class="btn btn-default">
-          <span class="fa fa-reply"></span> {% trans "restore" %}
-        </button>
-        {% endblock %}
-      </div>
-      <p></p>
       <div class ="panel">
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="{% block inboxClass %}{% endblock %}">
-            <a href="{% url 'messages_inbox' %}"><span class="fa fa-inbox"></span> {% trans "Inbox" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a>
-          </li>
-          <li class="{% block sentClass %}{% endblock %}">
-            <a href="{% url 'messages_sent' %}"><span class="fa fa-send"></span> {% trans "Sent" %}</a>
-          </li>
-          <li class="{% block trashClass %}{% endblock %}">
-            <a href="{% url 'messages_trash' %}"><span class="fa fa-trash-o"></span> {% trans "Trash" %}</a>
-          </li>
-        </ul>
         <table class="table table-hover">
           <tbody>
             {% for message in message_list %}
@@ -76,7 +90,7 @@
               </tr>
             {% empty %}
               <tr class="message unread">
-                <td class="no-message">{% trans "No messages" %}</td>
+                <td class="no-message">No messages</td>
               </tr>
             {% endfor %}
           </tbody>

@@ -3,33 +3,39 @@
 
 {% block publicClass %}active{% endblock %}
 
+{% block navigation %}
+<div class="navigation">
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      {% if user.profile.profile_type == 'm' %}
+        <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
+      {% elif user.profile.profile_type == 'v' %}
+        <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %}
+
 {% block content %}
   <div>
-    {% if user.profile.profile_type == 'm' %}
-      <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
-    {% elif user.profile.profile_type == 'v' %}
-      <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
-    {% endif %}
-    <p></p>
-    <div>
-      {% for r in requests %}
-        <div class="publicRequest">
-          {% include "request/_public_request.html" with publicRequest=r %}
-          <div class="container-fluid">
-            {% for application in publicRequest.applications %}
-              <div class="panel-footer">
-                {% include "request/_application.html" with application=application %}
-              </div>
-            {% empty %}
-              <div class="panel-footer">
-                <p>No applicants at this time</p>
-              </div>
-            {% endfor %}
-          </div>
+    {% for r in requests %}
+      <div class="publicRequest">
+        {% include "request/_public_request.html" with publicRequest=r %}
+        <div class="container-fluid">
+          {% for application in publicRequest.applications %}
+            <div class="panel-footer">
+              {% include "request/_application.html" with application=application %}
+            </div>
+          {% empty %}
+            <div class="panel-footer">
+              <p>No applicants at this time</p>
+            </div>
+          {% endfor %}
         </div>
-      {% empty %}
-        <p>No Private Requests</p>
-      {% endfor %}
-    </div>
+      </div>
+    {% empty %}
+      <p>No Private Requests</p>
+    {% endfor %}
   </div>
 {% endblock %}

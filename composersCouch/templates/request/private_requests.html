@@ -3,10 +3,30 @@
 
 {% block privateClass %}active{% endblock %}
 
+{% block navigation %}
+  <div class="navigation">
+    <div class="container-fluid">
+      <div class="row no-gutter">
+        <div class="col-sm-4 left">
+          <a href="{% url 'request_write' %}" class="btn btn-primary">Send Request</a>
+        </div>
+        <div class="col-sm-4 center">
+          <ul class="nav nav-tabs nav-centered" role="tablist">
+            <li class="{% if inbox %}active{% endif %}">
+              <a href="{% url 'private_requests' %}"><span class="fa fa-inbox"></span> Inbox{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a>
+            </li>
+            <li class="{% if sent %}active{% endif %}">
+              <a href="{% url 'sent_private_requests' %}"><span class="fa fa-send"></span> Sent</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}
+
 {% block content %}
   <div>
-    <a href="{% url 'request_write' %}" class="btn btn-primary">Send Request</a>
-    <p></p>
     <div>
       {% for p in participants %}
         {% include "request/_private_request.html" with request=p.thread.request %}

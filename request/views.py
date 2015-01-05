@@ -24,6 +24,7 @@ class PrivateRequestView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PrivateRequestView, self).get_context_data(**kwargs)
+        context['inbox'] = True
         context['participants'] = Participant.objects.filter(
             user=self.request.user,
             deleted_at__isnull=True,
@@ -40,6 +41,7 @@ class SentPrivateRequestsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(SentPrivateRequestsView, self).get_context_data(**kwargs)
+        context['sent'] = True
         context['participants'] = Participant.objects.filter(
             user=self.request.user,
             replied_at__isnull=False,
