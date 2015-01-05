@@ -15,7 +15,9 @@
   {{ script.super }}
   <script type="text/javascript" >
     $(document).ready(function() {
-      zipcode_fix();
+      $("form").on('submit', function() {
+        zipcode_fix();
+      });
     });
   </script>
 {% endblock %}

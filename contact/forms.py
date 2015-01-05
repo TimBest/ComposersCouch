@@ -29,30 +29,11 @@ class ZipcodeForm(ModelForm):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout('zip_code',)
-        self.fields['zip_code'].required = False
+        self.fields['zip_code'].required = True
 
     class Meta:
         model = Location
         fields = ['zip_code']
-
-    """def clean(self):
-        print "cleaning"
-        print self.cleaned_data
-        cleaned_data = super(ContactForm, self).clean()
-        print "dfgdfg"
-        print "cleaned_data"
-
-    def clean_zip_code(self):
-        print self.cleaned_data.get("zip_code", "not found")
-        print self.cleaned_data.ge
-        print "cleanig"
-        print code
-        if hasattr(code, 'pk'):
-            return code
-        else:
-            zipcode = get_object_or_None(Zipcode, code=code)
-            if zipcode:
-                return zipcode"""
 
 class LocationForm(ModelForm):
 

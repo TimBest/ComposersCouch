@@ -45,5 +45,7 @@ $(document).ready(function() {
     profileType();
   });
   $("input[type=radio]").change(profileType()).change();
-  zipcode_fix();
+  $("form").on('submit', function() {
+    zipcode_fix();
+  });
 });
