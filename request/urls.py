@@ -3,7 +3,8 @@ from django.conf.urls import include, patterns, url
 view_location = 'request.views'
 urlpatterns = patterns(view_location,
     url(r'^requests/', include(patterns(view_location,
-        url(r'^$', 'private_requests', name='private_requests'),
+        url(r'^$', 'inbox_private_requests', name='private_requests'),
+        url(r'^sent/$', 'sent_private_requests', name='sent_private_requests'),
         url(r'^public/$', 'public_requests', name='public_requests'),
         url(r'^view/(?P<thread_id>[\d]+)/$', 'view', name='request_detail'),
         url(r'^application/view/(?P<thread_id>[\d]+)/$', 'application_view', name='application_view'),
@@ -23,5 +24,5 @@ urlpatterns = patterns(view_location,
         url(r'^deny/$', 'deny', name='deny_public_request'),
         url(r'^apply-to-band/(?P<request_id>[-\w]+)/$', 'appy_to_band', name='request_appy_to_band'),
         url(r'^apply-to-venue/(?P<request_id>[-\w]+)/$', 'appy_to_venue', name='request_appy_to_venue'),
-    ))), 
+    ))),
 )

@@ -5,9 +5,8 @@
 
 {% block content %}
   <div>
-    <div>
-      <a href="{% url 'request_write' %}" class="btn btn-primary">Send Request</a>
-    </div>
+    <a href="{% url 'request_write' %}" class="btn btn-primary">Send Request</a>
+    <p></p>
     <div>
       {% for p in participants %}
         {% include "request/_private_request.html" with request=p.thread.request %}

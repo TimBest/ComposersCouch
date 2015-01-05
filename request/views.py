@@ -24,10 +24,31 @@ class PrivateRequestView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PrivateRequestView, self).get_context_data(**kwargs)
-        context['participants'] = Participant.objects.filter(user=self.request.user)
+        context['participants'] = Participant.objects.filter(
+            user=self.request.user,
+            deleted_at__isnull=True,
+            thread__request__isnull=False,
+        ).exclude(
+            thread__creator=self.request.user,
+        )
         return context
 
-private_requests = login_required(PrivateRequestView.as_view())
+inbox_private_requests = login_required(PrivateRequestView.as_view())
+
+class SentPrivateRequestsView(TemplateView):
+    template_name='request/private_requests.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(SentPrivateRequestsView, self).get_context_data(**kwargs)
+        context['participants'] = Participant.objects.filter(
+            user=self.request.user,
+            replied_at__isnull=False,
+            deleted_at__isnull=True,
+            thread__request__isnull=False,
+        )
+        return context
+
+sent_private_requests = login_required(SentPrivateRequestsView.as_view())
 
 class PublicRequestView(TemplateView):
     template_name='request/public_requests.html'

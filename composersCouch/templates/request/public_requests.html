@@ -5,13 +5,12 @@
 
 {% block content %}
   <div>
-    <div>
-      {% if user.profile.profile_type == 'm' %}
-        <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
-      {% elif user.profile.profile_type == 'v' %}
-        <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
-      {% endif %}
-    </div>
+    {% if user.profile.profile_type == 'm' %}
+      <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
+    {% elif user.profile.profile_type == 'v' %}
+      <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
+    {% endif %}
+    <p></p>
     <div>
       {% for r in requests %}
         <div class="publicRequest">
