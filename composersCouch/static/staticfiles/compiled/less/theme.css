@@ -7886,7 +7886,6 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   color: #fbfcfc;
   background-color: #474747;
   padding-top: 10px;
-  margin-bottom: 10px;
 }
 .header.thread .nav li a {
   color: #cbcfd3;
@@ -7903,6 +7902,28 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   border-radius: 0px;
   border-bottom: 3px solid #5490d3;
   color: #fbfcfc;
+}
+.navigation.thread {
+  background-color: #cbcfd3;
+}
+.navigation.thread .btn {
+  margin-top: 5px;
+}
+.navigation.thread .nav li a {
+  color: #474747;
+}
+.navigation.thread .nav li a:hover,
+.navigation.thread .nav li a:focus {
+  background-color: transparent;
+  color: #2f2f2f;
+}
+.navigation.thread .nav li.active a,
+.navigation.thread .nav li.active a:focus,
+.navigation.thread .nav li.active a:hover {
+  background-color: transparent;
+  border-radius: 0px;
+  border-bottom: 3px solid #2161a8;
+  color: #2f2f2f;
 }
 @media (min-width: 768px) {
   .content .message-thread {

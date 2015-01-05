@@ -4,14 +4,14 @@
 {% block privateClass %}active{% endblock %}
 
 {% block navigation %}
-  <div class="navigation">
+  <div class="navigation thread">
     <div class="container-fluid">
       <div class="row no-gutter">
         <div class="col-sm-4 left">
           <a href="{% url 'request_write' %}" class="btn btn-primary">Send Request</a>
         </div>
         <div class="col-sm-4 center">
-          <ul class="nav nav-tabs nav-centered" role="tablist">
+          <ul class="nav nav-pills nav-centered" role="tablist">
             <li class="{% if inbox %}active{% endif %}">
               <a href="{% url 'private_requests' %}"><span class="fa fa-inbox"></span> Inbox{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a>
             </li>

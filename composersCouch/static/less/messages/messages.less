@@ -1,33 +1,54 @@
-.header {
-  &.thread {
-    color: @white;
-    background-color: @black-light;
-    padding-top:10px;
-    margin-bottom:10px;
-    .nav {
-      .navHover(){
-
-      }
-      li {
-        a {
-          color: @silver;
-          &:hover, &:focus {
-            background-color: transparent;
-            color: @white;
-          }
+.header.thread {
+  color: @white;
+  background-color: @black-light;
+  padding-top:10px;
+  .nav {
+    li {
+      a {
+        color: @silver;
+        &:hover, &:focus {
+          background-color: transparent;
+          color: @white;
         }
-        &.active {
-          a, a:focus, a:hover  {
-            background-color: transparent;
-            border-radius:0px;
-            border-bottom: 3px solid @light-blue;
-            color: @white;
-          }
+      }
+      &.active {
+        a, a:focus, a:hover  {
+          background-color: transparent;
+          border-radius:0px;
+          border-bottom: 3px solid @light-blue;
+          color: @white;
         }
       }
     }
   }
 }
+
+.navigation.thread {
+  background-color: @silver;
+  .btn {
+    margin-top: 5px;
+  }
+  .nav {
+    li {
+      a {
+        color: @black-light;
+        &:hover, &:focus {
+          background-color: transparent;
+          color: @black;
+        }
+      }
+      &.active {
+        a, a:focus, a:hover  {
+          background-color: transparent;
+          border-radius:0px;
+          border-bottom: 3px solid @blue;
+          color: @black;
+        }
+      }
+    }
+  }
+}
+
 .content {
   .message-thread {
     @media (min-width: @screen-sm-min) {

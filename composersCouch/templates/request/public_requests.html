@@ -4,17 +4,17 @@
 {% block publicClass %}active{% endblock %}
 
 {% block navigation %}
-<div class="navigation">
-  <div class="container-fluid">
-    <div class="row no-gutter">
-      {% if user.profile.profile_type == 'm' %}
-        <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
-      {% elif user.profile.profile_type == 'v' %}
-        <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
-      {% endif %}
+  <div class="navigation thread">
+    <div class="container-fluid">
+      <div class="row no-gutter">
+        {% if user.profile.profile_type == 'm' %}
+          <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
+        {% elif user.profile.profile_type == 'v' %}
+          <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
+        {% endif %}
+      </div>
     </div>
   </div>
-</div>
 {% endblock %}
 
 {% block content %}
