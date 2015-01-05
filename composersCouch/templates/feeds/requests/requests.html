@@ -5,14 +5,6 @@
 {% block feedType %}Requests{% endblock %}
 {% block bgColor%}blue{% endblock %}
 
-{% block addFeedItem %}
-  {% if user.profile.profile_type == 'm' %}
-    <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="pull-right btn btn-success">Create Request</a>
-  {% elif user.profile.profile_type == 'v' %}
-    <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="pull-right btn btn-success">Create Request</a>
-  {% endif %}
-{% endblock %}
-
 {% block scopeNav %}
   <li class="{% block localClass %}{% endblock %}">
     <a href="{% url 'requests' order for 'local' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Local</a>
