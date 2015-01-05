@@ -74,6 +74,7 @@ class NumberOfApplicants(models.Model):
                                           related_name='applicants',)
     left = models.PositiveSmallIntegerField(verbose_name=_("total_bands"))
     total = models.PositiveSmallIntegerField(verbose_name=_("number_of_bands"))
+
     def save(self, public_request=None, *args, **kwargs):
         if public_request:
             self.public_request = public_request
