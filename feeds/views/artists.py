@@ -40,9 +40,12 @@ class AvailabilityView(AvailabilityMixin, ArtistView):
         start = datetime.combine(self.start_date, time()).replace(tzinfo=utc)
         end = datetime.combine(self.end_date, time()).replace(tzinfo=utc)
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-        return self.modelManager.exclude(**self.get_exclude(start, end)).filter(
-            profile__user__calendar__events__line__line__distance_lte=(location, D(m=LocalFeed.distance))
-        )
+        if location:
+            return self.modelManager.exclude(**self.get_exclude(start, end)).filter(
+                profile__user__calendar__events__line__line__distance_lte=(location, D(m=LocalFeed.distance))
+            )
+        else:
+            return []
 
 available_artists = AvailabilityView.as_view()
 
