@@ -86,14 +86,14 @@
   </div>
 {% endblock %}
 
-{% block content %}
-  <div class="feed">
-    <div class="filter-nav">
-      <ul class="nav nav-tabs">
+{% block navigation %}
+<div class="navigation thread">
+  <div class="container-fluid">
+    <div class="row no-gutter">
+      <div class="col-sm-2 col-xs-6 left">
         {% block genreForm %}
-        <p class="nav-text">Filter:</p>
-        <li class="popover-form">
-          <button id="genre-select" class="btn btn-link toggle">Genre <span class="caret"></span></button>
+          <span>Filter: </span>
+          <button id="genre-select" class="btn btn-default toggle">Genre <span class="caret"></span></button>
           <div class="head hide">Genres</div>
           <div class="content hide">
             <form class="genre-form" role="filter" method="POST" action="{% url 'filter' %}">
@@ -101,21 +101,31 @@
               {% crispy genreForm %}
             </form>
           </div>
-        </li>
         {% endblock %}
+      </div>
+      <div class="col-sm-2 col-sm-push-8 col-xs-6 right">
         {% block orderForm %}
-        <li class="pull-right dropdown">
-          <button class="btn btn-link dropdown-toggle toggle" data-toggle="dropdown">
-            {{ order | capfirst }} <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu">
-            {% block orderOptions %}{% endblock %}
-          </ul>
-        </li>
-        <p class="pull-right nav-text">Order:</p>
+          <span>Order: </span>
+          <div class="dropdown pull-right">
+            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+              {{ order | capfirst }}
+              <span class="caret text-muted"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              {% block orderOptions %}{% endblock %}
+            </ul>
+          </div>
         {% endblock %}
-      </ul>
+      </div>
+      <div class="col-sm-8 col-sm-pull-2 center">
+      </div>
     </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block content %}
+  <div class="feed">
     <div class="cards">
       {% block feed %}{% endblock %}
     </div>
