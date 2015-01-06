@@ -7905,22 +7905,22 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .navigation.thread {
   background-color: #cbcfd3;
-  height: 45px;
 }
-.navigation.thread .btn {
+.navigation.thread .row .btn {
   margin-top: 5px;
+  margin-bottom: 5px;
 }
-.navigation.thread .nav li a {
+.navigation.thread .row .nav li a {
   color: #474747;
 }
-.navigation.thread .nav li a:hover,
-.navigation.thread .nav li a:focus {
+.navigation.thread .row .nav li a:hover,
+.navigation.thread .row .nav li a:focus {
   background-color: transparent;
   color: #2f2f2f;
 }
-.navigation.thread .nav li.active a,
-.navigation.thread .nav li.active a:focus,
-.navigation.thread .nav li.active a:hover {
+.navigation.thread .row .nav li.active a,
+.navigation.thread .row .nav li.active a:focus,
+.navigation.thread .row .nav li.active a:hover {
   background-color: transparent;
   border-radius: 0px;
   border-bottom: 3px solid #2161a8;
