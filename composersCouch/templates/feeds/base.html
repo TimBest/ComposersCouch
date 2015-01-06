@@ -44,7 +44,7 @@
       <div class="row no-gutter">
         <div class="col-sm-2 col-xs-6 left">
           {% block genreForm %}
-            <span>Filter: </span>
+            {% comment %}<span>Filter: </span>{% endcomment %}
             <button id="genre-select" class="btn btn-link text-black toggle">
               Genre <span class="caret text-muted"></span>
             </button>
@@ -59,7 +59,7 @@
         </div>
         <div class="col-sm-2 col-sm-push-8 col-xs-6 right">
           {% block orderForm %}
-            <span>Order: </span>
+            {% comment %}<span>Order: </span>{% endcomment %}
             <div class="dropdown pull-right">
               <button class="btn btn-link text-black dropdown-toggle" type="button" data-toggle="dropdown">
                 {{ order | capfirst }} <span class="caret text-muted"></span>
@@ -88,7 +88,7 @@
         {% block availabilityForm %}
           <span>available on</span>
           <button id="availability-select" class="btn btn-link text-black toggle">
-            {% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %} <span class="caret"></span>
+            {% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %} <span class="caret text-muted"></span>
           </button>
           <div class="head hide">Availability</div>
           <div class="content hide">
@@ -101,7 +101,7 @@
         {% block zipcodeForm %}
           <span> near</span>
           <button id="zipcode-select" class="btn btn-link text-black toggle">
-            {% if zipcode %}{{ zipcode }}{% else %}Zipcode{% endif %} <span class="caret"></span>
+            {% if zipcode %}{{ zipcode }}{% else %}Zipcode{% endif %} <span class="caret text-muted"></span>
           </button>
           <div class="head hide">Zipcode</div>
           <div class="content hide">

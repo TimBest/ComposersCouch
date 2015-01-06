@@ -7015,13 +7015,6 @@ fieldset[disabled] .btn-default-nav.active {
 .text-white:focus {
   color: #FFF;
 }
-.link-muted {
-  color: #5490d3;
-}
-.link-muted:hover,
-.link-muted:focus {
-  color: #2161a8;
-}
 .alert-badge {
   color: #fbfcfc;
   background-color: #a62421;

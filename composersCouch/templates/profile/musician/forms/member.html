@@ -29,7 +29,7 @@
     {% if past_members %}
       <span>Edit past members: </span>
       {% for m in past_members %}
-        <a class="{{isEditable}} editMusicianMembers link-muted" href="{% url 'musician:memberForm' username m.id %}">
+        <a class="{{isEditable}} editMusicianMembers" href="{% url 'musician:memberForm' username m.id %}">
           {{m.name}}{% if not forloop.last %},{% endif %}
         </a>
       {% endfor %}
