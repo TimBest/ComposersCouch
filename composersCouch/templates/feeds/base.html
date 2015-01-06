@@ -34,17 +34,9 @@
           </ul>
         </div>
         <ul class="nav nav-tabs">
-          <li class="dropdown">
-            <button class="btn btn-transparent dropdown-toggle toggle" data-toggle="dropdown">
-              <b>{% block scopeNavActive %}Distance{% endblock %}</b> <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu">
-              {% block scopeNav %}
-              {% endblock %}
-            </ul>
-          </li>
+          <p class="nav-text">{% block scopeNavActive %}{% endblock %}</p>
           {% block zipcodeForm %}
-            <p class="nav-text hidden-xs">for</p>
+            <p class="nav-text hidden-xs">in</p>
             <li class="popover-form">
               <button id="zipcode-select" class="btn btn-transparent toggle">
                 <b>{% if zipcode %}
@@ -118,6 +110,7 @@
         {% endblock %}
       </div>
       <div class="col-sm-8 col-sm-pull-2 center">
+        <ul class="nav nav-pills nav-centered">{% block scopeNav %}{% endblock %}</ul>
       </div>
     </div>
   </div>
