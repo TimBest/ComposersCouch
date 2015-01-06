@@ -23,9 +23,9 @@
 {% endblock %}
 
 {% block forForm %}
-  <p class="nav-text hidden-xs">for {{scope}}</p>
-  <li class="dropdown">
-    <button class="btn btn-transparent dropdown-toggle toggle" data-toggle="dropdown" >
+  <span>for {{scope}}</span>
+  <span class="dropdown">
+    <button class="btn btn-link dropdown-toggle toggle" data-toggle="dropdown">
       <b>{{ for|capfirst }}s</b> <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
@@ -36,7 +36,7 @@
         <a href="{% url 'requests' order 'venue' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Venues</a>
       </li>
     </ul>
-  </li>
+  </span>
 {% endblock %}
 
 {% block orderOptions %}

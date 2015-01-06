@@ -30,32 +30,9 @@
     </div>
     <div class="nav-options">
       <ul class="nav nav-tabs">
-        <p class="nav-text">{% block scopeNavActive %}{% endblock %}</p>
-        <p class="nav-text">{% block feedType %}{% endblock %}</p>
-        {% block forForm %}
-        {% endblock %}
-        {% block zipcodeForm %}
-          <p class="nav-text hidden-xs">near</p>
-          <li class="popover-form">
-            <button id="zipcode-select" class="btn btn-transparent toggle">
-              <b>{% if zipcode %}
-                {{ zipcode }}
-              {% else %}
-                Zipcode
-              {% endif %}</b>
-              <span class="caret"></span>
-            </button>
-            <div class="head hide">Zipcode</div>
-            <div class="content hide">
-              <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
-                <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-                {% crispy zipcodeForm %}
-              </form>
-            </div>
-          </li>
-        {% endblock %}
+
         {% block availabilityForm %}
-          <p class="nav-text hidden-xs">available</p>
+          <p class="nav-text hidden-xs">available on</p>
           <li class="popover-form">
             <button id="availability-select" class="btn btn-transparent toggle">
               <b>{% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %}</b> <span class="caret"></span>
@@ -118,6 +95,25 @@
 {% block content %}
   <div class="feed">
     <div class="cards">
+      <div>
+        <span>Showing {% block feedType %}results{% endblock %}</span>
+      {% block forForm %}
+      {% endblock %}
+      {% block zipcodeForm %}
+        <span> near</span>
+        <button id="zipcode-select" class="btn btn-link toggle">
+          <b>{% if zipcode %}{{ zipcode }}{% else %}Zipcode{% endif %}</b>
+          <span class="caret"></span>
+        </button>
+        <div class="head hide">Zipcode</div>
+        <div class="content hide">
+          <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
+            <input type="hidden" name="path" value="{% firstof request.path '/' %}">
+            {% crispy zipcodeForm %}
+          </form>
+        </div>
+      {% endblock %}
+    </div>
       {% block feed %}{% endblock %}
     </div>
   </div>

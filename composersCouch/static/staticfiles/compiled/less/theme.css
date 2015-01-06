@@ -7780,6 +7780,9 @@ h1 {
 .header.feed.red {
   background-color: #6c0d08;
 }
+.header.feed .main-nav {
+  font-size: 20px;
+}
 .header.feed .main-nav .nav li a {
   color: #cbcfd3;
 }
