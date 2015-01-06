@@ -31,21 +31,7 @@
     <div class="nav-options">
       <ul class="nav nav-tabs">
 
-        {% block availabilityForm %}
-          <p class="nav-text hidden-xs">available on</p>
-          <li class="popover-form">
-            <button id="availability-select" class="btn btn-transparent toggle">
-              <b>{% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %}</b> <span class="caret"></span>
-            </button>
-            <div class="head hide">Availability</div>
-            <div class="content hide">
-              <form class="availability-form" role="filter" method="POST" action="{% url 'availability' %}">
-                <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-                {% crispy availabilityForm %}
-              </form>
-            </div>
-          </li>
-        {% endblock %}
+
       </ul>
     </div>
   </div>
@@ -59,7 +45,9 @@
         <div class="col-sm-2 col-xs-6 left">
           {% block genreForm %}
             <span>Filter: </span>
-            <button id="genre-select" class="btn btn-default toggle">Genre <span class="caret"></span></button>
+            <button id="genre-select" class="btn btn-link text-black toggle">
+              Genre <span class="caret text-muted"></span>
+            </button>
             <div class="head hide">Genres</div>
             <div class="content hide">
               <form class="genre-form" role="filter" method="POST" action="{% url 'filter' %}">
@@ -73,9 +61,8 @@
           {% block orderForm %}
             <span>Order: </span>
             <div class="dropdown pull-right">
-              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-                {{ order | capfirst }}
-                <span class="caret text-muted"></span>
+              <button class="btn btn-link text-black dropdown-toggle" type="button" data-toggle="dropdown">
+                {{ order | capfirst }} <span class="caret text-muted"></span>
               </button>
               <ul class="dropdown-menu" role="menu">
                 {% block orderOptions %}{% endblock %}
@@ -96,24 +83,35 @@
   <div class="feed">
     <div class="cards">
       <div>
-        <span>Showing {% block feedType %}results{% endblock %}</span>
-      {% block forForm %}
-      {% endblock %}
-      {% block zipcodeForm %}
-        <span> near</span>
-        <button id="zipcode-select" class="btn btn-link toggle">
-          <b>{% if zipcode %}{{ zipcode }}{% else %}Zipcode{% endif %}</b>
-          <span class="caret"></span>
-        </button>
-        <div class="head hide">Zipcode</div>
-        <div class="content hide">
-          <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
-            <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-            {% crispy zipcodeForm %}
-          </form>
-        </div>
-      {% endblock %}
-    </div>
+        <span>{% block feedType %}results{% endblock %}</span>
+        {% block forForm %}{% endblock %}
+        {% block availabilityForm %}
+          <span>available on</span>
+          <button id="availability-select" class="btn btn-link text-black toggle">
+            {% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %} <span class="caret"></span>
+          </button>
+          <div class="head hide">Availability</div>
+          <div class="content hide">
+            <form class="availability-form" role="filter" method="POST" action="{% url 'availability' %}">
+              <input type="hidden" name="path" value="{% firstof request.path '/' %}">
+              {% crispy availabilityForm %}
+            </form>
+          </div>
+        {% endblock %}
+        {% block zipcodeForm %}
+          <span> near</span>
+          <button id="zipcode-select" class="btn btn-link text-black toggle">
+            {% if zipcode %}{{ zipcode }}{% else %}Zipcode{% endif %} <span class="caret"></span>
+          </button>
+          <div class="head hide">Zipcode</div>
+          <div class="content hide">
+            <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
+              <input type="hidden" name="path" value="{% firstof request.path '/' %}">
+              {% crispy zipcodeForm %}
+            </form>
+          </div>
+        {% endblock %}
+      </div>
       {% block feed %}{% endblock %}
     </div>
   </div>

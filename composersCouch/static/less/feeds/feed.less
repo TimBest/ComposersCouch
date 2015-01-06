@@ -1,24 +1,61 @@
 .header {
   &.feed {
     padding: 0px 0px 10px 0px;
+    position:relative;
     &.blue {
       background-color: @dark-blue;
+      .main-nav {
+        li.active {
+          a, a:focus, a:hover  {
+            border-bottom: 3px solid @light-blue;
+          }
+        }
+      }
     }
     &.green {
       background-color: @dark-green;
+      .main-nav {
+        li.active {
+          a, a:focus, a:hover  {
+            border-bottom: 3px solid @light-green;
+          }
+        }
+      }
     }
     &.purple {
       background-color: @dark-purple;
+      .main-nav {
+        li.active {
+          a, a:focus, a:hover  {
+            border-bottom: 3px solid @light-purple;
+          }
+        }
+      }
     }
     &.orange {
       background-color: @dark-orange;
+      .main-nav {
+        li.active {
+          a, a:focus, a:hover  {
+            border-bottom: 3px solid @light-orange;
+          }
+        }
+      }
     }
     &.red {
       background-color: @dark-red;
+      .main-nav {
+        li.active {
+          a, a:focus, a:hover  {
+            border-bottom: 3px solid @light-red;
+          }
+        }
+      }
     }
     .main-nav {
-      font-size:20px;
-      .nav {
+      font-size:18px;
+      position:absolute;
+      bottom:10px;
         li {
           a {
             color: @silver;
@@ -36,7 +73,6 @@
             }
           }
         }
-      }
     }
     .nav-options {
       color:@silver-light;
@@ -72,9 +108,6 @@
   }
 }
 .feed {
-  .btn-link {
-    padding: 10px 5px;
-  }
   .genre-form{
     width:200px;
   }

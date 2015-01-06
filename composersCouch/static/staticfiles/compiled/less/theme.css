@@ -7764,36 +7764,64 @@ h1 {
 }
 .header.feed {
   padding: 0px 0px 10px 0px;
+  position: relative;
 }
 .header.feed.blue {
   background-color: #0b396d;
 }
+.header.feed.blue .main-nav li.active a,
+.header.feed.blue .main-nav li.active a:focus,
+.header.feed.blue .main-nav li.active a:hover {
+  border-bottom: 3px solid #5490d3;
+}
 .header.feed.green {
   background-color: #076e4f;
+}
+.header.feed.green .main-nav li.active a,
+.header.feed.green .main-nav li.active a:focus,
+.header.feed.green .main-nav li.active a:hover {
+  border-bottom: 3px solid #49d4aa;
 }
 .header.feed.purple {
   background-color: #3f0b6c;
 }
+.header.feed.purple .main-nav li.active a,
+.header.feed.purple .main-nav li.active a:focus,
+.header.feed.purple .main-nav li.active a:hover {
+  border-bottom: 3px solid #9854d3;
+}
 .header.feed.orange {
   background-color: #a6410b;
+}
+.header.feed.orange .main-nav li.active a,
+.header.feed.orange .main-nav li.active a:focus,
+.header.feed.orange .main-nav li.active a:hover {
+  border-bottom: 3px solid #ff9258;
 }
 .header.feed.red {
   background-color: #6c0d08;
 }
-.header.feed .main-nav {
-  font-size: 20px;
+.header.feed.red .main-nav li.active a,
+.header.feed.red .main-nav li.active a:focus,
+.header.feed.red .main-nav li.active a:hover {
+  border-bottom: 3px solid #d35754;
 }
-.header.feed .main-nav .nav li a {
+.header.feed .main-nav {
+  font-size: 18px;
+  position: absolute;
+  bottom: 10px;
+}
+.header.feed .main-nav li a {
   color: #cbcfd3;
 }
-.header.feed .main-nav .nav li a:hover,
-.header.feed .main-nav .nav li a:focus {
+.header.feed .main-nav li a:hover,
+.header.feed .main-nav li a:focus {
   background-color: transparent;
   color: #fbfcfc;
 }
-.header.feed .main-nav .nav li.active a,
-.header.feed .main-nav .nav li.active a:focus,
-.header.feed .main-nav .nav li.active a:hover {
+.header.feed .main-nav li.active a,
+.header.feed .main-nav li.active a:focus,
+.header.feed .main-nav li.active a:hover {
   background-color: transparent;
   border-radius: 0px;
   border-bottom: 3px solid #5490d3;
@@ -7832,9 +7860,6 @@ h1 {
 }
 .header.feed .nav-options .nav .nav-form div {
   float: left;
-}
-.feed .btn-link {
-  padding: 10px 5px;
 }
 .feed .genre-form {
   width: 200px;
