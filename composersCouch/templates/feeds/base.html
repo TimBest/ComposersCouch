@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block title %}Composers Couch{% endblock %}
-{% load static i18n crispy_forms_tags  %}
+{% load crispy_forms_tags  %}
 {% crispy AvailabilityForm AvailabilityForm.helper %}
 {% crispy GenreForm GenreForm.helper %}
 {% crispy ZipcodeForm ZipcodeForm.helper %}
@@ -9,71 +9,67 @@
 
 {% block header %}
   <div class="feed">
-    <div class="filter">
-      <div class="filter-nav">
-        <div class="btn-group">
-          <button type="button" class="btn btn-link text-white dropdown-toggle feed-type" data-toggle="dropdown" aria-expanded="false">
-            <h2>{% block feedType %}Feed{% endblock %} <span class="caret"></span></h2>
-          </button>
-          <ul class="dropdown-menu" role="menu">
-            <li class="{% block requestsClass %}{% endblock %}">
-              <a href="{% url 'requests' 'expiring' 'default' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Requests</a>
-            </li>
-            <li class="{% block showsClass %}{% endblock %}">
-              <a href="{% url 'shows' 'upcoming' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Concerts</a>
-            </li>
-            <li class="{% block artistsClass %}{% endblock %}">
-              <a href="{% url 'artists' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Artists</a>
-            </li>
-            <li class="{% block venuesClass %}{% endblock %}">
-              <a href="{% url 'venues' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Venues</a>
-            </li>
-            <li class="{% block updatesClass %}{% endblock %}">
-              <a href="{% url 'updates' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Updates</a>
-            </li>
-          </ul>
-        </div>
-        <ul class="nav nav-tabs">
-          <p class="nav-text">{% block scopeNavActive %}{% endblock %}</p>
-          {% block zipcodeForm %}
-            <p class="nav-text hidden-xs">in</p>
-            <li class="popover-form">
-              <button id="zipcode-select" class="btn btn-transparent toggle">
-                <b>{% if zipcode %}
-                  {{ zipcode }}
-                {% else %}
-                  Zipcode
-                {% endif %}</b>
-                <span class="caret"></span>
-              </button>
-              <div class="head hide">Zipcode</div>
-              <div class="content hide">
-                <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
-                  <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-                  {% crispy zipcodeForm %}
-                </form>
-              </div>
-            </li>
-          {% endblock %}
-          {% block forForm %}
-          {% endblock %}
-          {% block availabilityForm %}
-            <p class="nav-text hidden-xs">available</p>
-            <li class="popover-form">
-              <button id="availability-select" class="btn btn-transparent toggle">
-                <b>{% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %}</b> <span class="caret"></span>
-              </button>
-              <div class="head hide">Availability</div>
-              <div class="content hide">
-                <form class="availability-form" role="filter" method="POST" action="{% url 'availability' %}">
-                  <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-                  {% crispy availabilityForm %}
-                </form>
-              </div>
-            </li>
-          {% endblock %}
-        </ul>
-      </div>
+    <div class="main-nav" >
+      <ul class="nav nav-pills nav-centered" role="menu">
+        <li class="{% block requestsClass %}{% endblock %}">
+          <a href="{% url 'requests' 'expiring' 'default' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Requests</a>
+        </li>
+        <li class="{% block showsClass %}{% endblock %}">
+          <a href="{% url 'shows' 'upcoming' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Concerts</a>
+        </li>
+        <li class="{% block artistsClass %}{% endblock %}">
+          <a href="{% url 'artists' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Artists</a>
+        </li>
+        <li class="{% block venuesClass %}{% endblock %}">
+          <a href="{% url 'venues' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Venues</a>
+        </li>
+        <li class="{% block updatesClass %}{% endblock %}">
+          <a href="{% url 'updates' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Updates</a>
+        </li>
+      </ul>
+    </div>
+    <div class="nav-options">
+      <ul class="nav nav-tabs">
+        <p class="nav-text">{% block scopeNavActive %}{% endblock %}</p>
+        <p class="nav-text">{% block feedType %}{% endblock %}</p>
+        {% block forForm %}
+        {% endblock %}
+        {% block zipcodeForm %}
+          <p class="nav-text hidden-xs">near</p>
+          <li class="popover-form">
+            <button id="zipcode-select" class="btn btn-transparent toggle">
+              <b>{% if zipcode %}
+                {{ zipcode }}
+              {% else %}
+                Zipcode
+              {% endif %}</b>
+              <span class="caret"></span>
+            </button>
+            <div class="head hide">Zipcode</div>
+            <div class="content hide">
+              <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
+                <input type="hidden" name="path" value="{% firstof request.path '/' %}">
+                {% crispy zipcodeForm %}
+              </form>
+            </div>
+          </li>
+        {% endblock %}
+        {% block availabilityForm %}
+          <p class="nav-text hidden-xs">available</p>
+          <li class="popover-form">
+            <button id="availability-select" class="btn btn-transparent toggle">
+              <b>{% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %}</b> <span class="caret"></span>
+            </button>
+            <div class="head hide">Availability</div>
+            <div class="content hide">
+              <form class="availability-form" role="filter" method="POST" action="{% url 'availability' %}">
+                <input type="hidden" name="path" value="{% firstof request.path '/' %}">
+                {% crispy availabilityForm %}
+              </form>
+            </div>
+          </li>
+        {% endblock %}
+      </ul>
     </div>
   </div>
 {% endblock %}
@@ -81,36 +77,38 @@
 {% block navigation %}
 <div class="navigation thread">
   <div class="container-fluid">
-    <div class="row no-gutter">
-      <div class="col-sm-2 col-xs-6 left">
-        {% block genreForm %}
-          <span>Filter: </span>
-          <button id="genre-select" class="btn btn-default toggle">Genre <span class="caret"></span></button>
-          <div class="head hide">Genres</div>
-          <div class="content hide">
-            <form class="genre-form" role="filter" method="POST" action="{% url 'filter' %}">
-              <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-              {% crispy genreForm %}
-            </form>
-          </div>
-        {% endblock %}
-      </div>
-      <div class="col-sm-2 col-sm-push-8 col-xs-6 right">
-        {% block orderForm %}
-          <span>Order: </span>
-          <div class="dropdown pull-right">
-            <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
-              {{ order | capfirst }}
-              <span class="caret text-muted"></span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-              {% block orderOptions %}{% endblock %}
-            </ul>
-          </div>
-        {% endblock %}
-      </div>
-      <div class="col-sm-8 col-sm-pull-2 center">
-        <ul class="nav nav-pills nav-centered">{% block scopeNav %}{% endblock %}</ul>
+    <div class="feed">
+      <div class="row no-gutter">
+        <div class="col-sm-2 col-xs-6 left">
+          {% block genreForm %}
+            <span>Filter: </span>
+            <button id="genre-select" class="btn btn-default toggle">Genre <span class="caret"></span></button>
+            <div class="head hide">Genres</div>
+            <div class="content hide">
+              <form class="genre-form" role="filter" method="POST" action="{% url 'filter' %}">
+                <input type="hidden" name="path" value="{% firstof request.path '/' %}">
+                {% crispy genreForm %}
+              </form>
+            </div>
+          {% endblock %}
+        </div>
+        <div class="col-sm-2 col-sm-push-8 col-xs-6 right">
+          {% block orderForm %}
+            <span>Order: </span>
+            <div class="dropdown pull-right">
+              <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+                {{ order | capfirst }}
+                <span class="caret text-muted"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                {% block orderOptions %}{% endblock %}
+              </ul>
+            </div>
+          {% endblock %}
+        </div>
+        <div class="col-sm-8 col-sm-pull-2 center">
+          <ul class="nav nav-pills nav-centered">{% block scopeNav %}{% endblock %}</ul>
+        </div>
       </div>
     </div>
   </div>

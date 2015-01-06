@@ -7763,9 +7763,7 @@ h1 {
   }
 }
 .header.feed {
-  padding: 10px 0px 10px 0px;
-  -webkit-box-shadow: -1px 0px 3px rgba(0, 0, 0, 0.5);
-  box-shadow: -1px 0px 3px rgba(0, 0, 0, 0.5);
+  padding: 0px 0px 10px 0px;
 }
 .header.feed.blue {
   background-color: #0b396d;
@@ -7782,38 +7780,54 @@ h1 {
 .header.feed.red {
   background-color: #6c0d08;
 }
-.header.feed .filter .filter-nav {
+.header.feed .main-nav .nav li a {
+  color: #cbcfd3;
+}
+.header.feed .main-nav .nav li a:hover,
+.header.feed .main-nav .nav li a:focus {
+  background-color: transparent;
+  color: #fbfcfc;
+}
+.header.feed .main-nav .nav li.active a,
+.header.feed .main-nav .nav li.active a:focus,
+.header.feed .main-nav .nav li.active a:hover {
+  background-color: transparent;
+  border-radius: 0px;
+  border-bottom: 3px solid #5490d3;
+  color: #fbfcfc;
+}
+.header.feed .nav-options {
   color: #dfe5eb;
 }
-.header.feed .filter .filter-nav .feed-type {
+.header.feed .nav-options .feed-type {
   padding: 0px 5px;
 }
-.header.feed .filter .filter-nav .nav {
+.header.feed .nav-options .nav {
   margin-top: 20px;
   border-bottom: 0px;
 }
-.header.feed .filter .filter-nav .nav .dropdown,
-.header.feed .filter .filter-nav .nav .popover-form {
+.header.feed .nav-options .nav .dropdown,
+.header.feed .nav-options .nav .popover-form {
   padding-right: 10px;
   margin-bottom: 5px;
 }
 @media (min-width: 768px) {
-  .header.feed .filter .filter-nav .nav .dropdown,
-  .header.feed .filter .filter-nav .nav .popover-form {
+  .header.feed .nav-options .nav .dropdown,
+  .header.feed .nav-options .nav .popover-form {
     padding-right: 0px;
     margin-bottom: 0px;
   }
 }
-.header.feed .filter .filter-nav .nav .last {
+.header.feed .nav-options .nav .last {
   margin-bottom: 0px;
 }
-.header.feed .filter .filter-nav .nav .popover-form {
+.header.feed .nav-options .nav .popover-form {
   color: #2f2f2f;
 }
-.header.feed .filter .filter-nav .nav .nav-form {
+.header.feed .nav-options .nav .nav-form {
   float: left;
 }
-.header.feed .filter .filter-nav .nav .nav-form div {
+.header.feed .nav-options .nav .nav-form div {
   float: left;
 }
 .feed .btn-link {
