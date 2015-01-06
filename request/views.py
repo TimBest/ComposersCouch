@@ -106,7 +106,7 @@ class RequestFormView(MultipleFormsView):
       'requestForm': forms.PrivateRequestForm,
     }
     template_name = 'request/privaterequest_form.html'
-    success_url = 'messages_inbox'
+    success_url = 'sent_private_requests'
 
     def get_users(self):
         users = [self.request.user]
@@ -193,7 +193,7 @@ class PublicRequestFormView(MultipleFormsView):
       'requestForm': forms.PublicRequestForm,
     }
     template_name = 'request/publicrequest_form.html'
-    success_url = 'home'
+    success_url = 'public_requests'
 
     def forms_valid(self, forms):
         date = forms['dateForm'].save()
@@ -225,7 +225,7 @@ public_band_request_form = login_required(PublicBandRequestFormView.as_view())
 
 class ApplyFormView(FormView):
     form_class = forms.MessageForm
-    success_url = 'messages_inbox'
+    success_url = 'public_requests'
     template_name = 'request/apply_form.html'
 
     def dispatch(self, *args, **kwargs):

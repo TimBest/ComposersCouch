@@ -10,7 +10,7 @@
 {% block header %}
   <div class="feed">
     <div class="main-nav" >
-      <ul class="nav nav-pills nav-centered" role="menu">
+      <ul class="nav nav-pills" role="menu">
         <li class="{% block requestsClass %}{% endblock %}">
           <a href="{% url 'requests' 'expiring' 'default' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Requests</a>
         </li>
