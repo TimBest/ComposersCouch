@@ -34,13 +34,13 @@
   <div class="navigation thread">
     <div class="container-fluid">
       <div class="row no-gutter">
-        <div class="col-sm-4 left">
+        <div class="col-sm-3 left">
           <a href="{% url 'calendar_create_event' request.user.calendar.slug %}{% querystring_for_date date %}&hour=19&next={% firstof request.path '/' %}"
           class="btn btn-primary pull-left" role="button">Create Show</a>
           {% comment %}<a href="{% url 'calendar' %}" class="btn btn-default">Today</a>{% endcomment %}
         </div>
-        <div class="col-sm-4 center text-center">
-          <ul class="nav nav-pills" role="tablist">
+        <div class="col-sm-6 center text-center">
+          <ul class="nav nav-pills nav-centered" role="tablist">
             <li class="{% block dayClass %}{% endblock %}">
               <a href="{% url 'calendar' 'day' filter %}{% querystring_for_date date %}">Day</a>
             </li>
@@ -55,7 +55,7 @@
             </li>
           </ul>
         </div>
-        <div class="col-sm-4 right">
+        <div class="col-sm-3 right">
           <div class="btn-group pull-right">
             <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
               {{ filter|capfirst }} <span class="text-muted caret"></span>
