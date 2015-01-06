@@ -12,14 +12,14 @@
 {% endblock %}
 
 {% block dropdownTitle %}Week{% endblock %}
-{% block weekClass %}{% block weekClassDD %}active{% endblock %}{% endblock %}
+{% block weekClass %}active{% endblock %}
 
 {% block body %}
   <div id="week">
     {% for day in period.get_days %}
       <div class="weekday weekday{{forloop.counter}}">
         <div class="weekdaytable">
-          {% for event in day.get_event_partials %}            
+          {% for event in day.get_event_partials %}
             {% ifequal filter 'events' %}
               {% include "schedule/_show.html" with show=event.show user_accept=event.approved %}
             {% else %}
