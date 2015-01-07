@@ -25,9 +25,9 @@
 {% block forForm %}
   <span>for {{scope}}</span>
   <span class="dropdown">
-    <button class="btn btn-link text-black dropdown-toggle toggle" data-toggle="dropdown">
-      {{ for|capfirst }}s <span class="caret text-muted"></span>
-    </button>
+    <a class="dropdown-toggle toggle" data-toggle="dropdown">
+      {{ for|capfirst }}s<span class="caret"></span>
+    </a>
     <ul class="dropdown-menu">
       <li class="{% if for == 'band' %}active{% endif %}">
         <a href="{% url 'requests' order 'band' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Bands</a>
