@@ -23,8 +23,14 @@
 {% endblock %}
 
 {% block orderOptions %}
-  <li><a href="{% url 'shows' 'all' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a></li>
-  <li><a href="{% url 'shows' 'upcoming' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Upcoming</a></li>
-  <li><a href="{% url 'shows' 'new' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">New </a></li>
+  <li class="{% ifequal order 'all' %}text-bold{% endifequal %}">
+    <a href="{% url 'shows' 'all' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a>
+  </li>
+  <li class="{% ifequal order 'upcoming' %}text-bold{% endifequal %}">
+    <a href="{% url 'shows' 'upcoming' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Upcoming</a>
+  </li>
+  <li class="{% ifequal order 'new' %}text-bold{% endifequal %}">
+    <a href="{% url 'shows' 'new' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">New </a>
+  </li>
 {% endblock %}
 {% block availabilityForm %}{% endblock %}

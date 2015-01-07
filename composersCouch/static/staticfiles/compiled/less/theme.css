@@ -7015,6 +7015,9 @@ fieldset[disabled] .btn-default-nav.active {
 .text-white:focus {
   color: #FFF;
 }
+.text-bold {
+  font-weight: bold;
+}
 .alert-badge {
   color: #fbfcfc;
   background-color: #a62421;

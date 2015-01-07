@@ -6,7 +6,7 @@ from .models import Genre
 class GenreAutocomplete(autocomplete_light.AutocompleteModelBase):
     search_fields = ['^name','^categories__name']
     attrs = {
-        'placeholder': '',
+        'placeholder': 'Genre',
     }
     order_by = ['name']
 

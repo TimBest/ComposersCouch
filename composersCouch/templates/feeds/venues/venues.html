@@ -26,6 +26,10 @@
 {% endblock %}
 
 {% block orderOptions %}
-  <li><a href="{% url 'venues' 'all' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a></li>
-  <li><a href="{% url 'venues' 'new' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">New </a></li>
+  <li class="{% ifequal order 'all' %}text-bold{% endifequal %}">
+    <a href="{% url 'venues' 'all' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a>
+  </li>
+  <li class="{% ifequal order 'new' %}text-bold{% endifequal %}">
+    <a href="{% url 'venues' 'new' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">New </a>
+  </li>
 {% endblock %}

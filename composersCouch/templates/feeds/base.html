@@ -40,17 +40,18 @@
         </div>
         <div class="col-xs-2 right">
           <div class="text-right">
+            {% block filters %}
             <button class="btn btn-link text-black" type="button" data-toggle="collapse" data-target="#filters" aria-expanded="false" aria-controls="filters">
               Filters <span class="caret text-muted"></span>
             </button>
+            {% endblock %}
           </div>
         </div>
       </div>
       <div class="collapse row no-gutter" id="filters">
         {% block genreForm %}
           <div class="col-xs-6" >
-            <span>Filter by: </span>
-            <div>Genres</div>
+            <b>Filter by:</b>
             <form class="genre-form" role="filter" method="POST" action="{% url 'filter' %}">
               <input type="hidden" name="path" value="{% firstof request.path '/' %}">
               {% crispy genreForm %}
@@ -59,8 +60,8 @@
         {% endblock %}
         {% block orderForm %}
           <div class="col-xs-6" >
-            <span>Order by: </span>
-            <ul>{% block orderOptions %}{% endblock %}</ul>
+            <b>Order by:</b>
+            <ul class="list-unstyled">{% block orderOptions %}{% endblock %}</ul>
           </div>
         {% endblock %}
       </div>

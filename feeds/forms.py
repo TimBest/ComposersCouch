@@ -81,7 +81,7 @@ class GenreForm(ModelForm):
         self.helper.layout = Layout(
               'genre',
               'usersGenres',
-            Submit('submit', 'submit', css_class='btn btn-primary pull-right'),
+            Submit('submit', 'Filter', css_class='btn btn-primary pull-right'),
         )
 
     class Meta:
