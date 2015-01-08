@@ -58,9 +58,21 @@ class PublicRequestView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(PublicRequestView, self).get_context_data(**kwargs)
         context['requests'] = PublicRequest.objects.filter(requester=self.request.user)
+        context['is_requests'] = True
         return context
 
 public_requests = login_required(PublicRequestView.as_view())
+
+class PublicApplicationsView(TemplateView):
+    template_name='request/public_applications.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(PublicApplicationsView, self).get_context_data(**kwargs)
+        context['applications'] = Application.objects.filter(applicant=self.request.user)
+        context['is_applications'] = True
+        return context
+
+public_applications = login_required(PublicApplicationsView.as_view())
 
 class RequestView(MessageView):
     success_url='request_detail'
