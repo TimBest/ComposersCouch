@@ -55,16 +55,16 @@
             </div>
             <div class="row no-gutter">
               <div class="col-sm-2 left">
-                <a class="text-primary {{isEditable}}" href="{% url 'musician:editAlbumForm' username album %}">
+                <a class="text-primary {{isEditable}}" href="{% url 'musician:editAlbumForm' album %}">
                   {% include "_editLink.html" with text='Edit Album' %}
                 </a>
               </div>
               <div class="col-sm-10 right">
-                <a class="text-primary {{isEditable}}" href="{% url 'musician:tracksForm' username album %}">
+                <a class="text-primary {{isEditable}}" href="{% url 'musician:tracksForm' album %}">
                   {% include "_editLink.html" with text='Edit Tracks' %}
                 </a>
                 {% if forloop.last %}
-                  <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:albumForm' username %}">
+                  <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:albumForm' %}">
                     {% include "_addLink.html" with text='Add Album' %}
                   </a>
                 {% endif %}
@@ -80,7 +80,7 @@
             <h3>Albums</h3>
           </div>
           <div class="panel-body">
-            <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:albumForm' username %}">
+            <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:albumForm' %}">
               {% include "_addLink.html" with text='Add Album' %}
             </a>
           </div>
@@ -105,7 +105,7 @@
             {% include "tracks/_player.html" with id="live_tracks" %}
           </div>
         </div>
-        <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:live_track_form' username %}">
+        <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:live_track_form' %}">
           {% include "_addLink.html" with text='Add Live Track' %}
         </a>
       </div>
@@ -128,7 +128,7 @@
             {% include "tracks/_player.html" with id="interviews" %}
           </div>
         </div>
-        <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:interview_form' username %}">
+        <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:interview_form' %}">
           {% include "_addLink.html" with text='Add Interview' %}
         </a>
       </div>

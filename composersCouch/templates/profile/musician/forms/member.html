@@ -15,12 +15,12 @@
     {% if members %}
       <span>Edit members: </span>
       {% for m in members %}
-        <a class="{{isEditable}} editMusicianMembers" href="{% url 'musician:memberForm' username m.id %}">
+        <a class="{{isEditable}} editMusicianMembers" href="{% url 'musician:memberForm' m.id %}">
           {{m.name}},
         </a>
       {% endfor %}
       <span>or </span>
-      <a class="{{isEditable}} editMusicianMembers text-success" href="{% url 'musician:memberForm' username %}">
+      <a class="{{isEditable}} editMusicianMembers text-success" href="{% url 'musician:memberForm' %}">
         Add New
       </a>
     {% endif %}
@@ -29,7 +29,7 @@
     {% if past_members %}
       <span>Edit past members: </span>
       {% for m in past_members %}
-        <a class="{{isEditable}} editMusicianMembers" href="{% url 'musician:memberForm' username m.id %}">
+        <a class="{{isEditable}} editMusicianMembers" href="{% url 'musician:memberForm' m.id %}">
           {{m.name}}{% if not forloop.last %},{% endif %}
         </a>
       {% endfor %}

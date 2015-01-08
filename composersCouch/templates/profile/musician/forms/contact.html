@@ -9,11 +9,11 @@
 {% block formID %}contactMusicianForm{% endblock %}
 {% block form %}
   <span>Edit: </span>
-  <a class="editMusicianContact" href="{% url 'musician:userContactForm' username %}">Band</a>,
-  <a class="editMusicianContact" href="{% url 'musician:contactForm' username 'booking' %}">Booking</a>,
-  <a class="editMusicianContact" href="{% url 'musician:contactForm' username 'label' %}">Label</a>,
-  <a class="editMusicianContact" href="{% url 'musician:contactForm' username 'management' %}">Management</a>,
-  <a class="editMusicianContact" href="{% url 'musician:contactForm' username 'press' %}">Press</a>
+  <a class="editMusicianContact" href="{% url 'musician:userContactForm' %}">Band</a>,
+  <a class="editMusicianContact" href="{% url 'musician:contactForm' 'booking' %}">Booking</a>,
+  <a class="editMusicianContact" href="{% url 'musician:contactForm' 'label' %}">Label</a>,
+  <a class="editMusicianContact" href="{% url 'musician:contactForm' 'management' %}">Management</a>,
+  <a class="editMusicianContact" href="{% url 'musician:contactForm' 'press' %}">Press</a>
   {% crispy contactForm %}
   {% crispy locationForm %}
 {% endblock %}

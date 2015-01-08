@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.shortcuts import redirect, get_object_or_404
@@ -40,11 +41,12 @@ class ProfileMixin(object):
             context['isFollowing'] = 'isFollowing'
         return context
 
-class ProfileFormMixin(ProfileMixin):
-    @method_decorator(permission_required_or_403('change_profile', (Profile, 'user__username', 'username',)))
+class ProfileFormMixin(object):
+    #@method_decorator(permission_required_or_403('change_profile', (Profile, 'user__username', 'username',)))
+    @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        self.user = self.request.user
         return super(ProfileFormMixin, self).dispatch(*args, **kwargs)
-
 
 def profileRedirect(request, username, redirect_url):
     return redirect(redirect_url, username=username)

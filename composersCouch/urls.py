@@ -34,12 +34,9 @@ urlpatterns += patterns('composersCouch.views',
 )
 
 urlpatterns += patterns('',
-    url(r'^f/(?P<username>[-\w]+)/',
-        include('customProfile.fan.urls', namespace='fan')),
-    url(r'^m/(?P<username>[-\w]+)/',
-        include('customProfile.musician.urls', namespace='musician')),
-    url(r'^v/(?P<username>[-\w]+)/',
-        include('customProfile.venue.urls', namespace='venue')),
+    url(r'^f/', include('customProfile.fan.urls', namespace='fan')),
+    url(r'^m/', include('customProfile.musician.urls', namespace='musician')),
+    url(r'^v/', include('customProfile.venue.urls', namespace='venue')),
 )
 
 urlpatterns += patterns('',

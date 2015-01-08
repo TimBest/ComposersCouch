@@ -14,7 +14,7 @@
               {% if social.twitter %}<a href="{{ social.twitter }}" target="_blank" class="btn btn-twitter"><span class="fa fa-twitter"></span></a>{% endif %}
               {% if social.google_plus %}<a href="{{ social.google_plus }}" target="_blank" class="btn btn-google"><span class="fa fa-google-plus"></span></a>{% endif %}
           {% endwith %}
-          <a href="{% url 'musician:socialLinksForm' username  %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
+          <a href="{% url 'musician:socialLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
         </p></div>
       </div>
     </div>
@@ -25,7 +25,7 @@
         </div>
         <div class="panel-body">
           <p>{{ musicianProfile.biography }}</p>
-          <a class="{{isEditable}} editMusicianBiography" href="{% url 'musician:biographyForm' username  %}">
+          <a class="{{isEditable}} editMusicianBiography" href="{% url 'musician:biographyForm' %}">
             Edit
           </a>
         </div>
@@ -48,7 +48,7 @@
           <p>{{ member.biography }}</p>
         </div>
       {% endfor %}
-      <a class="{{isEditable}} editMusicianMembers" href="{% url 'musician:memberForm' username %}">
+      <a class="{{isEditable}} editMusicianMembers" href="{% url 'musician:memberForm' %}">
         Edit
       </a>
       </div>
@@ -69,7 +69,7 @@
             </div>
             <div class="panel-body">
               {% include "profile/_contact.html" with contact_info=profile.contact_info %}
-              <a class="editMusicianContact {{isEditable}}" href="{% url 'musician:userContactForm' username %}">Edit</a>
+              <a class="editMusicianContact {{isEditable}}" href="{% url 'musician:userContactForm' %}">Edit</a>
             </div>
           </div>
         </div>
@@ -80,7 +80,7 @@
             </div>
             <div class="panel-body">
               {% include "profile/_contact.html" with contact_info=musicianProfile.booking_contact %}
-              <a class="editMusicianContact {{isEditable}}" href="{% url 'musician:contactForm' username 'booking' %}">Edit</a>
+              <a class="editMusicianContact {{isEditable}}" href="{% url 'musician:contactForm' 'booking' %}">Edit</a>
             </div>
           </div>
         </div>
@@ -91,7 +91,7 @@
             </div>
             <div class="panel-body">
               {% include "profile/_contact.html" with contact_info=musicianProfile.label_contact %}
-              <a class="editMusicianContact {{isEditable}}" href="{% url 'musician:contactForm' username 'label' %}">Edit</a>
+              <a class="editMusicianContact {{isEditable}}" href="{% url 'musician:contactForm' 'label' %}">Edit</a>
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@
             </div>
             <div class="panel-body">
               {% include "profile/_contact.html" with contact_info=musicianProfile.management_contact %}
-              <a class="editMusicianContact {{isEditable}}" href="{% url 'musician:contactForm' username 'management' %}">Edit</a>
+              <a class="editMusicianContact {{isEditable}}" href="{% url 'musician:contactForm' 'management' %}">Edit</a>
             </div>
           </div>
         </div>
@@ -113,7 +113,7 @@
             </div>
             <div class="panel-body">
               {% include "profile/_contact.html" with contact_info=musicianProfile.press_contact %}
-              <a class="editMusicianContact {{isEditable}}" href="{% url 'musician:contactForm' username 'press' %}">Edit</a>
+              <a class="editMusicianContact {{isEditable}}" href="{% url 'musician:contactForm' 'press' %}">Edit</a>
             </div>
           </div>
         </div>

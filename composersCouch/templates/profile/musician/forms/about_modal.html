@@ -3,13 +3,13 @@
 {% block modalNav %}
   <ul class="nav nav-pills">
     <li class="{% block biographyClass %}{% endblock %}">
-      <a class="editMusicianBiography" href="{% url 'musician:biographyForm' username  %}">Biography</a>
+      <a class="editMusicianBiography" href="{% url 'musician:biographyForm' %}">Biography</a>
     </li>
     <li class="{% block memberClass %}{% endblock %}">
-      <a class="editMusicianMembers" href="{% url 'musician:memberForm' username %}">Members</a>
+      <a class="editMusicianMembers" href="{% url 'musician:memberForm' %}">Members</a>
     </li>
     <li class="{% block contactClass %}{% endblock %}">
-      <a class="editMusicianContact" href="{% url 'musician:userContactForm' username %}">Contact</a>
+      <a class="editMusicianContact" href="{% url 'musician:userContactForm' %}">Contact</a>
     </li>
   </ul>
 {% endblock %}
