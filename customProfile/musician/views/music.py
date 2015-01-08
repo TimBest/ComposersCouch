@@ -92,8 +92,7 @@ class AlbumView(ImageFormMixin, MultipleModelFormsView):
         addTracksToAlbum(self.request,
                          self.request.FILES.getlist('tracks'),
                          album)
-        return redirect(self.success_url, username=self.request.user.username,
-                        albumID=album.id)
+        return redirect(self.success_url, albumID=album.id)
 
 AddEditAlbum = AlbumView.as_view()
 
@@ -133,15 +132,15 @@ class TracksView(ProfileFormMixin, UpdateView):
         }
         return context
 
-    def get(self, request, username=None, **kwargs):
+    def get(self, request, **kwargs):
         return render(request, self.template_name, self.get_context_data())
 
-    def post(self, request, username, **kwargs):
+    def post(self, request, **kwargs):
         context = self.get_context_data()
         if context['formset'].is_valid():
             context['formset'].save()
             if not request.FILES.getlist('tracks'):
-                return redirect(self.success_url, username=username)
+                return redirect(self.success_url, username=self.user.username)
             else:
                 addTracksToAlbum(request,
                                  request.FILES.getlist('tracks'),
@@ -167,7 +166,7 @@ AddEditTracks = TracksView.as_view()
         track = form.save(commit=False)
         track.musician = self.user.profile.musicianProfile
         track.save()
-        return redirect(self.success_url, username=self.username)
+        return redirect(self.success_url, username=self.user.username)
 
 interview_form = InterviewView.as_view()
 """

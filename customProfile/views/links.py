@@ -18,7 +18,7 @@ class LinksView(ProfileFormMixin, UpdateView):
         social = form.save(commit=False)
         social.profile = self.user.profile
         social.save()
-        return redirect(self.success_url, username=self.username)
+        return redirect(self.success_url, username=self.user.username)
 
 #About page links to social media
 class ArtistSocialView(LinksView):
@@ -69,6 +69,6 @@ class MusicLinksView(ProfileFormMixin, UpdateView):
         music = form.save(commit=False)
         music.profile = self.user.profile.musicianProfile
         music.save()
-        return redirect(self.success_url, username=self.username)
+        return redirect(self.success_url, username=self.user.username)
 
 music_links = MusicLinksView.as_view()

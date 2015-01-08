@@ -81,7 +81,7 @@ class ProfileEdit(ImageFormMixin, MultipleFormsView):
 
     def get_forms(self):
         forms = {}
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        user = self.request.user
         form_kwargs = self.get_form_kwargs()
         forms['usernameForm'] = profile_forms.UsernameForm(instance=user, **form_kwargs)
         forms['mugshotFrom'] = MugshotForm(instance=user.profile.mugshot, **form_kwargs)
@@ -114,4 +114,4 @@ class ProfileEdit(ImageFormMixin, MultipleFormsView):
         profile.save()
         return redirect(self.success_url, username=username)
 
-profile_edit = ProfileEdit.as_view()
+profile_edit = login_required(ProfileEdit.as_view())

@@ -35,11 +35,12 @@ class TrackVideoView(TracksView):
             'formset': self.get_formset(),
         }
 
-    def post(self, request, username, **kwargs):
+    def post(self, request, **kwargs):
         context = self.get_context_data()
         if context['formset'].is_valid():
-            context['formset'].save()
-            return redirect(self.success_url, username=username)
+            for form in context['formset']:
+                form.save
+            return redirect(self.success_url, username=self.user.username)
         return render(request, self.template_name, context)
 
 add_video_to_album = TrackVideoView.as_view()

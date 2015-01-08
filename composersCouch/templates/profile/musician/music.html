@@ -15,7 +15,7 @@
               {% if music.spotify %}<a href="{{ music.spotify }}" target="_blank" class="btn btn-spotify"><span class="fa fa-spotify"></span></a>{% endif %}
               {% if music.soundcloud %}<a href="{{ music.soundcloud }}" target="_blank" class="btn btn-soundcloud"><span class="fa fa-soundcloud"></span></a>{% endif %}
           {% endwith %}
-          <a href="{% url 'musician:musicLinksForm' username  %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
+          <a href="{% url 'musician:musicLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
         </p></div>
       </div>
     </div>
