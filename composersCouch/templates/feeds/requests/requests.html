@@ -7,17 +7,17 @@
 
 {% block scopeNav %}
   <li class="{% block localClass %}{% endblock %}">
-    <a href="{% url 'requests' order for 'local' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Local</a>
+    <a href="{% url 'requests' order for 'local' zipcode %}?{{ request.GET.urlencode }}">Local</a>
   </li>
   <li class="{% block regionalClass %}{% endblock %}">
-    <a href="{% url 'requests' order for 'regional' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Regional</a>
+    <a href="{% url 'requests' order for 'regional' zipcode %}?{{ request.GET.urlencode }}">Regional</a>
   </li>
   <li class="{% block globalClass %}{% endblock %}">
-    <a href="{% url 'requests' order for 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a>
+    <a href="{% url 'requests' order for 'all' zipcode %}?{{ request.GET.urlencode }}">All</a>
   </li>
   {% if user.is_authenticated %}
     <li class="{% block followingClass %}{% endblock %}">
-      <a href="{% url 'requests' order for 'following' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Following</a>
+      <a href="{% url 'requests' order for 'following' zipcode %}?{{ request.GET.urlencode }}">Following</a>
     </li>
   {% endif %}
 {% endblock %}
@@ -30,10 +30,10 @@
     </a>
     <ul class="dropdown-menu">
       <li class="{% if for == 'band' %}active{% endif %}">
-        <a href="{% url 'requests' order 'band' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Bands</a>
+        <a href="{% url 'requests' order 'band' 'all' zipcode %}?{{ request.GET.urlencode }}">Bands</a>
       </li>
       <li class="{% if for == 'venue' %}active{% endif %}">
-        <a href="{% url 'requests' order 'venue' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Venues</a>
+        <a href="{% url 'requests' order 'venue' 'all' zipcode %}?{{ request.GET.urlencode }}">Venues</a>
       </li>
     </ul>
   </span>
@@ -41,13 +41,13 @@
 
 {% block orderOptions %}
   <li class="{% ifequal order 'all' %}text-bold{% endifequal %}">
-    <a href="{% url 'requests' 'all' for 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a>
+    <a href="{% url 'requests' 'all' for 'all' zipcode %}?{{ request.GET.urlencode }}">All</a>
   </li>
   <li class="{% ifequal order 'expiring' %}text-bold{% endifequal %}">
-    <a href="{% url 'requests' 'expiring' for 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Expiring</a>
+    <a href="{% url 'requests' 'expiring' for 'all' zipcode %}?{{ request.GET.urlencode }}">Expiring</a>
   </li>
   <li class="{% ifequal order 'new' %}text-bold{% endifequal %}">
-    <a href="{% url 'requests' 'new' for 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">New </a>
+    <a href="{% url 'requests' 'new' for 'all' zipcode %}?{{ request.GET.urlencode }}">New </a>
   </li>
 {% endblock %}
 

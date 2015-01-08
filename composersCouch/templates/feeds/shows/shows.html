@@ -7,30 +7,30 @@
 
 {% block scopeNav %}
   <li class="{% block localClass %}{% endblock %}">
-    <a href="{% url 'shows' order 'local' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Local</a>
+    <a href="{% url 'shows' order 'local' zipcode %}?{{ request.GET.urlencode }}">Local</a>
   </li>
   <li class="{% block regionalClass %}{% endblock %}">
-    <a href="{% url 'shows' order 'regional' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Regional</a>
+    <a href="{% url 'shows' order 'regional' zipcode %}?{{ request.GET.urlencode }}">Regional</a>
   </li>
   <li class="{% block globalClass %}{% endblock %}">
-    <a href="{% url 'shows' order 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a>
+    <a href="{% url 'shows' order 'all' zipcode %}?{{ request.GET.urlencode }}">All</a>
   </li>
   {% if user.is_authenticated %}
     <li class="{% block followingClass %}{% endblock %}">
-      <a href="{% url 'shows' order 'following' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Following</a>
+      <a href="{% url 'shows' order 'following' zipcode %}?{{ request.GET.urlencode }}">Following</a>
     </li>
   {% endif %}
 {% endblock %}
 
 {% block orderOptions %}
   <li class="{% ifequal order 'all' %}text-bold{% endifequal %}">
-    <a href="{% url 'shows' 'all' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a>
+    <a href="{% url 'shows' 'all' 'all' zipcode %}?{{ request.GET.urlencode }}">All</a>
   </li>
   <li class="{% ifequal order 'upcoming' %}text-bold{% endifequal %}">
-    <a href="{% url 'shows' 'upcoming' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Upcoming</a>
+    <a href="{% url 'shows' 'upcoming' 'all' zipcode %}?{{ request.GET.urlencode }}">Upcoming</a>
   </li>
   <li class="{% ifequal order 'new' %}text-bold{% endifequal %}">
-    <a href="{% url 'shows' 'new' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">New </a>
+    <a href="{% url 'shows' 'new' 'all' zipcode %}?{{ request.GET.urlencode }}">New </a>
   </li>
 {% endblock %}
 {% block availabilityForm %}{% endblock %}

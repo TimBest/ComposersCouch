@@ -11,19 +11,19 @@
     <div class="main-nav" >
       <ul class="nav nav-pills" role="menu">
         <li class="{% block requestsClass %}{% endblock %}">
-          <a href="{% url 'requests' 'expiring' 'default' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Requests</a>
+          <a href="{% url 'requests' 'expiring' 'default' 'all' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
         </li>
         <li class="{% block showsClass %}{% endblock %}">
-          <a href="{% url 'shows' 'upcoming' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Concerts</a>
+          <a href="{% url 'shows' 'upcoming' zipcode %}?{{ request.GET.urlencode }}">Concerts</a>
         </li>
         <li class="{% block artistsClass %}{% endblock %}">
-          <a href="{% url 'artists' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Artists</a>
+          <a href="{% url 'artists' 'all' zipcode %}?{{ request.GET.urlencode }}">Artists</a>
         </li>
         <li class="{% block venuesClass %}{% endblock %}">
-          <a href="{% url 'venues' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Venues</a>
+          <a href="{% url 'venues' 'all' zipcode %}?{{ request.GET.urlencode }}">Venues</a>
         </li>
         <li class="{% block updatesClass %}{% endblock %}">
-          <a href="{% url 'updates' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Updates</a>
+          <a href="{% url 'updates' 'all' zipcode %}?{{ request.GET.urlencode }}">Updates</a>
         </li>
       </ul>
     </div>

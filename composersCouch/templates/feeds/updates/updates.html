@@ -7,17 +7,17 @@
 
 {% block scopeNav %}
   <li class="{% block localClass %}{% endblock %}">
-    <a href="{% url 'updates' 'local' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Local</a>
+    <a href="{% url 'updates' 'local' zipcode %}?{{ request.GET.urlencode }}">Local</a>
   </li>
   <li class="{% block regionalClass %}{% endblock %}">
-    <a href="{% url 'updates' 'regional' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Regional</a>
+    <a href="{% url 'updates' 'regional' zipcode %}?{{ request.GET.urlencode }}">Regional</a>
   </li>
   <li class="{% block globalClass %}{% endblock %}">
-    <a href="{% url 'updates' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a>
+    <a href="{% url 'updates' 'all' zipcode %}?{{ request.GET.urlencode }}">All</a>
   </li>
   {% if user.is_authenticated %}
     <li class="{% block followingClass %}{% endblock %}">
-      <a href="{% url 'updates' 'following' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Following</a>
+      <a href="{% url 'updates' 'following' zipcode %}?{{ request.GET.urlencode }}">Following</a>
     </li>
   {% endif %}
 {% endblock %}
