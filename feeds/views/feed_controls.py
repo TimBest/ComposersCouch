@@ -101,16 +101,8 @@ class GenreFormView(FormView):
         return redirect(path)
 
     def form_valid(self, form):
-        # TODO: clean this up
         path = self.request.POST.get('path')
-        path = resolve(urlparse(path)[2])
-        url_name = path.url_name
-        kwargs = path.kwargs
-        if url_name == 'home':
-            kwargs['scope'] = homeScope
-            url_name = homeCategory
-        url = reverse(url_name, kwargs=kwargs)
-        response = redirect(url)
+        response = redirect(path)
         response['Location'] += self.get_querystring()
         return response
 

@@ -4,8 +4,8 @@ from django.conf.urls import include, patterns, url
 view_location = 'feeds.views'
 
 # used in feed system for redirect when appending zipcode onto url
-homeCategory = 'shows'
-homeScope = 'global'
+homeCategory = 'requests'
+homeScope = 'all'
 
 urlpatterns = patterns(view_location,
     url(r'^follow/$',
