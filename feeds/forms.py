@@ -63,10 +63,11 @@ class AvailabilityForm(forms.Form):
     def __init__(self, *args, **kwargs):
         super(AvailabilityForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.fields['date'].label = ''
         self.helper.form_tag = False
         self.helper.layout = Layout(
               'date',
-            Submit('submit', 'submit', css_class='btn btn-primary pull-right'),
+            Submit('submit', 'submit', css_class='btn btn-primary'),
         )
 
 class GenreForm(ModelForm):
