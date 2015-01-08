@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 from autocomplete_light import MultipleChoiceWidget
 from autocomplete_light import ModelForm
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Field, Layout, Submit
+from crispy_forms.layout import Field, Div, Layout, Submit
 
 from models import Follow, Post
 from post_feedly import feedly
@@ -66,7 +66,7 @@ class AvailabilityForm(forms.Form):
         self.fields['date'].label = ''
         self.helper.form_tag = False
         self.helper.layout = Layout(
-              'date',
+            'date',
             Submit('submit', 'submit', css_class='btn btn-primary'),
         )
 
@@ -80,9 +80,15 @@ class GenreForm(ModelForm):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-              'genre',
-              'usersGenres',
-            Submit('submit', 'Filter', css_class='btn btn-primary pull-right'),
+            'genre',
+            Div(
+              Div('usersGenres',css_class='col-xs-6 left',),
+              Div(
+                Submit('submit', 'Filter', css_class='btn btn-default pull-right'),
+                css_class='col-xs-6 right',css_id='end-div',
+              ),
+              css_class='row no-gutter',
+            ),
         )
 
     class Meta:

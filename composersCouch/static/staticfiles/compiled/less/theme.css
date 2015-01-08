@@ -7858,7 +7858,7 @@ h1 {
   float: left;
 }
 .feed .genre-form {
-  width: 200px;
+  max-width: 200px;
 }
 .feed .cards {
   text-align: left;
