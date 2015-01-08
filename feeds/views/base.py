@@ -91,7 +91,9 @@ class AvailabilityMixin(object):
             kwargs['month'] = now.month
             kwargs['day'] = now.day
             url_name = resolve(self.request.path_info).url_name
-            return redirect(reverse(url_name, kwargs=kwargs))
+            response = redirect(reverse(url_name, kwargs=kwargs))
+            response['Location'] += '?' + self.request.GET.urlencode()
+            return response
         self.end_date = self.start_date + timedelta(1)
         return super(AvailabilityMixin, self).dispatch(request, *args, **kwargs)
 

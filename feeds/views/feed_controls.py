@@ -84,7 +84,7 @@ class GenreFormView(FormView):
         genres = self.request.POST.getlist('genre')
         usersGenres = self.request.POST.get('usersGenres')
         if genres:
-            for i, genre in enumerate(genres):
+            for genre in genres:
                 if qs:
                     qs += '&genre=' + str(genre)
                 else:
