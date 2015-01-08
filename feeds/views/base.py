@@ -71,7 +71,6 @@ class FeedMixin(GenreMixin, ZipcodeMixin):
         if context.get('genres'):
             posts = self.filter_by_genre(context['genres'], posts)
         context['posts'] = get_page(page_num, posts, 25)
-        context['availabilityForm'] = AvailabilityForm()
         if not self.kwargs.get('order'):
           context['order'] = self.get_default_order()
         return context
@@ -106,4 +105,5 @@ class AvailabilityMixin(object):
     def get_context_data(self, **kwargs):
         context = super(AvailabilityMixin, self).get_context_data(**kwargs)
         context['date'] = self.start_date
+        context['availabilityForm'] = AvailabilityForm()
         return context
