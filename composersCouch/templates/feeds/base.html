@@ -78,7 +78,7 @@
         {% block forForm %}{% endblock %}
         {% block availabilityForm %}
           <span>available on</span>
-          <a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus"
+          <a href="#" role="button" data-toggle="popover"
              id="availability-select" class="toggle" title="Availability">
             {% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %}<span class="caret"></span>
           </a>
@@ -91,7 +91,7 @@
         {% endblock %}
         {% block zipcodeForm %}
           <span> near</span>
-          <a href="#" tabindex="0" role="button" data-toggle="popover" data-trigger="focus"
+          <a href="#" role="button" data-toggle="popover"
              id="zipcode-select" class="toggle" title="Zipcode">
             {% if zipcode %}{{ zipcode }}{% else %}Zipcode{% endif %}<span class="caret"></span>
           </a>
@@ -125,22 +125,22 @@
             return $('.zipcode-content').html();
         }
     });
+    $('html').on('click', function (e) {
+      $('[data-toggle="popover"]').each(function () {
+        //the 'is' for buttons that trigger popups
+        //the 'has' for icons within a button that triggers a popup
+        if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0) {
+          $(this).popover('hide');
+        }
+      });
+    });
     $('#availability-select').on('shown.bs.popover', function () {
         $(function () {
             $('#id_date').datetimepicker({pickTime: false});
         });
     })
-    $('#genre-select').on('shown.bs.popover', function () {
-          {% comment %}TODO: get url with not so fancy javascript{% endcomment %}
-          $('#div_id_genre').yourlabsWidget({
-              autocompleteOptions: {
-                  url: '/autocomplete/GenreAutocomplete/',
-                  choiceSelector: '[data-value]',
-                  placeholder: '',
-              },
-          });
-    })
     $('#zipcode-select').on('shown.bs.popover', function () {
+          {% comment %}TODO: get url with not so fancy javascript{% endcomment %}
           $('#div_id_zip_code').yourlabsWidget({
               autocompleteOptions: {
                   url: '/autocomplete/ZipcodeAutocomplete/',
