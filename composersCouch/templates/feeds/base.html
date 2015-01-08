@@ -81,8 +81,8 @@
           <a href="#" id="availability-select" class="toggle">
             {% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %}<span class="caret"></span>
           </a>
-          <div class="head hide">Availability</div>
-          <div class="content hide">
+          <div class="availability-head hide">Availability</div>
+          <div class="availability-content hide">
             <form class="availability-form" role="filter" method="POST" action="{% url 'availability' %}">
               <input type="hidden" name="path" value="{% firstof request.path '/' %}">
               {% crispy availabilityForm %}
@@ -94,8 +94,8 @@
           <a href="#" id="zipcode-select" class="toggle">
             {% if zipcode %}{{ zipcode }}{% else %}Zipcode{% endif %}<span class="caret"></span>
           </a>
-          <div class="head hide">Zipcode</div>
-          <div class="content hide">
+          <div class="zipcode-head hide">Zipcode</div>
+          <div class="zipcode-content hide">
             <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
               <input type="hidden" name="path" value="{% firstof request.path '/' %}">
               {% crispy zipcodeForm %}
@@ -115,10 +115,6 @@
         $('#genre-select').popover('hide')
         $('#zipcode-select').popover('hide')
     })
-    $('#genre-select').on('show.bs.popover', function () {
-        $('#availability-select').popover('hide')
-        $('#zipcode-select').popover('hide')
-    })
     $('#zipcode-select').on('show.bs.popover', function () {
         $('#availability-select').popover('hide')
         $('#genre-select').popover('hide')
@@ -127,30 +123,20 @@
         html: true,
         placement: 'bottom',
         title: function () {
-            return $(this).parent().find('.head').html();
+            return $(this).parent().find('.availability-head').html();
         },
         content: function () {
-            return $(this).parent().find('.content').html();
-        }
-    });
-    $('#genre-select').popover({
-        html: true,
-        placement: 'bottom',
-        title: function () {
-            return $(this).parent().find('.head').html();
-        },
-        content: function () {
-            return $(this).parent().find('.content').html();
+            return $(this).parent().find('.availability-content').html();
         }
     });
     $('#zipcode-select').popover({
         html: true,
         placement: 'bottom',
         title: function () {
-            return $(this).parent().find('.head').html();
+            return $(this).parent().find('.zipcode-head').html();
         },
         content: function () {
-            return $(this).parent().find('.content').html();
+            return $(this).parent().find('.zipcode-content').html();
         }
     });
     $('#availability-select').on('shown.bs.popover', function () {
