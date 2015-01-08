@@ -58,13 +58,15 @@ class ReqionalView(UpdateView):
     feed = 'get_regional_feed'
     location_type = 'code'
 
-class AllView(FeedMixin, TemplateView):
+class AllView(TemplateView):
     template_name = 'feeds/updates/all.html'
     path_to_genre = 'user__profile__genre__slug'
 
-    def get_posts(self, **kwargs):
-        posts = super(AllView, self).get_posts(**kwargs)
-        return Post.objects.all()
+    def get_context_data(self, **kwargs):
+        context = super(AllView, self).get_context_data(**kwargs)
+        page_num = self.request.GET.get('page')
+        context['posts'] = get_page(page_num, Post.objects.all(), 25)
+        return context
 
 class FollowingView(UpdateView):
     template_name='feeds/updates/following.html'
