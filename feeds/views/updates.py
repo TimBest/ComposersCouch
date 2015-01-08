@@ -5,7 +5,7 @@ from django.template.context import RequestContext
 from django.views.generic import TemplateView
 
 from composersCouch.utils import get_page
-from feeds.views import FeedMixin
+from feeds.views import FeedMixin, ZipcodeMixin
 from feeds.utils import enrich_activities
 from contact.utils import get_location
 from feeds.models import Post
@@ -25,8 +25,7 @@ def updates(request, scope='all', *args, **kwargs):
     else:
         return AllView.as_view()(request, *args, **kwargs)
 
-
-class UpdateView(FeedMixin, TemplateView):
+class UpdateView(ZipcodeMixin, TemplateView):
     template_name = 'feeds/updates/local.html'
     feed = 'get_local_feed'
     location_type = 'code'
@@ -61,6 +60,7 @@ class ReqionalView(UpdateView):
 
 class AllView(FeedMixin, TemplateView):
     template_name = 'feeds/updates/all.html'
+    path_to_genre = 'user__profile__genre__slug'
 
     def get_posts(self, **kwargs):
         posts = super(AllView, self).get_posts(**kwargs)
@@ -70,7 +70,7 @@ class FollowingView(UpdateView):
     template_name='feeds/updates/following.html'
 
     def get_context_data(self, **kwargs):
-        context = super(FeedMixin, self).get_context_data(**kwargs)
+        context = super(FollowingView, self).get_context_data(**kwargs)
         page_num = self.request.GET.get('page')
         feed = feedly.get_feeds(self.request.user.id)['normal']
         activities = list(feed[:25])

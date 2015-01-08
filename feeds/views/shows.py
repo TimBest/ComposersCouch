@@ -26,7 +26,7 @@ def shows(request, scope='all', *args, **kwargs):
 
 class ShowView(FeedMixin, TemplateView):
     modelManager = Show.objects
-    path_to_genre = 'host__profile__genre__slug'
+    path_to_genre = 'info__host__profile__genre__slug'
     # TODO: expand to also match with those preforming
 
     def get_default_order(self):

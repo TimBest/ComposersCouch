@@ -7,29 +7,29 @@
 
 {% block scopeNav %}
   <li class="{% block localClass %}{% endblock %}">
-    <a href="{% url 'venues' order 'local' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Local</a>
+    <a href="{% url 'venues' order 'local' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Local</a>
   </li>
   <li class="{% block regionalClass %}{% endblock %}">
-    <a href="{% url 'venues' order 'regional' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Regional</a>
+    <a href="{% url 'venues' order 'regional' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Regional</a>
   </li>
   <li class="{% block globalClass %}{% endblock %}">
-    <a href="{% url 'venues' order 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a>
+    <a href="{% url 'venues' order 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a>
   </li>
   {% if user.is_authenticated %}
     <li class="{% block followingClass %}{% endblock %}">
-      <a href="{% url 'venues' order 'following' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Following</a>
+      <a href="{% url 'venues' order 'following' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Following</a>
     </li>
   {% endif %}
   <li class="{% block availableClass %}{% endblock %}">
-    <a href="{% url 'available_venues' order 2014 32 32 zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Available</a>
+    <a href="{% url 'available_venues' order 2014 32 32 zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">Available</a>
   </li>
 {% endblock %}
 
 {% block orderOptions %}
   <li class="{% ifequal order 'all' %}text-bold{% endifequal %}">
-    <a href="{% url 'venues' 'all' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a>
+    <a href="{% url 'venues' 'all' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">All</a>
   </li>
   <li class="{% ifequal order 'new' %}text-bold{% endifequal %}">
-    <a href="{% url 'venues' 'new' 'all' zipcode %}?{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">New </a>
+    <a href="{% url 'venues' 'new' 'all' zipcode %}{% include 'feeds/_genres.html' with  genres=genres usersGenres=usersGenres %}">New </a>
   </li>
 {% endblock %}
