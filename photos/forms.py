@@ -1,4 +1,7 @@
 from django import forms
+from django.conf import settings
+from django.core.exceptions import ValidationError
+from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext_lazy as _
 
 from autocomplete_light import ModelForm
@@ -9,7 +12,41 @@ from crispy_forms.layout import Div, Layout, Submit
 from models import Image
 
 
-class ImageForm(ModelForm):
+def clean_image(image):
+    if image:
+        print image._size
+        print settings.PHOTOS_MAX_UPLOAD_SIZE
+        if int(image._size) > int(settings.PHOTOS_MAX_UPLOAD_SIZE):
+            print "validation error should be raised"
+            raise ValidationError(
+                _('Please keep filesize under %(max)s. Current filesize %(current)s'),
+                code='invalid',
+                params={'max': filesizeformat(settings.PHOTOS_MAX_UPLOAD_SIZE), 'current' : filesizeformat(image._size)},
+            )
+    return image
+
+class ImageOnlyForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(ImageOnlyForm, self).__init__(*args, **kwargs)
+        self.fields['image'].label = 'Photo'
+        self.fields['image'].required = False
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Div(
+              'image',
+            ),
+        )
+
+    class Meta(object):
+        model = Image
+        fields = ['image',]
+
+    def clean_image(self):
+        return clean_image(self.cleaned_data.get("image", ""))
+
+class ImageForm(ImageOnlyForm):
     def __init__(self, *args, **kwargs):
         super(ImageForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -29,24 +66,6 @@ class ImageForm(ModelForm):
                                 attrs={'rows': 2, 'cols': 19}),
         }
         fields = ('image','title','description',)
-
-class ImageOnlyForm(ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(ImageOnlyForm, self).__init__(*args, **kwargs)
-        self.fields['image'].label = 'Photo'
-        self.fields['image'].required = False
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-              'image',
-            ),
-        )
-
-    class Meta(object):
-        model = Image
-        fields = ['image',]
 
 class AlbumArtForm(ImageOnlyForm):
     def __init__(self, *args, **kwargs):

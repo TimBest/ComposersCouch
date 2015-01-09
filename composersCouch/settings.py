@@ -189,6 +189,10 @@ MEDIA_ROOT = os.path.join( BASE_DIR, 'composersCouch/media' )
 
 MEDIA_URL = '/media/'
 
+
+#10MB
+MAX_AUDIO_UPLOAD_SIZE = "10485760"
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 STATIC_ROOT = os.path.join( BASE_DIR, 'composersCouch/static/staticfiles/' )
