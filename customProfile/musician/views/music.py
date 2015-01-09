@@ -77,7 +77,7 @@ class AlbumView(ImageFormMixin, MultipleModelFormsView):
         }
 
     def forms_valid(self, forms):
-        album = forms['albumForm'].save(commit=False)
+        album = forms['albumForm'].save(request=self.request, commit=False)
         album.musician_profile = self.request.user.profile.musicianProfile
         if self.request.FILES.get('image'):
             album.album_art = Image.objects.create(
@@ -90,9 +90,9 @@ class AlbumView(ImageFormMixin, MultipleModelFormsView):
             album.album_art = get_object_or_None(Image, id=imageId)
         album.save()
         forms['albumForm'].save_m2m()
-        addTracksToAlbum(self.request,
+        """addTracksToAlbum(self.request,
                          self.request.FILES.getlist('tracks'),
-                         album)
+                         album)"""
         return redirect(self.success_url, albumID=album.id)
 
 AddEditAlbum = AlbumView.as_view()

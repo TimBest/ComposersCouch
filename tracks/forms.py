@@ -1,31 +1,24 @@
+import mutagen
 from django import forms
 from django.conf import settings
+from django.contrib import messages
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.forms import ModelChoiceField, ModelMultipleChoiceField, Textarea
-from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext_lazy as _
 
 from autocomplete_light import ModelForm
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, HTML, Layout
+from multiupload.fields import MultiFileField
 
 from accounts.models import Genre, MusicianProfile
 from embed_video.fields import EmbedVideoFormField
 from tracks.models import Album, Track, Media
 
 
-def clean_audio(audio):
-    if audio:
-        if int(audio._size) > int(settings.MAX_AUDIO_UPLOAD_SIZE):
-            raise ValidationError(
-                _('Please keep filesize under %(max)s. Current filesize %(current)s'),
-                code='invalid',
-                params={'max': filesizeformat(settings.MAX_AUDIO_UPLOAD_SIZE), 'current' : filesizeformat(audio._size)},
-            )
-    return audio
-
 class AlbumForm(ModelForm):
-
+    tracks = MultiFileField(required=False, max_num=15, min_num=0, max_file_size=settings.MAX_AUDIO_UPLOAD_SIZE)
     def __init__(self, *args, **kw):
         super(AlbumForm, self).__init__(*args, **kw)
         self.helper = FormHelper()
@@ -38,7 +31,7 @@ class AlbumForm(ModelForm):
           ),
           'genre',
           'description',
-          HTML("<label>Tracks</label><input type='file' name='tracks' multiple>")
+          'tracks',
         )
 
     class Meta:
@@ -47,6 +40,33 @@ class AlbumForm(ModelForm):
             'description' : Textarea(attrs={'rows': 2, 'cols': 19}),
         }
         fields = ['title', 'genre', 'year', 'description']
+
+    def save(self, request, commit=True):
+        super(AlbumForm, self).save(commit=commit)
+        tracks_on_album = Track.objects.filter(album=self.instance).count() + 1
+        for file in self.cleaned_data['tracks']:
+            try:
+                file_path = file.temporary_file_path()
+                metadata = mutagen.File(file_path, easy=True)
+                if metadata and metadata.get('title'):
+                    title=metadata.get('title')[0]
+            except:
+                title = ""
+            media = Media(audio=file, title=title)
+            try:
+                media.full_clean()
+                media.set_upload_to_info(
+                    username=self.instance.musician_profile.profile.user.username,
+                    track_type="albums",
+                    album_title=self.instance.title
+                )
+                media.save()
+                track = Track(media=media, order=tracks_on_album, album=self.instance)
+                tracks_on_album += 1
+                track.save()
+            except ValidationError as e:
+                messages.error(request, e.messages[0]+" : "+str(file))
+        return self.instance
 
 class AlbumAudioForm(ModelForm):
     title = forms.CharField(max_length=128)
