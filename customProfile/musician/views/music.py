@@ -1,4 +1,5 @@
 import mutagen
+from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import ValidationError
 from django.forms.models import inlineformset_factory
@@ -129,6 +130,7 @@ class TracksView(ProfileFormMixin, UpdateView):
             'album'         : album,
             'formset'       : formset,
             'formsetTracks' : formsetTracks,
+            'media_url'     : settings.MEDIA_URL,
         }
         return context
 

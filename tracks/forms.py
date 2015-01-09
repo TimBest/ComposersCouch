@@ -54,17 +54,8 @@ class AlbumAudioForm(ModelForm):
                     css_class='row no-gutter',
                 ),
                 Div(
-                  Div(
-                    HTML (
-                      "<label>Currently</label><audio controls><source src='{{media_url}}{{track.media.audio}}' type='audio/mp3'>Your browser does not support the audio element.</audio>"
-                    ),
-                    css_class='col-sm-6 left',
-                  ),
-                  Div(
-                    HTML (
-                        "<span class='text-danger'>{{form.audio.errors}}</span><label>Change To</label><input class='clearablefileinput' id='{{ form.audio.auto_id }}' name='{{ form.audio.html_name }}' type='file'>"
-                    ),
-                    css_class='col-sm-6 right',
+                  HTML (
+                    "<label>Currently</label><audio controls><source src='{{media_url}}{{track.media.audio}}' type='audio/mp3'>Your browser does not support the audio element.</audio>"
                   ),
                   css_class='audio-layout row no-gutter',
                 ),
