@@ -1,6 +1,8 @@
 from django import forms
-from django.forms import ModelChoiceField, ModelMultipleChoiceField, Textarea
+from django.conf import settings
 from django.contrib.auth.models import User
+from django.forms import ModelChoiceField, ModelMultipleChoiceField, Textarea
+from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext_lazy as _
 
 from autocomplete_light import ModelForm
@@ -9,8 +11,18 @@ from crispy_forms.layout import Div, HTML, Layout
 
 from accounts.models import Genre, MusicianProfile
 from embed_video.fields import EmbedVideoFormField
-from tracks.models import Album, Cover, Track, Media, Interview
+from tracks.models import Album, Track, Media
 
+
+def clean_audio(audio):
+    if audio:
+        if int(audio._size) > int(settings.MAX_AUDIO_UPLOAD_SIZE):
+            raise ValidationError(
+                _('Please keep filesize under %(max)s. Current filesize %(current)s'),
+                code='invalid',
+                params={'max': filesizeformat(settings.MAX_AUDIO_UPLOAD_SIZE), 'current' : filesizeformat(audio._size)},
+            )
+    return audio
 
 class AlbumForm(ModelForm):
 
@@ -35,7 +47,6 @@ class AlbumForm(ModelForm):
             'description' : Textarea(attrs={'rows': 2, 'cols': 19}),
         }
         fields = ['title', 'genre', 'year', 'description']
-
 
 class AlbumAudioForm(ModelForm):
     title = forms.CharField(max_length=128)

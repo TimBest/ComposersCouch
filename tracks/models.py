@@ -97,7 +97,7 @@ class Media(models.Model):
 
 class Track(models.Model):
     album = models.ForeignKey(Album, related_name='track_set')
-    order = models.PositiveSmallIntegerField(verbose_name=_("order"), unique=True)
+    order = models.PositiveSmallIntegerField(verbose_name=_("order"))
     media = models.OneToOneField(Media, related_name='album_track')
 
     class Meta:
@@ -106,14 +106,14 @@ class Track(models.Model):
     def __unicode__(self):
         return '%s'% self.id
 
-class Cover(models.Model):
-    media = models.OneToOneField(Media, verbose_name=_("media"),null=True, blank=True)
-    musician = models.ForeignKey('accounts.MusicianProfile', related_name='covers')
-    target_musician = models.ForeignKey('accounts.MusicianProfile', related_name='ceverd')
+#class Cover(models.Model):
+#    media = models.OneToOneField(Media, verbose_name=_("media"),null=True, blank=True)
+#    musician = models.ForeignKey('accounts.MusicianProfile', related_name='covers')
+#    target_musician = models.ForeignKey('accounts.MusicianProfile', related_name='ceverd')
 
-class Interview(models.Model):
-    media = models.OneToOneField(Media, verbose_name=_("media"),null=True, blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-    musician = models.ForeignKey('accounts.MusicianProfile', verbose_name=_("musician profile"), related_name='interviews')
-    host = models.ForeignKey(User, verbose_name=_("host profile"), related_name='interviews_hosted', null=True, blank=True)
+#class Interview(models.Model):
+#    media = models.OneToOneField(Media, verbose_name=_("media"),null=True, blank=True)
+#    created_at = models.DateTimeField(auto_now_add=True)
+#    updated_at = models.DateTimeField(auto_now=True)
+#    musician = models.ForeignKey('accounts.MusicianProfile', verbose_name=_("musician profile"), related_name='interviews')
+#    host = models.ForeignKey(User, verbose_name=_("host profile"), related_name='interviews_hosted', null=True, blank=True)
