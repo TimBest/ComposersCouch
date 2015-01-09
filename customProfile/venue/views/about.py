@@ -129,6 +129,7 @@ class HoursView(ProfileFormMixin, FormView):
             hours = f.save(commit=False)
             hours.profile = self.user.profile.venueProfile
             hours.weekday = count
+            hours.save()
         return redirect(self.success_url, username=self.user.username)
 
 hours = HoursView.as_view()
