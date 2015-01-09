@@ -5,7 +5,7 @@ view_location = 'customProfile.views'
 urlpatterns = patterns(view_location,
     # Views
     url(r'^(?P<username>[-\w]+)/', include(patterns(view_location,
-        url(r'^$', 'profileRedirect', {'redirect_url': 'venue:news'}, name='home'),
+        url(r'^$', 'profileRedirect', {'redirect_url': 'venue:about'}, name='home'),
         url(r'^news/$', 'venue_news', name='news'),
         url(r'^shows/$','venue_shows', name='shows'),
         url(r'^shows/(?P<year>\d{4})/$','venue_shows',name='shows'),
