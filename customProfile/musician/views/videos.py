@@ -37,9 +37,11 @@ class TrackVideoView(TracksView):
 
     def post(self, request, **kwargs):
         context = self.get_context_data()
+        #print context
         if context['formset'].is_valid():
-            for form in context['formset']:
-                form.save
+            context['formset'].save()
+            #for form in context['formset']:
+            #    form.save()
             return redirect(self.success_url, username=self.user.username)
         return render(request, self.template_name, context)
 

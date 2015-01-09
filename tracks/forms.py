@@ -90,14 +90,29 @@ class AlbumVideoForm(ModelForm):
             ),
         )
         track = kwargs.get('instance', None)
-        if track:
+        if hasattr(track, 'media'):
             self.fields['title'].initial = track.media.title
+            self.fields['video'].initial = track.media.video
 
     class Meta:
         model = Track
         fields = ['album','order']
 
 
+    def save(self, commit):
+        track = super(AlbumVideoForm, self).save(commit=False)
+        title = self.cleaned_data.get('title')
+        video = self.cleaned_data.get('video')
+        if hasattr(track, 'media'):
+            track.media.title = title
+            track.media.video = video
+            track.media.save()
+        else:
+            media = Media(title=title, video=video)
+            media.save()
+            track.media = media
+            track.save()
+        return track
 """
 video_layout = Layout(
   Div(
