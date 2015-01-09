@@ -6,7 +6,7 @@
       <div class="message-row reciver">
         <div class="message-image-col">
           <div class="message-image">
-            <a href="{% if post.user %}{% url 'redirectToProfile' post.user.username %}{% endif %}">
+            <a href="{% if post.user %}{{ post.user.profile.get_absolute_url }}{% endif %}">
               {% include "utils/_mugshot.html" with profile=post.user.profile height=50 width=50 %}
             </a>
           </div>
@@ -47,7 +47,7 @@
             {% endif %}
             <div class="footer text-muted">
               {% if post.user.username %}
-              <a class="text-muted" href="{% url 'redirectToProfile' post.user.username %}">{{ post.user.profile }}</a>
+              <a class="text-muted" href="{{ post.user.profile.get_absolute_url }}">{{ post.user.profile }}</a>
               {% endif %}
               <span> | </span>
               <span class="date">{% if post.created_at %}{{ post.created_at|timesince }} ago{% endif %}</span>

@@ -49,8 +49,7 @@ class SignupAuthView(SignupView):
     def dispatch(self, *args, **kwargs):
         username = self.kwargs.get('username', None)
         if self.request.user.is_authenticated():
-            return redirect('redirectToProfile',
-                            username = self.request.user.username)
+            return redirect(self.request.user.profile.get_absolute_url)
         return super(SignupAuthView, self).dispatch(*args, **kwargs)
 
 signup = SignupAuthView.as_view()
@@ -156,8 +155,7 @@ claim_profile_verify = VerifyProfileClaimView.as_view()
 def signin(request, auth_form=SigninForm,
            template_name='accounts/signin_form.html'):
     if request.user.is_authenticated():
-        return redirect('redirectToProfile',
-                        username = request.user.username)
+        return redirect(request.user.profile)
 
     response = userena_views.signin(request, auth_form=auth_form,
                                     template_name=template_name)

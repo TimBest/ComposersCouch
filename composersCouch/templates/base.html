@@ -41,7 +41,7 @@
             {% if user.is_authenticated %}
               <ul class="nav navbar-nav navbar-right">
                 <li>
-                  <a href="{% url 'redirectToProfile' user.username %}">{{ user.profile }}</a>
+                  <a href="{{ user.profile.get_absolute_url }}">{{ user.profile }}</a>
                 </li>
                 <li class="dropdown hidden-xs">
                   <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>

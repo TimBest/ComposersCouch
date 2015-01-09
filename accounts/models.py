@@ -44,6 +44,17 @@ class Profile(UserenaBaseProfile):
             return '%s' % self.venueProfile.name
         return '%s' % self.user.username
 
+    def get_absolute_url(self):
+        profileType = self.profile_type
+        if profileType == 'f':
+            return ('fan:home', [self.user.username])
+        elif profileType == 'm':
+            return ('musician:home', [self.user.username])
+        elif profileType == 'v':
+            return ('venue:home', [self.user.username])
+        return ('home')
+    get_absolute_url = models.permalink(get_absolute_url)
+
 class FanProfile(Profile):
     profile = models.OneToOneField(Profile,
                                    unique=True,

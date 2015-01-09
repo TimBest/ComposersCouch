@@ -15,13 +15,13 @@
             <div class="col-lg-2 col-sm-3">
               <div class="image-frame">
                 <span class="frame-helper"></span>
-                <a href="{% url 'redirectToProfile' applicant.username %}">
+                <a href="{{ applicant.profile.get_absolute_url }}">
                   {% include "utils/_mugshot.html" with profile=applicant.profile width=75 height=75 %}
                 </a>
               </div>
             </div>
             <div class="col-lg-8 col-sm-7">
-              <a class="text-black" href="{% url 'venue:about' application.applicant.username  %}">
+              <a class="text-black" href="{{ applicant.profile.get_absolute_url }}">
                 <h3>{{ applicant.profile }}</h3>
               </a>
               {% if applicant.biography %}
