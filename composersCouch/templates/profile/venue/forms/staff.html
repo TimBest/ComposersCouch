@@ -14,12 +14,12 @@
 {% block form %}
     <span>Edit: </span>
   {% for s in staff %}
-    <a class="{{isEditable}} editStaff" href="{% url 'venue:staffForm' username s.id %}">
+    <a class="{{isEditable}} editStaff" href="{% url 'venue:staffForm' s.id %}">
       {{s.contact.name}},
     </a>
   {% endfor %}
   <span>or </span>
-    <a class="{{isEditable}} editStaff text-success" href="{% url 'venue:staffForm' username %}">
+    <a class="{{isEditable}} editStaff text-success" href="{% url 'venue:staffForm' %}">
       Add New
     </a>
   {% crispy contactForm %}

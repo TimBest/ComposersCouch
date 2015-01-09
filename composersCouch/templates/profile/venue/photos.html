@@ -11,13 +11,14 @@
       <a class="{{isEditable}} btn btn-success" href="{% url 'photos:upload' %}">
         <span class="fa fa-arrow-up"></span> Add Photo
       </a>
-      <div class="pull-right"><p>
+      <div class="pull-right">
         {% with social=profile.social_links %}
           {% if social.instagram %}<a href="{{ social.instagram }}" target="_blank" class="btn btn-instagram"><span class="fa fa-instagram"></span></a>{% endif %}
           {% if social.tumblr %}<a href="{{ social.tumblr }}" target="_blank" class="btn btn-tumblr"><span class="fa fa-tumblr"></span></a>{% endif %}
         {% endwith %}
-        <a href="{% url 'venue:photoLinksForm' username  %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
-      </p></div>
+        <a href="{% url 'venue:photoLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
+      </div>
+      <p></p>
     </div>
   </div>
   <div class="{% if not images %}{{isEditable}}{% endif %}">

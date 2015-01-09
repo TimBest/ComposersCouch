@@ -4,25 +4,25 @@
 {% block modalNav %}
   <ul class="nav nav-pills">
     <li class="{% block contactClass %}{% endblock %}">
-      <a class="editContact" href="{% url 'venue:contactForm' username  %}">Contact</a>
+      <a class="editContact" href="{% url 'venue:contactForm' %}">Contact</a>
     </li>
     <li class="{% block hoursClass %}{% endblock %}">
-      <a class="editHours" href="{% url 'venue:hoursForm' username %}">Hours</a>
+      <a class="editHours" href="{% url 'venue:hoursForm' %}">Hours</a>
     </li>
     <li class="{% block seatingClass %}{% endblock %}">
-      <a class="editSeating" href="{% url 'venue:seatingForm' username %}">Seating</a>
+      <a class="editSeating" href="{% url 'venue:seatingForm' %}">Seating</a>
     </li>
     <li class="{% block equipmentClass %}{% endblock %}">
-      <a class="editEquipment" href="{% url 'venue:equipmentForm' username 'sound' %}">Equpiment</a>
+      <a class="editEquipment" href="{% url 'venue:equipmentForm' 'sound' %}">Equpiment</a>
     </li>
     <li class="{% block policiesClass %}{% endblock %}">
-      <a class="editPolicies" href="{% url 'venue:policiesForm' username %}">Policies</a>
+      <a class="editPolicies" href="{% url 'venue:policiesForm' %}">Policies</a>
     </li>
     <li class="{% block biographyClass %}{% endblock %}">
-      <a class="editBiography" href="{% url 'venue:biographyForm' username %}">Biography</a>
+      <a class="editBiography" href="{% url 'venue:biographyForm' %}">Biography</a>
     </li>
     <li class="{% block staffClass %}{% endblock %}">
-      <a class="editStaff" href="{% url 'venue:staffForm' username %}">Staff</a>
+      <a class="editStaff" href="{% url 'venue:staffForm' %}">Staff</a>
     </li>
   </ul>
 {% endblock %}

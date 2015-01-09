@@ -33,10 +33,7 @@ class SignupView(MultipleFormsView):
         info = {}
         if forms.get('emailForm'):
             info['user'] = forms['emailForm'].save()
-        try:
-            info['location'] = forms['zipcodeForm'].save()
-        except:
-            pass
+        info['location'] = forms['zipcodeForm'].save()
         info['email'] = forms['zipcodeForm'].cleaned_data.get('email')
         signupForm  = forms['signupForm']
         info['profile']  = signupForm.save(commit=False)

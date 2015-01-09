@@ -53,7 +53,7 @@ class BiographyView(ProfileFormMixin, UpdateView):
         return self.user.profile.venueProfile
 
     def get_success_url(self):
-        return reverse(self.success_url, kwargs={'username': self.username})
+        return reverse(self.success_url, kwargs={'username': self.user.username})
 
 biography = BiographyView.as_view()
 
@@ -103,7 +103,7 @@ class EquipmentView(ProfileFormMixin, FormView):
                 equipment.profile = self.user.profile.venueProfile
                 equipment.category = self.CATEGORY_TYPES[self.category]
                 equipment.save()
-      return redirect(self.success_url, username=self.username)
+      return redirect(self.success_url, username=self.user.username)
 
 equipment = EquipmentView.as_view()
 
@@ -129,7 +129,7 @@ class HoursView(ProfileFormMixin, FormView):
             hours = f.save(commit=False)
             hours.profile = self.user.profile.venueProfile
             hours.weekday = count
-        return redirect(self.success_url, username=self.username)
+        return redirect(self.success_url, username=self.user.username)
 
 hours = HoursView.as_view()
 
@@ -153,7 +153,7 @@ class PoliciesView(ProfileFormMixin, FormView):
             if policy:
                 policy.profile = self.user.profile.venueProfile
                 policy.save()
-      return redirect(self.success_url, username=self.username)
+      return redirect(self.success_url, username=self.user.username)
 
 policies = PoliciesView.as_view()
 
@@ -186,7 +186,7 @@ class SeatingView(ProfileFormMixin, ImageFormMixin, MultipleModelFormsView):
             imageId = self.request.POST.get('seating_chart')
             seating.seating_chart = get_object_or_None(Image, id=imageId)
         seating.save()
-        return redirect(self.success_url, username=self.username)
+        return redirect(self.success_url, username=self.user.username)
 
 seating = SeatingView.as_view()
 
@@ -222,6 +222,6 @@ class StaffView(ProfileFormMixin, MultipleModelFormsView):
             contact = forms['contactForm'].save()
             staff.contact = contact
             staff.save()
-        return redirect(self.success_url, username=self.username)
+        return redirect(self.success_url, username=self.user.username)
 
 staff = StaffView.as_view()

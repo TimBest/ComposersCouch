@@ -14,7 +14,7 @@
               {% if social.twitter %}<a href="{{ social.twitter }}" target="_blank" class="btn btn-twitter"><span class="fa fa-twitter"></span></a>{% endif %}
               {% if social.google_plus %}<a href="{{ social.google_plus }}" target="_blank" class="btn btn-google"><span class="fa fa-google-plus"></span></a>{% endif %}
           {% endwith %}
-          <a href="{% url 'venue:socialLinksForm' username  %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
+          <a href="{% url 'venue:socialLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
         </p></div>
       </div>
     </div>
@@ -38,7 +38,7 @@
                   {% ifequal today forloop.counter %}</strong>{% endifequal %}
                 </div>
               {% endfor %}
-              <a class="{{isEditable}} editHours" href="{% url 'venue:hoursForm' username %}">Edit</a>
+              <a class="{{isEditable}} editHours" href="{% url 'venue:hoursForm' %}">Edit</a>
             </div>
           </div>
         </div>
@@ -58,7 +58,7 @@
             </div>
             <div class="panel-body">
               {% include "profile/_contact.html" with contact_info=profile.contact_info %}
-              <a class="{{isEditable}} editContact" href="{% url 'venue:contactForm' username  %}">Edit</a>
+              <a class="{{isEditable}} editContact" href="{% url 'venue:contactForm' %}">Edit</a>
             </div>
           </div>
         </div>
@@ -82,7 +82,7 @@
                 {% endwith %}
               <p>Capacity: {{seating.capacity}}</p>
               {% endwith %}
-              <a class="{{isEditable}} editSeating" href="{% url 'venue:seatingForm' username %}">Edit</a>
+              <a class="{{isEditable}} editSeating" href="{% url 'venue:seatingForm' %}">Edit</a>
             </div>
           </div>
         </div>
@@ -108,7 +108,7 @@
               {% include "profile/venue/_equipment.html" with equipment=accessories %}
             </div>
           </div>
-          <a class="{{isEditable}} editEquipment" href="{% url 'venue:equipmentForm' username 'sound' %}">Edit</a>
+          <a class="{{isEditable}} editEquipment" href="{% url 'venue:equipmentForm' 'sound' %}">Edit</a>
         </div>
       </div>
     </div>
@@ -126,7 +126,7 @@
               <tr>
             {% endfor %}
           </table>
-          <a class="{{isEditable}} editPolicies" href="{% url 'venue:policiesForm' username %}">Edit</a>
+          <a class="{{isEditable}} editPolicies" href="{% url 'venue:policiesForm' %}">Edit</a>
         </div>
       </div>
     </div>
@@ -137,7 +137,7 @@
         </div>
         <div class="panel-body">
           <p>{{ venueProfile.biography }}</p>
-          <a class="{{isEditable}} editBiography" href="{% url 'venue:biographyForm' username %}">Edit</a>
+          <a class="{{isEditable}} editBiography" href="{% url 'venue:biographyForm' %}">Edit</a>
         </div>
       </div>
     <div class='staff'>
@@ -153,7 +153,7 @@
             <p>{{person.contact.email}}</p>
             <p>{{person.contact.phone}}</p>
           {% endfor %}
-          <a class="{{isEditable}} editStaff" href="{% url 'venue:staffForm' username %}">Edit</a>
+          <a class="{{isEditable}} editStaff" href="{% url 'venue:staffForm' %}">Edit</a>
         </div>
       </div>
     </div>

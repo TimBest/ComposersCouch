@@ -8,13 +8,13 @@
 
 {% block form %}
   <h3>{{ category|capfirst }}</h3>
-  <a class="{{isEditable}} editEquipment" href="{% url 'venue:equipmentForm' username 'sound' %}">
+  <a class="{{isEditable}} editEquipment" href="{% url 'venue:equipmentForm' 'sound' %}">
     Sound
   </a>,
-  <a class="{{isEditable}} editEquipment" href="{% url 'venue:equipmentForm' username 'effects' %}">
+  <a class="{{isEditable}} editEquipment" href="{% url 'venue:equipmentForm' 'effects' %}">
     Effects
   </a>,
-  <a class="{{isEditable}} editEquipment" href="{% url 'venue:equipmentForm' username 'accessories' %}">
+  <a class="{{isEditable}} editEquipment" href="{% url 'venue:equipmentForm' 'accessories' %}">
     Accessories
   </a>
   <div class="row no-gutter">
