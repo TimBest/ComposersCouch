@@ -89,7 +89,8 @@ class AudioField(FileField):
             logger.error(error_msg)
             raise forms.ValidationError(error_msg)
 
-        convert_to = request and int(request.POST["convert_type"])
+        convert_type = request.POST.get('convert_type',settings.CONVERT_TYPE_VALUE)
+        convert_to = request and int(convert_type)
         ext = ext.split('.')[1]
         audio_type = CONVERT_TYPE_CHK[convert_to]
         error_msg = _("not allowed : file format conversion is not allowed for same audio type (except Wav)")

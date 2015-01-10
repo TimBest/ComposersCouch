@@ -58,7 +58,8 @@ def validate_file_extension(value):
 class Media(models.Model):
     title = models.CharField(_('Title'), max_length=128)
     video = EmbedVideoField(verbose_name = _('video'),null=True, blank=True, help_text="Link to youtube or vimeo")
-    audio = models.FileField(_("Audio file"), upload_to=get_audio_upload_path, validators=[validate_file_extension], null=True, blank=True)
+    audio = AudioField(_("Audio file"), upload_to=get_audio_upload_path, ext_whitelist=(".mp3", ".wav", ".ogg"), null=True, blank=True)
+    #audio = models.FileField( upload_to=get_audio_upload_path, validators=[validate_file_extension], null=True, blank=True)
     live = models.BooleanField(default=False)
 
     def save(self, audio=None, *args, **kwargs):
