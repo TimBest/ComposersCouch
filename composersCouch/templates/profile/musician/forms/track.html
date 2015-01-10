@@ -8,7 +8,6 @@
 {% block formID %}tracks-form{% endblock %}
 {% block enctype %}multipart/form-data{% endblock %}
 {% block form %}
-  {% csrf_token %}
   {% if messages %}
     <div class="alert alert-danger">
       {% for message in messages %}

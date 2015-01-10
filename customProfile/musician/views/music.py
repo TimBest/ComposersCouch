@@ -82,16 +82,14 @@ class TracksView(ProfileFormMixin, UpdateView):
         return formset
 
     def get_context_data(self):
-        album = self.get_object()
+        self.get_object()
         formset = self.get_formset()
         tracks = Track.objects.filter(album=self.albumID)
         formset_tracks = zip(formset, tracks)
-        form_kwargs = self.get_form_kwargs()
         context = {
-            'album'          : album,
             'formset'        : formset,
             'formset_tracks' : formset_tracks,
-            'tracks_form'    : TracksForm(**form_kwargs),
+            'tracks_form'    : TracksForm(**self.get_form_kwargs()),
             'media_url'      : settings.MEDIA_URL,
         }
         return context
