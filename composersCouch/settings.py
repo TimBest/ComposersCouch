@@ -41,30 +41,31 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'autocomplete_light',
-    'annoying',
     'crispy_forms',
     'compressor',
     'djcelery',
     'embed_video',
     'stream_framework',
-    'guardian',
     'pagination',
     'social_auth',
     'static_precompiler',
 
-    'sorl.thumbnail',
     'accounts',
+    'audiofield',
+    'annoying',
     'contact',
     'customProfile.fan',
     'customProfile.musician',
     'customProfile.venue',
     'feeds',
-    'threaded_messages',
+    'guardian',
     'photos',
     'progressbarupload',
     'request',
-    'search',
     'schedule',
+    'search',
+    'sorl.thumbnail',
+    'threaded_messages',
     'tracks',
     'userena',
 )
@@ -77,6 +78,7 @@ MIDDLEWARE_CLASSES = (
     #'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'audiofield.middleware.threadlocals.ThreadLocals',
 )
 
 ROOT_URLCONF = 'composersCouch.urls'
@@ -285,6 +287,7 @@ djcelery.setup_loader()
 try:
     from accounts.userena_settings import *
     from accounts.social_auth_settings import *
+    from audiofield.settings import *
     from photos.photos_settings import *
 except ImportError:
     pass
