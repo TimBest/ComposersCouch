@@ -1,7 +1,6 @@
 .header {
   &.feed {
     padding: 0px 0px 10px 0px;
-    position:relative;
     &.blue {
       background-color: @dark-blue;
       .main-nav {
@@ -54,25 +53,26 @@
     }
     .main-nav {
       font-size:18px;
-      position:absolute;
-      bottom:10px;
-        li {
-          a {
-            color: @silver;
-            &:hover, &:focus {
-              background-color: transparent;
-              color: @white;
-            }
-          }
-          &.active {
-            a, a:focus, a:hover  {
-              background-color: transparent;
-              border-radius:0px;
-              border-bottom: 3px solid @light-blue;
-              color: @white;
-            }
+      @media (min-width: @screen-sm-min) {
+        margin-top:40px;
+      }
+      li {
+        a {
+          color: @silver;
+          &:hover, &:focus {
+            background-color: transparent;
+            color: @white;
           }
         }
+        &.active {
+          a, a:focus, a:hover  {
+            background-color: transparent;
+            border-radius:0px;
+            border-bottom: 3px solid @light-blue;
+            color: @white;
+          }
+        }
+      }
     }
     .nav-options {
       color:@silver-light;

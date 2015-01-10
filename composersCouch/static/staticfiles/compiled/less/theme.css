@@ -7760,7 +7760,6 @@ h1 {
 }
 .header.feed {
   padding: 0px 0px 10px 0px;
-  position: relative;
 }
 .header.feed.blue {
   background-color: #0b396d;
@@ -7804,8 +7803,11 @@ h1 {
 }
 .header.feed .main-nav {
   font-size: 18px;
-  position: absolute;
-  bottom: 10px;
+}
+@media (min-width: 768px) {
+  .header.feed .main-nav {
+    margin-top: 40px;
+  }
 }
 .header.feed .main-nav li a {
   color: #cbcfd3;
@@ -7924,6 +7926,11 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   color: #fbfcfc;
   background-color: #474747;
   padding-top: 10px;
+}
+@media (min-width: 768px) {
+  .header.thread .nav {
+    margin-top: 40px;
+  }
 }
 .header.thread .nav li a {
   color: #cbcfd3;
