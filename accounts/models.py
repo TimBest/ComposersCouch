@@ -5,7 +5,7 @@ from django.utils.translation import ugettext as _
 from sorl.thumbnail import ImageField
 
 from contact.models import ContactInfo
-from tracks.models import Genre
+from genres.models import Genre
 from userena.models import UserenaBaseProfile
 
 

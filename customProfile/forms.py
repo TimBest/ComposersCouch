@@ -11,7 +11,7 @@ from accounts import models
 from annoying.functions import get_object_or_None
 from customProfile.musician.models import Member, Instrument
 from photos.forms import MugshotForm
-from tracks.models import Genre
+from genres.models import Genre
 
 
 class MusicianProfileForm(forms.ModelForm):

@@ -58,6 +58,7 @@ INSTALLED_APPS = (
     'customProfile.musician',
     'customProfile.venue',
     'feeds',
+    'genres',
     'guardian',
     'photos',
     'progressbarupload',

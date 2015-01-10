@@ -10,7 +10,7 @@ from models import Follow, Post
 from post_feedly import feedly
 from annoying.functions import get_object_or_None
 from contact.forms import ZipcodeForm
-from tracks.models import Genre
+from genres.models import Genre
 
 
 class PostForm(forms.ModelForm):

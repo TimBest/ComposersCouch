@@ -22,11 +22,11 @@ def run(verbose=True):
           except:
               #print name to bo corrected
               print genre_name
-      for category_name in row:
+      """for category_name in row:
           category_name = category_name.strip()
           category = get_object_or_None(Category, name=category_name)
           if not category:
               category_slug = slugify(unicode(category_name))
               category = Category.objects.create(name=category_name, slug=category_slug)
           category.genres.add(genre)
-          category.save()
+          category.save()"""

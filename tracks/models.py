@@ -1,30 +1,15 @@
 import mutagen, os
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.translation import ugettext as _
 
-from sorl.thumbnail import ImageField
-
 from .utils import json_playlist
+from audiofield.fields import AudioField
 from embed_video.fields import EmbedVideoField
+from genres.models import Genre
 from photos.models import Image
 
-
-class Genre(models.Model):
-    name =  models.CharField(_("name"), max_length=64)
-    slug =  models.CharField(_("slug"), max_length=64)
-    def __unicode__(self):
-        return u'{0}'.format(self.name)
-
-class Category(models.Model):
-    name =  models.CharField(_("name"), max_length=64)
-    slug =  models.CharField(_("slug"), max_length=64)
-    genres = models.ManyToManyField(Genre, verbose_name=_("genres"),
-                               related_name='categories')
-    def __unicode__(self):
-        return u'{0}'.format(self.name)
 
 def get_audio_upload_path(instance, filename):
     if hasattr(instance, 'upload_to_info'):
@@ -105,15 +90,3 @@ class Track(models.Model):
 
     def __unicode__(self):
         return '%s'% self.id
-
-#class Cover(models.Model):
-#    media = models.OneToOneField(Media, verbose_name=_("media"),null=True, blank=True)
-#    musician = models.ForeignKey('accounts.MusicianProfile', related_name='covers')
-#    target_musician = models.ForeignKey('accounts.MusicianProfile', related_name='ceverd')
-
-#class Interview(models.Model):
-#    media = models.OneToOneField(Media, verbose_name=_("media"),null=True, blank=True)
-#    created_at = models.DateTimeField(auto_now_add=True)
-#    updated_at = models.DateTimeField(auto_now=True)
-#    musician = models.ForeignKey('accounts.MusicianProfile', verbose_name=_("musician profile"), related_name='interviews')
-#    host = models.ForeignKey(User, verbose_name=_("host profile"), related_name='interviews_hosted', null=True, blank=True)

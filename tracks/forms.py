@@ -12,7 +12,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, HTML, Layout
 from multiupload.fields import MultiFileField
 
-from accounts.models import Genre, MusicianProfile
+from accounts.models import MusicianProfile
 from embed_video.fields import EmbedVideoFormField
 from tracks.models import Album, Track, Media
 

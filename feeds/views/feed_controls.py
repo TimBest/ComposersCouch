@@ -11,7 +11,7 @@ from django.views.generic.edit import FormView
 from feeds.forms import GenreForm, ZipcodeForm, AvailabilityForm, RemovePostForm, FollowForm
 from feeds.models import Post
 from feeds.urls import homeCategory, homeScope
-from tracks.models import Genre
+from genres.models import Genre
 
 
 class ZipcodeFormView(FormView):
