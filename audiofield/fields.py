@@ -222,13 +222,12 @@ class AudioField(FileField):
             ext = os.path.splitext(filename)[1].lower()[:4]
             #Get new file name and make sure it's unique
             dst = self.generate_filename(instance, '%s%s%s' % (self.filename_prefix, self.uuid, ext))
-            dst_fullpath = os.path.join(settings.MEDIA_ROOT, dst)
+            dst_fullpath = os.path.join(settings.MEDIA_ROOT, instance.audio.path)
 
             # Same file should not exits
             if not os.path.isfile(dst_fullpath):
 
                 if os.path.abspath(filename) != os.path.abspath(dst_fullpath):
-                    print dst_fullpath
                     os.rename(filename, dst_fullpath)
                     self._convert_audio(dst_fullpath, instance, ext[1:4])
 
