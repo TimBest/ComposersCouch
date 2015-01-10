@@ -8,15 +8,19 @@
   <div class="music">
     <div class="row">
       <div class="col-xs-12">
-        <div class="pull-right"><p>
+        <a class="{{isEditable}} btn btn-success" href="{% url 'musician:albumForm' %}">
+          <span class="fa fa-plus"></span> Add Album
+        </a>
+        <div class="pull-right">
           {% with music=musicianProfile.music_links %}
-              {% if music.bandcamp %}<a href="{{ music.bandcamp }}" target="_blank" class="btn btn-bandcamp">bc</a>{% endif %}
-              {% if music.itunes %}<a href="{{ music.itunes }}" target="_blank" class="btn btn-itunes"><span class="fa fa-apple"></span></a>{% endif %}
-              {% if music.spotify %}<a href="{{ music.spotify }}" target="_blank" class="btn btn-spotify"><span class="fa fa-spotify"></span></a>{% endif %}
-              {% if music.soundcloud %}<a href="{{ music.soundcloud }}" target="_blank" class="btn btn-soundcloud"><span class="fa fa-soundcloud"></span></a>{% endif %}
+            {% if music.bandcamp %}<a href="{{ music.bandcamp }}" target="_blank" class="btn btn-bandcamp">bc</a>{% endif %}
+            {% if music.itunes %}<a href="{{ music.itunes }}" target="_blank" class="btn btn-itunes"><span class="fa fa-apple"></span></a>{% endif %}
+            {% if music.spotify %}<a href="{{ music.spotify }}" target="_blank" class="btn btn-spotify"><span class="fa fa-spotify"></span></a>{% endif %}
+            {% if music.soundcloud %}<a href="{{ music.soundcloud }}" target="_blank" class="btn btn-soundcloud"><span class="fa fa-soundcloud"></span></a>{% endif %}
           {% endwith %}
           <a href="{% url 'musician:musicLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
-        </p></div>
+        </div>
+        <p></p>
       </div>
     </div>
     {% for album in musicianProfile.albums.all %}
@@ -63,77 +67,13 @@
                 <a class="text-primary {{isEditable}}" href="{% url 'musician:tracksForm' album %}">
                   {% include "_editLink.html" with text='Edit Tracks' %}
                 </a>
-                {% if forloop.last %}
-                  <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:albumForm' %}">
-                    {% include "_addLink.html" with text='Add Album' %}
-                  </a>
-                {% endif %}
+
               </div>
             </div>
           </div>
         </div>
       </div>
-    {% empty %}
-      <div class="album {{isEditable}}">
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <h3>Albums</h3>
-          </div>
-          <div class="panel-body">
-            <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:albumForm' %}">
-              {% include "_addLink.html" with text='Add Album' %}
-            </a>
-          </div>
-        </div>
-      </div>
     {% endfor %}
-    {% comment %}
-    <div class="panel panel-default {% if live_tracks == '[]' %}{{isEditable}}{% endif %}">
-      <div class="panel-heading">
-        <h3>Live Recordings</h3>
-      </div>
-      <div class="panel-body">
-        <div class="row no-gutter">
-          <div class="col-sm-2 left">
-            <div class="image-frame">
-              <span class="frame-helper"></span>
-              <img class="image-center" src="{% static 'img/navbar.png' %}" alt="{% trans 'Composers Couch logo' %}"  height="" width="" />
-            </div>
-            {% include "tracks/_playlist_controls.html" with id="live_tracks" %}
-          </div>
-          <div class="col-sm-10 right">
-            {% include "tracks/_player.html" with id="live_tracks" %}
-          </div>
-        </div>
-        <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:live_track_form' %}">
-          {% include "_addLink.html" with text='Add Live Track' %}
-        </a>
-      </div>
-    </div>
-
-    <div class="panel panel-default {% if interviews == '[]' %}{{isEditable}}{% endif %}">
-      <div class="panel-heading">
-        <h3>Interviews</h3>
-      </div>
-      <div class="panel-body">
-        <div class="row no-gutter">
-          <div class="col-sm-2 left">
-            <div class="image-frame">
-              <span class="frame-helper"></span>
-              <img class="image-center" src="{% static 'img/navbar.png' %}" alt="{% trans 'Composers Couch logo' %}"  height="" width="" />
-            </div>
-            {% include "tracks/_playlist_controls.html" with id="interviews" %}
-          </div>
-          <div class="col-sm-10 right">
-            {% include "tracks/_player.html" with id="interviews" %}
-          </div>
-        </div>
-        <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:interview_form' %}">
-          {% include "_addLink.html" with text='Add Interview' %}
-        </a>
-      </div>
-    </div>
-    {% endcomment %}
   </div>
 {% endblock %}
 
@@ -141,6 +81,4 @@
   {% for album in musicianProfile.albums.all %}
     {% include "tracks/_player_script.html" with id=album.id playlist=album.get_json_playlist %}
   {% endfor %}
-  {% include "tracks/_player_script.html" with id="live_tracks" playlist=live_tracks %}
-  {% include "tracks/_player_script.html" with id="interviews" playlist=interviews %}
 {% endblock %}
