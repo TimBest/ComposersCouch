@@ -17,32 +17,22 @@ from embed_video.fields import EmbedVideoFormField
 from tracks.models import Album, Track, Media
 
 
-class AlbumForm(ModelForm):
+class TracksForm(ModelForm):
     tracks = MultiFileField(required=False, max_num=15, min_num=0, max_file_size=settings.MAX_AUDIO_UPLOAD_SIZE)
     def __init__(self, *args, **kw):
-        super(AlbumForm, self).__init__(*args, **kw)
+        super(TracksForm, self).__init__(*args, **kw)
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-          Div(
-            Div('title',css_class='col-sm-6 left',),
-            Div('year',css_class='col-sm-6 right',),
-            css_class='row no-gutter',
-          ),
-          'genre',
-          'description',
           'tracks',
         )
 
     class Meta:
         model = Album
-        widgets = {
-            'description' : Textarea(attrs={'rows': 2, 'cols': 19}),
-        }
-        fields = ['title', 'genre', 'year', 'description']
+        fields = []
 
     def save(self, request, commit=True):
-        super(AlbumForm, self).save(commit=commit)
+        super(TracksForm, self).save(commit=commit)
         tracks_on_album = Track.objects.filter(album=self.instance).count() + 1
         for file in self.cleaned_data['tracks']:
             try:
@@ -67,6 +57,30 @@ class AlbumForm(ModelForm):
             except ValidationError as e:
                 messages.error(request, e.messages[0]+" : "+str(file))
         return self.instance
+
+class AlbumForm(TracksForm):
+
+    def __init__(self, *args, **kw):
+        super(AlbumForm, self).__init__(*args, **kw)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+          Div(
+            Div('title',css_class='col-sm-6 left',),
+            Div('year',css_class='col-sm-6 right',),
+            css_class='row no-gutter',
+          ),
+          'genre',
+          'description',
+          'tracks',
+        )
+
+    class Meta:
+        model = Album
+        widgets = {
+            'description' : Textarea(attrs={'rows': 2, 'cols': 19}),
+        }
+        fields = ['title', 'genre', 'year', 'description']
 
 class AlbumAudioForm(ModelForm):
     title = forms.CharField(max_length=128)
@@ -129,7 +143,6 @@ class AlbumVideoForm(ModelForm):
         model = Track
         fields = ['album','order']
 
-
     def save(self, commit):
         track = super(AlbumVideoForm, self).save(commit=False)
         title = self.cleaned_data.get('title')
@@ -144,100 +157,3 @@ class AlbumVideoForm(ModelForm):
             track.media = media
             track.save()
         return track
-"""
-video_layout = Layout(
-  Div(
-    Div('title',css_class='col-xs-6 left',),
-    Div('video',css_class='col-xs-6 right',),
-    css_class='row no-gutter',
-  ),
-)
-
-audio_layout = Layout(
-  Div(
-    Div(
-      HTML (
-        "<label>Currently</label><audio controls><source src='{{media_url}}{{track.media.audio}}' type='audio/mp3'>Your browser does not support the audio element.</audio>"
-      ),
-      css_class='col-sm-6 left',
-    ),
-    Div(
-      'audio',
-      css_class='col-sm-6 right',
-    ),
-    css_class='audio-layout row no-gutter',
-  ),
-)
-class AudioForm(ModelForm):
-    def __init__(self, *args, **kw):
-        super(AudioForm, self).__init__(*args, **kw)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-                'title',
-                'live',
-                audio_layout,
-                css_class='track-formset',
-            ),
-        )
-
-    class Meta:
-        model = Media
-        fields = ['audio','live','title',]
-
-class VideoForm(ModelForm):
-
-    def __init__(self, *args, **kw):
-        super(AlbumTrackForm, self).__init__(*args, **kw)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-                'title',
-                'live',
-                'video',
-                css_class='track-formset',
-            ),
-        )
-
-    class Meta:
-        model = Media
-        fields = ['video','live','title',]
-
-
-
-class TrackForm(ModelForm):
-
-    def __init__(self, *args, **kw):
-        super(TrackForm, self).__init__(*args, **kw)
-        self.fields['host'].required = False
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-                'title',
-                'host',
-            ),
-        )
-
-    class Meta:
-        model = LiveTrack
-        fields = ['title', 'host']
-
-class HostTrackForm(ModelForm):
-
-    def __init__(self, *args, **kw):
-        super(HostTrackForm, self).__init__(*args, **kw)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-                'title',
-                'musician',
-            ),
-        )
-
-    class Meta:
-        model = LiveTrack
-        fields = ['title', 'musician']"""

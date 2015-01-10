@@ -1,10 +1,9 @@
 {% extends 'form.html' %}
-{% load crispy_forms_tags i18n progress_bar %}
+{% load crispy_forms_tags progress_bar %}
 {% crispy AlbumTrackForm AlbumTrackForm.helper %}
+{% crispy TracksForm TracksForm.helper %}
 
-{% block title %}
-  {% block formTitle %}{% trans "Add Tracks" %}{% endblock %}
-{% endblock %}
+{% block title %}{% block formTitle %}Add Tracks{% endblock %}{% endblock %}
 
 {% block formID %}tracks-form{% endblock %}
 {% block enctype %}multipart/form-data{% endblock %}
@@ -18,14 +17,12 @@
     </div>
   {% endif %}
   {{ formset.management_form }}
-  {% for form,track in formsetTracks %}
+  {% for form,track in formset_tracks %}
     {{ form.id }}
     {% crispy form %}
   {% endfor %}
-  <div class="controls">
-    <label class="control-label">Add More Tracks</label>
-    <input type='file' name='tracks' multiple />
-  </div>
+  {% crispy tracks_form %}
+
 {% endblock %}
 {% block extraSubmit %}{% progress_bar %}{% endblock %}
 
