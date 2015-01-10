@@ -101,7 +101,13 @@ class TracksView(ProfileFormMixin, UpdateView):
     def post(self, request, **kwargs):
         context = self.get_context_data()
         if context['formset'].is_valid():
-            context['formset'].save()
+            for form in context['formset']:
+                cleaned_data = form.cleaned_data
+                if cleaned_data:
+                    track = cleaned_data['id']
+                    track.media.title = cleaned_data['title']
+                    track.media.save()
+                    form.save()
             if request.FILES.getlist('tracks'):
                 context['tracks_form'].save(request=self.request)
                 return redirect(request.path_info)

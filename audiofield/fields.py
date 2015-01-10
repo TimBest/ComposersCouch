@@ -93,7 +93,7 @@ class AudioField(FileField):
         convert_to = request and int(convert_type)
         ext = ext.split('.')[1]
         audio_type = CONVERT_TYPE_CHK[convert_to]
-        error_msg = _("not supported : file format conversion is not allowed for same audio type (except Wav)")
+        error_msg = _("not supported : file format conversion is not supported for same audio type (except Wav)")
         if convert_to:
             if ext == audio_type and ext != 'wav':
                 error_msg += ' %s format !!' % ext
@@ -228,6 +228,7 @@ class AudioField(FileField):
             if not os.path.isfile(dst_fullpath):
 
                 if os.path.abspath(filename) != os.path.abspath(dst_fullpath):
+                    print dst_fullpath
                     os.rename(filename, dst_fullpath)
                     self._convert_audio(dst_fullpath, instance, ext[1:4])
 

@@ -47,7 +47,7 @@ class TracksForm(ModelForm):
                 try:
                     media.full_clean()
                     media.set_upload_to_info(
-                        username=request.user.username,
+                        username=self.instance.musician_profile.profile.user.username,
                         track_type="albums",
                         album_title=self.instance.title
                     )

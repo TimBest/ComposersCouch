@@ -1,4 +1,4 @@
-import mutagen, os
+import os
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.db import models
@@ -61,17 +61,6 @@ class Media(models.Model):
     audio = AudioField(_("Audio file"), upload_to=get_audio_upload_path, ext_whitelist=(".mp3", ".wav", ".ogg"), null=True, blank=True)
     #audio = models.FileField( upload_to=get_audio_upload_path, validators=[validate_file_extension], null=True, blank=True)
     live = models.BooleanField(default=False)
-
-    def save(self, audio=None, *args, **kwargs):
-        if audio:
-            file = self.audio.open()
-            file_path = file.temporary_file_path()
-            metadata = mutagen.File(file_path, easy=True)
-            if metadata and metadata.get('title'):
-                     title=metadata.get('title')[0]
-            if not self.title:
-                pass
-        super(Media, self).save(*args, **kwargs)
 
     def set_upload_to_info(self, username, track_type, album_title=None):
         """
