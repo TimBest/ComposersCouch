@@ -2,7 +2,7 @@ import os
 import csv
 from django.utils.text import slugify
 
-from .models import Category, Genre
+from .models import Genre#, Category
 from annoying.functions import get_object_or_None
 
 
