@@ -52,6 +52,7 @@ class AlbumView(ImageFormMixin, MultipleModelFormsView):
             imageId = self.request.POST.get('album_art')
             album.album_art = get_object_or_None(Image, id=imageId)
         album.save()
+        forms['albumForm'].save(request=self.request)
         forms['albumForm'].save_m2m()
         return redirect(self.success_url, albumID=album.id)
 

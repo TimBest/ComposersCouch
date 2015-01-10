@@ -33,29 +33,30 @@ class TracksForm(ModelForm):
 
     def save(self, request, commit=True):
         super(TracksForm, self).save(commit=commit)
-        tracks_on_album = Track.objects.filter(album=self.instance).count() + 1
-        for file in self.cleaned_data['tracks']:
-            try:
-                file_path = file.temporary_file_path()
-                metadata = mutagen.File(file_path, easy=True)
-                if metadata and metadata.get('title'):
-                    title=metadata.get('title')[0]
-            except:
-                title = ""
-            media = Media(audio=file, title=title)
-            try:
-                media.full_clean()
-                media.set_upload_to_info(
-                    username=self.instance.musician_profile.profile.user.username,
-                    track_type="albums",
-                    album_title=self.instance.title
-                )
-                media.save()
-                track = Track(media=media, order=tracks_on_album, album=self.instance)
-                tracks_on_album += 1
-                track.save()
-            except ValidationError as e:
-                messages.error(request, e.messages[0]+" : "+str(file))
+        if commit:
+            tracks_on_album = Track.objects.filter(album=self.instance).count() + 1
+            for file in self.cleaned_data['tracks']:
+                try:
+                    file_path = file.temporary_file_path()
+                    metadata = mutagen.File(file_path, easy=True)
+                    if metadata and metadata.get('title'):
+                        title=metadata.get('title')[0]
+                except:
+                    title = ""
+                media = Media(audio=file, title=title)
+                try:
+                    media.full_clean()
+                    media.set_upload_to_info(
+                        username=request.user.username,
+                        track_type="albums",
+                        album_title=self.instance.title
+                    )
+                    media.save()
+                    track = Track(media=media, order=tracks_on_album, album=self.instance)
+                    tracks_on_album += 1
+                    track.save()
+                except ValidationError as e:
+                    messages.error(request, e.messages[0]+" : "+str(file))
         return self.instance
 
 class AlbumForm(TracksForm):

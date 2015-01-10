@@ -85,7 +85,7 @@ class AudioField(FileField):
         ext = os.path.splitext(filename)[1]
         ext = ext.lower()
         if ext not in self.ext_whitelist:
-            error_msg = _("not allowed filetype!")
+            error_msg = _("filetype not supported!")
             logger.error(error_msg)
             raise forms.ValidationError(error_msg)
 
@@ -93,7 +93,7 @@ class AudioField(FileField):
         convert_to = request and int(convert_type)
         ext = ext.split('.')[1]
         audio_type = CONVERT_TYPE_CHK[convert_to]
-        error_msg = _("not allowed : file format conversion is not allowed for same audio type (except Wav)")
+        error_msg = _("not supported : file format conversion is not allowed for same audio type (except Wav)")
         if convert_to:
             if ext == audio_type and ext != 'wav':
                 error_msg += ' %s format !!' % ext
@@ -232,7 +232,7 @@ class AudioField(FileField):
                     self._convert_audio(dst_fullpath, instance, ext[1:4])
 
                     request = threadlocals.get_current_request()
-                    convert_type = int(request.POST["convert_type"])
+                    convert_type = int(request.POST.get('convert_type',settings.CONVERT_TYPE_VALUE))
 
                     # 0 => Keep original
                     if convert_type > 0:
