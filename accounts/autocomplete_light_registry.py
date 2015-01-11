@@ -22,7 +22,7 @@ autocomplete_light.register(
 class UserAutocomplete(autocomplete_light.AutocompleteModelTemplate):
     model = User
     attrs = {
-        'placeholder': 'Search venues',
+        'placeholder': 'Search users',
     }
     search_fields = ['^profile__musicianProfile__name','^profile__venueProfile__name','^first_name','^last_name',]
 
