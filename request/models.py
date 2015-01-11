@@ -40,7 +40,6 @@ class RequestParticipant(models.Model):
     request = models.OneToOneField(Participant, related_name='request_partici')
     role =  models.CharField(_('role'), max_length=1, choices=ROLE_CHOICES, null=True, blank=True)
     accepted = models.BooleanField(default=False)
-    accepted = models.BooleanField(default=False)
 
 """ Public Request """
 class PublicRequest(Request):
