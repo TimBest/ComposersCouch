@@ -14,7 +14,6 @@ from models import Image
 
 def clean_image(image):
     if image:
-        print image
         if int(image._size) > int(settings.PHOTOS_MAX_UPLOAD_SIZE):
             raise ValidationError(
                 _('Please keep filesize under %(max)s. Current filesize %(current)s'),
@@ -42,7 +41,10 @@ class ImageOnlyForm(ModelForm):
         fields = ['image',]
 
     def clean_image(self):
-        return clean_image(self.cleaned_data.get("image", ""))
+        image = self.cleaned_data.get("image", "")
+        if image != self.instance.image:
+            return clean_image(image)
+        return image
 
 class ImageForm(ImageOnlyForm):
     def __init__(self, *args, **kwargs):
