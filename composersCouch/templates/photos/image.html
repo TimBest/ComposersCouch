@@ -2,30 +2,19 @@
 {% load i18n thumbnail %}
 
 {% block title %}
-    {% trans "Photo" %} - {{ image.title }}
+    Photo: {{ image.title }}
 {% endblock %}
 
 {% block header %}
-  {% if image.title %}
-    <h3>{{ image.title }}</h3>
-  {% endif %}
-  {% if image.title %}
-    <div class="image-description">
-      <p>{{ image.description }}</p>
-    </div>
-  {% endif %}
+  <h3>{{ image.title }}</h3>
+  <p>{{ image.description }}</p>
 {% endblock %}
 {% block content %}
-  <div id="image-view">
-    {% thumbnail image.image "x500" upscale=false as im %}
-      <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ im.url }}">
-    {% endthumbnail %}
-  </div>
-  {% if request.user == image.user or perms.photos.moderate_images %}
+  <a href="{{ image.image.url }}">
+    <img class="img-responsive" alt="{{ image.title }}" src="{{ image.image.url }}">
+  </a>
+  {% if request.user == image.user %}
     <a href="{% url 'photos:update-image' image.id %}">{% include "_editLink.html" with text="Edit Photo" %}</a>
-    {% comment %}
-    TODO: fix issuewith bad requests
-    <a class="pull-right" href="{% url 'photos:delete-image' image.id %}">{% include "_deleteLink.html" with text="Delete Photo" %}</a>
-    {% endcomment %}
+    <a class="pull-right" href="{% url 'photos:delete-image' image.id %}">{% include "_deleteLink.html" with text="Remove Photo" %}</a>
   {% endif %}
 {% endblock %}

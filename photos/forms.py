@@ -14,10 +14,8 @@ from models import Image
 
 def clean_image(image):
     if image:
-        print image._size
-        print settings.PHOTOS_MAX_UPLOAD_SIZE
+        print image
         if int(image._size) > int(settings.PHOTOS_MAX_UPLOAD_SIZE):
-            print "validation error should be raised"
             raise ValidationError(
                 _('Please keep filesize under %(max)s. Current filesize %(current)s'),
                 code='invalid',

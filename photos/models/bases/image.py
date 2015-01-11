@@ -19,8 +19,6 @@ except ImportError:
 
 from photos.utils import get_file_path, get_model_string
 
-SELF_MANAGE = getattr(settings, 'PHOTOS_SELF_MANAGE', True)
-
 def validate_file_extension(value):
     if value.name.endswith('.eps'):
         raise ValidationError(u'.eps files are not supported at this time')
@@ -60,29 +58,3 @@ class BaseImage(models.Model):
 
     admin_thumbnail.short_description = _('Thumbnail')
     admin_thumbnail.allow_tags = True
-
-
-#noinspection PyUnusedLocal
-def setup_photos_permissions(instance, created, **kwargs):
-        if not created:
-            return
-        try:
-            from photos.models import Image
-            image_type = ContentType.objects.get(
-                app_label = Image._meta.app_label,
-                name='Image'
-            )
-            add_image_permission = Permission.objects.get(codename='add_image', content_type=image_type)
-            change_image_permission = Permission.objects.get(codename='change_image', content_type=image_type)
-            delete_image_permission = Permission.objects.get(codename='delete_image', content_type=image_type)
-            instance.user_permissions.add(add_image_permission,)
-            instance.user_permissions.add(change_image_permission,)
-            instance.user_permissions.add(delete_image_permission,)
-        except ObjectDoesNotExist:
-            # Permissions are not yet installed or conten does not created yet
-            # probaly this is first
-            pass
-
-
-if SELF_MANAGE:
-    post_save.connect(setup_photos_permissions, User)

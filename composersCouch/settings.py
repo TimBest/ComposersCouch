@@ -259,7 +259,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.contrib.messages.context_processors.messages',
     'composersCouch.context_processors.now',
     'social_auth.context_processors.social_auth_by_type_backends',
-    'photos.context_processors.photos_processor',
 )
 
 # over ride user defaults

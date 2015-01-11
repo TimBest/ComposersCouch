@@ -1,32 +1,13 @@
-
-from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import reverse
-from django.utils.decorators import method_decorator
-from django.shortcuts import get_object_or_404
-from django.http import Http404, HttpResponseRedirect
-from django.conf import settings
-from django.contrib.auth.models import User
-from django.contrib.auth.decorators import permission_required
 from django.contrib.auth.decorators import login_required
-from django.utils.translation import ugettext_lazy as _
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.db.models import Q
+from django.utils.translation import ugettext_lazy as _
+from django.views.generic import CreateView, DetailView, DeleteView, UpdateView
 
+from .models import Image
+from .forms import ImageForm
 from annoying.functions import get_object_or_None
 from accounts.views import loginredirect
 from composersCouch.utils import get_page
-from utils import load_class
-
-from photos.models import Image
-
-from django.contrib.auth.models import User
-username_field = 'username'
-
-PHOTOS_IMAGES_ON_PAGE = getattr(settings, 'PHOTOS_IMAGES_ON_PAGE', 20)
-
-PHOTOS_ON_PAGE = getattr(settings, 'PHOTOS_ON_PAGE', 20)
-
-ImageForm = load_class(getattr(settings, 'PHOTOS_IMAGE_FORM', 'photos.forms.ImageForm'))
 
 
 def get_images_queryset(self):
@@ -43,21 +24,6 @@ def get_images_queryset(self):
         self.e_context['view_user'] = user
         images = images.filter(user=user)
     return images
-
-
-class ImageListView(ListView):
-    context_object_name = 'image_list'
-    template_name = 'photos/image_list.html'
-    paginate_by = getattr(settings, 'PHOTOS_IMAGES_ON_PAGE', 20)
-    allow_empty = True
-
-    get_queryset = get_images_queryset
-
-    def get_context_data(self, **kwargs):
-        context = super(ImageListView, self).get_context_data(**kwargs)
-        context.update(self.e_context)
-        return context
-
 
 class ImageView(DetailView):
     context_object_name = 'image'
@@ -104,16 +70,12 @@ class ImageView(DetailView):
         context.update(self.e_context)
         return context
 
+veiw_image = ImageView.as_view()
 
 class CreateImage(CreateView):
     template_name = 'photos/forms/image_form.html'
     model = Image
     form_class = ImageForm
-
-    @method_decorator(login_required)
-    @method_decorator(permission_required('%s.add_%s' % (Image._meta.app_label, Image.__name__.lower())))
-    def dispatch(self, *args, **kwargs):
-        return super(CreateImage, self).dispatch(*args, **kwargs)
 
     def get_form(self, form_class):
         return form_class(**self.get_form_kwargs())
@@ -124,6 +86,7 @@ class CreateImage(CreateView):
         self.object.save()
         return loginredirect(self.request, tab='photos')
 
+create_image = login_required(CreateImage.as_view())
 
 def get_edit_image_queryset(self):
     if self.request.user.has_perm('%s.moderate_%s' % (Image._meta.app_label,  Image.__name__.lower())):
@@ -131,39 +94,23 @@ def get_edit_image_queryset(self):
     else:
         return Image.objects.filter(user=self.request.user)
 
-
 class UpdateImage(UpdateView):
-    template_name = 'photos/forms/image_edit_form.html'
+    template_name = 'photos/forms/image_form.html'
     model = Image
     form_class = ImageForm
-
     get_queryset = get_edit_image_queryset
 
-    @method_decorator(login_required)
-    @method_decorator(permission_required('%s.change_%s' % (Image._meta.app_label,  Image.__name__.lower())))
-    def dispatch(self, *args, **kwargs):
-        return super(UpdateImage, self).dispatch(*args, **kwargs)
-
+update_image = login_required(UpdateImage.as_view())
 
 class DeleteImage(DeleteView):
     template_name = 'photos/image_delete.html'
     model = Image
+    get_queryset = get_edit_image_queryset
 
     def get_success_url(self):
         return loginredirect(self.request, tab='photos')
 
-    get_queryset = get_edit_image_queryset
-
-    @method_decorator(login_required)
-    @method_decorator(permission_required('%s.delete_%s' % (Image._meta.app_label,  Image.__name__.lower())))
-    def dispatch(self, *args, **kwargs):
-        return super(DeleteImage, self).dispatch(*args, **kwargs)
-
-def ProfileImageView(extra_context,user):
-    images = Image.objects.all()
-    extra_context['paginate_by'] = getattr(settings, 'IMAGESTORE_IMAGES_ON_PAGE', 20)
-    extra_context['image_list'] = images.filter(user=user)
-    return extra_context
+delete_image = login_required(DeleteImage.as_view())
 
 class ImageFormMixin(object):
     images_on_page = 4

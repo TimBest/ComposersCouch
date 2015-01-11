@@ -4,7 +4,6 @@ from django.core.exceptions import ImproperlyConfigured
 from django.utils.importlib import import_module
 from django.conf import settings
 
-UPLOAD_TO = getattr(settings, 'PHOTOS_UPLOAD_TO', 'photos/')
 
 def load_class(class_path, setting_name=None):
     """
@@ -60,4 +59,4 @@ def get_model_string(model_name):
 def get_file_path(instance, filename):
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)
-    return os.path.join(instance.user.username, UPLOAD_TO, filename)
+    return os.path.join(instance.user.username, 'photos', filename)

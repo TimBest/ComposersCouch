@@ -15,15 +15,10 @@
               {% thumbnail image.image "120x120" crop="center" as im %}
                 <div class="image-frame">
                   <span class="frame-helper"></span>
-                  <a class="thumb" rel='gallery-image[ilist]' href="{{ image.image.url }}">
+                  <a class="thumb" rel='gallery-image[ilist]' href="{{ image.get_absolute_url }}">
                     <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ im.url }}">
                   </a>
                 </div>
-                {% if image.title %}
-                  <p class="text-center"><a href="{% include 'photos/image-href.html' %}">
-                    {{ image.title }}
-                  </a></p>
-                {% endif %}
               {% endthumbnail %}
             </div>
           </div>
