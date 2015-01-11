@@ -116,7 +116,7 @@ class RequestFormView(MultipleFormsView):
       'dateForm': forms.DateForm,
       'messageForm': forms.MessageForm,
       'requestForm': forms.PrivateRequestForm,
-      'headlinerForm': forms.ParticipantForm,
+      'headlinerForm': forms.ArtistParticipantForm,
       'hostForm': forms.ParticipantForm,
     }
     template_name = 'request/forms/private_request.html'

@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from autocomplete_light import ModelForm
+from autocomplete_light import ModelForm, ChoiceWidget
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Layout
 
@@ -49,12 +49,12 @@ class RequestForm(ModelForm):
         fields = ('accept_by',)
 
 class ParticipantForm(ModelForm):
-
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(ParticipantForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
+        self.helper.form_show_labels = False
         self.helper.layout = Layout(
             Div(
               Div('user',css_class='col-sm-6 left',),
@@ -66,6 +66,10 @@ class ParticipantForm(ModelForm):
     class Meta:
         model = Participant
         fields = ('email','user')
+
+class ArtistParticipantForm(ParticipantForm):
+    user = forms.ModelChoiceField(MusicianProfile.objects.all(),
+                widget=ChoiceWidget('MusicianProfileAutocomplete',))
 
 class PrivateRequestForm(RequestForm):
 
