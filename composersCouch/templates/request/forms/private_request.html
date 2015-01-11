@@ -1,22 +1,24 @@
 {% extends 'form.html' %}
-{% load i18n crispy_forms_tags %}
+{% load crispy_forms_tags %}
 {% crispy DateForm DateForm.helper %}
 {% crispy MessageForm MessageForm.helper %}
 {% crispy PrivateRequestForm PrivateRequestForm.helper %}
+{% crispy ParticipantForm ParticipantForm.helper %}
 
-{% block title %}{% block formTitle %}
-  {% trans "Send Request" %}
-{% endblock %}{% endblock %}
+
+{% block title %}{% block formTitle %}Send Request{% endblock %}{% endblock %}
 
 {% block formID %}privateRequestForm{% endblock %}
 
 {% block form %}
   {% crispy dateForm %}
+  {% crispy headlinerForm %}
+  {% crispy hostForm %}
   {% crispy requestForm %}
   {% crispy messageForm %}
 {% endblock %}
 
-{% block submit %}<button type="submit" class="btn btn-primary">{% trans 'Send' %}</button>{% endblock %}
+{% block submit %}<button type="submit" class="btn btn-primary">Send</button>{% endblock %}
 
 {% block script %}
   {{ block.super }}

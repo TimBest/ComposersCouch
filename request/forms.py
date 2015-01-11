@@ -12,6 +12,7 @@ from annoying.functions import get_object_or_None
 from contact.models import Zipcode
 from schedule.forms import DateForm, UserSelectForm
 from schedule.models import DateRange
+from threaded_messages.models import Participant
 
 
 class DateForm(DateForm):
@@ -47,7 +48,26 @@ class RequestForm(ModelForm):
         model = models.Request
         fields = ('accept_by',)
 
-class PrivateRequestForm(RequestForm, UserSelectForm):
+class ParticipantForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(ParticipantForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Div(
+              Div('user',css_class='col-sm-6 left',),
+              Div('email',css_class='col-sm-6 right',),
+              css_class='row no-gutter',
+            ),
+        )
+
+    class Meta:
+        model = Participant
+        fields = ('email','user')
+
+class PrivateRequestForm(RequestForm):
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -55,41 +75,9 @@ class PrivateRequestForm(RequestForm, UserSelectForm):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            self.participants,
             'accept_by',
         )
 
-    class Meta:
-        model = models.PrivateRequest
-        fields = ('accept_by','headliner','host','openers',)
-
-    def clean(self):
-        # user must be a participent in the evnet or request
-        isParticipent = False
-        try:
-            if self.cleaned_data.get('headliner').profile.user == self.user:
-                isParticipent = True
-        except:
-            pass
-        if self.cleaned_data.get('host') == self.user:
-            isParticipent = True
-        else:
-            for o in self.cleaned_data.get('openers'):
-                if o.profile.user == self.user:
-                    isParticipent = True
-        if not isParticipent:
-            raise forms.ValidationError(_(u"You must be part of this request"))
-        return super(PrivateRequestForm, self).clean()
-
-class EditPrivateRequestForm(RequestForm):
-
-    def __init__(self, *args, **kw):
-      super(EditPrivateRequestForm, self).__init__(*args, **kw)
-      self.helper = FormHelper()
-      self.helper.form_tag = False
-      self.helper.layout = Layout(
-          'accept_by',
-      )
     class Meta:
         model = models.PrivateRequest
         fields = ('accept_by',)
@@ -128,10 +116,10 @@ class NumberOfApplicantsForm(PublicRequestForm):
 class AcceptForm(forms.Form):
 
     class Meta:
-        model = models.Accept
+        model = models.RequestParticipant
 
-    def save(self, user, private_request, accepted):
-        a = get_object_or_None(models.Accept, user=user.id, request=private_request.id)
+    """def save(self, user, private_request, accepted):
+        a = get_object_or_None(models.RequestParticipant, user=user.id, request=private_request.id)
         if a:
             a.accepted = accepted
         else:
@@ -141,7 +129,7 @@ class AcceptForm(forms.Form):
                 accepted=accepted,
             )
         a.save()
-        return a
+        return a"""
 
 class ApproveForm(forms.Form):
 

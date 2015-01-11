@@ -116,8 +116,10 @@ class RequestFormView(MultipleFormsView):
       'dateForm': forms.DateForm,
       'messageForm': forms.MessageForm,
       'requestForm': forms.PrivateRequestForm,
+      'headlinerForm': forms.ParticipantForm,
+      'hostForm': forms.ParticipantForm,
     }
-    template_name = 'request/privaterequest_form.html'
+    template_name = 'request/forms/private_request.html'
     success_url = 'sent_private_requests'
 
     def get_users(self):
@@ -136,16 +138,18 @@ class RequestFormView(MultipleFormsView):
     def get_initial_data(self):
         request_data = {}
         date_data = {}
-        for user in self.get_users():
-            profile_type = user.profile.profile_type
-            if profile_type == 'm':
-                request_data['headliner'] = user.profile.musicianProfile
-            elif profile_type == 'v' or profile_type == 'f' :
-                request_data['host'] =  user
+        #for user in self.get_users():
+        #    profile_type = user.profile.profile_type
+        #    if profile_type == 'm':
+        #        request_data['headliner'] = user.profile.musicianProfile
+        #    elif profile_type == 'v' or profile_type == 'f' :
+        #        request_data['host'] =  user
         return {
             'dateForm': date_data,
             'messageForm': None,
             'requestForm': request_data,
+            'headlinerForm': None,
+            'hostForm': None,
         }
 
     def get_success_url(self, private_request=None):
@@ -175,7 +179,7 @@ requestForm = login_required(RequestFormView.as_view())
 class RequestEditFormView(MultipleModelFormsView):
     form_classes = {
       'dateForm': forms.DateForm,
-      'requestForm': forms.EditPrivateRequestForm,
+      'requestForm': forms.PrivateRequestForm,
     }
     template_name = 'request/edit_request_form.html'
 
