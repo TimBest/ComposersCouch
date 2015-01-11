@@ -14,7 +14,6 @@ from crispy_forms.bootstrap import AppendedText
 from accounts.models import MusicianProfile
 from contact.models import Location
 from photos.models import Image
-from photos.widgets import ImageSelectWidget
 from schedule.models import DateRange, Event, Show, Info
 
 
