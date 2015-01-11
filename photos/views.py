@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, DetailView, DeleteView, UpdateView
@@ -88,27 +89,31 @@ class CreateImage(CreateView):
 
 create_image = login_required(CreateImage.as_view())
 
-def get_edit_image_queryset(self):
-    if self.request.user.has_perm('%s.moderate_%s' % (Image._meta.app_label,  Image.__name__.lower())):
-        return Image.objects.all()
-    else:
-        return Image.objects.filter(user=self.request.user)
 
 class UpdateImage(UpdateView):
     template_name = 'photos/forms/image_form.html'
     model = Image
     form_class = ImageForm
-    get_queryset = get_edit_image_queryset
+
+    def get_queryset(self):
+        return Image.objects.filter(user=self.request.user)
+
+    def get_success_url(self):
+        kwargs= {'username':self.request.user.username, 'tab':'photos'}
+        return reverse('redirectToProfile', kwargs=kwargs)
 
 update_image = login_required(UpdateImage.as_view())
 
 class DeleteImage(DeleteView):
     template_name = 'photos/image_delete.html'
     model = Image
-    get_queryset = get_edit_image_queryset
+
+    def get_queryset(self):
+        return Image.objects.filter(user=self.request.user)
 
     def get_success_url(self):
-        return loginredirect(self.request, tab='photos')
+        kwargs= {'username':self.request.user.username, 'tab':'photos'}
+        return reverse('redirectToProfile', kwargs=kwargs)
 
 delete_image = login_required(DeleteImage.as_view())
 

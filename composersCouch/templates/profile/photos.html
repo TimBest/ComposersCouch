@@ -16,7 +16,7 @@
                 <div class="image-frame">
                   <span class="frame-helper"></span>
                   <a class="thumb" rel='gallery-image[ilist]' href="{{ image.get_absolute_url }}">
-                    <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ im.url }}">
+                    <img class="img-responsive" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ im.url }}">
                   </a>
                 </div>
               {% endthumbnail %}
