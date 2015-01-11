@@ -5,7 +5,7 @@ from django.utils.translation import ugettext as _
 from accounts.models import MusicianProfile
 from annoying.functions import get_object_or_None
 from contact.models import Zipcode
-from threaded_messages.models import Thread
+from threaded_messages.models import Thread, Participant
 from schedule.models.events import DateRange
 
 
@@ -19,28 +19,15 @@ class Request(models.Model):
     class Meta:
         abstract = True
 
+""" Private Request """
+ROLE_CHOICES = (
+    ('h', _('Headliner')),
+    ('o', _('Openers')),
+    ('v', _('Venue')),
+)
 class PrivateRequest(Request):
     messages = models.OneToOneField(Thread, verbose_name=_("messages"),
-                                   related_name='request',
-                                   null=True, blank=True)
-    headliner = models.ForeignKey(MusicianProfile,
-                                  verbose_name=_("headliner"),
-                                  related_name='request_for_headlining')
-    openers = models.ManyToManyField(MusicianProfile,
-                                     verbose_name=_("openers"),
-                                     related_name='request_for_opening',
-                                     null=True, blank=True)
-    host = models.ForeignKey(User, verbose_name=_("host"), related_name='request_for_hosting',)
-
-    def participants(self):
-        participants = []
-        if self.host:
-            participants.append(self.host)
-        if self.headliner:
-            participants.append(self.headliner.profile.user)
-        for opener in self.openers.all():
-            participants.append(opener.profile.user)
-        return participants
+                                   related_name='request', null=True, blank=True)
 
     def has_accepted(self, user):
         a = get_object_or_None(Accept, user=user, request=self)
@@ -49,11 +36,13 @@ class PrivateRequest(Request):
         else:
             return None
 
-class Accept(models.Model):
-    user = models.ForeignKey(User, related_name='accepter')
-    request = models.ForeignKey(PrivateRequest, related_name='accepted_request')
+class RequestParticipant(models.Model):
+    request = models.OneToOneField(Participant, related_name='request_partici')
+    role =  models.CharField(_('role'), max_length=1, choices=ROLE_CHOICES, null=True, blank=True)
+    accepted = models.BooleanField(default=False)
     accepted = models.BooleanField(default=False)
 
+""" Public Request """
 class PublicRequest(Request):
     zip_code = models.ForeignKey(Zipcode, verbose_name=_("Zipcode"))
     details = models.TextField(_("description"))

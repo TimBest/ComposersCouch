@@ -85,21 +85,17 @@ class UserSelectForm(ModelForm):
     def __init__(self, *args, **kwargs):
         kwargs.pop('user', None)
         super(UserSelectForm, self).__init__(*args, **kwargs)
-        create_user = HTML("<a href="+ reverse('signupNoOwner') +" target='_blank'><span class='add-user text-center text-success fa fa-plus'></span></a>")
         self.participants = Layout (
             Div(
               Div('headliner',css_class='col-xs-11 left',),
-              Div(create_user,css_class='col-xs-1 right',),
               css_class='row no-gutter',
             ),
             Div(
               Div('openers',css_class='col-xs-11 left',),
-              Div(create_user,css_class='col-xs-1 right',),
               css_class='row no-gutter',
             ),
             Div(
               Div('host',css_class='col-xs-11 left',),
-              Div(create_user,css_class='col-xs-1 right',),
               css_class='row no-gutter',
             ),
         )

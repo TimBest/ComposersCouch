@@ -8,7 +8,7 @@ from accounts.models import MusicianProfile
 class MusicianProfileAutocomplete(autocomplete_light.AutocompleteModelTemplate):
     model = MusicianProfile
     attrs = {
-        'placeholder': '',
+        'placeholder': 'Search artists',
     }
     search_fields = ['^name',]
 
@@ -22,7 +22,7 @@ autocomplete_light.register(
 class UserAutocomplete(autocomplete_light.AutocompleteModelTemplate):
     model = User
     attrs = {
-        'placeholder': '',
+        'placeholder': 'Search venues',
     }
     search_fields = ['^profile__musicianProfile__name','^profile__venueProfile__name','^first_name','^last_name',]
 
