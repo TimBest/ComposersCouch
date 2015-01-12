@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
 from autocomplete_light import ModelForm, ChoiceWidget
@@ -30,7 +31,7 @@ class DateForm(DateForm):
       )
 
 class MessageForm(forms.Form):
-    body = forms.CharField(label=_("Message"),
+    body = forms.CharField(label=_("Details"),
               widget=forms.Textarea(attrs={'rows': 2, 'cols': 19}))
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -56,21 +57,38 @@ class ParticipantForm(ModelForm):
         self.helper.form_tag = False
         self.helper.form_show_labels = False
         self.helper.layout = Layout(
-            Div(
-              Div('user',css_class='col-sm-6 left',),
-              Div('email',css_class='col-sm-6 right',),
-              css_class='row no-gutter',
-            ),
+            'user',
+            Field('email',placeholder='Email'),
         )
 
     class Meta:
         model = Participant
         fields = ('email','user')
 
-class ArtistParticipantForm(ParticipantForm):
-    user = forms.ModelChoiceField(MusicianProfile.objects.all(),
-                widget=ChoiceWidget('MusicianProfileAutocomplete',))
+    """def clean(self):
+        # either a user or email is required"""
 
+    def save(self, thread, sender, commit=True):
+        participent = super(ParticipantForm, self).save(commit=False)
+        if commit:
+            participent.thread = thread
+            if participent.user == sender:
+                participent.read_at = now()
+                participent.replied_at = now()
+            participent.save()
+        return participent
+
+class ArtistParticipantForm(ParticipantForm):
+    user = forms.ModelChoiceField(User.objects.filter(profile__profile_type='m'),
+                widget=ChoiceWidget('UserAutocomplete',))
+
+    """def clean(self):
+        artist = self.cleaned_data.get("user", None)
+        print artist
+        if artist:
+            self.cleaned_data["user"] = artist.profile.user
+        return self.cleaned_data
+"""
 class PrivateRequestForm(RequestForm):
 
     def __init__(self, *args, **kwargs):

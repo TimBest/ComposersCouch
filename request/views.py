@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
 from django.shortcuts import redirect
+from django.utils.timezone import now
 from django.views.decorators.http import require_POST
 from django.views.generic import FormView
 from django.views.generic.base import TemplateView
@@ -136,20 +137,19 @@ class RequestFormView(MultipleFormsView):
         return kwargs
 
     def get_initial_data(self):
-        request_data = {}
-        date_data = {}
-        #for user in self.get_users():
-        #    profile_type = user.profile.profile_type
-        #    if profile_type == 'm':
-        #        request_data['headliner'] = user.profile.musicianProfile
-        #    elif profile_type == 'v' or profile_type == 'f' :
-        #        request_data['host'] =  user
+        headliner_data = host_data = {}
+        for user in self.get_users():
+            profile_type = user.profile.profile_type
+            if profile_type == 'm':
+                headliner_data = {'user' : user.profile.musicianProfile}
+            elif profile_type == 'v' or profile_type == 'f' :
+                host_data = {'user' : user}
         return {
-            'dateForm': date_data,
+            'dateForm': None,
             'messageForm': None,
-            'requestForm': request_data,
-            'headlinerForm': None,
-            'hostForm': None,
+            'requestForm': None,
+            'headlinerForm': headliner_data,
+            'hostForm': host_data,
         }
 
     def get_success_url(self, private_request=None):
@@ -161,16 +161,27 @@ class RequestFormView(MultipleFormsView):
             return redirect(success_url)
 
     def forms_valid(self, forms):
+        # TODO: add check to ensure that current user is a particiapnt in the request
         private_request = forms['requestForm'].save(commit=False)
         private_request.date = forms['dateForm'].save()
         private_request.save()
-        forms['requestForm'].save_m2m()
-        private_request.messages = create_thread (
-            participants=private_request.participants(),
-            sender=self.request.user,
-            subject="Show Request",
-            body=forms['messageForm'].cleaned_data['body']
+        #forms['requestForm'].save_m2m()
+        sender = self.request.user
+        message = Message.objects.create(
+                    body=forms['messageForm'].cleaned_data['body'],
+                    sender=sender,
+                    parent_msg=None,
+                    sent_at=now(),
         )
+        thread = Thread.objects.create(
+            subject="Show Request",
+            latest_msg=message,
+            creator=sender,
+        )
+        thread.all_msgs.add(message)
+        thread.save()
+        forms['headlinerForm'].save(thread=thread, sender=sender)
+        forms['hostForm'].save(thread=thread, sender=sender)
         private_request.save()
         return self.get_success_url(private_request)
 
