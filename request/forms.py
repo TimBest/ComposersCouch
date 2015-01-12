@@ -50,6 +50,8 @@ class RequestForm(ModelForm):
         fields = ('accept_by',)
 
 class ParticipantForm(ModelForm):
+    user = forms.ModelChoiceField(User.objects.all(),
+                widget=ChoiceWidget('UserAutocomplete',))
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(ParticipantForm, self).__init__(*args, **kwargs)
@@ -65,9 +67,6 @@ class ParticipantForm(ModelForm):
         model = Participant
         fields = ('email','user')
 
-    """def clean(self):
-        # either a user or email is required"""
-
     def save(self, thread, sender, commit=True):
         participent = super(ParticipantForm, self).save(commit=False)
         if commit:
@@ -79,16 +78,16 @@ class ParticipantForm(ModelForm):
         return participent
 
 class ArtistParticipantForm(ParticipantForm):
-    user = forms.ModelChoiceField(User.objects.filter(profile__profile_type='m'),
-                widget=ChoiceWidget('UserAutocomplete',))
+    user = forms.ModelChoiceField(User.objects.all(),
+                widget=ChoiceWidget('UserArtistAutocomplete',))
 
-    """def clean(self):
+    def clean(self):
         artist = self.cleaned_data.get("user", None)
-        print artist
-        if artist:
-            self.cleaned_data["user"] = artist.profile.user
+        print self.cleaned_data
+        #if artist:
+        #    self.cleaned_data["user"] = artist.profile.user
         return self.cleaned_data
-"""
+
 class PrivateRequestForm(RequestForm):
 
     def __init__(self, *args, **kwargs):

@@ -19,26 +19,6 @@ autocomplete_light.register(
     autocomplete_template='autocomplete/_musicians.html',
 )
 
-class UserArtistAutocomplete(autocomplete_light.AutocompleteModelTemplate):
-    model = User
-    attrs = {
-        'placeholder': 'Search artists',
-    }
-    search_fields = ['^profile__musicianProfile__name',]
-
-
-    def choices_for_request(self):
-        self.choices = self.choices.filter(profile_type='m')
-
-        return super(UserArtistAutocomplete, self).choices_for_request()
-
-autocomplete_light.register(
-    MusicianProfile,
-    MusicianProfileAutocomplete,
-    choice_template='autocomplete/_musician.html',
-    autocomplete_template='autocomplete/_musicians.html',
-)
-
 class UserAutocomplete(autocomplete_light.AutocompleteModelTemplate):
     model = User
     attrs = {
@@ -49,6 +29,26 @@ class UserAutocomplete(autocomplete_light.AutocompleteModelTemplate):
 autocomplete_light.register(
     User,
     UserAutocomplete,
+    choice_template='autocomplete/_user.html',
+    autocomplete_template='autocomplete/_users.html',
+)
+
+class UserArtistAutocomplete(autocomplete_light.AutocompleteModelTemplate):
+    model = User
+    attrs = {
+        'placeholder': 'Search artists',
+    }
+    search_fields = ['^profile__musicianProfile__name',]
+
+
+    def choices_for_request(self):
+        self.choices = self.choices.filter(profile__profile_type='m')
+
+        return super(UserArtistAutocomplete, self).choices_for_request()
+
+autocomplete_light.register(
+    User,
+    UserArtistAutocomplete,
     choice_template='autocomplete/_user.html',
     autocomplete_template='autocomplete/_users.html',
 )
