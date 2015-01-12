@@ -89,8 +89,14 @@ class RequestView(MessageView):
         end = private_request.date.end + padding
         context['events'] = calendar.get_events_in_range(start=start, end=end)
         context['user_accept'] = private_request.has_accepted(self.request.user)
-        #context['host_accept'] = private_request.has_accepted(private_request.host)
-        #context['headliner_accept'] = private_request.has_accepted(private_request.headliner.profile.user)
+        for user in private_request.thread.participants.all():
+            role = user.request_participant.role
+            if role == 'v':
+                context['host'] = user
+                context['host_accept'] = user.request_participant.accepted
+            elif role == 'h':
+                context['headliner'] = user
+                context['headliner_accept'] = user.request_participant.accepted
         #openers_accept = []
         #for o in private_request.openers.all():
         #    openers_accept.append((o, private_request.has_accepted(o.profile.user)))
@@ -177,7 +183,7 @@ class RequestFormView(MultipleFormsView):
         )
         thread.all_msgs.add(message)
         thread.save()
-        forms['headlinerForm'].save(thread=thread, sender=sender)
+        forms['headlinerForm'].save(thread=thread, sender=sender, role='h')
         forms['hostForm'].save(thread=thread, sender=sender)
         private_request.thread = thread
         private_request.save()

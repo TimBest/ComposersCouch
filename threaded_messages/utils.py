@@ -71,9 +71,9 @@ def create_thread(participants, sender, subject, body):
     thread.save()
     for user in participants:
         if user != sender:
-            participent = Participant.objects.create(thread=thread, user=user)
+            participant = Participant.objects.create(thread=thread, user=user)
         else:
-            participent = Participant.objects.create(
+            participant = Participant.objects.create(
                             thread=thread,
                             user=user,
                             read_at=now(),

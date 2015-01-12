@@ -114,20 +114,20 @@ class ShowInfoForm(UserSelectForm):
         self.fields['headliner'].required = False
 
     def clean(self):
-        # user must be a participent in the evnet or request
-        isParticipent = False
+        # user must be a participant in the evnet or request
+        isParticipant = False
         try:
             if self.cleaned_data.get('headliner').profile.user == self.user:
-                isParticipent = True
+                isParticipant = True
         except:
             pass
         if self.cleaned_data.get('host') == self.user:
-            isParticipent = True
+            isParticipant = True
         else:
             for o in self.cleaned_data.get('openers'):
                 if o.profile.user == self.user:
-                    isParticipent = True
-        if not isParticipent:
+                    isParticipant = True
+        if not isParticipant:
             raise forms.ValidationError(_(u"You must be part of this request"))
 
         if not self.cleaned_data.get('title') and not self.cleaned_data.get('headliner'):

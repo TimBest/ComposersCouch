@@ -67,15 +67,18 @@ class ParticipantForm(ModelForm):
         model = Participant
         fields = ('email','user')
 
-    def save(self, thread, sender, commit=True):
-        participent = super(ParticipantForm, self).save(commit=False)
-        if commit:
-            participent.thread = thread
-            if participent.user == sender:
-                participent.read_at = now()
-                participent.replied_at = now()
-            participent.save()
-        return participent
+    def save(self, thread, sender):
+        participant = super(ParticipantForm, self).save(commit=False)
+        participant.thread = thread
+        participant.save()
+        request_paticipant = models.RequestParticipant(participant=participant, role='v')
+        if participant.user == sender:
+            participant.read_at = now()
+            participant.replied_at = now()
+            participant.save()
+            request_paticipant.accepted = True
+        request_paticipant.save()
+        return participant
 
 class ArtistParticipantForm(forms.Form):
     artist = forms.ModelChoiceField(User.objects.all(),
@@ -93,16 +96,19 @@ class ArtistParticipantForm(forms.Form):
             Field('artist_email',placeholder='Email'),
         )
 
-    def save(self, thread, sender, commit=True):
+    def save(self, thread, sender, role='o'):
         user = self.cleaned_data.get('artist')
         email = self.cleaned_data.get('artist_email')
-        participent = Participant(user=user, email=email, thread=thread)
+        participant = Participant(user=user, email=email, thread=thread)
+        participant.save()
+        request_paticipant = models.RequestParticipant(participant=participant, role=role)
         if user == sender:
-            participent.read_at = now()
-            participent.replied_at = now()
-        if commit:
-            participent.save()
-        return participent
+            participant.read_at = now()
+            participant.replied_at = now()
+            participant.save()
+            request_paticipant.accepted = True
+        request_paticipant.save()
+        return participant
 
     class Meta:
         model = Participant

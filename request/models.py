@@ -32,12 +32,13 @@ class PrivateRequest(Request):
     def has_accepted(self, user):
         participant = get_object_or_None(Participant, user=user, thread=self)
         if participant:
+            print participant.id
             return participant.request_participant.accepted
         else:
             return None
 
 class RequestParticipant(models.Model):
-    request = models.OneToOneField(Participant, related_name='request_participant')
+    participant = models.OneToOneField(Participant, related_name='request_participant')
     role =  models.CharField(_('role'), max_length=1, choices=ROLE_CHOICES, null=True, blank=True)
     accepted = models.BooleanField(default=False)
 
