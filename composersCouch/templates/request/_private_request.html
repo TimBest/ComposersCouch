@@ -3,6 +3,7 @@
     <div class="panel-body">
       <div class="row">
         <div class="col-sm-6">
+          {% comment %}
           <div class="Headliner">
             <b>Headliner:</b>
             <a class="text-black" href="{% request.headliner.profile.user.username 'about' %}">
@@ -25,6 +26,7 @@
             <a class="text-black" href="{% url 'redirectToProfile' host.username 'about' %}">{{ host.profile }}</a>
           </div>
           {% endwith %}
+          {% endcomment %}
           <p>Accept by: {{ request.accept_by }}</p>
         </div>
         <div class="col-sm-6">

@@ -154,7 +154,7 @@ class MessageView(MessagesMixin, FormView):
     def get_context_data(self, **kwargs):
         context = super(MessageView, self).get_context_data(**kwargs)
         context['thread'] = self.thread
-        context['participant'] = participant = get_object_or_404(Participant, thread=self.thread, user=self.request.user)
+        context['participant'] = participant = Participant.objects.filter(thread=self.thread, user=self.request.user)[0]
         message_list = []
         # in this view we want the last message last
         for message in self.thread.all_msgs.all().order_by("sent_at"):

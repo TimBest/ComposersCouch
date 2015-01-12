@@ -77,16 +77,36 @@ class ParticipantForm(ModelForm):
             participent.save()
         return participent
 
-class ArtistParticipantForm(ParticipantForm):
-    user = forms.ModelChoiceField(User.objects.all(),
+class ArtistParticipantForm(forms.Form):
+    artist = forms.ModelChoiceField(User.objects.all(),
                 widget=ChoiceWidget('UserArtistAutocomplete',))
+    artist_email = forms.EmailField(label=_("Email"),required=False, max_length=75)
 
-    def clean(self):
-        artist = self.cleaned_data.get("user", None)
-        print self.cleaned_data
-        #if artist:
-        #    self.cleaned_data["user"] = artist.profile.user
-        return self.cleaned_data
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(ArtistParticipantForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.form_show_labels = False
+        self.helper.layout = Layout(
+            'artist',
+            Field('artist_email',placeholder='Email'),
+        )
+
+    def save(self, thread, sender, commit=True):
+        user = self.cleaned_data.get('artist')
+        email = self.cleaned_data.get('artist_email')
+        participent = Participant(user=user, email=email, thread=thread)
+        if user == sender:
+            participent.read_at = now()
+            participent.replied_at = now()
+        if commit:
+            participent.save()
+        return participent
+
+    class Meta:
+        model = Participant
+        fields = ('email','user')
 
 class PrivateRequestForm(RequestForm):
 

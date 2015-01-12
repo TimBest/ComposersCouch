@@ -15,7 +15,7 @@ from .models import Application, PrivateRequest, PublicRequest
 from annoying.functions import get_object_or_None
 from composersCouch.views import MultipleFormsView, MultipleModelFormsView
 from customProfile.decorators import is_venue, is_musician
-from threaded_messages.models import Message, Participant
+from threaded_messages.models import Message, Participant, Thread
 from threaded_messages.views import MessageView
 from threaded_messages.utils import reply_to_thread, create_thread
 
@@ -89,12 +89,12 @@ class RequestView(MessageView):
         end = private_request.date.end + padding
         context['events'] = calendar.get_events_in_range(start=start, end=end)
         context['user_accept'] = private_request.has_accepted(self.request.user)
-        context['host_accept'] = private_request.has_accepted(private_request.host)
-        context['headliner_accept'] = private_request.has_accepted(private_request.headliner.profile.user)
-        openers_accept = []
-        for o in private_request.openers.all():
-            openers_accept.append((o, private_request.has_accepted(o.profile.user)))
-        context['openers_accept'] = openers_accept
+        #context['host_accept'] = private_request.has_accepted(private_request.host)
+        #context['headliner_accept'] = private_request.has_accepted(private_request.headliner.profile.user)
+        #openers_accept = []
+        #for o in private_request.openers.all():
+        #    openers_accept.append((o, private_request.has_accepted(o.profile.user)))
+        #context['openers_accept'] = openers_accept
         return context
 
 view = RequestView.as_view()
@@ -152,20 +152,17 @@ class RequestFormView(MultipleFormsView):
             'hostForm': host_data,
         }
 
-    def get_success_url(self, private_request=None):
+    def get_success_url(self, thread=None):
         # TODO: extend this guy to accept next urls
-        thread = private_request.messages
         if thread:
             return redirect('request_detail', thread_id=thread.id)
         else:
-            return redirect(success_url)
+            return redirect(self.success_url)
 
     def forms_valid(self, forms):
         # TODO: add check to ensure that current user is a particiapnt in the request
         private_request = forms['requestForm'].save(commit=False)
         private_request.date = forms['dateForm'].save()
-        private_request.save()
-        #forms['requestForm'].save_m2m()
         sender = self.request.user
         message = Message.objects.create(
                     body=forms['messageForm'].cleaned_data['body'],
@@ -182,8 +179,9 @@ class RequestFormView(MultipleFormsView):
         thread.save()
         forms['headlinerForm'].save(thread=thread, sender=sender)
         forms['hostForm'].save(thread=thread, sender=sender)
+        private_request.thread = thread
         private_request.save()
-        return self.get_success_url(private_request)
+        return self.get_success_url(thread)
 
 requestForm = login_required(RequestFormView.as_view())
 
