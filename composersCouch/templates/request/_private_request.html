@@ -60,8 +60,6 @@
     </div>
     <div class="panel-footer">
       <div class="pull-right">
-
-
         <form method="POST" class="accept-form inline-block {% hide_accept request user %}" action="{% url 'request_accept' %}">
           {% csrf_token %}
           <input type="hidden" name="private_request" value="{{ request.id }}">
