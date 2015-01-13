@@ -212,6 +212,7 @@ class RequestEditFormView(MultipleModelFormsView):
       'requestForm': forms.RequestForm,
     }
     template_name = 'request/edit_request_form.html'
+    success_url = 'sent_private_requests'
 
     def dispatch(self, *args, **kwargs):
         request_id = self.kwargs.get('request_id', None)
@@ -224,12 +225,19 @@ class RequestEditFormView(MultipleModelFormsView):
             'requestForm': self.private_request,
         }
 
+    def get_success_url(self, thread=None):
+        # TODO: extend this guy to accept next urls
+        if thread:
+            return redirect('request_detail', thread_id=thread.id)
+        else:
+            return redirect(self.success_url)
+
     def forms_valid(self, forms):
         private_request = forms['requestForm'].save()
         private_request.date = forms['dateForm'].save()
         private_request.save()
-        reply_to_thread(self.private_request.messages, self.request.user, "edited request")
-        return self.get_success_url()
+        reply_to_thread(self.private_request.thread, self.request.user, "edited request")
+        return self.get_success_url(thread=self.private_request.thread)
 
 requestEditForm = is_participant(RequestEditFormView.as_view())
 
@@ -341,7 +349,7 @@ def accept(request, accept=True):
             form = forms.AcceptForm(data=data)
             assert form.is_valid()
             form.save(user=request.user,private_request=private_request, accepted=accept)
-            return redirect('request_detail', thread_id=private_request.messages.id)
+            return redirect('request_detail', thread_id=private_request.thread.id)
     return PermissionDenied
 
 def decline(request):

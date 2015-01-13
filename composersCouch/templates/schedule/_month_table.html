@@ -63,7 +63,7 @@
                   </div>
                 {% else %}
                   <div class="center-block cal-event">
-                    <a href="{% url 'request_detail' event.messages.id %}">
+                    <a href="{% url 'request_detail' event.thread.id %}">
                       <span class="visible-xs">{{ event.show.date.start|date:'g:i' }}</span>
                       <span class="hidden-xs">
                         <b>{{ event.date.start|date:'fA' }}:</b>
@@ -76,7 +76,7 @@
                     </a>
                   </div>
                   <div class="hidden">
-                    <li class="events"><a class="show-title" href="{% url 'request_detail' event.messages.id %}">
+                    <li class="events"><a class="show-title" href="{% url 'request_detail' event.thread.id %}">
                       <b>{{ event.date.start|date:'fA' }}:</b>
                       {% if user.profile.profile_type == 'v' %}
                         {{ event.headliner.profile }}

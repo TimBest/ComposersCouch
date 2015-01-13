@@ -18,8 +18,8 @@ def is_participant(function):
             request_id = kwargs.get('request_id', None)
             if request_id:
                 private_request = get_object_or_None(PrivateRequest, id=request_id)
-                for user in private_request.participants():
-                    if user == request.user:
+                for participant in private_request.thread.participants.all():
+                    if participant.user == request.user:
                         return function(request, *args, **kwargs)
             return PermissionDenied
     return decorator
