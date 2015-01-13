@@ -2,17 +2,17 @@
     $(document).ready(function() {
         $("{{ email_div }}").append(function() {
             return $("<a href='#' class='pull-right' id='show-user'>Select by user</a>").click(function(){
-                $("{{ email_div }}").hide();
+                $("{{ email_div }}").parent().parent().hide();
                 $("{{ user_div }}").show();
             });
         });
         $("{{ user_div }}").append(function() {
             return $("<a href='#' class='pull-right' id='show-email'>Select by email</a>").click(function(){
                 $("{{ user_div }}").hide();
-                $("{{ email_div }}").show();
-            });
+                $("{{ email_div }}").parent().parent().show();
+              });
         });
-        $("{{ email_div }}").hide();
+        $("{{ email_div }}").parent().parent().hide();
         $("{{ user_div }}").show();
     });
 </script>

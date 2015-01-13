@@ -13,7 +13,7 @@ from django.views.generic.base import TemplateView
 from . import forms
 from .forms import ParticipantFormSet
 from .decorators import is_participant
-from .models import Application, PrivateRequest, PublicRequest
+from .models import Application, PrivateRequest, PublicRequest, RequestParticipant
 from annoying.functions import get_object_or_None
 from composersCouch.views import MultipleFormsView, MultipleModelFormsView
 from customProfile.decorators import is_venue, is_musician
@@ -133,9 +133,9 @@ class RequestFormView(MultipleFormsView):
     success_url = 'sent_private_requests'
 
     def get_form_kwargs(self):
-            kwargs = super(RequestFormView, self).get_form_kwargs()
-            kwargs['user'] = self.request.user
-            return kwargs
+        kwargs = super(RequestFormView, self).get_form_kwargs()
+        kwargs['user'] = self.request.user
+        return kwargs
 
     def get_forms(self):
         forms = super(RequestFormView, self).get_forms()
@@ -196,12 +196,12 @@ class RequestFormView(MultipleFormsView):
         private_request.save()
         forms['hostForm'].save(thread=thread, sender=sender, role='v')
         # check if user is in thread. if not add them
-        participant = Participant.objects.filter(thread=thread, user=sender)[0]
+        participant = get_object_or_None(Participant ,thread=thread, user=sender)
         if not participant:
             participant = Participant(user=sender, thread=thread,
                                       read_at=now(), replied_at=now())
             participant.save()
-            request_paticipant = models.RequestParticipant(participant=participant, role='o', accepted=True)
+            request_paticipant = RequestParticipant(participant=participant, role='o', accepted=True)
             request_paticipant.save()
         return self.get_success_url(thread)
 

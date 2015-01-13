@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.forms.models import BaseModelFormSet
+from django.utils.functional import cached_property
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
@@ -44,20 +45,25 @@ class MessageForm(forms.Form):
 
 class ParticipantFormSet(BaseModelFormSet):
     def __init__(self, *args, **kwargs):
-        self. user = kwargs.pop('user', None)
+        self.user = kwargs.pop('user', None)
         super(ParticipantFormSet, self).__init__(*args, **kwargs)
 
-    def _construct_forms(self):
-        self.forms = []
-        for i in xrange(self.total_form_count()):
-            self.forms.append(self._construct_form(i, user=self.user))
+    @cached_property
+    def forms(self):
+        """
+        Instantiate forms at first property access.
+        """
+        # DoS protection is included in total_form_count()
+        forms = [self._construct_form(i, user=self.user) for i in xrange(self.total_form_count())]
+        return forms
 
 class ParticipantForm(ModelForm):
     user = forms.ModelChoiceField(User.objects.all(), required=False,
                 widget=ChoiceWidget('UserAutocomplete',))
     email = forms.EmailField(required=False)
+    name = forms.CharField(max_length=64, required=False)
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
+        self.user = kwargs.pop('user')
         self.profile_type = 'v'
         super(ParticipantForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -65,7 +71,11 @@ class ParticipantForm(ModelForm):
         self.helper.form_show_labels = False
         self.helper.layout = Layout(
             'user',
-            Field('email',placeholder='Email'),
+            Div(
+              Div(Field('name',placeholder='Name'),css_class='col-xs-6 left',),
+              Div(Field('email',placeholder='Email'),css_class='col-xs-6 right',),
+              css_class='row no-gutter',
+            ),
         )
 
     class Meta:
@@ -80,13 +90,14 @@ class ParticipantForm(ModelForm):
         if email and not user:
             user = get_object_or_None(User, email=email)
             if not user:
-                user = create_user_profile(name=email, email=email,
+                name = self.cleaned_data.get('name', email)
+                print self.user
+                user = create_user_profile(name=name, email=email,
                             profile_type=self.profile_type, creator=self.user)
             self.cleaned_data['user']=user
         return self.cleaned_data
 
     def save(self, thread, sender, role='o'):
-        print "hello"
         participant = super(ParticipantForm, self).save(commit=False)
         participant.thread = thread
 
@@ -106,7 +117,7 @@ class ArtistParticipantForm(ParticipantForm):
                 widget=ChoiceWidget('UserArtistAutocomplete',))
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
+        self.user = kwargs.pop('user')
         self.profile_type = 'm'
         super(ParticipantForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -115,7 +126,11 @@ class ArtistParticipantForm(ParticipantForm):
         self.helper.layout = Layout(
             Div('id',css_class='hidden',),
             'user',
-            Field('email',placeholder='Email'),
+            Div(
+              Div(Field('name',placeholder='Name'),css_class='col-xs-6 left',),
+              Div(Field('email',placeholder='Email'),css_class='col-xs-6 right',),
+              css_class='row no-gutter',
+            ),
         )
 
     class Meta:
