@@ -141,7 +141,10 @@ class RequestFormView(MultipleFormsView):
     def get_forms(self):
         forms = super(RequestFormView, self).get_forms()
         formset = modelformset_factory(self.model, self.form_class, formset=ParticipantFormSet)
-        forms['ArtistFormset'] = formset(queryset=self.model.objects.none(), initial=[self.artist], **self.get_form_kwargs())
+        if self.request.method == 'POST':
+            forms['ArtistFormset'] = formset(queryset=self.model.objects.none(), **self.get_form_kwargs())
+        else:
+            forms['ArtistFormset'] = formset(queryset=self.model.objects.none(), initial=[self.artist], **self.get_form_kwargs())
         return forms
 
     def get_initial_data(self):
@@ -149,7 +152,7 @@ class RequestFormView(MultipleFormsView):
         for user in self.get_users():
             profile_type = user.profile.profile_type
             if profile_type == 'm':
-                self.artist = {'user' : user.id}
+                self.artist = {'user' : user}
             else:
                 host_data = {'user' : user}
         return {'dateForm':None, 'messageForm':None, 'requestForm':None, 'hostForm':host_data,}
