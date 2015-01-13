@@ -96,13 +96,11 @@ class ParticipantForm(ModelForm):
                 user = create_user_profile(name=name, email=email,
                             profile_type=self.profile_type, creator=self.user)
             self.cleaned_data['user']=user
-        return self.cleaned_data
+            return self.cleaned_data
 
     def save(self, thread, sender, role='o'):
         participant = super(ParticipantForm, self).save(commit=False)
         participant.thread = thread
-
-        # self.cleaned_data.get('email')
         participant.save()
         request_paticipant = models.RequestParticipant(participant=participant, role=role)
         if participant.user == sender:

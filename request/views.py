@@ -149,7 +149,7 @@ class RequestFormView(MultipleFormsView):
         for user in self.get_users():
             profile_type = user.profile.profile_type
             if profile_type == 'm':
-                self.artist = {'user' : user}
+                self.artist = {'user' : user.id}
             else:
                 host_data = {'user' : user}
         return {'dateForm':None, 'messageForm':None, 'requestForm':None, 'hostForm':host_data,}
