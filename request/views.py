@@ -91,18 +91,6 @@ class RequestView(MessageView):
         end = private_request.date.end + padding
         context['events'] = calendar.get_events_in_range(start=start, end=end)
         context['user_accept'] = private_request.has_accepted(self.request.user)
-        openers = []
-        for participant in private_request.thread.participants.all():
-            role = participant.request_participant.role
-            if role == 'v':
-                context['host'] = participant.user
-                context['host_accept'] = participant.request_participant.accepted
-            elif role == 'h':
-                context['headliner'] = participant.user
-                context['headliner_accept'] = participant.request_participant.accepted
-            else:
-                openers.append((participant.user, participant.request_participant.accepted))
-        context['openers'] = openers
         return context
 
 view = RequestView.as_view()
@@ -343,13 +331,11 @@ def deny(request):
 def accept(request, accept=True):
     # TODO: convert to ajax
     private_request = PrivateRequest.objects.get(id=request.POST['private_request'])
-    for user in private_request.participants():
-        if user == request.user:
-            data = request.POST.copy()
-            form = forms.AcceptForm(data=data)
-            assert form.is_valid()
-            form.save(user=request.user,private_request=private_request, accepted=accept)
-            return redirect('request_detail', thread_id=private_request.thread.id)
+    participant = get_object_or_None(Participant,thread=private_request.thread, user=request.user)
+    if participant:
+        participant.request_participant.accepted = accept
+        participant.request_participant.save()
+        return redirect('request_detail', thread_id=private_request.thread.id)
     return PermissionDenied
 
 def decline(request):

@@ -185,24 +185,6 @@ class NumberOfApplicantsForm(PublicRequestForm):
         model = models.NumberOfApplicants
         fields = ('total',)
 
-class AcceptForm(forms.Form):
-
-    class Meta:
-        model = models.RequestParticipant
-
-    """def save(self, user, private_request, accepted):
-        a = get_object_or_None(models.RequestParticipant, user=user.id, request=private_request.id)
-        if a:
-            a.accepted = accepted
-        else:
-            a = models.Accept.objects.create(
-                user=user,
-                request=private_request,
-                accepted=accepted,
-            )
-        a.save()
-        return a"""
-
 class ApproveForm(forms.Form):
 
     class Meta:

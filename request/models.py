@@ -37,13 +37,13 @@ class PrivateRequest(Request):
             return None
 
     def headliner(self):
-        return Participant.objects.filter(thread=self, request_participant__role='h')
+        return Participant.objects.get(thread=self.thread, request_participant__role='h')
 
     def host(self):
-        return Participant.objects.filter(thread=self, request_participant__role='v')
+        return Participant.objects.get(thread=self.thread, request_participant__role='v')
 
     def openers(self):
-        return Participant.objects.filter(thread=self, request_participant__role='o')
+        return Participant.objects.filter(thread=self.thread, request_participant__role='o')
 
 class RequestParticipant(models.Model):
     participant = models.OneToOneField(Participant, related_name='request_participant')

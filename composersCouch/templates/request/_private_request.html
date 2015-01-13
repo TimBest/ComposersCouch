@@ -1,36 +1,37 @@
-<div class="request text-left">
+<div class="request">
   <div class="panel panel-default">
     <div class="panel-body">
       <div class="row">
         <div class="col-sm-6">
-          {% comment %}
+          {% if request.headliner %}
           <div class="Headliner">
-            <b>Artisit:</b>
-            <a class="text-black" href="{% url 'redirectToProfile' headliner.username 'about' %}">
-              {{ headliner.profile }}
+            <b>Headliner:</b>
+            <a href="{% url 'redirectToProfile' request.headliner.user.username 'about' %}">
+              {{ request.headliner.user.profile }}
             </a>
-            {% include "request/_accepted.html" with accepted=headliner_accept %}
+            {% include "request/_accepted.html" with accepted=request.headliner.request_participant.accepted %}
           </div>
-          {% if openers.first %}
-          <div class="Performers">
-            <b>Performers:</b>
-            {% for o in openers_accept %}
-            <a class="text-black" href="{% url 'redirectToProfile' o.0.profile.user.username 'about' %}">
-              {{ o.0 }}
-            </a>
-            {% include "request/_accepted.html" with accepted=o.1 %}
-            {% endfor %}
+          {% endif %}
+          {% if request.openers %}
+          <div class="Artists">
+            <b>Artists:</b>
+            <ul class="list-unstyled">
+              {% for opener in request.openers %}
+              <li>
+                <a href="{% url 'redirectToProfile' opener.user.username 'about' %}"> {{ opener.user.profile }}</a>
+                {% include "request/_accepted.html" with accepted=opener.request_participant.accepted %}
+              </li>
+              {% endfor %}
+            </ul>
           </div>
           {% endif %}
           <div class="host">
             <b>Host:</b>
-            <a class="text-black" href="{% url 'redirectToProfile' host.username 'about' %}">{{ host.profile }}</a>
-            {% include "request/_accepted.html" with accepted=host_accept %}
+            <a href="{% url 'redirectToProfile' request.host.user.username 'about' %}">{{ request.host.user.profile }}</a>
+            {% include "request/_accepted.html" with accepted=request.host.request_participant.accepted %}
           </div>
           <p>Accept by: {{ request.accept_by }}</p>
-          {% endcomment %}
         </div>
-
         <div class="col-sm-6">
           <h4>Suggested dates:</h4>
           <p>
@@ -48,7 +49,7 @@
               {% endif %}
             </p>
             {% empty %}
-            <p>Your calendar is free</p>
+              <p>Your calendar is free</p>
             {% endfor %}
           </div>
           <a href="{% url 'request_edit' request.id %}" class="">Edit</a>
@@ -56,7 +57,19 @@
       </div>
     </div>
     <div class="panel-footer">
-      <a href="{% url 'calendar_request_to_event' user.calendar.slug request.id %}" class="btn btn-primary">Publish as show</a>
+      <div class="pull-right">
+        <form method="POST" class="accept-form inline-block {% if user_accept %}hidden{% endif %}" action="{% url 'request_accept' %}">
+          {% csrf_token %}
+          <input type="hidden" name="private_request" value="{{ request.id }}">
+          <button class="btn btn-success" type="submit"><span class="fa fa-check" ></span> Accept</button>
+        </form>
+        <form method="POST" class="decline-form inline-block {% if user_accept %}{% elif user_accept != None %}hidden{% endif %}" action="{% url 'request_decline' %}">
+          {% csrf_token %}
+          <input type="hidden" name="private_request" value="{{ request.id }}">
+          <button class="btn btn-danger-inv" type="submit"><span class="fa fa-ban" ></span> Decline</button>
+        </form>
+      </div>
+      <a href="{% url 'calendar_request_to_event' user.calendar.slug request.id %}" class="btn btn-link">Add to Calendar</a>
     </div>
   </div>
 </div>
