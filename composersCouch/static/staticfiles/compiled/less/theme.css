@@ -8314,6 +8314,9 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   border-top: 1px solid transparent;
   border-left: 1px solid transparent;
 }
+.request {
+  text-align: left;
+}
 .date-time {
   text-align: center;
   float: right;
