@@ -67,9 +67,9 @@ class ParticipantForm(ModelForm):
         model = Participant
         fields = ('email','user')
 
-    """def clean(self):
+    def clean(self):
         if not self.cleaned_data.get('email') and not self.cleaned_data.get('user'):
-            raise forms.ValidationError(_(u"A user or email is required"))"""
+            raise forms.ValidationError(_(u"A user or email is required"))
 
     def save(self, thread, sender, role='o'):
         participant = super(ParticipantForm, self).save(commit=False)

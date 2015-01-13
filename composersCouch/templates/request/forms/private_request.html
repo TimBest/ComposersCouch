@@ -36,4 +36,7 @@
         $('#id_accept_by').datetimepicker({pickTime: false});
     });
   </script>
+  {% include "utils/_request_participant_script.html" with email_div='#div_id_email' user_div='#div_id_user' %}
+  {% include "utils/_request_participant_script.html" with email_div='#div_id_form-0-email' user_div='#div_id_form-0-user' %}
+
 {% endblock %}
