@@ -131,6 +131,7 @@ class RequestFormView(MultipleFormsView):
     form_class = forms.ArtistParticipantForm
     template_name = 'request/forms/private_request.html'
     success_url = 'sent_private_requests'
+    artist = {}
 
     def get_form_kwargs(self):
         kwargs = super(RequestFormView, self).get_form_kwargs()
@@ -140,23 +141,18 @@ class RequestFormView(MultipleFormsView):
     def get_forms(self):
         forms = super(RequestFormView, self).get_forms()
         formset = modelformset_factory(self.model, self.form_class, formset=ParticipantFormSet)
-        forms['ArtistFormset'] = formset(queryset=self.model.objects.none(), **self.get_form_kwargs())
+        forms['ArtistFormset'] = formset(queryset=self.model.objects.none(), initial=[self.artist], **self.get_form_kwargs())
         return forms
 
     def get_initial_data(self):
-        headliner_data = host_data = {}
+        host_data = {}
         for user in self.get_users():
             profile_type = user.profile.profile_type
-            #if profile_type == 'm':
-            #    headliner_data = {'user' : user.profile.musicianProfile}
-            if profile_type != 'm':
+            if profile_type == 'm':
+                self.artist = {'user' : user}
+            else:
                 host_data = {'user' : user}
-        return {
-            'dateForm': None,
-            'messageForm': None,
-            'requestForm': None,
-            'hostForm': host_data,
-        }
+        return {'dateForm':None, 'messageForm':None, 'requestForm':None, 'hostForm':host_data,}
 
     def get_success_url(self, thread=None):
         # TODO: extend this guy to accept next urls
