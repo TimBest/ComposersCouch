@@ -37,11 +37,13 @@ class PrivateRequest(Request):
             return None
 
     def headliner(self):
-        participant = Participant.objects.filter(thread=self, request_participant__role='h')[0]
-        if hasattr(participant, 'user'):
-            return participant.user
-        else:
-            return None
+        return Participant.objects.filter(thread=self, request_participant__role='h')
+
+    def host(self):
+        return Participant.objects.filter(thread=self, request_participant__role='v')
+
+    def openers(self):
+        return Participant.objects.filter(thread=self, request_participant__role='o')
 
 class RequestParticipant(models.Model):
     participant = models.OneToOneField(Participant, related_name='request_participant')

@@ -90,8 +90,9 @@ class ParticipantForm(ModelForm):
         if email and not user:
             user = get_object_or_None(User, email=email)
             if not user:
-                name = self.cleaned_data.get('name', email)
-                print self.user
+                name = self.cleaned_data.get('name')
+                if not name:
+                    name = email
                 user = create_user_profile(name=name, email=email,
                             profile_type=self.profile_type, creator=self.user)
             self.cleaned_data['user']=user
