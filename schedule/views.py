@@ -250,10 +250,16 @@ class RequestToEventFormView(EventFormView):
         }
 
     def get_initial_data(self):
+        headliner = self.private_request.headliner()
+        host = self.private_request.host()
+        artists = self.private_request.openers()
+        openers = []
+        for artist in artists:
+            openers.append(artist.user)
         show_data = {
-            "headliner": self.private_request.headliner,
-            "openers"  : self.private_request.openers.all(),
-            "host"     : self.private_request.host,
+            "headliner": headliner.user if headliner else None,
+            "openers"  : openers,
+            "host": host.user if host else None,
         }
         return {'poster_form':{},'date_form':{},'event_form':{},'show_info_form':show_data,}
 
