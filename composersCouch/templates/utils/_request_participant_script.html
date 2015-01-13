@@ -1,13 +1,13 @@
 <script type="text/javascript">
     $(document).ready(function() {
         $("{{ email_div }}").append(function() {
-            return $("<a href='#' id='show-user'>Select by user</a>").click(function(){
+            return $("<a href='#' class='pull-right' id='show-user'>Select by user</a>").click(function(){
                 $("{{ email_div }}").hide();
                 $("{{ user_div }}").show();
             });
         });
         $("{{ user_div }}").append(function() {
-            return $("<a href='#' id='show-email'>Select by email</a>").click(function(){
+            return $("<a href='#' class='pull-right' id='show-email'>Select by email</a>").click(function(){
                 $("{{ user_div }}").hide();
                 $("{{ email_div }}").show();
             });
