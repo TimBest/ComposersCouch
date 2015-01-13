@@ -90,18 +90,18 @@ class RequestView(MessageView):
         end = private_request.date.end + padding
         context['events'] = calendar.get_events_in_range(start=start, end=end)
         context['user_accept'] = private_request.has_accepted(self.request.user)
+        openers = []
         for participant in private_request.thread.participants.all():
             role = participant.request_participant.role
             if role == 'v':
                 context['host'] = participant.user
                 context['host_accept'] = participant.request_participant.accepted
-            elif role == 'o':
+            elif role == 'h':
                 context['headliner'] = participant.user
                 context['headliner_accept'] = participant.request_participant.accepted
-        #openers_accept = []
-        #for o in private_request.openers.all():
-        #    openers_accept.append((o, private_request.has_accepted(o.profile.user)))
-        #context['openers_accept'] = openers_accept
+            else:
+                openers.append((participant.user, participant.request_participant.accepted))
+        context['openers'] = openers
         return context
 
 view = RequestView.as_view()
@@ -123,7 +123,7 @@ class RequestFormView(MultipleFormsView):
     form_classes = {
       'dateForm'      : forms.DateForm,
       'messageForm'   : forms.MessageForm,
-      'requestForm'   : forms.PrivateRequestForm,
+      'requestForm'   : forms.RequestForm,
       'hostForm'      : forms.ParticipantForm,
     }
     model = Participant
@@ -204,7 +204,7 @@ requestForm = login_required(RequestFormView.as_view())
 class RequestEditFormView(MultipleModelFormsView):
     form_classes = {
       'dateForm': forms.DateForm,
-      'requestForm': forms.PrivateRequestForm,
+      'requestForm': forms.RequestForm,
     }
     template_name = 'request/edit_request_form.html'
 

@@ -9,27 +9,29 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-sm-6">
-              <div class="Headliner">
-                <b>Artisit:</b>
-                <a class="text-black" href="{% url 'redirectToProfile' headliner.username 'about' %}">
-                  {{ headliner.profile }}
-                </a>
-                {% include "request/_accepted.html" with accepted=headliner_accept %}
-              </div>
-              {% if openers.first %}
-              <div class="Performers">
-                <b>Performers:</b>
-                {% for o in openers_accept %}
-                <a class="text-black" href="{% url 'redirectToProfile' o.0.profile.user.username 'about' %}">
-                  {{ o.0 }}
-                </a>
-                {% include "request/_accepted.html" with accepted=o.1 %}
-                {% endfor %}
-              </div>
+              {% if headliner %}
+                <div class="Headliner">
+                  <b>Headliner:</b>
+                  <a href="{% url 'redirectToProfile' headliner.username 'about' %}">
+                    {{ headliner.profile }}
+                  </a>
+                  {% include "request/_accepted.html" with accepted=headliner_accept %}
+                </div>
+              {% endif %}
+              {% if openers %}
+               <div class="Performers">
+                  <b>Artists:</b>
+                  {% for o in openers %}
+                  <a href="{% url 'redirectToProfile' o.0.username 'about' %}">
+                    {{ o.0.profile }}
+                  </a>
+                  {% include "request/_accepted.html" with accepted=o.1 %}
+                  {% endfor %}
+                </div>
               {% endif %}
               <div class="host">
                 <b>Host:</b>
-                {% comment %}<a class="text-black" href="{% url 'redirectToProfile' host.username 'about' %}">{{ host.profile }}</a>{% endcomment %}
+                <a href="{% url 'redirectToProfile' host.username 'about' %}">{{ host.profile }}</a>
                 {% include "request/_accepted.html" with accepted=host_accept %}
               </div>
               <p>Accept by: {{ request.accept_by }}</p>

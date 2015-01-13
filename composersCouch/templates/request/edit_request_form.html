@@ -1,7 +1,7 @@
 {% extends 'form.html' %}
 {% load i18n crispy_forms_tags %}
 {% crispy DateForm DateForm.helper %}
-{% crispy PrivateRequestForm PrivateRequestForm.helper %}
+{% crispy RequestForm RequestForm.helper %}
 
 {% block title %}{% block formTitle %}
   {% trans "Edit Request" %}

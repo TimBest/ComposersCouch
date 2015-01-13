@@ -40,15 +40,6 @@ class MessageForm(forms.Form):
         self.helper.form_tag = False
         self.helper.layout = Layout('body',)
 
-class RequestForm(ModelForm):
-    date_format = '%m/%d/%Y'
-    accept_by = forms.DateField(label=_("Accept by"),
-                                widget=forms.DateInput(format=date_format))
-
-    class Meta:
-        model = models.Request
-        fields = ('accept_by',)
-
 class ParticipantForm(ModelForm):
     user = forms.ModelChoiceField(User.objects.all(), required=False,
                 widget=ChoiceWidget('UserAutocomplete',))
@@ -143,11 +134,14 @@ class ArtistParticipantForm(ParticipantForm):
         model = Participant
         fields = ('email','user')"""
 
-class PrivateRequestForm(RequestForm):
+class RequestForm(ModelForm):
+    date_format = '%m/%d/%Y'
+    accept_by = forms.DateField(label=_("Accept by"), required=False,
+                                widget=forms.DateInput(format=date_format))
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
-        super(PrivateRequestForm, self).__init__(*args, **kwargs)
+        super(RequestForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
