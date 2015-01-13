@@ -14,8 +14,6 @@ from django.utils.translation import ugettext_lazy as _
 
 register = Library()
 
-
-
 from django.template import Library, Node, TemplateSyntaxError
 from threaded_messages.models import cached_inbox_count_for
 

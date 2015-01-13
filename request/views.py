@@ -90,7 +90,6 @@ class RequestView(MessageView):
         start = private_request.date.start - padding
         end = private_request.date.end + padding
         context['events'] = calendar.get_events_in_range(start=start, end=end)
-        context['user_accept'] = private_request.has_accepted(self.request.user)
         return context
 
 view = RequestView.as_view()
