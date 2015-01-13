@@ -9,15 +9,14 @@
         <div class="panel-body">
           <div class="row">
             <div class="col-sm-6">
-              {% comment %}
               <div class="Headliner">
-                <b>Headliner:</b>
-                <a class="text-black" href="{% url 'redirectToProfile' request.headliner.profile.user.username 'about' %}">
-                  {{ request.headliner.name }}
+                <b>Artisit:</b>
+                <a class="text-black" href="{% url 'redirectToProfile' headliner.username 'about' %}">
+                  {{ headliner.profile }}
                 </a>
                 {% include "request/_accepted.html" with accepted=headliner_accept %}
               </div>
-              {% if request.openers.first %}
+              {% if openers.first %}
               <div class="Performers">
                 <b>Performers:</b>
                 {% for o in openers_accept %}
@@ -28,14 +27,11 @@
                 {% endfor %}
               </div>
               {% endif %}
-              {% with host=request.host %}
               <div class="host">
                 <b>Host:</b>
-                <a class="text-black" href="{% url 'redirectToProfile' host.username 'about' %}">{{ host.profile }}</a>
+                {% comment %}<a class="text-black" href="{% url 'redirectToProfile' host.username 'about' %}">{{ host.profile }}</a>{% endcomment %}
                 {% include "request/_accepted.html" with accepted=host_accept %}
               </div>
-              {% endwith %}
-              {% endcomment %}
               <p>Accept by: {{ request.accept_by }}</p>
             </div>
             <div class="col-sm-6">

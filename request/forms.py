@@ -50,7 +50,7 @@ class RequestForm(ModelForm):
         fields = ('accept_by',)
 
 class ParticipantForm(ModelForm):
-    user = forms.ModelChoiceField(User.objects.all(),
+    user = forms.ModelChoiceField(User.objects.all(), required=False,
                 widget=ChoiceWidget('UserAutocomplete',))
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
@@ -67,11 +67,15 @@ class ParticipantForm(ModelForm):
         model = Participant
         fields = ('email','user')
 
-    def save(self, thread, sender):
+    """def clean(self):
+        if not self.cleaned_data.get('email') and not self.cleaned_data.get('user'):
+            raise forms.ValidationError(_(u"A user or email is required"))"""
+
+    def save(self, thread, sender, role='o'):
         participant = super(ParticipantForm, self).save(commit=False)
         participant.thread = thread
         participant.save()
-        request_paticipant = models.RequestParticipant(participant=participant, role='v')
+        request_paticipant = models.RequestParticipant(participant=participant, role=role)
         if participant.user == sender:
             participant.read_at = now()
             participant.replied_at = now()
@@ -80,8 +84,29 @@ class ParticipantForm(ModelForm):
         request_paticipant.save()
         return participant
 
-class ArtistParticipantForm(forms.Form):
-    artist = forms.ModelChoiceField(User.objects.all(),
+class ArtistParticipantForm(ParticipantForm):
+    user = forms.ModelChoiceField(User.objects.all(), required=False,
+                widget=ChoiceWidget('UserArtistAutocomplete',))
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(ParticipantForm, self).__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.form_show_labels = False
+        self.helper.layout = Layout(
+            Div('id',css_class='hidden',),
+            'user',
+            Field('email',placeholder='Email'),
+        )
+
+    class Meta:
+        model = Participant
+        fields = ('email','id','user')
+
+
+"""class ArtistParticipantForm(forms.Form):
+    artist = forms.ModelChoiceField(User.objects.all(), required=False,
                 widget=ChoiceWidget('UserArtistAutocomplete',))
     artist_email = forms.EmailField(label=_("Email"),required=False, max_length=75)
 
@@ -95,6 +120,10 @@ class ArtistParticipantForm(forms.Form):
             'artist',
             Field('artist_email',placeholder='Email'),
         )
+
+    def clean(self):
+        if not self.cleaned_data.get('artist_email') and not self.cleaned_data.get('artist'):
+            raise forms.ValidationError(_(u"An artist or email is required"))
 
     def save(self, thread, sender, role='o'):
         user = self.cleaned_data.get('artist')
@@ -112,7 +141,7 @@ class ArtistParticipantForm(forms.Form):
 
     class Meta:
         model = Participant
-        fields = ('email','user')
+        fields = ('email','user')"""
 
 class PrivateRequestForm(RequestForm):
 

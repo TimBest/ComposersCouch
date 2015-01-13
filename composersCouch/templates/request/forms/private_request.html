@@ -12,8 +12,11 @@
 
 {% block form %}
   {% crispy dateForm %}
-  <label>Artist*</label>
-  {% crispy headlinerForm %}
+  <label>Artists*</label>
+  {{ ArtistFormset.management_form|crispy }}
+  {% for form in ArtistFormset %}
+    {% crispy form %}
+  {% endfor %}
   <label>Host*</label>
   {% crispy hostForm %}
   {% crispy requestForm %}

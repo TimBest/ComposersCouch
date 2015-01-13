@@ -32,7 +32,6 @@ class PrivateRequest(Request):
     def has_accepted(self, user):
         participant = get_object_or_None(Participant, user=user, thread=self)
         if participant:
-            print participant.id
             return participant.request_participant.accepted
         else:
             return None

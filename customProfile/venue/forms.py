@@ -72,7 +72,7 @@ class EquipmentForm(forms.ModelForm):
       self.helper.form_tag = False
       self.helper.layout = Layout(
             Div(
-              Div('id',css_class='',),
+              Div('id',css_class='hidden',),
               Div(
                 Div('quantity',css_class='col-xs-3 left',),
                 Div('name',css_class='col-xs-7',),

@@ -3,6 +3,7 @@ import datetime
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
+from django.forms.models import modelformset_factory
 from django.shortcuts import redirect
 from django.utils.timezone import now
 from django.views.decorators.http import require_POST
@@ -89,14 +90,14 @@ class RequestView(MessageView):
         end = private_request.date.end + padding
         context['events'] = calendar.get_events_in_range(start=start, end=end)
         context['user_accept'] = private_request.has_accepted(self.request.user)
-        for user in private_request.thread.participants.all():
-            role = user.request_participant.role
+        for participant in private_request.thread.participants.all():
+            role = participant.request_participant.role
             if role == 'v':
-                context['host'] = user
-                context['host_accept'] = user.request_participant.accepted
-            elif role == 'h':
-                context['headliner'] = user
-                context['headliner_accept'] = user.request_participant.accepted
+                context['host'] = participant.user
+                context['host_accept'] = participant.request_participant.accepted
+            elif role == 'o':
+                context['headliner'] = participant.user
+                context['headliner_accept'] = participant.request_participant.accepted
         #openers_accept = []
         #for o in private_request.openers.all():
         #    openers_accept.append((o, private_request.has_accepted(o.profile.user)))
@@ -120,12 +121,13 @@ application_view = ApplicationView.as_view()
 """ Forms """
 class RequestFormView(MultipleFormsView):
     form_classes = {
-      'dateForm': forms.DateForm,
-      'messageForm': forms.MessageForm,
-      'requestForm': forms.PrivateRequestForm,
-      'headlinerForm': forms.ArtistParticipantForm,
-      'hostForm': forms.ParticipantForm,
+      'dateForm'      : forms.DateForm,
+      'messageForm'   : forms.MessageForm,
+      'requestForm'   : forms.PrivateRequestForm,
+      'hostForm'      : forms.ParticipantForm,
     }
+    model = Participant
+    form_class = forms.ArtistParticipantForm
     template_name = 'request/forms/private_request.html'
     success_url = 'sent_private_requests'
 
@@ -137,24 +139,24 @@ class RequestFormView(MultipleFormsView):
             users.append(user)
         return users
 
-    def get_form_kwargs(self):
-        kwargs = super(RequestFormView, self).get_form_kwargs()
-        kwargs['user'] = self.request.user
-        return kwargs
+    def get_forms(self):
+        forms = super(RequestFormView, self).get_forms()
+        formset = modelformset_factory(self.model, self.form_class)
+        forms['ArtistFormset'] = formset(queryset=self.model.objects.none(), **self.get_form_kwargs())
+        return forms
 
     def get_initial_data(self):
         headliner_data = host_data = {}
         for user in self.get_users():
             profile_type = user.profile.profile_type
-            if profile_type == 'm':
-                headliner_data = {'user' : user.profile.musicianProfile}
-            elif profile_type == 'v' or profile_type == 'f' :
+            #if profile_type == 'm':
+            #    headliner_data = {'user' : user.profile.musicianProfile}
+            if profile_type != 'm':
                 host_data = {'user' : user}
         return {
             'dateForm': None,
             'messageForm': None,
             'requestForm': None,
-            'headlinerForm': headliner_data,
             'hostForm': host_data,
         }
 
@@ -183,10 +185,24 @@ class RequestFormView(MultipleFormsView):
         )
         thread.all_msgs.add(message)
         thread.save()
-        forms['headlinerForm'].save(thread=thread, sender=sender, role='h')
-        forms['hostForm'].save(thread=thread, sender=sender)
+        for form in forms['ArtistFormset']:
+            form.save(thread=thread, sender=sender)
+        forms['hostForm'].save(thread=thread, sender=sender, role='v')
         private_request.thread = thread
         private_request.save()
+        # check if user is in thread. if not add them
+        participant = Participant.objects.filter(thread=thread, user=sender)[0]
+        if not participant:
+            participant = Participant(user=sender, thread=thread,
+                                      read_at=now(), replied_at=now())
+            participant.save()
+            if sender.profile.profile_type == 'm':
+                role = 'h'
+            else:
+                role = 'v'
+            request_paticipant = models.RequestParticipant(participant=participant, role=role, accepted=True)
+            request_paticipant.save()
+
         return self.get_success_url(thread)
 
 requestForm = login_required(RequestFormView.as_view())
