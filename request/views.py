@@ -11,6 +11,7 @@ from django.views.generic import FormView
 from django.views.generic.base import TemplateView
 
 from . import forms
+from .forms import ParticipantFormSet
 from .decorators import is_participant
 from .models import Application, PrivateRequest, PublicRequest
 from annoying.functions import get_object_or_None
@@ -131,17 +132,14 @@ class RequestFormView(MultipleFormsView):
     template_name = 'request/forms/private_request.html'
     success_url = 'sent_private_requests'
 
-    def get_users(self):
-        users = [self.request.user]
-        username = self.kwargs.get('username', None)
-        user = get_object_or_None(User, username=username)
-        if user and self.request.user != user:
-            users.append(user)
-        return users
+    def get_form_kwargs(self):
+            kwargs = super(RequestFormView, self).get_form_kwargs()
+            kwargs['user'] = self.request.user
+            return kwargs
 
     def get_forms(self):
         forms = super(RequestFormView, self).get_forms()
-        formset = modelformset_factory(self.model, self.form_class)
+        formset = modelformset_factory(self.model, self.form_class, formset=ParticipantFormSet)
         forms['ArtistFormset'] = formset(queryset=self.model.objects.none(), **self.get_form_kwargs())
         return forms
 
@@ -166,6 +164,14 @@ class RequestFormView(MultipleFormsView):
             return redirect('request_detail', thread_id=thread.id)
         else:
             return redirect(self.success_url)
+
+    def get_users(self):
+        users = [self.request.user]
+        username = self.kwargs.get('username', None)
+        user = get_object_or_None(User, username=username)
+        if user and self.request.user != user:
+            users.append(user)
+        return users
 
     def forms_valid(self, forms):
         private_request = forms['requestForm'].save(commit=False)

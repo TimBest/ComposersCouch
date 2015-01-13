@@ -124,8 +124,7 @@ class Participant(models.Model):
     Thread manager for each participant
     """
     thread = models.ForeignKey(Thread, related_name='participants', verbose_name=_("message thread"))
-    user = models.ForeignKey(User, related_name='threads', verbose_name=_("participant users"), null=True, blank=True)
-    email = models.EmailField(_("email"), null=True, blank=True)
+    user = models.ForeignKey(User, related_name='threads', verbose_name=_("participant users"))
     read_at = models.DateTimeField(_("read at"), null=True, blank=True, db_index=True)
     replied_at = models.DateTimeField(_("replied at"), null=True, blank=True, db_index=True)
     deleted_at = models.DateTimeField(_("deleted at"), null=True, blank=True, db_index=True)

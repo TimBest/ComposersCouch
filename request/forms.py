@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from django.forms.models import BaseModelFormSet
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
 
@@ -9,6 +10,7 @@ from crispy_forms.layout import Div, Field, Layout
 
 from . import models
 from accounts.models import MusicianProfile
+from accounts.utils import create_user_profile
 from annoying.functions import get_object_or_None
 from contact.models import Zipcode
 from schedule.forms import DateForm, UserSelectForm
@@ -40,11 +42,23 @@ class MessageForm(forms.Form):
         self.helper.form_tag = False
         self.helper.layout = Layout('body',)
 
+class ParticipantFormSet(BaseModelFormSet):
+    def __init__(self, *args, **kwargs):
+        self. user = kwargs.pop('user', None)
+        super(ParticipantFormSet, self).__init__(*args, **kwargs)
+
+    def _construct_forms(self):
+        self.forms = []
+        for i in xrange(self.total_form_count()):
+            self.forms.append(self._construct_form(i, user=self.user))
+
 class ParticipantForm(ModelForm):
     user = forms.ModelChoiceField(User.objects.all(), required=False,
                 widget=ChoiceWidget('UserAutocomplete',))
+    email = forms.EmailField(required=False)
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
+        self.profile_type = 'v'
         super(ParticipantForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -56,15 +70,27 @@ class ParticipantForm(ModelForm):
 
     class Meta:
         model = Participant
-        fields = ('email','user')
+        fields = ('user',)
 
     def clean(self):
-        if not self.cleaned_data.get('email') and not self.cleaned_data.get('user'):
+        email = self.cleaned_data.get('email')
+        user = self.cleaned_data.get('user')
+        if not email and not user :
             raise forms.ValidationError(_(u"A user or email is required"))
+        if email and not user:
+            user = get_object_or_None(User, email=email)
+            if not user:
+                user = create_user_profile(name=email, email=email,
+                            profile_type=self.profile_type, creator=self.user)
+            self.cleaned_data['user']=user
+        return self.cleaned_data
 
     def save(self, thread, sender, role='o'):
+        print "hello"
         participant = super(ParticipantForm, self).save(commit=False)
         participant.thread = thread
+
+        # self.cleaned_data.get('email')
         participant.save()
         request_paticipant = models.RequestParticipant(participant=participant, role=role)
         if participant.user == sender:
@@ -81,6 +107,7 @@ class ArtistParticipantForm(ParticipantForm):
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
+        self.profile_type = 'm'
         super(ParticipantForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -93,46 +120,7 @@ class ArtistParticipantForm(ParticipantForm):
 
     class Meta:
         model = Participant
-        fields = ('email','id','user')
-
-
-"""class ArtistParticipantForm(forms.Form):
-    artist = forms.ModelChoiceField(User.objects.all(), required=False,
-                widget=ChoiceWidget('UserArtistAutocomplete',))
-    artist_email = forms.EmailField(label=_("Email"),required=False, max_length=75)
-
-    def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user', None)
-        super(ArtistParticipantForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.form_show_labels = False
-        self.helper.layout = Layout(
-            'artist',
-            Field('artist_email',placeholder='Email'),
-        )
-
-    def clean(self):
-        if not self.cleaned_data.get('artist_email') and not self.cleaned_data.get('artist'):
-            raise forms.ValidationError(_(u"An artist or email is required"))
-
-    def save(self, thread, sender, role='o'):
-        user = self.cleaned_data.get('artist')
-        email = self.cleaned_data.get('artist_email')
-        participant = Participant(user=user, email=email, thread=thread)
-        participant.save()
-        request_paticipant = models.RequestParticipant(participant=participant, role=role)
-        if user == sender:
-            participant.read_at = now()
-            participant.replied_at = now()
-            participant.save()
-            request_paticipant.accepted = True
-        request_paticipant.save()
-        return participant
-
-    class Meta:
-        model = Participant
-        fields = ('email','user')"""
+        fields = ('id','user',)
 
 class RequestForm(ModelForm):
     date_format = '%m/%d/%Y'

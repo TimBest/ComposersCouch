@@ -36,10 +36,17 @@ class PrivateRequest(Request):
         else:
             return None
 
+    def headliner(self):
+        participant = Participant.objects.filter(thread=self, request_participant__role='h')[0]
+        if hasattr(participant, 'user'):
+            return participant.user
+        else:
+            return None
+
 class RequestParticipant(models.Model):
     participant = models.OneToOneField(Participant, related_name='request_participant')
-    role =  models.CharField(_('role'), max_length=1, choices=ROLE_CHOICES, null=True, blank=True)
-    accepted = models.BooleanField(default=False)
+    role =  models.CharField(_('role'), max_length=1, choices=ROLE_CHOICES)
+    accepted = models.NullBooleanField(_('approved'), default=None)
 
 """ Public Request """
 class PublicRequest(Request):
