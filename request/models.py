@@ -10,7 +10,7 @@ from schedule.models.events import DateRange
 
 
 class Request(models.Model):
-    accept_by = models.DateField(_("accept_by"))
+    accept_by = models.DateField(_("accept_by"), null=True, blank=True)
     date = models.ForeignKey(DateRange, verbose_name=_("dateRange"))
 
     created_at = models.DateTimeField(auto_now_add=True)

@@ -168,7 +168,6 @@ class RequestFormView(MultipleFormsView):
             return redirect(self.success_url)
 
     def forms_valid(self, forms):
-        # TODO: add check to ensure that current user is a particiapnt in the request
         private_request = forms['requestForm'].save(commit=False)
         private_request.date = forms['dateForm'].save()
         sender = self.request.user
@@ -187,22 +186,17 @@ class RequestFormView(MultipleFormsView):
         thread.save()
         for form in forms['ArtistFormset']:
             form.save(thread=thread, sender=sender)
-        forms['hostForm'].save(thread=thread, sender=sender, role='v')
         private_request.thread = thread
         private_request.save()
+        forms['hostForm'].save(thread=thread, sender=sender, role='v')
         # check if user is in thread. if not add them
         participant = Participant.objects.filter(thread=thread, user=sender)[0]
         if not participant:
             participant = Participant(user=sender, thread=thread,
                                       read_at=now(), replied_at=now())
             participant.save()
-            if sender.profile.profile_type == 'm':
-                role = 'h'
-            else:
-                role = 'v'
-            request_paticipant = models.RequestParticipant(participant=participant, role=role, accepted=True)
+            request_paticipant = models.RequestParticipant(participant=participant, role='o', accepted=True)
             request_paticipant.save()
-
         return self.get_success_url(thread)
 
 requestForm = login_required(RequestFormView.as_view())
