@@ -41,16 +41,15 @@
         </div>
         <div class="col-sm-2 col-sm-push-8 col-xs-6 right">
           <div class="btn-group pull-right">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-              {{ filter|capfirst }} <span class="text-muted caret"></span>
-            </button>
-            <ul class="dropdown-menu text-left" role="menu">
-              <li class="{% ifequal filter 'events' %}active{% endifequal %}"><a href="{% url 'calendar' period_name 'events' %}{% querystring_for_date date %}">Events</a></li>
-              <li class="{% ifequal filter 'requests' %}active{% endifequal %}"><a href="{% url 'calendar' period_name 'requests' %}{% querystring_for_date date %}">Requests</a></li>
-            </ul>
+            <a href="{% url 'calendar' period_name 'events' %}{% querystring_for_date date %}" class="{% ifequal filter 'events' %}active{% endifequal %} btn btn-default">
+              Events
+            </a>
+            <a href="{% url 'calendar' period_name 'requests' %}{% querystring_for_date date %}" class="{% ifequal filter 'requests' %}active{% endifequal %} btn btn-default">
+              Requests
+            </a>
           </div>
         </div>
-        <div class="col-sm-8 col-sm-pull-2 center">
+        <div class="col-sm-8 col-sm-pull-2 col-xs-12 center">
           <ul class="nav nav-pills nav-centered" role="tablist">
             <li class="{% block dayClass %}{% endblock %}">
               <a href="{% url 'calendar' 'day' filter %}{% querystring_for_date date %}">Day</a>
