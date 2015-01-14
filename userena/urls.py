@@ -13,11 +13,9 @@ def merged_dict(dict_a, dict_b):
     dict_a.update(dict_b)
     return dict_a
 
-urlpatterns = patterns('',
+urlpatterns = patterns('userena.views',
     # Signup, signin and signout
-    url(r'^signin/$',
-       userena_views.signin,
-       name='userena_signin'),
+    url(r'^signout/$', 'signout', name='signout'),
 
     # Reset password
     url(r'^password/reset/$',
@@ -41,23 +39,12 @@ urlpatterns = patterns('',
        {'template_name': 'accounts/password_reset_complete.html'},
         name='userena_password_reset_complete'),
 
-    # Activate
-    url(r'^activate/(?P<activation_key>\w+)/$',
-       userena_views.activate,
-       name='userena_activate'),
-
-    # Retry activation
-    url(r'^activate/retry/(?P<activation_key>\w+)/$',
-        userena_views.activate_retry,
-        name='userena_activate_retry'),
 
     # Change password
-    url(r'^(?P<username>[\.\w-]+)/password/$',
-       userena_views.password_change,
-       name='userena_password_change'),
+    url(r'^(?P<username>[\.\w-]+)/password/$', 'password_change', name='password_change'),
     url(r'^(?P<username>[\.\w-]+)/password/complete/$',
-       userena_views.direct_to_user_template,
+       'direct_to_user_template',
        {'template_name': 'accounts/password_complete.html'},
-       name='userena_password_change_complete'),
+       name='password_change_complete'),
 
 )

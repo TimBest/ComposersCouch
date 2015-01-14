@@ -16,7 +16,7 @@ class DecoratorTests(TestCase):
 
         """
         userena_settings.USERENA_USE_HTTPS = True
-        response = self.client.get(reverse('userena_signin'))
+        response = self.client.get(reverse('signin'))
 
         # Test for the permanent redirect
         self.assertEqual(response.status_code, 301)

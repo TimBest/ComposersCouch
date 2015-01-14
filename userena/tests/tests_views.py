@@ -214,8 +214,8 @@ class UserenaViewsTests(TestCase):
 
         """
         # If activation is required, user is not logged in after signup,
-        # disregarding USERENA_SIGNIN_AFTER_SIGNUP setting
-        userena_settings.USERENA_SIGNIN_AFTER_SIGNUP = True
+        # disregarding signin_AFTER_SIGNUP setting
+        userena_settings.signin_AFTER_SIGNUP = True
         userena_settings.USERENA_ACTIVATION_REQUIRED = True
         response = self.client.post(reverse('userena_signup'),
                                     data={'username': 'alice',
@@ -224,14 +224,14 @@ class UserenaViewsTests(TestCase):
                                           'password2': 'blueberry',
                                           'tos': 'on'})
         # Immediate reset to default to avoid leaks
-        userena_settings.USERENA_SIGNIN_AFTER_SIGNUP = False
+        userena_settings.signin_AFTER_SIGNUP = False
         userena_settings.USERENA_ACTIVATION_REQUIRED = True
 
         response_check = self.client.get(reverse('userena_profile_edit',
                                                  kwargs={'username': 'alice'}))
         self.assertEqual(response_check.status_code, 403)
 
-        userena_settings.USERENA_SIGNIN_AFTER_SIGNUP = True
+        userena_settings.signin_AFTER_SIGNUP = True
         userena_settings.USERENA_ACTIVATION_REQUIRED = False
         response = self.client.post(reverse('userena_signup'),
                                     data={'username': 'johndoe',
@@ -240,7 +240,7 @@ class UserenaViewsTests(TestCase):
                                           'password2': 'blueberry',
                                           'tos': 'on'})
         # Immediate reset to default to avoid leaks
-        userena_settings.USERENA_SIGNIN_AFTER_SIGNUP = False
+        userena_settings.signin_AFTER_SIGNUP = False
         userena_settings.USERENA_ACTIVATION_REQUIRED = True
 
         # Kind of hackish way to check if the user is logged in
@@ -250,7 +250,7 @@ class UserenaViewsTests(TestCase):
 
     def test_signin_view(self):
         """ A ``GET`` to the signin view should render the correct form """
-        response = self.client.get(reverse('userena_signin'))
+        response = self.client.get(reverse('signin'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response,
                                 'userena/signin_form.html')
@@ -261,7 +261,7 @@ class UserenaViewsTests(TestCase):
         ``REMEMBER_ME_DAYS``.
 
         """
-        response = self.client.post(reverse('userena_signin'),
+        response = self.client.post(reverse('signin'),
                                     data={'identification': 'john@example.com',
                                           'password': 'blowfish',
                                           'remember_me': True})
@@ -274,7 +274,7 @@ class UserenaViewsTests(TestCase):
         remembered.
 
         """
-        response = self.client.post(reverse('userena_signin'),
+        response = self.client.post(reverse('signin'),
                                     data={'identification': 'john@example.com',
                                           'password': 'blowfish'})
 
@@ -286,7 +286,7 @@ class UserenaViewsTests(TestCase):
         user.is_active = False
         user.save()
 
-        response = self.client.post(reverse('userena_signin'),
+        response = self.client.post(reverse('signin'),
                                     data={'identification': 'john@example.com',
                                           'password': 'blowfish'})
 
@@ -301,7 +301,7 @@ class UserenaViewsTests(TestCase):
         redirect to ``next``.
 
         """
-        response = self.client.post(reverse('userena_signin'),
+        response = self.client.post(reverse('signin'),
                                     data={'identification': 'john@example.com',
                                           'password': 'blowfish'})
 
@@ -309,7 +309,7 @@ class UserenaViewsTests(TestCase):
                                                kwargs={'username': 'john'}))
 
         # Redirect to supplied ``next`` value.
-        response = self.client.post(reverse('userena_signin'),
+        response = self.client.post(reverse('signin'),
                                     data={'identification': 'john@example.com',
                                           'password': 'blowfish',
                                           'next': '/accounts/'})
@@ -320,7 +320,7 @@ class UserenaViewsTests(TestCase):
         If the value of "next" is not a real URL, this should not raise
         an exception
         """
-        response = self.client.post(reverse('userena_signin'),
+        response = self.client.post(reverse('signin'),
                                     data={'identification': 'john@example.com',
                                           'password': 'blowfish',
                                           'next': 'something-fake'},
@@ -329,7 +329,7 @@ class UserenaViewsTests(TestCase):
 
     def test_signout_view(self):
         """ A ``GET`` to the signout view """
-        response = self.client.get(reverse('userena_signout'))
+        response = self.client.get(reverse('signout'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response,
                                 'userena/signout.html')

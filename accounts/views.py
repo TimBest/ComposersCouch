@@ -9,14 +9,14 @@ from django.utils.decorators import method_decorator
 from django.views.generic.base import View, TemplateView
 
 from guardian.decorators import permission_required_or_403
-from userena import views as userena_views
 
 from pipeline import create_profile
 from forms import CreateUserForm, EmailForm, SignupForm, SigninForm
 from models import Profile
 from composersCouch.views import MultipleFormsView
 from contact.forms import ZipcodeForm
-from userena import signals as userena_signals
+from userena.signals import signup_complete
+from userena.views import signin as userena_signin
 
 
 login_required_m = method_decorator(login_required)
@@ -71,7 +71,7 @@ class SignupEmailView(SignupAuthView):
         # A new signed user should logout the old one.
         if self.request.user.is_authenticated():
             logout(request)
-        userena_signals.signup_complete.send(sender=None,
+        signup_complete.send(sender=None,
                                              user=user)
         user = authenticate(identification=user.email, check_password=False)
         login(self.request, user)
@@ -157,8 +157,8 @@ def signin(request, auth_form=SigninForm,
     if request.user.is_authenticated():
         return redirect(request.user.profile)
 
-    response = userena_views.signin(request, auth_form=auth_form,
-                                    template_name=template_name)
+    response = userena_signin(request, auth_form=auth_form,
+                              template_name=template_name)
 
     return response
 
