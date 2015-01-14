@@ -2,15 +2,12 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.shortcuts import redirect, get_object_or_404
-from django.views.generic import TemplateView, FormView
-
-from guardian.decorators import permission_required_or_403
+from django.views.generic import TemplateView
 
 from customProfile import forms as profile_forms
 from accounts.models import FanProfile, MusicianProfile, VenueProfile, Profile
 from annoying.functions import get_object_or_None
 from composersCouch.views import MultipleFormsView
-from composersCouch.utils import get_page
 from feeds.models import Follow, Post
 from photos.models import Image
 from photos.forms import MugshotForm
@@ -42,7 +39,6 @@ class ProfileMixin(object):
         return context
 
 class ProfileFormMixin(object):
-    #@method_decorator(permission_required_or_403('change_profile', (Profile, 'user__username', 'username',)))
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
         self.user = self.request.user

@@ -24,11 +24,7 @@ class MusicianProfileForm(forms.ModelForm):
         super(MusicianProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-                'name',
-            ),
-        )
+        self.helper.layout = Layout('name',)
         self.fields['name'].required = required
 
     class Meta:
@@ -46,11 +42,7 @@ class VenueProfileForm(forms.ModelForm):
         super(VenueProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-                'name',
-            ),
-        )
+        self.helper.layout = Layout('name',)
         self.fields['name'].required = required
 
     class Meta:
@@ -88,15 +80,11 @@ class UsernameForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.fields['username'].help_text = ""
-        self.helper.layout = Layout(
-            Div(
-                'username',
-            ),
-        )
+        self.helper.layout = Layout('email', 'username',)
 
     class Meta:
         model = models.User
-        fields = ('username',)
+        fields = ('email', 'username',)
 
 class ProfileForm(autocomplete_light.ModelForm):
 
@@ -104,9 +92,7 @@ class ProfileForm(autocomplete_light.ModelForm):
         super(ProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.layout = Layout(
-            'genre',
-        )
+        self.helper.layout = Layout('genre',)
 
     class Meta:
         model = models.Profile
@@ -118,11 +104,7 @@ class ProfileTypeForm(forms.ModelForm):
         super(ProfileTypeForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-                InlineRadios('profile_type'),
-            ),
-        )
+        self.helper.layout = Layout(InlineRadios('profile_type'),)
 
     class Meta:
         model = models.Profile
