@@ -132,7 +132,9 @@ def claim_profile(request, username):
     try:
         assert reset_form.is_valid()
         reset_form.save(
+            domain_override="composerscouch.com",
             email_template_name='accounts/emails/password_reset_message.txt',
+
         )
         return redirect('userena_password_reset_done')
     except:
