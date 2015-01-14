@@ -334,39 +334,6 @@ class UserenaViewsTests(TestCase):
         self.assertTemplateUsed(response,
                                 'userena/signout.html')
 
-    def test_change_email_view(self):
-        """ A ``GET`` to the change e-mail view. """
-        response = self.client.get(reverse('userena_email_change',
-                                           kwargs={'username': 'john'}))
-
-        # Anonymous user should not be able to view the profile page
-        self.assertEqual(response.status_code, 403)
-
-        # Login
-        client = self.client.login(username='john', password='blowfish')
-        response = self.client.get(reverse('userena_email_change',
-                                           kwargs={'username': 'john'}))
-
-        self.assertEqual(response.status_code, 200)
-
-        # Check that the correct form is used.
-        self.failUnless(isinstance(response.context['form'],
-                                   forms.ChangeEmailForm))
-
-        self.assertTemplateUsed(response,
-                                'userena/email_form.html')
-
-    def test_change_valid_email_view(self):
-        """ A ``POST`` with a valid e-mail address """
-        self.client.login(username='john', password='blowfish')
-        response = self.client.post(reverse('userena_email_change',
-                                            kwargs={'username': 'john'}),
-                                    data={'email': 'john_new@example.com'})
-
-        self.assertRedirects(response,
-                             reverse('userena_email_change_complete',
-                                     kwargs={'username': 'john'}))
-
     def test_change_password_view(self):
         """ A ``GET`` to the change password view """
         self.client.login(username='john', password='blowfish')
