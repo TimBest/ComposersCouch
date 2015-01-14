@@ -97,6 +97,7 @@ FACEBOOK_APP_ID              = '525965254182714'
 FACEBOOK_API_SECRET          = 'bdd9cdd707d80d08bd53660852b91c51'
 GOOGLE_OAUTH2_CLIENT_ID      = '566838544572.apps.googleusercontent.com'
 GOOGLE_OAUTH2_CLIENT_SECRET  = 'BpAQ6KT37BLQxNc5ETzC0sMS'
+
 if DEVELOPMENT:
     POSTGIS_VERSION = (2, 1, 4)
     DATABASES = {
@@ -133,6 +134,14 @@ if DEVELOPMENT:
             'LOCATION': '127.0.0.1:11211',
         }
     }
+    # python -m smtpd -n -c DebuggingServer localhost:1025
+    EMAIL_HOST = 'localhost'
+    EMAIL_PORT = 1025
+    EMAIL_HOST_USER = ''
+    EMAIL_HOST_PASSWORD = ''
+    EMAIL_USE_TLS = False
+    DEFAULT_FROM_EMAIL = 'testing@example.com'
+
 else:
     POSTGIS_VERSION = (2, 1, 1)
     DATABASES = {
@@ -171,6 +180,12 @@ else:
             'LOCATION': 'ec2-54-174-202-254.compute-1.amazonaws.com:11211',
         }
     }
+    EMAIL_USE_TLS = True
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = 'messenger@composerscouch.com'#AnEmailAddressGoesHere
+    EMAIL_HOST_PASSWORD = ''#PasswordToSaidEmailAdress
+
 
 SITE_ID = 1
 

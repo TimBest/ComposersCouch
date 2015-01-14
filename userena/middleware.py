@@ -18,7 +18,7 @@ class UserenaLocaleMiddleware(object):
         if not lang_cookie:
             if request.user.is_authenticated():
                 try:
-                    profile = request.user.get_profile()
+                    profile = request.user.profile
                 except (ObjectDoesNotExist, SiteProfileNotAvailable):
                     profile = False
 

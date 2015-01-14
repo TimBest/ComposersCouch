@@ -37,7 +37,7 @@ class UserenaLocaleMiddlewareTests(TestCase):
 
         for pk, lang in users:
             user = User.objects.get(pk=pk)
-            profile = user.get_profile()
+            profile = user.profile
 
             req = self._get_request_with_user(user)
 
@@ -55,7 +55,7 @@ class UserenaLocaleMiddlewareTests(TestCase):
         user = User.objects.get(pk=1)
 
         # User shouldn't have a profile
-        self.assertRaises(ObjectDoesNotExist, user.get_profile)
+        self.assertRaises(ObjectDoesNotExist, user.profile)
 
         req = self._get_request_with_user(user)
         UserenaLocaleMiddleware().process_request(req)

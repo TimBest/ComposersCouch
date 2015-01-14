@@ -75,7 +75,7 @@ class ProfileListView(ListView):
 
 @secure_required
 def signup(request, signup_form=SignupForm,
-           template_name='userena/signup_form.html', success_url=None,
+           template_name='accounts/signup_form.html', success_url=None,
            extra_context=None):
     """
     Signup of an account.
@@ -130,7 +130,7 @@ def signup(request, signup_form=SignupForm,
 
 
             if success_url: redirect_to = success_url
-            else: redirect_to = reverse('userena_signup_complete',
+            else: redirect_to = reverse('accounts_signup_complete',
                                         kwargs={'username': user.username})
 
             # A new signed user should logout the old one.
@@ -151,8 +151,8 @@ def signup(request, signup_form=SignupForm,
 
 @secure_required
 def activate(request, activation_key,
-             template_name='userena/activate_fail.html',
-             retry_template_name='userena/activate_retry.html',
+             template_name='accounts/activate_fail.html',
+             retry_template_name='accounts/activate_retry.html',
              success_url=None, extra_context=None):
     """
     Activate a user with an activation key.
@@ -206,8 +206,7 @@ def activate(request, activation_key,
                                      fail_silently=True)
 
                 if success_url: redirect_to = success_url % {'username': user.username }
-                else: redirect_to = reverse('userena_profile_detail',
-                                            kwargs={'username': user.username})
+                else: redirect_to = reverse('userena_profile_detail', kwargs={'username': user.username})
                 return redirect(redirect_to)
             else:
                 if not extra_context: extra_context = dict()
@@ -226,7 +225,7 @@ def activate(request, activation_key,
 
 @secure_required
 def activate_retry(request, activation_key,
-                   template_name='userena/activate_retry_success.html',
+                   template_name='accounts/activate_retry_success.html',
                    extra_context=None):
     """
     Reissue a new ``activation_key`` for the user with the expired
@@ -269,7 +268,7 @@ def activate_retry(request, activation_key,
 
 @secure_required
 def email_confirm(request, confirmation_key,
-                  template_name='userena/email_confirm_fail.html',
+                  template_name='accounts/email_confirm_fail.html',
                   success_url=None, extra_context=None):
     """
     Confirms an email address with a confirmation key.
@@ -348,51 +347,13 @@ def direct_to_user_template(request, username, template_name,
 
     if not extra_context: extra_context = dict()
     extra_context['viewed_user'] = user
-    extra_context['profile'] = user.get_profile()
-    return ExtraContextTemplateView.as_view(template_name=template_name,
-                                            extra_context=extra_context)(request)
-
-def disabled_account(request, username, template_name, extra_context=None):
-    """
-    Checks if the account is disabled, if so, returns the disabled account template.
-
-    :param username:
-        String defining the username of the user that made the action.
-
-    :param template_name:
-        String defining the name of the template to use. Defaults to
-        ``userena/signup_complete.html``.
-
-    **Keyword arguments**
-
-    ``extra_context``
-        A dictionary containing extra variables that should be passed to the
-        rendered template. The ``account`` key is always the ``User``
-        that completed the action.
-
-    **Extra context**
-
-    ``viewed_user``
-        The currently :class:`User` that is viewed.
-
-    ``profile``
-        Profile of the viewed user.
-
-    """
-    user = get_object_or_404(User, username__iexact=username)
-
-    if user.is_active:
-        raise Http404
-
-    if not extra_context: extra_context = dict()
-    extra_context['viewed_user'] = user
-    extra_context['profile'] = user.get_profile()
+    extra_context['profile'] = user.profile
     return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
 
 @secure_required
 def signin(request, auth_form=AuthenticationForm,
-           template_name='userena/signin_form.html',
+           template_name='accounts/signin_form.html',
            redirect_field_name=REDIRECT_FIELD_NAME,
            redirect_signin_function=signin_redirect, extra_context=None):
     """
@@ -475,7 +436,7 @@ def signin(request, auth_form=AuthenticationForm,
 
 @secure_required
 def signout(request, next_page=userena_settings.USERENA_REDIRECT_ON_SIGNOUT,
-            template_name='userena/signout.html', *args, **kwargs):
+            template_name='accounts/signout.html', *args, **kwargs):
     """
     Signs out the user and adds a success message ``You have been signed
     out.`` If next_page is defined you will be redirected to the URI. If
@@ -497,7 +458,7 @@ def signout(request, next_page=userena_settings.USERENA_REDIRECT_ON_SIGNOUT,
 @secure_required
 @permission_required_or_403('change_user', (User, 'username', 'username'))
 def email_change(request, username, email_form=ChangeEmailForm,
-                 template_name='userena/email_form.html', success_url=None,
+                 template_name='accounts/email_form.html', success_url=None,
                  extra_context=None):
     """
     Change email address
@@ -563,13 +524,13 @@ def email_change(request, username, email_form=ChangeEmailForm,
 
     if not extra_context: extra_context = dict()
     extra_context['form'] = form
-    extra_context['profile'] = user.get_profile()
+    extra_context['profile'] = user.profile
     return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
 
 @secure_required
 @permission_required_or_403('change_user', (User, 'username', 'username'))
-def password_change(request, username, template_name='userena/password_form.html',
+def password_change(request, username, template_name='accounts/password_form.html',
                     pass_form=PasswordChangeForm, success_url=None, extra_context=None):
     """ Change password of user.
 
@@ -628,13 +589,13 @@ def password_change(request, username, template_name='userena/password_form.html
 
     if not extra_context: extra_context = dict()
     extra_context['form'] = form
-    extra_context['profile'] = user.get_profile()
+    extra_context['profile'] = user.profile
     return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
 @secure_required
 @permission_required_or_403('change_profile', (Profile, 'user__username', 'username'))
 def profile_edit(request, username, edit_profile_form=EditProfileForm,
-                 template_name='userena/profile_form.html', success_url=None,
+                 template_name='accounts/profile_form.html', success_url=None,
                  extra_context=None, **kwargs):
     """
     Edit profile.
@@ -680,7 +641,7 @@ def profile_edit(request, username, edit_profile_form=EditProfileForm,
     user = get_object_or_404(User,
                              username__iexact=username)
 
-    profile = user.get_profile()
+    profile = user.profile
 
     user_initial = {'first_name': user.first_name,
                     'last_name': user.last_name}
@@ -750,7 +711,7 @@ def profile_detail(request, username,
     return ExtraContextTemplateView.as_view(template_name=template_name,
                                             extra_context=extra_context)(request)
 
-def profile_list(request, page=1, template_name='userena/profile_list.html',
+def profile_list(request, page=1, template_name='accounts/profile_list.html',
                  paginate_by=50, extra_context=None, **kwargs): # pragma: no cover
     """
     Returns a list of all profiles that are public.

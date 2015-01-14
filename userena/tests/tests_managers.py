@@ -45,7 +45,7 @@ class UserenaManagerTests(TestCase):
         self.failUnless(re.match('^[a-f0-9]{40}$', new_user.userena_signup.activation_key))
 
         # User now has an profile.
-        self.failUnless(new_user.get_profile())
+        self.failUnless(new_user.profile)
 
         # User should be saved
         self.failUnlessEqual(User.objects.filter(email=self.user_info['email']).count(), 1)
@@ -69,8 +69,8 @@ class UserenaManagerTests(TestCase):
         self.failUnless(active_user.is_active)
 
         # The user should have permission to view and change its profile
-        self.failUnless('view_profile' in get_perms(active_user, active_user.get_profile()))
-        self.failUnless('change_profile' in get_perms(active_user, active_user.get_profile()))
+        self.failUnless('view_profile' in get_perms(active_user, active_user.profile))
+        self.failUnless('change_profile' in get_perms(active_user, active_user.profile))
 
         # The activation key should be the same as in the settings
         self.assertEqual(active_user.userena_signup.activation_key,

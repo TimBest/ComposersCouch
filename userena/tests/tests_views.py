@@ -430,7 +430,7 @@ class UserenaViewsTests(TestCase):
                                                kwargs={'username': 'john'}))
 
         # Users hould be changed now.
-        profile = User.objects.get(username='john').get_profile()
+        profile = User.objects.get(username='john').profile
         self.assertEqual(profile.about_me, new_about_me)
 
 

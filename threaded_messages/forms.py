@@ -1,4 +1,3 @@
-import settings as sendgrid_settings
 from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
@@ -13,22 +12,15 @@ from .models import *
 from .utils import reply_to_thread, now
 from .signals import message_composed
 
-if sendgrid_settings.MESSAGES_USE_SENDGRID:
-    from sendgrid_parse_api.utils import create_reply_email
 
-
-notification = None
-if "notification" in settings.INSTALLED_APPS:
-    from notification import models as notification
 WRAP_WIDTH = 55
 
 class ComposeForm(ModelForm):
     """
     A simple default form for private messages.
     """
-    recipients = forms.ModelMultipleChoiceField(
-              User.objects.all(),
-              widget=MultipleChoiceWidget('UserAutocomplete',))
+    recipients = forms.ModelMultipleChoiceField(User.objects.all(),
+                    widget=MultipleChoiceWidget('UserAutocomplete',))
     subject = forms.CharField(label=_(u"Subject"))
 
     class Meta:
@@ -54,7 +46,6 @@ class ComposeForm(ModelForm):
         body = self.cleaned_data['body']
 
         new_message = Message.objects.create(body=body, sender=sender)
-
         thread = Thread.objects.create(subject=subject,
                                        latest_msg=new_message,
                                        creator=sender)
@@ -68,26 +59,7 @@ class ComposeForm(ModelForm):
         sender_part.save()
 
         thread.save()  # save this last, since this updates the search index
-
-        message_composed.send(sender=Message,
-                              message=new_message,
-                              recipients=recipients)
-
-        #send notifications
-        if send and notification:
-            if sendgrid_settings.MESSAGES_USE_SENDGRID:
-                for r in recipients:
-                    reply_email = create_reply_email(sendgrid_settings.MESSAGES_ID, r, thread)
-                    notification.send(recipients, "received_email",
-                                        {"thread": thread,
-                                         "message": new_message}, sender=sender,
-                                        from_email=reply_email.get_from_email(),
-                                        headers={'Reply-To': reply_email.get_reply_to_email()})
-            else:
-                notification.send(recipients, "received_email",
-                                        {"thread": thread,
-                                         "message": new_message}, sender=sender)
-
+        message_composed.send(sender=Message, message=new_message,recipients=recipients)
         return (thread, new_message)
 
 

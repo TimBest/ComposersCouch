@@ -10,17 +10,11 @@ from django.template.loader import get_template
 from . import settings as tm_settings
 
 
-if "notification" in settings.INSTALLED_APPS:
-    from notification import models as notification
-
 # favour django-mailer but fall back to django.core.mail
 if tm_settings.MESSAGES_USE_SENDGRID:
     import sendgrid_parse_api
 
-if "mailer" in settings.INSTALLED_APPS:
-    from mailer import send_mail
-else:
-    from django.core.mail import send_mail
+from django.core.mail import send_mail
 
 try:
     from django.utils.timezone import now
