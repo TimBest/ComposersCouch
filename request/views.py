@@ -3,7 +3,7 @@ import datetime
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
-from django.forms.models import modelformset_factory
+from django.forms.formsets import formset_factory
 from django.shortcuts import redirect
 from django.utils.timezone import now
 from django.views.decorators.http import require_POST
@@ -128,11 +128,11 @@ class RequestFormView(MultipleFormsView):
 
     def get_forms(self):
         forms = super(RequestFormView, self).get_forms()
-        formset = modelformset_factory(self.model, self.form_class, formset=ParticipantFormSet, extra=3)
+        formset = formset_factory(self.form_class, formset=ParticipantFormSet)#, extra=3)
         if self.request.method == 'POST':
-            forms['ArtistFormset'] = formset(queryset=self.model.objects.none(), **self.get_form_kwargs())
+            forms['ArtistFormset'] = formset(**self.get_form_kwargs())
         else:
-            forms['ArtistFormset'] = formset(queryset=self.model.objects.none(), initial=[self.artist], **self.get_form_kwargs())
+            forms['ArtistFormset'] = formset(initial=[self.artist], **self.get_form_kwargs())
         return forms
 
     def get_initial_data(self):
@@ -178,7 +178,8 @@ class RequestFormView(MultipleFormsView):
         thread.all_msgs.add(message)
         thread.save()
         for form in forms['ArtistFormset']:
-            form.save(thread=thread, sender=sender)
+            if form.cleaned_data:
+                form.save(thread=thread, sender=sender)
         private_request.thread = thread
         private_request.save()
         forms['hostForm'].save(thread=thread, sender=sender, role='v')

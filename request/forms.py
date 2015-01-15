@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from django.forms.models import BaseModelFormSet
+from django.forms.formsets import BaseFormSet
 from django.utils.functional import cached_property
 from django.utils.timezone import now
 from django.utils.translation import ugettext_lazy as _
@@ -43,7 +43,7 @@ class MessageForm(forms.Form):
         self.helper.form_tag = False
         self.helper.layout = Layout('body',)
 
-class ParticipantFormSet(BaseModelFormSet):
+class ParticipantFormSet(BaseFormSet):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(ParticipantFormSet, self).__init__(*args, **kwargs)
@@ -62,7 +62,7 @@ class ParticipantFormSet(BaseModelFormSet):
         forms = [self._construct_form(i, user=self.user) for i in xrange(self.total_form_count())]
         return forms
 
-class ParticipantForm(ModelForm):
+class ParticipantForm(forms.Form):
     user = forms.ModelChoiceField(User.objects.all(), required=False,
                 widget=ChoiceWidget('UserAutocomplete',))
     email = forms.EmailField(required=False)
@@ -83,14 +83,10 @@ class ParticipantForm(ModelForm):
             ),
         )
 
-    class Meta:
-        model = Participant
-        fields = ('user',)
-
     def clean(self):
         email = self.cleaned_data.get('email')
         user = self.cleaned_data.get('user')
-        if not email and not user :
+        if not email and not user:
             raise forms.ValidationError(_(u"A user or email is required"))
         if email and not user:
             user = get_object_or_None(User, email=email)
@@ -104,8 +100,7 @@ class ParticipantForm(ModelForm):
             return self.cleaned_data
 
     def save(self, thread, sender, role='o'):
-        participant = super(ParticipantForm, self).save(commit=False)
-        participant.thread = thread
+        participant = Participant(user=self.cleaned_data['user'],thread=thread)
         participant.save()
         request_paticipant = models.RequestParticipant(participant=participant, role=role)
         if participant.user == sender:
@@ -121,25 +116,8 @@ class ArtistParticipantForm(ParticipantForm):
                 widget=ChoiceWidget('UserArtistAutocomplete',))
 
     def __init__(self, *args, **kwargs):
-        self.user = kwargs.pop('user')
         self.profile_type = 'm'
-        super(ParticipantForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.form_show_labels = False
-        self.helper.layout = Layout(
-            Div('id',css_class='hidden',),
-            'user',
-            Div(
-              Div(Field('name',placeholder='Name'),css_class='col-xs-6 left',),
-              Div(Field('email',placeholder='Email'),css_class='col-xs-6 right',),
-              css_class='row no-gutter',
-            ),
-        )
-
-    class Meta:
-        model = Participant
-        fields = ('id','user',)
+        super(ArtistParticipantForm, self).__init__(*args, **kwargs)
 
 class RequestForm(ModelForm):
     date_format = '%m/%d/%Y'
