@@ -1,3 +1,3 @@
 {% autoescape off %}
-Booking Request: {{ request.headliner }} at {{ request.host }} on {{ request.date.start }}?
+Booking Request: {% if request.headliner %}{{ request.headliner.user.profile }}{% else %}{{ request.thread.latest_msg.sender.profile }}{% endif %} at {{ request.host.user.profile }} on {{ request.date.start|date:"l, F d, Y" }}
 {% endautoescape %}
