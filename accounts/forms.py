@@ -95,9 +95,8 @@ class EmailForm(SignupFormOnlyEmail):
         if user:
             if not user.profile.has_owner:
                 raise forms.ValidationError(
-                    mark_safe(
-                        'An account fo this email already exists, click <a href="{0}">Here</a> to claim this account.'
-                    ).format(reverse('claim_profile_verify', kwargs={'username': user.username}))
+                    (_(mark_safe(('An account fo this email already exists, click <a href="{0}">Here</a> to claim this account.')
+                        .format(reverse('claim_profile_verify', kwargs={'username': user.username})))))
                 )
                 raise forms.ValidationError(_(u"Profile "))
 
