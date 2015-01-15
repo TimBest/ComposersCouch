@@ -1,7 +1,9 @@
 from django import forms
-from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.utils.safestring import mark_safe
+from django.utils.translation import ugettext_lazy as _
 
 from crispy_forms.bootstrap import FormActions, InlineRadios, InlineField
 from crispy_forms.helper import FormHelper
@@ -87,6 +89,17 @@ class EmailForm(SignupFormOnlyEmail):
               css_class='row no-gutter',
             ),
         )
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+        user = get_object_or_None(User, email=email)
+        if user:
+            if not user.profile.has_owner:
+                raise forms.ValidationError(
+                    mark_safe(
+                        'An account fo this email already exists, click <a href="{0}">Here</a> to claim this account.'
+                    ).format(reverse('claim_profile_verify', kwargs={'username': user.username}))
+                )
+                raise forms.ValidationError(_(u"Profile "))
 
 class ClaimProfileForm(SetPasswordForm):
     def __init__(self, *args, **kw):
@@ -100,6 +113,7 @@ class ClaimProfileForm(SetPasswordForm):
               css_class='row no-gutter',
             ),
         )
+
 
 class SigninForm(AuthenticationForm):
 

@@ -27,8 +27,8 @@ class Profile(UserenaBaseProfile):
                                         blank=True, null=True,
                                         verbose_name=_('contactInfo'),
                                         related_name='contactInfo')
-    has_owner =  models.BooleanField(default=True)
-    profile_type =  models.CharField(_('profile type'),
+    has_owner = models.BooleanField(default=True)
+    profile_type = models.CharField(_('profile type'),
                                      max_length=1,
                                      choices=PROFILE_TYPE_CHOICES,
                                      default=PROFILE_TYPE_CHOICES[1][0])
