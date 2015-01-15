@@ -48,6 +48,11 @@ class ParticipantFormSet(BaseModelFormSet):
         self.user = kwargs.pop('user', None)
         super(ParticipantFormSet, self).__init__(*args, **kwargs)
 
+    def clean(self):
+        cleaned_data = self.forms[0].cleaned_data
+        if not cleaned_data.get('email') and not cleaned_data.get('user'):
+            raise forms.ValidationError(_(u"At least on artist required"))
+
     @cached_property
     def forms(self):
         """

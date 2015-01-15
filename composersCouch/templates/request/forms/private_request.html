@@ -14,6 +14,11 @@
   {% crispy dateForm %}
   <label>Artists*</label>
   {{ ArtistFormset.management_form|crispy }}
+  {% if ArtistFormset.non_form_errors %}
+    <div class="alert alert-danger" role="alert">
+      {{ ArtistFormset.non_form_errors }}
+    </div>
+  {% endif %}
   {% for form in ArtistFormset %}
     {% crispy form %}
   {% endfor %}
