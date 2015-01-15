@@ -13,7 +13,7 @@ def send_request_email(request,
         if not participant.user.profile.has_owner:
             recipient_list.append(participant.user.email)
     if recipient_list:
-        context = {'request':request}
+        context = { 'request':request, 'domain':'composerscouch.com', 'protocol':'http' }
         subject = render_to_string(subject_template, context)
         # Email subject *must not* contain newlines
         subject = ''.join(subject.splitlines())

@@ -3,25 +3,18 @@
 Show on: {{ request.date.start }}
 
 With:
-{% if request.headliner %}
-  <b>Headliner:</b><a href="{% url 'redirectToProfile' request.headliner.user.username 'about' %}">{{ request.headliner.user.profile }}</a>
-{% endif %}
-{% if request.openers %}
-  <b>Artists:</b>
-  <ul class="list-unstyled">
-    {% for opener in request.openers %}
-    <li><a href="{% url 'redirectToProfile' opener.user.username 'about' %}"> {{ opener.user.profile }}</a></li>
-    {% endfor %}
-  </ul>
-{% endif %}
-<b>At:</b><a href="{% url 'redirectToProfile' request.host.user.username 'about' %}">{{ request.host.user.profile }}</a>
+{% if request.headliner %}Headliner: {{ request.headliner.user.profile }} {{ protocol }}://{{ domain }}{{ request.headliner.user.profile.get_absolute_url }}{% endif %}
+{% if request.openers %}Artists:{% endif %}
+  {% for opener in request.openers %}{{ opener.user.profile }} ({{ protocol }}://{{ domain }}{{ opener.user.profile.get_absolute_url }}){% endfor %}
+
+At: {{ request.host.user.profile }} ({{ protocol }}://{{ domain }}{{ request.host.user.profile.get_absolute_url }})
 
 Accept by: {{ request.accept_by }}
 
-{{ request.thread.messages.first }}
+{{ request.thread.latest_msg.body }}
 
 
 Sincerely,
-{{ site_name }}
+{{ request.thread.latest_msg.sender.profile }}
 
 {% endautoescape %}
