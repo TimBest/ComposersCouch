@@ -8250,35 +8250,35 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .videos .video-title {
   display: inline-block;
 }
-#requestForm #div_id_form-0-start:before,
-#requestForm #div_id_form-0-end:before,
-#requestForm #div_id_form-1-start:before,
-#requestForm #div_id_form-1-end:before,
-#requestForm #div_id_form-2-start:before,
-#requestForm #div_id_form-2-end:before {
+#privateRequestForm #div_id_form-0-start:before,
+#privateRequestForm #div_id_form-0-end:before,
+#privateRequestForm #div_id_form-1-start:before,
+#privateRequestForm #div_id_form-1-end:before,
+#privateRequestForm #div_id_form-2-start:before,
+#privateRequestForm #div_id_form-2-end:before {
   content: " ";
 }
-#requestForm #div_id_form-0-start:after,
-#requestForm #div_id_form-0-end:after,
-#requestForm #div_id_form-1-start:after,
-#requestForm #div_id_form-1-end:after,
-#requestForm #div_id_form-2-start:after,
-#requestForm #div_id_form-2-end:after {
+#privateRequestForm #div_id_form-0-start:after,
+#privateRequestForm #div_id_form-0-end:after,
+#privateRequestForm #div_id_form-1-start:after,
+#privateRequestForm #div_id_form-1-end:after,
+#privateRequestForm #div_id_form-2-start:after,
+#privateRequestForm #div_id_form-2-end:after {
   content: " ";
   clear: both;
 }
-#requestForm #div_id_form-0-start .dateinput,
-#requestForm #div_id_form-0-end .dateinput,
-#requestForm #div_id_form-1-start .dateinput,
-#requestForm #div_id_form-1-end .dateinput,
-#requestForm #div_id_form-2-start .dateinput,
-#requestForm #div_id_form-2-end .dateinput,
-#requestForm #div_id_form-0-start .timeinput,
-#requestForm #div_id_form-0-end .timeinput,
-#requestForm #div_id_form-1-start .timeinput,
-#requestForm #div_id_form-1-end .timeinput,
-#requestForm #div_id_form-2-start .timeinput,
-#requestForm #div_id_form-2-end .timeinput {
+#privateRequestForm #div_id_form-0-start .dateinput,
+#privateRequestForm #div_id_form-0-end .dateinput,
+#privateRequestForm #div_id_form-1-start .dateinput,
+#privateRequestForm #div_id_form-1-end .dateinput,
+#privateRequestForm #div_id_form-2-start .dateinput,
+#privateRequestForm #div_id_form-2-end .dateinput,
+#privateRequestForm #div_id_form-0-start .timeinput,
+#privateRequestForm #div_id_form-0-end .timeinput,
+#privateRequestForm #div_id_form-1-start .timeinput,
+#privateRequestForm #div_id_form-1-end .timeinput,
+#privateRequestForm #div_id_form-2-start .timeinput,
+#privateRequestForm #div_id_form-2-end .timeinput {
   position: relative;
   min-height: 1px;
   margin-right: 1%;
@@ -8286,15 +8286,20 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   float: left;
   width: 48%;
 }
-#requestForm #div_id_form-0-start .controls,
-#requestForm #div_id_form-0-end .controls,
-#requestForm #div_id_form-1-start .controls,
-#requestForm #div_id_form-1-end .controls,
-#requestForm #div_id_form-2-start .controls,
-#requestForm #div_id_form-2-end .controls {
+#privateRequestForm #div_id_form-0-start .controls,
+#privateRequestForm #div_id_form-0-end .controls,
+#privateRequestForm #div_id_form-1-start .controls,
+#privateRequestForm #div_id_form-1-end .controls,
+#privateRequestForm #div_id_form-2-start .controls,
+#privateRequestForm #div_id_form-2-end .controls {
   margin-right: -1%;
   margin-left: -1%;
   padding-bottom: 15px;
+}
+#privateRequestForm #div_id_form-0-user,
+#privateRequestForm #div_id_form-1-user,
+#privateRequestForm #div_id_form-2-user {
+  margin-bottom: 25px;
 }
 .messages .panel {
   border: 0px;

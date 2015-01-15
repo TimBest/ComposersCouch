@@ -128,7 +128,7 @@ class RequestFormView(MultipleFormsView):
 
     def get_forms(self):
         forms = super(RequestFormView, self).get_forms()
-        formset = modelformset_factory(self.model, self.form_class, formset=ParticipantFormSet)
+        formset = modelformset_factory(self.model, self.form_class, formset=ParticipantFormSet, extra=3)
         if self.request.method == 'POST':
             forms['ArtistFormset'] = formset(queryset=self.model.objects.none(), **self.get_form_kwargs())
         else:
