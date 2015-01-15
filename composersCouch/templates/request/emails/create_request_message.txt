@@ -1,14 +1,27 @@
 {% autoescape off %}
-You're receiving this email due to a claim of {{ user.username }}'s account at
-{{ site_name }}.
 
-Please go to the following page and choose a password to claim the profile:
-{% block reset_link %}{{ protocol }}://{{ domain }}{% url 'confirm_profile_claim' uid token %}{% endblock %}
+Show on: {{ request.date.start }}
 
-Thanks for using our site!
+With:
+{% if request.headliner %}
+  <b>Headliner:</b><a href="{% url 'redirectToProfile' request.headliner.user.username 'about' %}">{{ request.headliner.user.profile }}</a>
+{% endif %}
+{% if request.openers %}
+  <b>Artists:</b>
+  <ul class="list-unstyled">
+    {% for opener in request.openers %}
+    <li><a href="{% url 'redirectToProfile' opener.user.username 'about' %}"> {{ opener.user.profile }}</a></li>
+    {% endfor %}
+  </ul>
+{% endif %}
+<b>At:</b><a href="{% url 'redirectToProfile' request.host.user.username 'about' %}">{{ request.host.user.profile }}</a>
+
+Accept by: {{ request.accept_by }}
+
+{{ request.thread.messages.first }}
+
 
 Sincerely,
 {{ site_name }}
 
-If you did not request this email feel free to drop a line at contact@composerscouch.com
 {% endautoescape %}

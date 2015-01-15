@@ -14,6 +14,7 @@ from . import forms
 from .forms import ParticipantFormSet
 from .decorators import is_participant
 from .models import Application, PrivateRequest, PublicRequest, RequestParticipant
+from .utils import send_request_email
 from annoying.functions import get_object_or_None
 from composersCouch.views import MultipleFormsView, MultipleModelFormsView
 from customProfile.decorators import is_venue, is_musician
@@ -189,6 +190,7 @@ class RequestFormView(MultipleFormsView):
             participant.save()
             request_paticipant = RequestParticipant(participant=participant, role='o', accepted=True)
             request_paticipant.save()
+        send_request_email(request=private_request)
         return self.get_success_url(thread)
 
 requestForm = login_required(RequestFormView.as_view())
