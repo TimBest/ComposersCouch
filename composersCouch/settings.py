@@ -185,6 +185,7 @@ else:
     EMAIL_PORT = 587
     EMAIL_HOST_USER = 'messenger@composerscouch.com'#AnEmailAddressGoesHere
     EMAIL_HOST_PASSWORD = ''#PasswordToSaidEmailAdress
+    DEFAULT_FROM_EMAIL = 'messenger@composerscouch.com'
 
 
 SITE_ID = 1
