@@ -1,8 +1,8 @@
 from django.conf.urls import include, patterns, url
 from django.contrib.auth.views import password_reset_confirm
 
+from .forms import ClaimProfileForm
 from userena.compat import auth_views_compat_quirks, password_reset_uid_kwarg
-from userena.urls import merged_dict
 
 
 urlpatterns = patterns('accounts.views',
@@ -21,8 +21,5 @@ urlpatterns = patterns('accounts.views',
     url(r'^verify/profile/claim/(?P<username>[-\w]+)$', 'claim_profile_verify', name='claim_profile_verify'),
     url(r'^verify/profile/claim/(?P<username>[-\w]+)/(?P<error>[-\w]+)$', 'claim_profile_verify', name='claim_profile_error'),
     url(r'^confirm/profile/claim/(?P<%s>[0-9A-Za-z]+)-(?P<token>.+)/$' % password_reset_uid_kwarg,
-       password_reset_confirm,
-       merged_dict({'template_name': 'accounts/password_reset_confirm_form.html',
-                    }, auth_views_compat_quirks['userena_password_reset_confirm']),
-       name='confirm_profile_claim'),
+       'claim_profile_confirm', name='confirm_profile_claim'),
 )

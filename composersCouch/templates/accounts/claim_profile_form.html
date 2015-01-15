@@ -1,0 +1,11 @@
+{% extends "form.html" %}
+{% load crispy_forms_tags %}
+
+{% block formTitle %}{% block title %}Claim Profile{% endblock %}{% endblock %}
+
+{% block form %}
+  {% csrf_token %}
+  {% crispy form %}
+{% endblock %}
+
+{% block submit %}<button type="submit" class="btn btn-primary">Sign in</button>{% endblock %}

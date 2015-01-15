@@ -2,16 +2,23 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
-from django.shortcuts import get_object_or_404, render_to_response, render, redirect
+from django.contrib.auth.tokens import default_token_generator
+from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404, render_to_response, render, redirect, resolve_url
 from django.template import RequestContext
+from django.template.response import TemplateResponse
 from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
+from django.utils.http import urlsafe_base64_decode
+from django.utils.translation import ugettext as _
+from django.views.decorators.debug import sensitive_post_parameters
+from django.views.decorators.cache import never_cache
 from django.views.generic.base import View, TemplateView
 
 from guardian.decorators import permission_required_or_403
 
 from pipeline import create_profile
-from forms import CreateUserForm, EmailForm, SignupForm, SigninForm
+from forms import ClaimProfileForm, EmailForm, SignupForm, SigninForm
 from models import Profile
 from composersCouch.views import MultipleFormsView
 from contact.forms import ZipcodeForm
@@ -93,39 +100,6 @@ class SignupSocialView(SignupAuthView):
 
 signupSocial = SignupSocialView.as_view()
 
-class SignupNoOwnerView(SignupView):
-    template_name = 'accounts/signup/form_no_owner.html'
-    success_url = 'home'
-    form_classes = {
-      'signupForm'  : SignupForm,
-      'zipcodeForm' : CreateUserForm,
-    }
-
-    @login_required_m
-    def dispatch(self, *args, **kwargs):
-        return super(SignupNoOwnerView, self).dispatch(*args, **kwargs)
-
-    def create_user_profile(self, info):
-        user = User.objects.create_user(username=get_random_string(),
-                                        email=info['email'])
-        # apparently django does not let you reset a password if one is not initally set
-        user.set_password(get_random_string())
-        user.save
-        info['profile'].user = user
-        info['profile'].has_owner = False
-        info['profile'].save()
-        location = self.request.user.profile.contact_info.location
-        location.pk = None
-        location.save()
-        user = create_profile(
-            user, info['profile'].profile_type, location,
-            info['first_name'], info['last_name'], info['band_name'],
-            info['venue_name'],
-        )
-        return redirect(self.success_url)
-
-signupNoOwner = SignupNoOwnerView.as_view()
-
 def claim_profile(request, username):
     profile = get_object_or_404(Profile, user__username=username)
     reset_form = PasswordResetForm({'email': profile.user.email})
@@ -153,6 +127,58 @@ class VerifyProfileClaimView(TemplateView):
 
         }
 claim_profile_verify = VerifyProfileClaimView.as_view()
+
+
+@sensitive_post_parameters()
+@never_cache
+def claim_profile_confirm(request, uidb64=None, token=None,
+                           template_name='accounts/claim_profile_form.html',
+                           token_generator=default_token_generator,
+                           set_password_form=ClaimProfileForm,
+                           post_reset_redirect='loginredirect',
+                           current_app=None, extra_context=None):
+    """
+    View that checks the hash in a password reset link and presents a
+    form for entering a new password.
+    """
+    assert uidb64 is not None and token is not None # checked by URLconf
+    if post_reset_redirect is None:
+        post_reset_redirect = reverse('password_reset_complete')
+    else:
+        post_reset_redirect = resolve_url(post_reset_redirect)
+    try:
+        uid = urlsafe_base64_decode(uidb64)
+        user = User._default_manager.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and token_generator.check_token(user, token):
+        validlink = True
+        title = _('Enter new password')
+        if request.method == 'POST':
+            form = set_password_form(user, request.POST)
+            if form.is_valid():
+                user = form.save()
+                user = authenticate(username=user.username, password=form.cleaned_data['new_password1'])
+                login(request, user)
+                return HttpResponseRedirect(post_reset_redirect)
+        else:
+            form = set_password_form(user)
+    else:
+        validlink = False
+        form = None
+        title = _('Password reset unsuccessful')
+    context = {
+    'form': form,
+    'title': title,
+    'validlink': validlink,
+    }
+    if extra_context is not None:
+        context.update(extra_context)
+    if current_app is not None:
+        request.current_app = current_app
+    return TemplateResponse(request, template_name, context)
+
 
 def signin(request, auth_form=SigninForm,
            template_name='accounts/signin_form.html'):

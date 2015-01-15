@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.forms import SetPasswordForm
 from django.contrib.auth.models import User
 
 from crispy_forms.bootstrap import FormActions, InlineRadios, InlineField
@@ -74,7 +75,6 @@ class SignupForm(forms.ModelForm):
         fields = ('profile_type',)
 
 class EmailForm(SignupFormOnlyEmail):
-
     def __init__(self, data=None, *args, **kw):
         super(EmailForm, self).__init__(data, *args, **kw)
         self.helper = FormHelper()
@@ -88,18 +88,17 @@ class EmailForm(SignupFormOnlyEmail):
             ),
         )
 
-attrs_dict = {'class': 'required'}
-
-class CreateUserForm(forms.Form):
-    email = forms.EmailField(label=_("Email"),
-                             widget=forms.TextInput(attrs=dict(attrs_dict,
-                                                               maxlength=75)))
-    def __init__(self, data=None, *args, **kw):
-        super(CreateUserForm, self).__init__(data, *args, **kw)
+class ClaimProfileForm(SetPasswordForm):
+    def __init__(self, *args, **kw):
+        super(ClaimProfileForm, self).__init__(*args, **kw)
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            'email',
+            Div(
+              Div('new_password1',css_class='col-sm-6 left',),
+              Div('new_password2',css_class='col-sm-6 right',),
+              css_class='row no-gutter',
+            ),
         )
 
 class SigninForm(AuthenticationForm):
