@@ -80,7 +80,7 @@ class SignupEmailView(SignupAuthView):
         if self.request.user.is_authenticated():
             logout(request)
         signup_complete.send(sender=None, user=user)
-        user = authenticate(identification=user.email, password=info['password'])
+        user = authenticate(username=user.username, password=info['password'])
         login(self.request, user)
         return redirect(self.success_url, username=user.username)
 
