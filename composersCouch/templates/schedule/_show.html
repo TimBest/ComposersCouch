@@ -46,17 +46,7 @@
               {% endif %}
             </p>
           </div>
-          <div>
-            {% if info.age != "All" %}<p>Ages: {{ info.age }}</p>{% endif %}
-            <p>
-              {% if info.advance_price %}
-                Advanced: ${{ info.advance_price }}
-              {% endif %}
-              {% if info.full_price %}
-                Day of: ${{ info.full_price }}
-              {% endif %}
-            <p>{{ info.disciption }}</p>
-          </div>
+          <p>{{ info.disciption }}</p>
         </div>
         <div class="col-sm-2">
           <div class="date-block">

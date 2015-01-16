@@ -233,7 +233,7 @@ class EditEventFormView(EventFormView):
                 if not event:
                     event = Event(show=self.show, calendar=user.calendar)
                     event.save()
-        return self.get_success_url(calendar_slug=self.request.user.calendar.slug)
+        return self.get_success_url()
 
 edit_event = EditEventFormView.as_view()
 
