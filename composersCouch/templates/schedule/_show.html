@@ -19,23 +19,31 @@
           <div>
             {% if info.title %}
               <h3>{{ info.title }}</h3>
-              {% if info.headliner %}
-                <h4><a class="text-black" href="{% url 'musician:news' info.headliner.user.username  %}" >{{ info.headliner }}</a></h4>
-              {% endif %}
-            {% elif info.headliner %}
-              <h3><a class="text-black" href="{% url 'musician:news' info.headliner.user.username  %}" >{{ info.headliner }}</a></h3>
+            {% endif %}
+            {% if info.headliner %}
+            <h4><a class="text-black" href="{% url 'musician:news' info.headliner.user.username  %}" >{{ info.headliner }}</a></h4>
+            {% elif info.headliner_text %}
+            <h4>{{ info.headliner_text }}</h4>
             {% endif %}
             <div class="openers">
-              {% for opener in info.openers.all %}
-                {% if forloop.first %}with:{% else %},{% endif %}
-                <a class="text-black" href="{% url 'musician:news' opener.user.username  %}" > {{ opener }}</a>
-              {% endfor %}
+              {% if info.opener.first %}
+                {% for opener in info.openers.all %}
+                  {% if forloop.first %}with:{% else %},{% endif %}
+                  <a class="text-black" href="{% url 'musician:news' opener.user.username  %}" > {{ opener }}</a>
+                  {% endfor %}
+              {% elif info.openers_text %}
+                <span>with: {{ info.openers_text }}</span>
+              {% endif %}
             </div>
           </div>
           <div>
             <p>
               <span class="fa fa-map-marker text-muted"></span>
-              <a class="text-black" href="{% url 'redirectToProfile' info.host.username 'about' %}">{{ info.host.profile }}</a>
+              {% if info.host %}
+                <a class="text-black" href="{% url 'redirectToProfile' info.host.username 'about' %}">{{ info.host.profile }}</a>
+              {% else %}
+                {{ info.host_text }}
+              {% endif %}
             </p>
           </div>
           <div>
