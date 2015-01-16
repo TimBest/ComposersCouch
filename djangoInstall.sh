@@ -109,6 +109,7 @@ sudo npm install -g less
 exit 0
 
 # ssh -i djangosite-eb.pem ec2-user@54.174.202.254
+# /opt/python/current/app/
 
 #scp -i CCkey.pem -r composersCouch ubuntu@54.200.80.27:/home/ubuntu
 
