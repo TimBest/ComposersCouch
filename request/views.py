@@ -128,7 +128,7 @@ class RequestFormView(MultipleFormsView):
 
     def get_forms(self):
         forms = super(RequestFormView, self).get_forms()
-        formset = formset_factory(self.form_class, formset=ParticipantFormSet)#, extra=3)
+        formset = formset_factory(self.form_class, formset=ParticipantFormSet, max_num=3, min_num=3)
         if self.request.method == 'POST':
             forms['ArtistFormset'] = formset(**self.get_form_kwargs())
         else:
@@ -178,7 +178,7 @@ class RequestFormView(MultipleFormsView):
         thread.all_msgs.add(message)
         thread.save()
         for form in forms['ArtistFormset']:
-            if form.cleaned_data:
+            if form.cleaned_data.get('user'):
                 form.save(thread=thread, sender=sender)
         private_request.thread = thread
         private_request.save()

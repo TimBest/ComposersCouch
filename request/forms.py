@@ -51,7 +51,7 @@ class ParticipantFormSet(BaseFormSet):
     def clean(self):
         cleaned_data = self.forms[0].cleaned_data
         if not cleaned_data.get('email') and not cleaned_data.get('user'):
-            raise forms.ValidationError(_(u"At least on artist required"))
+            raise forms.ValidationError(_(u"At least one user or email is required"))
 
     @cached_property
     def forms(self):
@@ -118,6 +118,20 @@ class ArtistParticipantForm(ParticipantForm):
     def __init__(self, *args, **kwargs):
         self.profile_type = 'm'
         super(ArtistParticipantForm, self).__init__(*args, **kwargs)
+
+    def clean(self):
+        email = self.cleaned_data.get('email')
+        user = self.cleaned_data.get('user')
+        if email and not user:
+            user = get_object_or_None(User, email=email)
+            if not user:
+                name = self.cleaned_data.get('name')
+                if not name:
+                    name = email
+                user = create_user_profile(name=name, email=email,
+                            profile_type=self.profile_type, creator=self.user)
+            self.cleaned_data['user']=user
+            return self.cleaned_data
 
 class RequestForm(ModelForm):
     date_format = '%m/%d/%Y'
