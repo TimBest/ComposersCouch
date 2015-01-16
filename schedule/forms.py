@@ -121,9 +121,10 @@ class ShowInfoForm(ModelForm):
                     isParticipant = True
         if not isParticipant:
             raise forms.ValidationError(_(u"You must be part of this request"))
-
-        if not self.cleaned_data.get('title') and not self.cleaned_data.get('headliner'):
+        if not self.cleaned_data.get('title') and not (self.cleaned_data.get('headliner') or self.cleaned_data.get('headliner_text')):
             raise forms.ValidationError(_(u"A Title or a Headliner is required"))
+        if not self.cleaned_data.get('host') and not self.cleaned_data.get('host_text'):
+            raise forms.ValidationError(_(u"A Host is required"))
         return self.cleaned_data
 
     class Meta:

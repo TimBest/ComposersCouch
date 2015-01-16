@@ -152,7 +152,10 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
             info.poster = get_object_or_None(Image, id=imageId)
 
         if not info.location:
-            info.location = info.host.profile.contact_info.location
+            if info.host:
+                info.location = info.host.profile.contact_info.location
+            else:
+                info.location = self.request.user.profile.contact_info.location
         info.save()
         forms['show_info_form'].save_m2m()
         participants = info.participants()
