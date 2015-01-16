@@ -85,22 +85,9 @@ class UserSelectForm(ModelForm):
     def __init__(self, *args, **kwargs):
         kwargs.pop('user', None)
         super(UserSelectForm, self).__init__(*args, **kwargs)
-        self.participants = Layout (
-            Div(
-              Div('headliner',css_class='col-xs-11 left',),
-              css_class='row no-gutter',
-            ),
-            Div(
-              Div('openers',css_class='col-xs-11 left',),
-              css_class='row no-gutter',
-            ),
-            Div(
-              Div('host',css_class='col-xs-11 left',),
-              css_class='row no-gutter',
-            ),
-        )
+        self.participants = Layout ('headliner', 'openers', 'host',)
 
-class ShowInfoForm(UserSelectForm):
+class ShowInfoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(ShowInfoForm, self).__init__(*args, **kwargs)
@@ -108,7 +95,12 @@ class ShowInfoForm(UserSelectForm):
         self.helper.form_tag = False
         self.helper.layout = Layout(
             'title',
-            self.participants,
+            'headliner',
+            'headliner_text',
+            'openers',
+            'openers_text',
+            'host',
+            'host_text',
             'description',
         )
         self.fields['headliner'].required = False
@@ -136,7 +128,7 @@ class ShowInfoForm(UserSelectForm):
 
     class Meta:
         model = Info
-        fields = ('title','headliner','openers','host','description',)
+        fields = ('title','headliner','openers','host','headliner_text','openers_text','host_text','description',)
         widgets = {
           'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
         }

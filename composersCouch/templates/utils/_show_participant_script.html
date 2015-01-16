@@ -1,0 +1,18 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("{{ text_div }}").append(function() {
+            return $("<a href='#' class='pull-right' id='show-user'>Select by user</a>").click(function(){
+                $("{{ text_div }}").hide();
+                $("{{ user_div }}").show();
+            });
+        });
+        $("{{ user_div }}").append(function() {
+            return $("<a href='#' class='pull-right' id='show-text'>Select by name</a>").click(function(){
+                $("{{ user_div }}").hide();
+                $("{{ text_div }}").show();
+              });
+        });
+        $("{{ text_div }}").hide();
+        $("{{ user_div }}").show();
+    });
+</script>

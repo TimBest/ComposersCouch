@@ -5,7 +5,7 @@
 {% crispy ShowInfoForm ShowInfoForm.helper %}
 
 {% block title %}
-  {% block formTitle %}{% trans "Create Event" %}{% endblock %}
+  {% block formTitle %}Create Show{% endblock %}
 {% endblock %}
 
 {% block formID %}eventForm{% endblock %}
@@ -66,4 +66,9 @@
   </script>
   {% comment %}Image picker{% endcomment %}
   {% include "utils/_image_script.html" with selectorID='#id_poster' uploadDiv='#div_id_image' selectDiv='#div_id_poster' page=request.GET.page images=images %}
+
+  {% include "utils/_show_participant_script.html" with user_div='#div_id_headliner' text_div='#div_id_headliner_text' %}
+  {% include "utils/_show_participant_script.html" with user_div='#div_id_openers' text_div='#div_id_openers_text' %}
+  {% include "utils/_show_participant_script.html" with user_div='#div_id_host' text_div='#div_id_host_text' %}
+
 {% endblock %}
