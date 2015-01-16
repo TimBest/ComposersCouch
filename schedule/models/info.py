@@ -25,8 +25,7 @@ class Info(models.Model):
     title = models.CharField(_("title"), max_length = 255, null=True, blank=True,)
     description = models.TextField(_("description"), null=True,
                                    blank=True)
-    headliner = models.ForeignKey(MusicianProfile,
-                                  null=True, blank=True,
+    headliner = models.ForeignKey(MusicianProfile, null=True, blank=True,
                                   verbose_name=_("headliner"),
                                   related_name='shows_headlining')
     openers = models.ManyToManyField(MusicianProfile,
@@ -34,18 +33,14 @@ class Info(models.Model):
                                      verbose_name=_("openers"),
                                      related_name='shows_opening')
     host = models.ForeignKey(User, verbose_name=_("host"))
+    headliner_text = models.CharField(max_length=255, null=True, blank=True,)
+    openers_text = models.CharField(max_length=255, null=True, blank=True,)
+    host_text = models.CharField(max_length=255, null=True, blank=True,)
+
     location = models.ForeignKey(Location,
                                 null=True, blank=True,
                                 verbose_name=_("location"),
                                 related_name='event_location')
-    age =  models.CharField(_('age'), max_length=3, choices=AGE,
-                            default=AGE[0][0])
-    advance_price = models.DecimalField(max_digits=6, decimal_places=2,
-                                        null=True, blank=True,
-                                        verbose_name=_("advance_price"))
-    full_price = models.DecimalField(max_digits=6, decimal_places=2,
-                                     null=True, blank=True,
-                                     verbose_name=_("full_price"))
     objects = models.GeoManager()
 
     def participants(self):
