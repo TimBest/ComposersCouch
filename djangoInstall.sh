@@ -108,6 +108,8 @@ sudo npm install -g less
 
 exit 0
 
+# ssh -i djangosite-eb.pem ec2-user@54.174.202.254
+
 #scp -i CCkey.pem -r composersCouch ubuntu@54.200.80.27:/home/ubuntu
 
 # dev server: sudo gedit /etc/hosts    add '127.0.0.1        dev.composerscouch.com' as the first line
