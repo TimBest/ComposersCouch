@@ -71,7 +71,7 @@
             <button class="btn btn-danger-inv" type="submit"><span class="fa fa-ban" ></span> {% trans "Deny" %}</button>
           </form>
         </div>
-        <p><a href="{% url 'edit_event' calendar.slug show.id %}">Edit</a></p>
+        <p><a href="{% url 'edit_event' show.id %}">Edit</a></p>
       </div>
     {% endifequal %}
   </div>

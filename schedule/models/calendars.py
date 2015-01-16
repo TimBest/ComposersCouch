@@ -147,7 +147,7 @@ class Calendar(models.Model):
             return None
 
     def get_absolute_url(self):
-        return reverse('calendar_home', kwargs={'calendar_slug': self.slug})
+        return reverse('calendar')
 
     def add_event_url(self):
-        return reverse('calendar_create_event', args=[self.slug])
+        return reverse('calendar_create_event')

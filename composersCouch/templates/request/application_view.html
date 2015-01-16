@@ -45,7 +45,7 @@
             </form>
           </div>
           {% comment %}
-          <a href="{% url 'calendar_request_to_event' user.calendar.slug request.id %}" class="btn btn-link">{% trans "Add to Calendar" %}</a>
+          <a href="{% url 'calendar_request_to_event' request.id %}" class="btn btn-link">{% trans "Add to Calendar" %}</a>
           {% endcomment %}
         </div>
         {% endif %}

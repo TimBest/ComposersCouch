@@ -79,8 +79,6 @@ class ShowView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super(ShowView, self).get_context_data(*args, **kwargs)
-        calendar_slug = self.kwargs.get('calendar_slug', None)
-        context['calendar'] = get_object_or_None(Calendar, slug=calendar_slug)
         context['show'] = self.show
         event = get_object_or_None(Event, show=self.show, calendar=self.request.user.calendar)
         context['user_accept'] = event.approved
@@ -180,7 +178,8 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
                 event.calendar = user.calendar
                 event.approved = True
             event.save()
-        return self.get_success_url(calendar_slug=self.request.user.calendar.slug)
+        show.save()
+        return self.get_success_url()
 
 create_event = EventFormView.as_view()
 
@@ -198,7 +197,7 @@ class EditEventFormView(EventFormView):
         return {
             'poster_form': getattr(info, 'poster', None),
             'date_form'  : self.show.date,
-            'event_form' : Event(show=self.show, calendar=self.request.user.calendar),
+            'event_form' : get_object_or_None(Event, show=self.show, calendar=self.request.user.calendar),
             'show_info_form'  : info,
         }
     def get_initial_data(self):
@@ -227,12 +226,13 @@ class EditEventFormView(EventFormView):
         participants = info.participants()
 
         # create or edit event for each particpent in show
+        forms['event_form'].save()
         for user in participants:
-            if self.request.user != user:
-                event = get_object_or_None(Event, show=self.show, calendar=user.calendar)
-                if not event:
-                    event = Event(show=self.show, calendar=user.calendar)
-                    event.save()
+            event = get_object_or_None(Event, show=self.show, calendar=user.calendar)
+            if self.request.user != user and not event:
+                event = Event(show=self.show, calendar=user.calendar)
+                event.save()
+        self.show.save()
         return self.get_success_url()
 
 edit_event = EditEventFormView.as_view()

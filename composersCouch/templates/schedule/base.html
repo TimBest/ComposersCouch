@@ -35,7 +35,7 @@
     <div class="container-fluid">
       <div class="row no-gutter">
         <div class="col-sm-2 col-xs-6 left">
-          <a href="{% url 'calendar_create_event' request.user.calendar.slug %}{% querystring_for_date date %}&hour=19&next={% firstof request.path '/' %}"
+          <a href="{% url 'calendar_create_event' %}{% querystring_for_date date %}&hour=19&next={% firstof request.path '/' %}"
           class="btn btn-primary" role="button">Create Show</a>
           {% comment %}<a href="{% url 'calendar' %}" class="btn btn-default">Today</a>{% endcomment %}
         </div>

@@ -18,8 +18,7 @@ def edit_show(function):
             return HttpResponseRedirect(settings.LOGIN_URL)
         else:
             show = get_object_or_None(Show, pk=kwargs.get('show_id', None))
-            calendar = get_object_or_None(Calendar, slug=kwargs.get('calendar_slug', None))
-            if show and calendar:
+            if show:
                 event = get_object_or_None(Event, show=show, calendar=request.user.calendar)
                 if not event:
                     raise PermissionDenied
@@ -32,9 +31,8 @@ def view_show(function):
     @wraps(function)
     def decorator(request, *args, **kwargs):
         from schedule.models import Calendar, Event, Show
-        calendar = get_object_or_None(Calendar, slug=kwargs.get('calendar_slug', None))
         show = get_object_or_None(Show, pk=kwargs.get('show_id', None))
-        if show and calendar:
+        if show and request.user.calendar:
             try:
                 event = get_object_or_None(Event, show=show, calendar=request.user.calendar)
             except:
