@@ -183,8 +183,8 @@ else:
     EMAIL_USE_TLS = True
     EMAIL_HOST = 'smtp.gmail.com'
     EMAIL_PORT = 587
-    EMAIL_HOST_USER = 'messenger@composerscouch.com'#AnEmailAddressGoesHere
-    EMAIL_HOST_PASSWORD = ''#PasswordToSaidEmailAdress
+    EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+    EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
     DEFAULT_FROM_EMAIL = 'messenger@composerscouch.com'
 
 
