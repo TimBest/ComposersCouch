@@ -40,6 +40,7 @@ class SignupView(MultipleFormsView):
         info = {}
         if forms.get('emailForm'):
             info['user'] = forms['emailForm'].save()
+            info['password'] = forms['emailForm'].cleaned_data.get('password1')
         info['location'] = forms['zipcodeForm'].save()
         info['email'] = forms['zipcodeForm'].cleaned_data.get('email')
         signupForm  = forms['signupForm']
@@ -78,9 +79,8 @@ class SignupEmailView(SignupAuthView):
         # A new signed user should logout the old one.
         if self.request.user.is_authenticated():
             logout(request)
-        signup_complete.send(sender=None,
-                                             user=user)
-        user = authenticate(identification=user.email, check_password=False)
+        signup_complete.send(sender=None, user=user)
+        user = authenticate(identification=user.email, password=info['password'])
         login(self.request, user)
         return redirect(self.success_url, username=user.username)
 
