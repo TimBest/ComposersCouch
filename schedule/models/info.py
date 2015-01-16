@@ -18,28 +18,19 @@ class Info(models.Model):
     This model stores meta data for a date.  You can relate this data to many
     other models.
     '''
-    poster = models.ForeignKey(Image,
-                              verbose_name=_("Poster"),
-                              related_name='event poster',null=True,
-                              blank=True)
-    title = models.CharField(_("title"), max_length = 255, null=True, blank=True,)
-    description = models.TextField(_("description"), null=True,
-                                   blank=True)
+    poster = models.ForeignKey(Image, related_name='event poster',
+                               null=True, blank=True)
+    title = models.CharField(max_length = 255, null=True, blank=True,)
+    description = models.TextField(null=True, blank=True)
     headliner = models.ForeignKey(MusicianProfile, null=True, blank=True,
-                                  verbose_name=_("headliner"),
                                   related_name='shows_headlining')
-    openers = models.ManyToManyField(MusicianProfile,
-                                     null=True, blank=True,
-                                     verbose_name=_("openers"),
-                                     related_name='shows_opening')
-    host = models.ForeignKey(User, verbose_name=_("host"))
     headliner_text = models.CharField(max_length=255, null=True, blank=True,)
+    openers = models.ManyToManyField(MusicianProfile, null=True, blank=True,
+                                     related_name='shows_opening')
     openers_text = models.CharField(max_length=255, null=True, blank=True,)
+    host = models.ForeignKey(User, null=True, blank=True)
     host_text = models.CharField(max_length=255, null=True, blank=True,)
-
-    location = models.ForeignKey(Location,
-                                null=True, blank=True,
-                                verbose_name=_("location"),
+    location = models.ForeignKey(Location, null=True, blank=True,
                                 related_name='event_location')
     objects = models.GeoManager()
 
