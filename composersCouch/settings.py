@@ -21,7 +21,7 @@ SECRET_KEY = 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4&qd$uz_5&a7%q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-DEVELOPMENT = False
+DEVELOPMENT = True
 
 TEMPLATE_DEBUG = True
 
@@ -90,14 +90,6 @@ WSGI_APPLICATION = 'composersCouch.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
-# Social Auth
-TWITTER_CONSUMER_KEY         = 't64bvuxy0triEzEnHcyg'
-TWITTER_CONSUMER_SECRET      = 'jm41BJqDger9veDu3Aa7jswN4ZgQ9yIktlZIY4cSps'
-FACEBOOK_APP_ID              = '525965254182714'
-FACEBOOK_API_SECRET          = 'bdd9cdd707d80d08bd53660852b91c51'
-GOOGLE_OAUTH2_CLIENT_ID      = '566838544572.apps.googleusercontent.com'
-GOOGLE_OAUTH2_CLIENT_SECRET  = 'BpAQ6KT37BLQxNc5ETzC0sMS'
-
 if DEVELOPMENT:
     POSTGIS_VERSION = (2, 1, 4)
     DATABASES = {
@@ -141,6 +133,19 @@ if DEVELOPMENT:
     EMAIL_HOST_PASSWORD = ''
     EMAIL_USE_TLS = False
     DEFAULT_FROM_EMAIL = 'testing@example.com'
+    """EMAIL_USE_TLS = True
+    EMAIL_HOST = 'smtp-relay.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = 'timbest@composerscouch.com'
+    EMAIL_HOST_PASSWORD = #password goes here
+    DEFAULT_FROM_EMAIL = 'messenger@composerscouch.com'"""
+    # Social Auth
+    TWITTER_CONSUMER_KEY         = 't64bvuxy0triEzEnHcyg'
+    TWITTER_CONSUMER_SECRET      = 'jm41BJqDger9veDu3Aa7jswN4ZgQ9yIktlZIY4cSps'
+    FACEBOOK_APP_ID              = '525965254182714'
+    FACEBOOK_API_SECRET          = 'bdd9cdd707d80d08bd53660852b91c51'
+    GOOGLE_OAUTH2_CLIENT_ID      = '566838544572.apps.googleusercontent.com'
+    GOOGLE_OAUTH2_CLIENT_SECRET  = 'BpAQ6KT37BLQxNc5ETzC0sMS'
 
 else:
     POSTGIS_VERSION = (2, 1, 1)
@@ -181,12 +186,18 @@ else:
         }
     }
     EMAIL_USE_TLS = True
-    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST = 'smtp-relay.gmail.com'
     EMAIL_PORT = 587
     EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
     EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
     DEFAULT_FROM_EMAIL = 'messenger@composerscouch.com'
-
+    # Social Auth
+    TWITTER_CONSUMER_KEY         = 't64bvuxy0triEzEnHcyg'
+    TWITTER_CONSUMER_SECRET      = 'jm41BJqDger9veDu3Aa7jswN4ZgQ9yIktlZIY4cSps'
+    FACEBOOK_APP_ID              = '525965254182714'
+    FACEBOOK_API_SECRET          = 'bdd9cdd707d80d08bd53660852b91c51'
+    GOOGLE_OAUTH2_CLIENT_ID      = '566838544572.apps.googleusercontent.com'
+    GOOGLE_OAUTH2_CLIENT_SECRET  = 'BpAQ6KT37BLQxNc5ETzC0sMS'
 
 SITE_ID = 1
 
