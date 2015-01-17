@@ -21,7 +21,7 @@ SECRET_KEY = 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4&qd$uz_5&a7%q'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-DEVELOPMENT = False
+DEVELOPMENT = True
 
 TEMPLATE_DEBUG = True
 
@@ -135,12 +135,18 @@ if DEVELOPMENT:
         }
     }
     # python -m smtpd -n -c DebuggingServer localhost:1025
-    EMAIL_HOST = 'localhost'
+    MAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
     EMAIL_HOST_USER = ''
     EMAIL_HOST_PASSWORD = ''
     EMAIL_USE_TLS = False
     DEFAULT_FROM_EMAIL = 'testing@example.com'
+    """EMAIL_USE_TLS = True
+    EMAIL_HOST = 'smtp-relay.gmail.com'
+    EMAIL_PORT = 587
+    EMAIL_HOST_USER = 'timbest@composerscouch.com'
+    EMAIL_HOST_PASSWORD = #password goes here
+    DEFAULT_FROM_EMAIL = 'messenger@composerscouch.com'"""
 
 else:
     POSTGIS_VERSION = (2, 1, 1)
@@ -181,7 +187,7 @@ else:
         }
     }
     EMAIL_USE_TLS = True
-    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST = 'smtp-relay.gmail.com'
     EMAIL_PORT = 587
     EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
     EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
