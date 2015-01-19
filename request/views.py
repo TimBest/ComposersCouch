@@ -113,7 +113,7 @@ class RequestFormView(MultipleFormsView):
       'dateForm'      : forms.DateForm,
       'messageForm'   : forms.MessageForm,
       'requestForm'   : forms.RequestForm,
-      'hostForm'      : forms.ParticipantForm,
+      'venueForm'      : forms.ParticipantForm,
     }
     model = Participant
     form_class = forms.ArtistParticipantForm
@@ -136,14 +136,14 @@ class RequestFormView(MultipleFormsView):
         return forms
 
     def get_initial_data(self):
-        host_data = {}
+        venue_data = {}
         for user in self.get_users():
             profile_type = user.profile.profile_type
             if profile_type == 'm':
                 self.artist = {'user' : user}
             else:
-                host_data = {'user' : user}
-        return {'dateForm':None, 'messageForm':None, 'requestForm':None, 'hostForm':host_data,}
+                venue_data = {'user' : user}
+        return {'dateForm':None, 'messageForm':None, 'requestForm':None, 'venueForm':venue_data,}
 
     def get_success_url(self, thread=None):
         # TODO: extend this guy to accept next urls
@@ -182,7 +182,7 @@ class RequestFormView(MultipleFormsView):
                 form.save(thread=thread, sender=sender)
         private_request.thread = thread
         private_request.save()
-        forms['hostForm'].save(thread=thread, sender=sender, role='v')
+        forms['venueForm'].save(thread=thread, sender=sender, role='v')
         # check if user is in thread. if not add them
         participant = get_object_or_None(Participant ,thread=thread, user=sender)
         if not participant:

@@ -28,16 +28,16 @@ class Info(models.Model):
     openers = models.ManyToManyField(MusicianProfile, null=True, blank=True,
                                      related_name='shows_opening')
     openers_text = models.CharField(max_length=255, null=True, blank=True,)
-    host = models.ForeignKey(User, null=True, blank=True)
-    host_text = models.CharField(max_length=255, null=True, blank=True,)
+    venue = models.ForeignKey(User, null=True, blank=True)
+    venue_text = models.CharField(max_length=255, null=True, blank=True,)
     location = models.ForeignKey(Location, null=True, blank=True,
                                 related_name='event_location')
     objects = models.GeoManager()
 
     def participants(self):
         participants = []
-        if self.host:
-            participants.append(self.host)
+        if self.venue:
+            participants.append(self.venue)
         if self.headliner:
             participants.append(self.headliner.profile.user)
         for opener in self.openers.all():
@@ -50,8 +50,8 @@ class Info(models.Model):
                 return self.poster.image
             elif self.headliner:
                 return self.headliner.profile.mugshot.image
-            elif self.host:
-                return self.host.profile.mugshot.image
+            elif self.venue:
+                return self.venue.profile.mugshot.image
         except:
             return None
 

@@ -39,7 +39,7 @@ class PrivateRequest(Request):
     def headliner(self):
         return get_object_or_None(Participant, thread=self.thread, request_participant__role='h')
 
-    def host(self):
+    def venue(self):
         return get_object_or_None(Participant, thread=self.thread, request_participant__role='v')
 
     def openers(self):

@@ -26,7 +26,7 @@ def shows(request, scope='all', *args, **kwargs):
 
 class ShowView(FeedMixin, TemplateView):
     modelManager = Show.objects
-    path_to_genre = 'info__host__profile__genre__slug'
+    path_to_genre = 'info__venue__profile__genre__slug'
     # TODO: expand to also match with those preforming
 
     def get_default_order(self):
@@ -73,7 +73,7 @@ class FollowingView(ShowView):
         posts = super(FollowingView, self).get_posts(**kwargs)
         following = self.request.user.following_set.values_list('target')
         return posts.filter(
-            Q(info__openers__profile__user__pk__in=following) | Q(info__headliner__profile__user__pk__in=following) | Q(info__host__pk__in=following)
+            Q(info__openers__profile__user__pk__in=following) | Q(info__headliner__profile__user__pk__in=following) | Q(info__venue__pk__in=following)
         )
 
 class AllView(ShowView):

@@ -131,7 +131,7 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
         if self.request.user.profile.profile_type == "m":
             show_data['headliner'] = self.request.user.profile.musicianProfile
         else:
-            show_data['host'] = self.request.user
+            show_data['venue'] = self.request.user
         return {'poster_form':{},'date_form':date_data,'event_form':{},'show_info_form':show_data,}
 
     def forms_valid(self, forms):
@@ -150,8 +150,8 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
             info.poster = get_object_or_None(Image, id=imageId)
 
         if not info.location:
-            if info.host:
-                info.location = info.host.profile.contact_info.location
+            if info.venue:
+                info.location = info.venue.profile.contact_info.location
             else:
                 info.location = self.request.user.profile.contact_info.location
         info.save()
@@ -220,7 +220,7 @@ class EditEventFormView(EventFormView):
             info.poster = get_object_or_None(Image, id=imageId)
 
         if not info.location:
-            info.location = info.host.profile.contact_info.location
+            info.location = info.venue.profile.contact_info.location
         info.save()
         forms['show_info_form'].save_m2m()
         participants = info.participants()
@@ -254,7 +254,7 @@ class RequestToEventFormView(EventFormView):
 
     def get_initial_data(self):
         headliner = self.private_request.headliner()
-        host = self.private_request.host()
+        venue = self.private_request.venue()
         artists = self.private_request.openers()
         openers = []
         for artist in artists:
@@ -262,7 +262,7 @@ class RequestToEventFormView(EventFormView):
         show_data = {
             "headliner": headliner.user if headliner else None,
             "openers"  : openers,
-            "host": host.user if host else None,
+            "venue": venue.user if venue else None,
         }
         return {'poster_form':{},'date_form':{},'event_form':{},'show_info_form':show_data,}
 

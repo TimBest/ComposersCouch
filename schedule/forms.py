@@ -85,7 +85,7 @@ class UserSelectForm(ModelForm):
     def __init__(self, *args, **kwargs):
         kwargs.pop('user', None)
         super(UserSelectForm, self).__init__(*args, **kwargs)
-        self.participants = Layout ('headliner', 'openers', 'host',)
+        self.participants = Layout ('headliner', 'openers', 'venue',)
 
 class ShowInfoForm(ModelForm):
     def __init__(self, *args, **kwargs):
@@ -99,8 +99,8 @@ class ShowInfoForm(ModelForm):
             'headliner_text',
             'openers',
             'openers_text',
-            'host',
-            'host_text',
+            'venue',
+            'venue_text',
             'description',
         )
         self.fields['headliner'].required = False
@@ -113,7 +113,7 @@ class ShowInfoForm(ModelForm):
                 isParticipant = True
         except:
             pass
-        if self.cleaned_data.get('host') == self.user:
+        if self.cleaned_data.get('venue') == self.user:
             isParticipant = True
         else:
             for o in self.cleaned_data.get('openers'):
@@ -123,13 +123,13 @@ class ShowInfoForm(ModelForm):
             raise forms.ValidationError(_(u"You must be part of this request"))
         if not self.cleaned_data.get('title') and not (self.cleaned_data.get('headliner') or self.cleaned_data.get('headliner_text')):
             raise forms.ValidationError(_(u"A Title or a Headliner is required"))
-        if not self.cleaned_data.get('host') and not self.cleaned_data.get('host_text'):
-            raise forms.ValidationError(_(u"A Host is required"))
+        if not self.cleaned_data.get('venue') and not self.cleaned_data.get('venue_text'):
+            raise forms.ValidationError(_(u"A Venue is required"))
         return self.cleaned_data
 
     class Meta:
         model = Info
-        fields = ('title','headliner','openers','host','headliner_text','openers_text','host_text','description',)
+        fields = ('title','headliner','openers','venue','headliner_text','openers_text','venue_text','description',)
         widgets = {
           'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
         }

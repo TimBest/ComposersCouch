@@ -7,7 +7,7 @@ With:
 {% if request.openers %}Artists:{% endif %}
   {% for opener in request.openers %}{{ opener.user.profile }} ({{ protocol }}://{{ domain }}{{ opener.user.profile.get_absolute_url }}){% endfor %}
 
-At: {{ request.host.user.profile }} ({{ protocol }}://{{ domain }}{{ request.host.user.profile.get_absolute_url }})
+At: {{ request.venue.user.profile }} ({{ protocol }}://{{ domain }}{{ request.venue.user.profile.get_absolute_url }})
 
 Accept by: {{ request.accept_by }}
 

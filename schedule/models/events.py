@@ -106,5 +106,5 @@ class Event(models.Model):
         except:
             location = None
         if not location:
-            location = self.show.info.host.profile.contact_info.location
+            location = self.show.info.venue.profile.contact_info.location
         return location

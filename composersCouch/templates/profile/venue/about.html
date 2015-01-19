@@ -27,15 +27,13 @@
             </div>
             <div class="panel-body">
               {% for day in venueProfile.hours.all %}
-                <div class="row no-gutter">
-                  {% ifequal today forloop.counter %}<strong>{% endifequal %}
-                    <div class="col-xs-4 left">{{ weekdays|get_item:day.weekday }}</div>
-                    {% if day.start and day.end %}
-                      <div class="col-xs-8 right">{{ day.start }} - {{ day.end }}</div>
-                    {% else %}
-                      <div class="col-xs-8 right">Closed</div>
-                    {% endif %}
-                  {% ifequal today forloop.counter %}</strong>{% endifequal %}
+                <div class="row no-gutter {% ifequal today forloop.counter %}text-bold{% endifequal %}">
+                  <div class="col-xs-4 left">{{ weekdays|get_item:day.weekday }}</div>
+                  {% if day.start and day.end %}
+                    <div class="col-xs-8 right">{{ day.start }} - {{ day.end }}</div>
+                  {% else %}
+                    <div class="col-xs-8 right">Closed</div>
+                  {% endif %}
                 </div>
               {% endfor %}
               <a class="{{isEditable}} editHours" href="{% url 'venue:hoursForm' %}">Edit</a>

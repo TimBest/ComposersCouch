@@ -70,7 +70,7 @@
                         {% if user.profile.profile_type == 'v' %}
                           {{ event.headliner.profile }}
                         {% else %}
-                          {{ event.host.profile }}
+                          {{ event.venue.profile }}
                         {% endif %}
                       </span>
                     </a>
@@ -81,7 +81,7 @@
                       {% if user.profile.profile_type == 'v' %}
                         {{ event.headliner.profile }}
                       {% else %}
-                        {{ event.host.profile }}
+                        {{ event.venue.profile }}
                       {% endif %}
                     </a></li>
                   </div>

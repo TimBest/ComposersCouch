@@ -27,10 +27,10 @@
             </ul>
           </div>
           {% endif %}
-          <div class="host">
-            <b>Host:</b>
-            <a href="{% url 'redirectToProfile' request.host.user.username 'about' %}">{{ request.host.user.profile }}</a>
-            {% include "request/_accepted.html" with accepted=request.host.request_participant.accepted %}
+          <div class="venue">
+            <b>venue:</b>
+            <a href="{% url 'redirectToProfile' request.venue.user.username 'about' %}">{{ request.venue.user.profile }}</a>
+            {% include "request/_accepted.html" with accepted=request.venue.request_participant.accepted %}
           </div>
           <p>Accept by: {{ request.accept_by }}</p>
         </div>
