@@ -9,9 +9,9 @@
     <div class="row no-gutter">
       <div class="col-sm-4 left">
         {% if user.profile.profile_type == 'm' %}
-          <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
+          <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
         {% elif user.profile.profile_type == 'v' %}
-          <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Create Request</a>
+          <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
         {% endif %}
       </div>
       <div class="col-sm-4 center">
