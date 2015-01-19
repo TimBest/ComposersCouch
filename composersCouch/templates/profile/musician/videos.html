@@ -74,8 +74,8 @@
         </div>
       </div>
     {% empty %}
-      <p class="{{isEditable}}" >
-        Videos must be attached to an album. <a href="{% url 'musician:albumForm' %}">Add an album</a> to get started.
+      <p>No videos</p>
+      <p class="{{isEditable}}">Videos must be attached to an album. <a href="{% url 'musician:albumForm' %}">Add an album</a> to get started.</p>
     {% endfor %}
   </div>
 {% endblock %}
