@@ -7095,6 +7095,7 @@ h1 {
 .navbar .navbar-brand .beta-badge {
   position: absolute;
   bottom: 8px;
+  right: 7px;
   color: #6c0d08;
   font-size: 14px;
   font-family: PT-sans, sans-serif;
@@ -7653,16 +7654,16 @@ h1 {
   background-color: #d37876;
 }
 .winter {
-  background-color: #0b396d;
+  background-color: #5b789a;
 }
 .spring {
-  background-color: #3f0b6c;
+  background-color: #895b9b;
 }
 .summer {
-  background-color: #076e4f;
+  background-color: #5b9a5b;
 }
 .fall {
-  background-color: #a6410b;
+  background-color: #dd743c;
 }
 .landing-page .jumbotron {
   margin-bottom: 0px;
@@ -8622,105 +8623,16 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .calendar-header {
   padding: 8px 0px 8px 0px;
-}
-.calendar-header.December,
-.calendar-header.January,
-.calendar-header.February {
-  background-color: #0b396d;
-  color: #76a2d3;
-}
-.calendar-header.December a,
-.calendar-header.January a,
-.calendar-header.February a {
-  color: #76a2d3;
-}
-.calendar-header.December a:hover,
-.calendar-header.January a:hover,
-.calendar-header.February a:hover,
-.calendar-header.December a:focus,
-.calendar-header.January a:focus,
-.calendar-header.February a:focus,
-.calendar-header.December a:active,
-.calendar-header.January a:active,
-.calendar-header.February a:active,
-.calendar-header.December a .active,
-.calendar-header.January a .active,
-.calendar-header.February a .active {
-  color: #dfe5eb;
-}
-.calendar-header.March,
-.calendar-header.April,
-.calendar-header.May {
-  background-color: #3f0b6c;
-  color: #a876d3;
-}
-.calendar-header.March a,
-.calendar-header.April a,
-.calendar-header.May a {
-  color: #a876d3;
-}
-.calendar-header.March a:hover,
-.calendar-header.April a:hover,
-.calendar-header.May a:hover,
-.calendar-header.March a:focus,
-.calendar-header.April a:focus,
-.calendar-header.May a:focus,
-.calendar-header.March a:active,
-.calendar-header.April a:active,
-.calendar-header.May a:active,
-.calendar-header.March a .active,
-.calendar-header.April a .active,
-.calendar-header.May a .active {
-  color: #dfe5eb;
-}
-.calendar-header.June,
-.calendar-header.July,
-.calendar-header.August {
   background-color: #076e4f;
   color: #6ed4b6;
 }
-.calendar-header.June a,
-.calendar-header.July a,
-.calendar-header.August a {
+.calendar-header a {
   color: #6ed4b6;
 }
-.calendar-header.June a:hover,
-.calendar-header.July a:hover,
-.calendar-header.August a:hover,
-.calendar-header.June a:focus,
-.calendar-header.July a:focus,
-.calendar-header.August a:focus,
-.calendar-header.June a:active,
-.calendar-header.July a:active,
-.calendar-header.August a:active,
-.calendar-header.June a .active,
-.calendar-header.July a .active,
-.calendar-header.August a .active {
-  color: #dfe5eb;
-}
-.calendar-header.September,
-.calendar-header.October,
-.calendar-header.November {
-  background-color: #a6410b;
-  color: #ffaf85;
-}
-.calendar-header.September a,
-.calendar-header.October a,
-.calendar-header.November a {
-  color: #ffaf85;
-}
-.calendar-header.September a:hover,
-.calendar-header.October a:hover,
-.calendar-header.November a:hover,
-.calendar-header.September a:focus,
-.calendar-header.October a:focus,
-.calendar-header.November a:focus,
-.calendar-header.September a:active,
-.calendar-header.October a:active,
-.calendar-header.November a:active,
-.calendar-header.September a .active,
-.calendar-header.October a .active,
-.calendar-header.November a .active {
+.calendar-header a:hover,
+.calendar-header a:focus,
+.calendar-header a:active,
+.calendar-header a .active {
   color: #dfe5eb;
 }
 .calendar-header .preiod-name {
@@ -8734,26 +8646,6 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .calendar-wrapper .navigation {
   margin-bottom: 10px;
-}
-.calendar-wrapper .December,
-.calendar-wrapper .January,
-.calendar-wrapper .February {
-  color: #0b396d;
-}
-.calendar-wrapper .March,
-.calendar-wrapper .April,
-.calendar-wrapper .May {
-  color: #3f0b6c;
-}
-.calendar-wrapper .June,
-.calendar-wrapper .July,
-.calendar-wrapper .August {
-  color: #076e4f;
-}
-.calendar-wrapper .September,
-.calendar-wrapper .October,
-.calendar-wrapper .November {
-  color: #a6410b;
 }
 .calendar-wrapper div.cal-month-box {
   text-align: left;

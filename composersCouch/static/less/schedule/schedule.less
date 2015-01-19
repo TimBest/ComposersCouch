@@ -1,35 +1,12 @@
-.calendar-header(@color, @bg-color) {
-  background-color: @bg-color;
-  color: @color;
+.calendar-header {
+  padding: 8px 0px 8px 0px;
+  background-color: @dark-green;
+  color: @faded-green;
   a {
-    color: @color;
+    color: @faded-green;
     &:hover, &:focus, &:active,.active {
       color:@silver-light;
     }
-  }
-}
-
-.calendar-header {
-  padding: 8px 0px 8px 0px;
-  &.December,
-  &.January,
-  &.February {
-    .calendar-header(@color:@winter-bg, @bg-color:@winter);
-  }
-  &.March,
-  &.April,
-  &.May {
-  .calendar-header(@color:@spring-bg, @bg-color:@spring);
-  }
-  &.June,
-  &.July,
-  &.August {
-    .calendar-header(@color:@summer-bg, @bg-color:@summer);
-  }
-  &.September,
-  &.October,
-  &.November {
-    .calendar-header(@color:@fall-bg, @bg-color:@fall);
   }
   .preiod-name {
     font-size:36px;
@@ -42,27 +19,6 @@
   .navigation {
     margin-bottom:10px;
   }
-  .December,
-  .January,
-  .February {
-    color:@winter;
-  }
-  .March,
-  .April,
-  .May {
-    color:@spring;
-  }
-  .June,
-  .July,
-  .August {
-    color:@summer;
-  }
-  .September,
-  .October,
-  .November {
-    color:@fall;
-  }
-
   div.cal-month-box {
     text-align: left;
   }
