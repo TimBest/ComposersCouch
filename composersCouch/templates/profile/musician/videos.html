@@ -11,13 +11,14 @@
   <div class="videos">
     <div class="row">
       <div class="col-xs-12">
-        <div class="pull-right"><p>
+        <div class="pull-right">
           {% with social=profile.social_links %}
-              {% if social.vimeo %}<a href="{{ social.vimeo }}" target="_blank" class="btn btn-vimeo"><span class="fa fa-vimeo-square"></span></a>{% endif %}
-              {% if social.youtube %}<a href="{{ social.youtube }}" target="_blank" class="btn btn-youtube"><span class="fa fa-youtube-play"></span></a>{% endif %}
+          {% if social.vimeo %}<a href="{{ social.vimeo }}" target="_blank" class="btn btn-vimeo"><span class="fa fa-vimeo-square"></span></a>{% endif %}
+          {% if social.youtube %}<a href="{{ social.youtube }}" target="_blank" class="btn btn-youtube"><span class="fa fa-youtube-play"></span></a>{% endif %}
           {% endwith %}
           <a href="{% url 'musician:videoLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
-        </p></div>
+        </div>
+        <p></p>
       </div>
     </div>
     {% for album in musicianProfile.albums.all %}
@@ -72,70 +73,10 @@
           </div>
         </div>
       </div>
+    {% empty %}
+      <p class="{{isEditable}}" >
+        Videos must be attached to an album. <a href="{% url 'musician:albumForm' %}">Add an album</a> to get started.
     {% endfor %}
-    {% comment %}
-    <div class="panel panel-default {% if not live_tracks %}{{isEditable}}{% endif %}">
-      <div class="panel-heading">
-        <h3>Live Recordings</h3>
-      </div>
-      <div class="panel-body">
-        <div class="jp-playlist">
-          <ul class="jp-track-list">
-            {% for track in live_tracks %}
-              <li>
-                <h5 class="video-title">{{ track.title }}</h5>
-                {% if track.video %}
-                  <a href="javascript:;" id="toggle-live-video-{{track.id}}" class="btn btn-default btn-video" >
-                    <span class="fa fa-video-camera"></span> <sub class="caret"></sub>
-                  </a>
-                  <div style="display: none;" id="live-video-{{track.id}}" >
-                    {% video  track.video 'tiny' %}
-                  </div>
-                {% endif %}
-                <a class="edit-track pull-right {{isEditable}}" href="{% url 'musician:live_video_form' track.id %}">
-                  Edit
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-        <a class="pull-right {{isEditable}}" href="{% url 'musician:live_video_form' %}">
-          {% include "_addLink.html" with text='Add Live Track' %}
-        </a>
-      </div>
-    </div>
-    <div class="panel panel-default {% if not interviews %}{{isEditable}}{% endif %}">
-      <div class="panel-heading">
-        <h3>Interviews</h3>
-      </div>
-      <div class="panel-body">
-        <div class="jp-playlist">
-          <ul class="jp-track-list">
-            {% for track in interviews %}
-              <li>
-                <h5 class="video-title">{{ track.title }}</h5>
-                {% if track.video %}
-                  <a href="javascript:;" id="toggle-interview-{{track.id}}" class="btn btn-default btn-video" >
-                    <span class="fa fa-video-camera"></span> <sub class="caret"></sub>
-                  </a>
-                  <div style="display: none;" id="interview-{{track.id}}" >
-                    {% video  track.video 'tiny' %}
-                  </div>
-                {% endif %}
-
-                <a class="edit-track pull-right {{isEditable}}" href="{% url 'musician:interview_video_form' track.id %}">
-                  Edit
-                </a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-        <a class="text-primary pull-right {{isEditable}}" href="{% url 'musician:interview_video_form' %}">
-          {% include "_addLink.html" with text='Add Interview' %}
-        </a>
-      </div>
-    </div>
-    {% endcomment %}
   </div>
 {% endblock %}
 
@@ -147,16 +88,6 @@
             $("#album-video-{{track.id}}").toggle();
         });
       {% endfor %}
-    {% endfor %}
-    {% for track in live_tracks %}
-      $("#toggle-live-video-{{track.id}}").click(function() {
-          $("#live-video-{{track.id}}").toggle();
-      });
-    {% endfor %}
-    {% for track in interviews %}
-      $("#toggle-interview-{{track.id}}").click(function() {
-          $("#interview-{{track.id}}").toggle();
-      });
     {% endfor %}
   </script>
 {% endblock %}
