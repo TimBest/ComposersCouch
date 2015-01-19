@@ -7925,7 +7925,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .header.thread {
   color: #fbfcfc;
-  background-color: #474747;
+  background-color: #0b396d;
   padding-top: 10px;
 }
 @media (min-width: 768px) {
@@ -8624,16 +8624,16 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .calendar-header {
   padding: 8px 0px 8px 0px;
   background-color: #076e4f;
-  color: #6ed4b6;
+  color: #fbfcfc;
 }
 .calendar-header a {
-  color: #6ed4b6;
+  color: #fbfcfc;
 }
 .calendar-header a:hover,
 .calendar-header a:focus,
 .calendar-header a:active,
 .calendar-header a .active {
-  color: #dfe5eb;
+  color: #cbcfd3;
 }
 .calendar-header .preiod-name {
   font-size: 36px;
