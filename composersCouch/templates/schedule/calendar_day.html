@@ -17,5 +17,7 @@
     {% else %}
       {% include "request/_private_request.html" with request=event %}
     {% endifequal %}
+  {% empty %}
+    <p class="text-left">No {{ filter }} scheduled for {{ date|date:"SHORT_DATE_FORMAT" }}</p>
   {% endfor %}
 {% endblock %}
