@@ -8,10 +8,10 @@
           {% if request.headliner %}
           <div class="Headliner">
             <b>Headliner:</b>
-            <a href="{% url 'redirectToProfile' request.headliner.user.username 'about' %}">
-              {{ request.headliner.user.profile }}
+            <a href="{% url 'redirectToProfile' request.headliner.participant.user.username 'about' %}">
+              {{ request.headliner.participant.user.profile }}
             </a>
-            {% include "request/_accepted.html" with accepted=request.headliner.request_participant.accepted %}
+            {% include "request/_accepted.html" with accepted=request.headliner.accepted %}
           </div>
           {% endif %}
           {% if request.openers %}
@@ -20,8 +20,8 @@
             <ul class="list-unstyled">
               {% for opener in request.openers %}
               <li>
-                <a href="{% url 'redirectToProfile' opener.user.username 'about' %}"> {{ opener.user.profile }}</a>
-                {% include "request/_accepted.html" with accepted=opener.request_participant.accepted %}
+                <a href="{% url 'redirectToProfile' opener.participant.user.username 'about' %}"> {{ opener.participant.user.profile }}</a>
+                {% include "request/_accepted.html" with accepted=opener.accepted %}
               </li>
               {% endfor %}
             </ul>
@@ -29,8 +29,8 @@
           {% endif %}
           <div class="venue">
             <b>venue:</b>
-            <a href="{% url 'redirectToProfile' request.venue.user.username 'about' %}">{{ request.venue.user.profile }}</a>
-            {% include "request/_accepted.html" with accepted=request.venue.request_participant.accepted %}
+            <a href="{% url 'redirectToProfile' request.venue.participant.user.username 'about' %}">{{ request.venue.participant.user.profile }}</a>
+            {% include "request/_accepted.html" with accepted=request.venue.accepted %}
           </div>
           <p>Accept by: {{ request.accept_by }}</p>
         </div>

@@ -32,21 +32,21 @@ class PrivateRequest(Request):
     def has_accepted(self, user):
         participant = get_object_or_None(Participant, user=user, thread=self.thread)
         if participant:
-            return participant.request_participant.accepted
+            return participant.request_participant.first().accepted
         else:
             return None
 
     def headliner(self):
-        return get_object_or_None(Participant, thread=self.thread, request_participant__role='h')
+        return get_object_or_None(RequestParticipant, participant__thread=self.thread, role='h')
 
     def venue(self):
-        return get_object_or_None(Participant, thread=self.thread, request_participant__role='v')
+        return get_object_or_None(RequestParticipant, participant__thread=self.thread, role='v')
 
     def openers(self):
-        return Participant.objects.filter(thread=self.thread, request_participant__role='o')
+        return RequestParticipant.objects.filter(participant__thread=self.thread, role='o')
 
 class RequestParticipant(models.Model):
-    participant = models.OneToOneField(Participant, related_name='request_participant')
+    participant = models.ForeignKey(Participant, related_name='request_participant')
     role =  models.CharField(_('role'), max_length=1, choices=ROLE_CHOICES)
     accepted = models.NullBooleanField(_('approved'), default=None)
 

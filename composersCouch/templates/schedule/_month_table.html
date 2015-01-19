@@ -37,7 +37,7 @@
                 </a>
               </div>
               {% for event in day.get_event_partials %}
-                {% ifequal filter 'events' %}
+                {% ifequal filter 'shows' %}
                   <div class="center-block cal-event">
                     <a href="{% url 'show' event.show.id %}">
                       <span class="visible-xs">{{ event.show.date.start|date:'g:i' }}</span>

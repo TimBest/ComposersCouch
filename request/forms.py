@@ -100,7 +100,7 @@ class ParticipantForm(forms.Form):
             return self.cleaned_data
 
     def save(self, thread, sender, role='o'):
-        participant = Participant(user=self.cleaned_data['user'],thread=thread)
+        participant, created = Participant.objects.get_or_create(user=self.cleaned_data['user'],thread=thread)
         participant.save()
         request_paticipant = models.RequestParticipant(participant=participant, role=role)
         if participant.user == sender:

@@ -335,8 +335,9 @@ def accept(request, accept=True):
     private_request = PrivateRequest.objects.get(id=request.POST['private_request'])
     participant = get_object_or_None(Participant,thread=private_request.thread, user=request.user)
     if participant:
-        participant.request_participant.accepted = accept
-        participant.request_participant.save()
+        for request_participant in participant.request_participant.all():
+            request_participant.accepted = accept
+            request_participant.save()
         return redirect('request_detail', thread_id=private_request.thread.id)
     return PermissionDenied
 

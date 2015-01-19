@@ -50,6 +50,8 @@ def open_message_thread(recipients, subject, template,
 
 def create_thread(participants, sender, subject, body):
     from .models import Message, Thread, Participant
+    # ensure the participants are unique
+    participants = list(set(participants))
     message = Message.objects.create(
                 body=body,
                 sender=sender,
