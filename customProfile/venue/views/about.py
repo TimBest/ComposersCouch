@@ -17,15 +17,7 @@ from photos.models import Image
 from photos.views import ImageFormMixin
 
 
-WEEKDAYS = {
-    '0': 'Monday',
-    '1': 'Tuesday',
-    '2': 'Wednesday',
-    '3': 'Thursday',
-    '4': 'Friday',
-    '5': 'Saturday',
-    '6': 'Sunday',
-}
+WEEKDAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday',]
 
 class VenueProfileAboutView(VenueProfileView):
     template_name = 'profile/venue/about.html'
@@ -33,8 +25,6 @@ class VenueProfileAboutView(VenueProfileView):
     def get_context_data(self, **kwargs):
         context = super(VenueProfileAboutView, self).get_context_data(**kwargs)
         venueProfile = context['venueProfile']
-        context['weekdays'] = WEEKDAYS
-        context['hours'] = venueProfile.hours.all()
         context['today'] = datetime.now().weekday()
         context['sound'] = venueProfile.equipment.filter(category='Sound')
         context['effects'] = venueProfile.equipment.filter(category='Effects')
@@ -115,7 +105,7 @@ class HoursView(ProfileFormMixin, FormView):
 
     def get_context_data(self, **kwargs):
         context = super(HoursView, self).get_context_data(**kwargs)
-        context['weekdays'] = WEEKDAYS
+        context['weekdayForms'] = zip(WEEKDAYS, context['form'])
         return context
 
     def get_form(self, form_class=None):

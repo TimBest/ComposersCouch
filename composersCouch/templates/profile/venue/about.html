@@ -1,5 +1,5 @@
 {% extends 'profile/venue/detail.html' %}
-{% load annoying thumbnail staticfiles %}
+{% load thumbnail staticfiles %}
 
 {% block aboutClass %}active{% endblock %}
 {% block dropdownTitle %}About{% endblock %}
@@ -28,7 +28,7 @@
             <div class="panel-body">
               {% for day in venueProfile.hours.all %}
                 <div class="row no-gutter {% ifequal today forloop.counter %}text-bold{% endifequal %}">
-                  <div class="col-xs-4 left">{{ weekdays|get_item:day.weekday }}</div>
+                  <div class="col-xs-4 left">{{ day }}</div>
                   {% if day.start and day.end %}
                     <div class="col-xs-8 right">{{ day.start }} - {{ day.end }}</div>
                   {% else %}

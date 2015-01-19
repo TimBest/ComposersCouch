@@ -50,7 +50,6 @@ class SignupView(MultipleFormsView):
         info['venue_name'] = signupForm.cleaned_data['venue_name']
         return self.create_user_profile(info)
 
-
 class SignupAuthView(SignupView):
 
     def dispatch(self, *args, **kwargs):
@@ -127,7 +126,6 @@ class VerifyProfileClaimView(TemplateView):
         }
 claim_profile_verify = VerifyProfileClaimView.as_view()
 
-
 @sensitive_post_parameters()
 @never_cache
 def claim_profile_confirm(request, uidb64=None, token=None,
@@ -168,9 +166,9 @@ def claim_profile_confirm(request, uidb64=None, token=None,
         form = None
         title = _('Password reset unsuccessful')
     context = {
-    'form': form,
-    'title': title,
-    'validlink': validlink,
+        'form': form,
+        'title': title,
+        'validlink': validlink,
     }
     if extra_context is not None:
         context.update(extra_context)
@@ -178,18 +176,15 @@ def claim_profile_confirm(request, uidb64=None, token=None,
         request.current_app = current_app
     return TemplateResponse(request, template_name, context)
 
-
 def signin(request, auth_form=SigninForm,
            template_name='accounts/signin_form.html'):
     if request.user.is_authenticated():
         return redirect(request.user.profile)
-
     response = userena_signin(request, auth_form=auth_form,
                               template_name=template_name)
-
     return response
 
-def loginredirect(request, username=None,tab='home'):
+def loginredirect(request, username=None, tab='home'):
     if username == None:
         username = request.user.username
     profile = get_object_or_404(Profile, user__username=username)

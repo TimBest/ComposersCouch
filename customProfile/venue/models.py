@@ -6,6 +6,8 @@ from contact.models import Contact
 from photos.models import Image
 
 
+WEEKDAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday',]
+
 class Hours(models.Model):
     profile = models.ForeignKey(VenueProfile,
                                 verbose_name=_("venue"),
@@ -14,6 +16,9 @@ class Hours(models.Model):
                                help_text=_("0-6 (0=Monday)"))
     start = models.TimeField(_("start"), null=True, blank=True)
     end = models.TimeField(_("end"), null=True, blank=True)
+
+    def __unicode__(self):
+        return u'{0}'.format(WEEKDAYS[int(self.weekday)])
 
 CATEGORY_CHOICES = (
     ('Sound', _('Sound')),

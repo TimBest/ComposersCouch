@@ -16,15 +16,8 @@ class BiographyForm(forms.ModelForm):
         super(BiographyForm, self).__init__(*args, **kw)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-                'biography',
-            ),
-        )
-    """def clean_biography(self):
-        biography = self.cleaned_data['biography']
-        raise ValidationError("Email already exists")
-        return biography"""
+        self.helper.layout = Layout('biography',)
+
     class Meta:
         model = VenueProfile
         widgets = {

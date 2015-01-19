@@ -1,7 +1,5 @@
 {% extends 'profile/venue/forms/about_modal.html' %}
-{% load i18n crispy_forms_tags %}
-{% load staticfiles %}
-{% load annoying %}
+{% load i18n crispy_forms_tags annoying %}
 {% crispy HoursForm HoursForm.helper %}
 
 {% block title %}{% block formTitle %}{% trans "Edit Hours" %}{% endblock %}{% endblock %}
@@ -20,9 +18,9 @@
       <label class="control-label" for='equipmentForm'>Close</label>
     </div>
   </div>
-  {% for f in form %}
-    {% with day=weekdays|get_item:forloop.counter0 %}
-      {% crispy f %}
+  {% for weekday, form in weekdayForms %}
+    {% with day=weekday %}
+      {% crispy form %}
     {% endwith %}
   {% endfor %}
 
