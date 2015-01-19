@@ -80,7 +80,9 @@ class UsernameForm(forms.ModelForm):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.fields['username'].help_text = ""
+        self.fields['email'].required = True
         self.helper.layout = Layout('email', 'username',)
+
 
     class Meta:
         model = models.User
