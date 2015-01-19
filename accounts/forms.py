@@ -99,6 +99,7 @@ class EmailForm(SignupFormOnlyEmail):
                         .format(reverse('claim_profile_verify', kwargs={'username': user.username})))))
                 )
                 raise forms.ValidationError(_(u"Profile "))
+        return email
 
 class ClaimProfileForm(SetPasswordForm):
     def __init__(self, *args, **kw):

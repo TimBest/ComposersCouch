@@ -40,9 +40,9 @@ class SignupView(MultipleFormsView):
         info = {}
         if forms.get('emailForm'):
             info['user'] = forms['emailForm'].save()
+            info['email'] = forms['emailForm'].cleaned_data
             info['password'] = forms['emailForm'].cleaned_data.get('password1')
         info['location'] = forms['zipcodeForm'].save()
-        info['email'] = forms['zipcodeForm'].cleaned_data.get('email')
         signupForm  = forms['signupForm']
         info['profile']  = signupForm.save(commit=False)
         info['first_name'] = signupForm.cleaned_data['first_name']
