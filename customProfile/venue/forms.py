@@ -38,12 +38,9 @@ class HoursForm(forms.ModelForm):
       self.fields['end'].label = False
       self.helper = FormHelper()
       self.helper.form_tag = False
-      self.helper.disable_csrf = True
       self.helper.layout = Layout(
         Div(
-          HTML (
-            "<div class='col-sm-2 left'>{{day}}</div>"
-          ),
+          HTML ("<div class='col-sm-2 left'>{{ day }}</div>"),
           Div('start',css_class='col-sm-5 center',),
           Div('end',css_class='col-sm-5 right',),
           css_class='row no-gutter',
@@ -52,7 +49,7 @@ class HoursForm(forms.ModelForm):
 
     class Meta:
         model = models.Hours
-        fields = ('start','end',)
+        fields = ('id','start','end',)
 
 class EquipmentForm(forms.ModelForm):
     remove = forms.BooleanField(required=False)

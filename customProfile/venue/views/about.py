@@ -17,8 +17,6 @@ from photos.models import Image
 from photos.views import ImageFormMixin
 
 
-WEEKDAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday',]
-
 class VenueProfileAboutView(VenueProfileView):
     template_name = 'profile/venue/about.html'
 
@@ -102,10 +100,11 @@ class HoursView(ProfileFormMixin, FormView):
     model = models.Hours
     form_class = forms.HoursForm
     success_url = 'venue:about'
+    weekdays = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday',]
 
     def get_context_data(self, **kwargs):
         context = super(HoursView, self).get_context_data(**kwargs)
-        context['weekdayForms'] = zip(WEEKDAYS, context['form'])
+        context['forms'] = zip(self.weekdays, context['form'])
         return context
 
     def get_form(self, form_class=None):
