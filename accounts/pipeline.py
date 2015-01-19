@@ -106,9 +106,12 @@ def create_profile(user, profile_type, location, first_name=None, last_name=None
 
 def get_username(username):
     username = username.replace (" ", "_")
-    username = slugify(username)
+    username = slugify(username)[:30]
     try:
         User.objects.get(username=username)
-        return get_username(username+'_'+random.choice(string.letters))
+        if username.length == 30:
+            username = random.choice(string.letters+string.digits)
+        else:
+            return get_username(username+random.choice(string.letters+string.digits))
     except User.DoesNotExist:
         return username;
