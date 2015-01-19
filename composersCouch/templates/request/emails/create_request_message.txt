@@ -9,7 +9,7 @@ With:
 
 At: {{ request.venue.user.profile }} ({{ protocol }}://{{ domain }}{{ request.venue.user.profile.get_absolute_url }})
 
-Accept by: {{ request.accept_by }}
+Application deadline: {{ request.accept_by }}
 
 {{ request.thread.latest_msg.body }}
 

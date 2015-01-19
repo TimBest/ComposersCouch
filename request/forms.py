@@ -135,7 +135,7 @@ class ArtistParticipantForm(ParticipantForm):
 
 class RequestForm(ModelForm):
     date_format = '%m/%d/%Y'
-    accept_by = forms.DateField(label=_("Accept by"), required=False,
+    accept_by = forms.DateField(label=_("Application deadline"), required=False,
                                 widget=forms.DateInput(format=date_format))
 
     def __init__(self, *args, **kwargs):

@@ -16,7 +16,7 @@
           <a class="text-black" href="{% url 'redirectToProfile' publicRequest.requester.username 'about' %}">
             <h3>{{ publicRequest.requester.profile }}</h3>
           </a>
-          <div>Accept By: {{ publicRequest.accept_by }}</div>
+          <div>Application deadline: {{ publicRequest.accept_by }}</div>
           <div>At: {{ publicRequest.zip_code }}</div>
           {% if publicRequest.applicants %}
           <div>Looking for {{ publicRequest.applicants.left }} bands</div>
