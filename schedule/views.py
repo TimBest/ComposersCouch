@@ -50,7 +50,7 @@ class CalendarView(TemplateView):
         context = super(CalendarView, self).get_context_data(*args, **kwargs)
         context['calendar'] = self.request.user.calendar
         context['date'] = coerce_date_dict(self.request.GET)
-        context['filter'] = filter = kwargs.get('filter', 'events')
+        context['filter'] = filter = kwargs.get('filter', 'shows')
         if filter == 'requests':
             event_list = PrivateRequest.objects.all()
         else:
