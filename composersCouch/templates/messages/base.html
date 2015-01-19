@@ -45,8 +45,8 @@
     <form action="{% url 'messages_batch_update' %}" method="post">{% csrf_token %}
       <div class="btn-group request-folder-actions">
         {% block markAsRead %}
-        <button type="submit" name="action" value="read" class="btn btn-default">read</button>
-        <button type="submit" name="action" value="unread" class="btn btn-default">unread</button>
+        <button type="submit" name="action" value="read" class="btn btn-default">mark as read</button>
+        <button type="submit" name="action" value="unread" class="btn btn-default">mark as unread</button>
         {% endblock %}
         {% block delete %}
         <button type="submit" name="action" value="delete" class="btn btn-default">
