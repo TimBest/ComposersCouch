@@ -9,7 +9,7 @@
         <span class="frame-helper"></span>
         <img class="image-center" id="logo" alt="Composers Couch" src="{% static 'img/logo.png' %}">
       </div>
-        <p class="text-center">The online booking agency with a slogan</p>
+      <p class="text-center">Booking made easy</p>
     </div>
   </div>
 {% endblock %}
@@ -33,7 +33,7 @@
           <p>Find shows in your area, follow your favorite artists</p>
         </div>
       </div>
-      <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-primary">Sign up slogan here</a>
+      <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-primary">Get Started For Free</a>
     </div>
     <div class="jumbotron requests">
       <div class="row">
@@ -57,17 +57,6 @@
         </div>
       </div>
     </div>
-    <div class="jumbotron updates">
-      <div class="row">
-        <div class="col-sm-6">
-          <h2>Updates</h2>
-          <p>Find out what you favorite venues and artists are up to.</p>
-          <a href="{% url 'updates' 'all' %}" class="btn btn-transparent">
-            <b> Updates</b> <span class="fa fa-chevron-right"></span>
-          </a>
-        </div>
-      </div>
-    </div>
     <div class="jumbotron artists-venues text-center">
       <div class="row">
         <div class="col-sm-6">
@@ -86,5 +75,17 @@
         </div>
       </div>
     </div>
+    <div class="jumbotron updates">
+      <div class="row">
+        <div class="col-sm-6">
+          <h2>Updates</h2>
+          <p>Find out what you favorite venues and artists are up to.</p>
+          <a href="{% url 'updates' 'all' %}" class="btn btn-transparent">
+            <b> Updates</b> <span class="fa fa-chevron-right"></span>
+          </a>
+        </div>
+      </div>
+    </div>
+
   </div>
 {% endblock %}

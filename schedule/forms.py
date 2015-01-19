@@ -120,7 +120,7 @@ class ShowInfoForm(ModelForm):
                 if o.profile.user == self.user:
                     isParticipant = True
         if not isParticipant:
-            raise forms.ValidationError(_(u"You must be part of this request"))
+            raise forms.ValidationError(_(u"You must be a participant in this show"))
         if not self.cleaned_data.get('title') and not (self.cleaned_data.get('headliner') or self.cleaned_data.get('headliner_text')):
             raise forms.ValidationError(_(u"A Title or a Headliner is required"))
         if not self.cleaned_data.get('venue') and not self.cleaned_data.get('venue_text'):
