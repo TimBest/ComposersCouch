@@ -1,7 +1,5 @@
 {% extends 'profile/venue/forms/about_modal.html' %}
 {% load i18n crispy_forms_tags %}
-{% load staticfiles %}
-{% load annoying %}
 {% crispy HoursForm HoursForm.helper %}
 
 {% block title %}{% block formTitle %}{% trans "Edit Hours" %}{% endblock %}{% endblock %}
