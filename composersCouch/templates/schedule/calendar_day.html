@@ -15,7 +15,7 @@
     {% ifequal filter 'events' %}
       {% include "schedule/_show.html" with show=event.show user_accept=event.approved %}
     {% else %}
-      {% include "request/_private_request.html" with request=event %}
+      {% include "request/_private_request.html" with request=event.thread.request %}
     {% endifequal %}
   {% empty %}
     <p class="text-left">No {{ filter }} scheduled for {{ date|date:"SHORT_DATE_FORMAT" }}</p>

@@ -25,7 +25,7 @@
       <div class="week">
         <div class="cal-row-fluid row-eq-height cal-day-row">
           <div id="week-link">
-            <a href="{% url 'calendar' 'week' %}{% querystring_for_date week.start %}">Week</a>
+            <a href="{% url 'calendar' 'week' filter %}{% querystring_for_date week.start %}">Week</a>
           </div>
           {% for day in week.get_days %}
             <div id="expand-day" class="cal-cell1 cal-cell day-cell expand-day
