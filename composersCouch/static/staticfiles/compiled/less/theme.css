@@ -8245,7 +8245,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   margin-bottom: 5px;
   border-bottom: 1px solid #cbcfd3;
 }
-#album-form #div_id_tracks #id_tracks {
+#id_tracks {
   border: 0px;
   box-shadow: none;
   height: 100%;

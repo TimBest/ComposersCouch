@@ -18,14 +18,15 @@ from tracks.models import Album, Track, Media
 
 
 class TracksForm(ModelForm):
-    tracks = MultiFileField(required=False, max_num=15, min_num=0, max_file_size=settings.MAX_AUDIO_UPLOAD_SIZE)
+    tracks = MultiFileField(required=False, max_num=15, min_num=0,
+                            max_file_size=settings.MAX_AUDIO_UPLOAD_SIZE,
+                            help_text="Currently supports .mp3, .ogv, .m4v, and .oga",)
+
     def __init__(self, *args, **kw):
         super(TracksForm, self).__init__(*args, **kw)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.layout = Layout(
-          'tracks',
-        )
+        self.helper.layout = Layout('tracks',)
 
     class Meta:
         model = Album
@@ -65,6 +66,7 @@ class AlbumForm(TracksForm):
         super(AlbumForm, self).__init__(*args, **kw)
         self.helper = FormHelper()
         self.helper.form_tag = False
+        self.fields['tracks'].help_text = "Currently supports .mp3, .ogv, .m4v, and .oga"
         self.helper.layout = Layout(
           Div(
             Div('title',css_class='col-sm-6 left',),
@@ -86,6 +88,7 @@ class AlbumForm(TracksForm):
 class AlbumAudioForm(ModelForm):
     title = forms.CharField(max_length=128)
     audio = forms.FileField(required=False)
+
     def __init__(self, *args, **kwargs):
         super(AlbumAudioForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
@@ -119,6 +122,7 @@ class AlbumAudioForm(ModelForm):
 class AlbumVideoForm(ModelForm):
     video = EmbedVideoFormField(required=False)
     title = forms.CharField(max_length=128)
+
     def __init__(self, *args, **kwargs):
         super(AlbumVideoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
