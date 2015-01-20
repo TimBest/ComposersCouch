@@ -1,4 +1,3 @@
-import pytz
 from django import forms
 from django.contrib.auth.models import User
 from django.forms.formsets import BaseFormSet
@@ -11,12 +10,9 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Layout
 
 from . import models
-from accounts.models import MusicianProfile
 from accounts.utils import create_user_profile
 from annoying.functions import get_object_or_None
-from contact.models import Zipcode
-from schedule.forms import DateForm, UserSelectForm
-from schedule.models import DateRange
+from schedule.forms import DateForm
 from threaded_messages.models import Participant
 
 
@@ -153,9 +149,7 @@ class RequestForm(ModelForm):
         super(RequestForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.layout = Layout(
-            'accept_by',
-        )
+        self.helper.layout = Layout('accept_by',)
 
     class Meta:
         model = models.PrivateRequest
@@ -173,11 +167,7 @@ class PublicRequestForm(RequestForm):
       super(PublicRequestForm, self).__init__(*args, **kw)
       self.helper = FormHelper()
       self.helper.form_tag = False
-      self.helper.layout = Layout(
-          'zip_code',
-          'details',
-          'accept_by',
-      )
+      self.helper.layout = Layout('zip_code','details','accept_by',)
 
     class Meta:
         model = models.PublicRequest
