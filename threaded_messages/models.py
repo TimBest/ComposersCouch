@@ -215,6 +215,5 @@ def cached_inbox_count_for(user):
             INBOX_COUNT_CACHE_TIME)
         return count
 
-
 def inbox_count_for(user):
     return Participant.objects.inbox_for(user, read=False).count()

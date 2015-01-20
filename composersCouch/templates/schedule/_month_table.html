@@ -62,29 +62,31 @@
                     </a></li>
                   </div>
                 {% else %}
-                  <div class="center-block cal-event">
-                    <a href="{% url 'request_detail' event.thread.id %}">
-                      <span class="visible-xs">{{ event.show.date.start|date:'g:i' }}</span>
-                      <span class="hidden-xs">
-                        <b>{{ event.date.start|date:'fA' }}:</b>
+                  {% with request=event.thread.request %}
+                    <div class="center-block cal-event">
+                      <a href="{% url 'request_detail' request.thread.id %}">
+                        <span class="visible-xs">{{ request.date.start|date:'g:i' }}</span>
+                        <span class="hidden-xs">
+                          <b>{{ request.date.start|date:'fA' }}:</b>
+                          {% if user.profile.profile_type == 'v' %}
+                            {{ request.headliner.participant.user.profile }}
+                          {% else %}
+                            {{ request.venue.participant.user.profile }}
+                          {% endif %}
+                        </span>
+                      </a>
+                    </div>
+                    <div class="hidden">
+                      <li class="events"><a class="show-title" href="{% url 'request_detail' request.thread.id %}">
+                        <b>{{ request.date.start|date:'fA' }}:</b>
                         {% if user.profile.profile_type == 'v' %}
-                          {{ event.headliner.profile }}
+                          {{ request.headliner.participant.user.profile }}
                         {% else %}
-                          {{ event.venue.profile }}
+                          {{ request.venue.participant.user.profile }}
                         {% endif %}
-                      </span>
-                    </a>
-                  </div>
-                  <div class="hidden">
-                    <li class="events"><a class="show-title" href="{% url 'request_detail' event.thread.id %}">
-                      <b>{{ event.date.start|date:'fA' }}:</b>
-                      {% if user.profile.profile_type == 'v' %}
-                        {{ event.headliner.profile }}
-                      {% else %}
-                        {{ event.venue.profile }}
-                      {% endif %}
-                    </a></li>
-                  </div>
+                      </a></li>
+                    </div>
+                  {% endwith %}
                 {% endifequal %}
               {% endfor %}
               <div class="links pull-right">

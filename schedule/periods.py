@@ -46,7 +46,7 @@ class Period(object):
             if event.show.date.start > self.end or event.show.date.end < self.start:
                 return None
         else:
-            if event.date.start > self.end or event.date.end < self.start:
+            if event.thread.request.date.start > self.end or event.thread.request.date.end < self.start:
                 return None
         return event
 

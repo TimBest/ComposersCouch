@@ -14,6 +14,7 @@ from django.views.generic import TemplateView
 
 from annoying.functions import get_object_or_None
 from composersCouch.views import MultipleModelFormsView
+from threaded_messages.models import Participant
 from threaded_messages.views import MessageView
 from threaded_messages.utils import create_thread
 from photos.models import Image
@@ -52,7 +53,7 @@ class CalendarView(TemplateView):
         context['date'] = coerce_date_dict(self.request.GET)
         context['filter'] = filter = kwargs.get('filter', 'shows')
         if filter == 'requests':
-            event_list = PrivateRequest.objects.all()
+            event_list = Participant.objects.filter(user=self.request.user, thread__request__isnull=False)
         else:
             event_list = self.request.user.calendar.events.filter(approved=True)
         context['period'] = self.period(event_list, context['date'])
