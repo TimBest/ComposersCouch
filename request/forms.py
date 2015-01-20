@@ -1,8 +1,9 @@
+import pytz
 from django import forms
 from django.contrib.auth.models import User
 from django.forms.formsets import BaseFormSet
 from django.utils.functional import cached_property
-from django.utils.timezone import now
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from autocomplete_light import ModelForm, ChoiceWidget
@@ -37,10 +38,8 @@ class DateForm(DateForm):
         if self.cleaned_data['end'] and self.cleaned_data['start']:
             if self.cleaned_data['end'] < self.cleaned_data['start']:
                 raise forms.ValidationError(_(u"The end time must be later than start time."))
-        print self.cleaned_data['start']
-        print now()
-        if self.cleaned_data['start'] < now():
-            raise forms.ValidationError(_(u"The start time must be in the future"))
+        if self.cleaned_data['start'].date() <= timezone.now().date():
+            raise forms.ValidationError(_(u"The start time must after today"))
         return self.cleaned_data
 
 class MessageForm(forms.Form):
@@ -115,8 +114,8 @@ class ParticipantForm(forms.Form):
         participant.save()
         request_paticipant = models.RequestParticipant(participant=participant, role=role)
         if participant.user == sender:
-            participant.read_at = now()
-            participant.replied_at = now()
+            participant.read_at = timezone.now()
+            participant.replied_at = timezone.now()
             participant.save()
             request_paticipant.accepted = True
         request_paticipant.save()
@@ -164,7 +163,7 @@ class RequestForm(ModelForm):
 
     def clean_accept_by(self):
         accept_by = self.cleaned_data['accept_by']
-        if accept_by < now().date():
+        if accept_by < timezone.now().date():
             raise forms.ValidationError(_(u"There must be time to accept the request"))
         return accept_by
 
