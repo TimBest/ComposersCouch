@@ -31,7 +31,17 @@ class DateForm(DateForm):
               Div('end',css_class='col-xs-6 right',css_id='end-div',),
               css_class='row no-gutter',
             ),
-      )
+        )
+
+    def clean(self):
+        if self.cleaned_data['end'] and self.cleaned_data['start']:
+            if self.cleaned_data['end'] < self.cleaned_data['start']:
+                raise forms.ValidationError(_(u"The end time must be later than start time."))
+        print self.cleaned_data['start']
+        print now()
+        if self.cleaned_data['start'] < now():
+            raise forms.ValidationError(_(u"The start time must be in the future"))
+        return self.cleaned_data
 
 class MessageForm(forms.Form):
     body = forms.CharField(label=_("Details"),
@@ -67,6 +77,7 @@ class ParticipantForm(forms.Form):
                 widget=ChoiceWidget('UserAutocomplete',))
     email = forms.EmailField(required=False)
     name = forms.CharField(max_length=64, required=False)
+
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
         self.profile_type = 'v'
@@ -135,7 +146,7 @@ class ArtistParticipantForm(ParticipantForm):
 
 class RequestForm(ModelForm):
     date_format = '%m/%d/%Y'
-    accept_by = forms.DateField(label=_("Application deadline"), required=False,
+    accept_by = forms.DateField(label=_("Application deadline"),
                                 widget=forms.DateInput(format=date_format))
 
     def __init__(self, *args, **kwargs):
@@ -150,6 +161,12 @@ class RequestForm(ModelForm):
     class Meta:
         model = models.PrivateRequest
         fields = ('accept_by',)
+
+    def clean_accept_by(self):
+        accept_by = self.cleaned_data['accept_by']
+        if accept_by < now().date():
+            raise forms.ValidationError(_(u"There must be time to accept the request"))
+        return accept_by
 
 class PublicRequestForm(RequestForm):
 
