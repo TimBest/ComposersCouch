@@ -90,7 +90,7 @@
               <div class="links pull-right">
                 {% with date=day.start  %}
                   <div>
-                    <a class="btn btn-primary btn-sm" href="{% url 'calendar_create_event' %}?year={{date.year}}&month={{date.month}}&day={{date.day}}&hour=19">
+                    <a class="btn btn-primary btn-sm" href="{% url 'calendar_create_event' %}{% querystring_for_date date %}&hour=19&next={% url 'calendar' period_name 'shows' %}"
                       <span>Create Event</span>
                     </a>
                   </div>
