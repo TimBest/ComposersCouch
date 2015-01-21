@@ -89,13 +89,7 @@ class ShowInfoForm(ModelForm):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.fields['headliner'].required = False
-        self.fields['headliner'].label = ""
-        self.fields['headliner_select'].label = "Headliner"
-        self.fields['openers'].label = ""
         self.fields['openers'].help_text = "Separate artists by commas"
-        self.fields['openers_select'].label = "Openers"
-        self.fields['venue'].label = ""
-        self.fields['venue_select'].label = "Venue"
         self.helper.layout = Layout('title', 'headliner_select', 'headliner',
             'openers_select', 'openers', 'venue_select', 'venue','description',)
 
@@ -129,6 +123,6 @@ class ShowInfoForm(ModelForm):
         widgets = {
             'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
             'headliner' : autocomplete_light.TextWidget('MusicianProfileAutocomplete'),
-            'venue' : autocomplete_light.TextWidget('MusicianProfileAutocomplete'),
             'openers' : autocomplete_light.TextWidget('MusicianProfileAutocomplete'),
+            'venue' : autocomplete_light.TextWidget('UserAutocomplete'),
         }

@@ -1,7 +1,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $("#{{ id }}_select-autocomplete").hide();
+    $("#div_{{ id }}_select").hide();
   });
   $("#div_{{ id }}").on("click", "{{ choice_class }}", function() {
     value = $(this).attr("data-value");
@@ -10,5 +10,6 @@
     } else {
       $("#{{ id }}_select option").replaceWith("<option value='"+value+"' selected='selected'>"+value+"</option>");
     }
+    $("#div_{{ id }} .controls").prepend($(this).html());
   });
 </script>
