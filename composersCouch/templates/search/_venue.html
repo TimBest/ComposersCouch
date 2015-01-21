@@ -1,4 +1,4 @@
-{% load i18n staticfiles %}
+{% load i18n staticfiles feed %}
 
 <div class="venue">
   <div class="panel panel-default">
@@ -13,9 +13,21 @@
           </div>
         </div>
         <div class="col-sm-6">
-          <h3><a class="text-black" href="{% url 'venue:home' venue.profile.user.username %}">
-            {{ venue.name }}
-          </a></h3>
+          <h3><a class="text-black" href="{% url 'venue:home' venue.profile.user.username %}">{{ venue.name }}</a></h3>
+          <div class="btn-group">
+            <form method="POST" action="{% url 'follow' %}">
+              {% csrf_token %}
+              <input type="hidden" name="target" value="{{ venue.profile.user.id }}">
+              <button class="btn btn-primary {% is_following request.user venue.profile.user %}" type="submit">
+                <span class="follow">Follow</span>
+                <span class="following">Following</span>
+                <span class="unfollow">Unfollow</span>
+              </button>
+            </form>
+          </div>
+          <div class="btn-group">
+            <a href="{% url 'request_write' venue.profile.user.username %}" class="btn btn-default">{% trans "Request" %}</a>
+          </div>
           {% if venue.biography %}
             <p>{{ venue.biography }}</p>
           {% endif %}
