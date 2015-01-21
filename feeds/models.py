@@ -22,14 +22,8 @@ class Post(models.Model):
     def create_activity(self):
         from stream_framework.activity import Activity
         from feeds.verbs import Post as PostVerb
-        activity = Activity(
-            self.user,
-            PostVerb,
-            self.id,
-            self.target,
-            time=make_naive(self.created_at, pytz.utc),
-            #extra_context=dict(item_id=self.item_id)
-        )
+        activity = Activity(self.user, PostVerb, self.id, self.target,
+                            time=make_naive(self.created_at, pytz.utc),)
         return activity
 
 class Follow(models.Model):

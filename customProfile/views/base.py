@@ -32,9 +32,7 @@ class ProfileMixin(object):
             context['isEditable'] = 'visible'
         else:
             context['isEditable'] = 'hidden'
-        follows = get_object_or_None(Follow, user=self.request.user.id,
-                                     target=self.user.id)
-        if follows:
+        if get_object_or_None(Follow, user=self.request.user.id, target=self.user.id):
             context['isFollowing'] = 'isFollowing'
         return context
 

@@ -8052,41 +8052,6 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .detail .nametag .nametagInfo form .btn {
   width: 6em;
 }
-.detail .nametag .nametagInfo form .following {
-  display: none;
-}
-.detail .nametag .nametagInfo form .unfollow {
-  display: none;
-}
-.detail .nametag .nametagInfo form .isFollowing:hover,
-.detail .nametag .nametagInfo form .isFollowing:focus,
-.detail .nametag .nametagInfo form .isFollowing:active,
-.detail .nametag .nametagInfo form .isFollowing.active {
-  color: #a62421;
-  background-color: #fbfcfc;
-  border-color: #a62421;
-}
-.detail .nametag .nametagInfo form .isFollowing:hover .following,
-.detail .nametag .nametagInfo form .isFollowing:focus .following,
-.detail .nametag .nametagInfo form .isFollowing:active .following,
-.detail .nametag .nametagInfo form .isFollowing.active .following {
-  display: none;
-}
-.detail .nametag .nametagInfo form .isFollowing:hover .unfollow,
-.detail .nametag .nametagInfo form .isFollowing:focus .unfollow,
-.detail .nametag .nametagInfo form .isFollowing:active .unfollow,
-.detail .nametag .nametagInfo form .isFollowing.active .unfollow {
-  display: Inline;
-}
-.detail .nametag .nametagInfo form .isFollowing .follow {
-  display: none;
-}
-.detail .nametag .nametagInfo form .isFollowing .following {
-  display: Inline;
-}
-.detail .nametag .nametagInfo form .isFollowing .unfollow {
-  display: none;
-}
 .detail .nametag .nametagInfo .edit-profile {
   padding-top: 5px;
 }
@@ -8168,6 +8133,40 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .detail .add-dropdown {
   margin-bottom: 10px;
+}
+.following,
+.unfollow {
+  display: none;
+}
+.isFollowing {
+  width: 6em;
+}
+.isFollowing:hover,
+.isFollowing:focus,
+.isFollowing:active,
+.isFollowing.active {
+  color: #a62421;
+  background-color: #fbfcfc;
+  border-color: #a62421;
+}
+.isFollowing:hover .following,
+.isFollowing:focus .following,
+.isFollowing:active .following,
+.isFollowing.active .following {
+  display: none;
+}
+.isFollowing:hover .unfollow,
+.isFollowing:focus .unfollow,
+.isFollowing:active .unfollow,
+.isFollowing.active .unfollow {
+  display: Inline;
+}
+.isFollowing .follow,
+.isFollowing .unfollow {
+  display: none;
+}
+.isFollowing .following {
+  display: Inline;
 }
 .photos .upload {
   float: right;

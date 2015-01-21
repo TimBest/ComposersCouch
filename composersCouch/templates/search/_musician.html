@@ -1,4 +1,4 @@
-{% load i18n staticfiles %}
+{% load i18n staticfiles feed %}
 
 <div class="musician">
   <div class="panel panel-default">
@@ -16,6 +16,20 @@
           <h3><a class="text-black" href="{% url 'musician:home' artist.profile.user.username %}">
             {{ artist.name }}
           </a></h3>
+          <div class="btn-group">
+            <form method="POST" action="{% url 'follow' %}">
+              {% csrf_token %}
+              <input type="hidden" name="target" value="{{ artist.profile.user.id }}">
+              <button class="btn btn-primary {% is_following request.user artist.profile.user %}" type="submit">
+                <span class="follow">Follow</span>
+                <span class="following">Following</span>
+                <span class="unfollow">Unfollow</span>
+              </button>
+            </form>
+          </div>
+          <div class="btn-group">
+            <a href="{% url 'request_write' artist.profile.user.username %}" class="btn btn-default">{% trans "Request" %}</a>
+          </div>
           {% if artist.biography %}
             <p>{{ artist.biography }}</p>
           {% endif %}

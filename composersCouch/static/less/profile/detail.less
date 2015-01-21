@@ -33,37 +33,6 @@
         .btn {
           width:6em;
         }
-        .following {
-          display:none;
-        }
-        .unfollow {
-          display:none;
-        }
-        .isFollowing{
-          &:hover,
-          &:focus,
-          &:active,
-          &.active {
-            color: @btn-danger-bg;
-            background-color: @white;
-            border-color: @btn-danger-bg;
-            .following {
-              display:none;
-            }
-            .unfollow {
-              display:Inline;
-            }
-          }
-          .follow {
-            display:none;
-          }
-          .following {
-            display:Inline;
-          }
-          .unfollow {
-            display:none;
-          }
-        }
       }
       .edit-profile {
         padding-top:5px;
@@ -146,5 +115,30 @@
   }
   .add-dropdown {
     margin-bottom: 10px;
+  }
+}
+
+.following, .unfollow {
+  display:none;
+}
+.isFollowing{
+  width:6em;
+  &:hover, &:focus,
+  &:active, &.active {
+    color: @btn-danger-bg;
+    background-color: @white;
+    border-color: @btn-danger-bg;
+    .following {
+      display:none;
+    }
+    .unfollow {
+      display:Inline;
+    }
+  }
+  .follow, .unfollow {
+    display:none;
+  }
+  .following {
+    display:Inline;
   }
 }
