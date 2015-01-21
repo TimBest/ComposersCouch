@@ -102,13 +102,20 @@
         </br>
         <div class="row">
           <div class=col-xs-4>
-            <p><a class="text-black" href="{% url 'team' %}">The Team</a></p>
+            <ul class="list-unstyled">
+              <li><a class="text-black" href="{% url 'team' %}">The Team</a></li>
+              <li><a class="text-black" href="{% url 'about' %}">About</a></li>
+            </ul>
           </div>
           <div class=col-xs-4>
-            <p><a class="text-black" href="{% url 'colors' %}">Color Scheme</a></p>
+            <ul class="list-unstyled">
+              <li><a class="text-black" href="{% url 'colors' %}">Color Scheme</a></li>
+            </ul>
           </div>
           <div class=col-xs-4>
-            <p><a class="text-black" href="{% url 'credit' %}">Credit</a></p>
+            <ul class="list-unstyled">
+              <li><a class="text-black" href="{% url 'credit' %}">Credit</a></li>
+            </ul>
           </div>
         </div>
       </div>
