@@ -21,18 +21,13 @@ class DateForm(ModelForm):
     date_format = '%m/%d/%Y'
     time_format = '%I:%M %p'
     start = forms.SplitDateTimeField(label=_("Start"),
-                                    input_date_formats=[date_format],
-                                    input_time_formats=[time_format],
-                                    widget=forms.SplitDateTimeWidget(
-                                        time_format=time_format,
-                                        date_format=date_format))
-    end = forms.SplitDateTimeField(label=_("End"),
-                                  required=False,
-                                  input_date_formats=[date_format],
-                                  input_time_formats=[time_format],
-                                  widget=forms.SplitDateTimeWidget(
-                                      time_format=time_format,
-                                      date_format=date_format))
+            input_date_formats=[date_format], input_time_formats=[time_format],
+            widget=forms.SplitDateTimeWidget(time_format=time_format,
+                                             date_format=date_format))
+    end = forms.SplitDateTimeField(label=_("End"), required=False,
+          input_date_formats=[date_format], input_time_formats=[time_format],
+          widget=forms.SplitDateTimeWidget(time_format=time_format,
+                                           date_format=date_format))
     def __init__(self, *args, **kwargs):
         kwargs.pop('user', None)
         super(DateForm, self).__init__(*args, **kwargs)
@@ -93,17 +88,16 @@ class ShowInfoForm(ModelForm):
         super(ShowInfoForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.layout = Layout(
-            'title',
-            'headliner_select',
-            'headliner',
-            'openers_select',
-            'openers',
-            'venue_select',
-            'venue',
-            'description',
-        )
         self.fields['headliner'].required = False
+        self.fields['headliner'].label = ""
+        self.fields['headliner_select'].label = "Headliner"
+        self.fields['openers'].label = ""
+        self.fields['openers'].help_text = "Separate artists by commas"
+        self.fields['openers_select'].label = "Openers"
+        self.fields['venue'].label = ""
+        self.fields['venue_select'].label = "Venue"
+        self.helper.layout = Layout('title', 'headliner_select', 'headliner',
+            'openers_select', 'openers', 'venue_select', 'venue','description',)
 
     def clean(self):
         print self.cleaned_data
@@ -122,17 +116,19 @@ class ShowInfoForm(ModelForm):
                     isParticipant = True
         if not isParticipant:
             raise forms.ValidationError(_(u"You must be a participant in this show"))
-        if not self.cleaned_data.get('title') and not (self.cleaned_data.get('headliner') or self.cleaned_data.get('headliner_select')):
+        if not self.cleaned_data.get('title') and not self.cleaned_data.get('headliner'):
             raise forms.ValidationError(_(u"A Title or a Headliner is required"))
-        if not self.cleaned_data.get('venue') and not self.cleaned_data.get('venue_select'):
+        if not self.cleaned_data.get('venue'):
             raise forms.ValidationError(_(u"A Venue is required"))
         return self.cleaned_data
 
     class Meta:
         model = Info
-        fields = ('title','headliner','openers','venue','headliner_select','openers_select','venue_select','description',)
+        fields = ('title','headliner','openers','venue','headliner_select',
+                  'openers_select','venue_select','description',)
         widgets = {
-          'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
-          'headliner' : autocomplete_light.TextWidget('MusicianProfileAutocomplete'),
-          'venue' : autocomplete_light.TextWidget('MusicianProfileAutocomplete'),
+            'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
+            'headliner' : autocomplete_light.TextWidget('MusicianProfileAutocomplete'),
+            'venue' : autocomplete_light.TextWidget('MusicianProfileAutocomplete'),
+            'openers' : autocomplete_light.TextWidget('MusicianProfileAutocomplete'),
         }
