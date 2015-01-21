@@ -130,11 +130,10 @@ def follow(request):
     '''
     data = request.POST.copy()
     form = FollowForm(data=data)
-    user = request.user
-    target = User.objects.get(id=request.POST['target'])
 
     if form.is_valid():
-        follow = form.save(user=user,target=target)
+        target = User.objects.get(id=request.POST['target'])
+        form.save(user=request.user,target=target)
     # TODO: use ?next=sdngjk instead
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))
 
@@ -146,10 +145,9 @@ def remove_post(request):
     '''
     data = request.POST.copy()
     form = RemovePostForm(data=data)
-    user = request.user
-    post = Post.objects.get(id=request.POST['post'])
 
     if form.is_valid():
-        follow = form.save(user=user, post=post)
+        post = Post.objects.get(id=request.POST['post'])
+        form.save(user=request.user, post=post)
     # TODO: use ?next=sdngjk instead
     return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

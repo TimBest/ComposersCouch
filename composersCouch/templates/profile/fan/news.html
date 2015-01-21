@@ -20,19 +20,5 @@
   {{ block.super }}
   {% progress_bar_media %}
   {% include "utils/_image_script.html" with selectorID='#id_photo' uploadDiv='#div_id_image' selectDiv='#div_id_photo' page=request.GET.page images=images %}
-  <script type="text/javascript">
-    $(document).ready(function() {
-      $("#post-form").hide();
-      $("#attach-photo-form").hide();
-      $("#show-post-form").unbind('click');
-      $("#show-post-form").click(function() {
-        $("#post-form").show();
-        $("#show-post-form").hide();
-      });
-      $("#attach-photo").unbind('click');
-      $("#attach-photo").click(function() {
-        $("#attach-photo-form").toggle();
-      });
-    });
-  </script>
+  {% include "utils/_post_script.html" %}
 {% endblock %}
