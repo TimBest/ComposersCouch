@@ -27,7 +27,7 @@
             </div>
             <div class="panel-body">
               {% for day in venueProfile.hours.all %}
-                <div class="row no-gutter {% ifequal today forloop.counter %}text-bold{% endifequal %}">
+                <div class="row no-gutter {% ifequal today forloop.counter0 %}text-bold{% endifequal %}">
                   <div class="col-xs-4 left">{{ day }}</div>
                   {% if day.start and day.end %}
                     <div class="col-xs-8 right">{{ day.start }} - {{ day.end }}</div>

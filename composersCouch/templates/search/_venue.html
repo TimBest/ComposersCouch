@@ -28,9 +28,7 @@
           <div class="btn-group">
             <a href="{% url 'request_write' venue.profile.user.username %}" class="btn btn-default">{% trans "Request" %}</a>
           </div>
-          {% if venue.biography %}
-            <p>{{ venue.biography }}</p>
-          {% endif %}
+          {% if venue.biography %}<p>{{ venue.biography }}</p>{% endif %}
         </div>
         <div class="col-sm-3">
           {% include "profile/_contact.html" with contact_info=venue.profile.contact_info %}
