@@ -110,7 +110,7 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
       'show_info_form' : ShowInfoForm,
       'poster_form': PosterForm,
     }
-    template_name='schedule/create_event.html'
+    template_name='schedule/forms/create_event.html'
     success_url = 'calendar'
     images_on_page = 6
 
@@ -130,9 +130,11 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
         show_data = {}
         date_data = {"start": coerce_date_dict(self.request.GET),}
         if self.request.user.profile.profile_type == "m":
-            show_data['headliner'] = self.request.user.profile.musicianProfile
+            show_data['headliner'] = self.request.user.profile
+            show_data['headliner_select'] = self.request.user.profile.musicianProfile
         else:
-            show_data['venue'] = self.request.user
+            show_data['venue'] = self.request.user.profile
+            show_data['venue_select'] = self.request.user
         return {'poster_form':{},'date_form':date_data,'event_form':{},'show_info_form':show_data,}
 
     def forms_valid(self, forms):
@@ -261,9 +263,11 @@ class RequestToEventFormView(EventFormView):
         for artist in artists:
             openers.append(artist.participant.user)
         show_data = {
-            "headliner": headliner.participant.user if headliner else None,
+            "headliner": headliner.participant.user.profile if headliner else None,
+            "headliner_select": headliner.participant.user if headliner else None,
             "openers"  : openers,
-            "venue": venue.participant.user if venue else None,
+            "venue": venue.participant.user.profile if venue else None,
+            "venue_select": venue.participant.user if venue else None,
         }
         return {'poster_form':{},'date_form':{},'event_form':{},'show_info_form':show_data,}
 

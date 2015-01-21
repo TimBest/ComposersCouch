@@ -95,17 +95,18 @@ class ShowInfoForm(ModelForm):
         self.helper.form_tag = False
         self.helper.layout = Layout(
             'title',
+            'headliner_select',
             'headliner',
-            'headliner_text',
+            'openers_select',
             'openers',
-            'openers_text',
+            'venue_select',
             'venue',
-            'venue_text',
             'description',
         )
         self.fields['headliner'].required = False
 
     def clean(self):
+        print self.cleaned_data
         # user must be a participant in the evnet or request
         isParticipant = False
         try:
@@ -121,15 +122,17 @@ class ShowInfoForm(ModelForm):
                     isParticipant = True
         if not isParticipant:
             raise forms.ValidationError(_(u"You must be a participant in this show"))
-        if not self.cleaned_data.get('title') and not (self.cleaned_data.get('headliner') or self.cleaned_data.get('headliner_text')):
+        if not self.cleaned_data.get('title') and not (self.cleaned_data.get('headliner') or self.cleaned_data.get('headliner_select')):
             raise forms.ValidationError(_(u"A Title or a Headliner is required"))
-        if not self.cleaned_data.get('venue') and not self.cleaned_data.get('venue_text'):
+        if not self.cleaned_data.get('venue') and not self.cleaned_data.get('venue_select'):
             raise forms.ValidationError(_(u"A Venue is required"))
         return self.cleaned_data
 
     class Meta:
         model = Info
-        fields = ('title','headliner','openers','venue','headliner_text','openers_text','venue_text','description',)
+        fields = ('title','headliner','openers','venue','headliner_select','openers_select','venue_select','description',)
         widgets = {
           'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
+          'headliner' : autocomplete_light.TextWidget('MusicianProfileAutocomplete'),
+          'venue' : autocomplete_light.TextWidget('MusicianProfileAutocomplete'),
         }

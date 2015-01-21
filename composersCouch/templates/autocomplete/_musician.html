@@ -1,6 +1,6 @@
 {% load i18n staticfiles %}
 
-<div data-value="{% if pk %}{{pk}}{% else %}{{ choice.pk }}{% endif %}">
+<div class="musician-autocomplete" data-value="{% if pk %}{{pk}}{% else %}{{ choice.pk }}{% endif %}">
   {% include "utils/_mugshot.html" with profile=choice.profile height=45 width=45 %}
   {{ choice.name }}
 </div>

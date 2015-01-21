@@ -1,18 +1,14 @@
+
 <script type="text/javascript">
-    $(document).ready(function() {
-        $("{{ text_div }}").append(function() {
-            return $("<a href='#' class='pull-right' id='show-user'>Select by user</a>").click(function(){
-                $("{{ text_div }}").hide();
-                $("{{ user_div }}").show();
-            });
-        });
-        $("{{ user_div }}").append(function() {
-            return $("<a href='#' class='pull-right' id='show-text'>Use placeholder</a>").click(function(){
-                $("{{ user_div }}").hide();
-                $("{{ text_div }}").show();
-              });
-        });
-        $("{{ text_div }}").hide();
-        $("{{ user_div }}").show();
-    });
+  $(document).ready(function() {
+    //$("#div_{{ id }}_select").hide();
+  });
+  $("#div_{{ id }}").on("click", "{{ choice_class }}", function() {
+    value = $(this).attr("data-value");
+    if ($('#{{ id }}_select option:selected').length==0) {
+      $("#{{ id }}_select").append("<option value='"+value+"' selected='selected'>"+value+"</option>");
+    } else {
+      $("#{{ id }}_select option").replaceWith("<option value='"+value+"' selected='selected'>"+value+"</option>");
+    }
+  });
 </script>

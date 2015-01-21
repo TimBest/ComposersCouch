@@ -34,25 +34,12 @@
   {{ block.super }}
   {% progress_bar_media %}
   <script type="text/javascript">
-    {% comment %}Date picker{% endcomment %}
     $(function () {
         $('#id_start_0').datetimepicker({pickTime: false});
         $('#id_start_1').datetimepicker({pickDate: false});
         $('#id_end_0').datetimepicker({pickTime: false});
         $('#id_end_1').datetimepicker({pickDate: false});
-        $('#id_end_recurring_period').datetimepicker({pickTime: false});
     });
-    {% comment %}End recurrence data{% endcomment %}
-    $("#id_recurrence").on('change', function(){
-      var inputValue = this.value;
-      if(inputValue=="ONCE"){
-        $("#div_id_end_recurring_period").hide();
-      }
-      else{
-        $("#div_id_end_recurring_period").show();
-      }
-    }).change();
-    {% comment %}End recurrence data{% endcomment %}
     function show_image_form() {
       $('#add-poster').hide();
       $('#poster-form').show();
@@ -64,11 +51,9 @@
       })
     });
   </script>
-  {% comment %}Image picker{% endcomment %}
-  {% include "utils/_image_script.html" with selectorID='#id_poster' uploadDiv='#div_id_image' selectDiv='#div_id_poster' page=request.GET.page images=images %}
 
-  {% include "utils/_show_participant_script.html" with user_div='#div_id_headliner' text_div='#div_id_headliner_text' %}
-  {% include "utils/_show_participant_script.html" with user_div='#div_id_openers' text_div='#div_id_openers_text' %}
-  {% include "utils/_show_participant_script.html" with user_div='#div_id_venue' text_div='#div_id_venue_text' %}
+  {% include "utils/_image_script.html" with selectorID='#id_poster' uploadDiv='#div_id_image' selectDiv='#div_id_poster' page=request.GET.page images=images %}
+  {% include "utils/_show_participant_script.html" with id='id_headliner' choice_class='.musician-autocomplete' %}
+  {% include "utils/_show_participant_script.html" with id='id_venue' choice_class='.user-autocomplete' %}
 
 {% endblock %}

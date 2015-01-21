@@ -22,14 +22,14 @@ class Info(models.Model):
                                null=True, blank=True)
     title = models.CharField(max_length = 255, null=True, blank=True,)
     description = models.TextField(null=True, blank=True)
-    headliner = models.ForeignKey(MusicianProfile, null=True, blank=True,
+    headliner_select = models.ForeignKey(MusicianProfile, null=True, blank=True,
                                   related_name='shows_headlining')
-    headliner_text = models.CharField(max_length=255, null=True, blank=True,)
-    openers = models.ManyToManyField(MusicianProfile, null=True, blank=True,
+    headliner = models.CharField(max_length=255, null=True, blank=True,)
+    openers_select = models.ManyToManyField(MusicianProfile, null=True, blank=True,
                                      related_name='shows_opening')
-    openers_text = models.CharField(max_length=255, null=True, blank=True,)
-    venue = models.ForeignKey(User, null=True, blank=True)
-    venue_text = models.CharField(max_length=255, null=True, blank=True,)
+    openers = models.CharField(max_length=255, null=True, blank=True,)
+    venue_select = models.ForeignKey(User, null=True, blank=True)
+    venue = models.CharField(max_length=255, null=True, blank=True,)
     location = models.ForeignKey(Location, null=True, blank=True,
                                 related_name='event_location')
     objects = models.GeoManager()
