@@ -39,7 +39,7 @@ class ZipcodeFormView(FormView):
             url_name = homeCategory
         if zipcode:
             kwargs['zipcode'] = zipcode
-        if not kwargs.get('order'):
+        if not kwargs.get('order') and url_name != 'updates':
             kwargs['order'] = 'expiring'
         url = reverse(url_name, kwargs=kwargs)
         return redirect(url)

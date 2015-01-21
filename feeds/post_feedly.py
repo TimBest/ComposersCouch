@@ -2,22 +2,18 @@ from django.contrib.contenttypes.models import ContentType
 from django.contrib.gis.measure import D
 from annoying.functions import get_object_or_None
 
+from stream_framework.activity import Activity
 from stream_framework.feed_managers.base import Manager, FanoutPriority, add_operation, remove_operation
 
 from models import Follow, Post
 from post_feed import AggregatedPostFeed, PostFeed, UserPostFeed, LocalFeed, RegionalFeed
+from verbs import Post as PostVerb
 from contact.models import Zipcode
 
 
 class PostFeedly(Manager):
-    feed_classes = dict(
-        normal=PostFeed,
-        aggregated=AggregatedPostFeed
-    )
-    geo_feed_classes = dict(
-        local=LocalFeed,
-        regional=RegionalFeed
-    )
+    feed_classes = dict(normal=PostFeed, aggregated=AggregatedPostFeed)
+    geo_feed_classes = dict(local=LocalFeed, regional=RegionalFeed)
     user_feed_class = UserPostFeed
 
     def add_post(self, post):
@@ -83,11 +79,11 @@ class PostFeedly(Manager):
         self.metrics.on_activity_published()
 
     def remove_geo_activity(self, zip_code, activity):
-        '''
-        Remove the activity and then fanout to user followers
+        '''create_fanout_tasks
+        Remove the activity from the geo feeds
 
-        :param user_id: the id of the user
-        :param activity: the activity which to add
+        :param zip_code: the zip_code Object associated with the user
+        :param activity: the activity which to remove
         '''
         # we don't remove from the global feed due to race conditions
         # but we do remove from the regional and local feeds
@@ -101,6 +97,8 @@ class PostFeedly(Manager):
 
         for feed_class in self.geo_feed_classes.values():
             for priority_group, zip_codes in self.get_zipcodes(zip_code=zip_code, distance=feed_class.distance).items():
+                print priority_group
+                print zip_codes
                 self.create_fanout_tasks(
                     zip_codes,
                     feed_class,

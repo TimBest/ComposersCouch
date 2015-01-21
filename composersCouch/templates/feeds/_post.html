@@ -1,60 +1,67 @@
 {% load inbox thumbnail %}
 
-<div class="post message">
-  <div class="panel">
-    <div class="panel-body">
-      <div class="message-row reciver">
-        <div class="message-image-col">
-          <div class="message-image">
-            <a href="{% if post.user %}{{ post.user.profile.get_absolute_url }}{% endif %}">
-              {% include "utils/_mugshot.html" with profile=post.user.profile height=50 width=50 %}
-            </a>
-          </div>
-        </div>
-        <div class="message-content-col">
-          <div class="message-content">
-            <div class="row" >
-              <div class="col-xs-10">
-                <div class="title"><p><b>{{ post.title|safe|linebreaksbr }}</b></p></div>
-              </div>
-              <div class="col-xs-2">
-                {% if request.user == post.user or request.user == post.target %}
-                  <form method="POST" action="{% url 'remove_post' %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="post" value="{{ post.id }}">
-                    <div class="dropdown pull-right">
-                      <a class="dropdown-toggle" href="#" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-                        <span class="caret text-muted"></span>
-                      </a>
-                      <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                        <li><input class="btn btn-link" type="submit" value="Remove Post"></li>
-                      </ul>
-                    </div>
-                  </form>
-                {% endif %}
-              </div>
+{% if post %}
+  <div class="post message">
+    <div class="panel">
+      <div class="panel-body">
+        <div class="message-row reciver">
+          <div class="message-image-col">
+            <div class="message-image">
+              <a href="{% if post.user %}{{ post.user.profile.get_absolute_url }}{% endif %}">
+                {% include "utils/_mugshot.html" with profile=post.user.profile height=50 width=50 %}
+              </a>
             </div>
-
-            <div class="body"><p>{{ post.message|safe|linebreaksbr }}</p></div>
-            {% if post.photo %}
-              {% with height=200|stringformat:"s" width=200|stringformat:"s" %}
-                {% with geometry=height|add:"x"|add:width %}
-                  {% thumbnail post.photo.image geometry crop="center" as im %}
-                  <img src="{{ im.url }}" alt="{{ post.title }}"/>
-                  {% endthumbnail %}
+          </div>
+          <div class="message-content-col">
+            <div class="message-content">
+              <div class="row" >
+                <div class="col-xs-10">
+                  <div class="title"><p><b>{{ post.title|safe|linebreaksbr }}</b></p></div>
+                </div>
+                <div class="col-xs-2">
+                  {% if request.user == post.user or request.user == post.target %}
+                    <form method="POST" action="{% url 'remove_post' %}">
+                      {% csrf_token %}
+                      <input type="hidden" name="post" value="{{ post.id }}">
+                      <div class="dropdown pull-right">
+                        <a class="dropdown-toggle" href="#" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+                          <span class="caret text-muted"></span>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                          <li><input class="btn btn-link" type="submit" value="Remove Post"></li>
+                        </ul>
+                      </div>
+                    </form>
+                  {% endif %}
+                </div>
+              </div>
+              <div class="body"><p>{{ post.message|safe|linebreaksbr }}</p></div>
+              {% if post.photo %}
+                {% with height=200|stringformat:"s" width=200|stringformat:"s" %}
+                  {% with geometry=height|add:"x"|add:width %}
+                    {% thumbnail post.photo.image geometry crop="center" as im %}
+                    <img src="{{ im.url }}" alt="{{ post.title }}"/>
+                    {% endthumbnail %}
+                  {% endwith %}
                 {% endwith %}
-              {% endwith %}
-            {% endif %}
-            <div class="footer text-muted">
-              {% if post.user.username %}
-              <a class="text-muted" href="{{ post.user.profile.get_absolute_url }}">{{ post.user.profile }}</a>
               {% endif %}
-              <span> | </span>
-              <span class="date">{% if post.created_at %}{{ post.created_at|timesince }} ago{% endif %}</span>
+              <div class="footer text-muted">
+                {% if post.user.username %}
+                <a class="text-muted" href="{{ post.user.profile.get_absolute_url }}">{{ post.user.profile }}</a>
+                {% endif %}
+                <span> | </span>
+                <span class="date">{% if post.created_at %}{{ post.created_at|timesince }} ago{% endif %}</span>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+{% else %}
+  <div class="panel">
+    <div class="panel-body">
+      <p class="text-muted" >Removed</p>
+    </div>
+  </div>
+{% endif %}
