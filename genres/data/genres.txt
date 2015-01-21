@@ -1,3 +1,4 @@
+A Cappella,Vocal
 Acid Jazz,Funk,Disco,Hip-Hop/Rap,Jazz,R&B/Soul
 Acoustic,Acoustic
 Acoustic Blues,Acoustic,Blues
