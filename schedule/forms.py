@@ -84,9 +84,9 @@ class ShowInfoForm(ModelForm):
         self.helper.form_tag = False
         self.fields['headliner'].required = False
         self.fields['headliner_text'].label = "Headliner"
+        self.fields['openers_text'].help_text = "Separate artists by commas"
         self.fields['openers_text'].label = "Openers"
         self.fields['venue_text'].label = "Venue"
-        self.fields['openers'].help_text = "Separate artists by commas"
         self.helper.layout = Layout('title', 'headliner_text', 'headliner',
             'openers_text', 'openers', 'venue_text', 'venue','description',)
 

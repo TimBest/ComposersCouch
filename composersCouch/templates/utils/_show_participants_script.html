@@ -25,7 +25,7 @@
   });
   /* remove selection display and value */
   $("#div_{{ id }}_text").on("click", ".remove", function() {
-    value = $(this).parrent().attr("data-value");
+    value = $(this).parent().attr("data-value");
     $("#{{ id }} option[value="+value+"]").remove();
     name = $(this).parent().find(".musician-name").text();
     choices = $("#{{ id }}_text").val();
