@@ -16,10 +16,8 @@
     $("#{{ id }}_select option[value="+value+"]").remove();
     name = $(this).parent().find(".musician-name").text();
     choices = $("#{{ id }}").val();
-    choices = choices.replace(name+",", "");
     choices = choices.replace(name, "");
     $("#{{ id }}").val(choices);
     $(this).parent().remove()
-
   });
 </script>
