@@ -89,79 +89,31 @@ h1 {
 /* Navigation */
 .navigation {
   margin-bottom: 15px;
-  font-size: 110%;
-  .main-nav {
-    height:43px;
-    background-color: @muted-blue;
-    padding-bottom:0px;
-    margin-bottom:25px;
-    .navTabHover(){
-      background-color: @white;
-      color:@black;
-      border-top: @white;
-    }
-
-    .nav-tabs {
-      height:42px;
-      background-color: @muted-blue;
-      border-width: 0px;
-      -webkit-border-radius: 0px;
-      -moz-border-radius: 0px;
-      border-radius: 0px;
-      li {
-        a {
-          color:@silver-light;
-          margin-right: 0;
-          -webkit-border-radius: 0px;
-          -moz-border-radius: 0px;
-          border-radius: 0px;
-        }
-        a:hover,
-        a:focus {
-          .navTabHover();
-        }
+  &.sub-nav {
+    background-color: @silver;
+    .row {
+      .btn {
+        margin-top: 5px;
+        margin-bottom: 5px;
       }
-      li.active a,
-      li.active a:hover,
-      li.active a:focus {
-        .navTabHover();
-
-      }
-    }
-  }
-  .sub-nav {
-    height:43px;
-    background-color: @white;
-    margin-top:-25px;
-    .subNavActive(){
-      border: 1px solid @white;
-      background-color: @white;
-      color:@black;
-    }
-    .nav-tabs {
-      height:42px;
-      background-color: @white;
-      border-width: 0px;
-      -webkit-border-radius: 0px;
-      -moz-border-radius: 0px;
-      border-radius: 0px;
-      li {
-        a {
-          color:@blue;
-          margin-right: 0;
-          -webkit-border-radius: 0px;
-          -moz-border-radius: 0px;
-          border-radius: 0px;
+      .nav {
+        li {
+          a {
+            color: @black-light;
+            &:hover, &:focus {
+              background-color: transparent;
+              color: @black;
+            }
+          }
+          &.active {
+            a, a:focus, a:hover  {
+              background-color: transparent;
+              border-radius:0px;
+              border-bottom: 3px solid @blue;
+              color: @black;
+            }
+          }
         }
-        a:hover,
-        a:focus {
-          .subNavActive();
-        }
-      }
-      li.active a,
-      li.active a:hover,
-      li.active a:focus {
-        .subNavActive();
       }
     }
   }

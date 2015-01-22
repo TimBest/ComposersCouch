@@ -4,7 +4,7 @@
 {% crispy GenreForm GenreForm.helper %}
 {% crispy ZipcodeForm ZipcodeForm.helper %}
 
-{% block headerClass %}feed {% block bgColor%}blue{% endblock %}{% endblock %}
+{% block headerClass %}feed {% block bgColor %}blue{% endblock %}{% endblock %}
 
 {% block header %}
   <div class="feed">
@@ -31,40 +31,38 @@
 {% endblock %}
 
 {% block navigation %}
-<div class="navigation thread">
+<div class="navigation feed sub-nav {% block navColor %}blue{% endblock %}">
   <div class="container-fluid">
-    <div class="feed">
-      <div class="row no-gutter">
-        <div class="col-xs-10 left">
-          <ul class="nav nav-pills">{% block scopeNav %}{% endblock %}</ul>
-        </div>
-        <div class="col-xs-2 right">
-          <div class="text-right">
-            {% block filters %}
-            <button class="btn btn-link text-black" type="button" data-toggle="collapse" data-target="#filters" aria-expanded="false" aria-controls="filters">
-              Filters <span class="caret text-muted"></span>
-            </button>
-            {% endblock %}
-          </div>
+    <div class="row no-gutter">
+      <div class="col-xs-10 left">
+        <ul class="nav nav-pills">{% block scopeNav %}{% endblock %}</ul>
+      </div>
+      <div class="col-xs-2 right">
+        <div class="text-right">
+          {% block filters %}
+          <button class="btn btn-link text-black" type="button" data-toggle="collapse" data-target="#filters" aria-expanded="false" aria-controls="filters">
+            Filters <span class="caret text-muted"></span>
+          </button>
+          {% endblock %}
         </div>
       </div>
-      <div class="collapse row no-gutter" id="filters">
-        {% block genreForm %}
-          <div class="col-xs-6" >
-            <b>Filter by:</b>
-            <form class="genre-form" role="filter" method="POST" action="{% url 'filter' %}">
-              <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-              {% crispy genreForm %}
-            </form>
-          </div>
-        {% endblock %}
-        {% block orderForm %}
-          <div class="col-xs-6" >
-            <b>Order by:</b>
-            <ul class="list-unstyled">{% block orderOptions %}{% endblock %}</ul>
-          </div>
-        {% endblock %}
-      </div>
+    </div>
+    <div class="collapse row no-gutter" id="filters">
+      {% block genreForm %}
+        <div class="col-xs-6" >
+          <b>Filter by:</b>
+          <form class="genre-form" role="filter" method="POST" action="{% url 'filter' %}">
+            <input type="hidden" name="path" value="{% firstof request.path '/' %}">
+            {% crispy genreForm %}
+          </form>
+        </div>
+      {% endblock %}
+      {% block orderForm %}
+        <div class="col-xs-6" >
+          <b>Order by:</b>
+          <ul class="list-unstyled">{% block orderOptions %}{% endblock %}</ul>
+        </div>
+      {% endblock %}
     </div>
   </div>
 </div>

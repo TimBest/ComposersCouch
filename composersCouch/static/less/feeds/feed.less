@@ -1,12 +1,15 @@
 .header {
   &.feed {
-    padding: 0px 0px 10px 0px;
+    padding: 0px;
+    background-color: @black-light;
+
     &.blue {
-      background-color: @dark-blue;
+      //background-color: @dark-blue;
+      //border-bottom: 10px solid @light-blue;
       .main-nav {
         li.active {
+          background-color: @light-blue;
           a, a:focus, a:hover  {
-            border-bottom: 3px solid @light-blue;
           }
         }
       }
@@ -16,7 +19,9 @@
       .main-nav {
         li.active {
           a, a:focus, a:hover  {
-            border-bottom: 3px solid @light-green;
+            color:@dark-green;
+            background-color: @silver;
+            //border-bottom: 3px solid @light-green;
           }
         }
       }
@@ -54,7 +59,7 @@
     .main-nav {
       font-size:18px;
       @media (min-width: @screen-sm-min) {
-        margin-top:40px;
+        margin-top:54px;
       }
       li {
         a {
@@ -68,7 +73,7 @@
           a, a:focus, a:hover  {
             background-color: transparent;
             border-radius:0px;
-            border-bottom: 3px solid @light-blue;
+            //border-bottom: 3px solid @light-blue;
             color: @white;
           }
         }
@@ -107,6 +112,32 @@
     }
   }
 }
+
+.navigation {
+  &.feed {
+    &.blue {
+      .sub-nav {
+        li.active {
+          a, a:focus, a:hover  {
+          }
+        }
+      }
+    }
+    .sub-nav {
+      li {
+        a {
+          &:hover, &:focus {
+          }
+        }
+        &.active {
+          a, a:focus, a:hover  {
+          }
+        }
+      }
+    }
+  }
+}
+
 .feed {
   .genre-form{
     max-width:200px;
