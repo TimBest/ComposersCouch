@@ -130,11 +130,11 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
         show_data = {}
         date_data = {"start": coerce_date_dict(self.request.GET),}
         if self.request.user.profile.profile_type == "m":
-            show_data['headliner'] = self.request.user.profile
-            show_data['headliner_select'] = self.request.user.profile.musicianProfile
+            show_data['headliner_text'] = self.request.user.profile
+            show_data['headliner'] = self.request.user.profile.musicianProfile
         else:
-            show_data['venue'] = self.request.user.profile
-            show_data['venue_select'] = self.request.user
+            show_data['venue_text'] = self.request.user.profile
+            show_data['venue'] = self.request.user
         return {'poster_form':{},'date_form':date_data,'event_form':{},'show_info_form':show_data,}
 
     def forms_valid(self, forms):
@@ -153,8 +153,8 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
             info.poster = get_object_or_None(Image, id=imageId)
 
         if not info.location:
-            if info.venue_select:
-                info.location = info.venue_select.profile.contact_info.location
+            if info.venue:
+                info.location = info.venue.profile.contact_info.location
             else:
                 info.location = self.request.user.profile.contact_info.location
         info.save()
@@ -259,18 +259,18 @@ class RequestToEventFormView(EventFormView):
         headliner = self.private_request.headliner()
         venue = self.private_request.venue()
         artists = self.private_request.openers()
-        openers = ""
-        openers_select = []
+        openers_text = ""
+        openers = []
         for artist in artists:
-            openers_select.append(artist.participant.user)
-            openers = openers + str(artist.participant.user.profile) + ","
+            openers.append(artist.participant.user)
+            openers_text = openers_text + str(artist.participant.user.profile) + ","
         show_data = {
-            "headliner": headliner.participant.user.profile if headliner else None,
-            "headliner_select": headliner.participant.user if headliner else None,
+            "headliner_text": headliner.participant.user.profile if headliner else None,
+            "headliner": headliner.participant.user if headliner else None,
             "openers"  : openers,
-            "openers_select"  : openers_select,
-            "venue": venue.participant.user.profile if venue else None,
-            "venue_select": venue.participant.user if venue else None,
+            "openers_text"  : openers_text,
+            "venue_text": venue.participant.user.profile if venue else None,
+            "venue": venue.participant.user if venue else None,
         }
         return {'poster_form':{},'date_form':{},'event_form':{},'show_info_form':show_data,}
 

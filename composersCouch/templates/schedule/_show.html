@@ -21,9 +21,9 @@
               <h3>{{ info.title }}</h3>
             {% endif %}
             {% if info.headliner %}
-            <h4><a class="text-black" href="{% url 'musician:news' info.headliner.user.username  %}" >{{ info.headliner }}</a></h4>
+              <h4><a class="text-black" href="{% url 'musician:news' info.headliner.user.username  %}" >{{ info.headliner }}</a></h4>
             {% elif info.headliner_text %}
-            <h4>{{ info.headliner_text }}</h4>
+              <h4>{{ info.headliner_text }}</h4>
             {% endif %}
             <div class="openers">
               {% if info.opener.first %}
@@ -39,10 +39,10 @@
           <div>
             <p>
               <span class="fa fa-map-marker text-muted"></span>
-              {% if info.host %}
-                <a class="text-black" href="{% url 'redirectToProfile' info.host.username 'about' %}">{{ info.host.profile }}</a>
+              {% if info.venue %}
+                <a class="text-black" href="{% url 'redirectToProfile' info.venue.username 'about' %}">{{ info.venue.profile }}</a>
               {% else %}
-                {{ info.host_text }}
+                {{ info.venue_text }}
               {% endif %}
             </p>
           </div>

@@ -1,28 +1,28 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    $("#div_{{ id }}_select").hide();
+    $("#div_{{ id }}").hide();
   });
 
-  $('#{{ id }}').yourlabsAutocomplete({
+  $('#{{ id }}_text').yourlabsAutocomplete({
   }).input.bind('selectChoice', function(e, choice, autocomplete) {
-    value = $("#div_{{ id }} .hilight").attr("data-value");
-    if ($('#{{ id }}_select option:selected').length==0) {
-      $("#{{ id }}_select").append("<option value='"+value+"' selected='selected'>"+value+"</option>");
+    value = $("#div_{{ id }}_text .hilight").attr("data-value");
+    if ($('#{{ id }} option:selected').length==0) {
+      $("#{{ id }}").append("<option value='"+value+"' selected='selected'>"+value+"</option>");
     } else {
-      $("#{{ id }}_select option").replaceWith("<option value='"+value+"' selected='selected'>"+value+"</option>");
-      $("#{{ id }}_select option[data-value="+value+"]").remove()
-      $("#div_{{ id }} #selected-choice").remove()
+      $("#{{ id }} option").replaceWith("<option value='"+value+"' selected='selected'>"+value+"</option>");
+      $("#{{ id }} option[data-value="+value+"]").remove()
+      $("#div_{{ id }}_text #selected-choice").remove()
 
     }
-    $("#div_{{ id }} .controls").prepend(
+    $("#div_{{ id }}_text .controls").prepend(
       "<div id='selected-choice'><button class='btn btn-link remove' data-value="+value+" type='button'><span class='fa fa-times-circle text-muted'></span></button>"
       +$(choice).html()+"</div>"
     );
   });
-  $("#div_{{ id }}").on("click", ".remove", function() {
-    $("#{{ id }}_select option").remove()
+  $("#div_{{ id }}_text").on("click", ".remove", function() {
+    $("#{{ id }} option").remove()
     $(this).parent().remove()
-    $("#{{ id }}").val('');
+    $("#{{ id }}_text").val('');
   });
 </script>
