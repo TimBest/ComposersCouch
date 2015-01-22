@@ -36,11 +36,11 @@ class Info(models.Model):
 
     def participants(self):
         participants = []
-        if self.venue:
-            participants.append(self.venue)
-        if self.headliner:
-            participants.append(self.headliner.profile.user)
-        for opener in self.openers.all():
+        if self.venue_select:
+            participants.append(self.venue_select)
+        if self.headliner_select:
+            participants.append(self.headliner_select.profile.user)
+        for opener in self.openers_select.all():
             participants.append(opener.profile.user)
         return participants
 
