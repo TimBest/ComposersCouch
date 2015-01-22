@@ -2,17 +2,19 @@
   $(document).ready(function() {
     $("#div_{{ id }}_select").hide();
   });
-  $("#div_{{ id }}").on("click", "{{ choice_class }}", function() {
-    value = $(this).attr("data-value");
+  $('#{{ id }}').yourlabsTextWidget({
+  }).input.bind('selectChoice', function(e, choice, autocomplete) {
+    value = $("#div_{{ id }} .hilight").attr("data-value");
     $("#{{ id }}_select").append("<option value='"+value+"' selected='selected'>"+value+"</option>");
+
     $("#div_{{ id }} .controls").prepend(
-      "<div><button class='btn btn-link remove' data-value="+value+" type='button'><span class='fa fa-times-circle text-muted'></span></button>"
-      +$(this).html()+"</div>"
+      "<div id='selected-choice'><button class='btn btn-link remove' data-value="+value+" type='button'><span class='fa fa-times-circle text-muted'></span></button>"
+      +$(choice).html()+"</div>"
     );
   });
   $("#div_{{ id }}").on("click", ".remove", function() {
     value = $(this).attr("data-value");
-    $("#{{ id }}_select option[data-value="+value+"]").remove()
+    $("#{{ id }}_select option[value="+value+"]").remove()
     $(this).parent().remove()
   });
 </script>
