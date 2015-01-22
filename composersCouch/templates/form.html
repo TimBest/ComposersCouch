@@ -5,7 +5,7 @@
 
 {% block header %}
 <form id="{% block formID %}{% endblock %}" method="post"
-      enctype="{% block enctype %}{% endblock %}" class="modal-dialog"
+      enctype="{% block enctype %}{% endblock %}" class="non-modal-form modal-dialog"
       action="{% block FormURL %}{{ request.path }}{% endblock %}">
     <div class="modal-content">
         <div class="modal-header">

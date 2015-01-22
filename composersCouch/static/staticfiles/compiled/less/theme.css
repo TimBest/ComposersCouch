@@ -7302,6 +7302,10 @@ h1 {
               float: left;
               vertical-align:top; */
 }
+.non-modal-form .modal-content {
+  border: 1px solid #cbcfd3;
+  box-shadow: none;
+}
 /* Footer */
 #footer {
   position: absolute;
