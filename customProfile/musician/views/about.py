@@ -40,6 +40,11 @@ class ContactInfoView(ContactView):
     success_url = 'musician:about'
     template_name = 'profile/musician/forms/contact.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(ContactInfoView, self).get_context_data(**kwargs)
+        context['contactType'] = 'band'
+        return context
+
 contact_info = ContactInfoView.as_view()
 
 class MemberView(ProfileFormMixin, UpdateView):

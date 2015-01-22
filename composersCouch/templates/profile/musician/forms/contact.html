@@ -1,19 +1,19 @@
 {% extends 'profile/musician/forms/about_modal.html' %}
-{% load i18n crispy_forms_tags %}
+{% load crispy_forms_tags %}
 {% crispy ContactForm ContactForm.helper %}
 {% crispy NonUserLocationForm NonUserLocationForm.helper %}
 
 {% block contactClass %}active{% endblock %}
 
-{% block title %}{% block formTitle %}{% trans "Edit Contact Info" %}{% endblock %}{% endblock %}
+{% block title %}{% block formTitle %}{{ contactType|capfirst }} Contact Info{% endblock %}{% endblock %}
 {% block formID %}contactMusicianForm{% endblock %}
 {% block form %}
   <span>Edit: </span>
-  <a class="editMusicianContact" href="{% url 'musician:userContactForm' %}">Band</a>,
-  <a class="editMusicianContact" href="{% url 'musician:contactForm' 'booking' %}">Booking</a>,
-  <a class="editMusicianContact" href="{% url 'musician:contactForm' 'label' %}">Label</a>,
-  <a class="editMusicianContact" href="{% url 'musician:contactForm' 'management' %}">Management</a>,
-  <a class="editMusicianContact" href="{% url 'musician:contactForm' 'press' %}">Press</a>
+  <a class="editMusicianContact {% ifequal contactType 'band' %}text-bold{% endifequal %}" href="{% url 'musician:userContactForm' %}">Band</a>,
+  <a class="editMusicianContact {% ifequal contactType 'booking' %}text-bold{% endifequal %}" href="{% url 'musician:contactForm' 'booking' %}">Booking</a>,
+  <a class="editMusicianContact {% ifequal contactType 'label' %}text-bold{% endifequal %}" href="{% url 'musician:contactForm' 'label' %}">Label</a>,
+  <a class="editMusicianContact {% ifequal contactType 'management' %}text-bold{% endifequal %}" href="{% url 'musician:contactForm' 'management' %}">Management</a>,
+  <a class="editMusicianContact {% ifequal contactType 'press' %}text-bold{% endifequal %}" href="{% url 'musician:contactForm' 'press' %}">Press</a>
   {% crispy contactForm %}
   {% crispy locationForm %}
 {% endblock %}
