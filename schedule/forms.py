@@ -76,12 +76,6 @@ class EventForm(ModelForm):
         model = Event
         fields = ('visible',)
 
-class UserSelectForm(ModelForm):
-    def __init__(self, *args, **kwargs):
-        kwargs.pop('user', None)
-        super(UserSelectForm, self).__init__(*args, **kwargs)
-        self.participants = Layout ('headliner', 'openers', 'venue',)
-
 class ShowInfoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)

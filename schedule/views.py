@@ -259,13 +259,16 @@ class RequestToEventFormView(EventFormView):
         headliner = self.private_request.headliner()
         venue = self.private_request.venue()
         artists = self.private_request.openers()
-        openers = []
+        openers = ""
+        openers_select = []
         for artist in artists:
-            openers.append(artist.participant.user)
+            openers_select.append(artist.participant.user)
+            openers = openers + str(artist.participant.user.profile) + ","
         show_data = {
             "headliner": headliner.participant.user.profile if headliner else None,
             "headliner_select": headliner.participant.user if headliner else None,
             "openers"  : openers,
+            "openers_select"  : openers_select,
             "venue": venue.participant.user.profile if venue else None,
             "venue_select": venue.participant.user if venue else None,
         }
