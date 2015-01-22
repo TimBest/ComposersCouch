@@ -2,6 +2,13 @@
 <script type="text/javascript">
   $(document).ready(function() {
     $("#div_{{ id }}").hide();
+    $("#div_{{ id }} .user-autocomplete .remove").remove()
+    $("#div_{{ id }} .user-autocomplete").prepend(
+      "<button class='btn btn-link remove' type='button'><span class='fa fa-times-circle text-muted'></span></button>"
+    )
+    $("#div_{{ id }}_text .controls").prepend(
+      $("#div_{{ id }} #id_venue-deck").html()
+    );
   });
 
   $('#{{ id }}_text').yourlabsAutocomplete({
@@ -13,7 +20,6 @@
       $("#{{ id }} option").replaceWith("<option value='"+value+"' selected='selected'>"+value+"</option>");
       $("#{{ id }} option[data-value="+value+"]").remove()
       $("#div_{{ id }}_text #selected-choice").remove()
-
     }
     $("#div_{{ id }}_text .controls").prepend(
       "<div id='selected-choice'><button class='btn btn-link remove' data-value="+value+" type='button'><span class='fa fa-times-circle text-muted'></span></button>"
