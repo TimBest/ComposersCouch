@@ -26,12 +26,12 @@
               <h4>{{ info.headliner_text }}</h4>
             {% endif %}
             <div class="openers">
-              {% if info.opener.first %}
+              {% comment %}{% if info.opener.first %}
                 {% for opener in info.openers.all %}
                   {% if forloop.first %}with:{% else %},{% endif %}
                   <a class="text-black" href="{% url 'musician:news' opener.user.username  %}" > {{ opener }}</a>
-                  {% endfor %}
-              {% elif info.openers_text %}
+                  {% endfor %}{% endcomment %}
+              {% if info.openers_text %}
                 <span>with: {{ info.openers_text }}</span>
               {% endif %}
             </div>

@@ -20,7 +20,7 @@
       <div class="weekday weekday{{forloop.counter}}">
         <div class="weekdaytable">
           {% for event in day.get_event_partials %}
-            {% ifequal filter 'events' %}
+            {% ifequal filter 'shows' %}
               {% include "schedule/_show.html" with show=event.show user_accept=event.approved %}
             {% else %}
               {% include "request/_private_request.html" with request=event.thread.request %}
