@@ -26,6 +26,10 @@ class UserAutocomplete(autocomplete_light.AutocompleteModelTemplate):
     }
     search_fields = ['^profile__musicianProfile__name','^profile__venueProfile__name','^first_name','^last_name',]
 
+    def choices_for_request(self):
+        self.choices = self.choices.exclude(id=-1)
+        return super(UserAutocomplete, self).choices_for_request()
+
 autocomplete_light.register(
     User,
     UserAutocomplete,
@@ -43,7 +47,6 @@ class UserArtistAutocomplete(autocomplete_light.AutocompleteModelTemplate):
 
     def choices_for_request(self):
         self.choices = self.choices.filter(profile__profile_type='m')
-
         return super(UserArtistAutocomplete, self).choices_for_request()
 
 autocomplete_light.register(
