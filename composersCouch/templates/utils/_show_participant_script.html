@@ -1,9 +1,12 @@
+
 <script type="text/javascript">
   $(document).ready(function() {
     $("#div_{{ id }}_select").hide();
   });
-  $("#div_{{ id }}").on("click", "{{ choice_class }}", function() {
-    value = $(this).attr("data-value");
+
+  $('#{{ id }}').yourlabsAutocomplete({
+  }).input.bind('selectChoice', function(e, choice, autocomplete) {
+    value = $("#div_{{ id }} .hilight").attr("data-value");
     if ($('#{{ id }}_select option:selected').length==0) {
       $("#{{ id }}_select").append("<option value='"+value+"' selected='selected'>"+value+"</option>");
     } else {
@@ -14,11 +17,12 @@
     }
     $("#div_{{ id }} .controls").prepend(
       "<div id='selected-choice'><button class='btn btn-link remove' data-value="+value+" type='button'><span class='fa fa-times-circle text-muted'></span></button>"
-      +$(this).html()+"</div>"
+      +$(choice).html()+"</div>"
     );
   });
   $("#div_{{ id }}").on("click", ".remove", function() {
     $("#{{ id }}_select option").remove()
     $(this).parent().remove()
+    $("#{{ id }}").val('');
   });
 </script>
