@@ -8629,6 +8629,9 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   width: 100%;
   max-width: 1250px;
 }
+#eventForm button.remove {
+  padding: 0px;
+}
 .calendar-header {
   padding: 8px 0px 8px 0px;
   background-color: #076e4f;

@@ -8,9 +8,12 @@
       $("#{{ id }}_select").append("<option value='"+value+"' selected='selected'>"+value+"</option>");
     } else {
       $("#{{ id }}_select option").replaceWith("<option value='"+value+"' selected='selected'>"+value+"</option>");
+      $("#{{ id }}_select option[data-value="+value+"]").remove()
+      $("#div_{{ id }} #selected-choice").remove()
+
     }
     $("#div_{{ id }} .controls").prepend(
-      "<div><button class='btn btn-link remove' data-value="+value+" type='button'><span class='fa fa-times-circle text-muted'></span></button>"
+      "<div id='selected-choice'><button class='btn btn-link remove' data-value="+value+" type='button'><span class='fa fa-times-circle text-muted'></span></button>"
       +$(this).html()+"</div>"
     );
   });
