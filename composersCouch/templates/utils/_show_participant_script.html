@@ -1,9 +1,8 @@
-
 <script type="text/javascript">
   $(document).ready(function() {
     $("#div_{{ id }}").hide();
-    $("#div_{{ id }} .user-autocomplete .remove").remove()
-    $("#div_{{ id }} .user-autocomplete").prepend(
+    /* get initial data */
+    $("#div_{{ id }} .user-autocomplete .remove").replaceWith(
       "<button class='btn btn-link remove' type='button'><span class='fa fa-times-circle text-muted'></span></button>"
     )
     $("#div_{{ id }}_text .controls").prepend(
@@ -14,18 +13,23 @@
   $('#{{ id }}_text').yourlabsAutocomplete({
   }).input.bind('selectChoice', function(e, choice, autocomplete) {
     value = $("#div_{{ id }}_text .hilight").attr("data-value");
+    /* if no selection then add on else remove old selection then add new one */
     if ($('#{{ id }} option:selected').length==0) {
       $("#{{ id }}").append("<option value='"+value+"' selected='selected'>"+value+"</option>");
     } else {
       $("#{{ id }} option").replaceWith("<option value='"+value+"' selected='selected'>"+value+"</option>");
       $("#{{ id }} option[data-value="+value+"]").remove()
-      $("#div_{{ id }}_text #selected-choice").remove()
+      $("#div_{{ id }}_text .user-autocomplete").remove()
     }
+    /* display to user whom they selected */
     $("#div_{{ id }}_text .controls").prepend(
-      "<div id='selected-choice'><button class='btn btn-link remove' data-value="+value+" type='button'><span class='fa fa-times-circle text-muted'></span></button>"
-      +$(choice).html()+"</div>"
+      "<div class='user-autocomplete' data-value="+value+">"+
+        "<button class='btn btn-link remove' type='button'><span class='fa fa-times-circle text-muted'></span></button>"
+        +$(choice).html()+
+      "</div>"
     );
   });
+  /* remove selection display and value */
   $("#div_{{ id }}_text").on("click", ".remove", function() {
     $("#{{ id }} option").remove()
     $(this).parent().remove()
