@@ -1,7 +1,7 @@
 /*color scheme*/
 @font-face {
-  font-family: Ubuntu;
-  src: url('/static/fonts/Ubuntu-Regular.woff');
+  font-family: Lato;
+  src: url('/static/fonts/Lato-Regular.ttf');
 }
 @font-face {
   font-family: PT-sans;
@@ -6868,7 +6868,7 @@ html {
   min-height: 110%;
 }
 body {
-  font-family: PT-sans, sans-serif;
+  font-family: Lato, sans-serif;
   margin-bottom: 100px;
 }
 h1,
@@ -6876,9 +6876,8 @@ h2,
 h3,
 h4,
 h5,
-h6,
-nav {
-  font-family: Lato, sans-serif;
+h6 {
+  font-family: PT-sans, sans-serif;
   padding-top: 5px;
   padding-bottom: 5px;
   margin: 0;
