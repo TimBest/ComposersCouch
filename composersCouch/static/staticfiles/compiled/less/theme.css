@@ -6973,7 +6973,7 @@ h1 {
   background-color: transparent;
   border-radius: 0px;
   border-bottom: 3px solid #2161a8;
-  color: #2f2f2f;
+  color: #000;
 }
 /* Container sizeing */
 .container-fluid {
@@ -7540,10 +7540,15 @@ h1 {
 }
 .header.feed {
   padding: 0px;
-  background-color: #474747;
+  background-color: #2f2f2f;
 }
-.header.feed.blue .main-nav li.active {
-  background-color: #5490d3;
+.header.feed.blue {
+  background-color: #0b396d;
+}
+.header.feed.blue .main-nav li.active a,
+.header.feed.blue .main-nav li.active a:focus,
+.header.feed.blue .main-nav li.active a:hover {
+  color: #0b396d;
 }
 .header.feed.green {
   background-color: #076e4f;
@@ -7552,7 +7557,6 @@ h1 {
 .header.feed.green .main-nav li.active a:focus,
 .header.feed.green .main-nav li.active a:hover {
   color: #076e4f;
-  background-color: #cbcfd3;
 }
 .header.feed.purple {
   background-color: #3f0b6c;
@@ -7560,7 +7564,7 @@ h1 {
 .header.feed.purple .main-nav li.active a,
 .header.feed.purple .main-nav li.active a:focus,
 .header.feed.purple .main-nav li.active a:hover {
-  border-bottom: 3px solid #9854d3;
+  color: #3f0b6c;
 }
 .header.feed.orange {
   background-color: #a6410b;
@@ -7568,7 +7572,7 @@ h1 {
 .header.feed.orange .main-nav li.active a,
 .header.feed.orange .main-nav li.active a:focus,
 .header.feed.orange .main-nav li.active a:hover {
-  border-bottom: 3px solid #ff9258;
+  color: #a6410b;
 }
 .header.feed.red {
   background-color: #6c0d08;
@@ -7576,15 +7580,11 @@ h1 {
 .header.feed.red .main-nav li.active a,
 .header.feed.red .main-nav li.active a:focus,
 .header.feed.red .main-nav li.active a:hover {
-  border-bottom: 3px solid #d35754;
+  color: #6c0d08;
 }
 .header.feed .main-nav {
   font-size: 18px;
-}
-@media (min-width: 768px) {
-  .header.feed .main-nav {
-    margin-top: 54px;
-  }
+  margin-top: 54px;
 }
 .header.feed .main-nav li a {
   color: #cbcfd3;
@@ -7597,9 +7597,9 @@ h1 {
 .header.feed .main-nav li.active a,
 .header.feed .main-nav li.active a:focus,
 .header.feed .main-nav li.active a:hover {
-  background-color: transparent;
-  border-radius: 0px;
-  color: #fbfcfc;
+  background-color: #cbcfd3;
+  border-radius: 3px 3px 0px 0px;
+  color: #2f2f2f;
 }
 .header.feed .nav-options {
   color: #dfe5eb;
@@ -7634,6 +7634,31 @@ h1 {
 }
 .header.feed .nav-options .nav .nav-form div {
   float: left;
+}
+.feed.sub-nav.blue .nav li.active a,
+.feed.sub-nav.blue .nav li.active a:focus,
+.feed.sub-nav.blue .nav li.active a:hover {
+  border-color: #2161a8;
+}
+.feed.sub-nav.green .nav li.active a,
+.feed.sub-nav.green .nav li.active a:focus,
+.feed.sub-nav.green .nav li.active a:hover {
+  border-color: #16aa7d;
+}
+.feed.sub-nav.red .nav li.active a,
+.feed.sub-nav.red .nav li.active a:focus,
+.feed.sub-nav.red .nav li.active a:hover {
+  border-color: #a62421;
+}
+.feed.sub-nav.orange .nav li.active a,
+.feed.sub-nav.orange .nav li.active a:focus,
+.feed.sub-nav.orange .nav li.active a:hover {
+  border-color: #ff6e20;
+}
+.feed.sub-nav.purple .nav li.active a,
+.feed.sub-nav.purple .nav li.active a:focus,
+.feed.sub-nav.purple .nav li.active a:hover {
+  border-color: #6821a6;
 }
 .feed .genre-form {
   max-width: 200px;

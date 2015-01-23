@@ -4,13 +4,13 @@
 {% block publicClass %}active{% endblock %}
 
 {% block navigation %}
-<div class="navigation thread">
+<div class="navigation sub-nav">
   <div class="container-fluid">
     <div class="row no-gutter">
       <div class="col-sm-4 left">
         {% if user.profile.profile_type == 'm' %}
           <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
-        {% elif user.profile.profile_type == 'v' %}
+        {% else %}
           <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
         {% endif %}
       </div>
