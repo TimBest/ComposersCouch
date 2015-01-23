@@ -1,11 +1,11 @@
 .header.thread {
   color: @white;
   background-color: @dark-blue;
-  padding-top:10px;
+  padding: 10px 0px 0px 0px;
   .nav {
-    @media (min-width: @screen-sm-min) {
-      margin-top:40px;
-    }
+  //  font-size:18px;
+  
+    margin-top:54px;
     li {
       a {
         color: @silver;
@@ -16,10 +16,9 @@
       }
       &.active {
         a, a:focus, a:hover  {
-          background-color: transparent;
-          border-radius:0px;
-          border-bottom: 3px solid @light-blue;
-          color: @white;
+          background-color: @silver;
+          border-radius: 3px 3px 0px 0px;
+          color: @black;
         }
       }
     }

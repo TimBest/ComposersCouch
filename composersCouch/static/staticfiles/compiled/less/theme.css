@@ -6876,8 +6876,9 @@ h2,
 h3,
 h4,
 h5,
-h6 {
-  font-family: Ubuntu, sans-serif;
+h6,
+nav {
+  font-family: Lato, sans-serif;
   padding-top: 5px;
   padding-bottom: 5px;
   margin: 0;
@@ -7726,12 +7727,10 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .header.thread {
   color: #fbfcfc;
   background-color: #0b396d;
-  padding-top: 10px;
+  padding: 10px 0px 0px 0px;
 }
-@media (min-width: 768px) {
-  .header.thread .nav {
-    margin-top: 40px;
-  }
+.header.thread .nav {
+  margin-top: 54px;
 }
 .header.thread .nav li a {
   color: #cbcfd3;
@@ -7744,10 +7743,9 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .header.thread .nav li.active a,
 .header.thread .nav li.active a:focus,
 .header.thread .nav li.active a:hover {
-  background-color: transparent;
-  border-radius: 0px;
-  border-bottom: 3px solid #5490d3;
-  color: #fbfcfc;
+  background-color: #cbcfd3;
+  border-radius: 3px 3px 0px 0px;
+  color: #2f2f2f;
 }
 @media (min-width: 768px) {
   .content .message-thread {

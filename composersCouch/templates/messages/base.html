@@ -6,7 +6,7 @@
 {% block headerClass %}thread{% endblock %}
 
 {% block header%}
-  <ul class="nav nav-pills">
+  <ul class="nav nav-pills nav-centered">
     <li class="{% block messageClass %}{% endblock %}"><a href="{% url 'messages_inbox' %}">Messages</a></li>
     <li class="{% block privateClass %}{% endblock %}"><a href="{% url 'private_requests' %}">Private Requests</a></li>
     <li class="{% block publicClass %}{% endblock %}"><a href="{% url 'public_requests' %}">Public Request</a></li>
