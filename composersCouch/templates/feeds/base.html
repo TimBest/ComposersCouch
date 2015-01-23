@@ -7,26 +7,32 @@
 {% block headerClass %}feed {% block bgColor %}blue{% endblock %}{% endblock %}
 
 {% block header %}
-  <div class="feed">
-    <div class="main-nav" >
-      <ul class="nav nav-pills" role="menu">
-        <li class="{% block requestsClass %}{% endblock %}">
-          <a href="{% url 'requests' 'expiring' 'default' 'all' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
-        </li>
-        <li class="{% block showsClass %}{% endblock %}">
-          <a href="{% url 'shows' 'upcoming' zipcode %}?{{ request.GET.urlencode }}">Concerts</a>
-        </li>
-        <li class="{% block artistsClass %}{% endblock %}">
-          <a href="{% url 'artists' 'all' zipcode %}?{{ request.GET.urlencode }}">Artists</a>
-        </li>
-        <li class="{% block venuesClass %}{% endblock %}">
-          <a href="{% url 'venues' 'all' zipcode %}?{{ request.GET.urlencode }}">Venues</a>
-        </li>
-        <li class="{% block updatesClass %}{% endblock %}">
-          <a href="{% url 'updates' 'all' zipcode %}?{{ request.GET.urlencode }}">Updates</a>
-        </li>
-      </ul>
+  <div class="main-nav">
+    <div class="title">
+      <span class="dropdown">
+        <a class="text-white dropdown-toggle toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+          <h2>{% block feedType %}Feed{% endblock %} <small><span class="fa fa-chevron-down text-white"></span></small></h2>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li class="{% block requestsClass %}{% endblock %}">
+            <a href="{% url 'requests' 'expiring' 'default' 'all' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
+          </li>
+          <li class="{% block showsClass %}{% endblock %}">
+            <a href="{% url 'shows' 'upcoming' zipcode %}?{{ request.GET.urlencode }}">Concerts</a>
+          </li>
+          <li class="{% block artistsClass %}{% endblock %}">
+            <a href="{% url 'artists' 'all' zipcode %}?{{ request.GET.urlencode }}">Artists</a>
+          </li>
+          <li class="{% block venuesClass %}{% endblock %}">
+            <a href="{% url 'venues' 'all' zipcode %}?{{ request.GET.urlencode }}">Venues</a>
+          </li>
+          <li class="{% block updatesClass %}{% endblock %}">
+            <a href="{% url 'updates' 'all' zipcode %}?{{ request.GET.urlencode }}">Updates</a>
+          </li>
+        </ul>
+      </span>
     </div>
+    <p class="description text-white">Description of the current feed</p>
   </div>
 {% endblock %}
 
@@ -72,7 +78,7 @@
   <div class="feed">
     <div class="cards">
       <div>
-        <span>{% block feedType %}results{% endblock %}</span>
+        {% comment %}<span>{% block feedType %}results{% endblock %}</span>{% endcomment %}
         {% block forForm %}{% endblock %}
         {% block availabilityForm %}
           <span>available on</span>

@@ -7583,24 +7583,24 @@ h1 {
 .header.feed.red .main-nav li.active a:hover {
   color: #580200;
 }
-.header.feed .main-nav {
-  font-size: 16px;
-  margin-top: 57px;
+.header.feed .main-nav .title {
+  margin: 15px 0px 10px 0px;
 }
-.header.feed .main-nav li a {
-  color: #fff;
-}
-.header.feed .main-nav li a:hover,
-.header.feed .main-nav li a:focus {
+.header.feed .main-nav .title li a:hover,
+.header.feed .main-nav .title li a:focus {
   background-color: transparent;
   color: #cbcfd3;
 }
-.header.feed .main-nav li.active a,
-.header.feed .main-nav li.active a:focus,
-.header.feed .main-nav li.active a:hover {
+.header.feed .main-nav .title li.active a,
+.header.feed .main-nav .title li.active a:focus,
+.header.feed .main-nav .title li.active a:hover {
   background-color: #cbcfd3;
   border-radius: 3px 3px 0px 0px;
   color: #2f2f2f;
+}
+.header.feed .main-nav .description {
+  font-size: 15px;
+  margin-bottom: 12px;
 }
 .header.feed .nav-options {
   color: #dfe5eb;

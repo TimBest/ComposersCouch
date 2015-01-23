@@ -54,24 +54,29 @@
       }
     }
     .main-nav {
-      font-size:16px;
-      margin-top:57px;
-      li {
-        a {
-          color: #fff;
-          &:hover, &:focus {
-            background-color: transparent;
-            color: @silver;
+      .title{
+        margin:15px 0px 10px 0px;
+        li {
+          a {
+            &:hover, &:focus {
+              background-color: transparent;
+              color: @silver;
+            }
           }
-        }
-        &.active {
-          a, a:focus, a:hover  {
-            background-color: @silver;
-            border-radius: 3px 3px 0px 0px;
-            color: @black;
+          &.active {
+            a, a:focus, a:hover  {
+              background-color: @silver;
+              border-radius: 3px 3px 0px 0px;
+              color: @black;
+            }
           }
         }
       }
+      .description {
+        font-size:15px;
+        margin-bottom: 12px;
+      }
+
     }
     .nav-options {
       color:@silver-light;
