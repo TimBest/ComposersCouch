@@ -7763,27 +7763,27 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   width: 100%;
   overflow: hidden;
 }
-.sender .message-image- {
+.sender .message-image-col {
   width: 60px;
   float: right !important;
 }
-.sender .message-image- .message-image {
+.sender .message-image-col .message-image {
   float: right !important;
 }
-.sender .message-content- {
+.sender .message-content-col {
   margin-right: 65px;
 }
-.sender .message-content- .message-content {
+.sender .message-content-col .message-content {
   float: right !important;
 }
-.sender .message-content- .footer {
+.sender .message-content-col .footer {
   text-align: right;
 }
-.reciver .message-image- {
+.reciver .message-image-col {
   width: 60px;
   float: left !important;
 }
-.reciver .message-content- {
+.reciver .message-content-col {
   margin-left: 65px;
 }
 .detail {
