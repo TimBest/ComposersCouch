@@ -26,21 +26,6 @@ def search(request, template_name='search/search.html', ajax_template='autocompl
     context.update(queries)
     return render(request, template_name, context)
 
-class HomeView(TemplateView):
-    template_name = 'index.html'
-
-    def dispatch(self, *args, **kwargs):
-        if self.request.user.is_authenticated():
-            if self.request.user.profile.profile_type == 'm':
-                return requests(self.request, scope='local', kwargs={'for':'band','scope':'local'})
-            elif self.request.user.profile.profile_type == 'v':
-                return requests(self.request, scope='local', kwargs={'for':'venue','scope':'local'})
-            else:
-                return shows(self.request, scope='local')
-        return super(HomeView, self).dispatch(*args, **kwargs)
-
-home = HomeView.as_view()
-
 # Mixin to handle multiple form classses
 class MultipleFormsView(FormView):
     form_classes = {}

@@ -7468,7 +7468,7 @@ h1 {
   color: #fbfcfc;
 }
 .landing-page .artists-venues {
-  background-color: #474747;
+  background-color: #2f2f2f;
   color: #fbfcfc;
 }
 /*Content*/
@@ -7588,13 +7588,12 @@ h1 {
 }
 .header.feed .main-nav .title li a:hover,
 .header.feed .main-nav .title li a:focus {
-  background-color: transparent;
-  color: #cbcfd3;
+  background-color: #dfe5eb;
 }
 .header.feed .main-nav .title li.active a,
 .header.feed .main-nav .title li.active a:focus,
 .header.feed .main-nav .title li.active a:hover {
-  background-color: #cbcfd3;
+  background-color: #dfe5eb;
   border-radius: 3px 3px 0px 0px;
   color: #2f2f2f;
 }

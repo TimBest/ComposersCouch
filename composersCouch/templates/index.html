@@ -5,36 +5,31 @@
 {% block overwriteHeader %}
   <div class="landing-page">
     <div class="jumbotron composers-couch">
-      <div class="image-frame">
-        <span class="frame-helper"></span>
-        <img class="image-center" id="logo" alt="Composers Couch" src="{% static 'img/logo.png' %}">
-      </div>
-      <p class="text-center">Booking made easy</p>
+      {% if not user.is_authenticated %}
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="image-frame">
+              <span class="frame-helper"></span>
+              <img class="image-center" id="logo" alt="Composers Couch" src="{% static 'img/logo.png' %}">
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <h2>Composers Couch</h2>
+            <p>Manage press kit submission, easily fill gaps in your schedule, find shows in your area</p>
+            <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-primary">Get Started For Free</a>
+          </div>
+        </div>
+      {% else %}
+        <div class="image-frame">
+          <span class="frame-helper"></span>
+          <img class="image-center" id="logo" alt="Composers Couch" src="{% static 'img/logo.png' %}">
+        </div>
+      {% endif %}
     </div>
   </div>
 {% endblock %}
 {% block overwriteContent %}
   <div class="landing-page">
-    <div class="jumbotron profile-types text-center">
-      <div class="row">
-        <div class="col-sm-4">
-          <span class="fa fa-ticket fa-5x"></span>
-          <h2>Venues</h2>
-          <p>Manage press kit submissions, easily fill gaps in your schedule.</p>
-        </div>
-        <div class="col-sm-4">
-          <span class="fa fa-music fa-5x"></span>
-          <h2>Musicians</h2>
-          <p>Host your press kit and find venues locally or on tour</p>
-        </div>
-        <div class="col-sm-4">
-          <span class="fa fa-users fa-5x"></span>
-          <h2>Fans</h2>
-          <p>Find shows in your area, follow your favorite artists</p>
-        </div>
-      </div>
-      <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-primary">Get Started For Free</a>
-    </div>
     <div class="jumbotron requests">
       <div class="row">
         <div class="col-sm-6">
@@ -86,6 +81,27 @@
         </div>
       </div>
     </div>
-
+    {% if not user.is_authenticated %}
+      <div class="jumbotron profile-types text-center">
+        <div class="row">
+          <div class="col-sm-4">
+            <span class="fa fa-ticket fa-5x"></span>
+            <h2>Venues</h2>
+            <p>Manage press kit submissions, easily fill gaps in your schedule.</p>
+          </div>
+          <div class="col-sm-4">
+            <span class="fa fa-music fa-5x"></span>
+            <h2>Musicians</h2>
+            <p>Host your press kit and find venues locally or on tour</p>
+          </div>
+          <div class="col-sm-4">
+            <span class="fa fa-users fa-5x"></span>
+            <h2>Fans</h2>
+            <p>Find shows in your area, follow your favorite artists</p>
+          </div>
+        </div>
+        <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-primary">Get Started For Free</a>
+      </div>
+    {% endif %}
   </div>
 {% endblock %}
