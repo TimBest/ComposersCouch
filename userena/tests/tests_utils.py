@@ -60,7 +60,7 @@ class UtilsTests(TestCase):
         self.failUnlessEqual(signin_redirect(), settings.LOGIN_REDIRECT_URL)
 
     def test_get_protocol(self):
-        """ Test if the correct protocol is returned """
+        """ Test if the correct proto is returned """
         self.failUnlessEqual(get_protocol(), 'http')
 
         userena_settings.USERENA_USE_HTTPS = True

@@ -1,37 +1,32 @@
-
-.row {
-  margin-right:0px;
-  margin-left:0px;
-}
-
-.col {
-  position:relative;
-  height:125px;
-  .color {
-
-    position: absolute;
-    bottom:0;
-    vertical-align:bottom;
-    visibility:hidden;
-    font-weight:700;
-    font-size:14pt;
+  .row {
+    margin-right:0px;
+    margin-left:0px;
   }
-  &:hover,
-  &:focus,
-  &:active,
-  .active {
+
+
+.color-scheme {
+  color:@white;
+  margin-bottom:50px;
+  .col {
+    position:relative;
+    height:125px;
     .color {
-      visibility:visible;
+      position: absolute;
+      bottom:0;
+      vertical-align:bottom;
+      visibility:hidden;
+      font-weight:bold;
+      font-size:14pt;
+    }
+    &:hover,
+    &:focus,
+    &:active,
+    .active {
+      .color {
+        visibility:visible;
+      }
     }
   }
-}
-
-
-#black {
-  color:@black;
-}
-#white {
-  color:@white;
 }
 
 .black {
@@ -96,6 +91,22 @@
 }
 .faded-green {
   background-color:@faded-green;
+}
+
+.dark-yellow {
+  background-color:@dark-yellow;
+}
+.muted-yellow {
+  background-color:@muted-yellow;
+}
+.yellow {
+  background-color:@yellow;
+}
+.light-yellow {
+  background-color:@light-yellow;
+}
+.faded-yellow {
+  background-color:@faded-yellow;
 }
 
 .dark-orange {

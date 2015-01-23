@@ -3,7 +3,7 @@ You're receiving this email due to a claim of {{ user.username }}'s account at
 {{ site_name }}.
 
 Please go to the following page and choose a password to claim the profile:
-{% block reset_link %}{{ protocol }}://{{ domain }}{% url 'confirm_profile_claim' uid token %}{% endblock %}
+{% block reset_link %}{{ proto }}://{{ domain }}{% url 'confirm_profile_claim' uid token %}{% endblock %}
 
 Thanks for using our site!
 
