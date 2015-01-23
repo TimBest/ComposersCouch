@@ -7583,16 +7583,16 @@ h1 {
   color: #6c0d08;
 }
 .header.feed .main-nav {
-  font-size: 18px;
-  margin-top: 54px;
+  font-size: 16px;
+  margin-top: 57px;
 }
 .header.feed .main-nav li a {
-  color: #cbcfd3;
+  color: #fff;
 }
 .header.feed .main-nav li a:hover,
 .header.feed .main-nav li a:focus {
   background-color: transparent;
-  color: #fbfcfc;
+  color: #cbcfd3;
 }
 .header.feed .main-nav li.active a,
 .header.feed .main-nav li.active a:focus,
@@ -7725,19 +7725,19 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .header.thread {
   color: #fbfcfc;
-  background-color: #0b396d;
+  background-color: #2161a8;
   padding: 10px 0px 0px 0px;
 }
 .header.thread .nav {
   margin-top: 54px;
 }
 .header.thread .nav li a {
-  color: #cbcfd3;
+  color: #fff;
 }
 .header.thread .nav li a:hover,
 .header.thread .nav li a:focus {
   background-color: transparent;
-  color: #fbfcfc;
+  color: #cbcfd3;
 }
 .header.thread .nav li.active a,
 .header.thread .nav li.active a:focus,
