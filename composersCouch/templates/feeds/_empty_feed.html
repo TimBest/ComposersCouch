@@ -10,7 +10,7 @@
         <p>No {{ feed_type }} from whom your following</p>
       </div>
     </div>
-  {% else %}
+  {% elif zipcodeForm %}
     <div class="panel">
       <div class="panel-body">
         <p>Please enter a different zipcode for more {{ feed_type }}</p>
@@ -20,9 +20,15 @@
         </form>
       </div>
     </div>
+  {% else %}
+    <div class="panel">
+      <div class="panel-body">
+        <p>No {{ feed_type }}</p>
+      </div>
+    </div>
   {% endif %}
 {% else %}
-  {{ scope }}
+  {% if zipcodeForm %}
     <div class="panel">
       <div class="panel-body">
         <div class="row">
@@ -36,6 +42,15 @@
           <div class="col-sm-6">
             <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" class="btn btn-primary">Sign Up</a>
           </div>
+        </div>
       </div>
     </div>
+  {% else %}
+    <div class="panel">
+      <div class="panel-body">
+        <p>No {{ feed_type }}. <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" class="btn btn-primary">Sign Up</a> for more options.</p>
+      </div>
+    </div>
+  {% endif %}
+
 {% endif %}

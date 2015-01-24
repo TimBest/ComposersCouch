@@ -23,8 +23,6 @@ DEVELOPMENT = False#TODO: get this work ing: os.environ.get('DEVELOPMENT', True)
 
 TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = ['*']
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -89,6 +87,7 @@ WSGI_APPLICATION = 'composersCouch.wsgi.application'
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 if DEVELOPMENT:
+    ALLOWED_HOSTS = ['*']
     POSTGIS_VERSION = (2, 1, 4)
     DATABASES = {
         'default': {
@@ -146,6 +145,7 @@ if DEVELOPMENT:
     GOOGLE_OAUTH2_CLIENT_SECRET  = 'BpAQ6KT37BLQxNc5ETzC0sMS'
 
 else:
+    ALLOWED_HOSTS = ['*']
     POSTGIS_VERSION = (2, 1, 1)
     DATABASES = {
         'default': {
