@@ -77,7 +77,7 @@
 {% block content %}
   <div class="feed">
     <div class="cards">
-      <div>
+      <p>
         {% comment %}<span>{% block feedType %}results{% endblock %}</span>{% endcomment %}
         {% block forForm %}{% endblock %}
         {% block availabilityForm %}
@@ -106,7 +106,7 @@
             </form>
           </div>
         {% endblock %}
-      </div>
+      </p>
       {% block feed %}{% endblock %}
     </div>
   </div>

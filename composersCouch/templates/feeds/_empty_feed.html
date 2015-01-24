@@ -1,18 +1,41 @@
-{% if zipcode %}
-  <p>No {{ feed_type }} in your area</p>
-{% else %}
-  {% if following %}
-    {% if user.is_authenticated %}
-      <p>No post from whom your following</p>
-    {% else %}
-      <p>Please sign up</p>
-      <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" class="btn btn-primary">Sign Up</a>
-    {% endif %}
-  {% else %}
-    <p>Please sign up or enter your zipcode</p>
-    <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" class="btn btn-primary">Sign Up</a>
-  {% endif %}
-{% endif %}
+{% load crispy_forms_tags  %}
+
 {% if usersGenres or genres %}
   <a class="text-danger" href="{{ request.path }}"><span class="fa fa-filter"><span> <u>Remove Filters</u></a>
+{% endif %}
+{% if request.user.is_authenticated %}
+  {% if following %}
+    <div class="panel">
+      <div class="panel-body">
+        <p>No {{ feed_type }} from whom your following</p>
+      </div>
+    </div>
+  {% else %}
+    <div class="panel">
+      <div class="panel-body">
+        <p>Please enter a different zipcode for more {{ feed_type }}</p>
+        <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
+          <input type="hidden" name="path" value="{% firstof request.path '/' %}">
+          {% crispy zipcodeForm %}
+        </form>
+      </div>
+    </div>
+  {% endif %}
+{% else %}
+  {{ scope }}
+    <div class="panel">
+      <div class="panel-body">
+        <div class="row">
+          <p>Please enter a {% if zipcode %}different{% endif %} zipcode or sign up for more {{ feed_type }}</p>
+          <div class="col-sm-6">
+            <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
+              <input type="hidden" name="path" value="{% firstof request.path '/' %}">
+              {% crispy zipcodeForm %}
+            </form>
+          </div>
+          <div class="col-sm-6">
+            <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" class="btn btn-primary">Sign Up</a>
+          </div>
+      </div>
+    </div>
 {% endif %}
