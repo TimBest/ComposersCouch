@@ -65,21 +65,26 @@ class LocalView(RequestView):
 
     def get_posts(self, **kwargs):
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-        posts = self.modelManager.filter(
-            zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
-        )
-        return self.band_or_venue(posts, **kwargs)
+        if location:
+            posts = self.modelManager.filter(
+                zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
+            )
+            return self.band_or_venue(posts, **kwargs)
+        else:
+            return []
 
 class ReqionalView(RequestView):
     template_name = 'feeds/requests/regional.html'
 
     def get_posts(self, **kwargs):
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-        posts = self.modelManager.all()
-        posts = self.modelManager.filter(
-            zip_code__point__distance_lte=(location, D(m=RegionalFeed.distance))
-        )
-        return self.band_or_venue(posts, **kwargs)
+        if location:
+            posts = self.modelManager.filter(
+                zip_code__point__distance_lte=(location, D(m=RegionalFeed.distance))
+            )
+            return self.band_or_venue(posts, **kwargs)
+        else:
+            return []
 
 class FollowingView(RequestView):
     template_name = 'feeds/requests/following.html'

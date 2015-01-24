@@ -47,27 +47,30 @@ class AvailabilityView(AvailabilityMixin, VenueView):
         start = datetime.combine(self.start_date, time()).replace(tzinfo=utc)
         end = datetime.combine(self.end_date, time()).replace(tzinfo=utc)
         posts = self.modelManager.exclude(**self.get_exclude(start, end))
-        try:
-            calendar = self.request.user.calendar
-            prev = calendar.get_prev_event(in_datetime=end)
-            next = calendar.get_next_event(in_datetime=end)
-            if prev:
-                start = prev.get_location().zip_code.point
-            else:
-                start = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-            if next:
-                end = next.get_location().zip_code.point
-            else:
-                end = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-            line = LineString(start,end)
-            return posts.filter(
-                profile__contact_info__location__zip_code__point__distance_lte=(line, D(m=LocalFeed.distance))
-            )
-        except:
-            location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-            return posts.filter(
-                profile__user__calendar__events__line__line__distance_lte=(location, D(m=LocalFeed.distance))
-            )
+        location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
+        if location:
+            try:
+                calendar = self.request.user.calendar
+                prev = calendar.get_prev_event(in_datetime=end)
+                next = calendar.get_next_event(in_datetime=end)
+                if prev:
+                    start = prev.get_location().zip_code.point
+                else:
+                    start = get_location(self.request, self.get_zipcode(**kwargs), 'point')
+                if next:
+                    end = next.get_location().zip_code.point
+                else:
+                    end = get_location(self.request, self.get_zipcode(**kwargs), 'point')
+                line = LineString(start,end)
+                return posts.filter(
+                    profile__contact_info__location__zip_code__point__distance_lte=(line, D(m=LocalFeed.distance))
+                )
+            except:
+                return posts.filter(
+                    profile__user__calendar__events__line__line__distance_lte=(location, D(m=LocalFeed.distance))
+                )
+        else:
+            return []
 
 available_venues = AvailabilityView.as_view()
 
@@ -76,18 +79,24 @@ class LocalView(VenueView):
 
     def get_posts(self, **kwargs):
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-        return self.modelManager.filter(
-            profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
-        )
+        if location:
+            return self.modelManager.filter(
+                profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
+            )
+        else:
+            return []
 
 class ReqionalView(VenueView):
     template_name = 'feeds/venues/regional.html'
 
     def get_posts(self, **kwargs):
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-        return self.modelManager.filter(
-            profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=RegionalFeed.distance))
-        )
+        if location:
+            return self.modelManager.filter(
+                profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=RegionalFeed.distance))
+            )
+        else:
+            return []
 
 class FollowingView(VenueView):
     template_name = 'feeds/venues/following.html'

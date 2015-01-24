@@ -52,9 +52,12 @@ class LocalView(ShowView):
     def get_posts(self, **kwargs):
         posts = super(LocalView, self).get_posts(**kwargs)
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-        return posts.filter(
-            info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
-        )
+        if location:
+            return posts.filter(
+                info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
+            )
+        else:
+            return []
 
 class ReqionalView(ShowView):
     template_name = 'feeds/shows/regional.html'
@@ -62,9 +65,12 @@ class ReqionalView(ShowView):
     def get_posts(self, **kwargs):
         posts = super(ReqionalView, self).get_posts(**kwargs)
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-        return posts.filter(
-            info__location__zip_code__point__distance_lte=(location, D(m=RegionalFeed.distance))
-        )
+        if location:
+            return posts.filter(
+                info__location__zip_code__point__distance_lte=(location, D(m=RegionalFeed.distance))
+            )
+        else:
+            return []
 
 class FollowingView(ShowView):
     template_name = 'feeds/shows/following.html'

@@ -54,18 +54,24 @@ class LocalView(ArtistView):
 
     def get_posts(self, **kwargs):
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-        return self.modelManager.filter(
-            profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
-        )
+        if location:
+            return self.modelManager.filter(
+                profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
+            )
+        else:
+            return []
 
 class ReqionalView(ArtistView):
     template_name = 'feeds/artists/regional.html'
 
     def get_posts(self, **kwargs):
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-        return self.modelManager.filter(
-            profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=RegionalFeed.distance))
-        )
+        if location:
+            return self.modelManager.filter(
+                profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=RegionalFeed.distance))
+            )
+        else:
+            return []
 
 class FollowingView(ArtistView):
     template_name = 'feeds/artists/following.html'

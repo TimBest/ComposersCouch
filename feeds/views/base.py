@@ -67,9 +67,10 @@ class FeedMixin(GenreMixin, ZipcodeMixin):
         context = super(FeedMixin, self).get_context_data(**kwargs)
         page_num = self.request.GET.get('page')
         posts = self.get_posts()
-        posts = self.get_order(posts)
-        if context.get('genres'):
-            posts = self.filter_by_genre(context['genres'], posts)
+        if posts:
+            posts = self.get_order(posts)
+            if context.get('genres'):
+                posts = self.filter_by_genre(context['genres'], posts)
         context['posts'] = get_page(page_num, posts, 25)
         if not self.kwargs.get('order'):
           context['order'] = self.get_default_order()
