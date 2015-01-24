@@ -19,7 +19,10 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-DEVELOPMENT = os.environ.getenv('DEVELOPMENT', True)
+try:
+    DEVELOPMENT = os.environ['DEVELOPMENT']
+except:
+    DEVELOPMENT = True)
 
 TEMPLATE_DEBUG = True
 
