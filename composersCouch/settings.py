@@ -22,7 +22,7 @@ DEBUG = True
 try:
     DEVELOPMENT = os.environ['DEVELOPMENT']
 except KeyError:
-    DEVELOPMENT = True)
+    DEVELOPMENT = True
 
 TEMPLATE_DEBUG = True
 
