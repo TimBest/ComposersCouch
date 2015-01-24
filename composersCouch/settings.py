@@ -21,8 +21,8 @@ SECRET_KEY = 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4&qd$uz_5&a7%q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-DEVELOPMENT = False
-#DEVELOPMENT = True
+#DEVELOPMENT = False
+DEVELOPMENT = True
 
 TEMPLATE_DEBUG = True
 
@@ -44,10 +44,11 @@ INSTALLED_APPS = (
     'compressor',
     'djcelery',
     'embed_video',
-    'stream_framework',
     'pagination',
     'social_auth',
     'static_precompiler',
+    'storages',
+    'stream_framework',
 
     'accounts',
     'audiofield',
@@ -147,6 +148,8 @@ if DEVELOPMENT:
     GOOGLE_OAUTH2_CLIENT_ID      = '566838544572.apps.googleusercontent.com'
     GOOGLE_OAUTH2_CLIENT_SECRET  = 'BpAQ6KT37BLQxNc5ETzC0sMS'
 
+    STATIC_URL = '/static/'
+
 else:
     ALLOWED_HOSTS = ['*']
     POSTGIS_VERSION = (2, 1, 1)
@@ -200,6 +203,29 @@ else:
     GOOGLE_OAUTH2_CLIENT_ID      = '566838544572.apps.googleusercontent.com'
     GOOGLE_OAUTH2_CLIENT_SECRET  = 'BpAQ6KT37BLQxNc5ETzC0sMS'
 
+    AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'Cache-Control': 'max-age=94608000',
+    }
+
+    AWS_STORAGE_BUCKET_NAME = 'composerscouch-media'
+    AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID']
+    AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_KEY']
+
+    # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
+    # it simple - just use this domain plus the path. (If this isn't set, things get complicated).
+    # This controls how the `static` template tag from `staticfiles` gets expanded, if you're using it.
+    # We also use it in the next setting.
+    AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+    # This is used by the `static` template tag from `static`, if you're using that. Or if anything else
+    # refers directly to STATIC_URL. So it's safest to always set it.
+    STATIC_URL = "https://%s/" % AWS_S3_CUSTOM_DOMAIN
+
+    # Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
+    # you run `collectstatic`).
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
 SITE_ID = 1
 
 # Internationalization
@@ -228,7 +254,6 @@ MAX_AUDIO_UPLOAD_SIZE = "10485760"
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 STATIC_ROOT = os.path.join( BASE_DIR, 'composersCouch/static/staticfiles/' )
 
-STATIC_URL = '/static/'
 
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
@@ -251,6 +276,9 @@ STATIC_PRECOMPILER_COMPILERS = (
     'static_precompiler.compilers.LESS',
 )
 STATIC_PRECOMPILER_OUTPUT_DIR = 'compiled'
+
+
+
 
 # Templates
 TEMPLATE_DIRS = (
