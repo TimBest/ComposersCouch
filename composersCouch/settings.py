@@ -224,7 +224,9 @@ else:
 
     # Tell the staticfiles app to use S3Boto storage when writing the collected static files (when
     # you run `collectstatic`).
-    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_LOCATION = 'static'
+    STATICFILES_STORAGE = 'composersCouch.custom_storages.StaticStorage'
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
 SITE_ID = 1
 
