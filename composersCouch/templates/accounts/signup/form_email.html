@@ -1,5 +1,6 @@
 {% extends 'form.html' %}
-{% load i18n crispy_forms_tags static %}
+{% load i18n crispy_forms_tags %}
+{% load static from staticfiles %}
 {% crispy signupForm signupForm.helper %}
 {% crispy zipcodeForm zipcodeForm.helper %}
 {% crispy emailForm emailForm.helper %}

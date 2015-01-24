@@ -1,4 +1,6 @@
-{% load i18n staticfiles thumbnail %}
+{% load i18n thumbnail %}
+{% load static from staticfiles %}
+
 
 {% if profile.mugshot %}
   {% with height=height|stringformat:"s" width=width|stringformat:"s" %}

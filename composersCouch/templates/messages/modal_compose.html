@@ -1,4 +1,6 @@
 {% load i18n %}
+{% load static from staticfiles %}
+
 <link rel="stylesheet" href="{{ STATIC_URL }}css/token-input.css" type="text/css" />
 <form id="message-modal-form"
       action="{% url 'messages_compose' %}" method="post"
