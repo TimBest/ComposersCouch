@@ -21,7 +21,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4
 DEBUG = True
 try:
     DEVELOPMENT = os.environ['DEVELOPMENT']
-except:
+except KeyError:
     DEVELOPMENT = True)
 
 TEMPLATE_DEBUG = True
