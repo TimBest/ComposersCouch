@@ -39,11 +39,15 @@ urlpatterns += patterns('',
     url(r'^accounts/', include('userena.urls')),
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
-    # WARNING/TODO: media url is hard coded in auto complete templates
-    url(r'^media/(?P<path>.*)$','django.views.static.serve',
-        {'document_root':  getattr(settings, 'MEDIA_ROOT', '/media')}),
     url(r'^messages/', include('threaded_messages.urls')),
     url(r'^photos/', include('photos.urls', namespace='photos')),
     url(r'^progressbarupload/', include('progressbarupload.urls')),
     url(r'^search', include('search.urls')),
 )
+
+if settings.DEVELOPMENT:
+    urlpatterns += patterns('',
+        # WARNING/TODO: media url is hard coded in auto complete templates
+        url(r'^media/(?P<path>.*)$','django.views.static.serve',
+            {'document_root':  getattr(settings, 'MEDIA_ROOT', '/media')}),
+    )

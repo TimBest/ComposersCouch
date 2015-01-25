@@ -244,9 +244,7 @@ TIME_ZONE = 'UTC'
 
 USE_TZ = True
 
-MEDIA_ROOT = os.path.join( BASE_DIR, 'composersCouch/media' )
-#MEDIA_ROOT = '/media/timothy/Elements/test/'
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'composersCouch/media')
 
 #10MB
 MAX_AUDIO_UPLOAD_SIZE = "10485760"
