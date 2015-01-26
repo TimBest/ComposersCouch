@@ -33,7 +33,7 @@ class ProgressBarUploadHandler(TemporaryFileUploadHandler):
             try:
                 data['uploaded'] += self.chunk_size
             except:
-                data['uploaded'] += chunk_size
+                data['uploaded'] += 65536
             cache.set(self.cache_key, data)
         return raw_data
 
