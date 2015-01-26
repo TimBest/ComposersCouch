@@ -30,7 +30,8 @@ class ProgressBarUploadHandler(TemporaryFileUploadHandler):
     def receive_data_chunk(self, raw_data, start):
         if self.cache_key:
             data = cache.get(self.cache_key)
-            data['uploaded'] += start
+            if self:
+                data['uploaded'] += self.chunk_size
             cache.set(self.cache_key, data)
         import time
         time.sleep(2)
