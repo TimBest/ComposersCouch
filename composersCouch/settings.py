@@ -277,8 +277,6 @@ STATIC_PRECOMPILER_COMPILERS = (
 STATIC_PRECOMPILER_OUTPUT_DIR = 'compiled'
 
 
-
-
 # Templates
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
@@ -289,6 +287,7 @@ FILE_UPLOAD_HANDLERS = (
     "django.core.files.uploadhandler.MemoryFileUploadHandler",
     "django.core.files.uploadhandler.TemporaryFileUploadHandler",
 )
+
 PROGRESSBARUPLOAD_INCLUDE_JQUERY = False
 
 AUTHENTICATION_BACKENDS = (

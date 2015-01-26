@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from django.core.cache import cache
 from django.core.files.uploadhandler import TemporaryFileUploadHandler
+from django.core.cache import cache
 
 
 # copied from http://djangosnippets.org/snippets/678/
@@ -30,7 +30,7 @@ class ProgressBarUploadHandler(TemporaryFileUploadHandler):
     def receive_data_chunk(self, raw_data, start):
         if self.cache_key:
             data = cache.get(self.cache_key)
-            data['uploaded'] += self.chunk_size
+            #data['uploaded'] += self.chunk_size
             cache.set(self.cache_key, data)
         return raw_data
 
