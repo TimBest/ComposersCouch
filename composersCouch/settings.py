@@ -102,7 +102,6 @@ if DEVELOPMENT:
             'ATOMIC_REQUESTS': True,
         }
     }
-    #redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost:6379'))
     STREAM_REDIS_CONFIG = {
         'default': {
             'host': 'localhost',
@@ -158,7 +157,6 @@ else:
             'PORT': os.environ['RDS_PORT'],
         }
     }
-    redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'aws-my-1pu2uz0351jv0.og7bpd.0001.use1.cache.amazonaws.com:6379'))
     STREAM_REDIS_CONFIG = {
         'default': {
             'host': 'aws-my-1pu2uz0351jv0.og7bpd.0001.use1.cache.amazonaws.com',
