@@ -187,7 +187,7 @@ else:
     CACHES = {
         'default': {
             'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
-            'LOCATION': 'ec2-54-174-202-254.compute-1.amazonaws.com:11211',
+            'LOCATION': 'memcached.og7bpd.cfg.use1.cache.amazonaws.com:11211',
         }
     }
     EMAIL_USE_TLS = True

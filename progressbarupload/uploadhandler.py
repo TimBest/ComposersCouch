@@ -33,7 +33,7 @@ class ProgressBarUploadHandler(TemporaryFileUploadHandler):
             if data:
                 data['uploaded'] += self.chunk_size
             else:
-                data = {'uploaded' :start}
+                data = {'uploaded' : start}
             cache.set(self.cache_key, data)
         return raw_data
 
