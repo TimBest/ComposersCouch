@@ -21,9 +21,7 @@ SECRET_KEY = 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4&qd$uz_5&a7%q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-DEVELOPMENT = False
-#DEVELOPMENT = True
-
+DEVELOPMENT = os.environ.get('DEVELOPMENT', False)
 TEMPLATE_DEBUG = True
 
 # Application definition
@@ -104,14 +102,6 @@ if DEVELOPMENT:
             'ATOMIC_REQUESTS': True,
         }
     }
-    HAYSTACK_CONNECTIONS = {
-        'default': {
-            'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-            'URL': 'http://127.0.0.1:8983/solr',
-            'INCLUDE_SPELLING': True,
-        },
-    }
-    # on Heroku redis connection parameters come from environment variables
     redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost:6379'))
     STREAM_REDIS_CONFIG = {
         'default': {
@@ -152,7 +142,8 @@ if DEVELOPMENT:
     MEDIA_URL = '/media/'
 
 else:
-    ALLOWED_HOSTS = ['*']
+    ALLOWED_HOSTS = ['djangosite-env-ntjden2apj.elasticbeanstalk.com']
+    #ALLOWED_HOSTS = ['.composerscouch.com']
     POSTGIS_VERSION = (2, 1, 1)
     DATABASES = {
         'default': {
@@ -167,14 +158,6 @@ else:
             'PORT': os.environ['RDS_PORT'],
         }
     }
-    HAYSTACK_CONNECTIONS = {
-        'default': {
-            'ENGINE': 'haystack.backends.solr_backend.SolrEngine',
-            'URL': 'ec2-54-174-202-254.compute-1.amazonaws.com:8983/solr',
-            'INCLUDE_SPELLING': True,
-        },
-    }
-    # on Heroku redis connection parameters come from environment variables
     redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'aws-my-1pu2uz0351jv0.og7bpd.0001.use1.cache.amazonaws.com:6379'))
     STREAM_REDIS_CONFIG = {
         'default': {

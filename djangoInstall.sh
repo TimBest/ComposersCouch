@@ -59,32 +59,7 @@ sudo apt-get install apache2 libapache2-mod-wsgi -y
 #    WSGIScriptAlias / /home/ubuntu/composersCouch/composersCouch/apache/django.wsgi
 
 
-# Composers Couch dependencies
-
-# composers couch third party apps
-sudo pip install django-social-auth
-sudo pip install django-autocomplete-light
-sudo pip install --upgrade django-crispy-forms
-sudo pip install django-embed-video
-sudo pip install django-guardian
-sudo pip install django-pagination
-sudo pip install django-static-precompiler
-sudo pip install html2text
-sudo pip install django-debug-toolbar
-sudo pip install pytz
-sudo pip install vobject
-sudo pip install mutagen
-sudo pip install django-oscar
-sudo pip install django-extra-views
-sudo pip install django-extra-views
-sudo pip install feedly django-celery django_compressor
-sudo pip install django-progressbarupload
-sudo pip install django-threaded-messages
-
 # pillow image support
-sudo pip install pillow -y
-sudo pip install sorl-thumbnail
-sudo pip install easy-thumbnails
 sudo apt-get install libjpeg-dev -y
 sudo apt-get install libjpeg62 libjpeg62-dev zlib1g-dev -y
 
@@ -94,8 +69,6 @@ sudo apt-get install redis-server -y
 
 # install memcached
 sudo apt-get install memcached -y
-sudo pip install python-memcached
-sudo pip install pysolr
 
 # install Less
 sudo apt-get install python-software-properties python g++ make -y
@@ -107,6 +80,10 @@ sudo npm install -g less
 
 
 exit 0
+
+# add 'DEVELOPMENT=True' to the end of ~/.bashrc
+# add 'export DEVELOPMENT=Treu' to the end of ~/.profile
+# load with source ~/.bashrs and ~/.profile respectivly
 
 # ssh -i djangosite-eb.pem ec2-user@54.174.202.254
 # /opt/python/current/app/
