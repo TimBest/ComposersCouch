@@ -13,7 +13,7 @@ $(document).ready(function(){
     // Prevent multiple submits
     if ($.data(this, 'submitted')) return false;
 
-    var freq = 1000;//1000; // freqency of update in ms
+    var freq = 1000; // freqency of update in ms
     var uuid = gen_uuid(); // id for this upload so we can fetch progress info.
     var progress_url = upload_progress_url; // ajax view serving progress info
     var width = 200;
