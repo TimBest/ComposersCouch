@@ -21,8 +21,8 @@ SECRET_KEY = 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4&qd$uz_5&a7%q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-DEVELOPMENT = False
-#DEVELOPMENT = True
+#DEVELOPMENT = False
+DEVELOPMENT = True
 
 TEMPLATE_DEBUG = True
 
@@ -251,7 +251,7 @@ MAX_AUDIO_UPLOAD_SIZE = "10485760"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
-STATIC_ROOT = os.path.join( BASE_DIR, 'composersCouch/static/staticfiles/' )
+STATIC_ROOT = os.path.join( BASE_DIR, 'composersCouch/staticfiles/' )
 
 
 STATICFILES_DIRS = (
