@@ -102,7 +102,7 @@ if DEVELOPMENT:
             'ATOMIC_REQUESTS': True,
         }
     }
-    redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost:6379'))
+    #redis_url = urlparse.urlparse(os.environ.get('REDISTOGO_URL', 'redis://localhost:6379'))
     STREAM_REDIS_CONFIG = {
         'default': {
             'host': 'localhost',

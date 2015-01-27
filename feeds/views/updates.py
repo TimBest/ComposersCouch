@@ -58,7 +58,7 @@ class ReqionalView(UpdateView):
     feed = 'get_regional_feed'
     location_type = 'code'
 
-class AllView(TemplateView):
+class AllView(ZipcodeMixin, TemplateView):
     template_name = 'feeds/updates/all.html'
     path_to_genre = 'user__profile__genre__slug'
 
