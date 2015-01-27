@@ -91,17 +91,6 @@ WSGI_APPLICATION = 'composersCouch.wsgi.application'
 if DEVELOPMENT:
     ALLOWED_HOSTS = ['*']
     POSTGIS_VERSION = (2, 1, 4)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.contrib.gis.db.backends.postgis',
-            'NAME': 'composerscouchdb',
-            'USER': 'postgres',
-            'PASSWORD': 'devDatabase', # database Password goes Here
-            'HOST': 'localhost',
-            'PORT': '',
-            'ATOMIC_REQUESTS': True,
-        }
-    }
     STREAM_REDIS_CONFIG = {
         'default': {
             'host': 'localhost',
@@ -144,19 +133,6 @@ else:
     ALLOWED_HOSTS = ['djangosite-env-ntjden2apj.elasticbeanstalk.com']
     #ALLOWED_HOSTS = ['.composerscouch.com']
     POSTGIS_VERSION = (2, 1, 1)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.contrib.gis.db.backends.postgis',
-            'NAME': os.environ['RDS_DB_NAME'],
-            'OPTIONS': {
-                'options': '-c search_path=gis,public,pg_catalog'
-            },
-            'USER': os.environ['RDS_USERNAME'],
-            'PASSWORD': os.environ['RDS_PASSWORD'],
-            'HOST': os.environ['RDS_HOSTNAME'],
-            'PORT': os.environ['RDS_PORT'],
-        }
-    }
     STREAM_REDIS_CONFIG = {
         'default': {
             'host': 'aws-my-1pu2uz0351jv0.og7bpd.0001.use1.cache.amazonaws.com',
@@ -209,6 +185,23 @@ else:
     MEDIAFILES_LOCATION = 'media'
     MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
     DEFAULT_FILE_STORAGE = 'composersCouch.custom_storages.MediaStorage'
+
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': os.environ.get('RDS_DB_NAME', 'composerscouchdb'),
+        'OPTIONS': {
+            'options': '-c search_path=gis,public,pg_catalog'
+        },
+        'USER': os.environ.get('RDS_USERNAME', 'postgres'),
+        'PASSWORD': os.environ.get('RDS_PASSWORD', 'devDatabase'),
+        'HOST': os.environ.get('RDS_HOSTNAME', 'localhost'),
+        'PORT': os.environ.get('RDS_PORT', ''),
+        'ATOMIC_REQUESTS': True,
+    }
+}
 
 SITE_ID = 1
 
