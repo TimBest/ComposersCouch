@@ -65,7 +65,7 @@ class AllView(ZipcodeMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(AllView, self).get_context_data(**kwargs)
         page_num = self.request.GET.get('page')
-        context['posts'] = get_page(page_num, Post.objects.all(), 25)
+        context['posts'] = get_page(page_num, Post.objects.all().order_by('-created_at'), 25)
         return context
 
 class FollowingView(UpdateView):
