@@ -112,7 +112,6 @@ class RequestFormView(MultipleFormsView):
     form_classes = {
       'dateForm'      : forms.DateForm,
       'messageForm'   : forms.MessageForm,
-      'requestForm'   : forms.RequestForm,
       'venueForm'      : forms.ParticipantForm,
     }
     model = Participant
@@ -143,7 +142,7 @@ class RequestFormView(MultipleFormsView):
                 self.artist = {'user' : user}
             else:
                 venue_data = {'user' : user}
-        return {'dateForm':None, 'messageForm':None, 'requestForm':None, 'venueForm':venue_data,}
+        return {'dateForm':None, 'messageForm':None, 'venueForm':venue_data,}
 
     def get_success_url(self, thread=None):
         # TODO: extend this guy to accept next urls
@@ -161,8 +160,6 @@ class RequestFormView(MultipleFormsView):
         return users
 
     def forms_valid(self, forms):
-        private_request = forms['requestForm'].save(commit=False)
-        private_request.date = forms['dateForm'].save()
         sender = self.request.user
         message = Message.objects.create(
                     body=forms['messageForm'].cleaned_data['body'],
@@ -180,7 +177,10 @@ class RequestFormView(MultipleFormsView):
         for form in forms['ArtistFormset']:
             if form.cleaned_data.get('user'):
                 form.save(thread=thread, sender=sender)
-        private_request.thread = thread
+        private_request = PrivateRequest(
+            date=forms['dateForm'].save(),
+            thread=thread,
+        )
         private_request.save()
         forms['venueForm'].save(thread=thread, sender=sender, role='v')
         # check if user is in thread. if not add them
@@ -199,7 +199,6 @@ requestForm = login_required(RequestFormView.as_view())
 class RequestEditFormView(MultipleModelFormsView):
     form_classes = {
       'dateForm': forms.DateForm,
-      'requestForm': forms.RequestForm,
     }
     template_name = 'request/edit_request_form.html'
     success_url = 'sent_private_requests'
@@ -212,7 +211,6 @@ class RequestEditFormView(MultipleModelFormsView):
     def get_objects(self):
         return {
             'dateForm': self.private_request.date,
-            'requestForm': self.private_request,
         }
 
     def get_success_url(self, thread=None):
@@ -223,9 +221,8 @@ class RequestEditFormView(MultipleModelFormsView):
             return redirect(self.success_url)
 
     def forms_valid(self, forms):
-        private_request = forms['requestForm'].save()
-        private_request.date = forms['dateForm'].save()
-        private_request.save()
+        self.private_request.date = forms['dateForm'].save()
+        self.private_request.save()
         reply_to_thread(self.private_request.thread, self.request.user, "edited request")
         return self.get_success_url(thread=self.private_request.thread)
 

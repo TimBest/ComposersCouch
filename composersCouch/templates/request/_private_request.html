@@ -32,7 +32,6 @@
             <a href="{% url 'redirectToProfile' request.venue.participant.user.username 'about' %}">{{ request.venue.participant.user.profile }}</a>
             {% include "request/_accepted.html" with accepted=request.venue.accepted %}
           </div>
-          <p>Application deadline: {{ request.accept_by }}</p>
         </div>
         <div class="col-sm-6">
           <h4>Suggested dates:</h4>

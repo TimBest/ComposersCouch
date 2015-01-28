@@ -10,7 +10,6 @@ from schedule.models.events import DateRange
 
 
 class Request(models.Model):
-    accept_by = models.DateField(_("accept_by"), null=True, blank=True)
     date = models.ForeignKey(DateRange, verbose_name=_("dateRange"))
 
     created_at = models.DateTimeField(auto_now_add=True)
@@ -52,6 +51,7 @@ class RequestParticipant(models.Model):
 
 """ Public Request """
 class PublicRequest(Request):
+    accept_by = models.DateField(_("accept_by"), null=True, blank=True)
     zip_code = models.ForeignKey(Zipcode, verbose_name=_("Zipcode"))
     details = models.TextField(_("description"))
     fulfilled = models.BooleanField(_('fulfilled'), default=False)

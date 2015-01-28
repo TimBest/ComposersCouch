@@ -10,9 +10,6 @@ With:
 {% if request.openers %}Artists:{% endif %}
   {% for opener in request.openers %}{{ opener.user.profile }} ({{ proto }}://{{ domain }}{{ opener.user.profile.get_absolute_url }}){% endfor %}
 
-
-Application deadline: {{ request.accept_by }}
-
 {{ request.thread.latest_msg.body }}
 
 

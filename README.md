@@ -39,3 +39,6 @@ Django powered site for composers couch
     python manage.py shell
       from genres import load
       load.run()
+
+  Test Emails:
+    python -m smtpd -n -c DebuggingServer localhost:1025

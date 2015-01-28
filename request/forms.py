@@ -139,35 +139,16 @@ class ArtistParticipantForm(ParticipantForm):
             self.cleaned_data['user']=user
             return self.cleaned_data
 
-class RequestForm(ModelForm):
+class PublicRequestForm(ModelForm):
     date_format = '%m/%d/%Y'
     accept_by = forms.DateField(label=_("Application deadline"),
                                 widget=forms.DateInput(format=date_format))
-
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kw):
         self.user = kwargs.pop('user', None)
-        super(RequestForm, self).__init__(*args, **kwargs)
+        super(PublicRequestForm, self).__init__(*args, **kw)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.helper.layout = Layout('accept_by',)
-
-    class Meta:
-        model = models.PrivateRequest
-        fields = ('accept_by',)
-
-    def clean_accept_by(self):
-        accept_by = self.cleaned_data['accept_by']
-        if accept_by < timezone.now().date():
-            raise forms.ValidationError(_(u"There must be time to accept the request"))
-        return accept_by
-
-class PublicRequestForm(RequestForm):
-
-    def __init__(self, *args, **kw):
-      super(PublicRequestForm, self).__init__(*args, **kw)
-      self.helper = FormHelper()
-      self.helper.form_tag = False
-      self.helper.layout = Layout('zip_code','details','accept_by',)
+        self.helper.layout = Layout('zip_code','details','accept_by',)
 
     class Meta:
         model = models.PublicRequest
@@ -175,6 +156,12 @@ class PublicRequestForm(RequestForm):
           'details' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
         }
         fields = ('accept_by','details', 'zip_code',)
+
+    def clean_accept_by(self):
+        accept_by = self.cleaned_data['accept_by']
+        if accept_by < timezone.now().date():
+            raise forms.ValidationError(_(u"There must be time to accept the request"))
+        return accept_by
 
 class NumberOfApplicantsForm(PublicRequestForm):
 
