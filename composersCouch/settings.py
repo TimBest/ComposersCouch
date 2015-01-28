@@ -237,7 +237,6 @@ STATIC_PRECOMPILER_COMPILERS = (
     'static_precompiler.compilers.LESS',
 )
 
-STATIC_PRECOMPILER_ROOT = 'static'
 STATIC_PRECOMPILER_OUTPUT_DIR = 'compiled'
 
 
