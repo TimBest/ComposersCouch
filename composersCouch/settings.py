@@ -274,6 +274,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.tz',
     'django.contrib.messages.context_processors.messages',
     'composersCouch.context_processors.now',
+    'composersCouch.context_processors.development',
     'social_auth.context_processors.social_auth_by_type_backends',
 )
 

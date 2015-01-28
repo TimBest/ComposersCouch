@@ -14,8 +14,11 @@
     <title>{% block title %}Composers Couch{% endblock %}</title>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
     {% compress css %}
-      <link rel="stylesheet" type='text/css' href="{{ STATIC_URL }}{% compile 'less/theme.less' %}">
-      {% comment %}<link rel="stylesheet" type='text/css' href="{{ STATIC_URL }}compiled/less/theme.css" >{% endcomment %}
+      {% if is_development %}
+        <link rel="stylesheet" type='text/css' href="{{ STATIC_URL }}{% compile 'less/theme.less' %}">
+      {% else %}
+        <link rel="stylesheet" type='text/css' href="{{ STATIC_URL }}compiled/less/theme.css" >
+      {% endif %}
       <link rel="stylesheet" type='text/css' href="{{ STATIC_URL }}autocomplete_light/style.css">
     {% endcompress %}
   </head>
@@ -82,7 +85,6 @@
         <span class="fa fa-shopping-cart"></span>
       </a>{% endcomment %}
     </div>
-
     <!-- Begin page content -->
     {% block overwriteHeader %}
       <div class="header {% block headerClass %}{% endblock %}">
