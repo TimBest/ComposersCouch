@@ -104,7 +104,6 @@ if DEVELOPMENT:
             'LOCATION': '127.0.0.1:11211',
         }
     }
-    # python -m smtpd -n -c DebuggingServer localhost:1025
     EMAIL_HOST = 'localhost'
     EMAIL_PORT = 1025
     EMAIL_HOST_USER = ''
