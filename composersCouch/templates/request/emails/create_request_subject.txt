@@ -1,3 +1,3 @@
 {% autoescape off %}
-{% if request.headliner %}{{ request.headliner.user.profile }}{% else %}{{ request.thread.latest_msg.sender.profile }}{% endif %}, {{ request.date.start|date:"F d" }} at {{ request.venue.user.profile }}
+{% if request.headliner %}{{ request.headliner.user.profile }}{% else %}{{ request.thread.latest_msg.sender.profile }}{% endif %}, {{ request.date.start|date:"N d" }} at {{ request.venue.user.profile }}
 {% endautoescape %}
