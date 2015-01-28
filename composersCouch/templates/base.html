@@ -26,13 +26,11 @@
     <div class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container-fluid">
         <div class="navbar-header">
-          <h1>
-            <a class="navbar-brand" href="{% url 'home' %}">
-              <img class="couch" src="{% static 'img/CouchNavBar.png' %}" alt="COMPOSERS COUCH"/>
-              <span class="hidden">COMPOSERS COUCH</span>
-              <span class="beta-badge"> BETA</span>
-            </a>
-          </h1>
+          <a class="navbar-brand" href="{% url 'home' %}">
+            <img class="couch" src="{% static 'img/CouchNavBar.png' %}" alt="COMPOSERS COUCH"/>
+            <h1 class="hidden">COMPOSERS COUCH</h1>
+            <span class="beta-badge"> BETA</span>
+          </a>
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
