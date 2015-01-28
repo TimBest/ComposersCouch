@@ -109,7 +109,7 @@ def get_username(username):
     username = slugify(username)[:30]
     try:
         User.objects.get(username=username)
-        if username.length == 30:
+        if len(username) >= 30:
             username = random.choice(string.letters+string.digits)
         else:
             return get_username(username+random.choice(string.letters+string.digits))
