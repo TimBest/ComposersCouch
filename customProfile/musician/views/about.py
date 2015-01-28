@@ -17,9 +17,6 @@ class AboutView(ArtistProfileView):
     def get_context_data(self, **kwargs):
         context = super(AboutView, self).get_context_data(**kwargs)
         musician_profile = context['musicianProfile']
-        from django.conf import settings
-
-        context['key'] = settings.SECRET_KEY
         context['members'] = musician_profile.members.filter(current_member=True)
         return context
 
