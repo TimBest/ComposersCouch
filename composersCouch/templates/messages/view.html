@@ -1,37 +1,37 @@
-{% extends "base.html" %}
+{% extends "messages/base.html" %}
 {% load i18n inbox crispy_forms_tags %}
 {% crispy ReplyForm ReplyForm.helper %}
 
-{% block headerClass %}thread{% endblock %}
-
 {% block header %}
-  <h3>
-    {{ thread.subject }}
-  </h3>
+  <h3>{{ thread.subject }}</h3>
   {% block from %}
     <h5>
       {% for participant in participant.others %}
-      <a href="{{ participant.user.get_absolute_url }}" class="text-white">{{ participant.user.profile }}</a>
-      {% if not forloop.last %},{% endif %}
+        <a href="{{ participant.user.get_absolute_url }}" class="text-white">{{ participant.user.profile }}</a>
+        {% if not forloop.last %},{% endif %}
       {% endfor %}
     </h5>
   {% endblock %}
 {% endblock %}
 
+{% block navigation %}{% endblock %}
+
 {% block content %}
-  {% block card %}{% endblock %}
-  <div class="message-thread">
-    <div class="message-list">
-      {% for message_tuple in message_list %}
-        {% with message_tuple.0 as message %}
-          {% include "messages/_message.html" with message=message user=user %}
-        {% endwith %}
-      {% endfor %}
+  <div class="messages">
+    {% block card %}{% endblock %}
+    <div class="message-thread">
+      <div class="message-list">
+        {% for message_tuple in message_list %}
+          {% with message_tuple.0 as message %}
+            {% include "messages/_message.html" with message=message user=user %}
+          {% endwith %}
+        {% endfor %}
+      </div>
+      <form action="{% url 'message_reply' thread.pk %}?next={{ request.path }}" class="reply-form" method="post">
+        {% crispy form %}
+        <button type="submit" class="btn btn-primary"><span class="fa fa-send" ></span> {% trans 'Send' %}</button>
+      </form>
     </div>
-    <form action="{% url 'message_reply' thread.pk %}?next={{ request.path }}" class="reply-form" method="post">
-      {% crispy form %}
-      <button type="submit" class="btn btn-primary"><span class="fa fa-send" ></span> {% trans 'Send' %}</button>
-    </form>
   </div>
 {% endblock %}
 

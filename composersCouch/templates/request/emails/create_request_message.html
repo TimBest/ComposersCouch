@@ -1,0 +1,20 @@
+{% autoescape off %}
+
+Show on: {{ request.date.start }}
+
+With:
+{% if request.headliner %}Headliner: {{ request.headliner.user.profile }} {{ proto }}://{{ domain }}{{ request.headliner.user.profile.get_absolute_url }}{% endif %}
+{% if request.openers %}Artists:{% endif %}
+  {% for opener in request.openers %}{{ opener.user.profile }} ({{ proto }}://{{ domain }}{{ opener.user.profile.get_absolute_url }}){% endfor %}
+
+At: {{ request.venue.user.profile }} ({{ proto }}://{{ domain }}{{ request.venue.user.profile.get_absolute_url }})
+
+Application deadline: {{ request.accept_by }}
+
+{{ request.thread.latest_msg.body }}
+
+
+Sincerely,
+{{ request.thread.latest_msg.sender.profile }}
+
+{% endautoescape %}

@@ -7745,6 +7745,9 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   border-radius: 3px 3px 0px 0px;
   color: #2f2f2f;
 }
+.content {
+  padding-top: 15px;
+}
 @media (min-width: 768px) {
   .content .message-thread {
     padding: 0px 30px;

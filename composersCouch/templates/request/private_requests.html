@@ -13,7 +13,7 @@
         <div class="col-sm-4 center">
           <ul class="nav nav-pills nav-centered" role="tablist">
             <li class="{% if inbox %}active{% endif %}">
-              <a href="{% url 'private_requests' %}"><span class="fa fa-inbox"></span> Inbox{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a>
+              <a href="{% url 'private_requests' %}"><span class="fa fa-inbox"></span> Inbox</a>
             </li>
             <li class="{% if sent %}active{% endif %}">
               <a href="{% url 'sent_private_requests' %}"><span class="fa fa-send"></span> Sent</a>
