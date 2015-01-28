@@ -112,19 +112,6 @@ if DEVELOPMENT:
     EMAIL_HOST_PASSWORD = ''
     EMAIL_USE_TLS = False
     DEFAULT_FROM_EMAIL = 'testing@example.com'
-    """EMAIL_USE_TLS = True
-    EMAIL_HOST = 'smtp-relay.gmail.com'
-    EMAIL_PORT = 587
-    EMAIL_HOST_USER = 'timbest@composerscouch.com'
-    EMAIL_HOST_PASSWORD = #password goes here
-    DEFAULT_FROM_EMAIL = 'messenger@composerscouch.com'"""
-    # Social Auth
-    TWITTER_CONSUMER_KEY         = 't64bvuxy0triEzEnHcyg'
-    TWITTER_CONSUMER_SECRET      = 'jm41BJqDger9veDu3Aa7jswN4ZgQ9yIktlZIY4cSps'
-    FACEBOOK_APP_ID              = '525965254182714'
-    FACEBOOK_API_SECRET          = 'bdd9cdd707d80d08bd53660852b91c51'
-    GOOGLE_OAUTH2_CLIENT_ID      = '566838544572.apps.googleusercontent.com'
-    GOOGLE_OAUTH2_CLIENT_SECRET  = 'BpAQ6KT37BLQxNc5ETzC0sMS'
 
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
@@ -153,13 +140,6 @@ else:
     EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
     EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
     DEFAULT_FROM_EMAIL = 'messenger@composerscouch.com'
-    # Social Auth
-    TWITTER_CONSUMER_KEY         = 't64bvuxy0triEzEnHcyg'
-    TWITTER_CONSUMER_SECRET      = 'jm41BJqDger9veDu3Aa7jswN4ZgQ9yIktlZIY4cSps'
-    FACEBOOK_APP_ID              = '525965254182714'
-    FACEBOOK_API_SECRET          = 'bdd9cdd707d80d08bd53660852b91c51'
-    GOOGLE_OAUTH2_CLIENT_ID      = '566838544572.apps.googleusercontent.com'
-    GOOGLE_OAUTH2_CLIENT_SECRET  = 'BpAQ6KT37BLQxNc5ETzC0sMS'
 
     AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
@@ -202,6 +182,15 @@ DATABASES = {
         'ATOMIC_REQUESTS': True,
     }
 }
+
+# Social Auth
+FACEBOOK_APP_ID             = os.environ.get('FACEBOOK_APP_ID', '525965254182714')
+FACEBOOK_API_SECRET         = os.environ.get('FACEBOOK_API_SECRET', 'bdd9cdd707d80d08bd53660852b91c51')
+TWITTER_CONSUMER_KEY        = os.environ.get('TWITTER_CONSUMER_KEY', 't64bvuxy0triEzEnHcyg')
+TWITTER_CONSUMER_SECRET     = os.environ.get('TWITTER_CONSUMER_SECRET', 'jm41BJqDger9veDu3Aa7jswN4ZgQ9yIktlZIY4cSps')
+GOOGLE_OAUTH2_CLIENT_ID     = os.environ.get('GOOGLE_OAUTH2_CLIENT_ID', '566838544572.apps.googleusercontent.com')
+GOOGLE_OAUTH2_CLIENT_SECRET = os.environ.get('GOOGLE_OAUTH2_CLIENT_SECRET', 'BpAQ6KT37BLQxNc5ETzC0sMS')
+
 
 SITE_ID = 1
 
