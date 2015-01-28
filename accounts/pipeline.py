@@ -110,7 +110,7 @@ def get_username(username):
     try:
         User.objects.get(username=username)
         if len(username) >= 30:
-            username = random.choice(string.letters+string.digits)
+            return get_username(random.choice(string.letters+string.digits))
         else:
             return get_username(username+random.choice(string.letters+string.digits))
     except User.DoesNotExist:
