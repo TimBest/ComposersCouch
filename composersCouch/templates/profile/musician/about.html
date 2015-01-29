@@ -126,5 +126,22 @@
 
 {% block script %}
   {{ block.super }}
-  <script type="text/javascript" src="{% static 'js/profile/musician/about.js' %}"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      musicianAboutModals();
+      $(".modal").on('hidden.bs.modal', function () {
+        window.location.reload(false);
+      });
+    });
+
+    $(document).ajaxStop(function() {
+      musicianAboutModals();
+    });
+
+    function musicianAboutModals() {
+      modalConnect('.editMusicianBiography','#biographyMusicianForm');
+      modalConnect('.editMusicianContact','#contactMusicianForm');
+      modalConnect('.editMusicianMembers','#membersMusicianForm');
+    }
+  </script>
 {% endblock %}
