@@ -31,11 +31,11 @@
 
 {% block content %}
   <div>
-    {% for r in requests %}
+    {% for publicRequest in requests %}
       <div class="publicRequest">
-        {% include "request/_public_request.html" with publicRequest=r %}
+        {% include "request/_public_request.html" with publicRequest=publicRequest %}
         <div class="container-fluid">
-          {% for application in publicRequest.applications %}
+          {% for application in publicRequest.applications.all %}
             <div class="panel-footer">
               {% include "request/_application.html" with application=application %}
             </div>

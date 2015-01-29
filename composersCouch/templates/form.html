@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
-{% load i18n crispy_forms_tags %}
+{% load crispy_forms_tags %}
 
-{% block title %}{% trans "Form" %}{% endblock %}
+{% block title %}Form{% endblock %}
 
 {% block header %}
 <form id="{% block formID %}{% endblock %}" method="post"
@@ -9,7 +9,7 @@
       action="{% block FormURL %}{{ request.path }}{% endblock %}">
     <div class="modal-content">
         <div class="modal-header">
-          <h3>{% block formTitle %}{% trans 'Form' %}{% endblock %}</h3>
+          <h3>{% block formTitle %}Form{% endblock %}</h3>
           {% block modalNav %}
           {% endblock %}
         </div>
@@ -22,7 +22,7 @@
         </div>
         <div class="modal-footer">
           {% block extraSubmit %}{% endblock %}
-          {% block submit %}<button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>{% endblock %}
+          {% block submit %}<button type="submit" class="btn btn-primary">Save</button>{% endblock %}
         </div>
     </div>
 </form>
