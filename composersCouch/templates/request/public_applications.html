@@ -4,8 +4,8 @@
   <div>
     {% for app in applications %}
       <div class="publicRequest">
-        {% include "request/_public_request.html" with publicRequest=app.public_request %}
-        <div class="container-fluid">
+        <div class="panel panel-default">
+          {% include "request/_public_request.html" with publicRequest=app.public_request %}
           <div class="panel-footer">
             {% include "request/_application.html" with application=application %}
           </div>

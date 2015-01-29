@@ -2,7 +2,22 @@
 <div class="requests">
   {% for publicRequest in requests %}
     <div class="publicRequest">
-      {% include "request/_public_request.html" with publicRequest=publicRequest %}
+      <div class="panel panel-default">
+        {% include "request/_public_request.html" with publicRequest=publicRequest %}
+        {% ifnotequal user publicRequest.requester %}
+          {% if user.is_authenticated and not noApply and not publicRequest.fulfilled %}
+            {% if publicRequest.applicants and user.profile.profile_type == 'm' %}
+            <div class="panel-footer text-right">
+              <a href="{% url 'request_appy_to_venue' publicRequest.id %}" class="btn btn-default">Apply</a>
+            </div>
+          {% elif not publicRequest.applicants %}
+          <div class="panel-footer text-right">
+            <a href="{% url 'request_appy_to_band' publicRequest.id %}" class="btn btn-default">Apply</a>
+          </div>
+          {% endif %}
+        {% endif %}
+      {% endifnotequal %}
+      </div>
     </div>
   {% empty %}
     {% include "feeds/_empty_feed.html" with location=location feed_type="requests" following=following %}

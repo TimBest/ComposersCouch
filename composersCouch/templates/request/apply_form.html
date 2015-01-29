@@ -9,7 +9,7 @@
 {% block formID %}applyForm{% endblock %}
 
 {% block form %}
-  {% include "request/_public_request.html" with publicRequest=public_request noApply=True %}
+  {% include "request/_public_request.html" with publicRequest=public_request %}
   {% crispy form %}
 {% endblock %}
 
