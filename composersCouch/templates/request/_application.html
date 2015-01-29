@@ -1,43 +1,23 @@
 
-{% with applicant=application.applicant %}
-  <div class="applicant">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-lg-2 col-sm-3">
-            <div class="image-frame">
-              <span class="frame-helper"></span>
-              <a href="{{ applicant.profile.get_absolute_url }}">
-                {% include "utils/_mugshot.html" with profile=applicant.profile width=75 height=75 %}
-              </a>
-            </div>
-          </div>
-          <div class="col-lg-8 col-sm-7">
-            <a class="text-black" href="{% url 'venue:about' application.applicant.username  %}">
-              <h3>{{ applicant.profile }}</h3>
-            </a>
-            {% if applicant.biography %}
-              <p>{{ applicant.biography }}</p>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-      {% if user == public_request.requester %}
-      <div class="panel-footer">
-        <div class="text-right">
-          <form method="POST" class="accept-form inline-block {% if application.approved %}hidden{% endif %}" action="{% url 'approve_public_request' %}">
-            {% csrf_token %}
-            <input type="hidden" name="application" value="{{ application.id }}">
-            <button class="btn btn-success" type="submit"><span class="fa fa-check" ></span>Accept</button>
-          </form>
-          <form method="POST" class="decline-form inline-block {% if application.approved %}{% elif application.approved != None %}hidden{% endif %}" action="{% url 'deny_public_request' %}">
-            {% csrf_token %}
-            <input type="hidden" name="application" value="{{ application.id }}">
-            <button class="btn btn-danger" type="submit"><span class="fa fa-ban" ></span>Decline</button>
-          </form>
-        </div>
-      </div>
-      {% endif %}
+
+<div class="application">
+  {% ifequal application.applicant.profile.profile_type 'm' %}
+    {% include "search/_musician.html" with artist=application.applicant.profile.musicianProfile %}
+  {% else %}
+    {% include "search/_venue.html" with venue=application.applicant.profile.venueProfile %}
+  {% endifequal %}
+  {% if user == public_request.requester %}
+    <div class="text-right">
+      <form method="POST" class="accept-form inline-block {% if application.approved %}hidden{% endif %}" action="{% url 'approve_public_request' %}">
+        {% csrf_token %}
+        <input type="hidden" name="application" value="{{ application.id }}">
+        <button class="btn btn-success" type="submit"><span class="fa fa-check" ></span> Accept</button>
+      </form>
+      <form method="POST" class="decline-form inline-block {% if application.approved %}{% elif application.approved != None %}hidden{% endif %}" action="{% url 'deny_public_request' %}">
+        {% csrf_token %}
+        <input type="hidden" name="application" value="{{ application.id }}">
+        <button class="btn btn-danger" type="submit"><span class="fa fa-ban" ></span> Decline</button>
+      </form>
     </div>
-  </div>
-{% endwith %}
+  {% endif %}
+</div>
