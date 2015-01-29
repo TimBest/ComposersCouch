@@ -6929,7 +6929,11 @@ h1 {
 .navbar .navbar-form {
   border-left: 1px solid #dfe5eb;
 }
-.navbar .navbar-form #search {
+.navbar .navbar-form input#search {
+  font-family: 'FontAwesome', PT-sans, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-decoration: inherit;
   border-width: 0px;
   box-shadow: none;
 }

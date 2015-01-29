@@ -1,7 +1,10 @@
-{% load i18n inbox %}
+{% load i18n %}
+{% load inbox %}
 {% load static from staticfiles %}
 {% load compress compile_static %}
 {% load progress_bar %}
+
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -40,8 +43,7 @@
         </div>
         <div class="navbar-collapse collapse">
           <form class="navbar-form navbar-left" action="{% url 'search' %}" method="get" role="search">
-            <span class="fa fa-search"></span>
-            <input type="search" name="q" id="search" placeholder="Search" class="form-control" />
+            <input type="search" name="q" id="search" placeholder="&#xf002; Search" class="form-control" />
           </form>
           <div class="navbar-right">
             {% if user.is_authenticated %}
