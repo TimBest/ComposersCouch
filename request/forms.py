@@ -143,9 +143,9 @@ class PublicRequestForm(ModelForm):
     date_format = '%m/%d/%Y'
     accept_by = forms.DateField(label=_("Application deadline"),
                                 widget=forms.DateInput(format=date_format))
-    def __init__(self, *args, **kw):
+    def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
-        super(PublicRequestForm, self).__init__(*args, **kw)
+        super(PublicRequestForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout('zip_code','details','accept_by',)

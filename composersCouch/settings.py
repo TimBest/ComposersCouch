@@ -18,13 +18,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 #os.environ.get('DEVELOPMENT', False)
 DEVELOPMENT = True
 TEMPLATE_DEBUG = DEBUG
 
-ALLOWED_HOSTS = ['.composerscouch.com', '*']
+ALLOWED_HOSTS = ['.composerscouch.com']
 
 
 # Application definition
@@ -116,10 +116,8 @@ if DEVELOPMENT:
 
     STATIC_URL = '/static/'
     MEDIA_URL = '/media/'
-
 else:
-    #ALLOWED_HOSTS = ['djangosite-env-ntjden2apj.elasticbeanstalk.com']
-    #ALLOWED_HOSTS = ['.composerscouch.com']
+    ALLOWED_HOSTS += ['djangosite-env-ntjden2apj.elasticbeanstalk.com']
     POSTGIS_VERSION = (2, 1, 1)
     STREAM_REDIS_CONFIG = {
         'default': {

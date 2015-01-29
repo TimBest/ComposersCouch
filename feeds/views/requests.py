@@ -22,30 +22,27 @@ def requests(request, scope='all', *args, **kwargs):
 class RequestView(FeedMixin, TemplateView):
     modelManager = PublicRequest.objects
     path_to_genre = 'requester__profile__genre__slug'
+    requests_for = 'band'
+
+    def dispatch(self, *args, **kwargs):
+        requests_for = self.kwargs.get('for')
+        # defaults to bands so only need to know when its for venues
+        if requests_for == "venue":
+            self.requests_for = "venue"
+        elif self.request.user.is_authenticated() and self.request.user.profile.profile_type == 'v':
+            self.requests_for = "venue"
+        return super(RequestView, self).dispatch(*args, **kwargs)
 
     def band_or_venue(self, posts, **kwargs):
-        if self.kwargs.get('for') == 'band':
+        if self.requests_for == 'venue':
             return posts.exclude(applicants__isnull=True)
         else:
             return posts.filter(applicants__isnull=True)
-        return posts
 
     def get_context_data(self, **kwargs):
         context = super(RequestView, self).get_context_data(**kwargs)
-        context['for'] = self.get_for()
+        context['for'] = self.requests_for
         return context
-
-    def get_for(self):
-        band_or_venue = self.kwargs.get('for')
-        if band_or_venue == "band":
-            return "band"
-        elif band_or_venue == "venue":
-            return "venue"
-        else:
-            if self.request.user.is_authenticated() and self.request.user.profile.profile_type == 'm':
-                return "band"
-            else:
-                return "venue"
 
     def get_default_order(self):
         return "expiring"
