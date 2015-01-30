@@ -6441,7 +6441,7 @@ fieldset[disabled] .btn-danger-inv.active {
   color: #fbfcfc;
   background-color: transparent;
   border-color: #fbfcfc;
-  border: #fbfcfc 2px solid;
+  border: #fbfcfc 1px solid;
 }
 .btn-transparent:hover,
 .btn-transparent:focus,
@@ -7454,6 +7454,12 @@ h1 {
 }
 .landing-page .composers-couch {
   background-color: #fbfcfc;
+}
+.landing-page .composers-couch .image-frame {
+  margin-bottom: 48px;
+}
+.landing-page .composers-couch .moto {
+  margin-bottom: 30px;
 }
 .landing-page .profile-types {
   background-color: #2f2f2f;
