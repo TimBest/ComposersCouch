@@ -7545,46 +7545,22 @@ h1 {
 .header.feed {
   padding: 0px;
   background-color: #2f2f2f;
+  font-size: 16px;
 }
 .header.feed.blue {
   background-color: #083970;
 }
-.header.feed.blue .main-nav li.active a,
-.header.feed.blue .main-nav li.active a:focus,
-.header.feed.blue .main-nav li.active a:hover {
-  color: #083970;
-}
 .header.feed.green {
   background-color: #00714f;
-}
-.header.feed.green .main-nav li.active a,
-.header.feed.green .main-nav li.active a:focus,
-.header.feed.green .main-nav li.active a:hover {
-  color: #00714f;
 }
 .header.feed.purple {
   background-color: #170e77;
 }
-.header.feed.purple .main-nav li.active a,
-.header.feed.purple .main-nav li.active a:focus,
-.header.feed.purple .main-nav li.active a:hover {
-  color: #170e77;
-}
 .header.feed.orange {
   background-color: #ab3c00;
 }
-.header.feed.orange .main-nav li.active a,
-.header.feed.orange .main-nav li.active a:focus,
-.header.feed.orange .main-nav li.active a:hover {
-  color: #ab3c00;
-}
 .header.feed.red {
   background-color: #580200;
-}
-.header.feed.red .main-nav li.active a,
-.header.feed.red .main-nav li.active a:focus,
-.header.feed.red .main-nav li.active a:hover {
-  color: #580200;
 }
 .header.feed .main-nav .title {
   margin: 15px 0px 10px 0px;

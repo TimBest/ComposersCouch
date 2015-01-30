@@ -1,9 +1,3 @@
 {% extends 'feeds/requests/requests.html' %}
 
-
 {% block localClass %}active{% endblock %}
-
-
-{% block feed %}
-  {% include "feeds/requests/_feed.html" with title="Local Requests" requests=posts %}
-{% endblock %}

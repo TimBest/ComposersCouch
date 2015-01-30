@@ -35,9 +35,9 @@ class RequestView(FeedMixin, TemplateView):
 
     def band_or_venue(self, posts, **kwargs):
         if self.requests_for == 'venue':
-            return posts.exclude(applicants__isnull=True)
-        else:
             return posts.filter(applicants__isnull=True)
+        else:
+            return posts.exclude(applicants__isnull=True)
 
     def get_context_data(self, **kwargs):
         context = super(RequestView, self).get_context_data(**kwargs)
