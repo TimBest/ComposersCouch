@@ -21,23 +21,15 @@ class PostForm(forms.ModelForm):
         self.helper.form_tag = False
         self.helper.form_show_labels = False
         self.helper.layout = Layout(
-            Field('title', placeholder="Title"),
             Field('message', placeholder="Message"),
         )
-
-    def clean(self):
-        if self.cleaned_data['title'] or self.cleaned_data['message']:
-            return self.cleaned_data
-        else:
-            raise forms.ValidationError(_(u"A Title or a Message is required"))
-        return self.cleaned_data
 
     class Meta:
         model = Post
         widgets = {
           'message' : forms.Textarea(attrs={'rows': 3,}),
         }
-        fields = ['title','message',]
+        fields = ['message',]
 
 
 class RemovePostForm(forms.Form):

@@ -33,7 +33,6 @@ class ProfileNewsMixin(ProfileMixin, ImageFormMixin, MultipleFormsView):
         post = feedly.create_and_add_post(
             user=self.request.user,
             target=target,
-            title=post.title,
             message=post.message
         )
         if self.request.FILES.get('image'):

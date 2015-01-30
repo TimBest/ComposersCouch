@@ -55,11 +55,10 @@
     <div class="jumbotron requests">
       <div class="row">
         <div class="col-sm-6">
-          <h2>Requests</h2>
+          <h2><a href="{% url 'requests' 'expiring' 'default' 'all' %}" class="text-white" >Requests
+            <small><span class="fa fa-chevron-right text-white"></span></samll>
+          </a></h2>
           <p>Publically ask to see who is available. quickly find who is looking for show in your area.</p>
-          <a href="{% url 'requests' 'expiring' 'default' 'all' %}" class="btn btn-transparent">
-            <b> Requests</b> <span class="fa fa-chevron-right"></span>
-          </a>
         </div>
       </div>
     </div>

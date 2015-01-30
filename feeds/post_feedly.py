@@ -24,8 +24,8 @@ class PostFeedly(Manager):
         # Add activity the user's feed, and start the fanout
         self.add_user_activity(post.target_id, activity)
 
-    def create_and_add_post(self, user, target, title, message):
-        post = Post(user=user, target=target, title=title, message=message)
+    def create_and_add_post(self, user, target, message):
+        post = Post(user=user, target=target, message=message)
         post.save()
         zip_code = user.profile.contact_info.location.zip_code
         self.add_post(post=post)

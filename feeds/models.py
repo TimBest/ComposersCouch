@@ -10,8 +10,7 @@ from accounts.models import Profile
 class Post(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL)
     target = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='target_posts')
-    title = models.CharField(_("title"), max_length = 255, null=True, blank=True,)
-    message = models.TextField(blank=True, null=True)
+    message = models.TextField()
     photo = models.ForeignKey('photos.Image',blank=True, null=True)
     track = models.ForeignKey('tracks.Media',blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
