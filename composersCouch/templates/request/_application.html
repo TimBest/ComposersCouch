@@ -6,7 +6,7 @@
   {% else %}
     {% include "search/_venue.html" with venue=application.applicant.profile.venueProfile %}
   {% endifequal %}
-  {% if user == public_request.requester %}
+  {% if user == publicRequest.requester %}
     <div class="text-right">
       <form method="POST" class="accept-form inline-block {% if application.approved %}hidden{% endif %}" action="{% url 'approve_public_request' %}">
         {% csrf_token %}
@@ -18,6 +18,6 @@
         <input type="hidden" name="application" value="{{ application.id }}">
         <button class="btn btn-danger" type="submit"><span class="fa fa-ban" ></span> Decline</button>
       </form>
-    </div>
+    </div
   {% endif %}
 </div>

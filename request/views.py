@@ -101,7 +101,7 @@ class ApplicationView(MessageView):
 
     def get_context_data(self, **kwargs):
         context = super(ApplicationView, self).get_context_data(**kwargs)
-        context['public_request'] = self.thread.application.public_request
+        context['publicRequest'] = self.thread.application.public_request
         context['application'] = self.thread.application
         return context
 
@@ -276,7 +276,7 @@ class ApplyFormView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(ApplyFormView, self).get_context_data(**kwargs)
-        context['public_request'] = self.public_request
+        context['publicReques'] = self.public_request
         return context
 
     def get_success_url(self):
