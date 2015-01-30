@@ -9,14 +9,14 @@
         <span class="frame-helper"></span>
         <img class="image-center" id="logo" alt="Composers Couch" src="{% static 'img/logo.png' %}">
       </div>
-      {% if not user.is_authenticated %}
-        <div class="text-center container">
-          <div class="moto">
-            <h2>Composers Couch is a booking service with the mission of connecting artists and venues</h2>
-          </div>
-          <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-lg btn-primary">Join For Free</a>
+      <div class="text-center container">
+        <div class="moto">
+          <h2>Composers Couch is a booking service with the mission of connecting artists and venues.</h2>
         </div>
-      {% endif %}
+        {% if not user.is_authenticated %}
+          <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-lg btn-primary">Join For Free</a>
+        {% endif %}
+      </div>
     </div>
   </div>
 {% endblock %}
@@ -28,17 +28,17 @@
           <div class="col-sm-4">
             <span class="fa fa-ticket fa-5x"></span>
             <h2>Venues</h2>
-            <p>Manage press kit submissions, easily fill gaps in your schedule.</p>
+            <p>Manage show requests and easily fill gaps in your schedule.</p>
           </div>
           <div class="col-sm-4">
             <span class="fa fa-music fa-5x"></span>
             <h2>Musicians</h2>
-            <p>Host your press kit and find venues locally or on tour</p>
+            <p>Host your press kit and find venues locally or near other shows your playing tour.</p>
           </div>
           <div class="col-sm-4">
             <span class="fa fa-users fa-5x"></span>
             <h2>Fans</h2>
-            <p>Find shows in your area, follow your favorite artists</p>
+            <p>Find concerts in your area, follow your favorite artists.</p>
           </div>
         </div>
       </div>
