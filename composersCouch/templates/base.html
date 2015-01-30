@@ -63,7 +63,7 @@
                 </ul>
             {% else %}
               <a href="{% url 'signin' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-default-nav navbar-btn">Sign in</a>
-              <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-primary navbar-btn">Sign up</a>
+              <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-primary navbar-btn">Join</a>
             {% endif %}
           </div>
         </div>

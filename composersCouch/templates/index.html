@@ -10,9 +10,9 @@
         <img class="image-center" id="logo" alt="Composers Couch" src="{% static 'img/logo.png' %}">
       </div>
       {% if not user.is_authenticated %}
-        <div class="text-center">
+        <div class="text-center container">
           <div class="moto">
-            <h2>Manage press kit submission, easily fill gaps in your schedule, find shows in your area</h2>
+            <h2>Composers Couch is a booking service with the mission of connecting artists and venues</h2>
           </div>
           <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-lg btn-primary">Join For Free</a>
         </div>

@@ -7458,6 +7458,9 @@ h1 {
 .landing-page .composers-couch .image-frame {
   margin-bottom: 48px;
 }
+.landing-page .composers-couch .container {
+  max-width: 750px;
+}
 .landing-page .composers-couch .moto {
   margin-bottom: 30px;
 }
