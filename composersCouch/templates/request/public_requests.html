@@ -47,4 +47,5 @@
   {% empty %}
     <p>No Private Requests</p>
   {% endfor %}
+  {% include "utils/_pagination.html" with page=requests %}
 {% endblock %}

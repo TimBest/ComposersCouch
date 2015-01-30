@@ -14,5 +14,6 @@
     {% empty %}
       <p>No Public Requests</p>
     {% endfor %}
+    {% include "utils/_pagination.html" with page=applications %}
   </div>
 {% endblock %}

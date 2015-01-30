@@ -16,6 +16,7 @@ from .decorators import is_participant
 from .models import Application, PrivateRequest, PublicRequest, RequestParticipant
 from .utils import send_request_email
 from annoying.functions import get_object_or_None
+from composersCouch.utils import get_page
 from composersCouch.views import MultipleFormsView, MultipleModelFormsView
 from customProfile.decorators import is_venue, is_musician
 from threaded_messages.models import Message, Participant, Thread
@@ -28,14 +29,16 @@ class PrivateRequestView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PrivateRequestView, self).get_context_data(**kwargs)
+        page_num = self.request.GET.get('page')
         context['inbox'] = True
-        context['participants'] = Participant.objects.filter(
+        participants = Participant.objects.filter(
             user=self.request.user,
             deleted_at__isnull=True,
             thread__request__isnull=False,
         ).exclude(
             thread__creator=self.request.user,
         )
+        context['participants'] = get_page(page_num, participants, 15)
         return context
 
 inbox_private_requests = login_required(PrivateRequestView.as_view())
@@ -45,6 +48,7 @@ class SentPrivateRequestsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(SentPrivateRequestsView, self).get_context_data(**kwargs)
+        page_num = self.request.GET.get('page')
         context['sent'] = True
         context['participants'] = Participant.objects.filter(
             user=self.request.user,
@@ -52,6 +56,7 @@ class SentPrivateRequestsView(TemplateView):
             deleted_at__isnull=True,
             thread__request__isnull=False,
         )
+        context['participants'] = get_page(page_num, participants, 15)
         return context
 
 sent_private_requests = login_required(SentPrivateRequestsView.as_view())
@@ -61,7 +66,9 @@ class PublicRequestView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PublicRequestView, self).get_context_data(**kwargs)
-        context['requests'] = PublicRequest.objects.filter(requester=self.request.user)
+        page_num = self.request.GET.get('page')
+        requests = PublicRequest.objects.filter(requester=self.request.user)
+        context['requests'] = get_page(page_num, requests, 15)
         context['is_requests'] = True
         return context
 
@@ -72,7 +79,9 @@ class PublicApplicationsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(PublicApplicationsView, self).get_context_data(**kwargs)
-        context['applications'] = Application.objects.filter(applicant=self.request.user)
+        page_num = self.request.GET.get('page')
+        applications = Application.objects.filter(applicant=self.request.user)
+        context['applications'] = get_page(page_num, applications, 15)
         context['is_applications'] = True
         return context
 
