@@ -1,50 +1,46 @@
-{% extends 'base.html' %}
-{% load i18n %}
+{% extends 'form.html' %}
+
 
 {% block headerClass %}authentication text-center{% endblock %}
 
-{% block header %}
-  <form method="post" class="modal-dialog" action="{{ request.path }}">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2>{% block title %}{% trans "Join" %} Composers Couch{% endblock %}</h2>
-      </div>
-      <div class="modal-body">
-        <div class="sign-up">
-          <div class="social-links">
-            <div class="row">
-              <div class=" col-xs-6 col-sm-3 col-sm-offset-3 text-right">
-                <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook" role="button">
-                  <span class="fa fa-facebook"></span>
-                  <label>Facebook</label>
-                </a>
-              </div>
-              <div class=" col-xs-3 text-left">
-                <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter" role="button">
-                  <span class="fa fa-twitter"></span>
-                  <label>Twitter</label>
-                </a>
-              </div>
-              <div class=" col-xs-6 col-sm-3 col-sm-offset-3 text-right">
-                <a href="{% url 'socialauth_begin' 'google' %}" class="btn btn-google" role="button">
-                  <span class="fa fa-google-plus"></span>
-                  <label>Google</label>
-                </a>
-              </div>
-              <div class=" col-xs-3 text-left">
-                <a href="{% url 'signup_email' %}" class="btn btn-default" role="button">
-                  <span class="fa fa-envelope-o"></span>
-                  <label>Email</label>
-                </a>
-              </div>
-            </div>
-          </div>
+{% block modalHeader %}
+  <div class="nav nav-justified nav-tabs">
+    <li class="active"><a href="{% url 'signup' %}?next={% firstof request.path '/' %}"><h4>Join Composers Couch</h4></a></li>
+    <li><a href="{% url 'signin' %}?next={% firstof request.path '/' %}">Sign in</a></li>
+  </div>
+{% endblock %}
+
+
+{% block form %}
+  <div class="sign-up">
+    <div class="social-links">
+      <div class="row">
+        <div class=" col-xs-6 col-sm-3 col-sm-offset-3 text-right">
+          <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook" role="button">
+            <span class="fa fa-facebook"></span>
+            <label>Facebook</label>
+          </a>
         </div>
-        <input type="hidden" name="next" value="{{next|default:""}}"/>
-      </div>
-      <div class="modal-footer">
-        <p class="text-right">Already have an account? <a href="{% url 'signin' %}?next={% firstof request.path '/' %}">Sign in</a></p>
+        <div class=" col-xs-3 text-left">
+          <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter" role="button">
+            <span class="fa fa-twitter"></span>
+            <label>Twitter</label>
+          </a>
+        </div>
+        <div class=" col-xs-6 col-sm-3 col-sm-offset-3 text-right">
+          <a href="{% url 'socialauth_begin' 'google' %}" class="btn btn-google" role="button">
+            <span class="fa fa-google-plus"></span>
+            <label>Google</label>
+          </a>
+        </div>
+        <div class=" col-xs-3 text-left">
+          <a href="{% url 'signup_email' %}" class="btn btn-default" role="button">
+            <span class="fa fa-envelope-o"></span>
+            <label>Email</label>
+          </a>
+        </div>
       </div>
     </div>
-  </form>
+  </div>
+  <input type="hidden" name="next" value="{{next|default:""}}"/>
 {% endblock %}

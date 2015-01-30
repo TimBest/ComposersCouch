@@ -8,11 +8,13 @@
       enctype="{% block enctype %}{% endblock %}" class="non-modal-form modal-dialog"
       action="{% block FormURL %}{{ request.path }}{% endblock %}">
     <div class="modal-content">
+        {% block modalHeader %}
         <div class="modal-header">
           <h3>{% block formTitle %}Form{% endblock %}</h3>
           {% block modalNav %}
           {% endblock %}
         </div>
+        {% endblock %}
         <div class="modal-body">
           {% block form %}
             {% csrf_token %}
