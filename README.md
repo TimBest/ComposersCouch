@@ -6,7 +6,7 @@ Django powered site for composers couch
     load with source ~/.bashrs and ~/.profile respectivly
 
   SSH into production server
-    ssh -i djangosite-eb.pem ec2-user@54.174.202.254
+    ssh -i djangosite-eb.pem ec2-user@54.152.64.171
     /opt/python/current/app/
     /opt/python/run/venv/bin/activate
 

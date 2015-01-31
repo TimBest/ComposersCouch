@@ -20,8 +20,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-#os.environ.get('DEVELOPMENT', False)
-DEVELOPMENT = True
+DEVELOPMENT = os.environ.get('DEVELOPMENT', False)
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['.composerscouch.com']
