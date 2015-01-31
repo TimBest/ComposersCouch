@@ -27,4 +27,3 @@ httplib2==0.9
 kombu==3.0.24
 mutagen==1.27
 oauth2==1.5.211
-psycopg2==2.5.4
