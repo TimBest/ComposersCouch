@@ -3,11 +3,16 @@
 {% load crispy_forms_tags %}
 {% crispy SigninForm SigninForm.helper %}
 
-{% block title %}
-  {% block formTitle %}{% trans "Signin" %}{% endblock %}
-{% endblock %}
+{% block title %}{% block formTitle %}Sign in{% endblock %}{% endblock %}
 
 {% block headerClass %}authentication{% endblock %}
+{% block modalHeader %}
+  <div class="nav nav-justified nav-tabs">
+    <li class="active"><a href="{% url 'signin' %}?next={% firstof request.path '/' %}"><h4>Sign in</h4></a></li>
+    <li><a href="{% url 'signup' %}?next={% firstof request.path '/' %}">Join Composers Couch</a></li>
+  </div>
+{% endblock %}
+
 {% block formID %}sign-in-form{% endblock %}
 
 {% block form %}

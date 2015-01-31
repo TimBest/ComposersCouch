@@ -7504,6 +7504,31 @@ h1 {
 .authentication .container-fluid {
   padding-right: 15px;
 }
+.authentication .nav li {
+  border-left: 1px solid #DDD;
+  border-bottom: 1px solid #DDD;
+  background-color: #dfe5eb;
+}
+.authentication .nav li a {
+  border: none;
+}
+.authentication .nav li a:hover,
+.authentication .nav li a:focus {
+  background-color: transparent;
+  color: #2f2f2f;
+}
+.authentication .nav li.active {
+  border: none;
+}
+.authentication .nav li.active a,
+.authentication .nav li.active a:focus,
+.authentication .nav li.active a:hover {
+  background-color: #fbfcfc;
+  border: none;
+}
+.authentication .sign-up {
+  margin-top: 40px;
+}
 .authentication .sign-up .social-links a {
   width: 100px;
   height: 100px;
@@ -7516,6 +7541,9 @@ h1 {
 }
 .authentication .sign-up .social-links a label {
   padding-top: 15px;
+}
+.authentication .sign-in {
+  margin-top: 30px;
 }
 .authentication .sign-in .social-links {
   list-style-type: none;

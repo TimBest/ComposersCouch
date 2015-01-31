@@ -13,7 +13,29 @@
     input[type="radio"]:checked + label {
     }
   }
+  .nav {
+    li {
+      border-left: 1px solid #DDD;
+      border-bottom: 1px solid #DDD;
+      background-color: @silver-light;
+      a {
+        border:none;
+        &:hover, &:focus {
+          background-color: transparent;
+          color: @black;
+        }
+      }
+      &.active {
+        border:none;
+        a, a:focus, a:hover  {
+          background-color: @white;
+          border:none;
+        }
+      }
+    }
+  }
   .sign-up {
+    margin-top:40px;
     .social-links {
       a {
         width:100px;
@@ -31,6 +53,7 @@
     }
   }
   .sign-in {
+    margin-top:30px;
     .social-links {
       list-style-type:none;
       margin:0;
