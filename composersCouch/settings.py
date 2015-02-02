@@ -171,14 +171,14 @@ else:
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.environ.get('RDS_DB_NAME', 'composerscouchdb'),
+        'NAME': os.environ.get('RDS_DB_NAME', 'ebdb'),
         'OPTIONS': {
             'options': '-c search_path=gis,public,pg_catalog'
         },
-        'USER': os.environ.get('RDS_USERNAME', 'postgres'),
-        'PASSWORD': os.environ.get('RDS_PASSWORD', 'devDatabase'),
-        'HOST': os.environ.get('RDS_HOSTNAME', 'localhost'),
-        'PORT': os.environ.get('RDS_PORT', ''),
+        'USER': os.environ.get('RDS_USERNAME', 'ComposersCouchDB'),
+        'PASSWORD': os.environ.get('RDS_PASSWORD', '01SynchronousPenitent'),
+        'HOST': os.environ.get('RDS_HOSTNAME', 'aaq59jsqwag3b3.c7gjzwck4i8q.us-east-1.rds.amazonaws.com'),
+        'PORT': os.environ.get('RDS_PORT', '5432'),
         'ATOMIC_REQUESTS': True,
     }
 }
