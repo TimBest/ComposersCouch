@@ -7504,6 +7504,9 @@ h1 {
 .authentication .container-fluid {
   padding-right: 15px;
 }
+.authentication .nav {
+  margin-bottom: 40px;
+}
 .authentication .nav li {
   border-left: 1px solid #DDD;
   border-bottom: 1px solid #DDD;
@@ -7525,9 +7528,6 @@ h1 {
 .authentication .nav li.active a:hover {
   background-color: #fbfcfc;
   border: none;
-}
-.authentication .sign-up {
-  margin-top: 40px;
 }
 .authentication .sign-up .social-links a {
   width: 100px;
