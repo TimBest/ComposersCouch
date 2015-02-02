@@ -20,8 +20,6 @@ urlpatterns += patterns('composersCouch.views',
     url(r'^about/$', 'load_template', {'template_name': 'footer/about.html'}, name='about'),
     url(r'^team/$', 'load_template', {'template_name': 'footer/team.html'}, name='team'),
     url(r'^credit/$', 'load_template', {'template_name': 'footer/credit.html'}, name='credit'),
-    url(r'^contact/$', 'load_template', {'template_name': 'footer/contact.html'}, name='contact'),
-    url(r'^color-scheme/$', 'load_template', {'template_name': 'footer/colors.html'}, name='colors'),
 )
 
 urlpatterns += patterns('',

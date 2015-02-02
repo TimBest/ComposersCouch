@@ -103,29 +103,13 @@
       </div>
     {% endblock %}
 
-    <div id="footer" class="small">
-      <div class="container-fluid">
+    <div id="footer" class="text-center">
         </br>
-        <div class="row">
-          <div class=col-xs-4>
-            <ul class="list-unstyled">
-              <li><a class="text-black" href="{% url 'about' %}">About</a></li>
-              <li><a class="text-black" href="{% url 'team' %}">Team</a></li>
-              <li><a class="text-black" href="{% url 'contact' %}">Contact</a></li>
-            </ul>
-          </div>
-          <div class=col-xs-4>
-            <ul class="list-unstyled">
-              <li><a class="text-black" href="{% url 'colors' %}">Color Scheme</a></li>
-            </ul>
-          </div>
-          <div class=col-xs-4>
-            <ul class="list-unstyled">
-              <li><a class="text-black" href="{% url 'credit' %}">Credit</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
+        <a href="{% url 'about' %}">About</a><samll><span class="text-muted"> &#149; </span></small>
+        <a href="{% url 'about' %}#team">Team</a><samll><span class="text-muted"> &#149; </span></small>
+        <a href="{% url 'about' %}#contact">Contact</a><samll><span class="text-muted"> &#149; </span></small>
+        <a href="{% url 'about' %}#brand">Brand Info</a><samll><span class="text-muted"> &#149; </span></small>
+        <a href="{% url 'credit' %}">Credit</a>
     </div>
 
     <!-- Placed at the end of the document so the pages load faster -->
