@@ -70,3 +70,6 @@ Setup AWS instance:
 
     sudo echo /usr/local/lib >> /etc/ld.so.conf
     sudo ldconfig
+
+    add postgis extension to database
+    http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.html#Appendix.PostgreSQL.CommonDBATasks.PostGIS
