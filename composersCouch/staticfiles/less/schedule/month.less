@@ -1,0 +1,115 @@
+.calendar-wrapper {
+  .cal-row-head [class*="cal-cell"]:first-child,
+  .cal-row-head [class*="cal-cell"] {
+    min-height: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: normal;
+    text-align: center;
+    padding: 5px 0;
+  }
+  .cal-day-row:hover {
+    background-color: @rowHover;
+  }
+  .day-cell:hover {
+    background-color: @dayHover;
+  }
+  .cal-month-box [class*="cal-cell"] {
+    min-height: @rowHeightMonth;
+    border-right: @borderSizevert @borderStyle @borderColor;
+    position: relative;
+  }
+  .cal-month-box .cal-row-fluid [class*="cal-cell"]:last-child {
+    border-right: 0px;
+  }
+  .cal-month-box .cal-row-fluid {
+    border-bottom: @borderSizehoriz @borderStyle @borderColor;
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .cal-month-box .cal-row-fluid:last-child {
+    border-bottom: 0px;
+  }
+  .cal-month-box {
+    border-top: @borderSizehoriz @borderStyle @borderColor;
+    border-bottom: @borderSizehoriz @borderStyle @borderColor;
+    border-right: @borderSizevert @borderStyle @borderColor;
+    border-left: @borderSizevert @borderStyle @borderColor;
+    border-radius: 2px;
+  }
+  .cal-day-outmonth span[data-cal-date] {
+    opacity: 0.1;
+    cursor: default;
+  }
+  .cal-day-today {
+    background-color: @today-bg;
+  }
+  .cal-month-box .cal-day-today span[data-cal-date] {
+    font-size: 1.9em;
+  }
+  .cal-day-holiday span[data-cal-date] {
+    color: @holiday-color;
+  }
+
+  .cal-day-weekend span[data-cal-date] {
+    color: @weekend-color;
+  }
+  .cal-event {
+    padding-left: 2px;
+    @media (min-width: @screen-sm-min) {
+      padding-left: 7px;
+    }
+  }
+  .dayNumber {
+    padding-top: 3px;
+    padding-left: 7px;
+    a{
+      color: @black;
+    }
+
+  }
+  .show-title {
+    padding-left: 7px;
+  }
+  .cal-day-outmonth {
+    background-color: @outmonth-bg;
+    .dayNumber {
+      a {
+      color: @outmonth-color;
+      }
+    }
+  }
+  .day-cell {
+    position: relative;
+    .links {
+      display: none;
+    }
+    .can-expand {
+      position: absolute;
+      visibility: hidden;
+      width:14px;
+      margin-left:-7px;
+      bottom:0;
+      left:50%;
+    }
+    &:hover,
+    &:focus {
+      .can-expand {
+        visibility: visible;
+      }
+    }
+  }
+  .expanded-day {
+    background-color: @gray-lighter;
+    padding-top:10px;
+    padding-bottom:5px;
+    .link-list {
+      .btn {
+        margin-bottom: 5px;
+      }
+    }
+    .event-list {
+
+    }
+  }
+}
