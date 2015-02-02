@@ -23,7 +23,7 @@
 {% block overwriteContent %}
   <div class="landing-page">
     {% if not user.is_authenticated %}
-      <div class="jumbotron profile-types text-center">
+      <div class="jumbotron black text-center">
         <div class="row">
           <div class="col-sm-4">
             <span class="fa fa-ticket fa-5x"></span>
@@ -43,10 +43,10 @@
         </div>
       </div>
     {% endif %}
-    <div class="jumbotron requests">
+    <div class="jumbotron blue">
       <div class="row">
         <div class="col-sm-6">
-          <h2><a href="{% url 'requests' 'expiring' 'default' 'all' %}">
+          <h2><a class="text-white" href="{% url 'requests' 'expiring' 'default' 'all' %}">
             Requests
           </a></h2>
           <p>Publically ask to see who is available. Quickly find who is looking for show in your area.</p>
@@ -56,10 +56,12 @@
         </div>
       </div>
     </div>
-    <div class="jumbotron shows">
+    <div class="jumbotron green">
       <div class="row">
         <div class="col-sm-6 col-sm-offset-6">
-          <h2>Concerts</h2>
+          <h2><a class="text-white" href="{% url 'shows' 'upcoming' 'all' %}">
+            Concerts
+          </a></h2>
           <p>See what shows are coming up. Filterable by genre and location</p>
           <a href="{% url 'shows' 'upcoming' 'all' %}" class="pull-right btn btn-transparent">
             Concerts <small><span class="fa fa-chevron-right text-white"></span></small>
@@ -67,25 +69,31 @@
         </div>
       </div>
     </div>
-    <div class="jumbotron artists-venues">
+    <div class="jumbotron black">
       <div class="row">
         <div class="col-sm-6">
-          <h2>Artists</h2>
+          <h2><a class="text-white" href="{% url 'artists' 'all' 'all' %}">
+            Artists
+          </a></h2>
           <p>Find artists by location, genre and availability. Never have a hole in your schedule again.</p>
-          <a href="{% url 'artists' 'all' 'all' %}" class="pull-right btn btn-danger">
+          <a href="{% url 'artists' 'all' 'all' %}" class="pull-right btn btn-transparent">
             Artists <small><span class="fa fa-chevron-right"></span></small>
           </a>
         </div>
-        <div class="col-sm-6">
+      </div>
+    </div>
+    <div class="jumbotron blue">
+      <div class="row">
+        <div class="col-sm-6 col-sm-offset-6">
           <h2>Venues</h2>
           <p>Find venues by location, genre and availability. Never have a hole in your schedule again.</p>
-          <a href="{% url 'venues' 'all' 'all' %}" class="pull-right btn btn-warning">
+          <a href="{% url 'venues' 'all' 'all' %}" class="pull-right btn btn-transparent">
             Venues <small><span class="fa fa-chevron-right"></span></small>
           </a>
         </div>
       </div>
     </div>
-    <div class="jumbotron updates">
+    <div class="jumbotron green">
       <div class="row">
         <div class="col-sm-6">
           <h2>Updates</h2>

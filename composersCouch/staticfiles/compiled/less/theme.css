@@ -341,7 +341,7 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #dfe5eb;
 }
 .sr-only {
   position: absolute;
@@ -568,7 +568,7 @@ a.bg-danger:hover {
 .page-header {
   padding-bottom: 9px;
   margin: 40px 0 20px;
-  border-bottom: 1px solid #eeeeee;
+  border-bottom: 1px solid #dfe5eb;
 }
 ul,
 ol {
@@ -636,7 +636,7 @@ blockquote {
   padding: 10px 20px;
   margin: 0 0 20px;
   font-size: 17.5px;
-  border-left: 5px solid #eeeeee;
+  border-left: 5px solid #dfe5eb;
 }
 blockquote p:last-child,
 blockquote ul:last-child,
@@ -660,7 +660,7 @@ blockquote .small:before {
 blockquote.pull-right {
   padding-right: 15px;
   padding-left: 0;
-  border-right: 5px solid #eeeeee;
+  border-right: 5px solid #dfe5eb;
   border-left: 0;
   text-align: right;
 }
@@ -719,7 +719,7 @@ pre {
   line-height: 1.42857143;
   word-break: break-all;
   word-wrap: break-word;
-  color: #333333;
+  color: #2f2f2f;
   background-color: #f5f5f5;
   border: 1px solid #cccccc;
   border-radius: 3px;
@@ -1645,7 +1645,7 @@ legend {
   margin-bottom: 20px;
   font-size: 21px;
   line-height: inherit;
-  color: #333333;
+  color: #2f2f2f;
   border: 0;
   border-bottom: 1px solid #e5e5e5;
 }
@@ -1728,7 +1728,7 @@ output {
 .form-control[readonly],
 fieldset[disabled] .form-control {
   cursor: not-allowed;
-  background-color: #eeeeee;
+  background-color: #dfe5eb;
   opacity: 1;
 }
 textarea.form-control {
@@ -3146,13 +3146,13 @@ input[type="button"].btn-block {
   clear: both;
   font-weight: normal;
   line-height: 1.42857143;
-  color: #333333;
+  color: #2f2f2f;
   white-space: nowrap;
 }
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus {
   text-decoration: none;
-  color: #262626;
+  color: #222222;
   background-color: #f5f5f5;
 }
 .dropdown-menu > .active > a,
@@ -3482,7 +3482,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   line-height: 1;
   color: #555555;
   text-align: center;
-  background-color: #eeeeee;
+  background-color: #dfe5eb;
   border: 1px solid #cccccc;
   border-radius: 3px;
 }
@@ -3567,7 +3567,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: #dfe5eb;
 }
 .nav > li.disabled > a {
   color: #999999;
@@ -3582,7 +3582,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
-  background-color: #eeeeee;
+  background-color: #dfe5eb;
   border-color: #2161a8;
 }
 .nav .nav-divider {
@@ -3608,7 +3608,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-radius: 3px 3px 0 0;
 }
 .nav-tabs > li > a:hover {
-  border-color: #eeeeee #eeeeee #dddddd;
+  border-color: #dfe5eb #dfe5eb #dddddd;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
@@ -4269,7 +4269,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .pagination > li > a:focus,
 .pagination > li > span:focus {
   color: #143c68;
-  background-color: #eeeeee;
+  background-color: #dfe5eb;
   border-color: #dddddd;
 }
 .pagination > .active > a,
@@ -4345,7 +4345,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .pager li > a:hover,
 .pager li > a:focus {
   text-decoration: none;
-  background-color: #eeeeee;
+  background-color: #dfe5eb;
 }
 .pager .next > a,
 .pager .next > span {
@@ -4473,7 +4473,7 @@ a.list-group-item.active > .badge,
   padding: 30px;
   margin-bottom: 30px;
   color: inherit;
-  background-color: #eeeeee;
+  background-color: #dfe5eb;
 }
 .jumbotron h1,
 .jumbotron .h1 {
@@ -6964,7 +6964,7 @@ h1 {
   margin-bottom: 5px;
 }
 .navigation.sub-nav .row .nav li a {
-  color: #474747;
+  color: #555555;
 }
 .navigation.sub-nav .row .nav li a:hover,
 .navigation.sub-nav .row .nav li a:focus {
@@ -6978,13 +6978,6 @@ h1 {
   border-radius: 0px;
   border-bottom: 3px solid #2161a8;
   color: #000;
-}
-/* Container sizeing */
-.container-fluid {
-  padding-right: 0px;
-  padding-left: 0px;
-  margin-right: auto;
-  margin-left: auto;
 }
 .header .container-fluid {
   padding-left: 15px;
@@ -7205,7 +7198,7 @@ h1 {
 .bootstrap-datetimepicker-widget td.hour:hover,
 .bootstrap-datetimepicker-widget td.minute:hover,
 .bootstrap-datetimepicker-widget td.second:hover {
-  background: #eeeeee;
+  background: #dfe5eb;
   cursor: pointer;
 }
 .bootstrap-datetimepicker-widget td.old,
@@ -7251,7 +7244,7 @@ h1 {
   border-radius: 4px;
 }
 .bootstrap-datetimepicker-widget td span:hover {
-  background: #eeeeee;
+  background: #dfe5eb;
 }
 .bootstrap-datetimepicker-widget td span.active {
   background-color: #2161a8;
@@ -7284,7 +7277,7 @@ h1 {
   cursor: pointer;
 }
 .bootstrap-datetimepicker-widget thead tr:first-child th:hover {
-  background: #eeeeee;
+  background: #dfe5eb;
 }
 .input-group.date .input-group-addon span {
   display: block;
@@ -7303,37 +7296,68 @@ h1 {
 .bootstrap-datetimepicker-widget ul.list-unstyled li div.timepicker div.timepicker-picker table.table-condensed tbody > tr > td {
   padding: 0px !important;
 }
-.row {
+.landing-page {
+  color: #fbfcfc;
+}
+.landing-page .jumbotron {
+  margin-bottom: 0px;
+}
+.landing-page .composers-couch {
+  background-color: #fbfcfc;
+  color: #2f2f2f;
+}
+.landing-page .composers-couch .image-frame {
+  margin-bottom: 48px;
+}
+.landing-page .composers-couch .container {
+  max-width: 750px;
+}
+.landing-page .composers-couch .container .moto {
+  margin-bottom: 30px;
+}
+.landing-page .black {
+  background-color: #2f2f2f;
+}
+.landing-page .blue {
+  background-color: #2161a8;
+}
+.landing-page .green {
+  background-color: #16aa7d;
+}
+/*Content*/
+.team #TimBest {
+  margin-top: 15px;
+}
+.team #TimBest .TimBestimage {
+  width: 175px;
+  height: 175px;
+}
+.team #TimBest .TimBestimage img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+.team #TimBest h2 {
+  text-align: left;
+}
+.team .row {
   margin-right: 0px;
   margin-left: 0px;
 }
-.color-scheme {
-  color: #fbfcfc;
-  margin-bottom: 50px;
+.brand .color {
+  min-height: 100px;
+  border-radius: 3px;
 }
-.color-scheme .col {
-  position: relative;
-  height: 125px;
+.brand .color-blocks {
+  margin-left: 20px;
 }
-.color-scheme .col .color {
-  position: absolute;
-  bottom: 0;
-  vertical-align: bottom;
-  visibility: hidden;
-  font-weight: bold;
-  font-size: 14pt;
-}
-.color-scheme .col:hover .color,
-.color-scheme .col:focus .color,
-.color-scheme .col:active .color,
-.color-scheme .col .active .color {
-  visibility: visible;
+.brand .colors {
+  margin-bottom: 10px;
 }
 .black {
   background-color: #2f2f2f;
-}
-.black-light {
-  background-color: #474747;
 }
 .silver {
   background-color: #cbcfd3;
@@ -7344,20 +7368,11 @@ h1 {
 .white {
   background-color: #fbfcfc;
 }
-.gray-darker {
-  background-color: #222222;
-}
-.gray-dark {
-  background-color: #333333;
-}
 .gray {
   background-color: #555555;
 }
 .gray-light {
   background-color: #999999;
-}
-.gray-lighter {
-  background-color: #eeeeee;
 }
 .dark-blue {
   background-color: #083970;
@@ -7388,21 +7403,6 @@ h1 {
 }
 .faded-green {
   background-color: #5ccaa9;
-}
-.dark-yellow {
-  background-color: #ab8500;
-}
-.muted-yellow {
-  background-color: #daa900;
-}
-.yellow {
-  background-color: #ffcd20;
-}
-.light-yellow {
-  background-color: #ffd74b;
-}
-.faded-yellow {
-  background-color: #ffe074;
 }
 .dark-orange {
   background-color: #ab3c00;
@@ -7448,58 +7448,6 @@ h1 {
 }
 .faded-red {
   background-color: #e9716e;
-}
-.landing-page .jumbotron {
-  margin-bottom: 0px;
-}
-.landing-page .composers-couch {
-  background-color: #fbfcfc;
-}
-.landing-page .composers-couch .image-frame {
-  margin-bottom: 48px;
-}
-.landing-page .composers-couch .container {
-  max-width: 750px;
-}
-.landing-page .composers-couch .container .moto {
-  margin-bottom: 30px;
-}
-.landing-page .profile-types {
-  background-color: #2f2f2f;
-  color: #fbfcfc;
-}
-.landing-page .requests {
-  background-color: #2161a8;
-  color: #fbfcfc;
-}
-.landing-page .shows {
-  background-color: #16aa7d;
-  color: #fbfcfc;
-}
-.landing-page .updates {
-  background-color: #382cb3;
-  color: #fbfcfc;
-}
-.landing-page .artists-venues {
-  background-color: #cbcfd3;
-}
-/*Content*/
-#TimBest {
-  margin-top: 15px;
-}
-#TimBest .TimBestimage {
-  width: 175px;
-  height: 175px;
-}
-#TimBest .TimBestimage img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin-left: auto;
-  margin-right: auto;
-}
-#TimBest h2 {
-  text-align: left;
 }
 .authentication .container-fluid {
   padding-right: 15px;
@@ -8300,7 +8248,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   padding: 5px 0;
 }
 .calendar-wrapper .cal-day-row:hover {
-  background-color: #eeeeee;
+  background-color: #dfe5eb;
 }
 .calendar-wrapper .day-cell:hover {
   background-color: #dddddd;
@@ -8387,7 +8335,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   visibility: visible;
 }
 .calendar-wrapper .expanded-day {
-  background-color: #eeeeee;
+  background-color: #dfe5eb;
   padding-top: 10px;
   padding-bottom: 5px;
 }
