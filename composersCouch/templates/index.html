@@ -11,7 +11,7 @@
       </div>
       <div class="text-center container">
         <div class="moto">
-          <h2>Composers Couch is a booking service with the mission of connecting artists and venues.</h2>
+          <h2>Composers Couch is a booking service that connects artists, venues, and fans.</h2>
         </div>
         {% if not user.is_authenticated %}
           <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-lg btn-primary">Join For Free</a>
@@ -46,8 +46,8 @@
     <div class="jumbotron requests">
       <div class="row">
         <div class="col-sm-6">
-          <h2><a href="{% url 'requests' 'expiring' 'default' 'all' %}" class="text-white" >Requests
-            <small><span class="fa fa-chevron-right text-white"></span></samll>
+          <h2><a href="{% url 'requests' 'expiring' 'default' 'all' %}">
+            Requests
           </a></h2>
           <p>Publically ask to see who is available. Quickly find who is looking for show in your area.</p>
           <a href="{% url 'requests' 'expiring' 'default' 'all' %}" class="pull-right btn btn-transparent">
