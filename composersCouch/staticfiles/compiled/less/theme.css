@@ -6956,24 +6956,24 @@ h1 {
 .navigation {
   margin-bottom: 15px;
 }
-.navigation.sub-nav {
+.sub-nav {
   background-color: #cbcfd3;
 }
-.navigation.sub-nav .row .btn {
+.sub-nav .row .btn {
   margin-top: 5px;
   margin-bottom: 5px;
 }
-.navigation.sub-nav .row .nav li a {
+.sub-nav .nav li a {
   color: #555555;
 }
-.navigation.sub-nav .row .nav li a:hover,
-.navigation.sub-nav .row .nav li a:focus {
+.sub-nav .nav li a:hover,
+.sub-nav .nav li a:focus {
   background-color: transparent;
   color: #2f2f2f;
 }
-.navigation.sub-nav .row .nav li.active a,
-.navigation.sub-nav .row .nav li.active a:focus,
-.navigation.sub-nav .row .nav li.active a:hover {
+.sub-nav .nav li.active a,
+.sub-nav .nav li.active a:focus,
+.sub-nav .nav li.active a:hover {
   background-color: transparent;
   border-radius: 0px;
   border-bottom: 3px solid #2161a8;

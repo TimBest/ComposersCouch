@@ -43,7 +43,17 @@
         </div>
       </div>
     {% endif %}
-    <div class="jumbotron blue">
+    <div class="sub-nav">
+        <ul class="nav nav-pills nav-centered">
+          <li class=""><a href="#requests">Requests</a></li>
+          <li class=""><a href="#concerts">Concerts</a></li>
+          <li class=""><a href="#artists">Artists</a></li>
+          <li class=""><a href="#venues">Venues</a></li>
+          <li class=""><a href="#updates">Updates</a></li>
+        </ul>
+    </div>
+
+    <div class="jumbotron blue" id="requests">
       <div class="row">
         <div class="col-sm-6">
           <h2><a class="text-white" href="{% url 'requests' 'expiring' 'default' 'all' %}">
@@ -56,7 +66,7 @@
         </div>
       </div>
     </div>
-    <div class="jumbotron green">
+    <div class="jumbotron green" id="concerts">
       <div class="row">
         <div class="col-sm-6 col-sm-offset-6">
           <h2><a class="text-white" href="{% url 'shows' 'upcoming' 'all' %}">
@@ -69,7 +79,7 @@
         </div>
       </div>
     </div>
-    <div class="jumbotron black">
+    <div class="jumbotron black" id="artists">
       <div class="row">
         <div class="col-sm-6">
           <h2><a class="text-white" href="{% url 'artists' 'all' 'all' %}">
@@ -82,7 +92,7 @@
         </div>
       </div>
     </div>
-    <div class="jumbotron blue">
+    <div class="jumbotron blue" id="venues">
       <div class="row">
         <div class="col-sm-6 col-sm-offset-6">
           <h2>Venues</h2>
@@ -93,7 +103,7 @@
         </div>
       </div>
     </div>
-    <div class="jumbotron green">
+    <div class="jumbotron green" id="updates">
       <div class="row">
         <div class="col-sm-6">
           <h2>Updates</h2>

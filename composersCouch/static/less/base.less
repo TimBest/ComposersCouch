@@ -93,30 +93,31 @@ h1 {
 /* Navigation */
 .navigation {
   margin-bottom: 15px;
-  &.sub-nav {
-    background-color:@silver;
-    .row {
-      .btn {
-        margin-top: 5px;
-        margin-bottom: 5px;
+}
+
+.sub-nav {
+  background-color:@silver;
+  .row {
+    .btn {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+  }
+  .nav {
+    li {
+      a {
+        color: @gray;
+        &:hover, &:focus {
+          background-color: transparent;
+          color: @black;
+        }
       }
-      .nav {
-        li {
-          a {
-            color: @gray;
-            &:hover, &:focus {
-              background-color: transparent;
-              color: @black;
-            }
-          }
-          &.active {
-            a, a:focus, a:hover  {
-              background-color: transparent;
-              border-radius:0px;
-              border-bottom: 3px solid @blue;
-              color: #000;
-            }
-          }
+      &.active {
+        a, a:focus, a:hover  {
+          background-color: transparent;
+          border-radius:0px;
+          border-bottom: 3px solid @blue;
+          color: #000;
         }
       }
     }
