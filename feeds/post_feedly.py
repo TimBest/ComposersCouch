@@ -6,14 +6,14 @@ from stream_framework.activity import Activity
 from stream_framework.feed_managers.base import Manager, FanoutPriority, add_operation, remove_operation
 
 from models import Follow, Post
-from post_feed import AggregatedPostFeed, PostFeed, UserPostFeed, LocalFeed, RegionalFeed
+from post_feed import AggregatedPostFeed, PostFeed, UserPostFeed, LocalFeed
 from verbs import Post as PostVerb
 from contact.models import Zipcode
 
 
 class PostFeedly(Manager):
     feed_classes = dict(normal=PostFeed, aggregated=AggregatedPostFeed)
-    geo_feed_classes = dict(local=LocalFeed, regional=RegionalFeed)
+    geo_feed_classes = dict(local=LocalFeed)
     user_feed_class = UserPostFeed
 
     def add_post(self, post):
@@ -50,9 +50,6 @@ class PostFeedly(Manager):
     def get_local_feed(self, zip_code):
         return LocalFeed(zip_code)
 
-    def get_regional_feed(self, zip_code):
-        return RegionalFeed(zip_code)
-
     def add_geo_activity(self, zip_code, activity):
         '''
         Store the new activity and then fanout to the local feeds
@@ -86,11 +83,9 @@ class PostFeedly(Manager):
         :param activity: the activity which to remove
         '''
         # we don't remove from the global feed due to race conditions
-        # but we do remove from the regional and local feeds
+        # but we do remove from the local feeds
         local_feed = self.get_local_feed(zip_code)
         local_feed.remove(activity)
-        regional_feed = self.get_regional_feed(zip_code)
-        regional_feed.remove(activity)
 
         # no need to trim when removing items
         operation_kwargs = dict(activities=[activity], trim=False)

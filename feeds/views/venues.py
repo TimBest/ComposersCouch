@@ -12,14 +12,12 @@ from accounts.models import VenueProfile
 from composersCouch.utils import get_page
 from contact.utils import get_location
 from feeds.views import AvailabilityMixin, FeedMixin, GenreMixin
-from feeds.post_feed import LocalFeed, RegionalFeed
+from feeds.post_feed import LocalFeed
 
 
 def venues(request, scope='all', *args, **kwargs):
     if scope == 'local':
         return LocalView.as_view()(request, *args, **kwargs)
-    elif scope == 'regional':
-        return ReqionalView.as_view()(request, *args, **kwargs)
     elif scope == 'following':
         return FollowingView.as_view()(request, *args, **kwargs)
     else:
@@ -82,18 +80,6 @@ class LocalView(VenueView):
         if location:
             return self.modelManager.filter(
                 profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
-            )
-        else:
-            return []
-
-class ReqionalView(VenueView):
-    template_name = 'feeds/venues/regional.html'
-
-    def get_posts(self, **kwargs):
-        location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-        if location:
-            return self.modelManager.filter(
-                profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=RegionalFeed.distance))
             )
         else:
             return []

@@ -1,9 +1,0 @@
-{% extends 'feeds/artists/artists.html' %}
-
-{% block regionalClass %}active{% endblock %}
-
-{% block availabilityForm %}{% endblock %}
-
-{% block feed %}
-  {% include "feeds/artists/_feed.html" with title="Regional Artists" artists=posts %}
-{% endblock %}

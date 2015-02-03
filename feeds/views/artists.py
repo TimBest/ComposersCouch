@@ -5,15 +5,13 @@ from django.views.generic import TemplateView
 
 from accounts.models import MusicianProfile
 from contact.utils import get_location
-from feeds.post_feed import LocalFeed, RegionalFeed
+from feeds.post_feed import LocalFeed
 from feeds.views import AvailabilityMixin, FeedMixin
 
 
 def artists(request, scope='all', *args, **kwargs):
     if scope == 'local':
         return LocalView.as_view()(request, *args, **kwargs)
-    elif scope == 'regional':
-        return ReqionalView.as_view()(request, *args, **kwargs)
     elif scope == 'following':
         return FollowingView.as_view()(request, *args, **kwargs)
     else:
@@ -57,18 +55,6 @@ class LocalView(ArtistView):
         if location:
             return self.modelManager.filter(
                 profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
-            )
-        else:
-            return []
-
-class ReqionalView(ArtistView):
-    template_name = 'feeds/artists/regional.html'
-
-    def get_posts(self, **kwargs):
-        location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-        if location:
-            return self.modelManager.filter(
-                profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=RegionalFeed.distance))
             )
         else:
             return []

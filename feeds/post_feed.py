@@ -38,24 +38,3 @@ class LocalFeed(RedisFeed):
         # backends)
         self._filter_kwargs = dict()
         self._ordering_args = tuple()
-
-class RegionalFeed(RedisFeed):
-    key_format = 'feed:normal:%(zip_code)s'
-    # distance in meters (300 miles)
-    distance = 500000
-
-    def __init__(self, zip_code):
-        '''
-        :param zip_code: the zip_code associated to the feed we're working on
-        '''
-        self.zip_code = zip_code
-        self.key_format = self.key_format
-        self.key = self.key_format % {'zip_code': self.zip_code}
-
-        self.timeline_storage = self.get_timeline_storage()
-        self.activity_storage = self.get_activity_storage()
-
-        # ability to filter and change ordering (not supported for all
-        # backends)
-        self._filter_kwargs = dict()
-        self._ordering_args = tuple()

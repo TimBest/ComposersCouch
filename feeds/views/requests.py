@@ -4,7 +4,7 @@ from django.views.generic import TemplateView
 
 from contact.utils import get_location
 from feeds.models import Follow
-from feeds.post_feed import LocalFeed, RegionalFeed
+from feeds.post_feed import LocalFeed
 from feeds.views import FeedMixin, GenreMixin
 from request.models import PublicRequest
 
@@ -12,8 +12,6 @@ from request.models import PublicRequest
 def requests(request, scope='all', *args, **kwargs):
     if scope == 'local':
         return LocalView.as_view()(request, *args, **kwargs)
-    elif scope == 'regional':
-        return ReqionalView.as_view()(request, *args, **kwargs)
     elif scope == 'following':
         return FollowingView.as_view()(request, *args, **kwargs)
     else:
@@ -65,19 +63,6 @@ class LocalView(RequestView):
         if location:
             posts = self.modelManager.filter(
                 zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
-            )
-            return self.band_or_venue(posts, **kwargs)
-        else:
-            return []
-
-class ReqionalView(RequestView):
-    template_name = 'feeds/requests/regional.html'
-
-    def get_posts(self, **kwargs):
-        location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-        if location:
-            posts = self.modelManager.filter(
-                zip_code__point__distance_lte=(location, D(m=RegionalFeed.distance))
             )
             return self.band_or_venue(posts, **kwargs)
         else:

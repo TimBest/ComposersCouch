@@ -18,8 +18,6 @@ remove_operation(feed, activities)"""
 def updates(request, scope='all', *args, **kwargs):
     if scope == 'local':
         return LocalView.as_view()(request, *args, **kwargs)
-    elif scope == 'regional':
-        return ReqionalView.as_view()(request, *args, **kwargs)
     elif scope == 'following':
         return FollowingView.as_view()(request, *args, **kwargs)
     else:
@@ -51,11 +49,6 @@ class UpdateView(ZipcodeMixin, TemplateView):
 class LocalView(UpdateView):
     template_name = 'feeds/updates/local.html'
     feed = 'get_local_feed'
-    location_type = 'code'
-
-class ReqionalView(UpdateView):
-    template_name = 'feeds/updates/regional.html'
-    feed = 'get_regional_feed'
     location_type = 'code'
 
 class AllView(ZipcodeMixin, TemplateView):
