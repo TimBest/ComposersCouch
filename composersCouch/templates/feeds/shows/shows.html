@@ -9,9 +9,6 @@
   <li class="{% block localClass %}{% endblock %}">
     <a href="{% url 'shows' order 'local' zipcode %}?{{ request.GET.urlencode }}">Local</a>
   </li>
-  <li class="{% block regionalClass %}{% endblock %}">
-    <a href="{% url 'shows' order 'regional' zipcode %}?{{ request.GET.urlencode }}">Regional</a>
-  </li>
   <li class="{% block globalClass %}{% endblock %}">
     <a href="{% url 'shows' order 'all' zipcode %}?{{ request.GET.urlencode }}">All</a>
   </li>

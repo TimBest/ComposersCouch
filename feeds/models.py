@@ -15,7 +15,6 @@ class Post(models.Model):
     track = models.ForeignKey('tracks.Media',blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     local_votes = models.PositiveIntegerField(default=1)
-    regional_votes = models.PositiveIntegerField(default=1)
     site_votes = models.PositiveIntegerField(default=1)
 
     def create_activity(self):

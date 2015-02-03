@@ -2,14 +2,11 @@
 
 {% block artistsClass %}active{% endblock %}
 {% block feedType %}Artists{% endblock %}
-{% block navColor %}{% block bgColor %}red{% endblock %}{% endblock %}
+{% block navColor %}{% block bgColor %}black{% endblock %}{% endblock %}
 
 {% block scopeNav %}
   <li class="{% block localClass %}{% endblock %}">
     <a href="{% url 'artists' order 'local' zipcode %}?{{ request.GET.urlencode }}">Local</a>
-  </li>
-  <li class="{% block regionalClass %}{% endblock %}">
-    <a href="{% url 'artists' order 'regional' zipcode %}?{{ request.GET.urlencode }}">Regional</a>
   </li>
   <li class="{% block globalClass %}{% endblock %}">
     <a href="{% url 'artists' order 'all' zipcode %}?{{ request.GET.urlencode }}">All</a>
