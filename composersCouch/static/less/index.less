@@ -1,8 +1,10 @@
 .landing-page {
+
   color:@white;
   .jumbotron {
     margin-bottom: 0px;
   }
+
   .composers-couch {
     background-color:@white;
     color:@black;
@@ -16,13 +18,17 @@
       }
     }
   }
-  .black {
-    background-color:@black;
+
+
+  .sub-nav {
+    position: relative;
+    z-index: 2;
+    &.affix {
+      position: fixed;
+      top: 0;
+      width: 100%
+    }
   }
-  .blue {
-    background-color:@blue;
-  }
-  .green {
-    background-color:@green;
-  }
+
+
 }

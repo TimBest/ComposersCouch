@@ -7315,14 +7315,14 @@ h1 {
 .landing-page .composers-couch .container .moto {
   margin-bottom: 30px;
 }
-.landing-page .black {
-  background-color: #2f2f2f;
+.landing-page .sub-nav {
+  position: relative;
+  z-index: 2;
 }
-.landing-page .blue {
-  background-color: #2161a8;
-}
-.landing-page .green {
-  background-color: #16aa7d;
+.landing-page .sub-nav.affix {
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 /*Content*/
 .team #TimBest {

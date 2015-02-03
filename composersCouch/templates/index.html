@@ -43,9 +43,9 @@
         </div>
       </div>
     {% endif %}
-    <div class="sub-nav">
+    <div class="sub-nav" data-spy="affix" data-offset-top="395" data-offset-bottom="200">
         <ul class="nav nav-pills nav-centered">
-          <li class=""><a href="#requests">Requests</a></li>
+          <li class="active"><a href="#requests">Requests</a></li>
           <li class=""><a href="#concerts">Concerts</a></li>
           <li class=""><a href="#artists">Artists</a></li>
           <li class=""><a href="#venues">Venues</a></li>
@@ -53,7 +53,7 @@
         </ul>
     </div>
 
-    <div class="jumbotron blue" id="requests">
+    <div class="jumbotron section blue" id="requests">
       <div class="row">
         <div class="col-sm-6">
           <h2><a class="text-white" href="{% url 'requests' 'expiring' 'default' 'all' %}">
@@ -66,7 +66,7 @@
         </div>
       </div>
     </div>
-    <div class="jumbotron green" id="concerts">
+    <div class="jumbotron section green" id="concerts">
       <div class="row">
         <div class="col-sm-6 col-sm-offset-6">
           <h2><a class="text-white" href="{% url 'shows' 'upcoming' 'all' %}">
@@ -79,7 +79,7 @@
         </div>
       </div>
     </div>
-    <div class="jumbotron black" id="artists">
+    <div class="jumbotron section black" id="artists">
       <div class="row">
         <div class="col-sm-6">
           <h2><a class="text-white" href="{% url 'artists' 'all' 'all' %}">
@@ -92,7 +92,7 @@
         </div>
       </div>
     </div>
-    <div class="jumbotron blue" id="venues">
+    <div class="jumbotron section blue" id="venues">
       <div class="row">
         <div class="col-sm-6 col-sm-offset-6">
           <h2>Venues</h2>
@@ -103,7 +103,7 @@
         </div>
       </div>
     </div>
-    <div class="jumbotron green" id="updates">
+    <div class="jumbotron section green" id="updates">
       <div class="row">
         <div class="col-sm-6">
           <h2>Updates</h2>
@@ -115,4 +115,42 @@
       </div>
     </div>
   </div>
+
+{% endblock %}
+
+{% block script %}
+<script type="text/javascript">
+  var sections = $('.section'),
+      nav = $('.sub-nav'),
+      nav_height = nav.outerHeight();
+
+  $(window).on('scroll', function () {
+    var cur_pos = $(this).scrollTop();
+
+    sections.each(function() {
+      var top = $(this).offset().top - nav_height,
+          bottom = top + $(this).outerHeight();
+
+      if (cur_pos >= top && cur_pos <= bottom) {
+        nav.find('li').removeClass('active');
+        sections.removeClass('active');
+
+        $(this).addClass('active');
+        nav.find('a[href="#'+$(this).attr('id')+'"]').parent().addClass('active');
+      }
+    });
+  });
+
+  nav.find('a').on('click', function () {
+    var $el = $(this)
+      , id = $el.attr('href');
+
+    $('html, body').animate({
+      scrollTop: $(id).offset().top - nav_height
+    }, 500);
+
+    return false;
+});
+</script>
+
 {% endblock %}
