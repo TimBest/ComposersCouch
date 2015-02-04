@@ -20,6 +20,7 @@ from guardian.decorators import permission_required_or_403
 from pipeline import create_profile
 from forms import ClaimProfileForm, EmailForm, SignupForm, SigninForm
 from models import Profile
+from annoying.functions import get_object_or_None
 from composersCouch.views import MultipleFormsView
 from contact.forms import ZipcodeForm
 from userena.signals import signup_complete
@@ -55,7 +56,7 @@ class SignupAuthView(SignupView):
     def dispatch(self, *args, **kwargs):
         username = self.kwargs.get('username', None)
         if self.request.user.is_authenticated():
-            return redirect(self.request.user.profile.get_absolute_url)
+            return redirect(self.request.user.profile.get_absolute_url())
         return super(SignupAuthView, self).dispatch(*args, **kwargs)
 
 signup = SignupAuthView.as_view()
@@ -187,12 +188,15 @@ def signin(request, auth_form=SigninForm,
 def loginredirect(request, username=None, tab='home'):
     if username == None:
         username = request.user.username
-    profile = get_object_or_404(Profile, user__username=username)
-    profileType = profile.profile_type
-    if profileType == 'f':
-      return redirect('fan:'+tab, username=username)
-    elif profileType == 'm':
-      return redirect('musician:'+tab, username=username)
-    elif profileType == 'v':
-      return redirect('venue:'+tab, username=username)
-    return redirect(tab, username=username)
+    profile = get_object_or_None(Profile, user__username=username)
+    if profile:
+        profileType = profile.profile_type
+        if profileType == 'f':
+          return redirect('fan:'+tab, username=username)
+        elif profileType == 'm':
+          return redirect('musician:'+tab, username=username)
+        elif profileType == 'v':
+          return redirect('venue:'+tab, username=username)
+        return redirect(tab, username=username)
+    else:
+        return redirect('home')

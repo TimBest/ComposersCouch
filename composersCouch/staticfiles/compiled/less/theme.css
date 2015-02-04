@@ -7316,6 +7316,9 @@ h1 {
 .landing-page .composers-couch .container .moto {
   margin-bottom: 30px;
 }
+.landing-page .section .jumbotron {
+  min-height: 500px;
+}
 .landing-page .requests {
   background: rgba(33, 97, 168, 0.45);
 }
@@ -7323,28 +7326,28 @@ h1 {
   background-color: #2161a8;
 }
 .landing-page .concerts {
-  background: rgba(22, 170, 125, 0.7);
+  background: rgba(22, 170, 125, 0.45);
 }
 .landing-page .concerts .jumbotron {
   background-color: #16aa7d;
 }
 .landing-page .artists {
-  background: rgba(47, 47, 47, 0.75);
+  background: rgba(47, 47, 47, 0.45);
 }
 .landing-page .artists .jumbotron {
   background-color: #2f2f2f;
 }
 .landing-page .venues {
-  background: rgba(33, 97, 168, 0.7);
+  background: rgba(33, 97, 168, 0.45);
 }
 .landing-page .venues .jumbotron {
-  background-color: #2161a8;
+  background-color: #2f2f2f;
 }
 .landing-page .updates {
-  background: rgba(22, 170, 125, 0.45);
+  background: rgba(56, 44, 179, 0.45);
 }
 .landing-page .updates .jumbotron {
-  background-color: #16aa7d;
+  background-color: #382cb3;
 }
 .landing-page .sub-nav {
   position: relative;
@@ -7386,7 +7389,7 @@ h1 {
 }
 .brand .color {
   min-height: 75px;
-  border-radius: 3px;
+  border-radius: 5px;
 }
 .brand .color-blocks {
   margin-left: 20px;
