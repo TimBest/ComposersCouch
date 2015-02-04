@@ -120,7 +120,6 @@ input.autocomplete.xhr-pending {
 .autocomplete-light-widget .deck .choice
 {
     list-style-type: none;
-    display: inline-block;
     padding-top: 3px;
     padding-right: 3px;
 }

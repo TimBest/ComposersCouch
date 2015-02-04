@@ -73,7 +73,7 @@ class ComposeView(MessagesMixin, FormView):
                        could be separated by a '+'
     """
     form_class=ComposeForm
-    success_url='messages_inbox'
+    success_url='messages_sent'
     template_name='messages/compose.html'
 
     def form_valid(self, form):

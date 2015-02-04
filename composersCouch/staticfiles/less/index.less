@@ -1,0 +1,69 @@
+.landing-page {
+
+  color:@white;
+  .jumbotron {
+    margin-bottom: 0px;
+    background-color:@black;
+  }
+
+  .composers-couch {
+    background-color:@white;
+    color:@black;
+    .image-frame {
+      margin-bottom:48px;
+    }
+    .container {
+      max-width:750px;
+      .moto {
+        margin-bottom:30px;
+      }
+    }
+  }
+  .section {
+    .jumbotron {
+      min-height:500px;
+    }
+  }
+  .requests {
+    background: fade(@blue, 45%);
+    .jumbotron {
+      background-color:@blue;
+    }
+  }
+  .concerts {
+    background: fade(@green, 45%);
+    .jumbotron {
+      background-color:@green;
+    }
+  }
+  .artists {
+    background: fade(@black, 45%);
+    .jumbotron {
+      background-color:@black;
+    }
+  }
+  .venues {
+    background: fade(@blue, 45%);
+    .jumbotron {
+      background-color:@black;
+    }
+  }
+  .updates {
+    background: fade(@purple, 45%);
+    .jumbotron {
+      background-color:@purple;
+    }
+  }
+
+  .sub-nav {
+    position: relative;
+    z-index: 2;
+    &.affix {
+      position: fixed;
+      top: 0;
+      width: 100%
+    }
+  }
+
+
+}
