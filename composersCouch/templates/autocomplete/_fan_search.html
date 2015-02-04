@@ -1,0 +1,7 @@
+{% load i18n %}
+{% load static from staticfiles %}
+
+<a class="div choice" href="{% url 'fan:home' fan.profile.user.username %}">
+  {% include "utils/_mugshot.html" with profile=fan.profile height=45 width=45 %}
+  {{ fan }}
+</a>

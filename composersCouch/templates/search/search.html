@@ -10,12 +10,14 @@
 {% endblock %}
 
 {% block content %}
-  {% for musician in musicians %}
-    {% include "search/_musician.html"  with artist=musician %} 
+  {% for profile in profiles %}
+    {% if profile.profile_type == 'm' %}
+      {% include "search/_musician.html" with artist=profile.musicianProfile %}
+    {% elif profile.profile_type == 'v' %}
+      {% include "search/_venue.html" with venue=profile.venueProfile %}
+    {% else %}
+      {% include "search/_fan.html" with fan=profile.fanProfile %}
+    {% endif %}
   {% endfor %}
-  {% for venue in venues %}
-    {% include "search/_venue.html"  with venue=venue %} 
-  {% endfor %}
+  {% include "utils/_pagination.html" with page=profiles %}
 {% endblock %}
-
-
