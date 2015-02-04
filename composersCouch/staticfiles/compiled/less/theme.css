@@ -7078,6 +7078,9 @@ h1 {
   border: 1px solid #cbcfd3;
   box-shadow: none;
 }
+.row {
+  margin: 0px 0px 0px 0px;
+}
 /* Footer */
 #footer {
   position: absolute;
@@ -7359,27 +7362,6 @@ h1 {
   width: 100%;
 }
 /*Content*/
-.team #TimBest {
-  margin-top: 15px;
-}
-.team #TimBest .TimBestimage {
-  width: 175px;
-  height: 175px;
-}
-.team #TimBest .TimBestimage img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin-left: auto;
-  margin-right: auto;
-}
-.team #TimBest h2 {
-  text-align: left;
-}
-.team .row {
-  margin-right: 0px;
-  margin-left: 0px;
-}
 .about .panel-body {
   margin-left: 15px;
   margin-right: 15px;
