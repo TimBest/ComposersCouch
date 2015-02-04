@@ -1,9 +1,36 @@
 {% extends 'feeds/venues/venues.html' %}
+{% load crispy_forms_tags %}
 
 
 {% block availableClass %}active{% endblock %}
 
-
 {% block feed %}
-  {% include "feeds/venues/_feed.html" with title="Venues" venues=posts %}
+  {% include "feeds/venues/_feed.html" with venues=posts %}
+{% endblock %}
+
+{% block zipcodeForm %}
+  <span class="dropdown">
+    <a class="text-white dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+      {% block nearActive %}near{% endblock %}<span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <li class="{% block near %}active{% endblock %}">
+        <a href="{% url 'available_venues' order year month day zipcode %}?{{ request.GET.urlencode }}">near</a>
+      </li>
+      <li class="{% block between %}{% endblock %}">
+        <a href="{% url 'available_venues_between' order year month day %}?{{ request.GET.urlencode }}">between my shows</a>
+      </li>
+    </ul>
+  </span>
+  {% block betweenForm %}
+    <a href="#" role="button" data-toggle="popover"
+       id="zipcode-select" class="toggle text-white" title="Zipcode">
+      {% if zipcode %}{{ zipcode }}{% else %}Zipcode{% endif %}<span class="caret"></span>
+    </a>
+    <div class="zipcode-content hide">
+      <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
+        <input type="hidden" name="path" value="{% firstof request.path '/' %}">
+        {% crispy zipcodeForm %}
+      </form>
+    </div>
+  {% endblock %}
 {% endblock %}

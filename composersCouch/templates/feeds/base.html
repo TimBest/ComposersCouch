@@ -10,9 +10,11 @@
   <div class="main-nav">
     <div class="title">
       <span class="dropdown">
-        <a class="text-white dropdown-toggle toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-          <h2>{% block feedType %}Feed{% endblock %}<small><span class="fa fa-chevron-down text-white"></span></small></h2>
-        </a>
+        <h2>
+          <a class="text-white dropdown-toggle toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+            {% block feedType %}Feed{% endblock %}<small><span class="fa fa-chevron-down text-white"></span></small>
+          </a>
+        </h2>
         <ul class="dropdown-menu" role="menu">
           <li class="{% block requestsClass %}{% endblock %}">
             <a href="{% url 'requests' 'expiring' 'default' 'all' zipcode %}?{{ request.GET.urlencode }}">Requests</a>

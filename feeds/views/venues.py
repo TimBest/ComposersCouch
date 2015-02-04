@@ -79,6 +79,32 @@ class AvailabilityView(AvailabilityMixin, VenueView):
 
 available_venues = AvailabilityView.as_view()
 
+class BetweenView(AvailabilityView):
+    template_name = 'feeds/venues/available_between.html'
+
+    def get_posts(self, **kwargs):
+        # TODO: add checking for when its more then a (x time period) away the default to local
+        start = datetime.combine(self.start_date, time()).replace(tzinfo=utc)
+        end = datetime.combine(self.end_date, time()).replace(tzinfo=utc)
+        posts = self.modelManager.exclude(**self.get_exclude(start, end))
+        calendar = self.request.user.calendar
+        prev = calendar.get_prev_event(in_datetime=end)
+        next = calendar.get_next_event(in_datetime=end)
+        if prev:
+            start = prev.get_location().zip_code.point
+        else:
+            start = get_location(self.request, self.get_zipcode(**kwargs), 'point')
+        if next:
+            end = next.get_location().zip_code.point
+        else:
+            end = get_location(self.request, self.get_zipcode(**kwargs), 'point')
+        line = LineString(start,end)
+        return posts.filter(
+            profile__contact_info__location__zip_code__point__distance_lte=(line, D(m=LocalFeed.distance))
+        )
+
+available_venues_between = AvailabilityView.as_view()
+
 class LocalView(VenueView):
     template_name = 'feeds/venues/local.html'
 
