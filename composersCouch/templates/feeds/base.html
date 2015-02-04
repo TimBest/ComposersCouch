@@ -11,7 +11,7 @@
     <div class="title">
       <span class="dropdown">
         <a class="text-white dropdown-toggle toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-          <h2>{% block feedType %}Feed{% endblock %} <small><span class="fa fa-chevron-down text-white"></span></small></h2>
+          <h2>{% block feedType %}Feed{% endblock %}<small><span class="fa fa-chevron-down text-white"></span></small></h2>
         </a>
         <ul class="dropdown-menu" role="menu">
           <li class="{% block requestsClass %}{% endblock %}">
@@ -38,8 +38,7 @@
         <span class="text-white"> available on</span>
         <a href="#" role="button" data-toggle="popover"
            id="availability-select" class="toggle text-white" title="Availability">
-          {% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %}<span class="caret"></span>
-        </a>
+          {% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %}<span class="caret"></span></a>
         <div class="availability-content hide">
           <form class="availability-form" role="filter" method="POST" action="{% url 'availability' %}">
             <input type="hidden" name="path" value="{% firstof request.path '/' %}">
