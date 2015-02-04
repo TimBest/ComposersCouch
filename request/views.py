@@ -50,7 +50,7 @@ class SentPrivateRequestsView(TemplateView):
         context = super(SentPrivateRequestsView, self).get_context_data(**kwargs)
         page_num = self.request.GET.get('page')
         context['sent'] = True
-        context['participants'] = Participant.objects.filter(
+        participants = Participant.objects.filter(
             user=self.request.user,
             replied_at__isnull=False,
             deleted_at__isnull=True,
