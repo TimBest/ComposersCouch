@@ -5,7 +5,6 @@
 
 {% block header %}
   <h3>{{ image.title }}</h3>
-  <p>{{ image.description }}</p>
   {% if request.user == image.user %}
     <a href="{% url 'photos:update-image' image.id %}">{% include "_editLink.html" with text="Edit" %}</a>
     <a class="pull-right" href="{% url 'photos:delete-image' image.id %}">{% include "_deleteLink.html" with text="Remove" %}</a>

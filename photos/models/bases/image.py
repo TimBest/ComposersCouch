@@ -34,7 +34,6 @@ class BaseImage(models.Model):
         )
 
     title = models.CharField(_('Title'), max_length=100, blank=True, null=True)
-    description = models.TextField(_('Description'), blank=True, null=True)
     order = models.IntegerField(_('Order'), default=0)
     image = ImageField(verbose_name = _('File'), upload_to=get_file_path, validators=[validate_file_extension])
     user = models.ForeignKey(User, verbose_name=_('User'), null=True, blank=True, related_name='images')

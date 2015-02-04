@@ -11,11 +11,10 @@ class InlineImageAdmin(AdminInlineImageMixin, admin.TabularInline):
 
 
 class ImageAdmin(admin.ModelAdmin):
-    fieldsets = ((None, {'fields': ['user', 'title', 'image', 'description', 'order', 'tags']}),)
+    fieldsets = ((None, {'fields': ['user', 'title', 'image', 'order', 'tags']}),)
     list_display = ('admin_thumbnail', 'user', 'order', 'title')
     raw_id_fields = ('user', )
 
 IMAGE_MODEL = getattr(settings, 'PHOTOS_IMAGE_MODEL', None)
 if not IMAGE_MODEL:
     admin.site.register(Image, ImageAdmin)
-

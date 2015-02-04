@@ -50,22 +50,18 @@ class ImageForm(ImageOnlyForm):
     def __init__(self, *args, **kwargs):
         super(ImageForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
+        self.fields['image'].required = True
         self.helper.form_tag = False
         self.helper.layout = Layout(
             Div(
                 'image',
                 'title',
-                'description',
             ),
         )
 
     class Meta(object):
         model = Image
-        widgets = {
-            'description' : forms.Textarea(
-                                attrs={'rows': 2, 'cols': 19}),
-        }
-        fields = ('image','title','description',)
+        fields = ('image','title',)
 
 class AlbumArtForm(ImageOnlyForm):
     def __init__(self, *args, **kwargs):
