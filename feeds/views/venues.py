@@ -47,6 +47,13 @@ class AvailabilityView(AvailabilityMixin, VenueView):
         posts = self.modelManager.exclude(**self.get_exclude(start, end))
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
         if location:
+            return posts.filter(
+                profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
+            )
+        else:
+            return None
+
+        if location:
             try:
                 calendar = self.request.user.calendar
                 prev = calendar.get_prev_event(in_datetime=end)

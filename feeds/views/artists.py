@@ -1,5 +1,7 @@
 from datetime import datetime, time
+
 from django.contrib.gis.measure import D
+from django.db.models import Q
 from django.utils.timezone import utc
 from django.views.generic import TemplateView
 
@@ -46,7 +48,12 @@ class AvailabilityView(AvailabilityMixin, ArtistView):
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
         if location:
             return self.modelManager.exclude(**self.get_exclude(start, end)).filter(
-                profile__user__calendar__events__line__line__distance_lte=(location, D(m=LocalFeed.distance))
+                profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
+            )
+        if location:
+            return self.modelManager.exclude(**self.get_exclude(start, end)).filter(
+                Q(profile__user__calendar__events__line__line__distance_lte=(location, D(m=LocalFeed.distance))) |
+                Q(profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance)))
             )
         else:
             return []
