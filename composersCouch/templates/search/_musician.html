@@ -22,7 +22,7 @@
             <form method="POST" action="{% url 'follow' %}">
               {% csrf_token %}
               <input type="hidden" name="target" value="{{ artist.profile.user.id }}">
-              <button class="btn btn-sm btn-primary {% if user.is_authenticaed %}{% is_following request.user artist.profile.user %}{% endif %}" type="submit">
+              <button class="btn btn-sm btn-primary {% if user.is_authenticated %}{% is_following request.user artist.profile.user %}{% endif %}" type="submit">
                 <span class="follow">Follow</span>
                 <span class="following">Following</span>
                 <span class="unfollow">Unfollow</span>
