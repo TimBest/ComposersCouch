@@ -76,7 +76,7 @@
             <h2><a class="text-white" href="{% url 'shows' 'upcoming' 'all' %}">
               Concerts
             </a></h2>
-            <p>See who is playing in your area. Filter concerts by venue genre and location.</p>
+            <p>Promote your shows. Find out who is coming to your area. Filter concerts by genre and location.</p>
             <a href="{% url 'shows' 'upcoming' 'all' %}" class="pull-right btn btn-transparent">
               View Concerts <small><span class="fa fa-chevron-right text-white"></span></small>
             </a>
@@ -93,8 +93,8 @@
             </a></h2>
             <p>Discover local artists by genre. Use the
               <a class="text-white" href="{% url 'available_artists' 'all' 2014 32 32 %}">
-              availability feed</a> to find local artists or ones that are
-              passing through by date.</p>
+              availability feed</a> to find out when local artists are free or
+              when touring artists are passing through.</p>
             <a href="{% url 'artists' 'all' 'all' %}" class="pull-right btn btn-transparent">
               View Artists <small><span class="fa fa-chevron-right"></span></small>
             </a>
@@ -108,10 +108,9 @@
         <div class="row">
           <div class="col-sm-6 col-sm-offset-6">
             <h2>Venues</h2>
-            <p>Find local venues by genre. Use the
+            <p>Find local venues or ones between tour stops. Use the
               <a class="text-white" href="{% url 'available_venues' 'all' 2014 32 32 %}">
-              availability feed</a> to find local venues by location or between
-              stops on your tour.</p>
+              availability feed</a> to find out when venues are free.</p>
             <a href="{% url 'venues' 'all' 'all' %}" class="pull-right btn btn-transparent">
               View Venues <small><span class="fa fa-chevron-right"></span></small>
             </a>
