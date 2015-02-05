@@ -21,8 +21,6 @@ class photosTest(TestCase):
         self.image_file = open(os.path.join(os.path.dirname(__file__), 'test_img.jpg'))
         self.user = User.objects.create_user('zeus', 'zeus@example.com', 'zeus')
         self.client = Client()
-        self.album = Album(name='test album', user=self.user)
-        self.album.save()
 
     def _upload_test_image(self, username='zeus', password='zeus'):
         self.client.login(username=username, password=password)
@@ -32,77 +30,18 @@ class photosTest(TestCase):
         tree = html.fromstring(response.content)
         values = dict(tree.xpath('//form[@method="post"]')[0].form_values())
         values['image'] = self.image_file
-        values['album'] = Album.objects.filter(user=self.user)[0].id
         response = self.client.post(reverse('photos:upload'), values, follow=True)
         return response
 
-    def _create_test_album(self, username='zeus', password='zeus'):
-        self.client.login(username=username, password=password)
-        response = self.client.get(reverse('photos:create-album'))
-        self.assertEqual(response.status_code, 200)
-        tree = html.fromstring(response.content)
-        values = dict(tree.xpath('//form[@method="post"]')[0].form_values())
-        values['name'] = 'test album creation'
-        response = self.client.post(reverse('photos:create-album'), values, follow=True)
-        return response
-
-    def test_empty_index(self):
-        response = self.client.get(reverse('photos:index'))
-        self.assertEqual(response.status_code, 200)
-
-    def test_empty_album(self):
-        self.album.is_public = False
-        self.album.save()
-        response = self.client.get(self.album.get_absolute_url())
-        self.assertTrue(response.status_code == 403)
-        self.client.login(username='zeus', password='zeus')
-        self.user.is_superuser = True
-        self.user.save()
-        response = self.client.get(self.album.get_absolute_url())
-        self.assertEqual(response.status_code, 200)
-
-    def test_user(self):
-        response = self.client.get(reverse('photos:user', kwargs={'username': 'zeus'}))
-        self.assertEqual(response.status_code, 200)
-
-    def test_album_creation(self):
-        response = self._create_test_album()
-        self.assertEqual(response.status_code, 200)
-
-    def test_album_edit(self):
-        response = self._create_test_album()
-        album_id = Album.objects.get(name='test album creation').id
-        self.client.login(username='zeus', password='zeus')
-        response = self.client.get(reverse('photos:update-album', kwargs={'pk': album_id}))
-        self.assertEqual(response.status_code, 200)
-        tree = html.fromstring(response.content)
-        values = dict(tree.xpath('//form[@method="post"]')[0].form_values())
-        values['name'] = 'test album update'
-        self.client.post(reverse('photos:update-album', kwargs={'pk': album_id}), values, follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(Album.objects.get(id=album_id).name == 'test album update')
-
-    def test_album_delete(self):
-        response = self._create_test_album()
-        self.client.login(username='zeus', password='zeus')
-        album_id = Album.objects.get(name='test album creation').id
-        response = self.client.post(reverse('photos:delete-album', kwargs={'pk': album_id}), follow=True)
-        self.assertEqual(response.status_code, 200)
-        self.assertTrue(len(Album.objects.filter(id=album_id)) == 0)
-
-
     def test_image_upload(self):
-        response = self._create_test_album()
         response = self._upload_test_image()
         self.assertEqual(response.status_code, 200)
         img_url = Image.objects.get(user__username='zeus').get_absolute_url()
         response = self.client.get(img_url)
         self.assertEqual(response.status_code, 200)
-        self.test_user()
 
     def test_delete(self):
         User.objects.create_user('bad', 'bad@example.com', 'bad')
-        response = self._create_test_album()
         self._upload_test_image()
         self.client.login(username='bad', password='bad')
         image_id = Image.objects.get(user__username='zeus').id
@@ -121,15 +60,12 @@ class photosTest(TestCase):
         self.assertEqual(response.status_code, 200)
         tree = html.fromstring(response.content)
         values = dict(tree.xpath('//form[@method="post"]')[0].form_values())
-        values['tags'] = 'one, tow, three'
         values['title'] = 'changed title'
-        values['album'] = Album.objects.filter(user=self.user)[0].id
         self.client.post(reverse('photos:update-image', kwargs={'pk': image_id}), values, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(Image.objects.get(user__username='zeus').title == 'changed title')
 
     def test_prev_next_with_ordering(self):
-        self.test_album_creation()
         for i in range(1, 6):
             self._upload_test_image()
             img = Image.objects.order_by('-id')[0]
@@ -144,19 +80,3 @@ class photosTest(TestCase):
         response = self.client.get(Image.objects.get(order=3).get_absolute_url())
         self.assertEqual(response.context['next'], im1)
         self.assertEqual(response.context['previous'], im2)
-
-    def test_album_order(self):
-        self.album.delete()
-        a1 = Album.objects.create(name='b2', order=1, user=self.user)
-        a2 = Album.objects.create(name='a1', order=2, user=self.user)
-        response = self.client.get(reverse('photos:index'))
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['object_list'][0].name, 'b2')
-        self.assertEqual(response.context['object_list'][1].name, 'a1')
-        a1.order, a2.order = 2, 1
-        a1.save()
-        a2.save()
-        response = self.client.get(reverse('photos:index'))
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.context['object_list'][0].name, 'a1')
-        self.assertEqual(response.context['object_list'][1].name, 'b2')

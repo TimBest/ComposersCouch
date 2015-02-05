@@ -5,9 +5,9 @@ from django.conf import settings
 from django.test import TestCase
 from django.contrib.auth.models import User
 
-from userena.models import UserenaSignup, upload_to_mugshot
+from accounts.models import Profile
+from userena.models import UserenaSignup
 from userena import settings as userena_settings
-from userena.tests.profiles.models import Profile
 
 import datetime, hashlib, re
 
@@ -22,26 +22,6 @@ class UserenaSignupModelTests(TestCase):
                  'email': 'alice@example.com'}
 
     fixtures = ['users', 'profiles']
-
-    def test_upload_mugshot(self):
-        """
-        Test the uploaded path of mugshots
-
-        TODO: What if a image get's uploaded with no extension?
-
-        """
-        user = User.objects.get(pk=1)
-        filename = 'my_avatar.png'
-        path = upload_to_mugshot(user.profile, filename)
-
-        # Path should be changed from the original
-        self.failIfEqual(filename, path)
-
-        # Check if the correct path is returned
-        MUGSHOT_RE = re.compile('^%(mugshot_path)s[a-f0-9]{10}.png$' %
-                                {'mugshot_path': userena_settings.USERENA_MUGSHOT_PATH})
-
-        self.failUnless(MUGSHOT_RE.search(path))
 
     def test_stringification(self):
         """

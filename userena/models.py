@@ -228,7 +228,7 @@ class UserenaBaseProfile(models.Model):
     )
     mugshot = models.ForeignKey(Image,
                               verbose_name=_("mugshot"),
-                              related_name='user profile',null=True,
+                              related_name='mugshots_profile',null=True,
                               blank=True)
     privacy = models.CharField(_('privacy'),
                                max_length=15,

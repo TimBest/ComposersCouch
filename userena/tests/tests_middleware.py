@@ -5,7 +5,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.conf import settings
 from django.contrib.auth.models import User
 
-from userena.tests.profiles.models import Profile
+from accounts.models import Profile
 from userena.middleware import UserenaLocaleMiddleware
 from userena import settings as userena_settings
 

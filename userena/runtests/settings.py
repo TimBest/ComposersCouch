@@ -96,7 +96,7 @@ AUTHENTICATION_BACKENDS = (
 LOGIN_REDIRECT_URL = '/accounts/%(username)s/'
 LOGIN_URL = '/accounts/signin/'
 LOGOUT_URL = '/accounts/signout/'
-AUTH_PROFILE_MODULE = 'profiles.Profile'
+AUTH_PROFILE_MODULE = 'accounts.Profile'
 USERENA_DISABLE_PROFILE_LIST = True
 USERENA_MUGSHOT_SIZE = 140
 
@@ -119,8 +119,6 @@ INSTALLED_APPS = (
     'guardian',
     'south',
     'userena',
-    'userena.contrib.umessages',
-    'userena.tests.profiles',
 )
 
 LOGGING = {

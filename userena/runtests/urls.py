@@ -18,12 +18,9 @@ urlpatterns = patterns('',
     #  {'signup_form': SignupFormExtra}),
 
     (r'^accounts/', include('userena.urls')),
-    (r'^messages/', include('userena.contrib.umessages.urls')),
     (r'^i18n/', include('django.conf.urls.i18n')),
 )
 
 # Add media and static files
 urlpatterns += staticfiles_urlpatterns()
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
