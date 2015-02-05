@@ -86,7 +86,7 @@ class AuthenticationFormTests(TestCase):
         invalid_data_dicts = [
             {'data': {'identification': '',
                       'password': 'inhalefish'},
-             'error': ('identification', [u'Either supply us with your email or username.'])},
+             'error': ('identification', [u'Please supply your email.'])},
             {'data': {'identification': 'john',
                       'password': 'inhalefish'},
              'error': ('__all__', [u'Please enter a correct username or email and password. Note that both fields are case-sensitive.'])}
@@ -99,8 +99,6 @@ class AuthenticationFormTests(TestCase):
                              invalid_dict['error'][1])
 
         valid_data_dicts = [
-            {'identification': 'john',
-             'password': 'blowfish'},
             {'identification': 'john@example.com',
              'password': 'blowfish'}
         ]

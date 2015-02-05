@@ -1,9 +1,9 @@
 from django.test import TestCase
 from django.conf import settings
-from django.contrib.auth.models import SiteProfileNotAvailable, User
+from django.contrib.auth.models import User
 
 from accounts.models import Profile
-from userena.utils import get_gravatar, signin_redirect, get_protocol
+from userena.utils import get_gravatar, get_protocol
 from userena import settings as userena_settings
 from userena.models import UserenaBaseProfile
 
@@ -41,23 +41,6 @@ class UtilsTests(TestCase):
         # Is it really a 404?
         response = self.client.get(http_404)
         self.failUnlessEqual(response.status_code, 404)
-
-    def test_signin_redirect(self):
-        """
-        Test redirect function which should redirect the user after a
-        succesfull signin.
-
-        """
-        # Test with a requested redirect
-        self.failUnlessEqual(signin_redirect(redirect='/accounts/'), '/accounts/')
-
-        # Test with only the user specified
-        user = User.objects.get(pk=1)
-        self.failUnlessEqual(signin_redirect(user=user),
-                             '/accounts/%s/' % user.username)
-
-        # The ultimate fallback, probably never used
-        self.failUnlessEqual(signin_redirect(), settings.LOGIN_REDIRECT_URL)
 
     def test_get_protocol(self):
         """ Test if the correct proto is returned """

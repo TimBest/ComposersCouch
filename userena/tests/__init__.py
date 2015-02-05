@@ -5,6 +5,5 @@ from userena.tests.tests_forms import *
 from userena.tests.tests_managers import *
 from userena.tests.tests_middleware import *
 from userena.tests.tests_models import *
-from userena.tests.test_privacy import *
 from userena.tests.tests_utils import *
 from userena.tests.tests_views import *

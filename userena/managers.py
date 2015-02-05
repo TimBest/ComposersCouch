@@ -31,7 +31,7 @@ class UserenaManager(UserManager):
     """ Extra functionality for the Userena model. """
 
     def create_user(self, username, email, password, active=False,
-                    send_email=True):
+                    send_email=False):
         """
         A simple wrapper that creates a new :class:`User`.
 
@@ -47,11 +47,6 @@ class UserenaManager(UserManager):
         :param active:
             Boolean that defines if the user requires activation by clicking
             on a link in an e-mail. Defaults to ``False``.
-
-        :param send_email:
-            Boolean that defines if the user should be sent an email. You could
-            set this to ``False`` when you want to create a user in your own
-            code, but don't want the user to activate through email.
 
         :return: :class:`User` instance representing the new user.
 
@@ -80,9 +75,6 @@ class UserenaManager(UserManager):
         # Give permissions to view and change itself
         for perm in ASSIGNED_PERMISSIONS['user']:
             assign_perm(perm[0], new_user, new_user)
-
-        if send_email:
-            userena_profile.send_activation_email()
 
         return new_user
 

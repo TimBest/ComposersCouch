@@ -123,9 +123,9 @@ def get_protocol():
     setting.
 
     """
-    proto = 'http'
+    protocol = 'http'
     if userena_settings.USERENA_USE_HTTPS:
-        proto = 'https'
+        protocol = 'https'
     return protocol
 
 def get_datetime_now():

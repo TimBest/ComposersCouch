@@ -88,77 +88,6 @@ class UserenaSignup(models.Model):
         self.email_confirmation_key_created = get_datetime_now()
         self.save()
 
-        # Send email for activation
-        self.send_confirmation_email()
-
-    def send_confirmation_email(self):
-        """
-        Sends an email to confirm the new email address.
-
-        This method sends out two emails. One to the new email address that
-        contains the ``email_confirmation_key`` which is used to verify this
-        this email address with :func:`UserenaUser.objects.confirm_email`.
-
-        The other email is to the old email address to let the user know that
-        a request is made to change this email address.
-
-        """
-        context = {'user': self.user,
-                  'without_usernames': userena_settings.USERENA_WITHOUT_USERNAMES,
-                  'new_email': self.email_unconfirmed,
-                  'protocol': get_protocol(),
-                  'confirmation_key': self.email_confirmation_key,
-                  'site': Site.objects.get_current()}
-
-        # Email to the old address, if present
-        subject_old = render_to_string('userena/emails/confirmation_email_subject_old.txt',
-                                       context)
-        subject_old = ''.join(subject_old.splitlines())
-
-        if userena_settings.USERENA_HTML_EMAIL:
-            message_old_html = render_to_string('userena/emails/confirmation_email_message_old.html',
-                                                context)
-        else:
-            message_old_html = None
-
-        if (not userena_settings.USERENA_HTML_EMAIL or not message_old_html or
-            userena_settings.USERENA_USE_PLAIN_TEMPLATE):
-            message_old = render_to_string('userena/emails/confirmation_email_message_old.txt',
-                                       context)
-        else:
-            message_old = None
-
-        if self.user.email:
-            send_mail(subject_old,
-                      message_old,
-                      message_old_html,
-                      settings.DEFAULT_FROM_EMAIL,
-                    [self.user.email])
-
-        # Email to the new address
-        subject_new = render_to_string('userena/emails/confirmation_email_subject_new.txt',
-                                       context)
-        subject_new = ''.join(subject_new.splitlines())
-
-        if userena_settings.USERENA_HTML_EMAIL:
-            message_new_html = render_to_string('userena/emails/confirmation_email_message_new.html',
-                                                context)
-        else:
-            message_new_html = None
-
-        if (not userena_settings.USERENA_HTML_EMAIL or not message_new_html or
-            userena_settings.USERENA_USE_PLAIN_TEMPLATE):
-            message_new = render_to_string('userena/emails/confirmation_email_message_new.txt',
-                                       context)
-        else:
-            message_new = None
-
-        send_mail(subject_new,
-                  message_new,
-                  message_new_html,
-                  settings.DEFAULT_FROM_EMAIL,
-                  [self.email_unconfirmed, ])
-
     def activation_key_expired(self):
         """
         Checks if activation key is expired.
@@ -178,46 +107,6 @@ class UserenaSignup(models.Model):
         if get_datetime_now() >= expiration_date:
             return True
         return False
-
-    def send_activation_email(self):
-        """
-        Sends a activation email to the user.
-
-        This email is send when the user wants to activate their newly created
-        user.
-
-        """
-        context = {'user': self.user,
-                  'without_usernames': userena_settings.USERENA_WITHOUT_USERNAMES,
-                  'protocol': get_protocol(),
-                  'activation_days': userena_settings.USERENA_ACTIVATION_DAYS,
-                  'activation_key': self.activation_key,
-                  'site': Site.objects.get_current()}
-
-        subject = render_to_string('userena/emails/activation_email_subject.txt',
-                                   context)
-        subject = ''.join(subject.splitlines())
-
-
-        if userena_settings.USERENA_HTML_EMAIL:
-            message_html = render_to_string('userena/emails/activation_email_message.html',
-                                            context)
-        else:
-            message_html = None
-
-        if (not userena_settings.USERENA_HTML_EMAIL or not message_html or
-            userena_settings.USERENA_USE_PLAIN_TEMPLATE):
-            message = render_to_string('userena/emails/activation_email_message.txt',
-                                   context)
-        else:
-            message = None
-
-        send_mail(subject,
-                  message,
-                  message_html,
-                  settings.DEFAULT_FROM_EMAIL,
-                  [self.user.email, ])
-
 
 class UserenaBaseProfile(models.Model):
     """ Base model needed for extra profile functionality """
