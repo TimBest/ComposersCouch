@@ -20,7 +20,7 @@
       </div>
     </div>
   {% empty %}
-    {% include "feeds/_empty_feed.html" with location=location feed_type="requests" following=following %}
+    {% include "feeds/_empty_feed.html" with feed_type="requests" following=following %}
   {% endfor %}
   {% include "utils/_pagination.html" with page=requests %}
 </div>

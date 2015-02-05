@@ -59,7 +59,7 @@ class AvailabilityForm(forms.Form):
         self.helper.form_tag = False
         self.helper.layout = Layout(
             'date',
-            Submit('submit', 'submit', css_class='btn btn-primary'),
+            Submit('submit', 'Submit', css_class='btn btn-default'),
         )
 
 class GenreForm(ModelForm):
@@ -95,7 +95,7 @@ class ZipcodeForm(ZipcodeForm):
         self.helper.form_tag = False
         self.helper.layout = Layout(
             'zip_code',
-            Submit('submit', 'submit', css_class='btn btn-primary'),
+            Submit('submit', 'Submit', css_class='btn btn-default'),
         )
 
 class FollowForm(forms.Form):
