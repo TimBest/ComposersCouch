@@ -7325,6 +7325,9 @@ h1 {
 .landing-page .section .jumbotron .row {
   margin-top: 100px;
 }
+.landing-page .section .jumbotron h2 {
+  font-size: 40px;
+}
 .landing-page .requests {
   background: rgba(33, 97, 168, 0.45);
 }
@@ -7332,19 +7335,19 @@ h1 {
   background-color: #2161a8;
 }
 .landing-page .concerts {
-  background: rgba(22, 170, 125, 0.45);
+  background: rgba(0, 113, 79, 0.6);
 }
 .landing-page .concerts .jumbotron {
-  background-color: #16aa7d;
+  background-color: #00714f;
 }
 .landing-page .artists {
-  background: rgba(47, 47, 47, 0.45);
+  background: rgba(47, 47, 47, 0.75);
 }
 .landing-page .artists .jumbotron {
   background-color: #2f2f2f;
 }
 .landing-page .venues {
-  background: rgba(33, 97, 168, 0.45);
+  background: rgba(33, 97, 168, 0.55);
 }
 .landing-page .venues .jumbotron {
   background-color: #2f2f2f;

@@ -61,9 +61,9 @@
             <h2><a class="text-white" href="{% url 'requests' 'expiring' 'default' 'all' %}">
               Requests
             </a></h2>
-            <p>Publically ask to see who is available. Quickly find who is looking for show in your area.</p>
+            <p>Find artist and venues looking to put on shows in your area.</p>
             <a href="{% url 'requests' 'expiring' 'default' 'all' %}" class="pull-right btn btn-transparent">
-              Requests <small><span class="fa fa-chevron-right text-white"></span></small>
+              View Requests <small><span class="fa fa-chevron-right text-white"></span></small>
             </a>
           </div>
         </div>
@@ -76,9 +76,9 @@
             <h2><a class="text-white" href="{% url 'shows' 'upcoming' 'all' %}">
               Concerts
             </a></h2>
-            <p>See what shows are coming up. Filterable by genre and location</p>
+            <p>See who is playing in your area. Filter concerts by venue genre and location.</p>
             <a href="{% url 'shows' 'upcoming' 'all' %}" class="pull-right btn btn-transparent">
-              Concerts <small><span class="fa fa-chevron-right text-white"></span></small>
+              View Concerts <small><span class="fa fa-chevron-right text-white"></span></small>
             </a>
           </div>
         </div>
@@ -91,22 +91,29 @@
             <h2><a class="text-white" href="{% url 'artists' 'all' 'all' %}">
               Artists
             </a></h2>
-            <p>Find artists by location, genre and availability. Never have a hole in your schedule again.</p>
+            <p>Discover local artists by genre. Use the
+              <a class="text-white" href="{% url 'available_artists' 'all' 2014 32 32 %}">
+              availability feed</a> to find local artists or ones that are
+              passing through by date.</p>
             <a href="{% url 'artists' 'all' 'all' %}" class="pull-right btn btn-transparent">
-              Artists <small><span class="fa fa-chevron-right"></span></small>
+              View Artists <small><span class="fa fa-chevron-right"></span></small>
             </a>
           </div>
+
         </div>
       </div>
     </div>
     <div class="venues section" id="venues">
-      <div class="jumbotron stretchMe" data-stretch="{% static 'img/Venue.jpg' %}">
+      <div class="jumbotron stretchMe" data-stretch="{% static 'img/venue.jpg' %}">
         <div class="row">
           <div class="col-sm-6 col-sm-offset-6">
             <h2>Venues</h2>
-            <p>Find venues by location, genre and availability. Never have a hole in your schedule again.</p>
+            <p>Find local venues by genre. Use the
+              <a class="text-white" href="{% url 'available_venues' 'all' 2014 32 32 %}">
+              availability feed</a> to find loacl venues by location or inbetween stops
+              on your tour.</p>
             <a href="{% url 'venues' 'all' 'all' %}" class="pull-right btn btn-transparent">
-              Venues <small><span class="fa fa-chevron-right"></span></small>
+              View Venues <small><span class="fa fa-chevron-right"></span></small>
             </a>
           </div>
         </div>
@@ -119,7 +126,7 @@
             <h2>Updates</h2>
             <p>Find out what you favorite venues and artists are up to.</p>
             <a href="{% url 'updates' 'all' %}" class="pull-right btn btn-transparent">
-              Updates <span class="fa fa-chevron-right"></span>
+              View Updates <span class="fa fa-chevron-right"></span>
             </a>
           </div>
         </div>
