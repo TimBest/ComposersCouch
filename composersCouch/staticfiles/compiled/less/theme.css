@@ -7563,9 +7563,6 @@ h1 {
 .header.feed .main-nav .title {
   margin: 15px 0px 10px 0px;
 }
-.header.feed .main-nav .title li a {
-  margin-right: 0px;
-}
 .header.feed .main-nav .title li a:hover,
 .header.feed .main-nav .title li a:focus {
   background-color: #dfe5eb;
@@ -7577,11 +7574,7 @@ h1 {
   border-radius: 3px 3px 0px 0px;
   color: #2f2f2f;
 }
-.header.feed .main-nav .description {
-  font-size: 15px;
-  margin-bottom: 12px;
-}
-.header.feed .main-nav a {
+.header.feed .main-nav .description a {
   margin-right: 3px;
 }
 .header.feed .nav-options {
