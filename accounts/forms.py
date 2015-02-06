@@ -23,7 +23,7 @@ profile_type = Layout(
           <label for='id_profile_type' class='control-label  requiredField'>Profile type<span class='asteriskField'>*</span></label>\
           <div><div class='btn-group' role='group'>\
               <button type='button' id='f' class='btn btn-default'><span class='fa fa-users'></span> Fan</button>\
-              <button type='button' id='m' class='btn btn-default'><span class='fa fa-music'></span> Musician</button>\
+              <button type='button' id='m' class='btn btn-default'><span class='fa fa-music'></span> Artist</button>\
               <button type='button' id='v' class='btn btn-default'><span class='fa fa-ticket'></span> Venue</button>\
           </div></div>\
         </div>"
@@ -72,6 +72,34 @@ class SignupForm(forms.ModelForm):
         elif data and data.get('profile_type', None) == self.VENUE:
             self.fields['venue_name'].required = True
 
+    def clean_band_name(self):
+        band_name = self.cleaned_data.get('band_name')
+        if self.cleaned_data.get('profile_type') == 'm':
+            if not band_name:
+                raise forms.ValidationError(_(u"A band name is required for Artists "))
+        return band_name
+
+    def clean_venue_name(self):
+        venue_name = self.cleaned_data.get('venue_name')
+        if self.cleaned_data.get('profile_type') == 'v':
+            if not venue_name:
+                raise forms.ValidationError(_(u"A venue name is required for Venues "))
+        return venue_name
+
+    def clean_first_name(self):
+        first_name = self.cleaned_data.get('first_name')
+        if self.cleaned_data.get('profile_type') == 'f':
+            if not first_name:
+                raise forms.ValidationError(_(u"A first name is required for Fans "))
+        return first_name
+
+    def clean_last_name(self):
+        last_name = self.cleaned_data.get('last_name')
+        if self.cleaned_data.get('profile_type') == 'f':
+            if not last_name:
+                raise forms.ValidationError(_(u"A last name is required for Fans "))
+        return last_name
+
     class Meta:
         model = Profile
         fields = ('profile_type',)
@@ -98,7 +126,6 @@ class EmailForm(SignupFormOnlyEmail):
                     (_(mark_safe(('An account fo this email already exists, click <a href="{0}">Here</a> to claim this account.')
                         .format(reverse('claim_profile_verify', kwargs={'username': user.username})))))
                 )
-                raise forms.ValidationError(_(u"Profile "))
         return email
 
 class ClaimProfileForm(SetPasswordForm):
