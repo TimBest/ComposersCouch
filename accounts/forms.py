@@ -76,28 +76,28 @@ class SignupForm(forms.ModelForm):
         band_name = self.cleaned_data.get('band_name')
         if self.cleaned_data.get('profile_type') == 'm':
             if not band_name:
-                raise forms.ValidationError(_(u"A band name is required for Artists "))
+                raise forms.ValidationError(_(u"A band name is required for Artists."))
         return band_name
 
     def clean_venue_name(self):
         venue_name = self.cleaned_data.get('venue_name')
         if self.cleaned_data.get('profile_type') == 'v':
             if not venue_name:
-                raise forms.ValidationError(_(u"A venue name is required for Venues "))
+                raise forms.ValidationError(_(u"A venue name is required for Venues."))
         return venue_name
 
     def clean_first_name(self):
         first_name = self.cleaned_data.get('first_name')
         if self.cleaned_data.get('profile_type') == 'f':
             if not first_name:
-                raise forms.ValidationError(_(u"A first name is required for Fans "))
+                raise forms.ValidationError(_(u"A first name is required for Fans."))
         return first_name
 
     def clean_last_name(self):
         last_name = self.cleaned_data.get('last_name')
         if self.cleaned_data.get('profile_type') == 'f':
             if not last_name:
-                raise forms.ValidationError(_(u"A last name is required for Fans "))
+                raise forms.ValidationError(_(u"A last name is required for Fans."))
         return last_name
 
     class Meta:

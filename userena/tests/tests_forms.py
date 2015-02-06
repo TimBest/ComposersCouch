@@ -44,7 +44,7 @@ class SignupFormTests(TestCase):
                                       'password1': 'foobar',
                                       'password2': 'foobar',
                                       'tos': 'on'})
-        TODO: self.failUnless(form.is_valid())
+        self.failUnless(form.is_valid())
 
 class AuthenticationFormTests(TestCase):
     """ Test the ``AuthenticationForm`` """
