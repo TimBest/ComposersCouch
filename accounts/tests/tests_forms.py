@@ -122,7 +122,28 @@ class ClaimProfileFormTests(TestCase):
     """
     fixtures = ['users']
 
-    def test_claim_profile_porm(self):
+    def test_claim_profile_form(self):
+        """
+        Test that the ``ClaimProfileForm`` checks for unique e-mail addresses.
+        """
+        #TODO test field errors
+        """invalid_data_dicts = [
+            # Password is not the same
+            {'data': {'new_password1': 'foobar',
+                      'new_password2': 'foobar2',},
+             'error': ('__all__', [_(u'The two password fields didn\'t match.')])},
+        ]
+
+        for invalid_dict in invalid_data_dicts:
+            form = forms.ClaimProfileForm(data=invalid_dict['data'])
+            self.failIf(form.is_valid())
+            self.assertEqual(form.errors[invalid_dict['error'][0]],
+                             invalid_dict['error'][1])"""
+
+        #TODO And finally, a valid form.
+        """form = forms.ClaimProfileForm(data={'password1': 'foobar',
+                                     'password2': 'foobar'})
+        self.failUnless(form.is_valid())"""
         pass
 
 class SigninFormTests(TestCase):
@@ -130,4 +151,30 @@ class SigninFormTests(TestCase):
     fixtures = ['users']
 
     def test_sigin_form(self):
-        pass
+        """
+        Check that the ``SigninForm`` requires both identification and password
+
+        """
+        invalid_data_dicts = [
+            {'data': {'identification': '',
+                      'password': 'inhalefish'},
+             'error': ('identification', [u'Please supply your email.'])},
+            {'data': {'identification': 'john',
+                      'password': 'inhalefish'},
+             'error': ('__all__', [u'Please enter a correct or email and password. Note that fields are case-sensitive.'])}
+        ]
+
+        for invalid_dict in invalid_data_dicts:
+            form = forms.SigninForm(data=invalid_dict['data'])
+            self.failIf(form.is_valid())
+            self.assertEqual(form.errors[invalid_dict['error'][0]],
+                             invalid_dict['error'][1])
+
+        valid_data_dicts = [
+            {'identification': 'john@example.com',
+             'password': 'blowfish'}
+        ]
+
+        for valid_dict in valid_data_dicts:
+            form = forms.SigninForm(valid_dict)
+            self.failUnless(form.is_valid())

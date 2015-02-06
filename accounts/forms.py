@@ -135,8 +135,8 @@ class EmailForm(SignupFormOnlyEmail):
         return email
 
 class ClaimProfileForm(SetPasswordForm):
-    def __init__(self, *args, **kw):
-        super(ClaimProfileForm, self).__init__(*args, **kw)
+    def __init__(self, data=None, *args, **kw):
+        super(ClaimProfileForm, self).__init__(data, *args, **kw)
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(

@@ -178,7 +178,7 @@ class AuthenticationForm(forms.Form):
         if identification and password:
             user = authenticate(identification=identification, password=password)
             if user is None:
-                raise forms.ValidationError(_(u"Please enter a correct username or email and password. Note that both fields are case-sensitive."))
+                raise forms.ValidationError(_(u"Please enter a correct or email and password. Note that fields are case-sensitive."))
         return self.cleaned_data
 
 class ChangeEmailForm(forms.Form):
