@@ -79,7 +79,8 @@ class UsernameForm(forms.ModelForm):
         super(UsernameForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
-        self.fields['username'].help_text = ""
+        self.fields['username'].help_text = "This will appear at the end of your profile's URL"
+        self.fields['username'].label = "Slug"
         self.fields['email'].required = True
         self.helper.layout = Layout('email', 'username',)
 

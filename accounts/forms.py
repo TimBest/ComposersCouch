@@ -141,7 +141,6 @@ class ClaimProfileForm(SetPasswordForm):
             ),
         )
 
-
 class SigninForm(AuthenticationForm):
 
     def __init__(self, data=None, *args, **kw):
