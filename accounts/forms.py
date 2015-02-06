@@ -121,7 +121,13 @@ class EmailForm(SignupFormOnlyEmail):
         email = self.cleaned_data.get('email')
         user = get_object_or_None(User, email=email)
         if user:
-            if not user.profile.has_owner:
+            try:
+                hasowner = user.profile.has_owner
+            except:
+                hasowner = True
+            if hasowner:
+                raise forms.ValidationError(_(u"This email is already in use. Please supply a different email."))
+            else:
                 raise forms.ValidationError(
                     (_(mark_safe(('An account fo this email already exists, click <a href="{0}">Here</a> to claim this account.')
                         .format(reverse('claim_profile_verify', kwargs={'username': user.username})))))

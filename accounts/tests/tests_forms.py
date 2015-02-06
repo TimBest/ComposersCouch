@@ -85,7 +85,34 @@ class EmailFormTests(TestCase):
     fixtures = ['users',]
 
     def test_signin_email_form(self):
-        pass
+        """
+        Test that the ``EmailForm`` checks for unique e-mail addresses.
+        """
+        # test field errors
+        invalid_data_dicts = [
+            # Already taken email
+            {'data': {'email': 'john@example.com',
+                      'password1': 'foobar',
+                      'password2': 'foobar',},
+             'error': ('email', [_(u'This email is already in use. Please supply a different email.')])},
+            # Password is not the same
+            {'data': {'email': 'katy@example.com',
+                      'password1': 'foobar',
+                      'password2': 'foobar2',},
+             'error': ('__all__', [_(u'The two password fields didn\'t match.')])},
+        ]
+
+        for invalid_dict in invalid_data_dicts:
+            form = forms.EmailForm(data=invalid_dict['data'])
+            self.failIf(form.is_valid())
+            self.assertEqual(form.errors[invalid_dict['error'][0]],
+                             invalid_dict['error'][1])
+
+        # And finally, a valid form.
+        form = forms.EmailForm(data={'email': 'foo@example.com',
+                                      'password1': 'foobar',
+                                      'password2': 'foobar'})
+        self.failUnless(form.is_valid())
 
 class ClaimProfileFormTests(TestCase):
     """

@@ -17,16 +17,16 @@ class SignupFormTests(TestCase):
 
         """
         invalid_data_dicts = [
-            #TODO Password is not the same
-            #{'data': {'email': 'katy@newexample.com',
-            #          'password1': 'foobar',
-            #          'password2': 'foobar2',
-            #          'tos': 'on'},
-            # 'error': ('form', [_(u'The two password fields didn\'t match.')])},
+            # Password is not the same
+            {'data': {'email': 'katy@newexample.com',
+                      'password1': 'foobar',
+                      'password2': 'foobar2',
+                      'tos': 'on'},
+             'error': ('__all__', [_(u'The two password fields didn\'t match.')])},
 
             # Already taken email
             {'data': {'email': 'john@example.com',
-                      'password': 'foobar',
+                      'password1': 'foobar',
                       'password2': 'foobar',
                       'tos': 'on'},
              'error': ('email', [_(u'This email is already in use. Please supply a different email.')])},
