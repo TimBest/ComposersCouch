@@ -18,39 +18,20 @@ class SignupFormTests(TestCase):
         """
         invalid_data_dicts = [
             # Non-alphanumeric username.
-            {'data': {'username': 'foo@bar',
-                      'email': 'foo@example.com',
+            {'data': {'email': 'foo@example.com',
                       'password': 'foo',
                       'password2': 'foo',
                       'tos': 'on'},
              'error': ('username', [_(u'Username must contain only letters, numbers, dots and underscores.')])},
             # Password is not the same
-            {'data': {'username': 'katy-',
-                      'email': 'katy@newexample.com',
+            {'data': {'email': 'katy@newexample.com',
                       'password1': 'foo',
                       'password2': 'foo2',
                       'tos': 'on'},
-             'error': ('__all__', [_(u'The two password fields didn\'t match.')])},
-
-            # Already taken username
-            {'data': {'username': 'john',
-                      'email': 'john@newexample.com',
-                      'password1': 'foo',
-                      'password2': 'foo',
-                      'tos': 'on'},
-             'error': ('username', [_(u'This username is already taken.')])},
-
-            # Forbidden username
-            {'data': {'username': 'SignUp',
-                      'email': 'foo@example.com',
-                      'password': 'foo',
-                      'password2': 'foo2',
-                      'tos': 'on'},
-             'error': ('username', [_(u'This username is not allowed.')])},
+             'error': ('form', [_(u'The two password fields didn\'t match.')])},
 
             # Already taken email
-            {'data': {'username': 'alice',
-                      'email': 'john@example.com',
+            {'data': {'email': 'john@example.com',
                       'password': 'foo',
                       'password2': 'foo',
                       'tos': 'on'},

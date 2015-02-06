@@ -319,9 +319,7 @@ class UserenaViewsTests(TestCase):
     def test_signout_view(self):
         """ A ``GET`` to the signout view """
         response = self.client.get(reverse('signout'))
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response,
-                                'userena/signout.html')
+        self.assertEqual(response.status_code, 302)
 
     def test_change_password_view(self):
         """ A ``GET`` to the change password view """

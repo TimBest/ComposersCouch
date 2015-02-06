@@ -1,7 +1,7 @@
 from django.http import HttpRequest
 from django.test import TestCase
 from django.utils.importlib import import_module
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import RelatedObjectDoesNotExist
 from django.conf import settings
 from django.contrib.auth.models import User
 
@@ -30,24 +30,6 @@ class UserenaLocaleMiddlewareTests(TestCase):
         request.user = user
         return request
 
-    def test_preference_user(self):
-        """ Test the language preference of two users """
-        users = ((1, 'nl'),
-                 (2, 'en'))
-
-        for pk, lang in users:
-            user = User.objects.get(pk=pk)
-            profile = user.profile
-
-            req = self._get_request_with_user(user)
-
-            # Check that the user has this preference
-            self.failUnlessEqual(profile.language, lang)
-
-            # Request should have a ``LANGUAGE_CODE`` with dutch
-            UserenaLocaleMiddleware().process_request(req)
-            self.failUnlessEqual(req.LANGUAGE_CODE, lang)
-
     def test_without_profile(self):
         """ Middleware should do nothing when a user has no profile """
         # Delete the profile
@@ -55,7 +37,7 @@ class UserenaLocaleMiddlewareTests(TestCase):
         user = User.objects.get(pk=1)
 
         # User shouldn't have a profile
-        self.assertRaises(ObjectDoesNotExist, user.profile)
+        self.assertRaises(RelatedObjectDoesNotExist, user.profile)
 
         req = self._get_request_with_user(user)
         UserenaLocaleMiddleware().process_request(req)
