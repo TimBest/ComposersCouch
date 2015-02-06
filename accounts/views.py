@@ -15,8 +15,6 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.generic.base import View, TemplateView
 
-from guardian.decorators import permission_required_or_403
-
 from pipeline import create_profile
 from forms import ClaimProfileForm, EmailForm, SignupForm, SigninForm
 from models import Profile
