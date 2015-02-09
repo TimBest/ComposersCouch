@@ -75,7 +75,6 @@ class ParticipantForm(forms.Form):
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
-        self.profile_type = 'v'
         super(ParticipantForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -101,7 +100,7 @@ class ParticipantForm(forms.Form):
                 if not name:
                     name = email
                 user = create_user_profile(name=name, email=email,
-                            profile_type=self.profile_type, creator=self.user)
+                            profile_type='v', creator=self.user)
             self.cleaned_data['user']=user
             return self.cleaned_data
 
@@ -122,7 +121,6 @@ class ArtistParticipantForm(ParticipantForm):
                 widget=ChoiceWidget('UserArtistAutocomplete',))
 
     def __init__(self, *args, **kwargs):
-        self.profile_type = 'm'
         super(ArtistParticipantForm, self).__init__(*args, **kwargs)
 
     def clean(self):
@@ -135,7 +133,7 @@ class ArtistParticipantForm(ParticipantForm):
                 if not name:
                     name = email
                 user = create_user_profile(name=name, email=email,
-                            profile_type=self.profile_type, creator=self.user)
+                            profile_type='m', creator=self.user)
             self.cleaned_data['user']=user
             return self.cleaned_data
 
