@@ -1,7 +1,7 @@
 <div class="artists">
   {% for artist in artists %}
     <div class="artist">
-      {% include "search/_musician.html" with artist=artist %}
+      {% include "search/_artist.html" with artist=artist %}
     </div>
   {% empty %}
     {% include "feeds/_empty_feed.html" with feed_type="artists" following=following %}

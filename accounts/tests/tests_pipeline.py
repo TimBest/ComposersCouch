@@ -24,7 +24,7 @@ class CreateProfileTests(TestCase):
         profile_type='m'
         location = Location(zip_code=Zipcode(pk=12065))
         user = create_profile(user, profile_type, location, band_name="Mouse Rat")
-        self.assertIsNotNone(user.profile.musicianProfile)
+        self.assertIsNotNone(user.profile.artist_profile)
         self.assertIsNotNone(user.profile.contact_info)
         self.assertIsNotNone(user.calendar)
         # test venue creation

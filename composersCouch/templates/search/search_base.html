@@ -10,8 +10,8 @@
 {% endblock %}
 
 {% block content %}
-  {% for musician in musicians %}
-    {% include "search/_musician.html"  with artist=musician %}
+  {% for artist in artists %}
+    {% include "search/_artist.html"  with artist=artist %}
   {% endfor %}
   {% for venue in venues %}
     {% include "search/_venue.html"  with venue=venue %}

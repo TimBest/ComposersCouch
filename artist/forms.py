@@ -4,7 +4,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, Field, Layout
 
 from models import Member
-from accounts.models import MusicianProfile
+from artist.models import ArtistProfile
 from annoying.functions import get_object_or_None
 
 
@@ -18,7 +18,7 @@ class BiographyForm(forms.ModelForm):
         Field('biography',spellcheck="true"),
       )
     class Meta:
-        model = MusicianProfile
+        model = ArtistProfile
         widgets = {
           'biography' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
         }

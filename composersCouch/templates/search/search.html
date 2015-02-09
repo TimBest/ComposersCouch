@@ -12,7 +12,7 @@
 {% block content %}
   {% for profile in profiles %}
     {% if profile.profile_type == 'm' %}
-      {% include "search/_musician.html" with artist=profile.musicianProfile %}
+      {% include "search/_artist.html" with artist=profile.artist_profile %}
     {% elif profile.profile_type == 'v' %}
       {% include "search/_venue.html" with venue=profile.venueProfile %}
     {% else %}

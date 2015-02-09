@@ -2,21 +2,21 @@ from django.contrib.auth.models import User
 
 import autocomplete_light
 
-from accounts.models import MusicianProfile
+from artist.models import ArtistProfile
 
 
-class MusicianProfileAutocomplete(autocomplete_light.AutocompleteModelTemplate):
-    model = MusicianProfile
+class ArtistProfileAutocomplete(autocomplete_light.AutocompleteModelTemplate):
+    model = ArtistProfile
     attrs = {
         'placeholder': 'Search artists',
     }
     search_fields = ['^name',]
 
 autocomplete_light.register(
-    MusicianProfile,
-    MusicianProfileAutocomplete,
-    choice_template='autocomplete/_musician.html',
-    autocomplete_template='autocomplete/_musicians.html',
+    ArtistProfile,
+    ArtistProfileAutocomplete,
+    choice_template='autocomplete/_artist.html',
+    autocomplete_template='autocomplete/_artists.html',
 )
 
 class UserAutocomplete(autocomplete_light.AutocompleteModelTemplate):
@@ -24,7 +24,7 @@ class UserAutocomplete(autocomplete_light.AutocompleteModelTemplate):
     attrs = {
         'placeholder': 'Search users',
     }
-    search_fields = ['^profile__musicianProfile__name','^profile__venueProfile__name','^first_name','^last_name',]
+    search_fields = ['^profile__artist_profile__name','^profile__venueProfile__name','^first_name','^last_name',]
 
     def choices_for_request(self):
         self.choices = self.choices.exclude(id=-1)
@@ -42,7 +42,7 @@ class UserArtistAutocomplete(autocomplete_light.AutocompleteModelTemplate):
     attrs = {
         'placeholder': 'Search artists',
     }
-    search_fields = ['^profile__musicianProfile__name',]
+    search_fields = ['^profile__artist_profile__name',]
 
 
     def choices_for_request(self):

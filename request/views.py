@@ -18,7 +18,7 @@ from .utils import send_request_email
 from annoying.functions import get_object_or_None
 from composersCouch.utils import get_page
 from composersCouch.views import MultipleFormsView, MultipleModelFormsView
-from customProfile.decorators import is_venue, is_musician
+from customProfile.decorators import is_venue, is_artist
 from threaded_messages.models import Message, Participant, Thread
 from threaded_messages.views import MessageView
 from threaded_messages.utils import reply_to_thread, create_thread
@@ -251,7 +251,7 @@ class PublicRequestFormView(MultipleFormsView):
         public_request.save(requester=self.request.user, date=date)
         return self.get_success_url()
 
-public_request_form = is_musician(PublicRequestFormView.as_view())
+public_request_form = is_artist(PublicRequestFormView.as_view())
 
 class PublicBandRequestFormView(PublicRequestFormView):
     form_classes = {
@@ -315,7 +315,7 @@ class ApplyFormView(FormView):
         return self.get_success_url()
 
 appy_to_band = login_required(ApplyFormView.as_view())
-appy_to_venue = is_musician(ApplyFormView.as_view())
+appy_to_venue = is_artist(ApplyFormView.as_view())
 
 
 @login_required

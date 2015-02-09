@@ -22,15 +22,15 @@ def get_audio_upload_path(instance, filename):
         return os.path.join(instance.title, filename)
 
 class Album(models.Model):
-    musician_profile = models.ForeignKey('accounts.MusicianProfile',
-                          verbose_name=_("musician profile"),
+    artist_profile = models.ForeignKey('artist.ArtistProfile',
+                          verbose_name=_("artist profile"),
                           related_name='albums',null=True,
                           blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     album_art = models.ForeignKey(Image,
                           verbose_name=_("Album art"),
-                          related_name='musician Album art',null=True,
+                          related_name='artist Album art',null=True,
                           blank=True)
     title = models.CharField(_('Title'), max_length=100)
     genre = models.ManyToManyField(Genre, verbose_name=_("genre"),

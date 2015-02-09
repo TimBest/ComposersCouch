@@ -11,7 +11,7 @@ class PhotosMixin(object):
         return context
 
 class ArtistPhotosView(PhotosMixin, ArtistProfileView):
-    template_name = 'profile/musician/photos.html'
+    template_name = 'profile/artist/photos.html'
 artist_photos = ArtistPhotosView.as_view()
 
 class FanPhotosView(PhotosMixin, FanProfileView):

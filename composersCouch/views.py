@@ -5,7 +5,9 @@ from django.template.context import RequestContext
 from django.views.generic import FormView
 from django.views.generic.base import TemplateView
 
-from accounts.models import FanProfile, MusicianProfile, VenueProfile
+from artist.models import ArtistProfile
+from fan.models import FanProfile
+from venue.models import VenueProfile
 from feeds.views import requests, shows
 
 
@@ -20,7 +22,7 @@ def search(request, template_name='search/search.html', ajax_template='autocompl
     q = request.GET.get('q', '')
     context = {'q': q}
     queries = {}
-    queries['musicians'] = MusicianProfile.objects.filter(name__icontains=q)[:3]
+    queries['artists'] = ArtistProfile.objects.filter(name__icontains=q)[:3]
     queries['venues'] = VenueProfile.objects.filter(name__icontains=q)[:3]
 
     context.update(queries)

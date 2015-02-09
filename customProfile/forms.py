@@ -7,28 +7,31 @@ from crispy_forms.bootstrap import FormActions, InlineRadios
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import ButtonHolder, Div, Layout, Submit
 
-from accounts import models
+from artist.models import ArtistProfile
+from fan.models import FanProfile
+from venue.models import VenueProfile
+from accounts.models import Profile
 from annoying.functions import get_object_or_None
-from musician.models import Member, Instrument
+from artist.models import Member, Instrument
 from photos.forms import MugshotForm
 from genres.models import Genre
 
 
-class MusicianProfileForm(forms.ModelForm):
+class ArtistProfileForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         try:
             required = kwargs.pop('required')
         except:
             required = True
-        super(MusicianProfileForm, self).__init__(*args, **kwargs)
+        super(ArtistProfileForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout('name',)
         self.fields['name'].required = required
 
     class Meta:
-        model = models.MusicianProfile
+        model = ArtistProfile
         fields = ('name',)
 
 
@@ -46,7 +49,7 @@ class VenueProfileForm(forms.ModelForm):
         self.fields['name'].required = required
 
     class Meta:
-        model = models.VenueProfile
+        model = VenueProfile
         fields = ('name',)
 
 class UserForm(forms.ModelForm):
@@ -70,7 +73,7 @@ class UserForm(forms.ModelForm):
         self.fields['last_name'].required = required
 
     class Meta:
-        model = models.User
+        model = User
         fields = ('first_name', 'last_name')
 
 class UsernameForm(forms.ModelForm):
@@ -86,7 +89,7 @@ class UsernameForm(forms.ModelForm):
 
 
     class Meta:
-        model = models.User
+        model = User
         fields = ('email', 'username',)
 
 class ProfileForm(autocomplete_light.ModelForm):
@@ -98,7 +101,7 @@ class ProfileForm(autocomplete_light.ModelForm):
         self.helper.layout = Layout('genre',)
 
     class Meta:
-        model = models.Profile
+        model = Profile
         fields = ('genre',)
 
 class ProfileTypeForm(forms.ModelForm):
@@ -110,5 +113,5 @@ class ProfileTypeForm(forms.ModelForm):
         self.helper.layout = Layout(InlineRadios('profile_type'),)
 
     class Meta:
-        model = models.Profile
+        model = Profile
         fields = ('profile_type',)

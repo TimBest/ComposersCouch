@@ -50,7 +50,7 @@ class SocialLinks(models.Model):
     vimeo       =  models.CharField(_("vimeo"), max_length=200, blank=True)
 
 class MusicLinks(models.Model):
-    profile = models.OneToOneField('accounts.MusicianProfile', unique=True,
+    profile = models.OneToOneField('artist.ArtistProfile', unique=True,
                                    null=True, blank=True,
                                    verbose_name=_('profile'),
                                    related_name='music_links')

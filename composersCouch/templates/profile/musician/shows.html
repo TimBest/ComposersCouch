@@ -1,4 +1,4 @@
-{% extends 'profile/musician/detail.html' %}
+{% extends 'profile/artist/detail.html' %}
 {% load i18n %}
 {% load url from future %}
 
@@ -6,5 +6,5 @@
 {% block dropdownTitle %}Shows{% endblock %}
 
 {% block panelBody %}
-  {% include "profile/_shows.html" with currentYear=currentYear year=year request=request slug=musicianProfile.profile.user.calendar.slug name=musicianProfile events=events  %}
+  {% include "profile/_shows.html" with currentYear=currentYear year=year request=request slug=artist_profile.profile.user.calendar.slug name=artist_profile events=events  %}
 {% endblock %}

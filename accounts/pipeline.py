@@ -3,7 +3,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 
-from models import Profile, FanProfile, MusicianProfile, VenueProfile
+from artist.models import ArtistProfile
+from fan.models import FanProfile
+from venue.models import VenueProfile
 from accounts.models import Profile
 from annoying.functions import get_object_or_None
 from contact.models import ContactInfo, Contact, Location, Zipcode
@@ -65,14 +67,14 @@ def create_profile(user, profile_type, location, first_name=None, last_name=None
 
     elif profile_type == 'm':
         # Create Musician Profile
-        musician = MusicianProfile(profile=user.profile, user=user)
-        musician.name = band_name
-        musician.save()
-        user.username = get_username(musician.name)
+        artist = ArtistProfile(profile=user.profile, user=user)
+        artist.name = band_name
+        artist.save()
+        user.username = get_username(artist.name)
         user.save()
-        # must be after musician.save()
+        # must be after artist.save()
         user.profile.profile_type = 'm'
-        contact = Contact(name=musician.name)
+        contact = Contact(name=artist.name)
 
     elif profile_type == 'v':
         # Create Fan Profile

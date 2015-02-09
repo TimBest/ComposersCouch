@@ -11,7 +11,10 @@ from crispy_forms.layout import ButtonHolder, Div, HTML, Layout, Submit
 
 from pipeline import create_profile
 from models import PROFILE_TYPE_CHOICES
-from models import Profile, FanProfile, MusicianProfile, VenueProfile
+from artist.models import ArtistProfile
+from fan.models import FanProfile
+from venue.models import VenueProfile
+from accounts.models import Profile
 from annoying.functions import get_object_or_None
 from contact.forms import ZipcodeForm
 from userena.forms import SignupFormOnlyEmail, AuthenticationForm

@@ -51,12 +51,12 @@ class ProfileNewsMixin(ProfileMixin, ImageFormMixin, MultipleFormsView):
 
 
 class ArtistNewsView(ProfileNewsMixin):
-    template_name = 'profile/musician/news.html'
-    success_url = 'musician:news'
+    template_name = 'profile/artist/news.html'
+    success_url = 'artist:news'
 
     def get_context_data(self, **kwargs):
         context = super(ArtistNewsView, self).get_context_data(**kwargs)
-        context['musicianProfile'] = context['profile'].musicianProfile
+        context['artist_profile'] = context['profile'].artist_profile
         return context
 
 artist_news = ArtistNewsView.as_view()

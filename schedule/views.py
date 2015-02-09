@@ -131,7 +131,7 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
         date_data = {"start": coerce_date_dict(self.request.GET),}
         if self.request.user.profile.profile_type == "m":
             show_data['headliner_text'] = self.request.user.profile
-            show_data['headliner'] = self.request.user.profile.musicianProfile
+            show_data['headliner'] = self.request.user.profile.artist_profile
         else:
             show_data['venue_text'] = self.request.user.profile
             show_data['venue'] = self.request.user

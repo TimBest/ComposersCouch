@@ -1,6 +1,6 @@
-{% for musician in musicians %}
+{% for artist in artists %}
   {% if forloop.first %}<p><b>Artists</b></p>{% endif %}
-  {% include "autocomplete/_musician_search.html" with artist=musician %}
+  {% include "autocomplete/_artist_search.html" with artist=artist %}
 {% endfor %}
 {% for venue in venues %}
   {% if forloop.first %}<p><b>Venues</b></p>{% endif %}

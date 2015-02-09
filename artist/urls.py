@@ -5,7 +5,7 @@ view_location = 'customProfile.views'
 urlpatterns = patterns(view_location,
     # Views
     url(r'^(?P<username>[-\w]+)/', include(patterns(view_location,
-        url(r'^$', 'profileRedirect', {'redirect_url': 'musician:about'}, name='home'),
+        url(r'^$', 'profileRedirect', {'redirect_url': 'artist:about'}, name='home'),
         url(r'^news/$', 'artist_news', name='news'),
         url(r'^shows/$','shows', name='shows'),
         url(r'^shows/(?P<year>\d{4})/$','shows',name='shows'),
@@ -19,7 +19,7 @@ urlpatterns = patterns(view_location,
     url(r'^videos/links/edit/$', 'artist_video_links', name='videoLinksForm'),
 )
 
-view_location = 'musician.views'
+view_location = 'artist.views'
 urlpatterns += patterns(view_location,
     # Views
     url(r'^(?P<username>[-\w]+)/', include(patterns(view_location,
@@ -44,8 +44,8 @@ urlpatterns += patterns(view_location,
         #url(r'^interview/add/(?P<trackID>[\.\w-]+)$', 'interview_form', name='interview_form'),
     ))),
     url(r'^videos/', include(patterns(view_location,
-        url(r'^album/add/$', 'AddEditAlbum', {'success_url': 'musician:video_tracks_form'}, name='video_album_form'),
-        url(r'^album/(?P<albumID>[\.\w-]+)/edit/$', 'AddEditAlbum', {'success_url': 'musician:video_tracks_form'}, name='video_edit_album'),
+        url(r'^album/add/$', 'AddEditAlbum', {'success_url': 'artist:video_tracks_form'}, name='video_album_form'),
+        url(r'^album/(?P<albumID>[\.\w-]+)/edit/$', 'AddEditAlbum', {'success_url': 'artist:video_tracks_form'}, name='video_edit_album'),
         url(r'^album/(?P<albumID>[\.\w-]+)/tracks/add/$', 'add_video_to_album', name='video_tracks_form'),
         #url(r'^interview-video/add/$', 'interview_video_form', name='interview_video_form'),
         #url(r'^interview-video/add/(?P<trackID>[\.\w-]+)$', 'interview_video_form', name='interview_video_form'),

@@ -11,7 +11,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, HTML, Layout, Submit
 from crispy_forms.bootstrap import AppendedText
 
-from accounts.models import MusicianProfile
+from artist.models import ArtistProfile
 from contact.models import Location
 from photos.models import Image
 from schedule.models import DateRange, Event, Show, Info
@@ -119,7 +119,7 @@ class ShowInfoForm(ModelForm):
                   'openers_text','venue_text','description',)
         widgets = {
             'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
-            'headliner_text' : autocomplete_light.TextWidget('MusicianProfileAutocomplete'),
-            'openers_text' : autocomplete_light.TextWidget('MusicianProfileAutocomplete'),
+            'headliner_text' : autocomplete_light.TextWidget('ArtistProfileAutocomplete'),
+            'openers_text' : autocomplete_light.TextWidget('ArtistProfileAutocomplete'),
             'venue_text' : autocomplete_light.TextWidget('UserAutocomplete'),
         }

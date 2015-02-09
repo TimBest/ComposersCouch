@@ -192,7 +192,7 @@ def loginredirect(request, username=None, tab='home'):
         if profileType == 'f':
           return redirect('fan:'+tab, username=username)
         elif profileType == 'm':
-          return redirect('musician:'+tab, username=username)
+          return redirect('artist:'+tab, username=username)
         elif profileType == 'v':
           return redirect('venue:'+tab, username=username)
         return redirect(tab, username=username)

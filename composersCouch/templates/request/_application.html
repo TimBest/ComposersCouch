@@ -2,7 +2,7 @@
 
 <div class="application">
   {% ifequal application.applicant.profile.profile_type 'm' %}
-    {% include "search/_musician.html" with artist=application.applicant.profile.musicianProfile %}
+    {% include "search/_artist.html" with artist=application.applicant.profile.artist_profile %}
   {% else %}
     {% include "search/_venue.html" with venue=application.applicant.profile.venueProfile %}
   {% endifequal %}

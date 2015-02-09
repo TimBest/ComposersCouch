@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.utils.timezone import utc
 from django.views.generic import TemplateView
 
-from accounts.models import MusicianProfile
+from artist.models import ArtistProfile
 from contact.utils import get_location
 from feeds.post_feed import LocalFeed
 from feeds.views import AvailabilityMixin, FeedMixin
@@ -20,7 +20,7 @@ def artists(request, scope='all', *args, **kwargs):
         return AllView.as_view()(request, *args, **kwargs)
 
 class ArtistView(FeedMixin, TemplateView):
-    modelManager = MusicianProfile.objects
+    modelManager = ArtistProfile.objects
 
     def get_default_order(self):
         return "all"

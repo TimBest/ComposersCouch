@@ -27,7 +27,7 @@
   $("#div_{{ id }}_text").on("click", ".remove", function() {
     value = $(this).parent().attr("data-value");
     $("#{{ id }} option[value="+value+"]").remove();
-    name = $(this).parent().find(".musician-name").text();
+    name = $(this).parent().find(".artist-name").text();
     choices = $("#{{ id }}_text").val();
     choices = choices.replace(name, "");
     $("#{{ id }}_text").val(choices);

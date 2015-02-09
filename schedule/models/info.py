@@ -3,7 +3,7 @@ from django.contrib.gis.db import models
 from django.db.models.signals import post_save
 from django.utils.translation import ugettext as _
 
-from accounts.models import MusicianProfile
+from artist.models import ArtistProfile
 from contact.models import Location
 from photos.models import Image
 
@@ -22,10 +22,10 @@ class Info(models.Model):
                                null=True, blank=True)
     title = models.CharField(max_length = 255, null=True, blank=True,)
     description = models.TextField(null=True, blank=True)
-    headliner = models.ForeignKey(MusicianProfile, null=True, blank=True,
+    headliner = models.ForeignKey(ArtistProfile, null=True, blank=True,
                                   related_name='shows_headlining')
     headliner_text = models.CharField(max_length=255, null=True, blank=True,)
-    openers = models.ManyToManyField(MusicianProfile, null=True, blank=True,
+    openers = models.ManyToManyField(ArtistProfile, null=True, blank=True,
                                      related_name='shows_opening')
     openers_text = models.CharField(max_length=255, null=True, blank=True,)
     venue = models.ForeignKey(User, null=True, blank=True)

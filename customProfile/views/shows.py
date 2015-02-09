@@ -21,7 +21,7 @@ class ProfileShowsMixin(ProfileMixin):
         return context
 
 class ShowsView(ProfileShowsMixin, ArtistProfileView):
-    template_name = 'profile/musician/shows.html'
+    template_name = 'profile/artist/shows.html'
 
 shows = ShowsView.as_view()
 

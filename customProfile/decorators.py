@@ -15,7 +15,7 @@ def is_venue(function):
         return function(request, *args, **kwargs)
     return decorator
 
-def is_musician(function):
+def is_artist(function):
     @wraps(function)
     def decorator(request, *args, **kwargs):
         if not request.user.is_authenticated():

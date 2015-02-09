@@ -1,15 +1,15 @@
 $(document).ready(function() {
-    musicianAboutModals();
+    artistAboutModals();
     $(".modal").on('hidden.bs.modal', function () {
         window.location.reload(false);
     });
 });
 
 $(document).ajaxStop(function() {
-    musicianAboutModals();
+    artistAboutModals();
 });
 
-function musicianAboutModals() {
+function artistAboutModals() {
     modalConnect('.editMusicianBiography','#biographyMusicianForm');
     modalConnect('.editMusicianContact','#contactMusicianForm');
     modalConnect('.editMusicianMembers','#membersMusicianForm');

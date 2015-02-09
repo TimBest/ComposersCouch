@@ -5,7 +5,10 @@ from django.shortcuts import redirect, get_object_or_404
 from django.views.generic import TemplateView
 
 from customProfile import forms as profile_forms
-from accounts.models import FanProfile, MusicianProfile, VenueProfile, Profile
+from accounts.models import Profile
+from artist.models import ArtistProfile
+from fan.models import FanProfile
+from venue.models import VenueProfile
 from annoying.functions import get_object_or_None
 from composersCouch.views import MultipleFormsView
 from feeds.models import Follow, Post
@@ -54,11 +57,11 @@ class FanProfileView(ProfileMixin, TemplateView):
         return context
 
 class ArtistProfileView(ProfileMixin, TemplateView):
-    template_name = 'profile/musician/news.html'
+    template_name = 'profile/artist/news.html'
 
     def get_context_data(self, **kwargs):
         context = super(ArtistProfileView, self).get_context_data(**kwargs)
-        context['musicianProfile'] = context['profile'].musicianProfile
+        context['artist_profile'] = context['profile'].artist_profile
         return context
 
 class VenueProfileView(ProfileMixin, TemplateView):
@@ -84,7 +87,7 @@ class ProfileEdit(ImageFormMixin, MultipleFormsView):
         if profile_type == 'f':
             forms['typedForm'] = profile_forms.UserForm(instance=user, **form_kwargs)
         elif profile_type == 'm':
-            forms['typedForm'] = profile_forms.MusicianProfileForm(instance=user.profile.musicianProfile, **form_kwargs)
+            forms['typedForm'] = profile_forms.ArtistProfileForm(instance=user.profile.artist_profile, **form_kwargs)
         elif profile_type == 'v':
             forms['typedForm'] = profile_forms.VenueProfileForm(instance=user.profile.venueProfile, **form_kwargs)
         return forms

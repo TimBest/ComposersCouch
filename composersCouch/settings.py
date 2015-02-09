@@ -55,7 +55,7 @@ INSTALLED_APPS = (
     'annoying',
     'contact',
     'fan',
-    'musician',
+    'artist',
     'venue',
     'customProfile',
     'feeds',

@@ -1,7 +1,10 @@
 from django.db.models import Q
 from django.shortcuts import render
 
-from accounts.models import Profile, MusicianProfile, VenueProfile, FanProfile
+from accounts.models import Profile
+from artist.models import ArtistProfile
+from fan.models import FanProfile
+from venue.models import VenueProfile
 from composersCouch.utils import get_page
 
 
@@ -12,7 +15,7 @@ def search(request, template_name='search/search.html', ajax_template='autocompl
     if request.is_ajax():
         template_name = ajax_template
         queries = {}
-        queries['musicians'] = MusicianProfile.objects.filter(name__icontains=q)[:3]
+        queries['artists'] = ArtistProfile.objects.filter(name__icontains=q)[:3]
         queries['venues'] = VenueProfile.objects.filter(name__icontains=q)[:3]
         queries['fans'] = FanProfile.objects.filter(
             Q(profile__user__first_name__icontains=q) |
@@ -21,7 +24,7 @@ def search(request, template_name='search/search.html', ajax_template='autocompl
         context.update(queries)
     else:
         profiles = Profile.objects.filter(
-            Q(musicianProfile__name__icontains=q) |
+            Q(artist_profile__name__icontains=q) |
             Q(venueProfile__name__icontains=q) |
             Q(user__first_name__icontains=q) |
             Q(user__last_name__icontains=q)

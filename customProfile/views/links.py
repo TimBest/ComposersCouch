@@ -24,7 +24,7 @@ class LinksView(ProfileFormMixin, UpdateView):
 class ArtistSocialView(LinksView):
     form_class = SocialLinksForm
     template_name = 'profile/forms/social_links.html'
-    success_url = 'musician:about'
+    success_url = 'artist:about'
 artist_social_links = ArtistSocialView.as_view()
 
 class VenueSocialView(ArtistSocialView):
@@ -35,7 +35,7 @@ venue_social_links = VenueSocialView.as_view()
 class ArtistPhotoView(LinksView):
     form_class = PhotoLinksForm
     template_name = 'profile/forms/photo_links.html'
-    success_url = 'musician:photos'
+    success_url = 'artist:photos'
 artist_photo_links = ArtistPhotoView.as_view()
 
 class VenuePhotoView(ArtistPhotoView):
@@ -46,7 +46,7 @@ venue_photo_links = VenuePhotoView.as_view()
 class ArtistVideoView(LinksView):
     form_class = VideoLinksForm
     template_name = 'profile/forms/video_links.html'
-    success_url = 'musician:videos'
+    success_url = 'artist:videos'
 artist_video_links = ArtistVideoView.as_view()
 
 class VenueVideoView(ArtistVideoView):
@@ -59,14 +59,14 @@ class MusicLinksView(ProfileFormMixin, UpdateView):
     form_class = MusicLinksForm
     model = MusicLinks
     template_name = 'profile/forms/music_links.html'
-    success_url = 'musician:music'
+    success_url = 'artist:music'
 
     def get_object(self, queryset=None):
-        return get_object_or_None(self.model, profile=self.user.profile.musicianProfile)
+        return get_object_or_None(self.model, profile=self.user.profile.artist_profile)
 
     def form_valid(self, form):
         music = form.save(commit=False)
-        music.profile = self.user.profile.musicianProfile
+        music.profile = self.user.profile.artist_profile
         music.save()
         return redirect(self.success_url, username=self.user.username)
 

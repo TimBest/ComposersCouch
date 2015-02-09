@@ -17,7 +17,7 @@ from tracks.utils import json_playlist
 
 
 class MusicView(ArtistProfileView):
-    template_name = 'profile/musician/music.html'
+    template_name = 'profile/artist/music.html'
 
 music = MusicView.as_view()
 
@@ -27,8 +27,8 @@ class AlbumView(ImageFormMixin, MultipleModelFormsView):
       'albumArtForm' : AlbumArtForm
     }
     albumID=None
-    template_name = 'profile/musician/forms/album.html'
-    success_url = 'musician:tracksForm'
+    template_name = 'profile/artist/forms/album.html'
+    success_url = 'artist:tracksForm'
 
     def get_objects(self, queryset=None):
         self.albumID = self.kwargs.get('albumID', None)
@@ -40,7 +40,7 @@ class AlbumView(ImageFormMixin, MultipleModelFormsView):
 
     def forms_valid(self, forms):
         album = forms['albumForm'].save(request=self.request, commit=False)
-        album.musician_profile = self.request.user.profile.musicianProfile
+        album.artist_profile = self.request.user.profile.artist_profile
         if self.request.FILES.get('image'):
             album.album_art = Image.objects.create(
                 image=self.request.FILES.get('image'),
@@ -63,8 +63,8 @@ class TracksView(ProfileFormMixin, UpdateView):
     inline_model = Track
     object = None
     albumID = None
-    template_name = 'profile/musician/forms/track.html'
-    success_url = 'musician:music'
+    template_name = 'profile/artist/forms/track.html'
+    success_url = 'artist:music'
 
     def get_object(self, queryset=None):
         self.albumID = self.kwargs.get('albumID', None)

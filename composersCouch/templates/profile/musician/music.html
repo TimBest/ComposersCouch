@@ -1,4 +1,4 @@
-{% extends 'profile/musician/detail.html' %}
+{% extends 'profile/artist/detail.html' %}
 {% load i18n thumbnail %}
 {% load static from staticfiles %}
 
@@ -9,22 +9,22 @@
   <div class="music">
     <div class="row">
       <div class="col-xs-12">
-        <a class="{{isEditable}} btn btn-success" href="{% url 'musician:albumForm' %}">
+        <a class="{{isEditable}} btn btn-success" href="{% url 'artist:albumForm' %}">
           <span class="fa fa-plus"></span> Add Album
         </a>
         <div class="pull-right">
-          {% with music=musicianProfile.music_links %}
+          {% with music=artist_profile.music_links %}
             {% if music.bandcamp %}<a href="{{ music.bandcamp }}" target="_blank" class="btn btn-bandcamp">bc</a>{% endif %}
             {% if music.itunes %}<a href="{{ music.itunes }}" target="_blank" class="btn btn-itunes"><span class="fa fa-apple"></span></a>{% endif %}
             {% if music.spotify %}<a href="{{ music.spotify }}" target="_blank" class="btn btn-spotify"><span class="fa fa-spotify"></span></a>{% endif %}
             {% if music.soundcloud %}<a href="{{ music.soundcloud }}" target="_blank" class="btn btn-soundcloud"><span class="fa fa-soundcloud"></span></a>{% endif %}
           {% endwith %}
-          <a href="{% url 'musician:musicLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
+          <a href="{% url 'artist:musicLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
         </div>
         <p></p>
       </div>
     </div>
-    {% for album in musicianProfile.albums.all %}
+    {% for album in artist_profile.albums.all %}
       <div class="album">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -60,12 +60,12 @@
             </div>
             <div class="row no-gutter">
               <div class="col-sm-2 left">
-                <a class="text-primary {{isEditable}}" href="{% url 'musician:editAlbumForm' album %}">
+                <a class="text-primary {{isEditable}}" href="{% url 'artist:editAlbumForm' album %}">
                   {% include "_editLink.html" with text='Edit Album' %}
                 </a>
               </div>
               <div class="col-sm-10 right">
-                <a class="text-primary {{isEditable}}" href="{% url 'musician:tracksForm' album %}">
+                <a class="text-primary {{isEditable}}" href="{% url 'artist:tracksForm' album %}">
                   {% include "_editLink.html" with text='Edit Tracks' %}
                 </a>
 
@@ -79,7 +79,7 @@
 {% endblock %}
 
 {% block script %}
-  {% for album in musicianProfile.albums.all %}
+  {% for album in artist_profile.albums.all %}
     {% include "tracks/_player_script.html" with id=album.id playlist=album.get_json_playlist %}
   {% endfor %}
 {% endblock %}

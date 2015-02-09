@@ -12,7 +12,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, HTML, Layout
 from multiupload.fields import MultiFileField
 
-from accounts.models import MusicianProfile
+from artist.models import ArtistProfile
 from embed_video.fields import EmbedVideoFormField
 from tracks.models import Album, Track, Media
 
@@ -48,7 +48,7 @@ class TracksForm(ModelForm):
                 try:
                     media.full_clean()
                     media.set_upload_to_info(
-                        username=self.instance.musician_profile.profile.user.username,
+                        username=self.instance.artist_profile.profile.user.username,
                         track_type="albums",
                         album_title=self.instance.title
                     )

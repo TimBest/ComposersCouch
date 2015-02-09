@@ -1,10 +1,22 @@
-from django.db import models
+from django.contrib.gis.db import models
 from django.utils.translation import ugettext as _
 
-from accounts.models import VenueProfile
+from accounts.models import Profile
 from contact.models import Contact
 from photos.models import Image
 
+
+class VenueProfile(Profile):
+    profile = models.OneToOneField(Profile, unique=True,
+                          verbose_name=_('profile'),
+                                related_name='venueProfile')
+    name =  models.CharField(_('venue name'), max_length=64,
+                                   blank=False)
+    biography = models.TextField(_("biography"), null=True, blank=True)
+    objects = models.GeoManager()
+
+    def __unicode__(self):
+        return '%s' % self.name
 
 WEEKDAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday',]
 

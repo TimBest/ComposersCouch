@@ -5,7 +5,7 @@ from django.http import Http404
 from django.shortcuts import redirect
 from django.views.generic import FormView, UpdateView
 
-from accounts.models import VenueProfile
+from venue.models import VenueProfile
 from annoying.functions import get_object_or_None
 from contact.views import ContactView
 from composersCouch.views import MultipleModelFormsView

@@ -8,7 +8,7 @@ from django.template.context import RequestContext
 from django.utils.timezone import utc
 from django.views.generic import TemplateView
 
-from accounts.models import VenueProfile
+from venue.models import VenueProfile
 from composersCouch.utils import get_page
 from contact.utils import get_location
 from feeds.views import AvailabilityMixin, FeedMixin, GenreMixin

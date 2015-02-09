@@ -17,7 +17,7 @@ class UtilsTests(TestCase):
         # test artist creation
         user = create_user_profile("Mouse Rat", "mouserat@example.com", "m", creator)
         self.failIf(user.profile.has_owner)
-        self.assertIsNotNone(user.profile.musicianProfile)
+        self.assertIsNotNone(user.profile.artist_profile)
         self.assertIsNotNone(user.profile.contact_info)
         self.assertIsNotNone(user.calendar)
         # test venue creation

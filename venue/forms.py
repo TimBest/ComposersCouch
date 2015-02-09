@@ -6,7 +6,7 @@ from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, HTML, Layout, Submit
 
-from accounts.models import VenueProfile
+from venue.models import VenueProfile
 from annoying.functions import get_object_or_None
 from venue import models
 
