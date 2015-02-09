@@ -32,8 +32,8 @@ def createProfile(request, backend, user, social_user, is_new=False, new_associa
     try:
         profile = user.profile
     except:
-        profile = Profile(user=user)
-        profile.save()
+        user.profile = Profile(user=user)
+        user.profile.save()
         # TODO: remove this call to get profile type?
         profile_type = request.session.get('profile').profile_type
         location     = request.session.get('location')

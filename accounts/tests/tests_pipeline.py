@@ -16,7 +16,6 @@ class CreateProfileTests(TestCase):
     def test_create_profile(self):
         # test fan createion
         user = User.objects.get(pk=1)
-
         profile_type='f'
         location = Location(zip_code=Zipcode(pk=12065))
         user = create_profile(user, profile_type, location, 'Jane', 'Doe')

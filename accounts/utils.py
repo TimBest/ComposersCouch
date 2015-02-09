@@ -10,10 +10,13 @@ def create_user_profile(name, email, profile_type, creator):
     # apparently django does not let you reset a password if one is not initally set
     user.set_password(get_random_string())
     user.save()
-    profile = Profile(user=user, has_owner=False, profile_type=profile_type)
-    profile.save()
+    user.profile = Profile(user=user)
+    user.profile.save()
     location = creator.profile.contact_info.location
     location.pk = None
     location.save()
-    return create_profile(user=user, profile_type=profile_type,
+    user = create_profile(user=user, profile_type=profile_type,
                           location=location, band_name=name, venue_name=name)
+    user.profile.has_owner=False
+    user.profile.save()
+    return user
