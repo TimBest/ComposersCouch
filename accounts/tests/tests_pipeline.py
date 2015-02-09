@@ -1,13 +1,10 @@
 from django.test import TestCase
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 
-from accounts.models import Profile
 from accounts.pipeline import create_profile, get_username
 from contact.models import Location, Zipcode
 
-import hashlib
 
 class CreateProfileTests(TestCase):
     """ Test the extra utils methods """

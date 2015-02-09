@@ -1,16 +1,8 @@
-import re
-
-from datetime import datetime, timedelta
 from django.core.urlresolvers import reverse
-from django.core import mail
-from django.contrib.auth.forms import PasswordChangeForm
-from django.conf import settings
 from django.test import TestCase
-from django.test.utils import override_settings
 from django.contrib.auth.models import User
 
 from accounts.models import Profile
-from userena import settings as userena_settings
 
 
 class ViewsTests(TestCase):
