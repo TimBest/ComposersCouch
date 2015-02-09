@@ -23,10 +23,6 @@ class UserenaViewsTests(TestCase):
         """TODO: A ``GET`` to the ``signup`` view """
         pass
 
-    def test_signup_view_signout(self):
-        """ TODO: Check that a newly signed user shouldn't be signed in. """
-        pass
-
     def test_signup_view_success(self):
         """
         TODO: After a ``POST`` to the ``signup`` view a new user should be created,
