@@ -31,7 +31,6 @@ class VenueSocialView(ArtistSocialView):
     success_url = 'venue:about'
 venue_social_links = VenueSocialView.as_view()
 
-
 #Photo page links to image sites
 class ArtistPhotoView(LinksView):
     form_class = PhotoLinksForm
