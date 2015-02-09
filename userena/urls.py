@@ -41,10 +41,10 @@ urlpatterns = patterns('userena.views',
 
 
     # Change password
-    url(r'^(?P<username>[\.\w-]+)/password/$', 'password_change', name='password_change'),
-    url(r'^(?P<username>[\.\w-]+)/password/complete/$',
-       'direct_to_user_template',
-       {'template_name': 'accounts/password_complete.html'},
-       name='password_change_complete'),
+    #url(r'^(?P<username>[\.\w-]+)/password/$', 'password_change', name='password_change'),
+    #url(r'^(?P<username>[\.\w-]+)/password/complete/$',
+    #   'direct_to_user_template',
+    #   {'template_name': 'accounts/password_complete.html'},
+    #   name='password_change_complete'),
 
 )

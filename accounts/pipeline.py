@@ -3,8 +3,6 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.template.defaultfilters import slugify
 
-from guardian.shortcuts import assign_perm
-
 from models import Profile, FanProfile, MusicianProfile, VenueProfile
 from accounts.models import Profile
 from annoying.functions import get_object_or_None
@@ -50,19 +48,10 @@ def createProfile(request, backend, user, social_user, is_new=False, new_associa
 def create_profile(user, profile_type, location, first_name=None, last_name=None,
                    band_name=None, venue_name=None):
 
-    profile = user.profile
-    # Give permissions to view and change profile
-    for perm in userena.managers.ASSIGNED_PERMISSIONS['profile']:
-        assign_perm(perm[0], user, profile)
-
-    # Give permissions to view and change itself
-    for perm in userena.managers.ASSIGNED_PERMISSIONS['user']:
-        assign_perm(perm[0], user, user)
-
     profile_type = profile_type
-    if(profile_type == 'f'):
+    if profile_type == 'f':
         # Create Fan Profile
-        fan = FanProfile(profile = profile, user=user)
+        fan = FanProfile(profile=user.profile, user=user)
         fan.save()
 
         # must be after fan.save()
@@ -71,45 +60,48 @@ def create_profile(user, profile_type, location, first_name=None, last_name=None
         user.username = get_username(user.first_name+user.last_name)
         user.save()
 
-        profile.profile_type = 'f'
+        user.profile.profile_type = 'f'
         contact = Contact(name=user.first_name+" "+user.last_name)
 
-    elif(profile_type == 'm'):
+    elif profile_type == 'm':
         # Create Musician Profile
-        musician = MusicianProfile(profile = profile, user = user)
+        musician = MusicianProfile(profile=user.profile, user=user)
         musician.name = band_name
         musician.save()
         user.username = get_username(musician.name)
         user.save()
         # must be after musician.save()
-        profile.profile_type = 'm'
+        user.profile.profile_type = 'm'
         contact = Contact(name=musician.name)
 
-    elif(profile_type == 'v'):
+    elif profile_type == 'v':
         # Create Fan Profile
-        venue = VenueProfile(profile = profile, user=user)
+        venue = VenueProfile(profile=user.profile, user=user)
         venue.name = venue_name
         venue.save()
         user.username = get_username(venue.name)
         user.save()
         # must be after venue.save()
-        profile.profile_type = 'v'
+        user.profile.profile_type = 'v'
         contact = Contact(name=venue.name)
 
     contact.save()
     Contact_info = ContactInfo(contact=contact,location=location)
     Contact_info.save()
-    profile.contact_info = Contact_info
-    profile.save()
-    calendar = Calendar.objects.get_or_create_calendar(user, name = user.username)
+    user.profile.contact_info = Contact_info
+    user.profile.save()
+    calendar = Calendar.objects.get_or_create_calendar(user, name=user.username)
     return user
+
+
+USERNAME_LENGTH = User._meta.get_field('username').max_length
 
 def get_username(username):
     username = username.replace (" ", "_")
-    username = slugify(username)[:30]
+    username = slugify(username)[:USERNAME_LENGTH]
     try:
         User.objects.get(username=username)
-        if len(username) >= 30:
+        if len(username) >= USERNAME_LENGTH:
             return get_username(random.choice(string.letters+string.digits))
         else:
             return get_username(username+random.choice(string.letters+string.digits))

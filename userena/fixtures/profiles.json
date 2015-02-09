@@ -9,5 +9,12 @@
   "model": "accounts.profile",
   "fields": {"user": 2,
              "profile_type": "m"
+    }
+  },
+  {
+  "pk": 3,
+  "model": "accounts.profile",
+  "fields": {"user": 3,
+             "profile_type": "v"
   }
 }]

@@ -161,7 +161,7 @@ class SigninFormTests(TestCase):
              'error': ('identification', [u'Please supply your email.'])},
             {'data': {'identification': 'john',
                       'password': 'inhalefish'},
-             'error': ('__all__', [u'Please enter a correct or email and password. Note that fields are case-sensitive.'])}
+             'error': ('__all__', [u'Please enter a correct email and password. Note that fields are case-sensitive.'])}
         ]
 
         for invalid_dict in invalid_data_dicts:

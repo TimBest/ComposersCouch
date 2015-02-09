@@ -147,8 +147,8 @@ class AuthenticationForm(forms.Form):
     A custom form where the identification can be a e-mail address or username.
 
     """
-    identification = identification_field_factory(_(u"Email or username"),
-                                                  _(u"Either supply us with your email or username."))
+    identification = identification_field_factory(_(u"Email"),
+                                                  _(u"Please supply your email."))
     password = forms.CharField(label=_("Password"),
                                widget=forms.PasswordInput(attrs=attrs_dict, render_value=False))
     remember_me = forms.BooleanField(widget=forms.CheckboxInput(),
@@ -178,7 +178,7 @@ class AuthenticationForm(forms.Form):
         if identification and password:
             user = authenticate(identification=identification, password=password)
             if user is None:
-                raise forms.ValidationError(_(u"Please enter a correct or email and password. Note that fields are case-sensitive."))
+                raise forms.ValidationError(_(u"Please enter a correct email and password. Note that fields are case-sensitive."))
         return self.cleaned_data
 
 class ChangeEmailForm(forms.Form):
