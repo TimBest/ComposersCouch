@@ -8,7 +8,7 @@ from crispy_forms.layout import Div, HTML, Layout, Submit
 
 from accounts.models import VenueProfile
 from annoying.functions import get_object_or_None
-from customProfile.venue import models
+from venue import models
 
 class BiographyForm(forms.ModelForm):
 

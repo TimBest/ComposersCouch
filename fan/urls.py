@@ -11,7 +11,7 @@ urlpatterns = patterns(view_location,
     ))),
 )
 """
-view_location = 'customProfile.fan.views'
+view_location = 'fan.views'
 urlpatterns += patterns(view_location,
 
 )

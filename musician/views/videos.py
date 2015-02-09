@@ -3,7 +3,7 @@ from django.views.generic import UpdateView
 
 from annoying.functions import get_object_or_None
 from customProfile.views import ArtistProfileView, ProfileFormMixin
-from customProfile.musician.views import TracksView
+from musician.views import TracksView
 from tracks.forms import AlbumVideoForm#, LiveVideoForm, InterviewVideoForm
 from tracks.models import Album, Media
 

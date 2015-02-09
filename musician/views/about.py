@@ -7,8 +7,8 @@ from annoying.functions import get_object_or_None
 from contact.views import ContactView
 from contact.forms import NonUserLocationForm
 from customProfile.views import ArtistProfileView, ProfileFormMixin
-from customProfile.musician.models import Member
-from customProfile.musician.forms import BiographyForm, MemberForm
+from musician.models import Member
+from musician.forms import BiographyForm, MemberForm
 
 
 class AboutView(ArtistProfileView):

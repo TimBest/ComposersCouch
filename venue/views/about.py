@@ -9,7 +9,7 @@ from accounts.models import VenueProfile
 from annoying.functions import get_object_or_None
 from contact.views import ContactView
 from composersCouch.views import MultipleModelFormsView
-from customProfile.venue import forms, models
+from venue import forms, models
 from customProfile.views import VenueProfileView, ProfileFormMixin
 from contact.forms import ContactForm
 from photos.forms import SeatingChartForm

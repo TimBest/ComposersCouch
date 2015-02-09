@@ -19,7 +19,7 @@ urlpatterns = patterns(view_location,
     url(r'^videos/links/edit/$', 'artist_video_links', name='videoLinksForm'),
 )
 
-view_location = 'customProfile.musician.views'
+view_location = 'musician.views'
 urlpatterns += patterns(view_location,
     # Views
     url(r'^(?P<username>[-\w]+)/', include(patterns(view_location,

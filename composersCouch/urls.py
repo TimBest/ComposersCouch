@@ -23,9 +23,9 @@ urlpatterns += patterns('composersCouch.views',
 )
 
 urlpatterns += patterns('',
-    url(r'^f/', include('customProfile.fan.urls', namespace='fan')),
-    url(r'^m/', include('customProfile.musician.urls', namespace='musician')),
-    url(r'^v/', include('customProfile.venue.urls', namespace='venue')),
+    url(r'^f/', include('fan.urls', namespace='fan')),
+    url(r'^m/', include('musician.urls', namespace='musician')),
+    url(r'^v/', include('venue.urls', namespace='venue')),
 )
 
 urlpatterns += patterns('',

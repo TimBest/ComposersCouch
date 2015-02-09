@@ -17,7 +17,7 @@ urlpatterns = patterns(view_location,
     url(r'^photos/links/edit/$', 'venue_photo_links', name='photoLinksForm'),
 )
 
-view_location = 'customProfile.venue.views'
+view_location = 'venue.views'
 urlpatterns += patterns(view_location,
     # Views
     url(r'^(?P<username>[-\w]+)/', include(patterns(view_location,
