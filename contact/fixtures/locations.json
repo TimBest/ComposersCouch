@@ -1,0 +1,8 @@
+[{"pk": 1,
+  "model": "contact.Location",
+  "fields": {"address_1": "3 Zamora Ct.",
+             "address_2": "",
+             "city": "Clifton Park",
+             "state": "NY",
+             "zip_code": 12065}}
+]

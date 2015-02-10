@@ -1,7 +1,22 @@
-[{"pk": 12065,
-  "model": "contact.Zipcode",
-  "fields": {"country": "US",
-             "code": "12065",
-             "name": "Clifton Park",
-             "point": "0101000020E610000055302AA9130052C083C0CAA1453E4540"}}
+[
+  {
+    "pk": 12065,
+    "model": "contact.Zipcode",
+    "fields": {
+      "country": "US",
+      "code": "12065",
+      "name": "Clifton Park",
+      "point": "0101000020E610000055302AA9130052C083C0CAA1453E4540"
+    }
+  },
+  {
+    "pk": 1225,
+    "model": "contact.Zipcode",
+    "fields": {
+      "country": "US",
+      "code": "01225",
+      "name": "Chesire",
+      "point": "0101000020E6100000273108AC1C4A52C08FE4F21FD2474540"
+    }
+  }
 ]

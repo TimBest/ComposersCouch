@@ -1,15 +1,26 @@
-[{"pk": 1,
-  "model": "accounts.profile",
-  "fields": {"user": 1,
-             "profile_type": "f"}},
+[
   {
-  "pk": 2,
-  "model": "accounts.profile",
-  "fields": {"user": 2,
-             "profile_type": "m"}},
+    "pk": 1,
+    "model": "accounts.profile",
+    "fields": {
+      "user": 1,
+      "profile_type": "f"
+    }
+  },
   {
-  "pk": 3,
-  "model": "accounts.profile",
-  "fields": {"user": 3,
-             "profile_type": "v"}}
+    "pk": 2,
+    "model": "accounts.profile",
+    "fields": {
+      "user": 2,
+      "profile_type": "m"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "accounts.profile",
+    "fields": {
+      "user": 3,
+      "profile_type": "v"
+    }
+  }
 ]
