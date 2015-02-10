@@ -1,8 +1,9 @@
 import os
 import csv
 from django.contrib.gis.geos import GEOSGeometry
+from django.db import IntegrityError
 
-from models import Zipcode
+from contact.models import Zipcode
 
 
 zipcode_csv = os.path.abspath(os.path.join(os.path.dirname(__file__),
@@ -21,6 +22,6 @@ def run(verbose=True):
         #print row[0], row[1],row[longitude],row[latitude]
         point = GEOSGeometry('POINT(%s %s)' % (row[longitude],row[latitude]))
         try:
-            Zipcode.objects.create(country=row[0], code=row[1], point=point)
-        except:
+            Zipcode.objects.create(country=row[0], code=row[1], name=row[2], point=point)
+        except IntegrityError:
             print row[1]

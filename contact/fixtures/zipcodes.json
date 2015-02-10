@@ -1,0 +1,7 @@
+[{"pk": 12065,
+  "model": "contact.Zipcode",
+  "fields": {"country": "US",
+             "code": "12065",
+             "name": "Clifton Park",
+             "point": "0101000020E610000055302AA9130052C083C0CAA1453E4540"}}
+]
