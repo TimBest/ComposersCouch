@@ -93,5 +93,4 @@ class IsArtistDecoratorTests(TestCase):
         user.profile.profile_type = 'v'
         user.profile.save()
         self.request.user = user
-        response = self.decorated_func(self.request)
         self.assertRaises(PermissionDenied, self.decorated_func, self.request)
