@@ -15,19 +15,6 @@ def load_template(request, template_name, extra_context=None):
     if not extra_context: extra_context = dict()
     return render(request, template_name, extra_context)
 
-def search(request, template_name='search/search.html', ajax_template='autocomplete/search.html'):
-    if request.is_ajax():
-        template_name = ajax_template
-
-    q = request.GET.get('q', '')
-    context = {'q': q}
-    queries = {}
-    queries['artists'] = ArtistProfile.objects.filter(name__icontains=q)[:3]
-    queries['venues'] = VenueProfile.objects.filter(name__icontains=q)[:3]
-
-    context.update(queries)
-    return render(request, template_name, context)
-
 # Mixin to handle multiple form classses
 class MultipleFormsView(FormView):
     form_classes = {}
@@ -117,7 +104,6 @@ class MultipleModelFormsView(MultipleFormsView):
         for key, form_class in self.form_classes.iteritems():
             forms[key] = form_class(instance=objects[key], initial=initial[key], **form_kwargs)
         return forms
-
 
 def reset():
      cursor = connection.cursor()
