@@ -41,7 +41,7 @@ class Instrument(models.Model):
         return u'{0}'.format(self.name)
 
 class Member(models.Model):
-    artist_profile = models.ForeignKey(ArtistProfile, verbose_name=_("artist profile"), related_name='members', null=True, blank=True)
+    profile = models.ForeignKey(ArtistProfile, verbose_name=_("artist"), related_name='members', null=True, blank=True)
     name =  models.CharField(_("name"), max_length=64)
     current_member =  models.BooleanField(_("is current member"), default=True)
     instruments = models.ManyToManyField(Instrument, verbose_name=_("instrument"),

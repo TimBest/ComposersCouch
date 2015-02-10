@@ -1,0 +1,5 @@
+[{"pk": 1,
+  "model": "artist.artistProfile",
+  "fields": {"user": 2,
+             "profile_type": "f"}}
+]

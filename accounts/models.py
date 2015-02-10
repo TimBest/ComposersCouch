@@ -39,7 +39,7 @@ class Profile(UserenaBaseProfile):
         if profileType == 'f':
             return u'%s %s' % (self.user.first_name, self.user.last_name)
         elif profileType == 'm':
-            return '%s' % self.artistProfile.name
+            return '%s' % self.artist_profile.name
         elif profileType == 'v':
             return '%s' % self.venueProfile.name
         return '%s' % self.user.username

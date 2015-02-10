@@ -51,13 +51,12 @@ INSTALLED_APPS = (
     'stream_framework',
 
     'accounts',
-    'audiofield',
     'annoying',
-    'contact',
-    'fan',
     'artist',
-    'venue',
+    'audiofield',
+    'contact',
     'customProfile',
+    'fan',
     'feeds',
     'genres',
     'guardian',
@@ -70,6 +69,7 @@ INSTALLED_APPS = (
     'threaded_messages',
     'tracks',
     'userena',
+    'venue',
 )
 
 MIDDLEWARE_CLASSES = (
