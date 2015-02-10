@@ -7,7 +7,7 @@ from django.utils.functional import wraps
 def is_venue(function):
     @wraps(function)
     def decorator(request, *args, **kwargs):
-        if not request.user.is_authenticated():
+        if not request.user or not request.user.is_authenticated():
             return HttpResponseRedirect(settings.LOGIN_URL)
         else:
             if request.user.profile.profile_type != 'v':
@@ -18,7 +18,7 @@ def is_venue(function):
 def is_artist(function):
     @wraps(function)
     def decorator(request, *args, **kwargs):
-        if not request.user.is_authenticated():
+        if not request.user or not request.user.is_authenticated():
             return HttpResponseRedirect(settings.LOGIN_URL)
         else:
             if request.user.profile.profile_type != 'm':
