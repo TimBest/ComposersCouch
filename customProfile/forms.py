@@ -103,15 +103,3 @@ class ProfileForm(autocomplete_light.ModelForm):
     class Meta:
         model = Profile
         fields = ('genre',)
-
-class ProfileTypeForm(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(ProfileTypeForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(InlineRadios('profile_type'),)
-
-    class Meta:
-        model = Profile
-        fields = ('profile_type',)

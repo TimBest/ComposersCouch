@@ -1,0 +1,18 @@
+[
+  {
+    "pk": 1,
+    "model": "genres.genre",
+    "fields": {
+      "name": "Rock",
+      "slug": "Rock"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "genres.genre",
+    "fields": {
+      "name": "Alternative",
+      "slug": "Alternative"
+    }
+  }
+]
