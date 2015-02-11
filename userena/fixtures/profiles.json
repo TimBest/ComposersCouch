@@ -4,6 +4,9 @@
     "model": "accounts.profile",
     "fields": {
       "user": 1,
+      "genre": "",
+      "contact_info": null,
+      "has_owner": true,
       "profile_type": "f"
     }
   },
@@ -12,6 +15,9 @@
     "model": "accounts.profile",
     "fields": {
       "user": 2,
+      "genre": "",
+      "contact_info": null,
+      "has_owner": true,
       "profile_type": "m"
     }
   },
@@ -20,6 +26,9 @@
     "model": "accounts.profile",
     "fields": {
       "user": 3,
+      "genre": "",
+      "contact_info": null,
+      "has_owner": true,
       "profile_type": "v"
     }
   }

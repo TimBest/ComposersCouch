@@ -1,5 +1,10 @@
-[{"pk": 1,
+[{"pk": 2,
   "model": "artist.artistProfile",
-  "fields": {"user": 2,
-             "profile_type": "f"}}
+  "fields": {"profile": 2,
+             "name": "Mouse Rat",
+             "biography": "We are Mouse Rat.",
+             "booking_contact": null,
+             "label_contact": null,
+             "management_contact": null,
+             "press_contact": null}}
 ]

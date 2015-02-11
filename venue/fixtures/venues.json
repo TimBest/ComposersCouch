@@ -1,0 +1,5 @@
+[{"pk": 3,
+  "model": "venue.venueProfile",
+  "fields": {"profile": 3,
+             "name": "The Gas Works"}}
+]
