@@ -1,6 +1,6 @@
 [{"pk": 1,
   "model": "artist.member",
-  "fields": {"profile": 1,
+  "fields": {"profile": 2,
              "name": "Jack Johnson",
              "current_member": true,
              "instruments": "",

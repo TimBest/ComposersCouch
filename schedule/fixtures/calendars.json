@@ -1,0 +1,29 @@
+[
+  {
+    "pk": 1,
+    "model": "schedule.calendar",
+    "fields": {
+      "owner": 1,
+      "name": "Jane Doe",
+      "slug": "JaneDoe"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "schedule.calendar",
+    "fields": {
+      "owner": 2,
+      "name": "Mouse Rat",
+      "slug": "MouseRat"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "schedule.calendar",
+    "fields": {
+      "owner": 3,
+      "name": "Gas Works",
+      "slug": "GasWorks"
+    }
+  }
+]
