@@ -2,6 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.gis.measure import D
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
 from composersCouch.utils import get_page
@@ -14,6 +15,8 @@ from feeds.post_feedly import feedly
 
 """from feedly.feed_managers.base import remove_operation
 remove_operation(feed, activities)"""
+
+login_required_m = method_decorator(login_required)
 
 def updates(request, scope='all', *args, **kwargs):
     if scope == 'local':
@@ -63,6 +66,10 @@ class AllView(ZipcodeMixin, TemplateView):
 
 class FollowingView(UpdateView):
     template_name='feeds/updates/following.html'
+
+    @login_required_m
+    def dispatch(self, *args, **kwargs):
+        return super(FollowingView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context = super(FollowingView, self).get_context_data(**kwargs)

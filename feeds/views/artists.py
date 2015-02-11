@@ -1,7 +1,9 @@
 from datetime import datetime, time
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.gis.measure import D
 from django.db.models import Q
+from django.utils.decorators import method_decorator
 from django.utils.timezone import utc
 from django.views.generic import TemplateView
 
@@ -10,6 +12,8 @@ from contact.utils import get_location
 from feeds.post_feed import LocalFeed
 from feeds.views import AvailabilityMixin, FeedMixin
 
+
+login_required_m = method_decorator(login_required)
 
 def artists(request, scope='all', *args, **kwargs):
     if scope == 'local':
@@ -70,6 +74,10 @@ class LocalView(ArtistView):
 
 class FollowingView(ArtistView):
     template_name = 'feeds/artists/following.html'
+
+    @login_required_m
+    def dispatch(self, *args, **kwargs):
+        return super(FollowingView, self).dispatch(*args, **kwargs)
 
     def get_posts(self, **kwargs):
         return self.modelManager.filter(

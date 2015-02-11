@@ -1,5 +1,7 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.gis.measure import D
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
 from contact.utils import get_location
@@ -8,6 +10,8 @@ from feeds.post_feed import LocalFeed
 from feeds.views import FeedMixin, GenreMixin
 from request.models import PublicRequest
 
+
+login_required_m = method_decorator(login_required)
 
 def requests(request, scope='all', *args, **kwargs):
     if scope == 'local':
@@ -70,6 +74,10 @@ class LocalView(RequestView):
 
 class FollowingView(RequestView):
     template_name = 'feeds/requests/following.html'
+
+    @login_required_m
+    def dispatch(self, *args, **kwargs):
+        return super(FollowingView, self).dispatch(*args, **kwargs)
 
     def get_posts(self, **kwargs):
         following = self.request.user.following_set.values_list('target')

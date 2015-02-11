@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
 from contact.utils import get_location
@@ -13,6 +14,8 @@ from feeds.post_feed import LocalFeed
 from feeds.views import FeedMixin, GenreMixin
 from schedule.models import Show
 
+
+login_required_m = method_decorator(login_required)
 
 def shows(request, scope='all', *args, **kwargs):
     if scope == 'local':
@@ -59,6 +62,10 @@ class LocalView(ShowView):
 
 class FollowingView(ShowView):
     template_name = 'feeds/shows/following.html'
+
+    @login_required_m
+    def dispatch(self, *args, **kwargs):
+        return super(FollowingView, self).dispatch(*args, **kwargs)
 
     def get_posts(self,**kwargs):
         posts = super(FollowingView, self).get_posts(**kwargs)

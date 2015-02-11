@@ -5,6 +5,7 @@ from django.contrib.gis.measure import D
 from django.contrib.gis.geos import LineString
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
+from django.utils.decorators import method_decorator
 from django.utils.timezone import utc
 from django.views.generic import TemplateView
 
@@ -14,6 +15,8 @@ from contact.utils import get_location
 from feeds.views import AvailabilityMixin, FeedMixin, GenreMixin
 from feeds.post_feed import LocalFeed
 
+
+login_required_m = method_decorator(login_required)
 
 def venues(request, scope='all', *args, **kwargs):
     if scope == 'local':
@@ -119,6 +122,10 @@ class LocalView(VenueView):
 
 class FollowingView(VenueView):
     template_name = 'feeds/venues/following.html'
+
+    @login_required_m
+    def dispatch(self, *args, **kwargs):
+        return super(FollowingView, self).dispatch(*args, **kwargs)
 
     def get_posts(self, **kwargs):
         return self.modelManager.filter(
