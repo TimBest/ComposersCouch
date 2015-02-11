@@ -54,7 +54,7 @@ class AvailabilityView(AvailabilityMixin, VenueView):
                 profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
             )
         else:
-            return None
+            return []
 
         if location:
             try:
