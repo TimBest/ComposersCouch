@@ -31,11 +31,13 @@ class DateForm(DateForm):
         )
 
     def clean(self):
-        if self.cleaned_data['end'] and self.cleaned_data['start']:
-            if self.cleaned_data['end'] < self.cleaned_data['start']:
+        start = self.cleaned_data['start']
+        end = self.cleaned_data.get('end',None)
+        if start and end:
+            if end < start:
                 raise forms.ValidationError(_(u"The end time must be later than start time."))
-        if self.cleaned_data['start'].date() <= timezone.now().date():
-            raise forms.ValidationError(_(u"The start time must after today"))
+        if start.date() < timezone.now().date():
+            raise forms.ValidationError(_(u"The start time must after today."))
         return self.cleaned_data
 
 class MessageForm(forms.Form):

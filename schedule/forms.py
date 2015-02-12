@@ -40,6 +40,7 @@ class DateForm(ModelForm):
               css_class='row no-gutter',
             ),
         )
+
     def clean(self):
         # allows for equal start and end dates
         # when dates are equal end datetime is not shown in forms and templates
@@ -47,6 +48,7 @@ class DateForm(ModelForm):
             if self.cleaned_data['end'] < self.cleaned_data['start']:
                 raise forms.ValidationError(_(u"The end time must be later than start time."))
         return self.cleaned_data
+
     def save(self):
         date = super(DateForm, self).save(commit=False)
         if not date.end:

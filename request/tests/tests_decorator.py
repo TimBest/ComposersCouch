@@ -1,9 +1,7 @@
 from django.contrib import auth
 from django.contrib.auth.models import User
 from django.core.exceptions import PermissionDenied
-from django.core.handlers.wsgi import WSGIRequest
 from django.core.urlresolvers import reverse
-from django.http import HttpRequest
 from django.test import TestCase
 from django.test.client import RequestFactory
 
