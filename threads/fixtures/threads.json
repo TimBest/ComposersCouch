@@ -1,9 +1,13 @@
 [
   {
     "pk": 1,
-    "model": "threads.fanProfile",
+    "model": "threads.thread",
     "fields": {
-      "profile": 1
+      "subject": "Test thread subject line",
+      "latest_msg": 1,
+      "all_msgs": "",
+      "creator": 2,
+      "replied": false
     }
   }
 ]

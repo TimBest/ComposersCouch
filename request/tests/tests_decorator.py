@@ -10,80 +10,36 @@ from django.test.client import RequestFactory
 from accounts.models import Profile
 from request.decorators import can_apply, is_participant
 
+@is_participant
+def mock_fn(request, *args, **kwargs):
+    return request
 
-class IsVenueDecoratorTests(TestCase):
+class IsParticipantDecoratorTests(TestCase):
     """ Test the extra utils methods """
-    fixtures = ['users', 'profiles',]
+    fixtures = ['users', 'profiles', 'threads', 'messages', 'participants', 'privateRequests', 'dates']
 
     def setUp(self):
-        # create mock function and decorate it
-        func = lambda x: x
-        self.decorated_func = is_participant(func)
+        # create WSGIRequest object
         factory = RequestFactory()
         self.request = factory.get(reverse('home'))
-        # create user
-        self.user = User.objects.get(pk=1)
-        self.user.profile = Profile.objects.get(pk=1)
-        self.user.profile.save()
 
     def test_anonymous_user(self):
         self.request.user = auth.get_user(self.client)
-        response = self.decorated_func(self.request)
+        response = mock_fn(self.request)
         self.assertEqual(response.status_code, 302)
 
     def test_non_participant(self):
-        user = self.user
-        user.profile.profile_type = 'm'
+        user = User.objects.get(pk=1)
+        user.profile = Profile.objects.get(pk=1)
         user.profile.save()
         self.request.user = user
-        self.assertRaises(PermissionDenied, self.decorated_func, self.request)
+        self.assertRaises(PermissionDenied, mock_fn, self.request)
 
     def test_participant(self):
-        user = self.user
-        user.profile.profile_type = 'v'
-        user.profile.save()
-        self.request.user = user
-        response = self.decorated_func(self.request)
-        self.assertIsInstance(response, WSGIRequest)
-
-class IsArtistDecoratorTests(TestCase):
-    """ Test the extra utils methods """
-    fixtures = ['users', 'profiles',]
-
-    def setUp(self):
-        # create mock function and decorate it
-        func = lambda x: x
-        self.decorated_func = is_artist(func)
-        factory = RequestFactory()
-        self.request = factory.get(reverse('home'))
-        # create user
-        self.user = User.objects.get(pk=1)
-        self.user.profile = Profile.objects.get(pk=1)
-        self.user.profile.save()
-
-    def test_anonymous_user(self):
-        self.request.user = auth.get_user(self.client)
-        response = self.decorated_func(self.request)
-        self.assertEqual(response.status_code, 302)
-
-    def test_fan(self):
-        user = self.user
-        user.profile.profile_type = 'f'
-        user.profile.save()
-        self.request.user = user
-        self.assertRaises(PermissionDenied, self.decorated_func, self.request)
-
-    def test_artist(self):
-        user = self.user
-        user.profile.profile_type = 'm'
-        user.profile.save()
-        self.request.user = user
-        response = self.decorated_func(self.request)
-        self.assertIsInstance(response, WSGIRequest)
-
-    def test_venue(self):
-        user = self.user
-        user.profile.profile_type = 'v'
-        user.profile.save()
-        self.request.user = user
-        self.assertRaises(PermissionDenied, self.decorated_func, self.request)
+        for pk in [2,3]:
+            user = User.objects.get(pk=2)
+            user.profile = Profile.objects.get(pk=2)
+            user.profile.save()
+            self.request.user = user
+            response = mock_fn(self.request, request_id=1)
+            self.assertEqual(response, self.request)

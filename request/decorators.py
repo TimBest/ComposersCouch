@@ -1,8 +1,6 @@
 from django.conf import settings
 from django.core.exceptions import PermissionDenied
 from django.http import HttpResponseRedirect
-from django.http import Http404
-from django.utils import timezone
 from django.utils.functional import wraps
 
 from annoying.functions import get_object_or_None
@@ -21,7 +19,7 @@ def is_participant(function):
                 for participant in private_request.thread.participants.all():
                     if participant.user == request.user:
                         return function(request, *args, **kwargs)
-            return PermissionDenied
+            raise PermissionDenied
     return decorator
 
 def can_apply(function):

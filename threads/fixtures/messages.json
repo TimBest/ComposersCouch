@@ -1,0 +1,12 @@
+[
+  {
+    "pk": 1,
+    "model": "threads.message",
+    "fields": {
+      "body": "This is the first message in the test thread",
+      "sender": 2,
+      "parent_msg": null,
+      "sent_at": "2015-02-10 09:00:00+00:00"
+    }
+  }
+]
