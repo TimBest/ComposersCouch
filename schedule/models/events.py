@@ -17,7 +17,7 @@ from artist.models import ArtistProfile
 from contact.models import Location
 from photos.models import Image
 from schedule.models.calendars import Calendar
-from threaded_messages.models import Thread
+from threads.models import Thread
 
 
 class DateRange(models.Model):

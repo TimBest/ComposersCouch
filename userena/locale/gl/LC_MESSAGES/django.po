@@ -260,142 +260,142 @@ msgstr "Pechouse a súa sesión."
 msgid "Your profile has been updated."
 msgstr "Actualizouse o seu perfil."
 
-#: contrib/umessages/admin.py:25
+#: contrib/uthreads/admin.py:25
 msgid "Date/time"
 msgstr "Data e hora"
 
-#: contrib/umessages/fields.py:57
+#: contrib/uthreads/fields.py:57
 #, python-format
 msgid "The following usernames are incorrect: %(users)s."
 msgstr "Os seguintes nomes de usuario son incorrectos: %(users)s."
 
-#: contrib/umessages/forms.py:10
+#: contrib/uthreads/forms.py:10
 msgid "To"
 msgstr "Para"
 
-#: contrib/umessages/forms.py:11
+#: contrib/uthreads/forms.py:11
 msgid "Message"
 msgstr "Mensaxe"
 
-#: contrib/umessages/models.py:17
+#: contrib/uthreads/models.py:17
 msgid "from user"
 msgstr "do usuario"
 
-#: contrib/umessages/models.py:20
+#: contrib/uthreads/models.py:20
 msgid "to user"
 msgstr "ao usuario"
 
-#: contrib/umessages/models.py:24
+#: contrib/uthreads/models.py:24
 msgid "latest message"
 msgstr "última mensaxe"
 
-#: contrib/umessages/models.py:31
+#: contrib/uthreads/models.py:31
 msgid "contact"
 msgstr "contacto"
 
-#: contrib/umessages/models.py:32
+#: contrib/uthreads/models.py:32
 msgid "contacts"
 msgstr "contactos"
 
-#: contrib/umessages/models.py:35
+#: contrib/uthreads/models.py:35
 #, python-format
 msgid "%(um_from_user)s and %(um_to_user)s"
 msgstr "%(um_from_user)s e %(um_to_user)s"
 
-#: contrib/umessages/models.py:61 contrib/umessages/models.py:77
+#: contrib/uthreads/models.py:61 contrib/uthreads/models.py:77
 msgid "recipient"
 msgstr "destinatario"
 
-#: contrib/umessages/models.py:64 contrib/umessages/models.py:112
+#: contrib/uthreads/models.py:64 contrib/uthreads/models.py:112
 msgid "message"
 msgstr "mensaxe"
 
-#: contrib/umessages/models.py:66
+#: contrib/uthreads/models.py:66
 msgid "read at"
 msgstr "lida o"
 
-#: contrib/umessages/models.py:70
+#: contrib/uthreads/models.py:70
 msgid "recipient deleted at"
 msgstr "destinatario eliminado o"
 
-#: contrib/umessages/models.py:78 contrib/umessages/models.py:99
+#: contrib/uthreads/models.py:78 contrib/uthreads/models.py:99
 msgid "recipients"
 msgstr "destinatarios"
 
-#: contrib/umessages/models.py:81
+#: contrib/uthreads/models.py:81
 #, python-format
 msgid "%(message)s"
 msgstr "%(message)s"
 
-#: contrib/umessages/models.py:90
+#: contrib/uthreads/models.py:90
 msgid "body"
 msgstr "corpo"
 
-#: contrib/umessages/models.py:94
+#: contrib/uthreads/models.py:94
 msgid "sender"
 msgstr "remitente"
 
-#: contrib/umessages/models.py:101
+#: contrib/uthreads/models.py:101
 msgid "sent at"
 msgstr "enviado o"
 
-#: contrib/umessages/models.py:104
+#: contrib/uthreads/models.py:104
 msgid "sender deleted at"
 msgstr "remitente eliminado o"
 
-#: contrib/umessages/models.py:113
+#: contrib/uthreads/models.py:113
 msgid "messages"
 msgstr "mensaxes"
 
-#: contrib/umessages/views.py:124
+#: contrib/uthreads/views.py:124
 msgid "Message is sent."
 msgstr "Enviouse a mensaxe."
 
-#: contrib/umessages/views.py:206
+#: contrib/uthreads/views.py:206
 msgid "Message is succesfully restored."
 msgid_plural "Messages are succesfully restored."
 msgstr[0] "A mensaxe restaurouse correctamente."
 msgstr[1] "As mensaxes restauráronse correctamente."
 
-#: contrib/umessages/views.py:210
+#: contrib/uthreads/views.py:210
 msgid "Message is successfully removed."
 msgid_plural "Messages are successfully removed."
 msgstr[0] "A mensaxe eliminouse correctamente."
 msgstr[1] "As mensaxes elimináronse correctamente."
 
-#: contrib/umessages/templates/umessages/message_detail.html:4
+#: contrib/uthreads/templates/uthreads/message_detail.html:4
 #, python-format
 msgid "Conversation with %(recipient)s"
 msgstr "Conversa con %(recipient)s"
 
-#: contrib/umessages/templates/umessages/message_detail.html:12
+#: contrib/uthreads/templates/uthreads/message_detail.html:12
 #, python-format
 msgid "Received on %(sent_at)s"
 msgstr "Recibida o %(sent_at)s"
 
-#: contrib/umessages/templates/umessages/message_form.html:4
-#: contrib/umessages/templates/umessages/message_list.html:10
+#: contrib/uthreads/templates/uthreads/message_form.html:4
+#: contrib/uthreads/templates/uthreads/message_list.html:10
 msgid "Compose"
 msgstr "Redactar"
 
-#: contrib/umessages/templates/umessages/message_form.html:10
+#: contrib/uthreads/templates/uthreads/message_form.html:10
 msgid "Compose message"
 msgstr "Redactar unha mensaxe"
 
-#: contrib/umessages/templates/umessages/message_form.html:13
+#: contrib/uthreads/templates/uthreads/message_form.html:13
 msgid "Send"
 msgstr "Enviar"
 
-#: contrib/umessages/templates/umessages/message_list.html:5
+#: contrib/uthreads/templates/uthreads/message_list.html:5
 msgid "Messages"
 msgstr "Mensaxes"
 
-#: contrib/umessages/templates/umessages/message_list.html:9
+#: contrib/uthreads/templates/uthreads/message_list.html:9
 #, python-format
 msgid "%(unread_message_count)s new messages."
 msgstr "%(unread_message_count)s mensaxes novas."
 
-#: contrib/umessages/templates/umessages/message_list.html:21
+#: contrib/uthreads/templates/uthreads/message_list.html:21
 #, python-format
 msgid "%(latest_message)s (%(unread_between_count)s new)"
 msgstr "%(latest_message)s (%(unread_between_count)s novas)"

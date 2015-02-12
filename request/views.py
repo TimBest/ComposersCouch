@@ -19,9 +19,9 @@ from annoying.functions import get_object_or_None
 from composersCouch.utils import get_page
 from composersCouch.views import MultipleFormsView, MultipleModelFormsView
 from customProfile.decorators import is_venue, is_artist
-from threaded_messages.models import Message, Participant, Thread
-from threaded_messages.views import MessageView
-from threaded_messages.utils import reply_to_thread, create_thread
+from threads.models import Message, Participant, Thread
+from threads.views import MessageView
+from threads.utils import reply_to_thread, create_thread
 
 
 class PrivateRequestView(TemplateView):

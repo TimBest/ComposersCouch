@@ -1,4 +1,4 @@
-{% extends "messages/base.html" %}
+{% extends "threads/base.html" %}
 {% load i18n inbox crispy_forms_tags %}
 {% crispy ReplyForm ReplyForm.helper %}
 
@@ -23,7 +23,7 @@
       <div class="message-list">
         {% for message_tuple in message_list %}
           {% with message_tuple.0 as message %}
-            {% include "messages/_message.html" with message=message user=user %}
+            {% include "threads/_message.html" with message=message user=user %}
           {% endwith %}
         {% endfor %}
       </div>

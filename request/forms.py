@@ -13,7 +13,7 @@ from . import models
 from accounts.utils import create_user_profile
 from annoying.functions import get_object_or_None
 from schedule.forms import DateForm
-from threaded_messages.models import Participant
+from threads.models import Participant
 
 
 class DateForm(DateForm):

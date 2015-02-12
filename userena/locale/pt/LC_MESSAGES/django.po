@@ -226,118 +226,118 @@ msgstr "O seu perfil foi actualizado"
 msgid "You don't have permission to view this profile."
 msgstr "Não tem permissão para visualizar ester perfil"
 
-#: contrib/umessages/admin.py:25
+#: contrib/uthreads/admin.py:25
 msgid "Date/time"
 msgstr "Data/hora"
 
-#: contrib/umessages/fields.py:56
+#: contrib/uthreads/fields.py:56
 #, python-format
 msgid "The following usernames are incorrect: %(users)s."
 msgstr "Os seguintes usernames estão incorrentos: %(users)s."
 
-#: contrib/umessages/forms.py:10
+#: contrib/uthreads/forms.py:10
 msgid "To"
 msgstr "Para"
 
-#: contrib/umessages/forms.py:11
+#: contrib/uthreads/forms.py:11
 msgid "Message"
 msgstr "Mensagem"
 
-#: contrib/umessages/models.py:17
+#: contrib/uthreads/models.py:17
 msgid "from user"
 msgstr "De utilizador"
 
-#: contrib/umessages/models.py:20
+#: contrib/uthreads/models.py:20
 msgid "to user"
 msgstr "para utilizador"
 
-#: contrib/umessages/models.py:24
+#: contrib/uthreads/models.py:24
 msgid "latest message"
 msgstr "última mensagem"
 
-#: contrib/umessages/models.py:31
+#: contrib/uthreads/models.py:31
 msgid "contact"
 msgstr "contacto"
 
-#: contrib/umessages/models.py:32
+#: contrib/uthreads/models.py:32
 msgid "contacts"
 msgstr "contactos"
 
-#: contrib/umessages/models.py:35
+#: contrib/uthreads/models.py:35
 #, python-format
 msgid "%(um_from_user)s and %(um_to_user)s"
 msgstr ""
 
-#: contrib/umessages/models.py:61 contrib/umessages/models.py:77
+#: contrib/uthreads/models.py:61 contrib/uthreads/models.py:77
 msgid "recipient"
 msgstr "destinatário"
 
-#: contrib/umessages/models.py:64 contrib/umessages/models.py:112
+#: contrib/uthreads/models.py:64 contrib/uthreads/models.py:112
 msgid "message"
 msgstr "mensagem"
 
-#: contrib/umessages/models.py:66
+#: contrib/uthreads/models.py:66
 msgid "read at"
 msgstr "lido em"
 
-#: contrib/umessages/models.py:70
+#: contrib/uthreads/models.py:70
 msgid "recipient deleted at"
 msgstr ""
 
-#: contrib/umessages/models.py:78 contrib/umessages/models.py:99
+#: contrib/uthreads/models.py:78 contrib/uthreads/models.py:99
 msgid "recipients"
 msgstr "destinatários"
 
-#: contrib/umessages/models.py:81
+#: contrib/uthreads/models.py:81
 #, python-format
 msgid "%(message)s"
 msgstr ""
 
-#: contrib/umessages/models.py:90
+#: contrib/uthreads/models.py:90
 msgid "body"
 msgstr "corpo"
 
-#: contrib/umessages/models.py:94
+#: contrib/uthreads/models.py:94
 msgid "sender"
 msgstr "remetente"
 
-#: contrib/umessages/models.py:101
+#: contrib/uthreads/models.py:101
 msgid "sent at"
 msgstr "enviado em"
 
-#: contrib/umessages/models.py:104
+#: contrib/uthreads/models.py:104
 msgid "sender deleted at"
 msgstr "remetende apagado em"
 
-#: contrib/umessages/models.py:113
+#: contrib/uthreads/models.py:113
 msgid "messages"
 msgstr "mensagens"
 
-#: contrib/umessages/views.py:179
+#: contrib/uthreads/views.py:179
 msgid "Message is sent."
 msgstr "Mensagem enviada"
 
-#: contrib/umessages/views.py:263
+#: contrib/uthreads/views.py:263
 msgid "Message is succesfully restored."
 msgid_plural "Messages are succesfully restored."
 msgstr[0] "A mensagem foi restaurada com sucesso"
 msgstr[1] "As mensagens foram restauradas com sucesso"
 
-#: contrib/umessages/views.py:267
+#: contrib/uthreads/views.py:267
 msgid "Message is successfully removed."
 msgid_plural "Messages are successfully removed."
 msgstr[0] "A mensagem foi removida com sucesso"
 msgstr[1] "As menssagens foram removidas com sucesso"
 
-#: contrib/umessages/templates/umessages/message_form.html:4
+#: contrib/uthreads/templates/uthreads/message_form.html:4
 msgid "Compose"
 msgstr "Compor"
 
-#: contrib/umessages/templates/umessages/message_form.html:10
+#: contrib/uthreads/templates/uthreads/message_form.html:10
 msgid "Compose message"
 msgstr "Compor mensagem"
 
-#: contrib/umessages/templates/umessages/message_form.html:13
+#: contrib/uthreads/templates/uthreads/message_form.html:13
 msgid "Send"
 msgstr "Enviar"
 

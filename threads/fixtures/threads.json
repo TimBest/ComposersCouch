@@ -1,0 +1,9 @@
+[
+  {
+    "pk": 1,
+    "model": "threads.fanProfile",
+    "fields": {
+      "profile": 1
+    }
+  }
+]

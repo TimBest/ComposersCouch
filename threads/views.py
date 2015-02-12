@@ -23,16 +23,16 @@ from .forms import ComposeForm, ReplyForm
 from .utils import fill_count_cache, now
 
 
-class MessagesMixin(object):
+class threadMixin(object):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super(MessagesMixin, self).dispatch(*args, **kwargs)
+        return super(threadMixin, self).dispatch(*args, **kwargs)
 
-class InboxView(MessagesMixin, TemplateView):
+class InboxView(threadMixin, TemplateView):
     """
     Displays a list of received messages for the current user.
     """
-    template_name = 'messages/inbox.html'
+    template_name = 'threads/inbox.html'
 
     def get_context_data(self, **kwargs):
         return {
@@ -40,11 +40,11 @@ class InboxView(MessagesMixin, TemplateView):
         }
 inbox = InboxView.as_view()
 
-class SentView(MessagesMixin, TemplateView):
+class SentView(threadMixin, TemplateView):
     """
     Displays a list of sent messages for the current user.
     """
-    template_name = 'messages/sent.html'
+    template_name = 'threads/sent.html'
 
     def get_context_data(self, **kwargs):
         return {
@@ -52,11 +52,11 @@ class SentView(MessagesMixin, TemplateView):
         }
 sent = SentView.as_view()
 
-class TrashView(MessagesMixin, TemplateView):
+class TrashView(threadMixin, TemplateView):
     """
     Displays a list of deleted messages for the current user.
     """
-    template_name = 'messages/trash.html'
+    template_name = 'threads/trash.html'
 
     def get_context_data(self, **kwargs):
         return {
@@ -64,7 +64,7 @@ class TrashView(MessagesMixin, TemplateView):
         }
 trash = TrashView.as_view()
 
-class ComposeView(MessagesMixin, FormView):
+class ComposeView(threadMixin, FormView):
     """
     Displays and handles the ``form_class`` form to compose new messages.
     Arguments:
@@ -74,7 +74,7 @@ class ComposeView(MessagesMixin, FormView):
     """
     form_class=ComposeForm
     success_url='messages_sent'
-    template_name='messages/compose.html'
+    template_name='threads/compose.html'
 
     def form_valid(self, form):
         form.save(sender=self.request.user)
@@ -136,10 +136,10 @@ def restore(request, thread_id, success_url='messages_inbox'):
     return HttpResponseRedirect(success_url)
 
 
-class MessageView(MessagesMixin, FormView):
+class MessageView(threadMixin, FormView):
     form_class=ReplyForm
     success_url='messages_detail'
-    template_name='messages/view.html'
+    template_name='threads/view.html'
 
     @method_decorator(is_participant)
     def dispatch(self, *args, **kwargs):
@@ -223,6 +223,6 @@ def message_ajax_reply(request, thread_id, success_url='messages_inbox'):
                 logging.exception(e)
                 return HttpResponse(status=500, content="Message could not be sent")
 
-            return render_to_response('messages/_message.html', {'message':new_message,'user':request.user})
+            return render_to_response('threads/_message.html', {'message':new_message,'user':request.user})
         else:
             return HttpResponse(status=400, content="Invalid Form")

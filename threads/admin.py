@@ -1,5 +1,5 @@
 from django.contrib import admin
-from threaded_messages.models import *
+from threads.models import *
 
 
 class MessageAdmin(admin.ModelAdmin):

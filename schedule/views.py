@@ -14,9 +14,9 @@ from django.views.generic import TemplateView
 
 from annoying.functions import get_object_or_None
 from composersCouch.views import MultipleModelFormsView
-from threaded_messages.models import Participant
-from threaded_messages.views import MessageView
-from threaded_messages.utils import create_thread
+from threads.models import Participant
+from threads.views import MessageView
+from threads.utils import create_thread
 from photos.models import Image
 from photos.forms import PosterForm
 from photos.views import ImageFormMixin

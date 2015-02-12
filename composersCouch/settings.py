@@ -66,7 +66,7 @@ INSTALLED_APPS = (
     'schedule',
     'search',
     'sorl.thumbnail',
-    'threaded_messages',
+    'threads',
     'tracks',
     'userena',
     'venue',

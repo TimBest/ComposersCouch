@@ -256,142 +256,142 @@ msgstr "Din profil har blitt oppdatert."
 msgid "You don't have permission to view this profile."
 msgstr "Du har ikke rettighet til å se denne profilen."
 
-#: contrib/umessages/admin.py:25
+#: contrib/uthreads/admin.py:25
 msgid "Date/time"
 msgstr "Dato/tid"
 
-#: contrib/umessages/fields.py:57
+#: contrib/uthreads/fields.py:57
 #, python-format
 msgid "The following usernames are incorrect: %(users)s."
 msgstr "Følgende brukernavn er feil: %(users)s."
 
-#: contrib/umessages/forms.py:10
+#: contrib/uthreads/forms.py:10
 msgid "To"
 msgstr "Til"
 
-#: contrib/umessages/forms.py:11
+#: contrib/uthreads/forms.py:11
 msgid "Message"
 msgstr "Melding"
 
-#: contrib/umessages/models.py:17
+#: contrib/uthreads/models.py:17
 msgid "from user"
 msgstr "fra bruker"
 
-#: contrib/umessages/models.py:20
+#: contrib/uthreads/models.py:20
 msgid "to user"
 msgstr "til bruker"
 
-#: contrib/umessages/models.py:24
+#: contrib/uthreads/models.py:24
 msgid "latest message"
 msgstr "siste melding"
 
-#: contrib/umessages/models.py:31
+#: contrib/uthreads/models.py:31
 msgid "contact"
 msgstr "kontakt"
 
-#: contrib/umessages/models.py:32
+#: contrib/uthreads/models.py:32
 msgid "contacts"
 msgstr "kontakter"
 
-#: contrib/umessages/models.py:35
+#: contrib/uthreads/models.py:35
 #, python-format
 msgid "%(um_from_user)s and %(um_to_user)s"
 msgstr "%(um_from_user)s og %(um_to_user)s"
 
-#: contrib/umessages/models.py:61 contrib/umessages/models.py:77
+#: contrib/uthreads/models.py:61 contrib/uthreads/models.py:77
 msgid "recipient"
 msgstr "mottaker"
 
-#: contrib/umessages/models.py:64 contrib/umessages/models.py:112
+#: contrib/uthreads/models.py:64 contrib/uthreads/models.py:112
 msgid "message"
 msgstr "melding"
 
-#: contrib/umessages/models.py:66
+#: contrib/uthreads/models.py:66
 msgid "read at"
 msgstr "lest kl"
 
-#: contrib/umessages/models.py:70
+#: contrib/uthreads/models.py:70
 msgid "recipient deleted at"
 msgstr "mottaker slettet kl"
 
-#: contrib/umessages/models.py:78 contrib/umessages/models.py:99
+#: contrib/uthreads/models.py:78 contrib/uthreads/models.py:99
 msgid "recipients"
 msgstr "mottakere"
 
-#: contrib/umessages/models.py:81
+#: contrib/uthreads/models.py:81
 #, python-format
 msgid "%(message)s"
 msgstr "%(message)s"
 
-#: contrib/umessages/models.py:90
+#: contrib/uthreads/models.py:90
 msgid "body"
 msgstr "kropp"
 
-#: contrib/umessages/models.py:94
+#: contrib/uthreads/models.py:94
 msgid "sender"
 msgstr "sender"
 
-#: contrib/umessages/models.py:101
+#: contrib/uthreads/models.py:101
 msgid "sent at"
 msgstr "sendt kl"
 
-#: contrib/umessages/models.py:104
+#: contrib/uthreads/models.py:104
 msgid "sender deleted at"
 msgstr "sender slettet kl"
 
-#: contrib/umessages/models.py:113
+#: contrib/uthreads/models.py:113
 msgid "messages"
 msgstr "meldinger"
 
-#: contrib/umessages/views.py:124
+#: contrib/uthreads/views.py:124
 msgid "Message is sent."
 msgstr "Meldingen er sendt."
 
-#: contrib/umessages/views.py:206
+#: contrib/uthreads/views.py:206
 msgid "Message is succesfully restored."
 msgid_plural "Messages are succesfully restored."
 msgstr[0] "Meldingen ble gjenopprettet."
 msgstr[1] "Meldingene ble gjenopprettet."
 
-#: contrib/umessages/views.py:210
+#: contrib/uthreads/views.py:210
 msgid "Message is successfully removed."
 msgid_plural "Messages are successfully removed."
 msgstr[0] "Meldingen er fjernet."
 msgstr[1] "Meldingene er fjernet."
 
-#: contrib/umessages/templates/umessages/message_detail.html:4
+#: contrib/uthreads/templates/uthreads/message_detail.html:4
 #, python-format
 msgid "Conversation with %(recipient)s"
 msgstr "Samtale med %(recipient)s"
 
-#: contrib/umessages/templates/umessages/message_detail.html:12
+#: contrib/uthreads/templates/uthreads/message_detail.html:12
 #, python-format
 msgid "Received on %(sent_at)s"
 msgstr "Mottatt %(sent_at)s"
 
-#: contrib/umessages/templates/umessages/message_form.html:4
-#: contrib/umessages/templates/umessages/message_list.html:10
+#: contrib/uthreads/templates/uthreads/message_form.html:4
+#: contrib/uthreads/templates/uthreads/message_list.html:10
 msgid "Compose"
 msgstr "Skriv melding"
 
-#: contrib/umessages/templates/umessages/message_form.html:10
+#: contrib/uthreads/templates/uthreads/message_form.html:10
 msgid "Compose message"
 msgstr "Skriv melding"
 
-#: contrib/umessages/templates/umessages/message_form.html:13
+#: contrib/uthreads/templates/uthreads/message_form.html:13
 msgid "Send"
 msgstr "Send"
 
-#: contrib/umessages/templates/umessages/message_list.html:5
+#: contrib/uthreads/templates/uthreads/message_list.html:5
 msgid "Messages"
 msgstr "Meldinger"
 
-#: contrib/umessages/templates/umessages/message_list.html:9
+#: contrib/uthreads/templates/uthreads/message_list.html:9
 #, python-format
 msgid "%(unread_message_count)s new messages."
 msgstr "%(unread_message_count)s nye meldinger."
 
-#: contrib/umessages/templates/umessages/message_list.html:21
+#: contrib/uthreads/templates/uthreads/message_list.html:21
 #, python-format
 msgid "%(latest_message)s (%(unread_between_count)s new)"
 msgstr "%(latest_message)s (%(unread_between_count)s nye)"

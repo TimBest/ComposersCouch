@@ -1,4 +1,4 @@
-from threaded_messages.models import cached_inbox_count_for
+from threads.models import cached_inbox_count_for
 
 
 def inbox(request):
