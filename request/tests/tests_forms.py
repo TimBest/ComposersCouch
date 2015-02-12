@@ -171,22 +171,24 @@ class FormTests(TestCase):
             self.failUnless(form.is_valid())
 
     def test_approve_applicant_form(self):
-        pass
-        """public_request = PublicRequest.objects.get(pk=1)
-        left = public_request.applicants.left
+        left = PublicRequest.objects.get(pk=1).applicants.left
         form = forms.ApproveForm(data={})
         # Accept an applicatant
         application_1 = form.save(Application.objects.get(pk=1), True)
-        left = left -1
-        self.assertEqual(left, public_request.applicants.left)
+        left = left - 1
+        self.assertEqual(left, PublicRequest.objects.get(pk=1).applicants.left)
         # Deny an applicant
-        print public_request.applicants.left
-        application_2 = form.save(Application.objects.get(pk=2), False)
-        print public_request.applicants.left
-        self.assertEqual(left, public_request.applicants.left)
+        #application_2 = form.save(Application.objects.get(pk=2), False)
+        #self.assertEqual(left, PublicRequest.objects.get(pk=1).applicants.left)
         # Accept another applicant
         application_1 = form.save(Application.objects.get(pk=2), True)
-        left = left -1
-        self.assertEqual(left, application_1.public_request.applicants.left)
+        left = left - 1
+        self.assertEqual(left, PublicRequest.objects.get(pk=1).applicants.left)
         # public request is fulfiled
-        self.assertEqual(public_request.fulfilled, True)"""
+        self.assertEqual(PublicRequest.objects.get(pk=1).fulfilled, True)
+        # Deny an applicant
+        application_2 = form.save(Application.objects.get(pk=2), False)
+        left = left + 1
+        self.assertEqual(left, PublicRequest.objects.get(pk=1).applicants.left)
+        # public request is no longer fulfiled
+        self.assertEqual(PublicRequest.objects.get(pk=1).fulfilled, True)

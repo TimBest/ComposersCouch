@@ -197,6 +197,7 @@ class ApproveForm(forms.Form):
                 public_request.fulfilled = True
             else:
                 public_request.fulfilled = False
+            public_request.applicants.save()
         else:
             # public request has no applicants model (therefor can only accet one user)
             if approved == True:
