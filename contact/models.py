@@ -39,7 +39,7 @@ class Contact(models.Model):
 
 class SocialLinks(models.Model):
     profile = models.OneToOneField('accounts.Profile', unique=True,
-                                   null=True, blank=True,
+                                   primary_key=True,
                                    verbose_name=_('profile'),
                                    related_name='social_links')
     facebook    =  models.CharField(_("facebook"), max_length=200, blank=True)

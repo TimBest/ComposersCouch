@@ -1,0 +1,11 @@
+[
+  {
+    "pk": 1,
+    "model": "request.NumberOfApplicants",
+    "fields": {
+      "public_request": 1,
+      "left": 2,
+      "total": 2
+    }
+  }
+]

@@ -9,5 +9,16 @@
       "creator": 2,
       "replied": false
     }
+  },
+  {
+    "pk": 2,
+    "model": "threads.thread",
+    "fields": {
+      "subject": "Test thread subject line",
+      "latest_msg": 1,
+      "all_msgs": "",
+      "creator": 2,
+      "replied": false
+    }
   }
 ]

@@ -1,0 +1,16 @@
+[
+  {
+    "pk": 1,
+    "model": "request.PublicRequest",
+    "fields": {
+      "date": 1,
+      "accept_by": "3015-02-10",
+      "zip_code": 12065,
+      "details": "this is a public request for band",
+      "fulfilled": false,
+      "requester": 3,
+      "created_at": "2015-02-10 09:00:00+00:00",
+      "updated_at": "2015-02-10 09:00:00+00:00"
+    }
+  }
+]

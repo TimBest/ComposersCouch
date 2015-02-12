@@ -26,7 +26,8 @@ ROLE_CHOICES = (
 )
 class PrivateRequest(Request):
     thread = models.OneToOneField(Thread, verbose_name=_("thread"),
-                                   related_name='request', null=True, blank=True)
+                                   related_name='request',
+                                   null=True, blank=True)
 
     def has_accepted(self, user):
         participant = get_object_or_None(Participant, user=user, thread=self.thread)
@@ -66,7 +67,7 @@ class PublicRequest(Request):
         super(PublicRequest, self).save(*args, **kwargs)
 
 class NumberOfApplicants(models.Model):
-    public_request = models.OneToOneField(PublicRequest,
+    public_request = models.OneToOneField(PublicRequest, primary_key=True,
                                           verbose_name=_("public_request"),
                                           related_name='applicants',)
     left = models.PositiveSmallIntegerField(verbose_name=_("total_bands"))

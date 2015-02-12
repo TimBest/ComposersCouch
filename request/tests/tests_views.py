@@ -9,10 +9,11 @@ from artist.views import MusicianContactsView
 
 class ViewsTests(TestCase):
     """  """
-    fixtures = ['users', 'profiles', 'artists', 'members', 'calendars']
+    fixtures = ['user']
 
     def test_artist_feed_view(self):
         """  """
+        pass
         orders = ['new', 'all']
         scopes = ['local', 'all',]
         for order in orders:

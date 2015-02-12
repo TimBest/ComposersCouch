@@ -18,6 +18,7 @@ PROFILE_TYPE_CHOICES = (
 class Profile(UserenaBaseProfile):
     user = models.OneToOneField(User,
                                 unique=True,
+                                primary_key=True,
                                 verbose_name=_('user'),
                                 related_name='profile')
     genre = models.ManyToManyField(Genre, verbose_name=_("genre"),

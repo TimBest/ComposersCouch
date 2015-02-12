@@ -6,7 +6,7 @@ from accounts.models import Profile
 
 class FanProfile(Profile):
     profile = models.OneToOneField(Profile,
-                                   unique=True,
+                                   unique=True, primary_key=True,
                                    verbose_name=_('profile'),
                                    related_name='fanProfile')
     objects = models.GeoManager()

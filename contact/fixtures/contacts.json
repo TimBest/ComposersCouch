@@ -1,7 +1,32 @@
-[{"pk": 1,
-  "model": "contact.Contact",
-  "fields": {"name": "John Doe",
-             "phone": "",
-             "email": "",
-             "url": ""}}
+[
+  {
+    "pk": 1,
+    "model": "contact.Contact",
+    "fields": {
+      "name": "John Doe",
+      "phone": "",
+      "email": "",
+      "url": ""
+    }
+  },
+  {
+    "pk": 2,
+    "model": "contact.Contact",
+    "fields": {
+      "name": "Mouse Rat",
+      "phone": "",
+      "email": "",
+      "url": ""
+    }
+  },
+  {
+    "pk": 3,
+    "model": "contact.Contact",
+    "fields": {
+      "name": "Gas World",
+      "phone": "",
+      "email": "",
+      "url": ""
+    }
+  }
 ]

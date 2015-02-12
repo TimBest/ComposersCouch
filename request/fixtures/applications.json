@@ -1,0 +1,22 @@
+[
+  {
+    "pk": 1,
+    "model": "request.application",
+    "fields": {
+      "public_request": 1,
+      "thread": 1,
+      "applicant": 1,
+      "approved": null
+    }
+  },
+  {
+    "pk": 2,
+    "model": "request.application",
+    "fields": {
+      "public_request": 1,
+      "thread": 2,
+      "applicant": 2,
+      "approved": null
+    }
+  }
+]

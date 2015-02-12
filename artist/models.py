@@ -7,7 +7,7 @@ from contact.models import ContactInfo
 
 class ArtistProfile(Profile):
     profile = models.OneToOneField(Profile,
-                                   unique=True,
+                                   unique=True, primary_key=True,
                                    verbose_name=_('profile'),
                                    related_name='artist_profile')
     name =  models.CharField(_('band name'), max_length=64,

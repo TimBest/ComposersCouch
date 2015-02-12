@@ -94,7 +94,7 @@ class ParticipantForm(forms.Form):
         email = self.cleaned_data.get('email')
         user = self.cleaned_data.get('user')
         if not email and not user:
-            raise forms.ValidationError(_(u"A user or email is required"))
+            raise forms.ValidationError(_(u"A user or email is required."))
         if email and not user:
             user = get_object_or_None(User, email=email)
             if not user:
@@ -128,6 +128,8 @@ class ArtistParticipantForm(ParticipantForm):
     def clean(self):
         email = self.cleaned_data.get('email')
         user = self.cleaned_data.get('user')
+        if not email and not user:
+            raise forms.ValidationError(_(u"A user or email is required."))
         if email and not user:
             user = get_object_or_None(User, email=email)
             if not user:
@@ -160,7 +162,7 @@ class PublicRequestForm(ModelForm):
     def clean_accept_by(self):
         accept_by = self.cleaned_data['accept_by']
         if accept_by < timezone.now().date():
-            raise forms.ValidationError(_(u"There must be time to accept the request"))
+            raise forms.ValidationError(_(u"There must be time to accept the request."))
         return accept_by
 
 class NumberOfApplicantsForm(PublicRequestForm):
@@ -181,20 +183,27 @@ class ApproveForm(forms.Form):
         model = models.Application
 
     def save(self, application, approved):
-        application.approved = approved
         public_request = application.public_request
         if hasattr(public_request, 'applicants'):
             applicants = public_request.applicants
-            # TODO: fix this logic while still allowing users
+            # if application is approved and there and slots left
             if approved and applicants.left > 0:
                 applicants.left = applicants.left - 1
-            else:
+            # if application was approved and no longer is
+            elif not approved and application.approved:
                 applicants.left = applicants.left + 1
-        else:
-            if approved == True:
-                public_request = True
+            # if there are not applications left
+            if applicants.left >= 0:
+                public_request.fulfilled = True
             else:
-                public_request = False
+                public_request.fulfilled = False
+        else:
+            # public request has no applicants model (therefor can only accet one user)
+            if approved == True:
+                public_request.fulfilled = True
+            else:
+                public_request.fulfilled = False
         public_request.save()
+        application.approved = approved
         application.save()
         return application
