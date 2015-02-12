@@ -128,8 +128,6 @@ class ArtistParticipantForm(ParticipantForm):
     def clean(self):
         email = self.cleaned_data.get('email')
         user = self.cleaned_data.get('user')
-        if not email and not user:
-            raise forms.ValidationError(_(u"A user or email is required."))
         if email and not user:
             user = get_object_or_None(User, email=email)
             if not user:

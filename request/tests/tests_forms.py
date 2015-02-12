@@ -101,19 +101,6 @@ class FormTests(TestCase):
         user = User.objects.get(pk=2)
         user.profile.contact_info = ContactInfo.objects.get(pk=2)
         user.profile.save()
-        invalid_data_dicts = [
-            # Request must be in the future
-            {'data': {"user": "",
-                      "email": "",
-                      "name": "Devendra",},
-             'error': ('__all__', [_(u'A user or email is required.')])},
-        ]
-
-        for invalid_dict in invalid_data_dicts:
-            form = forms.ArtistParticipantForm(data=invalid_dict['data'], user=user)
-            self.failIf(form.is_valid())
-            self.assertEqual(form.errors[invalid_dict['error'][0]],
-                             invalid_dict['error'][1])
 
         # Test a valid form.
         valid_data_dicts = [

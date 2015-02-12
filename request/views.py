@@ -209,7 +209,7 @@ class RequestEditFormView(MultipleModelFormsView):
     form_classes = {
       'dateForm': forms.DateForm,
     }
-    template_name = 'request/edit_request_form.html'
+    template_name = 'request/forms/edit_request.html'
     success_url = 'sent_private_requests'
 
     def dispatch(self, *args, **kwargs):

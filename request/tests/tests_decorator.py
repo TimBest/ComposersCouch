@@ -6,7 +6,7 @@ from django.test import TestCase
 from django.test.client import RequestFactory
 
 from accounts.models import Profile
-from request.decorators import can_apply, is_participant
+from request.decorators import is_participant
 
 @is_participant
 def mock_fn(request, *args, **kwargs):

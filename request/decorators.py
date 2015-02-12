@@ -21,14 +21,3 @@ def is_participant(function):
                         return function(request, *args, **kwargs)
             raise PermissionDenied
     return decorator
-
-def can_apply(function):
-    @wraps(function)
-    def decorator(request, *args, **kwargs):
-        if not request.user.is_authenticated():
-            return HttpResponseRedirect(settings.LOGIN_URL)
-        else:
-            if request.user.profile.profile_type != 'm':
-                raise PermissionDenied
-        return function(request, *args, **kwargs)
-    return decorator
