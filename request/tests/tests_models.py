@@ -1,10 +1,20 @@
 from django.test import TestCase
 
 
-class PostModelTest(TestCase):
-    """ Test the ``Post`` model """
-    fixtures = ['users', 'profiles']
+class PrivateRequestModelTest(TestCase):
+    fixtures = ['users', 'profiles', 'contactInfos','locations', 'contacts',
+                'zipcodes', 'applications', 'publicRequests', 'numApplicants',
+                'threads', 'messages', 'participants', 'dates']
 
-class FollowModelTest(TestCase):
-    """ Test the ``follow`` model """
-    fixtures = ['users', 'profiles']
+    # TODO
+    def test_has_accepted(self):
+        pass
+
+    def test_headliner(self):
+        pass
+
+    def test_venue(self):
+        pass
+
+    def test_openers(self):
+        pass

@@ -1,16 +1,20 @@
 {% extends 'form.html' %}
-{% load i18n crispy_forms_tags %}
+{% load crispy_forms_tags %}
 {% crispy MessageForm MessageForm.helper %}
 
-{% block title %}{% block formTitle %}
-  {% trans "Apply to Request" %}
-{% endblock %}{% endblock %}
+{% block title %}
+  {% block formTitle %}
+    Apply to Request
+  {% endblock %}
+{% endblock %}
 
 {% block formID %}applyForm{% endblock %}
 
 {% block form %}
-  {% include "request/_public_request.html" with publicRequest=publicRequest %}
+  <div class="well">
+    {% include "request/_public_request.html" with publicRequest=publicRequest %}
+  </div>
   {% crispy form %}
 {% endblock %}
 
-{% block submit %}<button type="submit" class="btn btn-primary">{% trans 'Send' %}</button>{% endblock %}
+{% block submit %}<button type="submit" class="btn btn-primary">Send</button>{% endblock %}

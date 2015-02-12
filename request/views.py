@@ -285,7 +285,7 @@ class ApplyFormView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(ApplyFormView, self).get_context_data(**kwargs)
-        context['publicReques'] = self.public_request
+        context['publicRequest'] = self.public_request
         return context
 
     def get_success_url(self):
