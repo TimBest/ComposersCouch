@@ -3,8 +3,7 @@ from django.views.generic.base import RedirectView
 
 
 urlpatterns = patterns('threads.views',
-    url(r'^$', RedirectView.as_view(url='inbox/')),
-    url(r'^inbox/$', 'inbox', name='messages_inbox'),
+    url(r'^$', 'inbox', name='messages_inbox'),
     url(r'^sent/$', 'sent', name='messages_sent'),
     url(r'^compose/$', 'compose', name='messages_compose'),
     url(r'^compose/(?P<recipient>[\+\w]+)/$', 'compose', name='messages_compose'),

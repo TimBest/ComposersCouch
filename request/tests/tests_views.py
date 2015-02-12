@@ -3,23 +3,23 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 from accounts.models import Profile
-from artist.models import ArtistProfile
-from artist.views import MusicianContactsView
 
 
 class ViewsTests(TestCase):
     """  """
-    fixtures = ['user']
+    fixtures = ['users', 'profiles', 'artists', 'calendars']
 
-    def test_artist_feed_view(self):
-        """  """
-        pass
-        orders = ['new', 'all']
-        scopes = ['local', 'all',]
-        for order in orders:
-            response = self.client.get(reverse('available_artists',
-                kwargs={'order': order,
-                        'year':2015,
-                        'month':02,
-                        'day':15,}))
+    def test_request_views(self):
+        """ test views where login is required """
+        url_names = ['private_requests', 'sent_private_requests',
+                     'public_requests', 'public_applications', 'request_write',]
+        for url_name in url_names:
+            response = self.client.get(reverse(url_name))
+            self.assertEqual(response.status_code, 302)
+
+        self.client.post(reverse('signin'),
+                                 data={'identification': 'jane@example.com',
+                                       'password': 'blowfish'})
+        for url_name in url_names:
+            response = self.client.get(reverse(url_name))
             self.assertEqual(response.status_code, 200)
