@@ -10,7 +10,7 @@ from annoying.functions import get_object_or_None
 from contact.views import ContactView
 from composersCouch.views import MultipleModelFormsView
 from venue import forms, models
-from customProfile.views import VenueProfileView, ProfileFormMixin
+from customProfile.views import VenueProfileView, VenueProfileFormMixin
 from contact.forms import ContactForm
 from photos.forms import SeatingChartForm
 from photos.models import Image
@@ -31,7 +31,7 @@ class VenueProfileAboutView(VenueProfileView):
 
 venue_about = VenueProfileAboutView.as_view()
 
-class BiographyView(ProfileFormMixin, UpdateView):
+class BiographyView(VenueProfileFormMixin, UpdateView):
     form_class = forms.BiographyForm
     template_name = 'profile/venue/forms/biography.html'
     model = VenueProfile
@@ -45,13 +45,13 @@ class BiographyView(ProfileFormMixin, UpdateView):
 
 biography = BiographyView.as_view()
 
-class ContactInfoView(ContactView):
+class ContactInfoView(VenueProfileFormMixin, ContactView):
     success_url = 'venue:about'
     template_name = 'profile/venue/forms/contact.html'
 
 contact_info = ContactInfoView.as_view()
 
-class EquipmentView(ProfileFormMixin, FormView):
+class EquipmentView(VenueProfileFormMixin, FormView):
     template_name = 'profile/venue/forms/equipment.html'
     success_url = 'venue:about'
     model = models.Equipment
@@ -95,7 +95,7 @@ class EquipmentView(ProfileFormMixin, FormView):
 
 equipment = EquipmentView.as_view()
 
-class HoursView(ProfileFormMixin, FormView):
+class HoursView(VenueProfileFormMixin, FormView):
     template_name = 'profile/venue/forms/hours.html'
     model = models.Hours
     form_class = forms.HoursForm
@@ -123,7 +123,7 @@ class HoursView(ProfileFormMixin, FormView):
 
 hours = HoursView.as_view()
 
-class PoliciesView(ProfileFormMixin, FormView):
+class PoliciesView(VenueProfileFormMixin, FormView):
     template_name = 'profile/venue/forms/policies.html'
     model = models.Policies
     form_class = forms.PoliciesForm
@@ -147,7 +147,7 @@ class PoliciesView(ProfileFormMixin, FormView):
 
 policies = PoliciesView.as_view()
 
-class SeatingView(ProfileFormMixin, ImageFormMixin, MultipleModelFormsView):
+class SeatingView(VenueProfileFormMixin, ImageFormMixin, MultipleModelFormsView):
     form_classes = {
       'seatingForm' : forms.SeatingForm,
       'seatingChartForm' : SeatingChartForm
@@ -180,7 +180,7 @@ class SeatingView(ProfileFormMixin, ImageFormMixin, MultipleModelFormsView):
 
 seating = SeatingView.as_view()
 
-class StaffView(ProfileFormMixin, MultipleModelFormsView):
+class StaffView(VenueProfileFormMixin, MultipleModelFormsView):
     form_classes = {
       'staffForm' : forms.StaffForm,
       'contactForm' : ContactForm
@@ -188,25 +188,25 @@ class StaffView(ProfileFormMixin, MultipleModelFormsView):
     template_name = 'profile/venue/forms/staff.html'
     model = models.Staff
     success_url = 'venue:about'
-    staffID=None
+    staff_id=None
 
     def get_context_data(self, **kwargs):
         context = super(StaffView, self).get_context_data(**kwargs)
         staff = self.model.objects.filter(profile=self.user.profile.venueProfile)
         context['staff'] = staff
-        context['staffID'] = self.kwargs.get('staffID', None)
+        context['staff_id'] = self.kwargs.get('staff_id', None)
         return context
 
     def get_objects(self, queryset=None):
-        self.staffID = self.kwargs.get('staffID')
-        staff = get_object_or_None(self.model, id=self.staffID)
+        self.staff_id = self.kwargs.get('staff_id')
+        staff = get_object_or_None(self.model, id=self.staff_id)
         return {
             'staffForm' : staff,
             'contactForm' : staff.contact if staff else None
         }
 
     def forms_valid(self, forms):
-        staff = forms['staffForm'].save(commit=False, id=self.kwargs.get('staffID'))
+        staff = forms['staffForm'].save(commit=False, id=self.kwargs.get('staff_id'))
         if staff:
             staff.profile = self.user.profile.venueProfile
             contact = forms['contactForm'].save()

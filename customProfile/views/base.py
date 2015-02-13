@@ -2,21 +2,22 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.shortcuts import redirect, get_object_or_404
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
-from customProfile import forms as profile_forms
 from accounts.models import Profile
 from artist.models import ArtistProfile
-from fan.models import FanProfile
-from venue.models import VenueProfile
 from annoying.functions import get_object_or_None
+from customProfile import forms as profile_forms
+from customProfile.decorators import is_artist, is_venue, is_fan
 from composersCouch.views import MultipleFormsView
 from feeds.models import Follow, Post
+from fan.models import FanProfile
 from photos.models import Image
 from photos.forms import MugshotForm
 from photos.views import ImageFormMixin
+from venue.models import VenueProfile
 
-from django.utils.decorators import method_decorator
 
 
 class ProfileMixin(object):
@@ -44,6 +45,24 @@ class ProfileFormMixin(object):
     def dispatch(self, *args, **kwargs):
         self.user = self.request.user
         return super(ProfileFormMixin, self).dispatch(*args, **kwargs)
+
+class ArtistProfileFormMixin(ProfileFormMixin):
+    @method_decorator(is_artist)
+    def dispatch(self, *args, **kwargs):
+        self.user = self.request.user
+        return super(ArtistProfileFormMixin, self).dispatch(*args, **kwargs)
+
+class VenueProfileFormMixin(ProfileFormMixin):
+    @method_decorator(is_venue)
+    def dispatch(self, *args, **kwargs):
+        self.user = self.request.user
+        return super(VenueProfileFormMixin, self).dispatch(*args, **kwargs)
+
+class FanProfileFormMixin(ProfileFormMixin):
+    @method_decorator(is_fan)
+    def dispatch(self, *args, **kwargs):
+        self.user = self.request.user
+        return super(FanProfileFormMixin, self).dispatch(*args, **kwargs)
 
 def profileRedirect(request, username, redirect_url):
     return redirect(redirect_url, username=username)

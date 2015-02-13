@@ -7,7 +7,7 @@ from django.views.generic import UpdateView
 
 from annoying.functions import get_object_or_None
 from composersCouch.views import MultipleModelFormsView
-from customProfile.views import ArtistProfileView, ProfileFormMixin
+from customProfile.views import ArtistProfileView, ArtistProfileFormMixin
 from photos.models import Image
 from photos.forms import AlbumArtForm
 from photos.views import ImageFormMixin
@@ -21,7 +21,7 @@ class MusicView(ArtistProfileView):
 
 music = MusicView.as_view()
 
-class AlbumView(ImageFormMixin, MultipleModelFormsView):
+class AlbumView(ArtistProfileFormMixin, ImageFormMixin, MultipleModelFormsView):
     form_classes = {
       'albumForm' : AlbumForm,
       'albumArtForm' : AlbumArtForm
@@ -57,7 +57,7 @@ class AlbumView(ImageFormMixin, MultipleModelFormsView):
 
 AddEditAlbum = AlbumView.as_view()
 
-class TracksView(ProfileFormMixin, UpdateView):
+class TracksView(ArtistProfileFormMixin, UpdateView):
     form_class = AlbumAudioForm
     model = Album
     inline_model = Track

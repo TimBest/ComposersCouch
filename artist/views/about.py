@@ -6,7 +6,7 @@ from artist.models import ArtistProfile
 from annoying.functions import get_object_or_None
 from contact.views import ContactView
 from contact.forms import NonUserLocationForm
-from customProfile.views import ArtistProfileView, ProfileFormMixin
+from customProfile.views import ArtistProfileView, ArtistProfileFormMixin
 from artist.models import Member
 from artist.forms import BiographyForm, MemberForm
 
@@ -22,7 +22,7 @@ class AboutView(ArtistProfileView):
 
 about = AboutView.as_view()
 
-class BiographyView(ProfileFormMixin, UpdateView):
+class BiographyView(ArtistProfileFormMixin, UpdateView):
     form_class = BiographyForm
     template_name = 'profile/artist/forms/biography.html'
     model = ArtistProfile
@@ -36,7 +36,7 @@ class BiographyView(ProfileFormMixin, UpdateView):
 
 biography = BiographyView.as_view()
 
-class ContactInfoView(ContactView):
+class ContactInfoView(ArtistProfileFormMixin, ContactView):
     success_url = 'artist:about'
     template_name = 'profile/artist/forms/contact.html'
 
@@ -47,7 +47,7 @@ class ContactInfoView(ContactView):
 
 contact_info = ContactInfoView.as_view()
 
-class MemberView(ProfileFormMixin, UpdateView):
+class MemberView(ArtistProfileFormMixin, UpdateView):
     form_class = MemberForm
     model = Member
     memberID=None

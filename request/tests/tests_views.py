@@ -127,8 +127,9 @@ class IsArtistViewsTests(TestCase):
         # No user redirects to login
         for url_name in url_names:
             response = self.client.post(reverse(url_name[0]), url_name[1])
-            self.assertRedirects(response, '%s?next=%s' % (reverse('signin'), reverse(url_name[0])), status_code=302,
-                                 target_status_code=200, msg_prefix='')
+            self.assertRedirects(response, '%s?next=%s' % (reverse('signin'),
+                                 response.request['PATH_INFO']),
+                                 status_code=302, target_status_code=200,)
 
         # user with out permission is denied
         self.client.post(reverse('signin'),

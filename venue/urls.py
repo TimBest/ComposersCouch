@@ -33,6 +33,6 @@ urlpatterns += patterns(view_location,
         url(r'^policies/edit/$','policies',name='policiesForm'),
         url(r'^seating/edit/$', 'seating', name='seatingForm'),
         url(r'^staff/edit/$', 'staff', name='staffForm'),
-        url(r'^staff/edit/(?P<staffID>[\.\w-]+)/$', 'staff', name='staffForm'),
+        url(r'^staff/edit/(?P<staff_id>[\.\w-]+)/$', 'staff', name='staffForm'),
     ))),
 )

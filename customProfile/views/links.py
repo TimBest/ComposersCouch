@@ -4,11 +4,11 @@ from django.views.generic import UpdateView
 from annoying.functions import get_object_or_None
 from contact.forms import MusicLinksForm, PhotoLinksForm, SocialLinksForm, VideoLinksForm
 from contact.models import SocialLinks, MusicLinks
-from customProfile.views import ProfileFormMixin
+from customProfile.views import ArtistProfileFormMixin, VenueProfileFormMixin
 
 
 #Generic form for external link forms
-class LinksView(ProfileFormMixin, UpdateView):
+class LinksView(UpdateView):
     model = SocialLinks
 
     def get_object(self, queryset=None):
@@ -21,41 +21,49 @@ class LinksView(ProfileFormMixin, UpdateView):
         return redirect(self.success_url, username=self.user.username)
 
 #About page links to social media
-class ArtistSocialView(LinksView):
+class ArtistSocialView(ArtistProfileFormMixin, LinksView):
     form_class = SocialLinksForm
     template_name = 'profile/forms/social_links.html'
     success_url = 'artist:about'
 artist_social_links = ArtistSocialView.as_view()
 
-class VenueSocialView(ArtistSocialView):
+class VenueSocialView(VenueProfileFormMixin, LinksView):
+    form_class = SocialLinksForm
+    template_name = 'profile/forms/social_links.html'
     success_url = 'venue:about'
 venue_social_links = VenueSocialView.as_view()
 
+
 #Photo page links to image sites
-class ArtistPhotoView(LinksView):
+class ArtistPhotoView(ArtistProfileFormMixin, LinksView):
     form_class = PhotoLinksForm
     template_name = 'profile/forms/photo_links.html'
     success_url = 'artist:photos'
 artist_photo_links = ArtistPhotoView.as_view()
 
-class VenuePhotoView(ArtistPhotoView):
+class VenuePhotoView(VenueProfileFormMixin, LinksView):
+    form_class = PhotoLinksForm
+    template_name = 'profile/forms/photo_links.html'
     success_url = 'venue:photos'
 venue_photo_links = VenuePhotoView.as_view()
 
+
 #video page links to video sites
-class ArtistVideoView(LinksView):
+class ArtistVideoView(ArtistProfileFormMixin, LinksView):
     form_class = VideoLinksForm
     template_name = 'profile/forms/video_links.html'
     success_url = 'artist:videos'
 artist_video_links = ArtistVideoView.as_view()
 
-class VenueVideoView(ArtistVideoView):
+class VenueVideoView(VenueProfileFormMixin, LinksView):
+    form_class = VideoLinksForm
+    template_name = 'profile/forms/video_links.html'
     success_url = 'venue:videos'
 venue_video_links = VenueVideoView.as_view()
 
 
 #music page links to music sites
-class MusicLinksView(ProfileFormMixin, UpdateView):
+class MusicLinksView(ArtistProfileFormMixin, UpdateView):
     form_class = MusicLinksForm
     model = MusicLinks
     template_name = 'profile/forms/music_links.html'

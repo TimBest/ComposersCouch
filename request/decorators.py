@@ -11,7 +11,7 @@ def is_participant(function):
     @wraps(function)
     def decorator(request, *args, **kwargs):
         if not request.user.is_authenticated():
-            return HttpResponseRedirect(settings.LOGIN_URL)
+            return HttpResponseRedirect('%s?next=%s' % (settings.LOGIN_URL, request.META['PATH_INFO']))
         else:
             request_id = kwargs.get('request_id', None)
             if request_id:
