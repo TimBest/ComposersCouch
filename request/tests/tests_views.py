@@ -124,11 +124,13 @@ class IsArtistViewsTests(TestCase):
             ['approve_public_request', {'application':1}],
             ['deny_public_request', {'application':1}],
         ]
+        # No user redirects to login
         for url_name in url_names:
             response = self.client.post(reverse(url_name[0]), url_name[1])
-            print response
-            self.assertEqual(response.status_code, 302)
+            self.assertRedirects(response, '%s?next=%s' % (reverse('signin'), reverse(url_name[0])), status_code=302,
+                                 target_status_code=200, msg_prefix='')
 
+        # user with out permission is denied
         self.client.post(reverse('signin'),
                                  data={'identification': 'john@example.com',
                                        'password': 'blowfish'})
@@ -137,6 +139,7 @@ class IsArtistViewsTests(TestCase):
             self.assertEqual(response.status_code, 403)
         self.client.logout()
 
+        # user with permission is redirected
         self.client.post(reverse('signin'),
                                  data={'identification': 'arie@example.com',
                                        'password': 'blowfish'})
