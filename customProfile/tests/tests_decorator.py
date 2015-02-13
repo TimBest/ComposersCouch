@@ -102,7 +102,7 @@ class IsFanDecoratorTests(TestCase):
     def setUp(self):
         # create mock function and decorate it
         func = lambda x: x
-        self.decorated_func = is_artist(func)
+        self.decorated_func = is_fan(func)
         factory = RequestFactory()
         self.request = factory.get(reverse('home'))
         # create user
@@ -120,6 +120,7 @@ class IsFanDecoratorTests(TestCase):
         user.profile.profile_type = 'f'
         user.profile.save()
         self.request.user = user
+        response = self.decorated_func(self.request)
         self.assertIsInstance(response, WSGIRequest)
 
     def test_artist(self):
@@ -127,7 +128,6 @@ class IsFanDecoratorTests(TestCase):
         user.profile.profile_type = 'm'
         user.profile.save()
         self.request.user = user
-        response = self.decorated_func(self.request)
         self.assertRaises(PermissionDenied, self.decorated_func, self.request)
 
     def test_venue(self):
