@@ -4,8 +4,8 @@
     "model": "request.application",
     "fields": {
       "public_request": 1,
-      "thread": 1,
-      "applicant": 1,
+      "thread": 2,
+      "applicant": 2,
       "approved": null
     }
   },
@@ -14,8 +14,8 @@
     "model": "request.application",
     "fields": {
       "public_request": 1,
-      "thread": 2,
-      "applicant": 2,
+      "thread": 3,
+      "applicant": 3,
       "approved": null
     }
   }

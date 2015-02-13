@@ -20,5 +20,27 @@
       "replied_at": null,
       "deleted_at": null
     }
+  },
+  {
+    "pk": 3,
+    "model": "threads.participant",
+    "fields": {
+      "thread": 2,
+      "user": 2,
+      "read_at": null,
+      "replied_at": null,
+      "deleted_at": null
+    }
+  },
+  {
+    "pk": 4,
+    "model": "threads.participant",
+    "fields": {
+      "thread": 2,
+      "user": 3,
+      "read_at": null,
+      "replied_at": null,
+      "deleted_at": null
+    }
   }
 ]

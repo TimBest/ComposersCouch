@@ -19,5 +19,5 @@ def is_participant(function):
                 for p in thread.participants.all():
                     if p.user == request.user:
                         return function(request, *args, **kwargs)
-            return PermissionDenied
+            raise PermissionDenied
     return decorator

@@ -12,7 +12,7 @@ class ViewsTests(TestCase):
     """  """
     fixtures = ['users', 'profiles', 'artists', 'threads', 'messages',
                 'participants', 'privateRequests', 'dates', 'calendars',
-                'venues', 'requestParticipants']
+                'venues', 'requestParticipants', 'publicRequests', 'zipcodes',]
 
     def test_request_views(self):
         """ test views where login is required """
@@ -25,7 +25,7 @@ class ViewsTests(TestCase):
             ['request_write', {}],
             ['request_write', {'username':user.username}],
             ['public_band_request', {}],
-            #['request_appy_to_band', {'request_id':1}],
+            ['request_appy_to_band', {'request_id':1}],
         ]
 
         for url_name in url_names:
@@ -39,34 +39,35 @@ class ViewsTests(TestCase):
             response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
             self.assertEqual(response.status_code, 200)
 
-    def test_request_particpant_views(self):
+class ParticipantViewsTests(TestCase):
+    """  """
+    fixtures = ['users', 'profiles', 'artists', 'threads', 'messages',
+                'participants', 'privateRequests', 'dates', 'calendars',
+                'venues', 'requestParticipants', 'publicRequests', 'zipcodes',
+                'applications']
+
+    def test_request_participant_views(self):
         """ test views where thread participant is required """
         url_names = [
             ['request_detail',   {'thread_id':1}],
-            #['request_edit',     {'request_id':1}],
-            #['application_view', {'thread_id':2}],
+            ['request_edit',     {'request_id':1}],
+            ['application_view', {'thread_id':2}],
         ]
         for url_name in url_names:
             response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
             self.assertEqual(response.status_code, 302)
 
         self.client.post(reverse('signin'),
-                                 data={'identification': 'arie@example.com',
+                                 data={'identification': 'john@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:
-            try:
-                response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
-                self.failIf(True)
-            except PermissionDenied:
-                pass
-            """self.assertRaises(PermissionDenied,
-                              self.client.get,
-                              reverse(url_name[0], kwargs=url_name[1])
-            )"""
+            response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
+            self.assertEqual(response.status_code, 403)
+        self.client.logout()
+
         self.client.post(reverse('signin'),
                                  data={'identification': 'jane@example.com',
                                        'password': 'blowfish'})
-
         for url_name in url_names:
             response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
             self.assertEqual(response.status_code, 200)
