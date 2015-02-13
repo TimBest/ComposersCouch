@@ -34,9 +34,9 @@ class ViewsTests(TestCase):
             ['venue:photoLinksForm',  {}],
             ['venue:biographyForm',   {}],
             ['venue:contactForm',     {}],
-            #['venue:equipmentForm',   {'category':'Sound'}],
-            #['venue:equipmentForm',   {'category':'Effects'}],
-            #['venue:equipmentForm',   {'category':'Accessories'}],
+            ['venue:equipmentForm',   {'category':'sound'}],
+            ['venue:equipmentForm',   {'category':'effects'}],
+            ['venue:equipmentForm',   {'category':'accessories'}],
             ['venue:hoursForm',       {}],
             ['venue:policiesForm',    {}],
             ['venue:seatingForm',     {}],
@@ -54,7 +54,7 @@ class ViewsTests(TestCase):
                                  data={'identification': 'john@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:
-            response = self.client.get(reverse(url_name[0]), url_name[1])
+            response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
             self.assertEqual(response.status_code, 403)
         self.client.logout()
 
@@ -63,5 +63,5 @@ class ViewsTests(TestCase):
                                  data={'identification': 'arie@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:
-            response = self.client.get(reverse(url_name[0]), url_name[1])
+            response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
             self.assertEqual(response.status_code, 200)
