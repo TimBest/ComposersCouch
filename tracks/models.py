@@ -51,7 +51,7 @@ class Album(models.Model):
 
 def validate_file_extension(value):
     ext = os.path.splitext(value.name)[1]
-    valid_extensions = ['.mp3','.ogv','.m4v','.oga']
+    valid_extensions = ['.mp3','.oga']
     if not ext in valid_extensions:
         raise ValidationError(u'File type not supported')
 
@@ -60,8 +60,8 @@ class Media(models.Model):
     video = EmbedVideoField(_('Video Link'), null=True, blank=True,
                             help_text="Link to youtube or vimeo")
     audio = AudioField(_("Audio file"), upload_to=get_audio_upload_path,
-                       ext_whitelist=('.mp3','.ogv','.m4v','.oga'),
-                       help_text="Currently supports mp3, ogv, m4v, and oga",
+                       ext_whitelist=('.mp3','.ogg'),
+                       help_text="Currently supports mp3 and ogg",
                        null=True, blank=True)
     live = models.BooleanField(default=False)
 
