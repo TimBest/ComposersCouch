@@ -76,7 +76,7 @@ class MemberView(ArtistProfileFormMixin, UpdateView):
 
 members = MemberView.as_view()
 
-class MusicianContactsView(ContactView):
+class MusicianContactsView(ArtistProfileFormMixin, ContactView):
     locationForm = NonUserLocationForm
     template_name = 'profile/artist/forms/contact.html'
     success_url = 'artist:about'
@@ -93,7 +93,7 @@ class MusicianContactsView(ContactView):
             self.contactType = self.kwargs.get('contactType', None)
         if self.contactType not in self.CONTACT_TYPES:
             self.contactType = self.CONTACT_TYPES.keys()[0]
-        return super(ContactView, self).dispatch(*args, **kwargs)
+        return super(MusicianContactsView, self).dispatch(*args, **kwargs)
 
     def get_contact_info(self):
         return getattr(self.user.profile.artist_profile, self.CONTACT_TYPES[self.contactType])
