@@ -8,7 +8,9 @@ from venue.models import VenueProfile
 from composersCouch.utils import get_page
 
 
-def search(request, template_name='search/search.html', ajax_template='autocomplete/search.html'):
+def search(request, template_name='search/search.html',
+           ajax_template='autocomplete/search.html'):
+
     q = request.GET.get('q', '')
     context = {'q': q}
 

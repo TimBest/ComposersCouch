@@ -39,7 +39,7 @@
              "user_permissions": [],
              "password": "sha1$645fd$8d18b38b96f72363bc9438bc1d340081b87e0fbe",
              "email": "arie@example.com",
-             "date_joined": "2010-01-01T00:00:00.019Z"}}, 
+             "date_joined": "2010-01-01T00:00:00.019Z"}},
 
  {"pk": 1,
   "model": "userena.userenasignup",
