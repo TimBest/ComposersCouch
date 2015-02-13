@@ -340,8 +340,10 @@ def deny(request):
 @require_POST
 def accept(request, accept=True):
     # TODO: convert to ajax
-    private_request = PrivateRequest.objects.get(id=request.POST['private_request'])
-    participant = get_object_or_None(Participant,thread=private_request.thread, user=request.user)
+    private_request = PrivateRequest.objects.get(
+                        id=request.POST['private_request'])
+    participant = get_object_or_None(Participant,thread=private_request.thread,
+                                     user=request.user)
     if participant:
         for request_participant in participant.request_participant.all():
             request_participant.accepted = accept
