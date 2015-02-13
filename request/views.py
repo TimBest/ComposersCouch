@@ -10,15 +10,15 @@ from django.views.decorators.http import require_POST
 from django.views.generic import FormView
 from django.views.generic.base import TemplateView
 
-from . import forms
-from .forms import ParticipantFormSet
-from .decorators import is_participant
-from .models import Application, PrivateRequest, PublicRequest, RequestParticipant
-from .utils import send_request_email
 from annoying.functions import get_object_or_None
 from composersCouch.utils import get_page
 from composersCouch.views import MultipleFormsView, MultipleModelFormsView
 from customProfile.decorators import is_venue, is_artist
+from request import forms
+from request.decorators import is_participant as is_request_participant
+from request.models import Application, PrivateRequest, PublicRequest, RequestParticipant
+from request.utils import send_request_email
+from threads.decorators import is_participant
 from threads.models import Message, Participant, Thread
 from threads.views import MessageView
 from threads.utils import reply_to_thread, create_thread
@@ -102,7 +102,7 @@ class RequestView(MessageView):
         context['events'] = calendar.get_events_in_range(start=start, end=end)
         return context
 
-view = RequestView.as_view()
+view = is_participant(RequestView.as_view())
 
 class ApplicationView(MessageView):
     success_url='application_view'
@@ -114,7 +114,7 @@ class ApplicationView(MessageView):
         context['application'] = self.thread.application
         return context
 
-application_view = ApplicationView.as_view()
+application_view = is_participant(ApplicationView.as_view())
 
 """ Forms """
 class RequestFormView(MultipleFormsView):
@@ -135,13 +135,15 @@ class RequestFormView(MultipleFormsView):
         return kwargs
 
     def get_forms(self):
-        forms = super(RequestFormView, self).get_forms()
-        formset = formset_factory(self.form_class, formset=ParticipantFormSet, max_num=3, min_num=3)
+        requestForms = super(RequestFormView, self).get_forms()
+        formset = formset_factory(self.form_class,
+            formset=forms.ParticipantFormSet, max_num=3, min_num=3)
         if self.request.method == 'POST':
-            forms['ArtistFormset'] = formset(**self.get_form_kwargs())
+            requestForms['ArtistFormset'] = formset(**self.get_form_kwargs())
         else:
-            forms['ArtistFormset'] = formset(initial=[self.artist], **self.get_form_kwargs())
-        return forms
+            requestForms['ArtistFormset'] = formset(initial=[self.artist],
+                                                    **self.get_form_kwargs())
+        return requestForms
 
     def get_initial_data(self):
         venue_data = {}
@@ -235,7 +237,7 @@ class RequestEditFormView(MultipleModelFormsView):
         reply_to_thread(self.private_request.thread, self.request.user, "edited request")
         return self.get_success_url(thread=self.private_request.thread)
 
-requestEditForm = is_participant(RequestEditFormView.as_view())
+requestEditForm = is_request_participant(RequestEditFormView.as_view())
 
 class PublicRequestFormView(MultipleFormsView):
     form_classes = {
@@ -329,7 +331,7 @@ def approve(request, accept=True):
         assert form.is_valid()
         form.save(application=application, approved=accept)
         return redirect('application_view', thread_id=application.thread.id)
-    return PermissionDenied
+    raise PermissionDenied
 
 def deny(request):
     return  approve(request, accept=False)
@@ -345,7 +347,7 @@ def accept(request, accept=True):
             request_participant.accepted = accept
             request_participant.save()
         return redirect('request_detail', thread_id=private_request.thread.id)
-    return PermissionDenied
+    raise PermissionDenied
 
 def decline(request):
     return  accept(request, accept=False)

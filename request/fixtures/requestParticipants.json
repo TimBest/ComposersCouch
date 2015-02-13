@@ -1,0 +1,20 @@
+[
+  {
+    "pk": 1,
+    "model": "request.requestParticipant",
+    "fields": {
+      "participant": 1,
+      "role": "o",
+      "accepted": null
+    }
+  },
+  {
+    "pk": 2,
+    "model": "request.requestParticipant",
+    "fields": {
+      "participant": 2,
+      "role": "v",
+      "accepted": null
+    }
+  }
+]
