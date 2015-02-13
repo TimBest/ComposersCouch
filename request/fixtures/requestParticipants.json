@@ -5,7 +5,7 @@
     "fields": {
       "participant": 1,
       "role": "o",
-      "accepted": null
+      "accepted": true
     }
   },
   {

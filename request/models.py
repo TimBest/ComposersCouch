@@ -40,7 +40,7 @@ class PrivateRequest(Request):
         return get_object_or_None(RequestParticipant, participant__thread=self.thread, role='h')
 
     def venue(self):
-        return get_object_or_None(RequestParticipant, participant__thread=self.thread, role='v')
+        return RequestParticipant.objects.get(participant__thread=self.thread, role='v')
 
     def openers(self):
         return RequestParticipant.objects.filter(participant__thread=self.thread, role='o')
