@@ -23,13 +23,11 @@ def get_audio_upload_path(instance, filename):
 
 class Album(models.Model):
     artist_profile = models.ForeignKey('artist.ArtistProfile',
-                          verbose_name=_("artist profile"),
                           related_name='albums',null=True,
                           blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     album_art = models.ForeignKey(Image,
-                          verbose_name=_("Album art"),
                           related_name='artist Album art',null=True,
                           blank=True)
     title = models.CharField(_('Title'), max_length=100)

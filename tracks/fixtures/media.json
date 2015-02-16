@@ -1,0 +1,22 @@
+[
+  {
+    "pk": 1,
+    "model": "tracks.media",
+    "fields": {
+      "title": "Intro",
+      "video": "http://www.youtube.com",
+      "audio": "",
+      "live": false
+    }
+  },
+  {
+    "pk": 2,
+    "model": "tracks.media",
+    "fields": {
+      "title": "He's Not Mine",
+      "video": "http://www.video.com",
+      "audio": "",
+      "live": false
+    }
+  }
+]

@@ -13,6 +13,7 @@ from crispy_forms.layout import Div, HTML, Layout
 from multiupload.fields import MultiFileField
 
 from artist.models import ArtistProfile
+from contact.forms import clean_url
 from embed_video.fields import EmbedVideoFormField
 from tracks.models import Album, Track, Media
 
@@ -147,6 +148,13 @@ class AlbumVideoForm(ModelForm):
     class Meta:
         model = Track
         fields = ['album','order']
+
+    def clean_video(self):
+        url = clean_url(self.cleaned_data.get("video", ""))
+        if "youtube.com" in url or "vimeo.com" in url:
+            return url
+        elif url:
+            raise ValidationError(_('Must be a Youtube or Vimeo URL.'), code='invalid')
 
     def save(self, commit):
         track = super(AlbumVideoForm, self).save(commit=False)
