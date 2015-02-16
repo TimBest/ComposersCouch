@@ -1,7 +1,7 @@
 from django.contrib.auth.models import User
 from django.test import TestCase
 
-from tracks.models import Album, Track
+from threads import models
 
 
 class PrivateRequestModelTest(TestCase):
@@ -10,7 +10,45 @@ class PrivateRequestModelTest(TestCase):
                 'threads', 'messages', 'participants', 'dates',
                 'privateRequests', 'requestParticipants']
 
-    def test_json_playlist(self):
+    def test_inbox(self):
         pass
-        #album = Album.objects.get(pk=1)
-        #tracks = Track.objects.all()
+
+    def test_outbox(self):
+        pass
+
+    def test_trash(self):
+        pass
+
+    def test_get_absolute_url(self):
+        # request
+        # show
+        # application
+        # message
+        pass
+
+    def test_new(self):
+        pass
+
+    def test_replied(self):
+        pass
+
+    def test_last_other_sender(self):
+        pass
+
+    def test_last_others(self):
+        pass
+
+    def test_get_next(self):
+        pass
+
+    def test_get_prev(self):
+        pass
+
+    def test_read_thread(self):
+        pass
+
+    def test_cached_inbox_count_for(self):
+        pass
+
+    def test_inbox_count_for(self):
+        pass
