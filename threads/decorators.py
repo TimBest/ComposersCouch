@@ -10,6 +10,8 @@ from threads.models import Thread
 def is_participant(function):
     @wraps(function)
     def decorator(request, *args, **kwargs):
+        print args
+        print kwargs
         if not request.user.is_authenticated():
             return HttpResponseRedirect('%s?next=%s' % (settings.LOGIN_URL, request.META['PATH_INFO']))
         else:

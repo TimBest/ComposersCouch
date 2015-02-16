@@ -23,7 +23,7 @@ class IsParticipantDecoratorTests(TestCase):
 
     def test_anonymous_user(self):
         self.request.user = auth.get_user(self.client)
-        response = mock_fn(self.request, kwargs={'thread_id':1})
+        response = mock_fn(self.request, thread_id=1)
         self.assertEqual(response.status_code, 302)
 
     def test_non_participant(self):
@@ -31,7 +31,7 @@ class IsParticipantDecoratorTests(TestCase):
         user.profile = Profile.objects.get(pk=1)
         user.profile.save()
         self.request.user = user
-        self.assertRaises(PermissionDenied, mock_fn, self.request, kwargs={'thread_id':1})
+        self.assertRaises(PermissionDenied, mock_fn, self.request, thread_id=1)
 
     def test_participant(self):
         for pk in [2,3]:

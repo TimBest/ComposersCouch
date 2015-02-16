@@ -228,4 +228,5 @@ def message_ajax_reply(request, thread_id, success_url='threads:inbox'):
 
             return render_to_response('threads/_message.html', {'message':new_message,'user':request.user})
         else:
+            print form.errors
             return HttpResponse(status=400, content="Invalid Form")
