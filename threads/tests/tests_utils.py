@@ -9,13 +9,6 @@ class UtilsTest(TestCase):
 
         nyan nyan nyan nyan nyan
 
-
-
-
-
-
-
-
         2011/10/28 Nyan Cat <nyan@nyan.cat>:
          > hey guys
         > sarete il 31 dicembre con Pascal a Firenze?
@@ -27,10 +20,10 @@ class UtilsTest(TestCase):
         >"""
 
         body_stripped = """nyan nyan nyan nyan nyan
-nyan nyan nyan nyan nyan
+                           nyan nyan nyan nyan nyan
 
-nyan nyan nyan nyan nyan
-"""
+                           nyan nyan nyan nyan nyan
+        """
 
         self.assertEquals(body_stripped.strip(), strip_mail(body).strip())
 
