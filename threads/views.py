@@ -38,6 +38,7 @@ class InboxView(threadMixin, TemplateView):
         return {
             'message_list': Participant.objects.inbox_for(self.request.user),
         }
+
 inbox = InboxView.as_view()
 
 class SentView(threadMixin, TemplateView):
@@ -50,6 +51,7 @@ class SentView(threadMixin, TemplateView):
         return {
             'message_list': Participant.objects.outbox_for(self.request.user),
         }
+
 sent = SentView.as_view()
 
 class TrashView(threadMixin, TemplateView):
@@ -62,6 +64,7 @@ class TrashView(threadMixin, TemplateView):
         return {
             'message_list': Participant.objects.trash_for(self.request.user),
         }
+
 trash = TrashView.as_view()
 
 class ComposeView(threadMixin, FormView):
@@ -97,7 +100,7 @@ class ComposeView(threadMixin, FormView):
 
 compose = ComposeView.as_view()
 
-@login_required
+@is_participant
 def delete(request, thread_id, success_url='threads:inbox'):
     """
     Marks a message as deleted by sender or recipient. The message is not
@@ -120,7 +123,7 @@ def delete(request, thread_id, success_url='threads:inbox'):
     return HttpResponseRedirect(success_url)
 
 
-@login_required
+@is_participant
 def restore(request, thread_id, success_url='threads:inbox'):
     """
     Recovers a message from trash. This is achieved by removing the
@@ -211,7 +214,7 @@ def batch_update(request, success_url=None):
         else:
             return HttpResponseRedirect(reverse("messages_inbox"))
 
-@login_required
+@is_participant
 def message_ajax_reply(request, thread_id, success_url='threads:inbox'):
     thread = get_object_or_404(Thread, id=thread_id)
     if request.POST:
