@@ -73,7 +73,7 @@
     <!-- Right Hand Navigation -->
     <div class="rightNav" id="sidebar" role="navigation">
       {% if user.is_authenticated %}
-      <a href="{% url 'messages_inbox' %}" class="rightNavItem request">
+      <a href="{% url 'threads:inbox' %}" class="rightNavItem request">
         <span class="fa fa-envelope-o"></span>
         {% inbox_count as unread_count %}
         {% include "utils/_alert_badge.html" with count=unread_count %}

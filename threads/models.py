@@ -111,7 +111,7 @@ class Thread(models.Model):
         elif hasattr(self, 'application'):
             return ('application_view', [self.id])
         else:
-            return ('messages_detail', [self.id])
+            return ('threads:detail', [self.id])
     get_absolute_url = models.permalink(get_absolute_url)
 
     class Meta:

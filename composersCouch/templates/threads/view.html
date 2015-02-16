@@ -27,7 +27,7 @@
           {% endwith %}
         {% endfor %}
       </div>
-      <form action="{% url 'message_reply' thread.pk %}?next={{ request.path }}" class="reply-form" method="post">
+      <form action="{% url 'threads:reply' thread.pk %}?next={{ request.path }}" class="reply-form" method="post">
         {% crispy form %}
         <button type="submit" class="btn btn-primary"><span class="fa fa-send" ></span> {% trans 'Send' %}</button>
       </form>

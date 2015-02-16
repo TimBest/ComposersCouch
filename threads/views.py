@@ -73,7 +73,7 @@ class ComposeView(threadMixin, FormView):
                        could be separated by a '+'
     """
     form_class=ComposeForm
-    success_url='messages_sent'
+    success_url='threads:sent'
     template_name='threads/compose.html'
 
     def form_valid(self, form):
@@ -98,7 +98,7 @@ class ComposeView(threadMixin, FormView):
 compose = ComposeView.as_view()
 
 @login_required
-def delete(request, thread_id, success_url='messages_inbox'):
+def delete(request, thread_id, success_url='threads:inbox'):
     """
     Marks a message as deleted by sender or recipient. The message is not
     really removed from the database, because two users must delete a message
@@ -121,7 +121,7 @@ def delete(request, thread_id, success_url='messages_inbox'):
 
 
 @login_required
-def restore(request, thread_id, success_url='messages_inbox'):
+def restore(request, thread_id, success_url='threads:inbox'):
     """
     Recovers a message from trash. This is achieved by removing the
     ``(sender|recipient)_deleted_at`` from the model.
@@ -138,7 +138,7 @@ def restore(request, thread_id, success_url='messages_inbox'):
 
 class MessageView(threadMixin, FormView):
     form_class=ReplyForm
-    success_url='messages_detail'
+    success_url='threads:detail'
     template_name='threads/view.html'
 
     @method_decorator(is_participant)
@@ -212,7 +212,7 @@ def batch_update(request, success_url=None):
             return HttpResponseRedirect(reverse("messages_inbox"))
 
 @login_required
-def message_ajax_reply(request, thread_id, success_url='messages_inbox'):
+def message_ajax_reply(request, thread_id, success_url='threads:inbox'):
     thread = get_object_or_404(Thread, id=thread_id)
     if request.POST:
         form = ReplyForm(data=request.POST)

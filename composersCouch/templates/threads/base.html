@@ -7,7 +7,7 @@
 
 {% block header%}
   <ul class="nav nav-pills nav-centered">
-    <li class="{% block messageClass %}{% endblock %}"><a href="{% url 'messages_inbox' %}">Messages</a></li>
+    <li class="{% block messageClass %}{% endblock %}"><a href="{% url 'threads:inbox' %}">Messages</a></li>
     <li class="{% block privateClass %}{% endblock %}"><a href="{% url 'private_requests' %}">Private Requests</a></li>
     <li class="{% block publicClass %}{% endblock %}"><a href="{% url 'public_requests' %}">Public Requests</a></li>
   </ul>
@@ -18,20 +18,20 @@
     <div class="container-fluid">
       <div class="row no-gutter">
         <div class="col-sm-4 col-xs-6 left">
-          <a href="{% url 'messages_compose' %}" class="btn btn-primary">Send message</a>
+          <a href="{% url 'threads:compose' %}" class="btn btn-primary">Send message</a>
         </div>
         <div class="col-sm-4 col-sm-push-4 col-xs-6 right">
         </div>
         <div class="col-sm-4 col-sm-pull-4 center">
           <ul class="nav nav-pills nav-centered" role="tablist">
             <li class="{% block inboxClass %}{% endblock %}">
-              <a href="{% url 'messages_inbox' %}"><span class="fa fa-inbox"></span> {% trans "Inbox" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a>
+              <a href="{% url 'threads:inbox' %}"><span class="fa fa-inbox"></span> {% trans "Inbox" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a>
             </li>
             <li class="{% block sentClass %}{% endblock %}">
-              <a href="{% url 'messages_sent' %}"><span class="fa fa-send"></span> {% trans "Sent" %}</a>
+              <a href="{% url 'threads:sent' %}"><span class="fa fa-send"></span> {% trans "Sent" %}</a>
             </li>
             <li class="{% block trashClass %}{% endblock %}">
-              <a href="{% url 'messages_trash' %}"><span class="fa fa-trash-o"></span> {% trans "Trash" %}</a>
+              <a href="{% url 'threads:trash' %}"><span class="fa fa-trash-o"></span> {% trans "Trash" %}</a>
             </li>
           </ul>
         </div>
@@ -42,7 +42,7 @@
 
 {% block content %}
   <div class="messages">
-    <form action="{% url 'messages_batch_update' %}" method="post">{% csrf_token %}
+    <form action="{% url 'threads:batch_update' %}" method="post">{% csrf_token %}
       <div class="btn-group request-folder-actions">
         {% block markAsRead %}
         <button type="submit" name="action" value="read" class="btn btn-default">mark as read</button>
