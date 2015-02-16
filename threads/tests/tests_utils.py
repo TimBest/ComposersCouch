@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from .utils import strip_mail
+from threads.utils import strip_mail
 
 class UtilsTest(TestCase):
     def test_strip_quotes(self):
