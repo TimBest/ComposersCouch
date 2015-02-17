@@ -100,45 +100,6 @@ class ComposeView(threadMixin, FormView):
 
 compose = ComposeView.as_view()
 
-@is_participant
-def delete(request, thread_id, success_url='threads:inbox'):
-    """
-    Marks a message as deleted by sender or recipient. The message is not
-    really removed from the database, because two users must delete a message
-    before it's save to remove it completely.
-    A cron-job should prune the database and remove old messages which are
-    deleted by both users.
-    As a side effect, this makes it easy to implement a trash with undelete.
-
-    You can pass ?next=/foo/bar/ via the url to redirect the user to a different
-    page (e.g. `/foo/bar/`) than ``success_url`` after deletion of the message.
-    """
-    user = request.user
-    thread = get_object_or_404(Thread, id=thread_id)
-    user_part = get_object_or_404(Participant, user=user, thread=thread)
-    user_part.deleted_at = now()
-    user_part.save()
-    if request.GET.has_key('next'):
-        success_url = request.GET['next']
-    return HttpResponseRedirect(success_url)
-
-
-@is_participant
-def restore(request, thread_id, success_url='threads:inbox'):
-    """
-    Recovers a message from trash. This is achieved by removing the
-    ``(sender|recipient)_deleted_at`` from the model.
-    """
-    user = request.user
-    thread = get_object_or_404(Thread, id=thread_id)
-    user_part = get_object_or_404(Participant, user=user, thread=thread)
-    user_part.deleted_at = None
-    user_part.save()
-    if request.GET.has_key('next'):
-        success_url = request.GET['next']
-    return HttpResponseRedirect(success_url)
-
-
 class MessageView(threadMixin, FormView):
     form_class=ReplyForm
     success_url='threads:detail'
@@ -212,7 +173,7 @@ def batch_update(request, success_url=None):
         if referer:
             return HttpResponseRedirect(referer)
         else:
-            return HttpResponseRedirect(reverse("messages_inbox"))
+            return HttpResponseRedirect(reverse("threads:inbox"))
 
 @is_participant
 def message_ajax_reply(request, thread_id, success_url='threads:inbox'):

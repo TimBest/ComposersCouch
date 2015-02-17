@@ -9,8 +9,6 @@ urlpatterns = patterns('threads.views',
     url(r'^compose/$', 'compose', name='compose'),
     url(r'^compose/(?P<recipient>[\+\w]+)/$', 'compose', name='compose'),
     url(r'^view/(?P<thread_id>[\d]+)/$', 'view', name='detail'),
-    url(r'^delete/(?P<thread_id>[\d]+)/$', 'delete', name='delete'),
-    url(r'^restore/(?P<thread_id>[\d]+)/$', 'restore', name='restore'),
     url(r'^batch-update/$', 'batch_update', name='batch_update'),
     url(r'^message-reply/(?P<thread_id>[\d]+)/$', 'message_ajax_reply', name="reply"),
 
