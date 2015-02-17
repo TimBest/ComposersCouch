@@ -42,29 +42,34 @@ class Show(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.GeoManager()
+
     class Meta:
         verbose_name = _('show')
         verbose_name_plural = _('shows')
         app_label = 'schedule'
 
-def update_visible_and_appoved(sender, instance, **kwargs):
-    post_save.disconnect(update_visible_and_appoved, sender=Show, dispatch_uid="update_visibility")
+def update_visible_and_approved(sender, instance, **kwargs):
+    """
+        one non approved event sets the shows visibility and approved to False.
+        one visible event sets the shows visibility to True.
+        all approved events sets the shows approved to True.
+    """
+    post_save.disconnect(update_visible_and_approved, sender=Show, dispatch_uid="update_visibility")
+    approved = True
+    visible = False
     for event in instance.events.all():
         if event.approved == False:
-            instance.approved = False
-            instance.visible = False
+            approved = False
+            visible = False
             break
         if event.visible == True:
-            instance.visible = True
+            visible = True
+    instance.visible = visible
+    instance.approved = approved
     instance.save()
-    post_save.connect(update_visible_and_appoved, sender=Show, dispatch_uid="update_visibility")
+    post_save.connect(update_visible_and_approved, sender=Show, dispatch_uid="update_visibility")
 
-post_save.connect(update_visible_and_appoved, sender=Show, dispatch_uid="update_visibility")
-
-class EventManager(models.Manager):
-
-    def get_for_object(self, content_object, distinction=None, inherit=True):
-        return EventRelation.objects.get_events_for_object(content_object, distinction, inherit)
+post_save.connect(update_visible_and_approved, sender=Show, dispatch_uid="update_visibility")
 
 class Event(models.Model):
     '''
@@ -77,8 +82,7 @@ class Event(models.Model):
                                   related_name='events')
     approved = models.BooleanField(_('approved'), default=False)
     visible = models.BooleanField(_('visible'), default=False)
-    objects = EventManager()
-    geo = models.GeoManager()
+    objects = models.GeoManager()
 
     class Meta:
         verbose_name = _('event')

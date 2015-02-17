@@ -28,6 +28,16 @@
       "approved": true,
       "visible": true
     }
+  },
+  {
+    "pk": 4,
+    "model": "schedule.event",
+    "fields": {
+      "show": 3,
+      "calendar": 1,
+      "approved": true,
+      "visible": true
+    }
   }
 
 ]
