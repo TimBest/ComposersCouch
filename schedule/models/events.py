@@ -23,6 +23,7 @@ from threads.models import Thread
 class DateRange(models.Model):
     start = models.DateTimeField(_("start"))
     end = models.DateTimeField(_("end"),help_text=_("The end time must be later than the start time."))
+
     class Meta:
         verbose_name = _('dateRange')
         verbose_name_plural = _('dateRanges')
@@ -95,7 +96,7 @@ class Event(models.Model):
         }
 
     def get_absolute_url(self):
-        return reverse('event', args=[self.id])
+        return reverse('show', kwargs={'show_id':self.show.id})
 
     def get_location(self):
         try:
@@ -103,5 +104,8 @@ class Event(models.Model):
         except:
             location = None
         if not location:
-            location = self.show.info.venue.profile.contact_info.location
+            try:
+                location = self.show.info.venue.profile.contact_info.location
+            except:
+                location = self.calendar.owner.profile.contact_info.location
         return location

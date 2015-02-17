@@ -7,8 +7,38 @@ from django.test import TestCase
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+from contact.models import Location
 from schedule.models import Event, Calendar, Show
 
+
+class TestEvent(TestCase):
+
+    fixtures = ['users', 'profiles', 'contactInfos','locations', 'contacts',
+                'zipcodes', 'applications', 'publicRequests', 'numApplicants',
+                'threads', 'messages', 'participants', 'dates', 'genres',
+                'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
+                'shows', 'events']
+
+    def test_get_absolute_url(self):
+        event = Event.objects.get(pk=3)
+        event.get_absolute_url()
+
+    def test_get_loaction(self):
+        # if info has a location return it
+        event = Event.objects.get(pk=3)
+        location = Location.objects.get(pk=1)
+        event.show.info.location = location
+        event.show.info.save()
+        self.assertEqual(event.get_location(),location)
+        # if there is no location return the venues loaction
+        event.show.info.location = None
+        event.show.info.save()
+        user = User.objects.get(pk=3)
+        self.assertEqual(event.get_location(),user.profile.contact_info.location)
+        # if there is no show location and no venue location return the users loaction
+        event.show.info.venue = None
+        event.show.info.save()
+        self.assertEqual(event.get_location(),event.calendar.owner.profile.contact_info.location)
 
 class TestShow(TestCase):
 
