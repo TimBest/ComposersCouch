@@ -11,8 +11,8 @@ from schedule.models.calendars import Calendar
 from schedule.models.events import Event
 from schedule import utils
 
-from schedule.views import check_next_url, coerce_date_dict
-
+from schedule.utils import coerce_date_dict
+'''
 
 class TestViews(TestCase):
     fixtures = ['schedule.json']
@@ -149,3 +149,4 @@ class TestUrls(TestCase):
         self.response = self.client.get(reverse("delete_event", kwargs={"event_id": 1}), {})
         self.assertEqual(self.response.status_code, 404)
         self.client.logout()
+'''

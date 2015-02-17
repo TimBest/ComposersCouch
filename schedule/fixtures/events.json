@@ -1,0 +1,33 @@
+[
+  {
+    "pk": 1,
+    "model": "schedule.event",
+    "fields": {
+      "show": 1,
+      "calendar": 2,
+      "approved": true,
+      "visible": true
+    }
+  },
+  {
+    "pk": 2,
+    "model": "schedule.event",
+    "fields": {
+      "show": 2,
+      "calendar": 2,
+      "approved": true,
+      "visible": true
+    }
+  },
+  {
+    "pk": 3,
+    "model": "schedule.event",
+    "fields": {
+      "show": 3,
+      "calendar": 2,
+      "approved": true,
+      "visible": true
+    }
+  }
+
+]

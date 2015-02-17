@@ -16,7 +16,7 @@ class TestEvent(TestCase):
         cal = Calendar(name="MyCal")
         cal.save()
 
-    def __create_event(self, title, start, end, cal):
+    """def __create_event(self, title, start, end, cal):
         return Event(**{
                 'title': title,
                 'start': start,
@@ -173,4 +173,4 @@ class TestEvent(TestCase):
         self.assertEquals(reverse('event', kwargs={'event_id': event.id}), url)
 
     def test_(self):
-        pass
+        pass"""

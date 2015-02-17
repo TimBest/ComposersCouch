@@ -1,0 +1,44 @@
+[
+  {
+    "pk": 1,
+    "model": "schedule.show",
+    "fields": {
+      "info": 1,
+      "date": 1,
+      "thread": null,
+      "approved": true,
+      "visible": true,
+      "turnout": 0,
+      "created_at": "2015-02-11 09:00:00+00:00",
+      "updated_at": "2015-02-11 09:00:00+00:00"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "schedule.show",
+    "fields": {
+      "info": 1,
+      "date": 2,
+      "thread": null,
+      "approved": true,
+      "visible": true,
+      "turnout": 0,
+      "created_at": "2015-02-11 09:00:00+00:00",
+      "updated_at": "2015-02-11 09:00:00+00:00"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "schedule.show",
+    "fields": {
+      "info": 1,
+      "date": 3,
+      "thread": null,
+      "approved": true,
+      "visible": true,
+      "turnout": 0,
+      "created_at": "2015-02-11 09:00:00+00:00",
+      "updated_at": "2015-02-11 09:00:00+00:00"
+    }
+  }
+]

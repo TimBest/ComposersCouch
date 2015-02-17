@@ -5,7 +5,7 @@
     "fields": {
       "user": 1,
       "genre": "",
-      "contact_info": null,
+      "contact_info": 1,
       "has_owner": true,
       "profile_type": "f"
     }
@@ -16,7 +16,7 @@
     "fields": {
       "user": 2,
       "genre": "",
-      "contact_info": null,
+      "contact_info": 2,
       "has_owner": true,
       "profile_type": "m"
     }
@@ -27,7 +27,7 @@
     "fields": {
       "user": 3,
       "genre": "",
-      "contact_info": null,
+      "contact_info": 3,
       "has_owner": true,
       "profile_type": "v"
     }

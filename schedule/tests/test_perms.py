@@ -4,10 +4,10 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.utils import timezone
 from schedule.models.calendars import Calendar
-from schedule.models.events import Event, Occurrence
+from schedule.models.events import Event
 from schedule import utils
 
-
+'''
 def check_event_perms(ob, user):
     return user.username == 'ann'
 
@@ -88,3 +88,4 @@ class TestPermissions(TestCase):
 
         utils.CHECK_EVENT_PERM_FUNC = default_event_check
         utils.CHECK_CALENDAR_PERM_FUNC = default_cal_check
+'''

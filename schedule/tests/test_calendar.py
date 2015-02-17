@@ -1,132 +1,78 @@
-
-import datetime
-import pytz
-
+from datetime import timedelta
+from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils import timezone
 
-from schedule.models import Event, Calendar
+from schedule.models import Event, Calendar, DateRange
 from schedule.periods import Period, Day
 
 class TestCalendar(TestCase):
+    fixtures = ['users', 'profiles', 'contactInfos','locations', 'contacts',
+                'zipcodes', 'applications', 'publicRequests', 'numApplicants',
+                'threads', 'messages', 'participants', 'dates', 'genres',
+                'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
+                'shows', 'events']
 
-    def setup(self):
-        pass
+    def setUp(self):
+        self.calendar = Calendar.objects.get(pk=2)
+        for count,event in enumerate(self.calendar.events.all()):
+            event.show.date.start = timezone.now() + timedelta(days=count+1)
+            event.show.date.end = timezone.now() + timedelta(days=count+1)
+            event.show.date.save()
 
-    def __create_event(self, start, end):
-        data = {
-                'title': 'Recent Event',
-                'start': start,
-                'end': end
-            }
-        return Event(**data)
-
-
-    def test_get_recent_events_without_events_is_empty(self):
-        calendar = Calendar()
-        self.assertEquals(list(calendar.get_recent()), [])
-
-    def test_get_recent_events_with_events_return_the_event(self):
-        pass
-
-    def test_occurrences_after_without_events_is_empty(self):
-        calendar = Calendar()
-        self.assertEquals(list(calendar.occurrences_after(timezone.now())), [])
-
-    def test_occurrences_after_with_events_after_returns_events(self):
-        calendar = Calendar()
-        calendar.save()
-        start_after = timezone.now() + datetime.timedelta(days=1)
-        end_after = start_after + datetime.timedelta(hours=1)
-        event = self.__create_event(start_after, end_after)
-        calendar.events.add(event)
-        occurrences = list(calendar.occurrences_after(timezone.now()))
-        self.assertEquals(len(occurrences), 1)
-        self.assertEquals(occurrences[0].start, start_after)
-        self.assertEquals(occurrences[0].end, end_after)
-
-    def test_occurrences_after_with_events_before_returns_empty(self):
-        calendar = Calendar()
-        calendar.save()
-        start_after = timezone.now() + datetime.timedelta(days=-1)
-        end_after = start_after + datetime.timedelta(hours=1)
-        event = self.__create_event(start_after, end_after)
-        calendar.events.add(event)
-        occurrences = list(calendar.occurrences_after(timezone.now()))
-        self.assertEquals(occurrences, [])
-#        self.assertEquals(list(calendar.occurrences_after(timezone.now())), [])
-
-#    def test_get_absolute_url(self):
-#        calendar = Calendar()
-#        self.assertEquals(calendar.get_absolute_url(), '')
-
-    def test_get_calendar_for_object(self):
-        calendar = Calendar(name='My Cal')
-        calendar.save()
-        rule = Rule()
-        rule.save()
-        calendar.create_relation(rule)
-        result = Calendar.objects.get_calendar_for_object(rule)
-        self.assertEquals(result.name, 'My Cal')
-
-    def test_get_calendar_for_object_without_calendars(self):
-        with self.assertRaises(Calendar.DoesNotExist):
-            rule = Rule()
-            rule.save()
-            Calendar.objects.get_calendar_for_object(rule)
-
-    def test_get_calendar_for_object_with_more_than_one_calendar(self):
-        calendar_1 = Calendar(name='My Cal 1')
-        calendar_1.save()
-        calendar_2 = Calendar(name='My Cal 2')
-        calendar_2.save()
-        rule = Rule()
-        rule.save()
-        calendar_1.create_relation(rule)
-        calendar_2.create_relation(rule)
-        with self.assertRaises(AssertionError):
-            result = Calendar.objects.get_calendar_for_object(rule)
+    def __create_event(self, calendar, start, end):
+        show = Show.objects.get(pk=1)
+        show.date = DateRange(start=start, end=end)
+        return Event (show=show, calendar=calendar,
+                      approved=True, visible=True,)
 
     def test_get_or_create_calendar_for_object_without_calendar(self):
-        """
-            Creation test
-        """
-        rule = Rule()
-        rule.save()
-        calendar = Calendar.objects.get_or_create_calendar_for_object(rule, name='My Cal')
+        """ Test create calendar """
+        user = User.objects.get(pk=1)
+        user.pk = 4
+        user.username = "calendarTest"
+        calendar = Calendar.objects.get_or_create_calendar(user=user, name='My Cal')
+        user.save()
         self.assertEquals(calendar.name, 'My Cal')
-        calendar_from_rule = Calendar.objects.get_calendars_for_object(rule)[0]
-        self.assertEquals(calendar, calendar_from_rule)
 
-    def test_get_or_create_calendar_for_object_withouth_name(self):
-        """
-            Test with already created calendar
-        """
-        rule = Rule()
-        rule.save()
-        calendar = Calendar.objects.get_or_create_calendar_for_object(rule)
-        calendar_from_rule = Calendar.objects.get_calendars_for_object(rule)[0]
-        self.assertEquals(calendar, calendar_from_rule)
+    def test_get_or_create_calendar_for_object_with_calendar(self):
+        """ Test get calendar """
+        user = User.objects.get(pk=1)
+        calendar_0 = user.calendar
+        calendar_1 = Calendar.objects.get_or_create_calendar(user=user)
+        self.assertEquals(calendar_0, calendar_1)
 
-    def test_get_calendars_for_object_without_calendars(self):
-        rule = Rule()
-        rule.save()
-        calendar = Calendar.objects.get_or_create_calendar_for_object(rule, name='My Cal', distinction='owner')
-        rule = Rule()
-        rule.save()
-        calendars = list(Calendar.objects.get_calendars_for_object(rule, distinction='owner'))
-        self.assertEquals(len(calendars), 0)
+    def test_calendar_get_recent(self):
+        """ Test get upcoming events for calendar """
+        for count,event in enumerate(self.calendar.get_recent()):
+            self.assertEquals(count+1, event.pk)
 
-    def test_calendar_absolute_and_event_url(self):
-        """
-            this test seems to not make too much send, just added since an
-            url was with wrong reverse name.
+    def test_calendar_get_yearly_events(self):
+        """ Test get yearly events """
+        self.assertEquals(set(self.calendar.events.all()), set(self.calendar.get_yearly_events()))
+        self.assertEquals(set([]), set(self.calendar.get_yearly_events(year=2014)))
 
-        """
-        rule = Rule()
-        rule.save()
-        calendar = Calendar.objects.get_or_create_calendar_for_object(rule, name='My Cal', distinction='owner')
-        abs_url = calendar.get_absolute_url()
-        calendar.add_event_url()
-        relation = CalendarRelation.objects.create_relation(calendar, rule)
-        relation.__unicode__()
+    def test_calendar_get_prev_next_event(self):
+        """ Test get previous and get next event """
+        event = Event.objects.get(pk=2)
+        prev = self.calendar.get_prev_event(event.show.date.start)
+        next = self.calendar.get_next_event(event.show.date.end)
+        self.assertEquals(prev.pk, 1)
+        self.assertEquals(next.pk, 3)
+
+    def test_calendar_get_events_in_range(self):
+        """ Test get previous and get next event """
+        event_1 = Event.objects.get(pk=1)
+        event_3 = Event.objects.get(pk=3)
+        events = self.calendar.get_events_in_range(start=event_1.show.date.start, end= event_3.show.date.end)
+        self.assertEquals(set(self.calendar.events.all()), set(events))
+        events = self.calendar.get_events_in_range(
+            start=event_1.show.date.start - timedelta(days=2),
+            end=event_1.show.date.start - timedelta(days=1)
+        )
+        self.assertEquals(set([]), set(events))
+        events = self.calendar.get_events_in_range(
+            start=event_3.show.date.end +  timedelta(days=1),
+            end=event_3.show.date.end + timedelta(days=2)
+        )
+        self.assertEquals(set([]), set(events))
