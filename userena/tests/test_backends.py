@@ -13,7 +13,7 @@ class UserenaAuthenticationBackendTests(TestCase):
     when supplied with a username/email and a correct password.
 
     """
-    fixtures = ['users',]
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',]
     backend = UserenaAuthenticationBackend()
 
     def test_with_email(self):

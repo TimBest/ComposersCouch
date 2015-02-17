@@ -9,7 +9,7 @@ from contact.models import Contact, ContactInfo, Location, Zipcode
 
 class UtilsTests(TestCase):
     """ Test the extra utils methods """
-    fixtures = ['users', 'profiles','contactInfos', 'contacts', 'locations','zipcodes']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  'zipcodes']
 
     def test_get_location(self):
         factory = RequestFactory()

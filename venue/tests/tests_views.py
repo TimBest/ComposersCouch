@@ -7,7 +7,7 @@ from accounts.models import Profile
 
 class ViewsTests(TestCase):
     """  """
-    fixtures = ['users', 'profiles', 'venues', 'calendars', 'staff', 'contacts']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles', 'venues', 'calendars', 'staff', 'contacts']
 
     def test_view(self):
         """  """

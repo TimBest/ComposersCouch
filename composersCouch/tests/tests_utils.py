@@ -5,7 +5,7 @@ from composersCouch.utils import get_page
 
 class UtilsTests(TestCase):
     """ Test the extra utils methods """
-    fixtures = ['users', 'profiles']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles']
 
     def test_get_page(self):
         """ TODO: make into loop """

@@ -21,7 +21,7 @@ class UserenaSignupModelTests(TestCase):
                  'password': 'swordfish',
                  'email': 'alice@example.com'}
 
-    fixtures = ['users', 'profiles']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles']
 
     def test_change_email(self):
         """ TODO """
@@ -62,7 +62,7 @@ class UserenaSignupModelTests(TestCase):
 
 class BaseProfileModelTest(TestCase):
     """ Test the ``BaseProfile`` model """
-    fixtures = ['users', 'profiles']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles']
 
     def test_mugshot_url(self):
         """TODO: The user has uploaded it's own mugshot. This should be returned. """

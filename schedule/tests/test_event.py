@@ -13,8 +13,8 @@ from schedule.models import Event, Calendar, Show
 
 class TestEvent(TestCase):
 
-    fixtures = ['users', 'profiles', 'contactInfos','locations', 'contacts',
-                'zipcodes', 'applications', 'publicRequests', 'numApplicants',
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  
+                 'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
                 'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
                 'shows', 'events']
@@ -42,8 +42,8 @@ class TestEvent(TestCase):
 
 class TestShow(TestCase):
 
-    fixtures = ['users', 'profiles', 'contactInfos','locations', 'contacts',
-                'zipcodes', 'applications', 'publicRequests', 'numApplicants',
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
+                 'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
                 'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
                 'shows', 'events']

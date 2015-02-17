@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class FanViewsTests(TestCase):
     """  """
-    fixtures = ['users', 'profiles', 'fans']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles', 'fans']
 
     def test_home_view(self):
         """  """

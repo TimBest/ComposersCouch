@@ -10,9 +10,9 @@ from threads.models import Thread
 
 class ViewsTests(TestCase):
     """  """
-    fixtures = ['users', 'profiles', 'artists', 'threads', 'messages',
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles', 'artists', 'threads', 'messages',
                 'participants', 'privateRequests', 'dates', 'calendars',
-                'venues', 'requestParticipants', 'publicRequests', 'zipcodes',]
+                'venues', 'requestParticipants', 'publicRequests', ]
 
     def test_request_views(self):
         """ test views where login is required """
@@ -41,9 +41,9 @@ class ViewsTests(TestCase):
 
 class ParticipantViewsTests(TestCase):
     """  """
-    fixtures = ['users', 'profiles', 'artists', 'threads', 'messages',
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles', 'artists', 'threads', 'messages',
                 'participants', 'privateRequests', 'dates', 'calendars',
-                'venues', 'requestParticipants', 'publicRequests', 'zipcodes',
+                'venues', 'requestParticipants', 'publicRequests', 
                 'applications']
 
     def test_request_participant_views(self):
@@ -74,9 +74,9 @@ class ParticipantViewsTests(TestCase):
 
 class IsArtistViewsTests(TestCase):
     """  """
-    fixtures = ['users', 'profiles', 'artists', 'threads', 'messages',
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles', 'artists', 'threads', 'messages',
                 'participants', 'privateRequests', 'dates', 'calendars',
-                'venues', 'requestParticipants', 'publicRequests', 'zipcodes',
+                'venues', 'requestParticipants', 'publicRequests', 
                 'applications']
 
     def test_is_artist_views(self):

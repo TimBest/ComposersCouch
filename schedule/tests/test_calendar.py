@@ -7,8 +7,8 @@ from schedule.models import Event, Calendar, DateRange
 from schedule.periods import Period, Day
 
 class TestCalendar(TestCase):
-    fixtures = ['users', 'profiles', 'contactInfos','locations', 'contacts',
-                'zipcodes', 'applications', 'publicRequests', 'numApplicants',
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  
+                 'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
                 'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
                 'shows', 'events']

@@ -6,7 +6,11 @@ from accounts import forms
 
 class SignupFormTests(TestCase):
     """ Test the signup form. """
-    fixtures = ['users']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  
+                 'applications', 'publicRequests', 'numApplicants',
+                'threads', 'messages', 'participants', 'dates', 'genres',
+                'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
+                'shows', 'events']
 
     def test_signup_form(self):
         """
@@ -81,7 +85,11 @@ class SignupFormTests(TestCase):
 class EmailFormTests(TestCase):
     """ Test the ``EmailForm`` """
 
-    fixtures = ['users',]
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  
+                 'applications', 'publicRequests', 'numApplicants',
+                'threads', 'messages', 'participants', 'dates', 'genres',
+                'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
+                'shows', 'events']
 
     def test_signin_email_form(self):
         """
@@ -119,7 +127,7 @@ class ClaimProfileFormTests(TestCase):
 
 
     """
-    fixtures = ['users']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',]
 
     def test_claim_profile_form(self):
         """
@@ -147,7 +155,7 @@ class ClaimProfileFormTests(TestCase):
 
 class SigninFormTests(TestCase):
     """ Test the ``ChangeEmailForm`` """
-    fixtures = ['users']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',]
 
     def test_sigin_form(self):
         """

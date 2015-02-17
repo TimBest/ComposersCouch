@@ -17,7 +17,7 @@ User = User
 
 class UserenaViewsTests(TestCase):
     """ Test the account views """
-    fixtures = ['users', 'profiles']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles']
 
     def test_signup_view(self):
         """TODO: A ``GET`` to the ``signup`` view """

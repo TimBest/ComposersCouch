@@ -8,7 +8,7 @@ from artist.models import ArtistProfile
 
 class ViewsTests(TestCase):
     """ Test the account views """
-    fixtures = ['users', 'profiles', 'artists', 'venues']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles', 'artists', 'venues']
 
     def setUp(self):
         # create user and log them in

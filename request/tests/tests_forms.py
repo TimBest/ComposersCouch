@@ -11,8 +11,8 @@ from request.models import Application, NumberOfApplicants
 
 
 class FormTests(TestCase):
-    fixtures = ['users', 'profiles', 'contactInfos','locations', 'contacts',
-                'zipcodes', 'applications', 'publicRequests', 'numApplicants',
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  
+                 'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates']
 
     def test_date_form(self):

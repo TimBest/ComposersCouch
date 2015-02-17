@@ -13,7 +13,7 @@ from customProfile.decorators import is_venue, is_artist, is_fan
 
 class IsVenueDecoratorTests(TestCase):
     """ Test the extra utils methods """
-    fixtures = ['users', 'profiles',]
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',]
 
     def setUp(self):
         # create mock function and decorate it
@@ -55,7 +55,7 @@ class IsVenueDecoratorTests(TestCase):
 
 class IsArtistDecoratorTests(TestCase):
     """ Test the extra utils methods """
-    fixtures = ['users', 'profiles',]
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',]
 
     def setUp(self):
         # create mock function and decorate it
@@ -97,7 +97,7 @@ class IsArtistDecoratorTests(TestCase):
 
 class IsFanDecoratorTests(TestCase):
     """ Test the extra utils methods """
-    fixtures = ['users', 'profiles',]
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',]
 
     def setUp(self):
         # create mock function and decorate it

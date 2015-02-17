@@ -14,7 +14,7 @@ def mock_fn(request, *args, **kwargs):
 
 class IsParticipantDecoratorTests(TestCase):
     """ Test the extra utils methods """
-    fixtures = ['users', 'profiles', 'threads', 'messages', 'participants', 'privateRequests', 'dates']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles', 'threads', 'messages', 'participants', 'privateRequests', 'dates']
 
     def setUp(self):
         # create WSGIRequest object

@@ -8,7 +8,7 @@ from userena import settings as userena_settings
 
 class SignupFormTests(TestCase):
     """ Test the signup form. """
-    fixtures = ['users']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',]
 
     def test_signup_form(self):
         """
@@ -49,7 +49,7 @@ class SignupFormTests(TestCase):
 class AuthenticationFormTests(TestCase):
     """ Test the ``AuthenticationForm`` """
 
-    fixtures = ['users',]
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',]
 
     def test_signin_form(self):
         """
@@ -106,7 +106,7 @@ class SignupFormOnlyEmailTests(TestCase):
     username for a successfull signup.
 
     """
-    fixtures = ['users']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',]
 
     def test_signup_form_only_email(self):
         """
@@ -133,7 +133,7 @@ class SignupFormOnlyEmailTests(TestCase):
 
 class ChangeEmailFormTests(TestCase):
     """ Test the ``ChangeEmailForm`` """
-    fixtures = ['users']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',]
 
     def test_change_email_form(self):
         user = User.objects.get(pk=1)

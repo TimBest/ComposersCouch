@@ -6,8 +6,8 @@ from threads import forms
 
 
 class FormTests(TestCase):
-    fixtures = ['users', 'profiles', 'contactInfos','locations', 'contacts',
-                'zipcodes', 'applications', 'publicRequests', 'numApplicants',
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  
+                 'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
                 'albums', 'artists', 'tracks', 'media']
 

@@ -13,7 +13,7 @@ User = User
 
 class UserenaLocaleMiddlewareTests(TestCase):
     """ Test the ``UserenaLocaleMiddleware`` """
-    fixtures = ['users', 'profiles']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles']
 
     def _get_request_with_user(self, user):
         """ Fake a request with an user """

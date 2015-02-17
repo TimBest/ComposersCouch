@@ -5,8 +5,8 @@ from request.models import PrivateRequest, RequestParticipant
 
 
 class PrivateRequestModelTest(TestCase):
-    fixtures = ['users', 'profiles', 'contactInfos','locations', 'contacts',
-                'zipcodes', 'applications', 'publicRequests', 'numApplicants',
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  
+                 'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates',
                 'privateRequests', 'requestParticipants']
 

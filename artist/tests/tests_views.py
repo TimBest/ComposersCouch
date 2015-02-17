@@ -8,7 +8,7 @@ from artist.views import MusicianContactsView
 
 class ViewsTests(TestCase):
     """  """
-    fixtures = ['users', 'profiles', 'artists', 'members', 'calendars']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles', 'artists', 'members', 'calendars']
 
     def test_view(self):
         """  """

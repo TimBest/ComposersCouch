@@ -18,7 +18,7 @@ class UserenaManagerTests(TestCase):
                  'password': 'swordfish',
                  'email': 'alice@example.com'}
 
-    fixtures = ['users']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',]
 
     def test_create_inactive_user(self):
         """

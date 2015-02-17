@@ -7,7 +7,7 @@ from contact.models import Contact, ContactInfo, Location, Zipcode
 
 class UtilsTests(TestCase):
     """ Test the extra utils methods """
-    fixtures = ['users', 'profiles']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles']
 
     def test_create_user_profile(self):
         creator = User.objects.get(pk=1)

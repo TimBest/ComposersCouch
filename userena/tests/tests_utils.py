@@ -11,7 +11,7 @@ import hashlib
 
 class UtilsTests(TestCase):
     """ Test the extra utils methods """
-    fixtures = ['users']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',]
 
     def test_get_gravatar(self):
         template = '//www.gravatar.com/avatar/%(hash)s?s=%(size)s&d=%(type)s'

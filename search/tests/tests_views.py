@@ -10,9 +10,9 @@ from threads.models import Thread
 
 class SearchViewsTests(TestCase):
     """  """
-    fixtures = ['users', 'profiles', 'artists', 'threads', 'messages', 'fans',
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles', 'artists', 'threads', 'messages', 'fans',
                 'participants', 'privateRequests', 'dates', 'calendars',
-                'venues', 'requestParticipants', 'publicRequests', 'zipcodes',]
+                'venues', 'requestParticipants', 'publicRequests', ]
 
     def test_null_search_views(self):
         response = self.client.get(reverse('search'))
