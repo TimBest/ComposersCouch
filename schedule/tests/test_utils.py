@@ -6,7 +6,6 @@ from django.test import TestCase
 from django.utils import timezone
 
 from schedule.models import Calendar
-from schedule.utils import EventListManager
 
 
 class TestEventListManager(TestCase):
