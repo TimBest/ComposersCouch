@@ -12,7 +12,7 @@ from schedule import forms
 
 class TestScheduleForms(TestCase):
     fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
-                 'applications', 'publicRequests', 'numApplicants',
+                'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
                 'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
                 'shows', 'events']
@@ -92,7 +92,6 @@ class TestScheduleForms(TestCase):
                       "description": "Were putting a show on. tickets are 5 bucks.",},
              'error': ('__all__', [_(u'You must be a participant in this show.')]),
              'user' : User.objects.get(pk=1),},
-
         ]
 
         for invalid_dict in invalid_data_dicts:
@@ -112,6 +111,7 @@ class TestScheduleForms(TestCase):
              "venue": 3,
              "description": "Were putting a show on. tickets are 5 bucks.",},
         ]
+
         for valid_dict in valid_data_dicts:
             form = forms.ShowInfoForm(data=valid_dict, user=user)
             self.failUnless(form.is_valid())
