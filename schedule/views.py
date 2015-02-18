@@ -27,6 +27,7 @@ from schedule.periods import Year, Month, Week, Day
 from schedule.utils import coerce_date_dict
 from schedule.decorators import view_show, edit_show
 
+
 edit_show_m = decorators.method_decorator(edit_show)
 login_required_m = decorators.method_decorator(login_required)
 
@@ -36,6 +37,9 @@ PERIODS = {
     'month' : (Month,'schedule/calendar_month.html'),
     'year'  : (Year, 'schedule/calendar_year.html'),
 }
+
+FILTER = ['shows', 'requests']
+
 
 """ Calendar Views """
 class CalendarView(TemplateView):
@@ -52,10 +56,11 @@ class CalendarView(TemplateView):
         context = super(CalendarView, self).get_context_data(*args, **kwargs)
         context['calendar'] = self.request.user.calendar
         context['date'] = coerce_date_dict(self.request.GET)
-        context['filter'] = filter = kwargs.get('filter', 'shows')
+        context['filter'] = filter = kwargs.get('filter')
         if filter == 'requests':
             event_list = Participant.objects.filter(user=self.request.user, thread__request__isnull=False)
         else:
+            context['filter'] = filter = 'shows'
             event_list = self.request.user.calendar.events.filter(approved=True)
         context['period'] = self.period(event_list, context['date'])
         context['period_name'] = self.period.__name__.lower()
