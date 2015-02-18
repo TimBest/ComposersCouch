@@ -6,15 +6,19 @@ from django.test import TestCase
 from django.test.client import RequestFactory
 
 from accounts.models import Profile
-from request.decorators import is_participant
+from schedule.decorators import edit_show, view_show
 
-@is_participant
+@edit_show
 def mock_fn(request, *args, **kwargs):
     return request
 
-class IsParticipantDecoratorTests(TestCase):
+class editShowDecoratorTests(TestCase):
     """ Test the extra utils methods """
-    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles', 'threads', 'messages', 'participants', 'privateRequests', 'dates']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
+                 'applications', 'publicRequests', 'numApplicants',
+                'threads', 'messages', 'participants', 'dates', 'genres',
+                'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
+                'shows', 'events']
 
     def setUp(self):
         # create WSGIRequest object
@@ -26,18 +30,17 @@ class IsParticipantDecoratorTests(TestCase):
         response = mock_fn(self.request, request_id=1)
         self.assertEqual(response.status_code, 302)
 
-    def test_non_participant(self):
+    def test_user_without_event(self):
         user = User.objects.get(pk=1)
         user.profile = Profile.objects.get(pk=1)
         user.profile.save()
         self.request.user = user
-        self.assertRaises(PermissionDenied, mock_fn, self.request, request_id=1)
+        self.assertRaises(PermissionDenied, mock_fn, self.request, show_id=1)
 
-    def test_participant(self):
-        for pk in [2,3]:
-            user = User.objects.get(pk=2)
-            user.profile = Profile.objects.get(pk=2)
-            user.profile.save()
-            self.request.user = user
-            response = mock_fn(self.request, request_id=1)
-            self.assertEqual(response, self.request)
+    def test_user_with_event(self):
+        user = User.objects.get(pk=2)
+        user.profile = Profile.objects.get(pk=2)
+        user.profile.save()
+        self.request.user = user
+        response = mock_fn(self.request, show_id=1)
+        self.assertEqual(response, self.request)

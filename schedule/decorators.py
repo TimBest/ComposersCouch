@@ -10,7 +10,7 @@ from annoying.functions import get_object_or_None
 def edit_show(function):
     @wraps(function)
     def decorator(request, *args, **kwargs):
-        from schedule.models import Calendar, Event, Show
+        from schedule.models import Event, Show
         if not request.user.is_authenticated():
             return HttpResponseRedirect(settings.LOGIN_URL)
         else:
@@ -27,7 +27,7 @@ def edit_show(function):
 def view_show(function):
     @wraps(function)
     def decorator(request, *args, **kwargs):
-        from schedule.models import Calendar, Event, Show
+        from schedule.models import Event, Show
         show = get_object_or_None(Show, pk=kwargs.get('show_id', None))
         if show and request.user.calendar:
             try:
