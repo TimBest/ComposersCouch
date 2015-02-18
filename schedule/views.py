@@ -24,7 +24,8 @@ from request.models import PrivateRequest
 from schedule.forms import DateForm, EventForm, ShowInfoForm
 from schedule.models import Calendar, Event, Show
 from schedule.periods import Year, Month, Week, Day
-from schedule.utils import view_show, edit_show, coerce_date_dict
+from schedule.utils import coerce_date_dict
+from schedule.decorators import view_show, edit_show
 
 edit_show_m = decorators.method_decorator(edit_show)
 login_required_m = decorators.method_decorator(login_required)
