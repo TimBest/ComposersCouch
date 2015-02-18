@@ -29,7 +29,7 @@ def view_show(function):
     def decorator(request, *args, **kwargs):
         from schedule.models import Event, Show
         show = get_object_or_None(Show, pk=kwargs.get('show_id', None))
-        if show and request.user.calendar:
+        if show:
             try:
                 event = get_object_or_None(Event, show=show, calendar=request.user.calendar)
             except:
