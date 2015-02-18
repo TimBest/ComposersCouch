@@ -20,6 +20,7 @@ from threads.utils import create_thread
 from photos.models import Image
 from photos.forms import PosterForm
 from photos.views import ImageFormMixin
+from request.decorators import is_participant
 from request.models import PrivateRequest
 from schedule.forms import DateForm, EventForm, ShowInfoForm
 from schedule.models import Calendar, Event, Show
@@ -28,8 +29,10 @@ from schedule.utils import coerce_date_dict
 from schedule.decorators import view_show, edit_show
 
 
+view_show_m = decorators.method_decorator(view_show)
 edit_show_m = decorators.method_decorator(edit_show)
 login_required_m = decorators.method_decorator(login_required)
+is_participant_m = decorators.method_decorator(is_participant)
 
 PERIODS = {
     'day'   : (Day,  'schedule/calendar_day.html'),
@@ -72,6 +75,7 @@ calendar = CalendarView.as_view()
 class ShowView(TemplateView):
     template_name="schedule/show.html"
 
+    @view_show_m
     def dispatch(self, *args, **kwargs):
         show_id = self.kwargs.get('show_id', None)
         self.show = get_object_or_None(Show, id=show_id)
@@ -91,7 +95,7 @@ class ShowView(TemplateView):
         context['user_accept'] = event.approved
         return context
 
-show = view_show(ShowView.as_view())
+show = ShowView.as_view()
 
 class ShowMessageView(MessageView):
     success_url='show_message'
@@ -248,6 +252,7 @@ edit_event = EditEventFormView.as_view()
 
 class RequestToEventFormView(EventFormView):
 
+    @is_participant_m
     def dispatch(self, *args, **kwargs):
         request_id = self.kwargs.get('request_id', None)
         self.private_request = get_object_or_None(PrivateRequest, id=request_id)
@@ -294,4 +299,4 @@ def confirm(request, approved=True):
     return redirect('show_message', thread_id=show.thread.id)
 
 def deny(request):
-    return  confirm(request, approved=False)
+    return confirm(request, approved=False)
