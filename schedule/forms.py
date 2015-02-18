@@ -93,7 +93,6 @@ class ShowInfoForm(ModelForm):
             'openers_text', 'openers', 'venue_text', 'venue','description',)
 
     def clean(self):
-        print self.cleaned_data
         # user must be a participant in the evnet or request
         isParticipant = False
         try:
@@ -108,11 +107,11 @@ class ShowInfoForm(ModelForm):
                 if o.profile.user == self.user:
                     isParticipant = True
         if not isParticipant:
-            raise forms.ValidationError(_(u"You must be a participant in this show"))
+            raise forms.ValidationError(_(u"You must be a participant in this show."))
         if not self.cleaned_data.get('title') and not self.cleaned_data.get('headliner_text'):
-            raise forms.ValidationError(_(u"A Title or a Headliner is required"))
+            raise forms.ValidationError(_(u"A Title or a Headliner is required."))
         if not self.cleaned_data.get('venue_text'):
-            raise forms.ValidationError(_(u"A Venue is required"))
+            raise forms.ValidationError(_(u"A Venue is required."))
         return self.cleaned_data
 
     class Meta:
