@@ -9,5 +9,4 @@ class TestTemplateTags(TestCase):
     def test_querystring_for_datetime(self):
         date = datetime.datetime(2008,1,1,0,0,0)
         query_string=querystring_for_date(date)
-        self.assertEqual("?year=2008&month=1&day=1",
-            query_string)
+        self.assertEqual("?year=2008&month=1&day=1", query_string)
