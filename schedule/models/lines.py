@@ -28,42 +28,38 @@ def create_or_update_line(sender, instance, **kwargs):
     TODO: if a new event is being created
           else its an edit so just return
     """
-
+    if not instance.approved:
+        return None
     calendar = instance.calendar
     # update previous event's line
     prev_event = calendar.get_prev_event(in_datetime=instance.show.date.start)
-    next_event = None
-    if prev_event and prev_event != instance:
-        prev_line = prev_event.line
+    if prev_event:
         # save old next event
-        next_event = getattr(prev_line, "next", None)
-        prev_line.next = instance
-        prev_line.line = LineString(
-            prev_event.get_location().zip_code.point,
-            instance.get_location().zip_code.point
-        )
-        prev_line.save()
-    # Create line string if previous event had a next event
+        prev_event.next = instance
+        #prev_event.line = LineString(
+        #    prev_event.get_location().zip_code.point,
+        #    instance.get_location().zip_code.point
+        #)
+        prev_event.save()
+
+    # create or update current line
+    next_event = calendar.get_next_event(in_datetime=instance.show.date.start)
     if next_event:
         line_string = LineString(
             instance.get_location().zip_code.point,
-            next_event.get_location().zip_code.point
-        )
+            next_event.get_location().zip_code.point,
+         )
     else:
         # if no next event assume artist home location
         line_string = LineString(
             instance.get_location().zip_code.point,
             calendar.owner.profile.contact_info.location.zip_code.point
         )
-    # create or update current line
-    try:
-        line = getattr(instance, "line", None)
-    except:
-        line = None
+
+    line = getattr(instance, "line", None)
     if line:
         line.next = next_event
         line.line = line_string
-
     else:
         line = Line(
             current = instance,

@@ -56,30 +56,6 @@ class AvailabilityView(AvailabilityMixin, VenueView):
         else:
             return []
 
-        if location:
-            try:
-                calendar = self.request.user.calendar
-                prev = calendar.get_prev_event(in_datetime=end)
-                next = calendar.get_next_event(in_datetime=end)
-                if prev:
-                    start = prev.get_location().zip_code.point
-                else:
-                    start = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-                if next:
-                    end = next.get_location().zip_code.point
-                else:
-                    end = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-                line = LineString(start,end)
-                return posts.filter(
-                    profile__contact_info__location__zip_code__point__distance_lte=(line, D(m=LocalFeed.distance))
-                )
-            except:
-                return posts.filter(
-                    profile__user__calendar__events__line__line__distance_lte=(location, D(m=LocalFeed.distance))
-                )
-        else:
-            return []
-
 available_venues = AvailabilityView.as_view()
 
 class BetweenView(AvailabilityView):

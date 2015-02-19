@@ -49,11 +49,6 @@ class DateForm(ModelForm):
         end = self.cleaned_data.get('end')
         if (start and end) and end < start:
             raise forms.ValidationError(_(u"The end time must be later than start time."))
-        if start:
-            event = get_object_or_None(Event, show__date__start=start, calendar=self.user.calendar, approved=True)
-            if event:
-                raise forms.ValidationError(_(u"A participant in this event has a conflict. Try another date/time."))
-
         return self.cleaned_data
 
     def save(self):

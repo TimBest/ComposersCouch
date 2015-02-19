@@ -75,7 +75,7 @@ class Calendar(models.Model):
         return self.events.order_by('show__date__start').filter(
             show__date__start__gte=start,
             show__date__start__lt=end,
-            Sapproved=True
+            approved=True
         )
 
     def get_prev_event(self, in_datetime=datetime.datetime.now(), tzinfo=pytz.utc):
@@ -86,7 +86,7 @@ class Calendar(models.Model):
         date = in_datetime.replace(tzinfo=tzinfo)
         try:
             return self.events.order_by('-show__date__end').filter(
-                show__date__end__lte=date,
+                show__date__end__lt=date,
                 approved=True
             )[0]
         except:
@@ -100,7 +100,7 @@ class Calendar(models.Model):
         date = in_datetime.replace(tzinfo=tzinfo)
         try:
             return self.events.order_by('show__date__start').filter(
-                show__date__start__gte=date,
+                show__date__start__gt=date,
                 approved=True
             )[0]
         except:
