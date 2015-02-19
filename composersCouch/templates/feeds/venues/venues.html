@@ -24,9 +24,9 @@
 
 {% block orderOptions %}
   <li class="{% ifequal order 'all' %}text-bold{% endifequal %}">
-    <a href="{% url 'venues' 'all' 'all' zipcode %}?{{ request.GET.urlencode }}">All</a>
+    <a href="{% url 'venues' 'all' scope zipcode %}?{{ request.GET.urlencode }}">All</a>
   </li>
   <li class="{% ifequal order 'new' %}text-bold{% endifequal %}">
-    <a href="{% url 'venues' 'new' 'all' zipcode %}?{{ request.GET.urlencode }}">New </a>
+    <a href="{% url 'venues' 'new' scope zipcode %}?{{ request.GET.urlencode }}">New </a>
   </li>
 {% endblock %}

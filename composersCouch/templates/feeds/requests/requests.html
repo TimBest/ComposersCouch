@@ -1,7 +1,7 @@
 {% extends 'feeds/base.html' %}
 
 
-{% block bgColor %}blue{% endblock %}
+{% block bgColor %}dark-blue{% endblock %}
 {% block requestsClass %}active{% endblock %}
 {% block feedType %}Requests{% endblock %}
 {% block forForm %}
@@ -39,13 +39,13 @@
 
 {% block orderOptions %}
   <li class="{% ifequal order 'all' %}text-bold{% endifequal %}">
-    <a href="{% url 'requests' 'all' for 'all' zipcode %}?{{ request.GET.urlencode }}">All</a>
+    <a href="{% url 'requests' 'all' for scope zipcode %}?{{ request.GET.urlencode }}">All</a>
   </li>
   <li class="{% ifequal order 'expiring' %}text-bold{% endifequal %}">
-    <a href="{% url 'requests' 'expiring' for 'all' zipcode %}?{{ request.GET.urlencode }}">Expiring</a>
+    <a href="{% url 'requests' 'expiring' for scope zipcode %}?{{ request.GET.urlencode }}">Expiring</a>
   </li>
   <li class="{% ifequal order 'new' %}text-bold{% endifequal %}">
-    <a href="{% url 'requests' 'new' for 'all' zipcode %}?{{ request.GET.urlencode }}">New </a>
+    <a href="{% url 'requests' 'new' for scope zipcode %}?{{ request.GET.urlencode }}">New </a>
   </li>
 {% endblock %}
 

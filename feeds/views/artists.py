@@ -16,6 +16,7 @@ from feeds.views import AvailabilityMixin, FeedMixin
 login_required_m = method_decorator(login_required)
 
 def artists(request, scope='all', *args, **kwargs):
+    kwargs['scope'] = scope
     if scope == 'local':
         return LocalView.as_view()(request, *args, **kwargs)
     elif scope == 'following':

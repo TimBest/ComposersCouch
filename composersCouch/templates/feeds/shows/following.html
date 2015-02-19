@@ -5,7 +5,6 @@
 
 {% comment %}remove zipcode form from template{% endcomment %}
 {% block zipcodeForm %}{% endblock %}
-{% block genreForm %}{% endblock %}
 
 {% block feed %}
   {% include "feeds/shows/_feed.html" with title="Following" shows=posts following="Ture" %}

@@ -14,6 +14,7 @@ from request.models import PublicRequest
 login_required_m = method_decorator(login_required)
 
 def requests(request, scope='all', *args, **kwargs):
+    kwargs['scope'] = scope
     if scope == 'local':
         return LocalView.as_view()(request, *args, **kwargs)
     elif scope == 'following':

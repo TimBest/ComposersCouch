@@ -18,6 +18,7 @@ from schedule.models import Show
 login_required_m = method_decorator(login_required)
 
 def shows(request, scope='all', *args, **kwargs):
+    kwargs['scope'] = scope
     if scope == 'local':
         return LocalView.as_view()(request, *args, **kwargs)
     elif scope == 'following':

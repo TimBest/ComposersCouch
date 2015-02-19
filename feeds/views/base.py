@@ -65,6 +65,8 @@ class FeedMixin(GenreMixin, ZipcodeMixin):
 
     def get_context_data(self, **kwargs):
         context = super(FeedMixin, self).get_context_data(**kwargs)
+        context['scope'] = self.kwargs.get('scope', 'all')
+
         page_num = self.request.GET.get('page')
         posts = self.get_posts()
         if posts:
