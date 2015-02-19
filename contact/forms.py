@@ -68,7 +68,7 @@ class NonUserLocationForm(LocationForm):
 
 
 class ContactForm(forms.ModelForm):
-
+    phone = forms.CharField(min_length=7, widget=forms.TextInput(attrs={'type':'number'}))
     def __init__(self, *args, **kw):
       super(ContactForm, self).__init__(*args, **kw)
       self.helper = FormHelper()
