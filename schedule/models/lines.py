@@ -24,55 +24,49 @@ class Line(models.Model):
 
 
 def create_or_update_line(sender, instance, **kwargs):
-    """
-    TODO: if a new event is being created
-          else its an edit so just return
-    """
-    if not instance.approved:
-        return None
-    calendar = instance.calendar
-    # update previous event's line
-    prev_event = calendar.get_prev_event(in_datetime=instance.show.date.start)
+    """ """
+    lines_to_update = []
+    # get line where next = instance (line_1)
+    line_1 = get_object_or_None(Line, next=instance)
+    if line_1:
+        line_1.next = None
+        line_1.save()
+        lines_to_update.append(line_1)
+
+    #get line where current = instance (line_2)
+    line_2 = Line.objects.get_or_create(current=instance)
+    line_2.next = None
+    line_2.save()
+    lines_to_update.append(line_2)
+
+    # get new previous event (line_3)
+    prev_event = instance.calendar.get_prev_event(
+                    in_datetime=instance.show.date.start)
     if prev_event:
-        # save old next event
-        prev_event.next = instance
-        #prev_event.line = LineString(
-        #    prev_event.get_location().zip_code.point,
-        #    instance.get_location().zip_code.point
-        #)
-        prev_event.save()
+        prev_event.line.next = None
+        lines_to_update.append(prev_event.line)
+        prev_event.line.save()
 
-    # create or update current line
-    next_event = calendar.get_next_event(in_datetime=instance.show.date.start)
+    for line in lines_to_update:
+        update_line(line, instance.calendar)
+
+
+def update_line(line, calendar):
+    next_event = calendar.get_next_event(in_datetime=line.event.show.date.start)
     if next_event:
-        line_string = LineString(
-            instance.get_location().zip_code.point,
-            next_event.get_location().zip_code.point,
-         )
-    else:
-        # if no next event assume artist home location
-        line_string = LineString(
-            instance.get_location().zip_code.point,
-            calendar.owner.profile.contact_info.location.zip_code.point
-        )
-
-    line = getattr(instance, "line", None)
-    if line:
         line.next = next_event
-        line.line = line_string
+        line.line = LineString(
+            line.current.get_location().zip_code.point,
+            next_event.get_location().zip_code.point
+        )
     else:
-        line = Line(
-            current = instance,
-            next = next_event,
-            line = line_string,
+        line.next = None
+        line.line = LineString(
+            line.current.get_location().zip_code.point,
+            calendar.owner.profile.contact_info.location.zip_code.point
         )
     line.save()
 
-def create_line_string(start=None, end=None):
-    if start and end:
-        return LineString(start,end)
-    else:
-        return None
 
 
 post_save.connect(create_or_update_line, sender=Event, dispatch_uid="create_or_update_line")
