@@ -91,13 +91,6 @@ class ShowView(TemplateView):
     def get_context_data(self, *args, **kwargs):
         context = super(ShowView, self).get_context_data(*args, **kwargs)
         context['show'] = self.show
-        try:
-            calendar = self.request.user.calendar
-        except:
-            calendar = None
-        event = get_object_or_None(Event, show=self.show, calendar=calendar)
-        if event:
-            context['user_accept'] = event.approved
         return context
 
 show = ShowView.as_view()
@@ -108,10 +101,8 @@ class ShowMessageView(MessageView):
 
     def get_context_data(self, **kwargs):
         context = super(ShowMessageView, self).get_context_data(**kwargs)
-        context['calendar'] = calendar = self.request.user.calendar
-        context['show'] = show = context['thread'].show
-        event = get_object_or_None(Event, show=show, calendar=self.request.user.calendar)
-        context['user_accept'] = event.approved
+        context['calendar'] = self.request.user.calendar
+        context['show'] = context['thread'].show
         return context
 
 show_message = ShowMessageView.as_view()
