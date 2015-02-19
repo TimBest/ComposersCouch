@@ -1,6 +1,6 @@
 <div class="shows">
   {% for show in shows %}
-    {%comment%}}crude check until show clean up is ensured{%endcomment%}
+    {%comment%}crude check until show clean up is ensured{%endcomment%}
     {% if show.events.first %}
       {% include "schedule/_show.html" with show=show %}
     {% endif %}

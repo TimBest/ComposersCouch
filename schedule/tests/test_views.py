@@ -13,11 +13,12 @@ from schedule.views import PERIODS, FILTER
 
 class ViewsTests(TestCase):
     """  """
-    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
-                'applications', 'publicRequests', 'numApplicants',
-                'threads', 'messages', 'participants', 'dates', 'genres',
-                'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
-                'shows', 'events', 'venues']
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',
+                'profiles', 'applications', 'publicRequests', 'numApplicants',
+                'privateRequests', 'requestParticipants', 'threads', 'messages',
+                'participants', 'dates', 'genres', 'albums', 'artists',
+                'tracks', 'media', 'calendars', 'info', 'shows', 'events',
+                'venues']
 
     def test_calendar_views(self):
         """ test views where login is required """
@@ -81,13 +82,13 @@ class ViewsTests(TestCase):
             response = self.client.get(reverse(url_name[0]), url_name[1])
             self.assertEqual(response.status_code, 405)
 
-    def test_show_views(self):
+    def test_show_forms_views(self):
         """ test views where login is required """
         user = User.objects.get(pk=1)
         url_names = [
             ['edit_event',                {'show_id':1}],
-            #['calendar_request_to_event', {'request_id':1}],
-            #['show_message',              {'thread_id':4}],
+            ['calendar_request_to_event', {'request_id':1}],
+            ['show_message',              {'thread_id':4}],
         ]
 
         for url_name in url_names:
@@ -101,20 +102,20 @@ class ViewsTests(TestCase):
             response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
             self.assertEqual(response.status_code, 200)
 
-    '''def test_show_views(self):
+    def test_show_views(self):
         """ test views where login is required """
         user = User.objects.get(pk=1)
         url_names = [
             ['show', {'show_id':1}],
         ]
 
-        for url_name in url_names:
+        """for url_name in url_names:
             response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
-            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.status_code, 200)"""
 
         self.client.post(reverse('signin'),
                                  data={'identification': 'jane@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:
             response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
-            self.assertEqual(response.status_code, 200)'''
+            self.assertEqual(response.status_code, 200)

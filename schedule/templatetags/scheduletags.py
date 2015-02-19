@@ -1,6 +1,9 @@
 from django import template
 from django.core.urlresolvers import reverse
 
+from annoying.functions import get_object_or_None
+from schedule.models import Event
+
 
 register = template.Library()
 
@@ -23,3 +26,16 @@ def next_url(period, filter):
     return '%s%s' % (
         reverse("calendar", kwargs=dict(period=period.__class__.__name__.lower(), filter=filter)),
         querystring_for_date(period.next().start))
+
+@register.filter
+def has_event_for_show(value, arg):
+    # value: request.user
+    # arg: show
+    try:
+        event = get_object_or_None(Event, show=arg, calendar=value.calendar)
+    except:
+        event = None
+    if event:
+        return True
+    else:
+        return False
