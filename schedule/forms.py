@@ -11,6 +11,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, HTML, Layout, Submit
 from crispy_forms.bootstrap import AppendedText
 
+from annoying.functions import get_object_or_None
 from artist.models import ArtistProfile
 from contact.models import Location
 from photos.models import Image
@@ -29,7 +30,7 @@ class DateForm(ModelForm):
           widget=forms.SplitDateTimeWidget(time_format=time_format,
                                            date_format=date_format))
     def __init__(self, *args, **kwargs):
-        kwargs.pop('user', None)
+        self.user = kwargs.pop('user', None)
         super(DateForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -44,9 +45,15 @@ class DateForm(ModelForm):
     def clean(self):
         # allows for equal start and end dates
         # when dates are equal end datetime is not shown in forms and templates
-        if self.cleaned_data['end'] and self.cleaned_data['start']:
-            if self.cleaned_data['end'] < self.cleaned_data['start']:
-                raise forms.ValidationError(_(u"The end time must be later than start time."))
+        start = self.cleaned_data.get('start')
+        end = self.cleaned_data.get('end')
+        if (start and end) and end < start:
+            raise forms.ValidationError(_(u"The end time must be later than start time."))
+        if start:
+            event = get_object_or_None(Event, show__date__start=start, calendar=self.user.calendar)
+            if event:
+                raise forms.ValidationError(_(u"A participant in this event has a conflict. Try another date/time."))
+
         return self.cleaned_data
 
     def save(self):

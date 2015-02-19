@@ -127,6 +127,7 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
     def get_form_kwargs(self):
         kwargs = super(EventFormView, self).get_form_kwargs()
         kwargs['user'] = self.request.user
+        # if post add date start
         return kwargs
 
     def get_objects(self, queryset=None):

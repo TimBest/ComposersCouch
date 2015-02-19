@@ -9,10 +9,10 @@ from schedule.models.events import Event
 
 class Line(models.Model):
     current = models.OneToOneField(Event, verbose_name=_("current_event"),
-                                related_name='line', primary_key=True)
+                                   related_name='line', primary_key=True)
     next = models.OneToOneField(Event, blank=True, null=True,
-                             verbose_name=_("next_event"),
-                             related_name='pervious_line')
+                                verbose_name=_("next_event"),
+                                related_name='pervious_line')
     # starting point is the location of the current event and end point is the location of the next event
     line = models.LineStringField(srid=4326, verbose_name="line",
                                   blank=True, null=True)
