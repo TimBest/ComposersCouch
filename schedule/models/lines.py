@@ -34,7 +34,8 @@ def create_or_update_line(sender, instance, **kwargs):
         lines_to_update.append(line_1)
 
     #get line where current = instance (line_2)
-    line_2 = Line.objects.get_or_create(current=instance)
+    line_2, created = Line.objects.get_or_create(current=instance)
+
     line_2.next = None
     line_2.save()
     lines_to_update.append(line_2)
@@ -52,7 +53,7 @@ def create_or_update_line(sender, instance, **kwargs):
 
 
 def update_line(line, calendar):
-    next_event = calendar.get_next_event(in_datetime=line.event.show.date.start)
+    next_event = calendar.get_next_event(in_datetime=line.current.show.date.start)
     if next_event:
         line.next = next_event
         line.line = LineString(
