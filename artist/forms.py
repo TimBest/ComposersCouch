@@ -41,20 +41,15 @@ class MemberForm(forms.ModelForm):
         ),
       )
 
-    def save(self):
-        delete = False
-        try:
-            delete = self.cleaned_data['remove_member']
-        except:
-            pass
-        formData = super(MemberForm, self).save(commit=False)
-        member = get_object_or_None(Member, id=formData.id)
-        if delete and member:
+    def save(self, artist):
+        delete = self.cleaned_data.get('remove_member', False)
+        member = super(MemberForm, self).save(commit=False)
+        member.profile = artist
+        member.save()
+        if delete:
             member.delete()
             return None
-
-        formData.save()
-        return formData
+        return member
 
     class Meta:
         model = Member
