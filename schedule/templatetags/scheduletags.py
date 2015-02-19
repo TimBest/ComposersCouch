@@ -39,3 +39,23 @@ def has_event_for_show(value, arg):
         return True
     else:
         return False
+
+@register.simple_tag
+def hide_confirm(show, user):
+    event = get_object_or_None(Event, show=show, calendar=user.calendar)
+    try:
+        if event.approved:
+            return "hidden"
+    except:
+        pass
+    return None
+
+@register.simple_tag
+def hide_deny(show, user):
+    event = get_object_or_None(Event, show=show, calendar=user.calendar)
+    try:
+        if not event.approved:
+            return "hidden"
+    except:
+        pass
+    return None
