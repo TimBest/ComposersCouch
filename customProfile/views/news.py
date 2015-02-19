@@ -38,7 +38,7 @@ class ProfileNewsMixin(ProfileMixin, ImageFormMixin, MultipleFormsView):
         if self.request.FILES.get('image'):
             image = Image.objects.create(
                 image=self.request.FILES.get('image'),
-                title = post.title,
+                title = post.message,
                 user = self.request.user
             )
             post.photo = image
