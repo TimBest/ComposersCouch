@@ -70,7 +70,7 @@ class MemberView(ArtistProfileFormMixin, UpdateView):
     def form_valid(self, form):
         member = form.save()
         if member:
-            member.artist_profile = self.user.profile.artist_profile
+            member.profile = self.user.profile.artist_profile
             member.save()
         return redirect(self.success_url, username=self.user.username)
 
