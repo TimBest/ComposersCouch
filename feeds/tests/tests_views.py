@@ -70,7 +70,7 @@ class ViewsTests(TestCase):
                         'year':2015,
                         'month':02,
                         'day':15,}))
-            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.status_code, 302)
             response = self.client.get(reverse('available_venues',
                 kwargs={'order': order,
                         'year':2015,

@@ -82,7 +82,7 @@ class BetweenView(AvailabilityView):
             profile__contact_info__location__zip_code__point__distance_lte=(line, D(m=LocalFeed.distance))
         )
 
-available_venues_between = BetweenView.as_view()
+available_venues_between = login_required(BetweenView.as_view())
 
 class LocalView(VenueView):
     template_name = 'feeds/venues/local.html'
