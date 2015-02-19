@@ -2,25 +2,27 @@
 {% load i18n crispy_forms_tags %}
 {% crispy MemberForm MemberForm.helper %}
 
-{% block title %}{% trans "Edit Member" %}{% endblock %}
+{% block title %}
+  {% block formTitle %}
+    {% trans "Edit Member" %}
+  {% endblock %}
+{% endblock %}
 
 {% block memberClass %}active{% endblock %}
 
 {% block formID %}membersMusicianForm{% endblock %}
-
-{% block formTitle %}{% trans "Edit Member" %}{% endblock %}
 
 {% block form %}
   <div>
     {% if members %}
       <span>Edit members: </span>
       {% for m in members %}
-        <a class="{{isEditable}} editMusicianMembers" href="{% url 'artist:memberForm' m.id %}">
+        <a class="{% ifequal m member %}text-bold{% endifequal %} editMusicianMembers" href="{% url 'artist:memberForm' m.id %}">
           {{m.name}},
         </a>
       {% endfor %}
       <span>or </span>
-      <a class="{{isEditable}} editMusicianMembers text-success" href="{% url 'artist:memberForm' %}">
+      <a class="editMusicianMembers text-success" href="{% url 'artist:memberForm' %}">
         Add New
       </a>
     {% endif %}
@@ -29,7 +31,7 @@
     {% if past_members %}
       <span>Edit past members: </span>
       {% for m in past_members %}
-        <a class="{{isEditable}} editMusicianMembers" href="{% url 'artist:memberForm' m.id %}">
+        <a class="{% ifequal m member %}text-bold{% endifequal %} editMusicianMembers" href="{% url 'artist:memberForm' m.id %}">
           {{m.name}}{% if not forloop.last %},{% endif %}
         </a>
       {% endfor %}

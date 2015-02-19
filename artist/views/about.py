@@ -54,21 +54,24 @@ class MemberView(ArtistProfileFormMixin, UpdateView):
     template_name = 'profile/artist/forms/member.html'
     success_url = 'artist:about'
 
+    def dispatch(self, *args, **kwargs):
+        memberID = self.kwargs.get('memberID', None)
+        self.member = get_object_or_None(self.model, id=memberID)
+        return super(MemberView, self).dispatch(*args, **kwargs)
+
     def get_context_data(self, **kwargs):
         context = super(MemberView, self).get_context_data(**kwargs)
-        band = self.user.profile.artist_profile
-        context['members'] = band.members.filter(current_member=True).order_by('name')
-        context['past_members'] = band.members.filter(current_member=False).order_by('name')
-        context['memberID'] = self.kwargs.get('memberID', None)
+        members = self.user.profile.artist_profile.members
+        context['members'] = members.filter(current_member=True).order_by('name')
+        context['past_members'] = members.filter(current_member=False).order_by('name')
+        context['member'] = self.member
         return context
 
     def get_object(self, queryset=None):
-        self.memberID = self.kwargs.get('memberID', None)
-        member = get_object_or_None(self.model, id=self.memberID)
-        return member
+        return self.member
 
     def form_valid(self, form):
-        member = form.save(artist=self.user.profile.artist_profile)
+        form.save(artist=self.user.profile.artist_profile)
         return redirect(self.success_url, username=self.user.username)
 
 members = MemberView.as_view()
