@@ -17,10 +17,9 @@
         $("{{selectDiv}}").append(function() {
           return $("<a href='#' id='show-image-uploader'>Upload photo</a>").click(show_image_uploader);
         });
-        {% if page or images %}
-          show_image_picker();
-        {% else %}
+        show_image_uploader();
+        if ($(".help-block").length) {
           show_image_uploader();
-        {% endif %}
+        }
     });
 </script>
