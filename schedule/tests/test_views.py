@@ -108,7 +108,7 @@ class ViewsTests(TestCase):
         url_names = [
             ['show', {'show_id':1}],
         ]
-
+        # TODO: why does this 403
         """for url_name in url_names:
             response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
             self.assertEqual(response.status_code, 200)"""
@@ -118,4 +118,4 @@ class ViewsTests(TestCase):
                                        'password': 'blowfish'})
         for url_name in url_names:
             response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
-            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.status_code, 302)
