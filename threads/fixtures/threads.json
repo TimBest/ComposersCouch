@@ -31,5 +31,16 @@
       "creator": 2,
       "replied": false
     }
+  },
+  {
+    "pk": 4,
+    "model": "threads.thread",
+    "fields": {
+      "subject": "Test Thread for shows",
+      "latest_msg": 1,
+      "all_msgs": "",
+      "creator": 2,
+      "replied": false
+    }
   }
 ]

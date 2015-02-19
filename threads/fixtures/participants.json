@@ -42,5 +42,16 @@
       "replied_at": null,
       "deleted_at": null
     }
+  },
+  {
+    "pk": 5,
+    "model": "threads.participant",
+    "fields": {
+      "thread": 4,
+      "user": 2,
+      "read_at": null,
+      "replied_at": null,
+      "deleted_at": null
+    }
   }
 ]

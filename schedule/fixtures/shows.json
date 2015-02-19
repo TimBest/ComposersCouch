@@ -5,7 +5,7 @@
     "fields": {
       "info": 1,
       "date": 1,
-      "thread": null,
+      "thread": 4,
       "approved": true,
       "visible": true,
       "turnout": 0,

@@ -296,6 +296,8 @@ def confirm(request, approved=True):
     if event:
         event.approved=approved
         event.save()
+    else:
+        raise PermissionDenied
     return redirect('show_message', thread_id=show.thread.id)
 
 def deny(request):
