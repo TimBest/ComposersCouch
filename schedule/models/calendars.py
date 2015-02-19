@@ -63,7 +63,7 @@ class Calendar(models.Model):
         in_datetime is the datetime you want to check against.  It defaults to
         datetime.datetime.now
         """
-        return self.events.order_by('show__date__start').filter(show__date__start__gte=timezone.now())
+        return self.events.order_by('show__date__start').filter(show__date__start__gte=timezone.now(), approved=True)
 
     def get_yearly_events(self, year=datetime.datetime.now().date().year):
         """
@@ -72,7 +72,11 @@ class Calendar(models.Model):
         """
         start = datetime.date(year, 1, 1)
         end = datetime.date(year+1, 1, 1)
-        return self.events.order_by('show__date__start').filter(show__date__start__gte=start).filter(show__date__start__lt=end)
+        return self.events.order_by('show__date__start').filter(
+            show__date__start__gte=start,
+            show__date__start__lt=end,
+            Sapproved=True
+        )
 
     def get_prev_event(self, in_datetime=datetime.datetime.now(), tzinfo=pytz.utc):
         """
@@ -81,7 +85,10 @@ class Calendar(models.Model):
         """
         date = in_datetime.replace(tzinfo=tzinfo)
         try:
-            return self.events.order_by('-show__date__end').filter(show__date__end__lte=date)[0]
+            return self.events.order_by('-show__date__end').filter(
+                show__date__end__lte=date,
+                approved=True
+            )[0]
         except:
             return None
 
@@ -92,7 +99,10 @@ class Calendar(models.Model):
         """
         date = in_datetime.replace(tzinfo=tzinfo)
         try:
-            return self.events.order_by('show__date__start').filter(show__date__start__gte=date)[0]
+            return self.events.order_by('show__date__start').filter(
+                show__date__start__gte=date,
+                approved=True
+            )[0]
         except:
             return None
 
@@ -104,6 +114,10 @@ class Calendar(models.Model):
         start = start.replace(tzinfo=tzinfo)
         end = end.replace(tzinfo=tzinfo)
         try:
-            return self.events.order_by('show__date__start').filter(show__date__end__gte=start).filter(show__date__start__lte=end)
+            return self.events.order_by('show__date__start').filter(
+                show__date__end__gte=start,
+                show__date__start__lte=end,
+                approved=True
+            )
         except:
             return None
