@@ -22,7 +22,6 @@ class Line(models.Model):
         verbose_name = _('line')
         app_label = 'schedule'
 
-
 def create_or_update_line(sender, instance, **kwargs):
     """ """
     lines_to_update = []
@@ -34,11 +33,16 @@ def create_or_update_line(sender, instance, **kwargs):
         lines_to_update.append(line_1)
 
     #get line where current = instance (line_2)
-    line_2, created = Line.objects.get_or_create(current=instance)
-
-    line_2.next = None
-    line_2.save()
-    lines_to_update.append(line_2)
+    if instance.approved:
+        line_2, created = Line.objects.get_or_create(current=instance)
+        line_2.next = None
+        line_2.save()
+        lines_to_update.append(line_2)
+    else:
+        # if the current instance is denied has a line remove it
+        line_2 = get_object_or_None(Line, current=instance)
+        if line_2:
+            line_2.delete()
 
     # get new previous event (line_3)
     prev_event = instance.calendar.get_prev_event(
@@ -47,9 +51,9 @@ def create_or_update_line(sender, instance, **kwargs):
         prev_event.line.next = None
         lines_to_update.append(prev_event.line)
         prev_event.line.save()
-
     for line in lines_to_update:
         update_line(line, instance.calendar)
+
 
 
 def update_line(line, calendar):
@@ -67,7 +71,5 @@ def update_line(line, calendar):
             calendar.owner.profile.contact_info.location.zip_code.point
         )
     line.save()
-
-
 
 post_save.connect(create_or_update_line, sender=Event, dispatch_uid="create_or_update_line")
