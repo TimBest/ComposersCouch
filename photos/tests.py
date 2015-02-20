@@ -1,22 +1,19 @@
 #!/usr/bin/env python
 # vim:fileencoding=utf-8
 
-__author__ = 'zeus'
+import os
 
+from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
+from django.db import models
 from django.test import TestCase
 from django.test.client import Client
-from django.core.urlresolvers import reverse
-from models import *
-import os
-from django.contrib.auth.models import User
-from django.db import models
 
-try:
-    from lxml import html
-except:
-    raise ImportError('photos require lxml for self-testing')
+from models import *
+
 
 class photosTest(TestCase):
+
     def setUp(self):
         self.image_file = open(os.path.join(os.path.dirname(__file__), 'test_img.jpg'))
         self.user = User.objects.create_user('zeus', 'zeus@example.com', 'zeus')
@@ -27,9 +24,7 @@ class photosTest(TestCase):
         self.image_file = open(os.path.join(os.path.dirname(__file__), 'test_img.jpg'))
         response = self.client.get(reverse('photos:upload'))
         self.assertEqual(response.status_code, 200)
-        tree = html.fromstring(response.content)
-        values = dict(tree.xpath('//form[@method="post"]')[0].form_values())
-        values['image'] = self.image_file
+        values = {'image' : self.image_file}
         response = self.client.post(reverse('photos:upload'), values, follow=True)
         return response
 
@@ -58,9 +53,7 @@ class photosTest(TestCase):
         image_id = Image.objects.get(user__username='zeus').id
         response = self.client.get(reverse('photos:update-image', kwargs={'pk': image_id}), follow=True)
         self.assertEqual(response.status_code, 200)
-        tree = html.fromstring(response.content)
-        values = dict(tree.xpath('//form[@method="post"]')[0].form_values())
-        values['title'] = 'changed title'
+        values = {'title' : 'changed title' }
         self.client.post(reverse('photos:update-image', kwargs={'pk': image_id}), values, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(Image.objects.get(user__username='zeus').title == 'changed title')
