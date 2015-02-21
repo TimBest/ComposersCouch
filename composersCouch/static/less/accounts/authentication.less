@@ -14,22 +14,27 @@
     }
   }
   .nav {
-    margin-bottom:40px;
+    margin-bottom:30px;
     li {
-      border-left: 1px solid #DDD;
-      border-bottom: 1px solid #DDD;
+      height: 50px;
+      border: none;
       background-color: @silver-light;
       a {
+        height: 50px;
+        padding-top:12px;
+        padding-bottom:11px;
         color:@gray;
-        border:none;
+        border-bottom: 1px solid #DDD;
         &:hover, &:focus {
-          background-color: transparent;
-          color: @black;
+          background-color: rgba(0,0,0,0.1);
         }
       }
       &.active {
         border:none;
         a, a:focus, a:hover  {
+          padding-top:10px;
+          padding-bottom:10px;
+          font-size: 17px;
           background-color: @white;
           border:none;
         }

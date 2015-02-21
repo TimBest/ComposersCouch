@@ -1,0 +1,5 @@
+{% extends "threads/compose.html" %}
+{% load crispy_forms_tags %}
+{% crispy ComposeForm ComposeForm.helper %}
+
+{% block message %}active{% endblock %}

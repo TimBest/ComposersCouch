@@ -1,4 +1,4 @@
-{% extends 'form.html' %}
+{% extends "threads/compose.html" %}
 {% load crispy_forms_tags %}
 {% crispy DateForm DateForm.helper %}
 {% crispy MessageForm MessageForm.helper %}
@@ -6,6 +6,7 @@
 
 
 {% block title %}{% block formTitle %}Send Private Request{% endblock %}{% endblock %}
+{% block private_request %}active{% endblock %}
 
 {% block formID %}privateRequestForm{% endblock %}
 
@@ -25,8 +26,6 @@
   {% crispy venueForm %}
   {% crispy messageForm %}
 {% endblock %}
-
-{% block submit %}<button type="submit" class="btn btn-primary">Send</button>{% endblock %}
 
 {% block script %}
   {{ block.super }}

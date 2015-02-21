@@ -5,7 +5,7 @@
 
 {% block modalHeader %}
   <div class="nav nav-justified nav-tabs">
-    <li class="active"><a href="#"><h4>Join Composers Couch</h4></a></li>
+    <li class="active"><a href="#">Join Composers Couch</a></li>
     <li><a href="{% url 'signin' %}?next={% firstof request.path '/' %}">Sign in</a></li>
   </div>
 {% endblock %}

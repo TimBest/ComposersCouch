@@ -1,10 +1,13 @@
-{% extends 'form.html' %}
+{% extends "threads/compose.html" %}
 {% load i18n crispy_forms_tags %}
 {% crispy DateForm DateForm.helper %}
 {% crispy PublicRequestForm PublicRequestForm.helper %}
 {% crispy NumberOfApplicantsForm NumberOfApplicantsForm.helper %}
 
-{% block title %}{% block formTitle %}Post Public Request{% endblock %}{% endblock %}
+{% block title %}
+  {% block formTitle %}Post Public Request{% endblock %}
+{% endblock %}
+{% block public_request %}active{% endblock %}
 
 {% block formID %}publicRequestForm{% endblock %}
 
@@ -15,6 +18,11 @@
     {% endif %}
     {% crispy requestForm %}
 {% endblock %}
+
+{% block submit %}
+  <button type="submit" class="btn btn-primary">Post</button>
+{% endblock %}
+
 
 {% block script %}
   {{ block.super }}
