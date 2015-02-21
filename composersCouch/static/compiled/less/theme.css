@@ -6275,7 +6275,7 @@ fieldset[disabled] .btn-transparent-dropdown.active {
 .btn-transparent-dropdown:focus,
 .open .dropdown-toggle.btn-transparent-dropdown {
   color: #fbfcfc;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 0, 0, 0.1);
   box-shadow: none;
 }
 /* Tweeks to bootstraps buttons */
@@ -7302,6 +7302,11 @@ h1 {
 }
 .header.feed .nav-options .nav .nav-form div {
   float: left;
+}
+.feed.sub-nav .filter {
+  margin: 0px;
+  padding: 11px 12px;
+  border: none;
 }
 .feed .genre-form {
   max-width: 200px;
