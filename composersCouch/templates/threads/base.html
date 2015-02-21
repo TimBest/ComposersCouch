@@ -8,11 +8,16 @@
 {% block headerClass %}thread{% endblock %}
 
 {% block header%}
-  <ul class="nav nav-pills nav-centered">
-    <li class="{% block messageClass %}{% endblock %}"><a href="{% url 'threads:inbox' %}">Messages</a></li>
-    <li class="{% block privateClass %}{% endblock %}"><a href="{% url 'private_requests' %}">Private Requests</a></li>
-    <li class="{% block publicClass %}{% endblock %}"><a href="{% url 'public_requests' %}">Public Requests</a></li>
-  </ul>
+  <span class="dropdown">
+    <a class="btn btn-header dropdown-toggle toggle" data-toggle="dropdown" href="#" aria-expanded="false">
+      {% block messageType %}Messages{% endblock %}<span class="caret-large text-white"></span>
+    </a>
+    <ul class="dropdown-menu" role="menu">
+      <li class="{% block messageClass %}{% endblock %}"><a href="{% url 'threads:inbox' %}">Messages</a></li>
+      <li class="{% block privateClass %}{% endblock %}"><a href="{% url 'private_requests' %}">Private Requests</a></li>
+      <li class="{% block publicClass %}{% endblock %}"><a href="{% url 'public_requests' %}">Public Requests</a></li>
+    </ul>
+  </span>
 {% endblock %}
 
 {% block navigation %}

@@ -3051,15 +3051,15 @@ input[type="button"].btn-block {
 .dropdown-menu > li > a:focus {
   text-decoration: none;
   color: #222222;
-  background-color: #f5f5f5;
+  background-color: #dfe5eb;
 }
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
 .dropdown-menu > .active > a:focus {
-  color: #fbfcfc;
+  color: #2f2f2f;
   text-decoration: none;
   outline: 0;
-  background-color: #2161a8;
+  background-color: #dfe5eb;
 }
 .dropdown-menu > .disabled > a,
 .dropdown-menu > .disabled > a:hover,
@@ -6134,7 +6134,6 @@ fieldset[disabled] .btn-danger-inv.active {
   color: #fbfcfc;
   background-color: transparent;
   border-color: #fbfcfc;
-  border: #fbfcfc 1px solid;
 }
 .btn-transparent:hover,
 .btn-transparent:focus,
@@ -6178,6 +6177,105 @@ fieldset[disabled] .btn-transparent.active {
   color: #fbfcfc;
   background-color: rgba(0, 0, 0, 0.2);
   border-color: #dfe5eb;
+  box-shadow: none;
+}
+.btn-header {
+  color: #fbfcfc;
+  background-color: transparent;
+  border-color: transparent;
+  border: none;
+  font-size: 24px;
+}
+.btn-header:hover,
+.btn-header:focus,
+.btn-header:active,
+.btn-header.active,
+.open .dropdown-toggle.btn-header {
+  color: #fbfcfc;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
+}
+.btn-header:active,
+.btn-header.active,
+.open .dropdown-toggle.btn-header {
+  background-image: none;
+}
+.btn-header.disabled,
+.btn-header[disabled],
+fieldset[disabled] .btn-header,
+.btn-header.disabled:hover,
+.btn-header[disabled]:hover,
+fieldset[disabled] .btn-header:hover,
+.btn-header.disabled:focus,
+.btn-header[disabled]:focus,
+fieldset[disabled] .btn-header:focus,
+.btn-header.disabled:active,
+.btn-header[disabled]:active,
+fieldset[disabled] .btn-header:active,
+.btn-header.disabled.active,
+.btn-header[disabled].active,
+fieldset[disabled] .btn-header.active {
+  background-color: transparent;
+  border-color: transparent;
+}
+.btn-header .badge {
+  color: transparent;
+  background-color: #fbfcfc;
+}
+.btn-header:hover,
+.btn-header:focus,
+.open .dropdown-toggle.btn-header {
+  color: #fbfcfc;
+  background-color: rgba(0, 0, 0, 0.2);
+  box-shadow: none;
+}
+.btn-transparent-dropdown {
+  color: #fbfcfc;
+  background-color: transparent;
+  border-color: transparent;
+  border: none;
+}
+.btn-transparent-dropdown:hover,
+.btn-transparent-dropdown:focus,
+.btn-transparent-dropdown:active,
+.btn-transparent-dropdown.active,
+.open .dropdown-toggle.btn-transparent-dropdown {
+  color: #fbfcfc;
+  background-color: rgba(0, 0, 0, 0);
+  border-color: rgba(0, 0, 0, 0);
+}
+.btn-transparent-dropdown:active,
+.btn-transparent-dropdown.active,
+.open .dropdown-toggle.btn-transparent-dropdown {
+  background-image: none;
+}
+.btn-transparent-dropdown.disabled,
+.btn-transparent-dropdown[disabled],
+fieldset[disabled] .btn-transparent-dropdown,
+.btn-transparent-dropdown.disabled:hover,
+.btn-transparent-dropdown[disabled]:hover,
+fieldset[disabled] .btn-transparent-dropdown:hover,
+.btn-transparent-dropdown.disabled:focus,
+.btn-transparent-dropdown[disabled]:focus,
+fieldset[disabled] .btn-transparent-dropdown:focus,
+.btn-transparent-dropdown.disabled:active,
+.btn-transparent-dropdown[disabled]:active,
+fieldset[disabled] .btn-transparent-dropdown:active,
+.btn-transparent-dropdown.disabled.active,
+.btn-transparent-dropdown[disabled].active,
+fieldset[disabled] .btn-transparent-dropdown.active {
+  background-color: transparent;
+  border-color: transparent;
+}
+.btn-transparent-dropdown .badge {
+  color: transparent;
+  background-color: #fbfcfc;
+}
+.btn-transparent-dropdown:hover,
+.btn-transparent-dropdown:focus,
+.open .dropdown-toggle.btn-transparent-dropdown {
+  color: #fbfcfc;
+  background-color: rgba(0, 0, 0, 0.2);
   box-shadow: none;
 }
 /* Tweeks to bootstraps buttons */
@@ -6224,6 +6322,17 @@ fieldset[disabled] .btn-default-nav.active {
 .btn-default-nav .badge {
   color: #fbfcfc;
   background-color: #2f2f2f;
+}
+.caret-large {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-top: 3px;
+  margin-left: 3px;
+  vertical-align: middle;
+  border-top: 7px solid;
+  border-right: 7px solid transparent;
+  border-left: 7px solid transparent;
 }
 .modal-open {
   overflow: hidden;
@@ -6555,7 +6664,9 @@ h1 {
 }
 .sub-nav .nav li a:hover,
 .sub-nav .nav li a:focus {
-  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.01);
+  border-radius: 0px;
   color: #2f2f2f;
 }
 .sub-nav .nav li.active a,
@@ -7149,18 +7260,11 @@ h1 {
   font-size: 16px;
 }
 .header.feed .main-nav .title {
-  margin: 15px 0px 10px 0px;
+  margin: 10px 0px 10px 0px;
+  font-size: 30px;
 }
-.header.feed .main-nav .title li a:hover,
-.header.feed .main-nav .title li a:focus {
-  background-color: #dfe5eb;
-}
-.header.feed .main-nav .title li.active a,
-.header.feed .main-nav .title li.active a:focus,
-.header.feed .main-nav .title li.active a:hover {
-  background-color: #dfe5eb;
-  border-radius: 3px 3px 0px 0px;
-  color: #2f2f2f;
+.header.feed .main-nav .description {
+  margin-left: 15px;
 }
 .header.feed .main-nav .description a {
   margin-right: 3px;
@@ -7199,31 +7303,6 @@ h1 {
 .header.feed .nav-options .nav .nav-form div {
   float: left;
 }
-.feed.sub-nav.blue .nav li.active a,
-.feed.sub-nav.blue .nav li.active a:focus,
-.feed.sub-nav.blue .nav li.active a:hover {
-  border-color: #2161a8;
-}
-.feed.sub-nav.green .nav li.active a,
-.feed.sub-nav.green .nav li.active a:focus,
-.feed.sub-nav.green .nav li.active a:hover {
-  border-color: #16aa7d;
-}
-.feed.sub-nav.red .nav li.active a,
-.feed.sub-nav.red .nav li.active a:focus,
-.feed.sub-nav.red .nav li.active a:hover {
-  border-color: #a62421;
-}
-.feed.sub-nav.orange .nav li.active a,
-.feed.sub-nav.orange .nav li.active a:focus,
-.feed.sub-nav.orange .nav li.active a:hover {
-  border-color: #ff6e20;
-}
-.feed.sub-nav.purple .nav li.active a,
-.feed.sub-nav.purple .nav li.active a:focus,
-.feed.sub-nav.purple .nav li.active a:hover {
-  border-color: #382cb3;
-}
 .feed .genre-form {
   max-width: 200px;
 }
@@ -7241,9 +7320,6 @@ h1 {
   display: block;
   padding: 8px 5px;
   margin-bottom: 0px;
-}
-.feed .filter-nav {
-  min-height: 20px;
 }
 .post form {
   padding: 0px;

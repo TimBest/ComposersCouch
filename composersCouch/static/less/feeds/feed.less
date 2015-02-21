@@ -3,29 +3,16 @@
     padding: 0px;
     font-size: 16px;
     .main-nav {
-      .title{
-        margin:15px 0px 10px 0px;
-        li {
-          a {
-            &:hover, &:focus {
-              background-color: @silver-light;
-            }
-          }
-          &.active {
-            a, a:focus, a:hover  {
-              background-color: @silver-light;
-              border-radius: 3px 3px 0px 0px;
-              color: @black;
-            }
-          }
-        }
+      .title {
+        margin:10px 0px 10px 0px;
+        font-size:30px;
       }
       .description {
+        margin-left:15px;
         a {
           margin-right:3px;
         }
       }
-
     }
     .nav-options {
       color:@silver-light;
@@ -62,50 +49,9 @@
 }
 
 .feed.sub-nav {
-  &.blue {
-    .nav {
-      li.active {
-        a, a:focus, a:hover  {
-          border-color: @blue;
-        }
-      }
-    }
-  }
-  &.green {
-    .nav {
-      li.active {
-        a, a:focus, a:hover  {
-          border-color: @green;
-        }
-      }
-    }
-  }
-  &.red {
-      .nav {
-        li.active {
-          a, a:focus, a:hover  {
-            border-color: @red;
-          }
-        }
-      }
-  }
-  &.orange {
-      .nav {
-        li.active {
-          a, a:focus, a:hover  {
-            border-color: @orange;
-          }
-        }
-      }
-  }
-  &.purple {
-      .nav {
-        li.active {
-          a, a:focus, a:hover  {
-            border-color: @purple;
-          }
-        }
-      }
+  .filter {
+    //top:13px;
+    //padding: 10px 10px;
   }
 }
 
@@ -126,8 +72,5 @@
     display: block;
     padding: 8px 5px;
     margin-bottom:0px;
-  }
-  .filter-nav {
-    min-height: 20px;
   }
 }

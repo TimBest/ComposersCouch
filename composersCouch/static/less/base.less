@@ -108,7 +108,9 @@ h1 {
       a {
         color: @gray;
         &:hover, &:focus {
-          background-color: transparent;
+          background-color: rgba(0,0,0,0.1);
+          border-bottom: 3px solid rgba(0,0,0,0.01);
+          border-radius:0px;
           color: @black;
         }
       }

@@ -70,13 +70,37 @@
 }
 .btn-transparent {
   .button-variant(@white; transparent; @white);
-  border: @white 1px solid;
   &:hover,
   &:focus,
   .open .dropdown-toggle& {
     color: @white;
     background-color: rgba(0,0,0,0.2);;
     border-color: @silver-light;
+    box-shadow: none
+  }
+}
+
+.btn-header {
+  .button-variant(@white; transparent; transparent);
+  border:none;
+  font-size:24px;
+  &:hover,
+  &:focus,
+  .open .dropdown-toggle& {
+    color: @white;
+    background-color: rgba(0,0,0,0.2);;
+    box-shadow: none
+  }
+}
+
+.btn-transparent-dropdown {
+  .button-variant(@white; transparent; transparent);
+  border:none;
+  &:hover,
+  &:focus,
+  .open .dropdown-toggle& {
+    color: @white;
+    background-color: rgba(0,0,0,0.2);;
     box-shadow: none
   }
 }
