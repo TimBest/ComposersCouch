@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'compressor',
     'djcelery',
     'embed_video',
+    'easy_timezones',
     'pagination',
     'social_auth',
     'static_precompiler',
@@ -81,6 +82,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'audiofield.middleware.threadlocals.ThreadLocals',
+    'easy_timezones.middleware.EasyTimezoneMiddleware',
 )
 
 ROOT_URLCONF = 'composersCouch.urls'
@@ -217,6 +219,8 @@ MAX_AUDIO_UPLOAD_SIZE = "10485760"
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 STATIC_ROOT = os.path.join( BASE_DIR, 'composersCouch/staticfiles/' )
 STATIC_PRECOMPILER_ROOT = os.path.join( BASE_DIR, 'composersCouch/static/' )
+
+GEOIP_DATABASE = os.path.join(STATIC_ROOT, 'GeoLiteCity.dat')
 
 
 STATICFILES_DIRS = (

@@ -1,5 +1,7 @@
 {% extends "base.html" %}
-{% load i18n inbox %}
+{% load i18n %}
+{% load inbox %}
+{% load tz %}
 
 {% block title %}Messages{% endblock %}
 
@@ -85,7 +87,9 @@
                   {% if message.new %}</b>{% endif %}</a>
                 </td>
                 <td>
-                  <span class="date pull-right">{{ message.thread.latest_msg.sent_at|compact_date:_("g:i A,M j,n/j/y") }}</span>
+                  {% localtime on %}
+                    <span class="date pull-right">{{ message.thread.latest_msg.sent_at|compact_date:_("g:i A,M j,n/j/y") }}</span>
+                  {% endlocaltime %}
                 </td>
               </tr>
             {% empty %}
