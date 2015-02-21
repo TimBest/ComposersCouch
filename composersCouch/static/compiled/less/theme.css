@@ -2082,23 +2082,6 @@ fieldset[disabled] .btn-default.active {
   color: #fbfcfc;
   background-color: #555555;
 }
-.btn-default:hover,
-.btn-default:focus,
-.open .dropdown-toggle.btn-default {
-  color: #555555;
-  background-color: #fbfcfc;
-  border-color: #fbfcfc;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-default:active,
-.btn-default.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-}
 .btn-primary {
   color: #fbfcfc;
   background-color: #2161a8;
@@ -2139,23 +2122,6 @@ fieldset[disabled] .btn-primary.active {
 .btn-primary .badge {
   color: #2161a8;
   background-color: #fbfcfc;
-}
-.btn-primary:hover,
-.btn-primary:focus,
-.open .dropdown-toggle.btn-primary {
-  color: #fbfcfc;
-  background-color: #2161a8;
-  border-color: #2161a8;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-primary:active,
-.btn-primary.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 .btn-success {
   color: #fbfcfc;
@@ -2198,23 +2164,6 @@ fieldset[disabled] .btn-success.active {
   color: #16aa7d;
   background-color: #fbfcfc;
 }
-.btn-success:hover,
-.btn-success:focus,
-.open .dropdown-toggle.btn-success {
-  color: #fbfcfc;
-  background-color: #16aa7d;
-  border-color: #16aa7d;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-success:active,
-.btn-success.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-}
 .btn-info {
   color: #fbfcfc;
   background-color: #382cb3;
@@ -2255,23 +2204,6 @@ fieldset[disabled] .btn-info.active {
 .btn-info .badge {
   color: #382cb3;
   background-color: #fbfcfc;
-}
-.btn-info:hover,
-.btn-info:focus,
-.open .dropdown-toggle.btn-info {
-  color: #fbfcfc;
-  background-color: #382cb3;
-  border-color: #382cb3;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-info:active,
-.btn-info.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 .btn-warning {
   color: #fbfcfc;
@@ -2314,23 +2246,6 @@ fieldset[disabled] .btn-warning.active {
   color: #ff6e20;
   background-color: #fbfcfc;
 }
-.btn-warning:hover,
-.btn-warning:focus,
-.open .dropdown-toggle.btn-warning {
-  color: #fbfcfc;
-  background-color: #ff6e20;
-  border-color: #ff6e20;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-warning:active,
-.btn-warning.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-}
 .btn-danger {
   color: #fbfcfc;
   background-color: #a62421;
@@ -2371,23 +2286,6 @@ fieldset[disabled] .btn-danger.active {
 .btn-danger .badge {
   color: #a62421;
   background-color: #fbfcfc;
-}
-.btn-danger:hover,
-.btn-danger:focus,
-.open .dropdown-toggle.btn-danger {
-  color: #fbfcfc;
-  background-color: #a62421;
-  border-color: #a62421;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-danger:active,
-.btn-danger.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 .btn-link {
   color: #2161a8;
@@ -5775,23 +5673,6 @@ fieldset[disabled] .btn-twitter.active {
   color: #00aced;
   background-color: #fbfcfc;
 }
-.btn-twitter:hover,
-.btn-twitter:focus,
-.open .dropdown-toggle.btn-twitter {
-  color: #fbfcfc;
-  background-color: #00aced;
-  border-color: #00aced;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-twitter:active,
-.btn-twitter.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-}
 .btn-facebook {
   color: #fbfcfc;
   background-color: #3b5998;
@@ -5832,23 +5713,6 @@ fieldset[disabled] .btn-facebook.active {
 .btn-facebook .badge {
   color: #3b5998;
   background-color: #fbfcfc;
-}
-.btn-facebook:hover,
-.btn-facebook:focus,
-.open .dropdown-toggle.btn-facebook {
-  color: #fbfcfc;
-  background-color: #3b5998;
-  border-color: #3b5998;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-facebook:active,
-.btn-facebook.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 .btn-google {
   color: #fbfcfc;
@@ -5891,23 +5755,6 @@ fieldset[disabled] .btn-google.active {
   color: #dd4b39;
   background-color: #fbfcfc;
 }
-.btn-google:hover,
-.btn-google:focus,
-.open .dropdown-toggle.btn-google {
-  color: #fbfcfc;
-  background-color: #dd4b39;
-  border-color: #dd4b39;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-google:active,
-.btn-google.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-}
 .btn-instagram {
   color: #fbfcfc;
   background-color: #517fa4;
@@ -5948,23 +5795,6 @@ fieldset[disabled] .btn-instagram.active {
 .btn-instagram .badge {
   color: #517fa4;
   background-color: #fbfcfc;
-}
-.btn-instagram:hover,
-.btn-instagram:focus,
-.open .dropdown-toggle.btn-instagram {
-  color: #fbfcfc;
-  background-color: #517fa4;
-  border-color: #517fa4;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-instagram:active,
-.btn-instagram.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 .btn-tumblr {
   color: #fbfcfc;
@@ -6007,23 +5837,6 @@ fieldset[disabled] .btn-tumblr.active {
   color: #32506d;
   background-color: #fbfcfc;
 }
-.btn-tumblr:hover,
-.btn-tumblr:focus,
-.open .dropdown-toggle.btn-tumblr {
-  color: #fbfcfc;
-  background-color: #32506d;
-  border-color: #32506d;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-tumblr:active,
-.btn-tumblr.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-}
 .btn-youtube {
   color: #fbfcfc;
   background-color: #bb0000;
@@ -6064,23 +5877,6 @@ fieldset[disabled] .btn-youtube.active {
 .btn-youtube .badge {
   color: #bb0000;
   background-color: #fbfcfc;
-}
-.btn-youtube:hover,
-.btn-youtube:focus,
-.open .dropdown-toggle.btn-youtube {
-  color: #fbfcfc;
-  background-color: #bb0000;
-  border-color: #bb0000;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-youtube:active,
-.btn-youtube.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 .btn-bandcamp {
   color: #fbfcfc;
@@ -6123,23 +5919,6 @@ fieldset[disabled] .btn-bandcamp.active {
   color: #629aa9;
   background-color: #fbfcfc;
 }
-.btn-bandcamp:hover,
-.btn-bandcamp:focus,
-.open .dropdown-toggle.btn-bandcamp {
-  color: #fbfcfc;
-  background-color: #629aa9;
-  border-color: #629aa9;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-bandcamp:active,
-.btn-bandcamp.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-}
 .btn-itunes {
   color: #fbfcfc;
   background-color: #666666;
@@ -6180,23 +5959,6 @@ fieldset[disabled] .btn-itunes.active {
 .btn-itunes .badge {
   color: #666666;
   background-color: #fbfcfc;
-}
-.btn-itunes:hover,
-.btn-itunes:focus,
-.open .dropdown-toggle.btn-itunes {
-  color: #fbfcfc;
-  background-color: #666666;
-  border-color: #666666;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-itunes:active,
-.btn-itunes.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 .btn-spotify {
   color: #fbfcfc;
@@ -6239,23 +6001,6 @@ fieldset[disabled] .btn-spotify.active {
   color: #81b71a;
   background-color: #fbfcfc;
 }
-.btn-spotify:hover,
-.btn-spotify:focus,
-.open .dropdown-toggle.btn-spotify {
-  color: #fbfcfc;
-  background-color: #81b71a;
-  border-color: #81b71a;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-spotify:active,
-.btn-spotify.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-}
 .btn-soundcloud {
   color: #fbfcfc;
   background-color: #ff3a00;
@@ -6297,23 +6042,6 @@ fieldset[disabled] .btn-soundcloud.active {
   color: #ff3a00;
   background-color: #fbfcfc;
 }
-.btn-soundcloud:hover,
-.btn-soundcloud:focus,
-.open .dropdown-toggle.btn-soundcloud {
-  color: #fbfcfc;
-  background-color: #ff3a00;
-  border-color: #ff3a00;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-soundcloud:active,
-.btn-soundcloud.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-}
 .btn-vimeo {
   color: #fbfcfc;
   background-color: #1ab7ea;
@@ -6354,23 +6082,6 @@ fieldset[disabled] .btn-vimeo.active {
 .btn-vimeo .badge {
   color: #1ab7ea;
   background-color: #fbfcfc;
-}
-.btn-vimeo:hover,
-.btn-vimeo:focus,
-.open .dropdown-toggle.btn-vimeo {
-  color: #fbfcfc;
-  background-color: #1ab7ea;
-  border-color: #1ab7ea;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-vimeo:active,
-.btn-vimeo.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
 }
 .btn-danger-inv {
   color: #820a07;
@@ -6416,25 +6127,7 @@ fieldset[disabled] .btn-danger-inv.active {
 .btn-danger-inv:hover,
 .btn-danger-inv:focus,
 .open .dropdown-toggle.btn-danger-inv {
-  color: #820a07;
-  background-color: #fbfcfc;
-  border-color: #fbfcfc;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-danger-inv:active,
-.btn-danger-inv.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-}
-.btn-danger-inv:hover,
-.btn-danger-inv:focus,
-.open .dropdown-toggle.btn-danger-inv {
   color: #a62421;
-  background-color: #fbfcfc;
   border-color: #a62421;
 }
 .btn-transparent {
@@ -6483,23 +6176,6 @@ fieldset[disabled] .btn-transparent.active {
 .btn-transparent:focus,
 .open .dropdown-toggle.btn-transparent {
   color: #fbfcfc;
-  background-color: transparent;
-  border-color: transparent;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-transparent:active,
-.btn-transparent.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-}
-.btn-transparent:hover,
-.btn-transparent:focus,
-.open .dropdown-toggle.btn-transparent {
-  color: #fbfcfc;
   background-color: rgba(0, 0, 0, 0.2);
   border-color: #dfe5eb;
   box-shadow: none;
@@ -6507,71 +6183,6 @@ fieldset[disabled] .btn-transparent.active {
 /* Tweeks to bootstraps buttons */
 button::-moz-focus-inner {
   border: 0;
-}
-.btn-default {
-  color: #555555;
-  background-color: #fbfcfc;
-  border-color: #999999;
-}
-.btn-default:hover,
-.btn-default:focus,
-.btn-default:active,
-.btn-default.active,
-.open .dropdown-toggle.btn-default {
-  color: #555555;
-  background-color: #e4ebeb;
-  border-color: #7a7a7a;
-}
-.btn-default:active,
-.btn-default.active,
-.open .dropdown-toggle.btn-default {
-  background-image: none;
-}
-.btn-default.disabled,
-.btn-default[disabled],
-fieldset[disabled] .btn-default,
-.btn-default.disabled:hover,
-.btn-default[disabled]:hover,
-fieldset[disabled] .btn-default:hover,
-.btn-default.disabled:focus,
-.btn-default[disabled]:focus,
-fieldset[disabled] .btn-default:focus,
-.btn-default.disabled:active,
-.btn-default[disabled]:active,
-fieldset[disabled] .btn-default:active,
-.btn-default.disabled.active,
-.btn-default[disabled].active,
-fieldset[disabled] .btn-default.active {
-  background-color: #fbfcfc;
-  border-color: #999999;
-}
-.btn-default .badge {
-  color: #fbfcfc;
-  background-color: #555555;
-}
-.btn-default:hover,
-.btn-default:focus,
-.open .dropdown-toggle.btn-default {
-  color: #555555;
-  background-color: #fbfcfc;
-  border-color: #fbfcfc;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-default:active,
-.btn-default.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-}
-.btn-default:hover,
-.btn-default:focus,
-.open .dropdown-toggle.btn-default {
-  color: #2f2f2f;
-  background-color: #fbfcfc;
-  border-color: #888;
 }
 .btn-default-nav {
   color: #2f2f2f;
@@ -6613,30 +6224,6 @@ fieldset[disabled] .btn-default-nav.active {
 .btn-default-nav .badge {
   color: #fbfcfc;
   background-color: #2f2f2f;
-}
-.btn-default-nav:hover,
-.btn-default-nav:focus,
-.open .dropdown-toggle.btn-default-nav {
-  color: #2f2f2f;
-  background-color: #fbfcfc;
-  border-color: #fbfcfc;
-  -webkit-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  -moz-box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  box-shadow: inset 0 10px 20px rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-.btn-default-nav:active,
-.btn-default-nav.active {
-  -webkit-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  -moz-box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.3), inset 0 10px 20px rgba(0, 0, 0, 0.08);
-}
-.btn-default-nav:hover,
-.btn-default-nav:focus,
-.open .dropdown-toggle.btn-default-nav {
-  color: #000;
-  background-color: #fbfcfc;
-  border-color: #fbfcfc;
 }
 .modal-open {
   overflow: hidden;
@@ -7490,6 +7077,7 @@ h1 {
   background-color: #dfe5eb;
 }
 .authentication .nav li a {
+  color: #555555;
   border: none;
 }
 .authentication .nav li a:hover,
@@ -7701,7 +7289,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .header.thread {
   color: #fbfcfc;
-  background-color: #083970;
+  background-color: #0c498e;
   padding: 10px 0px 0px 0px;
 }
 .header.thread .nav {
@@ -8386,7 +7974,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .calendar-header {
   padding: 8px 0px 8px 0px;
-  background-color: #00714f;
+  background-color: #009064;
   color: #fbfcfc;
 }
 .calendar-header a {
