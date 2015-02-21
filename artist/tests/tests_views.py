@@ -1,15 +1,19 @@
+import os
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.contrib.auth.models import User
 
 from accounts.models import Profile
-from artist.models import ArtistProfile
+from artist.models import ArtistProfile, Member
 from artist.views import MusicianContactsView
+from tracks.models import Album
+
 
 class ViewsTests(TestCase):
     """  """
     fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',
-                'profiles', 'artists', 'members', 'calendars']
+                'profiles', 'artists', 'members', 'calendars', 'albums',
+                'media', 'tracks','genres']
 
     def _test_only_viewable_by_artist(self, url_name, kwargs):
         # Anonymous user is redirected to login
@@ -38,7 +42,6 @@ class ViewsTests(TestCase):
                          data={'identification': 'jane@example.com',
                                'password': 'blowfish'})
 
-
     def test_view(self):
         """  """
         user = User.objects.get(pk=2)
@@ -58,7 +61,6 @@ class ViewsTests(TestCase):
             self.assertEqual(response.status_code, 200)
         response = self.client.get(reverse('artist:home', kwargs={'username': user.username}))
         self.assertEqual(response.status_code, 302)
-
 
     def test_biography_form_view(self):
         url_name = 'artist:biographyForm'
@@ -117,38 +119,73 @@ class ViewsTests(TestCase):
             )
             self.assertEqual(contact_info.contact.name, values['name'])
 
-    def test_form_permissions_views(self):
-        user = User.objects.get(pk=2)
-        user.profile.artist_profile = ArtistProfile(pk=2)
+    def test_member_forms_view(self):
+        url_name = 'artist:memberForm'
+        kwargs = {'memberID':1}
+        self._test_only_viewable_by_artist(url_name, {})
+        self._test_only_viewable_by_artist(url_name, kwargs)
+        values = {
+            'name': 'Andy Dwyer',
+            'biography': 'Dogs are the best.',
+            'current_member': True,
+            'remove_member': False,
+        }
+        self._signin_artist()
+        response = self.client.post(reverse(url_name), values, follow=True)
+        self.assertEqual(response.status_code, 200)
+        member = Member.objects.get(name=values['name'])
+        self.assertEqual(member.biography, values['biography'])
+        values['biography'] = "No cats are."
+        response = self.client.post(
+            reverse(url_name, kwargs={'memberID':member.id}),
+            values, follow=True
+        )
+        member_edited = Member.objects.get(name=values['name'])
+        self.assertEqual(member_edited.biography, values['biography'])
+        self.assertEqual(member_edited.id, member.id)
+
+    def test_music_form_views(self):
         url_names = [
-            ['artist:memberForm',        {}],
-            ['artist:memberForm',        {'memberID':1}],
             ['artist:albumForm',         {}],
             ['artist:editAlbumForm',     {'albumID':1}],
             ['artist:tracksForm',        {'albumID':1}],
+        ]
+        for url_name in url_names:
+            self._test_only_viewable_by_artist(url_name[0], url_name[1])
+        mp3_file = open(os.path.join(os.path.dirname(__file__), 'files/thriftyTale.mp3'))
+        values = {
+            'title': "Around The Well",
+            'year': "2009",
+            'genre': [2,],
+            'description':"This is our album",
+            'tracks': mp3_file,
+        }
+        self._signin_artist()
+        # create album
+        response = self.client.post(reverse('artist:albumForm'), values, follow=True)
+        self.assertEqual(response.status_code, 200)
+        album = Album.objects.get(title=values['title'])
+        self.assertEqual(album.year, values['year'])
+        # edit album
+        values['description'] = "This is our album."
+        values['tracks'] = ""
+        response = self.client.post(
+            reverse('artist:editAlbumForm', kwargs={'albumID':album.id}),
+            values, follow=True
+        )
+        self.assertEqual(response.status_code, 200)
+        album_edit = Album.objects.get(title=values['title'])
+        self.assertEqual(album_edit.id, album.id)
+        self.assertEqual(album_edit.description, values['description'])
+        #ogg_file = open(os.path.join(os.path.dirname(__file__), 'files/sway.ogg'))
+        #files = {"tracks": SimpleUploadedFile(self.mp3_file.name, self.mp3_file.read())}
+
+    def test_video_form_views(self):
+        url_names = [
             ['artist:video_album_form',  {}],
             ['artist:video_edit_album',  {'albumID':1}],
             ['artist:video_tracks_form', {'albumID':1}],
         ]
 
         for url_name in url_names:
-            response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
-            self.assertRedirects(response, '%s?next=%s' % (reverse('signin'),
-                                 response.request['PATH_INFO']),
-                                 status_code=302, target_status_code=200,)
-        # user with out permission is denied
-        self.client.post(reverse('signin'),
-                                 data={'identification': 'john@example.com',
-                                       'password': 'blowfish'})
-        for url_name in url_names:
-            response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
-            self.assertEqual(response.status_code, 403)
-        self.client.logout()
-
-        # user with permission is redirected
-        self.client.post(reverse('signin'),
-                                 data={'identification': 'jane@example.com',
-                                       'password': 'blowfish'})
-        for url_name in url_names:
-            response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
-            self.assertEqual(response.status_code, 200)
+            self._test_only_viewable_by_artist(url_name[0], url_name[1])
