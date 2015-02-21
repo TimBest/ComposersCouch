@@ -74,7 +74,7 @@
         </div>
       </div>
     {% empty %}
-      <p>No videos</p>
+      <p>This artist has not added any videos yet.</p>
       <p class="{{isEditable}}">Videos must be attached to an album. <a href="{% url 'artist:albumForm' %}">Add an album</a> to get started.</p>
     {% endfor %}
   </div>
