@@ -37,12 +37,6 @@
         </div>
       </div>
     </div>
-    <div>
-      {% for genre in profile.genre.all %}
-      {% if forloop.first %}Genres:{% else %},{% endif %}
-      <span> {{ genre }}</span>
-      {% endfor %}
-    </div>
   </div>
 {% endblock %}
 
