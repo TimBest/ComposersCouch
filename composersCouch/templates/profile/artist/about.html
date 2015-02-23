@@ -15,7 +15,7 @@
           {% endfor %}
         </span>
         <div class="pull-right">
-          <a href="{% url 'artist:socialLinksForm' %}" class="{{isEditable}}">Edit Social Media<span class="hidden-xs"> Links</span></a>
+          <a href="{% url 'artist:socialLinksForm' %}" class="{{isEditable}}">Edit <span class="hidden-xs">Social Media Links</span></a>
           {% with social=profile.social_links %}
               {% if social.facebook %}<a href="{{ social.facebook }}" target="_blank" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>{% endif %}
               {% if social.twitter %}<a href="{{ social.twitter }}" target="_blank" class="btn btn-twitter"><span class="fa fa-twitter"></span></a>{% endif %}

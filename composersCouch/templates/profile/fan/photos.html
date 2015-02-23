@@ -5,12 +5,11 @@
 {% block dropdownTitle %}Photos{% endblock %}
 
 {% block panelBody %}
-  <div class="row">
+  <div class="row page-header">
     <div class="col-xs-12">
       <a class="{{isEditable}} btn btn-success" href="{% url 'photos:upload' %}">
         <span class="fa fa-arrow-up"></span> Add Photo
       </a>
-      <p></p>
     </div>
   </div>
   <div class="{% if not images %}{{isEditable}}{% endif %}">
