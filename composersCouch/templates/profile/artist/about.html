@@ -6,12 +6,14 @@
 
 {% block panelBody %}
   <div class='about'>
-    <div class="row">
+    <div class="row page-header">
       <div class="col-xs-12">
-        {% for genre in profile.genre.all %}
-          {% if forloop.first %}Genres:{% else %},{% endif %}
-          <span> {{ genre }}</span>
-        {% endfor %}
+        <span>
+          {% for genre in profile.genre.all %}
+            {% if forloop.first %}Genres:{% else %},{% endif %}
+            <span> {{ genre }}</span>
+          {% endfor %}
+        </span>
         <div class="pull-right">
           <a href="{% url 'artist:socialLinksForm' %}" class="{{isEditable}}">Edit Social Media<span class="hidden-xs"> Links</span></a>
           {% with social=profile.social_links %}
@@ -20,7 +22,6 @@
               {% if social.google_plus %}<a href="{{ social.google_plus }}" target="_blank" class="btn btn-google"><span class="fa fa-google-plus"></span></a>{% endif %}
           {% endwith %}
         </div>
-        <p></p>
       </div>
     </div>
     <div class="biography">

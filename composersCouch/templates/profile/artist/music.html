@@ -7,7 +7,7 @@
 
 {% block panelBody %}
   <div class="music">
-    <div class="row">
+    <div class="row page-header">
       <div class="col-xs-12">
         <a class="{{isEditable}} btn btn-success" href="{% url 'artist:albumForm' %}">
           <span class="fa fa-plus"></span> Add Album
@@ -21,7 +21,6 @@
             {% if music.soundcloud %}<a href="{{ music.soundcloud }}" target="_blank" class="btn btn-soundcloud"><span class="fa fa-soundcloud"></span></a>{% endif %}
           {% endwith %}
         </div>
-        <p></p>
       </div>
     </div>
     {% for album in artist_profile.albums.all %}

@@ -9,7 +9,7 @@
 
 {% block panelBody %}
   <div class="videos">
-    <div class="row">
+    <div class="row page-header">
       <div class="col-xs-12">
         <div class="pull-right">
           <a href="{% url 'artist:videoLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
@@ -18,7 +18,6 @@
             {% if social.youtube %}<a href="{{ social.youtube }}" target="_blank" class="btn btn-youtube"><span class="fa fa-youtube-play"></span></a>{% endif %}
           {% endwith %}
         </div>
-        <p></p>
       </div>
     </div>
     {% for album in artist_profile.albums.all %}

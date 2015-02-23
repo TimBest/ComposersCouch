@@ -7070,17 +7070,17 @@ h1 {
   margin-left: 15px;
   margin-right: 15px;
 }
-#about .page-header {
+.about .panel-body #about .page-header {
   margin-top: 0px;
 }
-.brand .color {
+.about .brand .color {
   min-height: 75px;
   border-radius: 5px;
 }
-.brand .color-blocks {
+.about .brand .color-blocks {
   margin-left: 20px;
 }
-.brand .colors {
+.about .brand .colors {
   margin-bottom: 10px;
 }
 .black {

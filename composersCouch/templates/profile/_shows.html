@@ -1,16 +1,10 @@
-<div class="row">
-  <div class="col-xs-6">
+<div class="row page-header">
+  <div class="col-xs-12">
     {% if currentYear %}
       <h3>Upcoming shows</h3>
     {% else %}
       <h3>Shows in {{year}}</h3>
     {% endif %}
-  </div>
-  <div class="col-xs-6">
-    <div class="pull-right">
-      {%comment%}<p><a class="btn btn-default"  href="{% url 'calendar' %}">
-          <span class="fa fa-calendar-o"></span> {{name}}'s Calendar</a></p>{%endcomment%}
-    </div>
   </div>
 </div>
 {% if events %}
