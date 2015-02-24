@@ -49,18 +49,26 @@
 }
 
 .feed.sub-nav {
-  .filter {
-    margin: 0px;
-    padding: 11px 12px;
-    border: none;
+  .filters {
+    margin-bottom: 0px;
+    .filter {
+      margin: 0px;
+      padding: 11px 12px;
+      border: none;
+    }
+    ul {
+      width:200px;
+      li {
+        margin: 0px 10px;
+        label {
+        }
+      }
+    }
   }
 }
 
 
 .feed {
-  .genre-form{
-    max-width:200px;
-  }
   .cards {
     text-align:left;
     @media (max-width: @screen-xs-max) {

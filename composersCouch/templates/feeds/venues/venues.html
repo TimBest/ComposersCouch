@@ -23,10 +23,12 @@
 {% endblock %}
 
 {% block orderOptions %}
-  <li class="{% ifequal order 'all' %}text-bold{% endifequal %}">
-    <a href="{% url 'venues' 'all' scope zipcode %}?{{ request.GET.urlencode }}">All</a>
-  </li>
-  <li class="{% ifequal order 'new' %}text-bold{% endifequal %}">
-    <a href="{% url 'venues' 'new' scope zipcode %}?{{ request.GET.urlencode }}">New </a>
-  </li>
+  <a class="list-group-item {% ifequal order 'all' %}active{% endifequal %}"
+     href="{% url 'venues' 'all' scope zipcode %}?{{ request.GET.urlencode }}">
+     All
+  </a>
+  <a class="list-group-item {% ifequal order 'new' %}active{% endifequal %}"
+     href="{% url 'venues' 'new' scope zipcode %}?{{ request.GET.urlencode }}">
+     New
+  </a>
 {% endblock %}

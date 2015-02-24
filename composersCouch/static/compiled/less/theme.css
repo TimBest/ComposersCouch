@@ -7308,13 +7308,19 @@ h1 {
 .header.feed .nav-options .nav .nav-form div {
   float: left;
 }
-.feed.sub-nav .filter {
+.feed.sub-nav .filters {
+  margin-bottom: 0px;
+}
+.feed.sub-nav .filters .filter {
   margin: 0px;
   padding: 11px 12px;
   border: none;
 }
-.feed .genre-form {
-  max-width: 200px;
+.feed.sub-nav .filters ul {
+  width: 200px;
+}
+.feed.sub-nav .filters ul li {
+  margin: 0px 10px;
 }
 .feed .cards {
   text-align: left;

@@ -38,15 +38,20 @@
 {% endblock %}
 
 {% block orderOptions %}
-  <li class="{% ifequal order 'all' %}text-bold{% endifequal %}">
-    <a href="{% url 'requests' 'all' for scope zipcode %}?{{ request.GET.urlencode }}">All</a>
-  </li>
-  <li class="{% ifequal order 'expiring' %}text-bold{% endifequal %}">
-    <a href="{% url 'requests' 'expiring' for scope zipcode %}?{{ request.GET.urlencode }}">Expiring</a>
-  </li>
-  <li class="{% ifequal order 'new' %}text-bold{% endifequal %}">
-    <a href="{% url 'requests' 'new' for scope zipcode %}?{{ request.GET.urlencode }}">New </a>
-  </li>
+  {% comment %}
+  <a class="list-group-item {% ifequal order 'all' %}active{% endifequal %}"
+     href="{% url 'requests' 'all' for scope zipcode %}?{{ request.GET.urlencode }}">
+     Closest
+  </a>
+  {% endcomment %}
+  <a class="list-group-item {% ifequal order 'expiring' %}active{% endifequal %}"
+     href="{% url 'requests' 'expiring' for scope zipcode %}?{{ request.GET.urlencode }}">
+     Expiring
+  </a>
+  <a class="list-group-item {% ifequal order 'new' %}active{% endifequal %}"
+     href="{% url 'requests' 'new' for scope zipcode %}?{{ request.GET.urlencode }}">
+     Latest
+  </a>
 {% endblock %}
 
 {% block feed %}
