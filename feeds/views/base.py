@@ -3,6 +3,7 @@ from django.core.urlresolvers import resolve, reverse
 from django.shortcuts import redirect, render
 from django.utils import timezone
 
+from annoying.functions import get_object_or_None
 from composersCouch.utils import get_page
 from contact.utils import get_location
 from feeds.forms import ZipcodeForm, AvailabilityForm
@@ -27,9 +28,9 @@ class GenreMixin(object):
             genre_qs = []
             for i, genre in enumerate(genres):
                 if i==0:
-                    genre_qs = self.modelManager.filter(**{self.path_to_genre:genre})
+                    genre_qs = self.modelManager.filter(**{self.path_to_genre:genre.slug})
                 else:
-                    genre_qs = genre_qs | self.modelManager.filter(**{self.path_to_genre:genre})
+                    genre_qs = genre_qs | self.modelManager.filter(**{self.path_to_genre:genre.slug})
             return qs & genre_qs
         else:
             return qs
@@ -39,13 +40,16 @@ class GenreMixin(object):
         context['categories'] = Category.objects.filter(popular=True)
         context['more_categories'] = Category.objects.filter(popular=False)
 
-        category = self.request.GET.get('genre')
+        category_slug = self.request.GET.get('genre')
         my_genres = self.request.GET.get('my-genres')
         if self.request.user.is_authenticated() and my_genres :
-            self.path_to_genre = 'profile__genre__slug'
             context['my_genres'] = my_genres
+            context['genres'] = self.request.user.profile.genre.all()
         else:
-            context['category'] = category
+            context['category'] = category_slug
+            category = get_object_or_None(Category, slug=category_slug)
+            if category:
+                context['genres'] = category.genres.all()
         return context
 
 class FeedMixin(GenreMixin, ZipcodeMixin):
