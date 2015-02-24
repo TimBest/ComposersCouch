@@ -29,6 +29,7 @@ def shows(request, scope='all', *args, **kwargs):
 class ShowView(FeedMixin, TemplateView):
     modelManager = Show.objects
     path_to_genre = 'info__venue__profile__genre__slug'
+    template_name = 'feeds/shows/shows.html'
     # TODO: expand to also match with those preforming
 
     def get_default_order(self):
@@ -49,7 +50,6 @@ class ShowView(FeedMixin, TemplateView):
 
 
 class LocalView(ShowView):
-    template_name = 'feeds/shows/local.html'
 
     def get_posts(self, **kwargs):
         posts = super(LocalView, self).get_posts(**kwargs)
