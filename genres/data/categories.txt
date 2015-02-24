@@ -1,5 +1,3 @@
-"""Categories"""
-
 Acoustic, Ture
 Alternative, True
 Blues, True
