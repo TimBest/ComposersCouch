@@ -118,7 +118,6 @@ class ProfileEdit(ImageFormMixin, MultipleFormsView):
         user.calendar.slug = user.calendar.name = username
         user.calendar.save()
         profile = forms['profileForm'].save()
-        print forms['profileForm'].data
         if self.request.FILES.get('image'):
             profile.mugshot = Image.objects.create(
                 image=self.request.FILES.get('image'),

@@ -32,6 +32,12 @@
           <div class="btn-group">
             <a href="{% url 'request_write' artist.profile.user.username %}" class="btn btn-sm btn-default">{% trans "Request" %}</a>
           </div>
+          <p>
+            {% for genre in artist.profile.genre.all %}
+              {% if forloop.first %}Genres:{% else %},{% endif %}
+              <span> {{ genre }}</span>
+            {% endfor %}
+          </p>
           {% if artist.biography %}
             <p>{{ artist.biography }}</p>
           {% endif %}
