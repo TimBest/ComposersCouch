@@ -13,7 +13,7 @@ from crispy_forms.layout import Div, HTML, Layout
 from multiupload.fields import MultiFileField
 
 from artist.models import ArtistProfile
-from contact.forms import clean_url
+from links.forms import clean_url
 from embed_video.fields import EmbedVideoFormField
 from tracks.models import Album, Track, Media
 

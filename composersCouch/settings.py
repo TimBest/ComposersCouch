@@ -61,6 +61,7 @@ INSTALLED_APPS = (
     'feeds',
     'genres',
     'guardian',
+    'links',
     'photos',
     'progressbarupload',
     'request',

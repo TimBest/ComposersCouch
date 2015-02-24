@@ -8,6 +8,8 @@ from annoying.functions import get_object_or_None
 
 genre_csv = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                            'data/genres.txt'))
+categories_csv = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                           'data/categories.txt'))
 
 def run(verbose=True):
   for row in csv.reader(open(genre_csv),delimiter=','):
