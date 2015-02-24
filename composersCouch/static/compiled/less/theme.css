@@ -6659,6 +6659,10 @@ h1 {
   margin-top: 5px;
   margin-bottom: 5px;
 }
+.sub-nav .row .btn-sm {
+  margin-top: 7px;
+  margin-bottom: 7px;
+}
 .sub-nav .nav li a {
   color: #555555;
 }

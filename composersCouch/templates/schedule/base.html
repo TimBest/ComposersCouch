@@ -42,10 +42,10 @@
         </div>
         <div class="col-sm-2 col-sm-push-8 col-xs-6 right">
           <div class="btn-group pull-right">
-            <a href="{% url 'calendar' period_name 'shows' %}{% querystring_for_date date %}" class="{% ifequal filter 'shows' %}active{% endifequal %} btn btn-default">
+            <a href="{% url 'calendar' period_name 'shows' %}{% querystring_for_date date %}" class="{% ifequal filter 'shows' %}active{% endifequal %} btn btn-sm btn-default">
               Shows
             </a>
-            <a href="{% url 'calendar' period_name 'requests' %}{% querystring_for_date date %}" class="{% ifequal filter 'requests' %}active{% endifequal %} btn btn-default">
+            <a href="{% url 'calendar' period_name 'requests' %}{% querystring_for_date date %}" class="{% ifequal filter 'requests' %}active{% endifequal %} btn btn-sm btn-default">
               Requests
             </a>
           </div>

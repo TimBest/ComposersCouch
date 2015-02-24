@@ -10,10 +10,10 @@
 {% block header%}
   <span class="dropdown">
     <a class="btn btn-header dropdown-toggle toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-      {% block messageType %}Messages{% endblock %}<span class="caret-large text-white"></span>
+      {% block messageType %}All Messages{% endblock %}<span class="caret-large text-white"></span>
     </a>
     <ul class="dropdown-menu" role="menu">
-      <li class="{% block messageClass %}{% endblock %}"><a href="{% url 'threads:inbox' %}">Messages</a></li>
+      <li class="{% block messageClass %}{% endblock %}"><a href="{% url 'threads:inbox' %}">All Messages</a></li>
       <li class="{% block privateClass %}{% endblock %}"><a href="{% url 'private_requests' %}">Private Requests</a></li>
       <li class="{% block publicClass %}{% endblock %}"><a href="{% url 'public_requests' %}">Public Requests</a></li>
     </ul>
@@ -28,6 +28,17 @@
           <a href="{% url 'threads:compose' %}" class="btn btn-primary">Send message</a>
         </div>
         <div class="col-sm-4 col-sm-push-4 col-xs-6 right">
+          <div class="btn-group pull-right">
+            <a href="#" class="{% ifequal filter 'shows' %}active{% endifequal %} btn btn-sm btn-default">
+              All
+            </a>
+            <a href="#" class="{% ifequal filter 'requests' %}active{% endifequal %} btn btn-sm btn-default">
+              Private Request
+            </a>
+            <a href="#" class="{% ifequal filter 'requests' %}active{% endifequal %} btn btn-sm btn-default">
+              Public Requests
+            </a>
+          </div>
         </div>
         <div class="col-sm-4 col-sm-pull-4 center">
           <ul class="nav nav-pills nav-centered" role="tablist">
