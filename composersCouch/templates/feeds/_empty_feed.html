@@ -1,7 +1,11 @@
 {% load crispy_forms_tags  %}
 
+
 {% if usersGenres or genres %}
-  <a class="text-danger" href="{{ request.path }}"><span class="fa fa-filter"><span> <u>Remove Filters</u></a>
+  <div class="text-right">
+    <a class="btn btn-sm btn-danger-inv" href="{{ request.path }}"><span class="fa fa-filter"><span> <u>Remove Filters</u></a>
+    </p>
+  </div>
 {% endif %}
 {% if request.user.is_authenticated %}
   {% if following %}
@@ -18,7 +22,7 @@
     <div class="panel">
       <div class="panel-body">
         <p>No {{ feed_type }} feel free to try a diffrent zipcode.</p>
-        <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
+        <form class="form-inline zipcode-form" role="filter" method="POST" action="{% url 'zipcode' %}">
           <input type="hidden" name="path" value="{% firstof request.path '/' %}">
           {% crispy zipcodeForm %}
         </form>
@@ -40,7 +44,7 @@
              zipcode or <a href="{% url 'signup' %}?next={% firstof request.path '/' %}">sign up</a>
              for more options.</p>
           <div class="col-sm-6">
-            <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
+            <form class="form-inline zipcode-form" role="filter" method="POST" action="{% url 'zipcode' %}">
               <input type="hidden" name="path" value="{% firstof request.path '/' %}">
               {% crispy zipcodeForm %}
             </form>
@@ -58,5 +62,4 @@
       </div>
     </div>
   {% endif %}
-
 {% endif %}
