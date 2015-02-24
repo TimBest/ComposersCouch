@@ -38,16 +38,13 @@ class GenreMixin(object):
         context = super(GenreMixin, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.all()
 
-        genres = self.request.GET.getlist('genre')
+        category = self.request.GET.getlist('genre')
         my_genres = self.request.GET.get('my-genres')
         if self.request.user.is_authenticated() and my_genres :
-            genres = self.request.user.profile.genre.all()
             self.path_to_genre = 'profile__genre'
-            data = {'my-genres' : my_genres,}
+            context['my_genres'] = my_genres
         else:
-            context['genres'] = genres
-            data = {'genre' : genres, 'my-genres' : my_genres,}
-        context['my_genres'] = my_genres
+            context['category'] = category
         return context
 
 class FeedMixin(GenreMixin, ZipcodeMixin):
