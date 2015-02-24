@@ -10,7 +10,6 @@ from models import Follow, Post
 from post_feedly import feedly
 from annoying.functions import get_object_or_None
 from contact.forms import ZipcodeForm
-from genres.models import Genre
 
 
 class PostForm(forms.ModelForm):
@@ -61,31 +60,6 @@ class AvailabilityForm(forms.Form):
             'date',
             Submit('submit', 'Submit', css_class='btn btn-default'),
         )
-
-class GenreForm(ModelForm):
-    usersGenres = forms.BooleanField(label="My genres", required=False)
-    genre = forms.ModelMultipleChoiceField(label="",
-              queryset=Genre.objects.all(), required=False,
-              widget=MultipleChoiceWidget('GenreAutocomplete'))
-    def __init__(self, *args, **kwargs):
-        super(GenreForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            'genre',
-            Div(
-              Div('usersGenres',css_class='col-xs-6 left',),
-              Div(
-                Submit('submit', 'Filter', css_class='btn btn-default pull-right'),
-                css_class='col-xs-6 right',css_id='end-div',
-              ),
-              css_class='row no-gutter',
-            ),
-        )
-
-    class Meta:
-        model = Genre
-        fields = ('genre',)
 
 class ZipcodeForm(ZipcodeForm):
     def __init__(self, *args, **kwargs):

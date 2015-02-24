@@ -8,7 +8,7 @@ from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 from django.views.generic.edit import FormView
 
-from feeds.forms import GenreForm, ZipcodeForm, AvailabilityForm, RemovePostForm, FollowForm
+from feeds.forms import ZipcodeForm, AvailabilityForm, RemovePostForm, FollowForm
 from feeds.models import Post
 from feeds.urls import homeCategory, homeScope
 from genres.models import Genre
@@ -71,42 +71,6 @@ class AvailabilityFormView(FormView):
         return redirect(url)
 
 availability = AvailabilityFormView.as_view()
-
-class GenreFormView(FormView):
-    form_class = GenreForm
-
-    def get(self, request, *args, **kwargs):
-        path = self.request.POST.get('path')
-        return redirect(path)
-
-    def get_querystring(self):
-        qs = ''
-        genres = self.request.POST.getlist('genre')
-        usersGenres = self.request.POST.get('usersGenres')
-        if genres:
-            for genre in genres:
-                if qs:
-                    qs += '&genre=' + str(genre)
-                else:
-                    qs  = '?genre=' + str(genre)
-        if usersGenres:
-            if qs:
-                qs += '&usersGenres=' + str(usersGenres)
-            else:
-                qs  = '?usersGenres=' + str(usersGenres)
-        return qs
-
-    def form_invalid(self, form):
-        path = self.request.POST.get('path')
-        return redirect(path)
-
-    def form_valid(self, form):
-        path = self.request.POST.get('path')
-        response = redirect(path)
-        response['Location'] += self.get_querystring()
-        return response
-
-filter = GenreFormView.as_view()
 
 def genre(request, template_name='autocomplete/genre.html', ajax_template='autocomplete/genre.html'):
     q = request.GET.get('q', '')

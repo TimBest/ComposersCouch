@@ -11,7 +11,6 @@ urlpatterns = patterns(view_location,
     url(r'^follow/$', 'follow', name='follow'),
     url(r'^remove_post/$', 'remove_post', name='remove_post'),
     url(r'^zipcode/$', 'zipcode', name='zipcode'),
-    url(r'^filter/$', 'filter', name='filter'),
     url(r'^genre/$', 'genre', name='genre'),
     url(r'^availability/$', 'availability', name='availability'),
 

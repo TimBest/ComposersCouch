@@ -27,19 +27,6 @@ class FormTests(TestCase):
             form = forms.AvailabilityForm(data=valid_dict['data'])
             self.failUnless(form.is_valid())
 
-    def test_genre_form(self):
-        # Test a valid form.
-        valid_data_dicts = [
-            {'data': {'genre':  ['1', '2'],
-                      'usersGenres': '',},},
-            {'data': {'genre':  '',
-                      'usersGenres': True,},},
-        ]
-
-        for valid_dict in valid_data_dicts:
-            form = forms.GenreForm(data=valid_dict['data'])
-            self.failUnless(form.is_valid())
-
     def test_zipcode_form(self):
         # Test a valid form.
         valid_data_dicts = [{'data': {'zip_code': Zipcode(pk=12065)},},]

@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags  %}
 {% crispy AvailabilityForm AvailabilityForm.helper %}
-{% crispy GenreForm GenreForm.helper %}
 {% crispy ZipcodeForm ZipcodeForm.helper %}
 
 {% block headerClass %}feed {% block bgColor %}blue{% endblock %}{% endblock %}
@@ -86,11 +85,13 @@
                 {% endblock %}
                 {% block genreForm %}
                   <li>
-                    <form class="genre-form" role="filter" method="POST" action="{% url 'filter' %}">
-                      <b>Filter by:</b>
-                      <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-                      {% crispy genreForm %}
-                    </form>
+                    <b>Filter by:</b>
+                    <div class="row no-gutter genres">
+                      {% for genre in categories %}
+                        <a class="label label-default" href="{% firstof request.path '/' %}?genre={{ genre.id }}">{{ genre }}</a>
+                      {% endfor %}
+                      <a class="btn btn-sm btn-default" href="{% firstof request.path '/' %}?my-genres=on">Use my genres</a>
+                    </div>
                   </li>
                 {% endblock %}
               </ul>

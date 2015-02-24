@@ -6564,7 +6564,7 @@ html {
   min-height: 110%;
 }
 body {
-  font-family: Lato, sans-serif;
+  font-family: Lato, Helvetica, Arial, sans-serif;
   margin-bottom: 75px;
 }
 h1,
@@ -7325,10 +7325,13 @@ h1 {
   border: none;
 }
 .feed.sub-nav .filters ul {
-  width: 200px;
+  width: 300px;
 }
 .feed.sub-nav .filters ul li {
   margin: 0px 10px;
+}
+.feed.sub-nav .filters ul li .genres {
+  font-family: Arial, sans-serif;
 }
 .feed .cards {
   text-align: left;

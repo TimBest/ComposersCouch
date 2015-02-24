@@ -5,7 +5,8 @@ from django.utils import timezone
 
 from composersCouch.utils import get_page
 from contact.utils import get_location
-from feeds.forms import GenreForm, ZipcodeForm, AvailabilityForm
+from feeds.forms import ZipcodeForm, AvailabilityForm
+from genres.models import Category
 
 
 class ZipcodeMixin(object):
@@ -35,20 +36,18 @@ class GenreMixin(object):
 
     def get_context_data(self, **kwargs):
         context = super(GenreMixin, self).get_context_data(**kwargs)
+        context['categories'] = Category.objects.all()
+
         genres = self.request.GET.getlist('genre')
-        usersGenres = self.request.GET.get('usersGenres')
-        if self.request.user.is_authenticated() and usersGenres :
+        my_genres = self.request.GET.get('my-genres')
+        if self.request.user.is_authenticated() and my_genres :
             genres = self.request.user.profile.genre.all()
             self.path_to_genre = 'profile__genre'
-            data = {'usersGenres' : usersGenres,}
+            data = {'my-genres' : my_genres,}
         else:
             context['genres'] = genres
-            data = {
-                'genre' : genres,
-                'usersGenres' : usersGenres,
-            }
-        context['genreForm'] = GenreForm(data)
-        context['usersGenres'] = usersGenres
+            data = {'genre' : genres, 'my-genres' : my_genres,}
+        context['my_genres'] = my_genres
         return context
 
 class FeedMixin(GenreMixin, ZipcodeMixin):
