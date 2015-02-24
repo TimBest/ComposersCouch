@@ -2,9 +2,9 @@ from django.shortcuts import redirect
 from django.views.generic import UpdateView
 
 from annoying.functions import get_object_or_None
-from contact.forms import MusicLinksForm, PhotoLinksForm, SocialLinksForm, VideoLinksForm
-from contact.models import SocialLinks, MusicLinks
 from customProfile.views import ArtistProfileFormMixin, VenueProfileFormMixin
+from social_links.forms import MusicLinksForm, PhotoLinksForm, SocialLinksForm, VideoLinksForm
+from social_links.models import SocialLinks, MusicLinks
 
 
 #Generic form for external link forms

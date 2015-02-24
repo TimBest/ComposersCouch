@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from links import models
+from social_links import models
 
 
 admin.site.register(models.SocialLinks)
