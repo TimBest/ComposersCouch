@@ -9,6 +9,7 @@ from crispy_forms.layout import Div, Field, Layout, Submit
 
 from annoying.functions import get_object_or_None
 from contact.models import Location, Contact, Zipcode
+from social_links.forms import clean_url
 
 
 class ZipcodeForm(ModelForm):

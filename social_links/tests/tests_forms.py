@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.utils.translation import ugettext_lazy as _
 
-from links import forms
+from social_links import forms
 
 
 class LinksFormTests(TestCase):
