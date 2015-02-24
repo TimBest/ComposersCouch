@@ -1,33 +1,33 @@
 """Categories"""
 
-Acoustic
-Alternative
-Blues
-Brass
-Children's
-Christian & Gospel
-Classical
-Comedy
-Country
-Dance
-Disco
-Electronic
-Folk
-Funk
-Hip-Hop/Rap
-Holiday
-Indie
-Instrumental
-Jazz
-Latin
-Metal
-New Age
-Pop
-Punk
-R&B/Soul
-Reggae
-Rock
-Singer/Songwriter
-Soundtrack
-Vocal
-World
+Acoustic, Ture
+Alternative, True
+Blues, True
+Brass, False
+Children's, False
+Christian & Gospel, False
+Classical, False
+Comedy, False
+Country, True
+Dance, True
+Disco, False
+Electronic, True
+Folk, True
+Funk, False
+Hip-Hop/Rap, True
+Holiday, False
+Indie, True
+Instrumental, False
+Jazz, True
+Latin, True
+Metal, True
+New Age, False
+Pop, True
+Punk, True
+R&B/Soul, True
+Reggae, False
+Rock, True
+Singer/Songwriter, True
+Soundtrack, False
+Vocal, False
+World, False
