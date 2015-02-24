@@ -7324,13 +7324,15 @@ h1 {
   padding: 11px 12px;
   border: none;
 }
-.feed.sub-nav .filters ul {
+.feed.sub-nav .filters .dropdown-menu {
+  left: auto;
+  right: 0;
   width: 300px;
 }
-.feed.sub-nav .filters ul li {
+.feed.sub-nav .filters .dropdown-menu li {
   margin: 0px 10px;
 }
-.feed.sub-nav .filters ul li .genres {
+.feed.sub-nav .filters .dropdown-menu li .genres {
   font-family: Arial, sans-serif;
 }
 .feed .cards {

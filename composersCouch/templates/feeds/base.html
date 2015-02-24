@@ -70,52 +70,50 @@
       <div class="col-xs-10 left">
         <ul class="nav nav-pills">{% block scopeNav %}{% endblock %}</ul>
       </div>
-      <div class="col-xs-2 right">
+      <div class="col-xs-2 right text-right">
         {% block filters %}
-          <ul class="navbar-right filters">
-            <span class="dropdown">
-              <a class="btn btn-transparent-dropdown text-black filter dropdown-toggle"
-                 data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
-                Filters <span class="caret"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                {% block orderForm %}
-                  <li><label>Order</label></li>
-                  <li><div class="list-group">{% block orderOptions %}{% endblock %}</div></li>
-                {% endblock %}
-                {% block genreForm %}
-                  <li>
-                    <b>Filter by:</b>
-                    <div class="row no-gutter genres">
-                      {% if my_genres %}
-                        <a class="btn btn-xs btn-primary" href="{{ request.path }}">My genres X</a>
+          <span class="dropdown text-left filters">
+            <a class="btn btn-transparent-dropdown text-black filter dropdown-toggle"
+               data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
+              Filters <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              {% block orderForm %}
+                <li><label>Order</label></li>
+                <li><div class="list-group">{% block orderOptions %}{% endblock %}</div></li>
+              {% endblock %}
+              {% block genreForm %}
+                <li>
+                  <b>Filter by:</b>
+                  <div class="row no-gutter genres">
+                    {% if my_genres %}
+                      <a class="btn btn-xs btn-primary" href="{{ request.path }}">My genres X</a>
+                    {% else %}
+                      <a class="btn btn-xs btn-default" href="{{ request.path }}?my-genres=on">My genres</a>
+                    {% endif %}
+                    <span> or </span>
+                    {% for genre in categories %}
+                      {% if category == genre.slug %}
+                        <a class="label label-primary" href="{{ request.path }}">{{ genre }} X</a>
                       {% else %}
-                        <a class="btn btn-xs btn-default" href="{{ request.path }}?my-genres=on">My genres</a>
+                        <a class="label label-default" href="{{ request.path }}?genre={{ genre.slug }}">{{ genre }}</a>
                       {% endif %}
-                      <span> or </span>
-                      {% for genre in categories %}
+                    {% endfor %}
+                    <span class="more-genres">
+                      {% for genre in more_categories %}
                         {% if category == genre.slug %}
                           <a class="label label-primary" href="{{ request.path }}">{{ genre }} X</a>
                         {% else %}
                           <a class="label label-default" href="{{ request.path }}?genre={{ genre.slug }}">{{ genre }}</a>
                         {% endif %}
                       {% endfor %}
-                      <span class="more-genres">
-                        {% for genre in more_categories %}
-                          {% if category == genre.slug %}
-                            <a class="label label-primary" href="{{ request.path }}">{{ genre }} X</a>
-                          {% else %}
-                            <a class="label label-default" href="{{ request.path }}?genre={{ genre.slug }}">{{ genre }}</a>
-                          {% endif %}
-                        {% endfor %}
-                      </span>
-                    </div>
-                    <a id="load-more-genres" class="btn btn-sm btn-default" href="javascript:void(0)">Show More</a>
-                  </li>
-                {% endblock %}
-              </ul>
-            </span>
-          </ul>
+                    </span>
+                  </div>
+                  <a id="load-more-genres" class="btn btn-sm btn-default" href="javascript:void(0)">Show More</a>
+                </li>
+              {% endblock %}
+            </ul>
+          </span>
         {% endblock %}
       </div>
     </div>
