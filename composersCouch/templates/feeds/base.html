@@ -38,8 +38,8 @@
       {% block availabilityForm %}
         <span class="text-white"> available on</span>
         <a href="#" role="button" data-toggle="popover"
-           id="availability-select" class="toggle text-white" title="Availability">
-          {% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %}<span class="caret"></span></a>
+           id="availability-select" class="toggle btn btn-transparent-dropdown text-white" title="Availability">
+          {% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %} <span class="caret"></span></a>
         <div class="availability-content hide">
           <form class="availability-form" role="filter" method="POST" action="{% url 'availability' %}">
             <input type="hidden" name="path" value="{% firstof request.path '/' %}">
@@ -50,8 +50,8 @@
       {% block zipcodeForm %}
         <span class="text-white"> near</span>
         <a href="#" role="button" data-toggle="popover"
-           id="zipcode-select" class="toggle text-white" title="Zipcode">
-          {% if zipcode %}{{ zipcode }}{% else %}Zipcode{% endif %}<span class="caret"></span>
+           id="zipcode-select" class="toggle btn btn-transparent-dropdown text-white" title="Zipcode">
+          {% if zipcode %}{{ zipcode }}{% else %}Zipcode{% endif %} <span class="caret"></span>
         </a>
         <div class="zipcode-content hide">
           <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
@@ -75,7 +75,7 @@
         {% block filters %}
           <ul class="navbar-right filters">
             <span class="dropdown">
-              <a class=" btn btn-transparent-dropdown text-black filter dropdown-toggle"
+              <a class="btn btn-transparent-dropdown text-black filter dropdown-toggle"
                  data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
                 Filters <span class="caret"></span>
               </a>

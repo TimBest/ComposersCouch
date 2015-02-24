@@ -7,7 +7,7 @@
 {% block forForm %}
   <span class="text-white">Looking for </span>
   <span class="dropdown">
-    <a class="text-white dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+    <a class="btn btn-transparent-dropdown text-white dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
       {{ for|capfirst }}s <span class="caret"></span>
     </a>
     <ul class="dropdown-menu">
@@ -41,16 +41,16 @@
   {% comment %}
   <a class="list-group-item {% ifequal order 'all' %}active{% endifequal %}"
      href="{% url 'requests' 'all' for scope zipcode %}?{{ request.GET.urlencode }}">
-     Closest
+    Closest
   </a>
   {% endcomment %}
   <a class="list-group-item {% ifequal order 'expiring' %}active{% endifequal %}"
      href="{% url 'requests' 'expiring' for scope zipcode %}?{{ request.GET.urlencode }}">
-     Expiring
+    Expiring
   </a>
   <a class="list-group-item {% ifequal order 'new' %}active{% endifequal %}"
      href="{% url 'requests' 'new' for scope zipcode %}?{{ request.GET.urlencode }}">
-     Latest
+    Latest
   </a>
 {% endblock %}
 

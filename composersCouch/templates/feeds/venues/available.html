@@ -10,8 +10,8 @@
 
 {% block zipcodeForm %}
   <span class="dropdown">
-    <a class="text-white dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
-      {% block nearActive %}near{% endblock %}<span class="caret"></span></a>
+    <a class="btn btn-transparent-dropdown text-white dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+      {% block nearActive %}near{% endblock %} <span class="caret"></span></a>
     <ul class="dropdown-menu">
       <li class="{% block near %}active{% endblock %}">
         <a href="{% url 'available_venues' order year month day zipcode %}?{{ request.GET.urlencode }}">near</a>
@@ -23,7 +23,7 @@
   </span>
   {% block betweenForm %}
     <a href="#" role="button" data-toggle="popover"
-       id="zipcode-select" class="toggle text-white" title="Zipcode">
+       id="zipcode-select" class="toggle btn btn-transparent-dropdown text-white" title="Zipcode">
       {% if zipcode %}{{ zipcode }}{% else %}Zipcode{% endif %}<span class="caret"></span>
     </a>
     <div class="zipcode-content hide">
