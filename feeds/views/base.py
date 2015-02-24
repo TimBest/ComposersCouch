@@ -20,7 +20,7 @@ class ZipcodeMixin(object):
         return context
 
 class GenreMixin(object):
-    path_to_genre = 'profile__genre__id'
+    path_to_genre = 'profile__genre__slug'
 
     def filter_by_genre(self, genres, qs):
         if genres:
@@ -39,10 +39,10 @@ class GenreMixin(object):
         context['categories'] = Category.objects.filter(popular=True)
         context['more_categories'] = Category.objects.filter(popular=False)
 
-        category = self.request.GET.getlist('genre')
+        category = self.request.GET.get('genre')
         my_genres = self.request.GET.get('my-genres')
         if self.request.user.is_authenticated() and my_genres :
-            self.path_to_genre = 'profile__genre'
+            self.path_to_genre = 'profile__genre__slug'
             context['my_genres'] = my_genres
         else:
             context['category'] = category

@@ -87,14 +87,26 @@
                   <li>
                     <b>Filter by:</b>
                     <div class="row no-gutter genres">
-                      <a class="btn btn-xs btn-default" href="{% firstof request.path '/' %}?my-genres=on">My genres</a>
+                      {% if my_genres %}
+                        <a class="btn btn-xs btn-primary" href="{{ request.path }}">My genres X</a>
+                      {% else %}
+                        <a class="btn btn-xs btn-default" href="{{ request.path }}?my-genres=on">My genres</a>
+                      {% endif %}
                       <span> or </span>
                       {% for genre in categories %}
-                        <a class="label label-default" href="{% firstof request.path '/' %}?genre={{ genre.id }}">{{ genre }}</a>
+                        {% if category == genre.slug %}
+                          <a class="label label-primary" href="{{ request.path }}">{{ genre }} X</a>
+                        {% else %}
+                          <a class="label label-default" href="{{ request.path }}?genre={{ genre.slug }}">{{ genre }}</a>
+                        {% endif %}
                       {% endfor %}
                       <span class="more-genres">
                         {% for genre in more_categories %}
-                          <a class="label label-default" href="{% firstof request.path '/' %}?genre={{ genre.id }}">{{ genre }}</a>
+                          {% if category == genre.slug %}
+                            <a class="label label-primary" href="{{ request.path }}">{{ genre }} X</a>
+                          {% else %}
+                            <a class="label label-default" href="{{ request.path }}?genre={{ genre.slug }}">{{ genre }}</a>
+                          {% endif %}
                         {% endfor %}
                       </span>
                     </div>
