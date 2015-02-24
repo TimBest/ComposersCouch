@@ -4,26 +4,17 @@
 {% block privateClass %}active{% endblock %}
 {% block messageType %}Private Requests{% endblock %}
 
-{% block navigation %}
-  <div class="navigation sub-nav">
-    <div class="container-fluid">
-      <div class="row no-gutter">
-        <div class="col-sm-4 left">
-          <a href="{% url 'request_write' %}" class="btn btn-primary">Send Private Request</a>
-        </div>
-        <div class="col-sm-4 center">
-          <ul class="nav nav-pills nav-centered" role="tablist">
-            <li class="{% if inbox %}active{% endif %}">
-              <a href="{% url 'private_requests' %}"><span class="fa fa-inbox"></span> Inbox</a>
-            </li>
-            <li class="{% if sent %}active{% endif %}">
-              <a href="{% url 'sent_private_requests' %}"><span class="fa fa-send"></span> Sent</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
+{% block send_message %}
+  <a href="{% url 'request_write' %}" class="btn btn-primary">Send Private Request</a>
+{% endblock %}
+
+{% block center_nav %}
+  <li class="{% if inbox %}active{% endif %}">
+    <a href="{% url 'private_requests' %}"><span class="fa fa-inbox"></span> Inbox</a>
+  </li>
+  <li class="{% if sent %}active{% endif %}">
+    <a href="{% url 'sent_private_requests' %}"><span class="fa fa-send"></span> Sent</a>
+  </li>
 {% endblock %}
 
 {% block content %}

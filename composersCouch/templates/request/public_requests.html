@@ -4,30 +4,21 @@
 {% block publicClass %}active{% endblock %}
 {% block messageType %}Public Requests{% endblock %}
 
-{% block navigation %}
-<div class="navigation sub-nav">
-  <div class="container-fluid">
-    <div class="row no-gutter">
-      <div class="col-sm-4 left">
-        {% if user.profile.profile_type == 'm' %}
-          <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
-        {% else %}
-          <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
-        {% endif %}
-      </div>
-      <div class="col-sm-4 center">
-        <ul class="nav nav-pills nav-centered" role="tablist">
-          <li class="{% if is_requests %}active{% endif %}">
-            <a href="{% url 'public_requests' %}">Sent</a>
-          </li>
-          <li class="{% if is_applications %}active{% endif %}">
-            <a href="{% url 'public_applications' %}">Applied For</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</div>
+{% block send_message %}
+  {% if user.profile.profile_type == 'm' %}
+    <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
+  {% else %}
+    <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
+  {% endif %}
+{% endblock %}
+
+{% block center_nav %}
+  <li class="{% if is_requests %}active{% endif %}">
+    <a href="{% url 'public_requests' %}">Sent</a>
+  </li>
+  <li class="{% if is_applications %}active{% endif %}">
+    <a href="{% url 'public_applications' %}">Applied For</a>
+  </li>
 {% endblock %}
 
 {% block content %}

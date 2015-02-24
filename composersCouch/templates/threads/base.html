@@ -8,16 +8,7 @@
 {% block headerClass %}thread{% endblock %}
 
 {% block header%}
-  <span class="dropdown">
-    <a class="btn btn-header dropdown-toggle toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-      {% block messageType %}All Messages{% endblock %}<span class="caret-large text-white"></span>
-    </a>
-    <ul class="dropdown-menu" role="menu">
-      <li class="{% block messageClass %}{% endblock %}"><a href="{% url 'threads:inbox' %}">All Messages</a></li>
-      <li class="{% block privateClass %}{% endblock %}"><a href="{% url 'private_requests' %}">Private Requests</a></li>
-      <li class="{% block publicClass %}{% endblock %}"><a href="{% url 'public_requests' %}">Public Requests</a></li>
-    </ul>
-  </span>
+  <h2 class="text-white">{% block messageType %}All Messages{% endblock %}</h2>
 {% endblock %}
 
 {% block navigation %}
@@ -25,32 +16,36 @@
     <div class="container-fluid">
       <div class="row no-gutter">
         <div class="col-sm-4 col-xs-6 left">
-          <a href="{% url 'threads:compose' %}" class="btn btn-primary">Send message</a>
+          {% block send_message %}
+            <a href="{% url 'threads:compose' %}" class="btn btn-primary">Send message</a>
+          {% endblock %}
         </div>
         <div class="col-sm-4 col-sm-push-4 col-xs-6 right">
           <div class="btn-group pull-right">
-            <a href="#" class="{% ifequal filter 'shows' %}active{% endifequal %} btn btn-sm btn-default">
+            <a href="{% url 'threads:inbox' %}" class="{% block messageClass %}{% endblock %} btn btn-sm btn-default">
               All
             </a>
-            <a href="#" class="{% ifequal filter 'requests' %}active{% endifequal %} btn btn-sm btn-default">
-              Private Request
+            <a href="{% url 'private_requests' %}" class="{% block privateClass %}{% endblock %} btn btn-sm btn-default">
+              Private Requests
             </a>
-            <a href="#" class="{% ifequal filter 'requests' %}active{% endifequal %} btn btn-sm btn-default">
+            <a href="{% url 'public_requests' %}" class="{% block publicClass %}{% endblock %} btn btn-sm btn-default">
               Public Requests
             </a>
           </div>
         </div>
-        <div class="col-sm-4 col-sm-pull-4 center">
+        <div class="col-sm-4 col-sm-pull-4 col-xs-12 center">
           <ul class="nav nav-pills nav-centered" role="tablist">
-            <li class="{% block inboxClass %}{% endblock %}">
-              <a href="{% url 'threads:inbox' %}"><span class="fa fa-inbox"></span> {% trans "Inbox" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a>
-            </li>
-            <li class="{% block sentClass %}{% endblock %}">
-              <a href="{% url 'threads:sent' %}"><span class="fa fa-send"></span> {% trans "Sent" %}</a>
-            </li>
-            <li class="{% block trashClass %}{% endblock %}">
-              <a href="{% url 'threads:trash' %}"><span class="fa fa-trash-o"></span> {% trans "Trash" %}</a>
-            </li>
+            {% block center_nav %}
+              <li class="{% block inboxClass %}{% endblock %}">
+                <a href="{% url 'threads:inbox' %}"><span class="fa fa-inbox"></span> {% trans "Inbox" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a>
+              </li>
+              <li class="{% block sentClass %}{% endblock %}">
+                <a href="{% url 'threads:sent' %}"><span class="fa fa-send"></span> {% trans "Sent" %}</a>
+              </li>
+              <li class="{% block trashClass %}{% endblock %}">
+                <a href="{% url 'threads:trash' %}"><span class="fa fa-trash-o"></span> {% trans "Trash" %}</a>
+              </li>
+            {% endblock %}
           </ul>
         </div>
       </div>
