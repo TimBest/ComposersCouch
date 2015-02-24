@@ -36,7 +36,8 @@ class GenreMixin(object):
 
     def get_context_data(self, **kwargs):
         context = super(GenreMixin, self).get_context_data(**kwargs)
-        context['categories'] = Category.objects.all()[:17]
+        context['categories'] = Category.objects.filter(popular=True)
+        context['more_categories'] = Category.objects.filter(popular=False)
 
         category = self.request.GET.getlist('genre')
         my_genres = self.request.GET.get('my-genres')

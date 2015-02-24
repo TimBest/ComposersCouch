@@ -87,11 +87,18 @@
                   <li>
                     <b>Filter by:</b>
                     <div class="row no-gutter genres">
+                      <a class="btn btn-xs btn-default" href="{% firstof request.path '/' %}?my-genres=on">My genres</a>
+                      <span> or </span>
                       {% for genre in categories %}
                         <a class="label label-default" href="{% firstof request.path '/' %}?genre={{ genre.id }}">{{ genre }}</a>
                       {% endfor %}
-                      <a class="btn btn-sm btn-default" href="{% firstof request.path '/' %}?my-genres=on">Use my genres</a>
+                      <span class="more-genres">
+                        {% for genre in more_categories %}
+                          <a class="label label-default" href="{% firstof request.path '/' %}?genre={{ genre.id }}">{{ genre }}</a>
+                        {% endfor %}
+                      </span>
                     </div>
+                    <a id="load-more-genres" class="btn btn-sm btn-default" href="javascript:void(0)">Show More</a>
                   </li>
                 {% endblock %}
               </ul>
@@ -153,5 +160,11 @@
               },
           });
     })
+    $('.more-genres').hide();
+    $('#load-more-genres').click(function(e) {
+      e.stopPropagation();
+      $('.more-genres').show();
+      $('#load-more-genres').hide();
+    });
   </script>
 {% endblock %}
