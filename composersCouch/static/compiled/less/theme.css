@@ -6612,7 +6612,7 @@ h1 {
   position: absolute;
   bottom: 8px;
   right: 8px;
-  color: #580200;
+  color: #820a07;
   font-size: 14px;
   font-family: PT-sans, sans-serif;
 }
@@ -7037,10 +7037,10 @@ h1 {
   background-color: #2161a8;
 }
 .landing-page .concerts {
-  background: rgba(0, 113, 79, 0.6);
+  background: rgba(0, 144, 100, 0.6);
 }
 .landing-page .concerts .jumbotron {
-  background-color: #00714f;
+  background-color: #009064;
 }
 .landing-page .artists {
   background: rgba(47, 47, 47, 0.75);
@@ -7106,9 +7106,6 @@ h1 {
   background-color: #999999;
 }
 .dark-blue {
-  background-color: #083970;
-}
-.muted-blue {
   background-color: #0c498e;
 }
 .blue {
@@ -7117,13 +7114,7 @@ h1 {
 .light-blue {
   background-color: #3f77b5;
 }
-.faded-blue {
-  background-color: #6494c9;
-}
 .dark-green {
-  background-color: #00714f;
-}
-.muted-green {
   background-color: #009064;
 }
 .green {
@@ -7132,13 +7123,7 @@ h1 {
 .light-green {
   background-color: #35b68f;
 }
-.faded-green {
-  background-color: #5ccaa9;
-}
-.dark-orange {
-  background-color: #ab3c00;
-}
-.muted-orange {
+.dark- {
   background-color: #da4c00;
 }
 .orange {
@@ -7147,13 +7132,7 @@ h1 {
 .light-orange {
   background-color: #ff8a4b;
 }
-.faded-orange {
-  background-color: #ffa474;
-}
 .dark-purple {
-  background-color: #170e77;
-}
-.muted-purple {
   background-color: #211598;
 }
 .purple {
@@ -7162,13 +7141,7 @@ h1 {
 .light-purple {
   background-color: #544abe;
 }
-.faded-purple {
-  background-color: #776ed0;
-}
 .dark-red {
-  background-color: #580200;
-}
-.muted-red {
   background-color: #820a07;
 }
 .red {
@@ -7176,9 +7149,6 @@ h1 {
 }
 .light-red {
   background-color: #c4423f;
-}
-.faded-red {
-  background-color: #e9716e;
 }
 .authentication .container-fluid {
   padding-right: 15px;
@@ -7394,7 +7364,8 @@ ul.thumbnails.image_picker_selector li .thumbnail img {
   -webkit-user-drag: none;
 }
 ul.thumbnails.image_picker_selector li .thumbnail.selected {
-  background: #6494c9;
+  background: #3f77b5;
+  color: #fbfcfc;
 }
 .header.thread {
   color: #fbfcfc;
@@ -7513,12 +7484,12 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .detail .navigation {
   height: 42px;
-  background-color: #2161a8;
+  background-color: #0c498e;
   padding-bottom: 0px;
 }
 .detail .navigation .nav-tabs {
   height: 42px;
-  background-color: #2161a8;
+  background-color: #0c498e;
   border-width: 0px;
   -webkit-border-radius: 0px;
   -moz-border-radius: 0px;
