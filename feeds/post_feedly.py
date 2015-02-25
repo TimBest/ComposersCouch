@@ -35,7 +35,7 @@ class PostFeedly(Manager):
         activity = post.create_activity()
         zipcode = post.target.profile.contact_info.location.zip_code
         self.remove_geo_activity(zipcode, activity)
-        self.remove_user_activity(post.user_id, activity)
+        self.remove_user_activity(post.target_id, activity)
         post.delete()
 
     def get_user_follower_ids(self, user_id):
@@ -92,8 +92,6 @@ class PostFeedly(Manager):
 
         for feed_class in self.geo_feed_classes.values():
             for priority_group, zip_codes in self.get_zipcodes(zip_code=zip_code, distance=feed_class.distance).items():
-                print priority_group
-                print zip_codes
                 self.create_fanout_tasks(
                     zip_codes,
                     feed_class,
