@@ -7,11 +7,6 @@ from stream_framework.feeds.aggregated_feed.redis import RedisAggregatedFeed
 class PostFeed(RedisFeed):
     key_format = 'feed:normal:%(user_id)s'
 
-#combines similar activities that happen in a short period of time
-class AggregatedPostFeed(RedisAggregatedFeed):
-    aggregator_class = RecentVerbAggregator
-    key_format = 'feed:aggregated:%(user_id)s'
-
 # The feed containing only your posts
 class UserPostFeed(PostFeed):
     key_format = 'feed:user:%(user_id)s'

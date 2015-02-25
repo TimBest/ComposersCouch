@@ -6,13 +6,13 @@ from stream_framework.activity import Activity
 from stream_framework.feed_managers.base import Manager, FanoutPriority, add_operation, remove_operation
 
 from models import Follow, Post
-from post_feed import AggregatedPostFeed, PostFeed, UserPostFeed, LocalFeed
+from post_feed import PostFeed, UserPostFeed, LocalFeed
 from verbs import Post as PostVerb
 from contact.models import Zipcode
 
 
 class PostFeedly(Manager):
-    feed_classes = dict(normal=PostFeed, aggregated=AggregatedPostFeed)
+    feed_classes = dict(normal=PostFeed)
     geo_feed_classes = dict(local=LocalFeed)
     user_feed_class = UserPostFeed
 
