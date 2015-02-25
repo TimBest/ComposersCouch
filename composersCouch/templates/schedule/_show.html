@@ -13,7 +13,7 @@
             {% thumbnail info.get_poster "100x100" crop="center" as im %}
               <img class="image-center" src="{{ MEDIA_URL }}{{ im }}" alt="{{ info.title }}"/>
             {% empty %}
-              <img class="image-center" src="{% static 'img/navbar.png' %}" alt="{% trans 'Composers Couch logo' %}"  height="" width="" />
+              <img class="image-center" src="{% static 'img/logo.png' %}" alt="{% trans 'Composers Couch logo' %}"  height="" width="200px" />
             {% endthumbnail %}
           </div>
         </div>
