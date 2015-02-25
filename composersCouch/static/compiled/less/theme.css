@@ -7336,6 +7336,9 @@ h1 {
 .post form {
   padding: 0px;
 }
+.post form .dropdown-menu {
+  top: 0px;
+}
 ul.thumbnails.image_picker_selector {
   overflow: auto;
   list-style-image: none;
