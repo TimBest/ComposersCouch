@@ -7114,6 +7114,9 @@ h1 {
 .light-blue {
   background-color: #3f77b5;
 }
+.faded-blue {
+  background-color: #6494c9;
+}
 .dark-green {
   background-color: #009064;
 }
@@ -7122,6 +7125,9 @@ h1 {
 }
 .light-green {
   background-color: #35b68f;
+}
+.faded-green {
+  background-color: #5ccaa9;
 }
 .dark-orange {
   background-color: #da4c00;
@@ -7140,6 +7146,9 @@ h1 {
 }
 .light-purple {
   background-color: #544abe;
+}
+.faded-purple {
+  background-color: #776ed0;
 }
 .dark-red {
   background-color: #820a07;
