@@ -307,6 +307,14 @@ THUMBNAIL_FORMAT = 'PNG'
 CELERY_ALWAYS_EAGER = True
 CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
+# compressor
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.cssmin.CSSMinFilter'
+]
+COMPRESS_JS_FILTERS = [
+     'compressor.filters.jsmin.JSMinFilter'
+]
+
 import djcelery
 djcelery.setup_loader()
 
