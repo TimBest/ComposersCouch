@@ -5,15 +5,11 @@ from storages.backends.s3boto import S3BotoStorage
 
 
 class StaticStorage(S3BotoStorage):
-    location = settings.STATICFILES_LOCATION
-
-class MediaStorage(S3BotoStorage):
-    location = settings.MEDIAFILES_LOCATION
-
-class CachedStorage(S3BotoStorage):
     """
     S3 storage backend that saves the files locally, too.
     """
+    location = settings.STATICFILES_LOCATION
+
     def __init__(self, *args, **kwargs):
         super(CachedStorage, self).__init__(*args, **kwargs)
         self.local_storage = get_storage_class(
@@ -23,3 +19,8 @@ class CachedStorage(S3BotoStorage):
         name = super(CachedStorage, self).save(name, content)
         self.local_storage._save(name, content)
         return name
+
+class MediaStorage(S3BotoStorage):
+    location = settings.MEDIAFILES_LOCATION
+
+class CachedStorage(S3BotoStorage):

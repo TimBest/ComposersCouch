@@ -170,8 +170,7 @@ else:
     MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
     DEFAULT_FILE_STORAGE = 'composersCouch.custom_storages.MediaStorage'
 
-    COMPRESS_STORAGE = 'composersCouch.custom_storages.CachedStorage'
-
+    COMPRESS_STORAGE = STATICFILES_STORAGE
 
 
 DATABASES = {
@@ -311,6 +310,8 @@ CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
 # compressor
 COMPRESS_ENABLED = True
+COMPRESS_URL = STATIC_URL
+COMPRESS_ROOT = STATIC_ROOT
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.cssmin.CSSMinFilter'
 ]
