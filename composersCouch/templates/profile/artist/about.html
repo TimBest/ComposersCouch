@@ -43,15 +43,18 @@
       </div>
       <div class="panel-body">
       {% for member in members %}
-        <div class='member '>
-          <h4>{{ member.name }}</h4>
+        <div class="member">
           <p>
+            <b>{{ member.name }}</b>
+            - {{ member.biography }}
+          </p>
+          {% comment %}<p>
             {% for instrument in member.instruments.all %}
               {{ instrument }}
               {% if not forloop.last %},{% endif %}
             {% endfor %}
-          </p>
-          <p>{{ member.biography }}</p>
+          </p>{% endcomment %}
+
         </div>
       {% endfor %}
       <a class="{{isEditable}} editMusicianMembers" href="{% url 'artist:memberForm' %}">
