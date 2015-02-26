@@ -116,7 +116,7 @@
     <script type="text/javascript" src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
 
 
-    {% compress js %}
+    {% comment %}{% compress js %}{% endcomment %}
       {% comment %}<script type="text/javascript" src="{% static 'js/jquery-1.11.0.min.js' %}"></script>{% endcomment %}
       <script type="text/javascript" src="{% static 'js/jquery.jplayer.min.js' %}"></script>
       <script type="text/javascript" src="{% static 'js/jplayer.playlist.js' %}"></script>
@@ -142,7 +142,7 @@
           });
         });
       </script>
-    {% endcompress %}
+    {% comment %}{% endcompress %}{% endcomment %}
     {% block script %}{% endblock %}
   </body>
 </html>
