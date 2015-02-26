@@ -115,10 +115,16 @@ class HoursView(VenueProfileFormMixin, FormView):
 
     def form_valid(self, form):
         for count,f in enumerate(form):
+            hours_old = get_object_or_None(model, profile=self.user.profile.venueProfile, weekday=count)
             hours = f.save(commit=False)
-            hours.profile = self.user.profile.venueProfile
-            hours.weekday = count
-            hours.save()
+            if hours_old:
+                hours_old.start = hours.start
+                hours_old.end = hours.end
+                hours_old.save()
+            else:
+                hours.profile = self.user.profile.venueProfile
+                hours.weekday = count
+                hours.save()
         return redirect(self.success_url, username=self.user.username)
 
 hours = HoursView.as_view()
@@ -167,7 +173,7 @@ class SeatingView(VenueProfileFormMixin, ImageFormMixin, MultipleModelFormsView)
         seating = forms['seatingForm'].save(commit=False)
         seating.profile = self.user.profile.venueProfile
         if self.request.FILES.get('image'):
-            seating.seating_chart = Image.objects.create(
+            seating.seating_chart, created = Image.objects.get_or_create(
                 image=self.request.FILES.get('image'),
                 title = "Seating Chart",
                 user = self.user

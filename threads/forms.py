@@ -1,3 +1,4 @@
+from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
@@ -51,7 +52,7 @@ class ComposeForm(ModelForm):
         thread.all_msgs.add(new_message)
 
         for recipient in recipients:
-            Participant.objects.create(thread=thread, user=recipient)
+            Participant.objects.get_or_create(thread=thread, user=recipient)
 
         (sender_part, created) = Participant.objects.get_or_create(thread=thread, user=sender)
         sender_part.replied_at = sender_part.read_at = now()

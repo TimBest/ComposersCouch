@@ -79,13 +79,11 @@ class FollowForm(forms.Form):
         exclude = ['created_at']
 
     def save(self, user, target):
-        follows = get_object_or_None(Follow, user=user.id, target=target.id)
-
-        if follows:
-            feedly.unfollow_user(follows.user_id, follows.target_id)
-            follows.delete()
-            return
-
-        follow = Follow.objects.create(user=user, target_id=target.id)
-        feedly.follow_user(follow.user_id, follow.target_id)
+        follow, created = Follow.objects.get_or_create(user=user, target_id=target.id)
+        if created:
+            feedly.follow_user(follow.user_id, follow.target_id)
+        else:
+            # user is already following target
+            feedly.unfollow_user(follow.user_id, follow.target_id)
+            follow.delete()
         return follow

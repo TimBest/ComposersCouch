@@ -150,7 +150,7 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
         info  = forms['show_info_form'].save(commit=False)
 
         if self.request.FILES.get('image'):
-            info.poster = Image.objects.create(
+            info.poster, created = Image.objects.get_or_create(
                 image=self.request.FILES.get('image'),
                 title = "Poster",
                 user = self.request.user
@@ -220,7 +220,7 @@ class EditEventFormView(EventFormView):
         info  = forms['show_info_form'].save(commit=False)
 
         if self.request.FILES.get('image'):
-            info.poster = Image.objects.create(
+            info.poster, created = Image.objects.get_or_create(
                 image=self.request.FILES.get('image'),
                 title = "Poster",
                 user = self.request.user

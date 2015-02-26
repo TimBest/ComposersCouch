@@ -176,7 +176,6 @@ class RequestFormView(MultipleFormsView):
                     body=forms['messageForm'].cleaned_data['body'],
                     sender=sender,
                     parent_msg=None,
-                    sent_at=now(),
         )
         thread = Thread.objects.create(
             subject="Show Request",
@@ -188,7 +187,7 @@ class RequestFormView(MultipleFormsView):
         for form in forms['ArtistFormset']:
             if form.cleaned_data.get('user'):
                 form.save(thread=thread, sender=sender)
-        private_request = PrivateRequest(
+        private_request = PrivateRequest.objects.create(
             date=forms['dateForm'].save(),
             thread=thread,
         )

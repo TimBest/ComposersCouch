@@ -13,16 +13,8 @@ class ContactView(ProfileFormMixin, MultipleFormsView):
     template_name = 'profile/forms/contact.html',
     success_url = 'redirectToProfile'
 
-    def get_contact_info(self):
-        return self.user.profile.contact_info
-
-    def set_contact_info(self, contact_info):
-        self.user.profile.contact_info = contact_info
-        self.user.profile.save()
-        return contact_info
-
     def get_objects(self):
-        contact_info = self.get_contact_info()
+        contact_info = self.user.profile.contact_info
         location_data = {}
         if contact_info:
             location = contact_info.location
@@ -47,10 +39,9 @@ class ContactView(ProfileFormMixin, MultipleFormsView):
     def forms_valid(self, forms):
         location = forms['locationForm'].save()
         contact = forms['contactForm'].save()
-        contact_info = self.get_contact_info()
-        if not contact_info:
-            contact_info = ContactInfo.objects.create(location=location,
-                                                      contact=contact)
+        contact_info, created = ContactInfo.objects.get_or_create(
+                                    location=location, contact=contact)
         contact_info.save()
-        self.set_contact_info(contact_info)
+        self.user.profile.contact_info = contact_info
+        self.user.profile.save()
         return redirect(self.success_url, username=self.user.username)
