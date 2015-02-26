@@ -10,9 +10,6 @@
 {% block enctype %}multipart/form-data{% endblock %}
 {% block form %}
     {% crispy seatingChartForm %}
-    {% if images %}
-      {% include "utils/_image_select.html" with images=images id="seating_chart" label="Seating chart" %}
-    {% endif %}
     {% crispy seatingForm %}
 {% endblock %}
 {% block extraSubmit %}{% progress_bar %}{% endblock %}
@@ -20,5 +17,4 @@
 {% block script %}
   {{ block.super }}
   {% progress_bar_media %}
-  {% include "utils/_image_script.html" with selectorID='#id_seating_chart' uploadDiv='#div_id_image' selectDiv='#div_id_seating_chart' page=request.GET.page images=images %}
 {% endblock %}

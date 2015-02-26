@@ -96,6 +96,7 @@ class PoliciesForm(forms.ModelForm):
       self.helper = FormHelper()
       self.helper.form_tag = False
       self.helper.layout = Layout(
+        'id',
         Div(
           Div('title',css_class='col-sm-5 left',),
           Div('description',css_class='col-sm-5 center',),
@@ -118,7 +119,7 @@ class PoliciesForm(forms.ModelForm):
         widgets = {
           'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
         }
-        fields = ('title','description',)
+        fields = ('id','title','description',)
 
 class SeatingForm(forms.ModelForm):
 
