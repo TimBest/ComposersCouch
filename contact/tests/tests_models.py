@@ -12,9 +12,3 @@ class ContactModelTest(TestCase):
 
 class ContactInforModelTest(TestCase):
     pass
-
-class SocialLinksModelTest(TestCase):
-    pass
-
-class MusicLinksModelTest(TestCase):
-    pass
