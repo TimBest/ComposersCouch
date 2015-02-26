@@ -124,6 +124,16 @@
 {% block content %}
   <div class="feed">
     <div class="cards">
+      {% if category %}
+        <p class="text-right">
+          <a class="label label-primary" href="{{ request.path }}">{{ category }} X</a>
+        </p>
+      {% endif %}
+      {% if my_genres %}
+        <p class="text-right">
+          <a class="label label-primary" href="{{ request.path }}">My Genres X</a>
+        </p>
+      {% endif %}
       {% block feed %}{% endblock %}
     </div>
   </div>

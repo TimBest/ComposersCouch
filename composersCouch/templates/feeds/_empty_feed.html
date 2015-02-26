@@ -1,16 +1,6 @@
 {% load crispy_forms_tags  %}
 
 
-{% if category %}
-  <p class="text-right">
-    <a class="label label-primary" href="{{ request.path }}">{{ category }} X</a>
-  </p>
-{% endif %}
-{% if my_genres %}
-  <p class="text-right">
-    <a class="label label-primary" href="{{ request.path }}">My Genres X</a>
-  </p>
-{% endif %}
 {% if request.user.is_authenticated %}
   {% if following %}
     <div class="panel">
