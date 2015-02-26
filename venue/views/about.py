@@ -115,7 +115,7 @@ class HoursView(VenueProfileFormMixin, FormView):
 
     def form_valid(self, form):
         for count,f in enumerate(form):
-            hours_old = get_object_or_None(model, profile=self.user.profile.venueProfile, weekday=count)
+            hours_old = get_object_or_None(self.model, profile=self.user.profile.venueProfile, weekday=count)
             hours = f.save(commit=False)
             if hours_old:
                 hours_old.start = hours.start
