@@ -62,12 +62,12 @@
         <form method="POST" class="accept-form inline-block {% hide_accept request user %}" action="{% url 'request_accept' %}">
           {% csrf_token %}
           <input type="hidden" name="private_request" value="{{ request.id }}">
-          <button class="btn btn-success" onclick="this.disabled=true" type="submit"><span class="fa fa-check" ></span> Accept</button>
+          <button class="btn btn-success" type="submit"><span class="fa fa-check" ></span> Accept</button>
         </form>
         <form method="POST" class="decline-form inline-block {% hide_decline request user %}" action="{% url 'request_decline' %}">
           {% csrf_token %}
           <input type="hidden" name="private_request" value="{{ request.id }}">
-          <button class="btn btn-danger-inv" onclick="this.disabled=true" type="submit"><span class="fa fa-ban" ></span> Decline</button>
+          <button class="btn btn-danger-inv" type="submit"><span class="fa fa-ban" ></span> Decline</button>
         </form>
       </div>
       <a href="{% url 'calendar_request_to_event' request.id %}" class="btn btn-link">Add to Calendar</a>

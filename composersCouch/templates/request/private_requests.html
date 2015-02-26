@@ -18,7 +18,7 @@
 {% endblock %}
 
 {% block content %}
-  <div>
+  <div class="messages">
     {% for p in participants %}
       <a href="{{ p.thread.get_absolute_url }}" class="btn btn-link pull-right" >Veiw messages</a>
       {% include "request/_private_request.html" with request=p.thread.request %}

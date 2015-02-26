@@ -22,22 +22,24 @@
 {% endblock %}
 
 {% block content %}
-  {% for publicRequest in requests %}
-    <div class="publicRequest">
-      <div class="panel panel-default">
-        {% include "request/_public_request.html" with publicRequest=publicRequest %}
-        <div class="panel-footer">
-          {% for application in publicRequest.applications.all %}
-            {% if forloop.first %}<h4>Applicants:</h4>{% endif %}
-            {% include "request/_application.html" with application=application %}
-          {% empty %}
-            <p>No applicants at this time</p>
-          {% endfor %}
+  <div class="messages">
+    {% for publicRequest in requests %}
+      <div class="publicRequest">
+        <div class="panel panel-default">
+          {% include "request/_public_request.html" with publicRequest=publicRequest %}
+          <div class="panel-footer">
+            {% for application in publicRequest.applications.all %}
+              {% if forloop.first %}<h4>Applicants:</h4>{% endif %}
+              {% include "request/_application.html" with application=application %}
+            {% empty %}
+              <p>No applicants at this time</p>
+            {% endfor %}
+          </div>
         </div>
       </div>
-    </div>
-  {% empty %}
-    <p>No Private Requests</p>
-  {% endfor %}
-  {% include "utils/_pagination.html" with page=requests %}
+    {% empty %}
+      <p>No Private Requests</p>
+    {% endfor %}
+    {% include "utils/_pagination.html" with page=requests %}
+  </div>
 {% endblock %}
