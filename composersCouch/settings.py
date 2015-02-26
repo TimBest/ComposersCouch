@@ -18,9 +18,9 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-DEVELOPMENT = os.environ.get('DEVELOPMENT', False)
+DEVELOPMENT = False#os.environ.get('DEVELOPMENT', False)
 TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['.composerscouch.com']
@@ -170,6 +170,8 @@ else:
     MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
     DEFAULT_FILE_STORAGE = 'composersCouch.custom_storages.MediaStorage'
 
+    COMPRESS_STORAGE = 'composersCouch.custom_storages.CachedStorage'
+
 
 
 DATABASES = {
@@ -308,6 +310,7 @@ CELERY_ALWAYS_EAGER = True
 CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
 # compressor
+COMPRESS_ENABLED = True
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.cssmin.CSSMinFilter'
 ]
