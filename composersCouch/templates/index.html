@@ -62,9 +62,15 @@
               Requests
             </a></h2>
             <p>Find artist and venues looking to put on shows in your area.</p>
-            <a href="{% url 'requests' 'expiring' 'default' 'all' %}" class="pull-right btn btn-transparent">
-              View Requests <small><span class="fa fa-chevron-right text-white"></span></small>
-            </a>
+            {% if request.user.profile.profile_type == "m" %}
+              <a href="{% url 'requests' 'expiring' 'band' 'all' %}" class="pull-right btn btn-transparent">
+                View Requests <small><span class="fa fa-chevron-right text-white"></span></small>
+              </a>
+            {% else %}
+              <a href="{% url 'requests' 'expiring' 'venue' 'all' %}" class="pull-right btn btn-transparent">
+                View Requests <small><span class="fa fa-chevron-right text-white"></span></small>
+              </a>
+            {% endif %}
           </div>
         </div>
       </div>

@@ -28,12 +28,7 @@ class RequestView(FeedMixin, TemplateView):
     requests_for = 'band'
 
     def dispatch(self, *args, **kwargs):
-        requests_for = self.kwargs.get('for')
-        # defaults to bands so only need to know when its for venues
-        if requests_for == "venue":
-            self.requests_for = "venue"
-        elif self.request.user.is_authenticated() and self.request.user.profile.profile_type == 'v':
-            self.requests_for = "venue"
+        self.requests_for = self.kwargs.get('for')
         return super(RequestView, self).dispatch(*args, **kwargs)
 
     def band_or_venue(self, posts, **kwargs):

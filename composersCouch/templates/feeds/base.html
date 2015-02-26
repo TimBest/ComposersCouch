@@ -14,7 +14,11 @@
         </a>
         <ul class="dropdown-menu" role="menu">
           <li class="{% block requestsClass %}{% endblock %}">
-            <a href="{% url 'requests' 'expiring' 'default' 'all' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
+            {% if request.user.profile.profile_type == "m" %}
+              <a href="{% url 'requests' 'expiring' 'band' 'all' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
+            {% else %}
+              <a href="{% url 'requests' 'expiring' 'venue' 'all' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
+            {% endif %}
           </li>
           <li class="{% block showsClass %}{% endblock %}">
             <a href="{% url 'shows' 'upcoming' zipcode %}?{{ request.GET.urlencode }}">Concerts</a>
