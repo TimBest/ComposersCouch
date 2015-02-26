@@ -16,7 +16,7 @@
             <form method="POST" action="{% url 'follow' %}">
               {% csrf_token %}
               <input type="hidden" name="target" value="{{ profile.user.id }}">
-              <button class="btn btn-primary {{isFollowing}}" type="submit">
+              <button class="btn btn-primary {{isFollowing}}" onclick="this.disabled=true" type="submit">
                 <span class="follow">Follow</span>
                 <span class="following">Following</span>
                 <span class="unfollow">Unfollow</span>

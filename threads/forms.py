@@ -1,4 +1,3 @@
-from django import forms
 from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
@@ -6,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from autocomplete_light import ModelForm
 from autocomplete_light import MultipleChoiceWidget
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Field, Layout, Submit
+from crispy_forms.layout import Div, Field, Layout
 
 from .models import *
 from .utils import reply_to_thread, now

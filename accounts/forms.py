@@ -5,9 +5,9 @@ from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-from crispy_forms.bootstrap import FormActions, InlineRadios, InlineField
+from crispy_forms.bootstrap import InlineRadios
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import ButtonHolder, Div, HTML, Layout, Submit
+from crispy_forms.layout import Div, HTML, Layout
 
 from pipeline import create_profile
 from models import PROFILE_TYPE_CHOICES

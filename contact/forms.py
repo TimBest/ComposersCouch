@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from autocomplete_light.forms import ModelForm
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Field, Layout, Submit
+from crispy_forms.layout import Div, Field, Layout
 
 from annoying.functions import get_object_or_None
 from contact.models import Location, Contact, Zipcode

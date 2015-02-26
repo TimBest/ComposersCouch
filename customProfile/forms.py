@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 import autocomplete_light
 from crispy_forms.bootstrap import FormActions, InlineRadios
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import ButtonHolder, Div, Layout, Submit
+from crispy_forms.layout import ButtonHolder, Div, Layout
 
 from artist.models import ArtistProfile
 from fan.models import FanProfile

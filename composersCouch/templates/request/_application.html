@@ -11,12 +11,12 @@
       <form method="POST" class="accept-form inline-block {% if application.approved %}hidden{% endif %}" action="{% url 'approve_public_request' %}">
         {% csrf_token %}
         <input type="hidden" name="application" value="{{ application.id }}">
-        <button class="btn btn-success" type="submit"><span class="fa fa-check" ></span> Accept</button>
+        <button class="btn btn-success" onclick="this.disabled=true" type="submit"><span class="fa fa-check" ></span> Accept</button>
       </form>
       <form method="POST" class="decline-form inline-block {% if application.approved %}{% elif application.approved != None %}hidden{% endif %}" action="{% url 'deny_public_request' %}">
         {% csrf_token %}
         <input type="hidden" name="application" value="{{ application.id }}">
-        <button class="btn btn-danger" type="submit"><span class="fa fa-ban" ></span> Decline</button>
+        <button class="btn btn-danger" onclick="this.disabled=true" type="submit"><span class="fa fa-ban" ></span> Decline</button>
       </form>
     </div
   {% endif %}

@@ -8,7 +8,7 @@ import autocomplete_light
 from autocomplete_light import ModelForm
 from crispy_forms.bootstrap import PrependedText
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, HTML, Layout, Submit
+from crispy_forms.layout import Div, HTML, Layout
 from crispy_forms.bootstrap import AppendedText
 
 from annoying.functions import get_object_or_None

@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 from autocomplete_light import ModelForm
 from crispy_forms.bootstrap import FormActions
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Layout, Submit
+from crispy_forms.layout import Div, Layout
 
 from models import Image
 

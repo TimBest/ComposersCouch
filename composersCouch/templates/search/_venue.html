@@ -19,7 +19,7 @@
             <form method="POST" action="{% url 'follow' %}">
               {% csrf_token %}
               <input type="hidden" name="target" value="{{ venue.profile.user.id }}">
-              <button class="btn btn-sm btn-primary {% if user.is_authenticated %}{% is_following request.user venue.profile.user %}{% endif %}" type="submit">
+              <button class="btn btn-sm btn-primary {% if user.is_authenticated %}{% is_following request.user venue.profile.user %}{% endif %}" onclick="this.disabled=true" type="submit">
                 <span class="follow">Follow</span>
                 <span class="following">Following</span>
                 <span class="unfollow">Unfollow</span>
