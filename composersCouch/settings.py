@@ -296,49 +296,49 @@ CELERY_ALWAYS_EAGER = True
 CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
 
-#PIPELINE_ENABLED= True
-#PIPELINE_COMPILERS = (
-#  'pipeline.compilers.less.LessCompiler',
-#)
-#PIPELINE_JS_COMPRESSOR = (
-#  'pipeline.compressors.yuglify.YuglifyCompressor'
-#)
-#PIPELINE_CSS_COMPRESSOR = (
-#  'pipeline.compressors.yuglify.YuglifyCompressor'
-#)
-#PIPELINE_CSS = {
-#    'less': {
-#        'source_filenames': (
-#          'less/theme.less',
-#        ),
-#        'output_filename': 'css/style.css',
-#        'extra_context': {
-#            'media': 'screen',
-#        },
-#    },
-#}
-#PIPELINE_JS = {
-#    'scripts': {
-#        'source_filenames': (
-#            'js/moment.min.js',
-#            'js/bootstrap-datetimepicker.min.js',
-#            'js/jquery.jplayer.min.js',
-#            'js/jplayer.playlist.js',
-#            'js/bootstrap.min.js',
-#            'js/image-picker.js',
-#            'js/modalForms.js',
-#            'js/request/folder.js',
-#            'js/schedule/expand-day.js',
-#            'autocomplete_light/addanother.js',
-#            'autocomplete_light/autocomplete.js',
-#            'autocomplete_light/text_widget.js',
-#            'autocomplete_light/widget.js',
-#            'js/autocomplete_fixes.js',
-#            'js/jquery.anystretch.min.js',
-#        ),
-#        'output_filename': 'js/scripts.js',
-#    }
-#}
+PIPELINE_ENABLED= True
+PIPELINE_COMPILERS = (
+  'pipeline.compilers.less.LessCompiler',
+)
+PIPELINE_JS_COMPRESSOR = (
+  'pipeline.compressors.yuglify.YuglifyCompressor'
+)
+PIPELINE_CSS_COMPRESSOR = (
+  'pipeline.compressors.yuglify.YuglifyCompressor'
+)
+PIPELINE_CSS = {
+    'less': {
+        'source_filenames': (
+          'less/theme.less',
+        ),
+        'output_filename': 'css/style.css',
+        'extra_context': {
+            'media': 'screen',
+        },
+    },
+}
+PIPELINE_JS = {
+    'scripts': {
+        'source_filenames': (
+            'js/moment.min.js',
+            'js/bootstrap-datetimepicker.min.js',
+            'js/jquery.jplayer.min.js',
+            'js/jplayer.playlist.js',
+            'js/bootstrap.min.js',
+            'js/image-picker.js',
+            'js/modalForms.js',
+            'js/request/folder.js',
+            'js/schedule/expand-day.js',
+            'autocomplete_light/addanother.js',
+            'autocomplete_light/autocomplete.js',
+            'autocomplete_light/text_widget.js',
+            'autocomplete_light/widget.js',
+            'js/autocomplete_fixes.js',
+            'js/jquery.anystretch.min.js',
+        ),
+        'output_filename': 'js/scripts.js',
+    }
+}
 
 import djcelery
 djcelery.setup_loader()
