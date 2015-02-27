@@ -6,7 +6,7 @@ from storages.backends.s3boto import S3BotoStorage
 
 
 class StaticStorage(PipelineMixin, CachedFilesMixin, S3BotoStorage):
-    pass
+    location = settings.STATICFILES_LOCATION
 
 class MediaStorage(S3BotoStorage):
     location = settings.MEDIAFILES_LOCATION
