@@ -1,4 +1,3 @@
-
 function zipcode_fix() {
   /* Fixes edge case when user submits the form before autocomplete can select an option */
   code = $("#id_zip_code-autocomplete").val();

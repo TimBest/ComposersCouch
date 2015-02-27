@@ -1,0 +1,117 @@
+/* applying bootstrap look/feel to file upload buttons
+ * credit to: Cory Laviska*/
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 999px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+
+/* Social Media Buttons */
+.social-media-btn(@color;) {
+  .button-variant(@white, @color, darken(@color, 2%));
+}
+
+.btn-twitter {
+  .social-media-btn(@twitter);
+}
+.btn-facebook {
+  .social-media-btn(@facebook);
+}
+.btn-google {
+  .social-media-btn(@google);
+}
+.btn-instagram {
+  .social-media-btn(@instagram);
+}
+.btn-tumblr {
+  .social-media-btn(@tumblr);
+}
+.btn-youtube {
+  .social-media-btn(@youtube);
+}
+.btn-bandcamp {
+  .social-media-btn(@bandcamp);
+}
+.btn-itunes {
+  .social-media-btn(@itunes);
+}
+.btn-spotify {
+  .social-media-btn(@spotify);
+}
+.btn-soundcloud {
+  .social-media-btn(@soundcloud);
+}
+.btn-vimeo {
+  .social-media-btn(@vimeo);
+}
+
+.btn-danger-inv {
+  .button-variant(@dark-red; @white; @dark-red);
+  &:hover,
+  &:focus,
+  .open .dropdown-toggle& {
+    color: @red;
+    border-color: @red;
+  }
+}
+.btn-transparent {
+  .button-variant(@white; transparent; @white);
+  &:hover,
+  &:focus,
+  .open .dropdown-toggle& {
+    color: @white;
+    background-color: rgba(0,0,0,0.2);;
+    border-color: @silver-light;
+    box-shadow: none
+  }
+}
+
+.btn-header {
+  .button-variant(@white; transparent; transparent);
+  border:none;
+  font-size:24px;
+  &:hover,
+  &:focus,
+  .open .dropdown-toggle& {
+    color: @white;
+    background-color: rgba(0,0,0,0.2);;
+    box-shadow: none
+  }
+}
+
+.btn-transparent-dropdown {
+  .button-variant(@white; transparent; transparent);
+  border:none;
+  &:hover,
+  &:focus,
+  .open .dropdown-toggle& {
+    color: @white;
+    background-color: rgba(0,0,0,0.1);;
+    box-shadow: none
+  }
+}
+
+
+/* Tweeks to bootstraps buttons */
+button::-moz-focus-inner {
+  border:0;
+}
+
+
+.btn-default-nav {
+  .button-variant(@black; @btn-default-bg; @white);
+}

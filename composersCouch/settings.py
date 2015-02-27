@@ -41,13 +41,12 @@ INSTALLED_APPS = (
 
     'autocomplete_light',
     'crispy_forms',
-    'compressor',
     'djcelery',
     'embed_video',
     'easy_timezones',
     'pagination',
+    'pipeline',
     'social_auth',
-    'static_precompiler',
     'storages',
     'stream_framework',
 
@@ -118,6 +117,7 @@ if DEVELOPMENT:
     DEFAULT_FROM_EMAIL = 'testing@example.com'
 
     STATIC_URL = '/static/'
+    STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
     MEDIA_URL = '/media/'
 else:
     ALLOWED_HOSTS += ['djangosite-env-ntjden2apj.elasticbeanstalk.com']
@@ -148,8 +148,6 @@ else:
         'Cache-Control': 'max-age=94608000',
     }
 
-
-
     AWS_STORAGE_BUCKET_NAME = 'composerscouch-media'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_KEY', '')
@@ -169,9 +167,6 @@ else:
     MEDIAFILES_LOCATION = 'media'
     MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
     DEFAULT_FILE_STORAGE = 'composersCouch.custom_storages.MediaStorage'
-
-    COMPRESS_STORAGE = STATICFILES_STORAGE
-
 
 DATABASES = {
     'default': {
@@ -220,7 +215,6 @@ MAX_AUDIO_UPLOAD_SIZE = "10485760"
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.7/howto/static-files/
 STATIC_ROOT = os.path.join( BASE_DIR, 'composersCouch/staticfiles/' )
-STATIC_PRECOMPILER_ROOT = os.path.join( BASE_DIR, 'composersCouch/static/' )
 
 GEOIP_DATABASE = os.path.join(STATIC_ROOT, 'GeoLiteCity.dat')
 
@@ -238,16 +232,9 @@ STATICFILES_DIRS = (
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    'static_precompiler.finders.StaticPrecompilerFinder',
-    'compressor.finders.CompressorFinder',
+    'pipeline.finders.PipelineFinder',
 
 )
-STATIC_PRECOMPILER_COMPILERS = (
-    'static_precompiler.compilers.LESS',
-)
-
-STATIC_PRECOMPILER_OUTPUT_DIR = 'compiled'
-
 
 # Templates
 TEMPLATE_DIRS = (
@@ -308,16 +295,43 @@ THUMBNAIL_FORMAT = 'PNG'
 CELERY_ALWAYS_EAGER = True
 CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
-# compressor
-COMPRESS_ENABLED = True
-COMPRESS_URL = STATIC_URL
-COMPRESS_ROOT = STATIC_ROOT
-COMPRESS_CSS_FILTERS = [
-    'compressor.filters.cssmin.CSSMinFilter'
-]
-#COMPRESS_JS_FILTERS = [
-#    'compressor.filters.jsmin.JSMinFilter'
-#]
+
+PIPELINE_COMPILERS = (
+  'pipeline.compilers.less.LessCompiler',
+)
+PIPELINE_CSS = {
+    'less': {
+        'source_filenames': (
+          'less/theme.less',
+        ),
+        'output_filename': 'css/style.css',
+        'extra_context': {
+            'media': 'screen',
+        },
+    },
+}
+PIPELINE_JS = {
+    'scripts': {
+        'source_filenames': (
+            'js/moment.min.js',
+            'js/bootstrap-datetimepicker.min.js',
+            'js/jquery.jplayer.min.js',
+            'js/jplayer.playlist.js',
+            'js/bootstrap.min.js',
+            'js/image-picker.js',
+            'js/modalForms.js',
+            'js/request/folder.js',
+            'js/schedule/expand-day.js',
+            'autocomplete_light/addanother.js',
+            'autocomplete_light/autocomplete.js',
+            'autocomplete_light/text_widget.js',
+            'autocomplete_light/widget.js',
+            'js/autocomplete_fixes.js',
+            'js/jquery.anystretch.min.js',
+        ),
+        'output_filename': 'js/scripts.js',
+    }
+}
 
 import djcelery
 djcelery.setup_loader()
