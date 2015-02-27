@@ -88,6 +88,7 @@ class CompilerBase(object):
         try:
             return self.storage.modified_time(infile) > self.storage.modified_time(outfile)
         except:
+            print infile
             return True
 
 
