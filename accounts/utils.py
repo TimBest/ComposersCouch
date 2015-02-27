@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User
 from django.utils.crypto import get_random_string
 
-from pipeline import create_profile
-from models import Profile
+from accounts.pipeline import create_profile
+from accounts.models import Profile
 
 
 def create_user_profile(name, email, profile_type, creator):

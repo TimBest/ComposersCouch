@@ -9,15 +9,14 @@ from crispy_forms.bootstrap import InlineRadios
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, HTML, Layout
 
-from pipeline import create_profile
-from models import PROFILE_TYPE_CHOICES
-from artist.models import ArtistProfile
-from fan.models import FanProfile
-from venue.models import VenueProfile
-from accounts.models import Profile
+from accounts.pipeline import create_profile
+from accounts.models import PROFILE_TYPE_CHOICES, Profile
 from annoying.functions import get_object_or_None
+from artist.models import ArtistProfile
 from contact.forms import ZipcodeForm
+from fan.models import FanProfile
 from userena.forms import SignupFormOnlyEmail, AuthenticationForm
+from venue.models import VenueProfile
 
 
 profile_type = Layout(

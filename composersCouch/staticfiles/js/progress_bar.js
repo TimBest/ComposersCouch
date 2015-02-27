@@ -6,7 +6,6 @@ function gen_uuid() {
   }
   return uuid
 }
-
 // Add upload progress for multipart forms.
 $(document).ready(function(){
   $('form').submit(function(){

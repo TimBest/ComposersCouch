@@ -15,9 +15,9 @@ from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.generic.base import View, TemplateView
 
-from pipeline import create_profile
-from forms import ClaimProfileForm, EmailForm, SignupForm, SigninForm
-from models import Profile
+from accounts.pipeline import create_profile
+from accounts.forms import ClaimProfileForm, EmailForm, SignupForm, SigninForm
+from accounts.models import Profile
 from annoying.functions import get_object_or_None
 from composersCouch.views import MultipleFormsView
 from contact.forms import ZipcodeForm
