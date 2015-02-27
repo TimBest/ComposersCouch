@@ -119,6 +119,23 @@ if DEVELOPMENT:
     STATIC_URL = '/static/'
     STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
     MEDIA_URL = '/media/'
+    PIPELINE_COMPILERS = (
+      'pipeline.compilers.less.LessCompiler',
+    )
+    PIPELINE_CSS_COMPRESSOR = (
+      'pipeline.compressors.yuglify.YuglifyCompressor'
+    )
+    PIPELINE_CSS = {
+        'less': {
+            'source_filenames': (
+              'less/theme.less',
+            ),
+            'output_filename': 'css/style.css',
+            'extra_context': {
+                'media': 'screen',
+            },
+        },
+    }
 
 else:
     ALLOWED_HOSTS += ['djangosite-env-ntjden2apj.elasticbeanstalk.com']
@@ -297,26 +314,9 @@ CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
 
 PIPELINE_ENABLED= True
-PIPELINE_COMPILERS = (
-  'pipeline.compilers.less.LessCompiler',
-)
 PIPELINE_JS_COMPRESSOR = (
   'pipeline.compressors.yuglify.YuglifyCompressor'
 )
-PIPELINE_CSS_COMPRESSOR = (
-  'pipeline.compressors.yuglify.YuglifyCompressor'
-)
-PIPELINE_CSS = {
-    'less': {
-        'source_filenames': (
-          'less/theme.less',
-        ),
-        'output_filename': 'css/style.css',
-        'extra_context': {
-            'media': 'screen',
-        },
-    },
-}
 PIPELINE_JS = {
     'scripts': {
         'source_filenames': (
