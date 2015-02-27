@@ -119,6 +119,7 @@ if DEVELOPMENT:
     STATIC_URL = '/static/'
     STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
     MEDIA_URL = '/media/'
+
 else:
     ALLOWED_HOSTS += ['djangosite-env-ntjden2apj.elasticbeanstalk.com']
     POSTGIS_VERSION = (2, 1, 1)
@@ -305,17 +306,17 @@ PIPELINE_JS_COMPRESSOR = (
 PIPELINE_CSS_COMPRESSOR = (
   'pipeline.compressors.yuglify.YuglifyCompressor'
 )
-PIPELINE_CSS = {
-    'less': {
-        'source_filenames': (
-          'less/theme.less',
-        ),
-        'output_filename': 'css/style.css',
-        'extra_context': {
-            'media': 'screen',
-        },
-    },
-}
+#PIPELINE_CSS = {
+#    'less': {
+#        'source_filenames': (
+#          'less/theme.less',
+#        ),
+#        'output_filename': 'css/style.css',
+#        'extra_context': {
+#            'media': 'screen',
+#        },
+#    },
+#}
 PIPELINE_JS = {
     'scripts': {
         'source_filenames': (
