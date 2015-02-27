@@ -312,9 +312,9 @@ CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 COMPRESS_ENABLED = True
 COMPRESS_URL = STATIC_URL
 COMPRESS_ROOT = STATIC_ROOT
-#COMPRESS_CSS_FILTERS = [
-#    'compressor.filters.cssmin.CSSMinFilter'
-#]
+COMPRESS_CSS_FILTERS = [
+    'compressor.filters.cssmin.CSSMinFilter'
+]
 #COMPRESS_JS_FILTERS = [
 #    'compressor.filters.jsmin.JSMinFilter'
 #]
