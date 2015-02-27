@@ -1,0 +1,141 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', '-g', 'install', 'yuglify' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 verbose node symlink /usr/bin/node
+5 verbose cache add [ 'yuglify', null ]
+6 verbose cache add name=undefined spec="yuglify" args=["yuglify",null]
+7 verbose parsed url { protocol: null,
+7 verbose parsed url   slashes: null,
+7 verbose parsed url   auth: null,
+7 verbose parsed url   host: null,
+7 verbose parsed url   port: null,
+7 verbose parsed url   hostname: null,
+7 verbose parsed url   hash: null,
+7 verbose parsed url   search: null,
+7 verbose parsed url   query: null,
+7 verbose parsed url   pathname: 'yuglify',
+7 verbose parsed url   path: 'yuglify',
+7 verbose parsed url   href: 'yuglify' }
+8 silly lockFile a15791f5-yuglify yuglify
+9 verbose lock yuglify /home/timothy/.npm/a15791f5-yuglify.lock
+10 silly lockFile a15791f5-yuglify yuglify
+11 silly lockFile a15791f5-yuglify yuglify
+12 verbose addNamed [ 'yuglify', '' ]
+13 verbose addNamed [ null, '*' ]
+14 silly lockFile e77d10d2-yuglify yuglify@
+15 verbose lock yuglify@ /home/timothy/.npm/e77d10d2-yuglify.lock
+16 silly addNameRange { name: 'yuglify', range: '*', hasData: false }
+17 verbose request where is /yuglify
+18 verbose request registry https://registry.npmjs.org/
+19 verbose request id 9c7675e848f876b3
+20 verbose url raw /yuglify
+21 verbose url resolving [ 'https://registry.npmjs.org/', './yuglify' ]
+22 verbose url resolved https://registry.npmjs.org/yuglify
+23 verbose request where is https://registry.npmjs.org/yuglify
+24 info trying registry request attempt 1 at 20:24:33
+25 http GET https://registry.npmjs.org/yuglify
+26 http 200 https://registry.npmjs.org/yuglify
+27 silly registry.get cb [ 200,
+27 silly registry.get   { date: 'Fri, 27 Feb 2015 01:24:34 GMT',
+27 silly registry.get     server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+27 silly registry.get     etag: '"1MA817EX783KA5R7T0G4NN8RZ"',
+27 silly registry.get     'content-type': 'application/json',
+27 silly registry.get     'cache-control': 'max-age=60',
+27 silly registry.get     'content-length': '26310',
+27 silly registry.get     'accept-ranges': 'bytes',
+27 silly registry.get     via: '1.1 varnish',
+27 silly registry.get     age: '0',
+27 silly registry.get     'x-served-by': 'cache-atl6225-ATL',
+27 silly registry.get     'x-cache': 'MISS',
+27 silly registry.get     'x-cache-hits': '0',
+27 silly registry.get     'x-timer': 'S1425000274.898278,VS0,VE76',
+27 silly registry.get     vary: 'Accept',
+27 silly registry.get     'keep-alive': 'timeout=10, max=50',
+27 silly registry.get     connection: 'Keep-Alive' } ]
+28 silly addNameRange number 2 { name: 'yuglify', range: '*', hasData: true }
+29 silly addNameRange versions [ 'yuglify',
+29 silly addNameRange   [ '0.0.1', '0.1.0', '0.1.1', '0.1.2', '0.1.3', '0.1.4' ] ]
+30 verbose addNamed [ 'yuglify', '0.1.4' ]
+31 verbose addNamed [ '0.1.4', '0.1.4' ]
+32 silly lockFile 2278936e-yuglify-0-1-4 yuglify@0.1.4
+33 verbose lock yuglify@0.1.4 /home/timothy/.npm/2278936e-yuglify-0-1-4.lock
+34 silly lockFile 677ad253-js-org-yuglify-yuglify-0-1-4-tgz https://registry.npmjs.org/yuglify/-/yuglify-0.1.4.tgz
+35 verbose lock https://registry.npmjs.org/yuglify/-/yuglify-0.1.4.tgz /home/timothy/.npm/677ad253-js-org-yuglify-yuglify-0-1-4-tgz.lock
+36 verbose addRemoteTarball [ 'https://registry.npmjs.org/yuglify/-/yuglify-0.1.4.tgz',
+36 verbose addRemoteTarball   '726d5e4af810f741ef21865f6f954c4078a3a45f' ]
+37 info retry fetch attempt 1 at 20:24:39
+38 verbose fetch to= /tmp/npm-14177-RYAQr1Sn/registry.npmjs.org/yuglify/-/yuglify-0.1.4.tgz
+39 http GET https://registry.npmjs.org/yuglify/-/yuglify-0.1.4.tgz
+40 http 200 https://registry.npmjs.org/yuglify/-/yuglify-0.1.4.tgz
+41 silly lockFile 677ad253-js-org-yuglify-yuglify-0-1-4-tgz https://registry.npmjs.org/yuglify/-/yuglify-0.1.4.tgz
+42 silly lockFile 677ad253-js-org-yuglify-yuglify-0-1-4-tgz https://registry.npmjs.org/yuglify/-/yuglify-0.1.4.tgz
+43 silly lockFile 2278936e-yuglify-0-1-4 yuglify@0.1.4
+44 silly lockFile 2278936e-yuglify-0-1-4 yuglify@0.1.4
+45 silly lockFile e77d10d2-yuglify yuglify@
+46 silly lockFile e77d10d2-yuglify yuglify@
+47 silly resolved [ { name: 'yuglify',
+47 silly resolved     description: 'cli wrapper for uglify and cssmin used by YUI',
+47 silly resolved     version: '0.1.4',
+47 silly resolved     dependencies: { 'uglify-js': '~1.3.4', ycssmin: '~1.0.1', nopt: '~2.1.1' },
+47 silly resolved     devDependencies: { 'yui-lint': '~0.1.1', jshint: '~0.9.0', vows: '*' },
+47 silly resolved     main: './lib/index.js',
+47 silly resolved     bin: { yuglify: './bin/yuglify' },
+47 silly resolved     scripts:
+47 silly resolved      { pretest: 'jshint --config ./node_modules/yui-lint/jshint.json ./lib/*.js ./bin/yuglify',
+47 silly resolved        test: 'vows --spec ./tests/*.js' },
+47 silly resolved     preferGlobal: 'true',
+47 silly resolved     bugs: { url: 'http://github.com/yui/yuglify/issues' },
+47 silly resolved     licenses: [ [Object] ],
+47 silly resolved     repository: { type: 'git', url: 'http://github.com/yui/yuglify.git' },
+47 silly resolved     readme: 'yUglify\n=======\n\n`yuglify` is a wrapper around [UglifyJS](https://github.com/mishoo/UglifyJS) and [cssmin](https://github.com/jbleuzen/node-cssmin)\nwith the default YUI configurations on each of them.\n\n\nBuild Status\n------------\n\n[![Build Status](https://secure.travis-ci.org/yui/yuglify.png?branch=master)](http://travis-ci.org/yui/yuglify)\n\n\nCLI Usage\n----------\n\n    npm -g install yuglify\n\n`yuglify` has a very simple CLI interface to allow you to compress files from the command line.\n\n    yuglify ./lib/*.js #uses shell globbing, won\'t work on Windows\n\nThis will read all passed files and compress them (js or css) and write them back beside the original\nwith the name altered to `-min.js|css`.\n\nRequired\n--------\n\n    npm install yuglify\n\n\n```javascript\n\nvar yuglify = require(\'yuglify\');\n\nyuglify.jsmin(\'<string of source\', function(err, smashed) {\n    fs.writeFile(\'/path/to/file\', smashed, \'utf8\', function() {});\n});\n\nyuglify.cssmin(\'<string of source\', function(err, smashed) {\n    fs.writeFile(\'/path/to/file\', smashed, \'utf8\', function() {});\n});\n\n```\n\nPurpose\n-------\n\nThis module is primarily designed to be used inside [shifter](http://yui.github.com/shifter/).\n\nWhy not use the default Uglify?\n-------------------------------\n\nWe need to support the `/*!` license comment blocks when minifying, so we added\na preprocessor to the code to pull them from the source, then place them back when\nthe minification is complete.\n\nWe also needed to make sure that the file ends in a clean line ending for our\ncombo servers. This way we ensure that other modules don\'t have to end with a\nsemi-colon and the combohandler doesn\'t concat them together in a bad way.\n\nWe\'ve also added support to add a semi-colon if the last character of the\nminified source is either a `)` or a `}`.\n\nThe last thing this module does is provide the default config that we think\nis the most compatible with the way that YUI Compressor used to minify our\nfiles.\n\n```javascript\n{\n    mangle: true,\n    squeeze: true,\n    semicolon: false,\n    lift_vars: false,\n    mangle_toplevel: true,\n    no_mangle_functions: true,\n    max_line_length: 6000\n}\n```\n\nTesting\n-------\n\nCurrently, the tests for this module are just to make sure that they are exported properly.\nShifter\'s test suite validates that these compressors are working as expected. Soon, we\'ll\nmove them over to this repo too.\n',
+47 silly resolved     readmeFilename: 'README.md',
+47 silly resolved     _id: 'yuglify@0.1.4',
+47 silly resolved     dist:
+47 silly resolved      { shasum: '726d5e4af810f741ef21865f6f954c4078a3a45f',
+47 silly resolved        tarball: 'http://registry.npmjs.org/yuglify/-/yuglify-0.1.4.tgz' },
+47 silly resolved     _from: 'yuglify@',
+47 silly resolved     _npmVersion: '1.2.15',
+47 silly resolved     _npmUser: { name: 'davglass', email: 'davglass@gmail.com' },
+47 silly resolved     maintainers: [ [Object] ],
+47 silly resolved     directories: {},
+47 silly resolved     _shasum: '726d5e4af810f741ef21865f6f954c4078a3a45f',
+47 silly resolved     _resolved: 'https://registry.npmjs.org/yuglify/-/yuglify-0.1.4.tgz' } ]
+48 info install yuglify@0.1.4 into /usr/lib
+49 info installOne yuglify@0.1.4
+50 verbose lib/node_modules/yuglify unbuild
+51 verbose tar unpack /home/timothy/.npm/yuglify/0.1.4/package.tgz
+52 silly lockFile 2a7e1b13-tar-usr-lib-node-modules-yuglify tar:///usr/lib/node_modules/yuglify
+53 verbose lock tar:///usr/lib/node_modules/yuglify /home/timothy/.npm/2a7e1b13-tar-usr-lib-node-modules-yuglify.lock
+54 silly lockFile e5cb0dab-hy-npm-yuglify-0-1-4-package-tgz tar:///home/timothy/.npm/yuglify/0.1.4/package.tgz
+55 verbose lock tar:///home/timothy/.npm/yuglify/0.1.4/package.tgz /home/timothy/.npm/e5cb0dab-hy-npm-yuglify-0-1-4-package-tgz.lock
+56 silly gunzTarPerm modes [ '775', '664' ]
+57 error Error: EACCES, mkdir '/usr/lib/node_modules/yuglify'
+57 error  { [Error: EACCES, mkdir '/usr/lib/node_modules/yuglify']
+57 error   errno: 3,
+57 error   code: 'EACCES',
+57 error   path: '/usr/lib/node_modules/yuglify',
+57 error   fstream_type: 'Directory',
+57 error   fstream_path: '/usr/lib/node_modules/yuglify',
+57 error   fstream_class: 'DirWriter',
+57 error   fstream_stack:
+57 error    [ '/usr/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23',
+57 error      '/usr/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53',
+57 error      'Object.oncomplete (fs.js:107:15)' ] }
+58 error Please try running this command again as root/Administrator.
+59 error System Linux 3.13.0-46-generic
+60 error command "/usr/bin/node" "/usr/bin/npm" "-g" "install" "yuglify"
+61 error cwd /home/timothy/Development/composersCouch
+62 error node -v v0.10.33
+63 error npm -v 1.4.28
+64 error path /usr/lib/node_modules/yuglify
+65 error fstream_path /usr/lib/node_modules/yuglify
+66 error fstream_type Directory
+67 error fstream_class DirWriter
+68 error code EACCES
+69 error errno 3
+70 error stack Error: EACCES, mkdir '/usr/lib/node_modules/yuglify'
+71 error fstream_stack /usr/lib/node_modules/npm/node_modules/fstream/lib/dir-writer.js:36:23
+71 error fstream_stack /usr/lib/node_modules/npm/node_modules/mkdirp/index.js:46:53
+71 error fstream_stack Object.oncomplete (fs.js:107:15)
+72 verbose exit [ 3, true ]

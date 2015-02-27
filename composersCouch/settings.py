@@ -233,7 +233,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
     'pipeline.finders.PipelineFinder',
-
 )
 
 # Templates
@@ -296,8 +295,15 @@ CELERY_ALWAYS_EAGER = True
 CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
 
+PIPELINE_ENABLED= True
 PIPELINE_COMPILERS = (
   'pipeline.compilers.less.LessCompiler',
+)
+PIPELINE_JS_COMPRESSOR = (
+  'pipeline.compressors.yuglify.YuglifyCompressor'
+)
+PIPELINE_CSS_COMPRESSOR = (
+  'pipeline.compressors.yuglify.YuglifyCompressor'
 )
 PIPELINE_CSS = {
     'less': {
