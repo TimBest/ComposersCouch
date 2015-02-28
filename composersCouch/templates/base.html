@@ -118,7 +118,6 @@
     <script type="text/javascript" src="{% static 'js/image-picker.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jquery.jplayer.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/jplayer.playlist.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/modalForms.js' %}"></script>
 
 
     {% if is_development %}
@@ -127,25 +126,25 @@
       <link rel="stylesheet" href="{{ STATIC_URL }}js/scripts.js" >
     {% endif %}
     {% comment %}
-
+      <script type="text/javascript" src="{% static 'js/modalForms.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/request/folder.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/schedule/expand-day.js' %}"></script>
+      <script type="text/javascript" src="{% static 'autocomplete_light/addanother.js' %}"></script>
+      <script type="text/javascript" src="{% static 'autocomplete_light/autocomplete.js' %}"></script>
+      <script type="text/javascript" src="{% static 'autocomplete_light/text_widget.js' %}"></script>
+      <script type="text/javascript" src="{% static 'autocomplete_light/widget.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/autocomplete_fixes.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/jquery.anystretch.min.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/progress_bar.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/feeds.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/landing_page.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/signup.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/about.js' %}"></script>
+      <script type="text/javascript" src="{% static 'js/post.js' %}"></script>
     {% endcomment %}
 
-    <script type="text/javascript" src="{% static 'js/request/folder.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/schedule/expand-day.js' %}"></script>
-    <script type="text/javascript" src="{% static 'autocomplete_light/addanother.js' %}"></script>
-    <script type="text/javascript" src="{% static 'autocomplete_light/autocomplete.js' %}"></script>
-    <script type="text/javascript" src="{% static 'autocomplete_light/text_widget.js' %}"></script>
-    <script type="text/javascript" src="{% static 'autocomplete_light/widget.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/autocomplete_fixes.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.anystretch.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/progress_bar.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/base.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/feeds.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/landing_page.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/forms.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/signup.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/about.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/post.js' %}"></script>
     {% block script %}{% endblock %}
   </body>
 </html>

@@ -1,6 +1,6 @@
 $(document).ready(function() {
   $('#search').yourlabsAutocomplete({
-    url: "search/",
+    url: "/search/",
     placeholder: 'Search',
     choiceSelector: 'a',
   }).input.bind('selectChoice', function(e, choice, autocomplete) {
