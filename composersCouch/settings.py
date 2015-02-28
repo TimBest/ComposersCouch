@@ -142,7 +142,7 @@ else:
     POSTGIS_VERSION = (2, 1, 1)
     STREAM_REDIS_CONFIG = {
         'default': {
-            'host': 'aws-my-1j3u56xcl1jvu.og7bpd.0001.use1.cache.amazonaws.com',
+            'host': 'aws-my-iiivslcgwpn1.og7bpd.0001.use1.cache.amazonaws.com',
             'port': 6379,
             'password': None,# Redis Password goes Here
             'db': 0
