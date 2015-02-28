@@ -14,6 +14,7 @@
 from django.db.models.fields.files import FileField
 from django.db.models import signals
 from django.conf import settings
+from django.core.files.storage import Storage, default_storage
 from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext_lazy as _
 from django import forms
@@ -253,14 +254,15 @@ class AudioField(FileField):
                 error_msg = ("file already exists!")
                 logger.error(error_msg)
 
-    def _set_audio_converted(self, instance=None, **kwargs):
+    """def _set_audio_converted(self, instance=None, **kwargs):
         '''Creates a "audio_field" object as attribute of the FileField instance
         audio_field attribute will be of the same class of original file, so
         "path", "url", "name"... properties can be used'''
         if getattr(instance, self.name):
+            # TODO: this doesn't work with S3
             filename = self.generate_filename(instance, os.path.basename(getattr(instance, self.name).path))
             audio_field = StdAudioField(filename)
-            setattr(getattr(instance, self.name), 'audio_converted', audio_field)
+            setattr(getattr(instance, self.name), 'audio_converted', audio_field)"""
 
     def formfield(self, **kwargs):
         '''Specify form field and widget to be used on the forms'''
@@ -289,7 +291,7 @@ class AudioField(FileField):
         '''Call methods for generating all operations on specified signals'''
         super(AudioField, self).contribute_to_class(cls, name)
         signals.post_save.connect(self._rename_audio, sender=cls)
-        signals.post_init.connect(self._set_audio_converted, sender=cls)
+        #signals.post_init.connect(self._set_audio_converted, sender=cls)
 
 
 try:
