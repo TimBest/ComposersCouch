@@ -150,7 +150,7 @@ else:
     }
     CACHES = {
         'default': {
-            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'BACKEND': 'django_elasticache.memcached.ElastiCache',
             'LOCATION': 'memcached.og7bpd.cfg.use1.cache.amazonaws.com:11211',
         }
     }
