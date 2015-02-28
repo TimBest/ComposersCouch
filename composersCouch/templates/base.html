@@ -112,19 +112,20 @@
 
     {% comment %}<script type="text/javascript" src="{% static 'js/jquery-1.11.0.min.js' %}"></script>{% endcomment %}
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-    <script type="text/javascript" src="{% static 'js/jquery.jplayer.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/jplayer.playlist.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/moment.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/bootstrap-datetimepicker.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/image-picker.js' %}"></script>
     {% comment %}
+    <script type="text/javascript" src="{% static 'js/image-picker.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jquery.jplayer.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/jplayer.playlist.js' %}"></script>
+    {% endcomment %}
+
     {% if is_development %}
       {% javascript 'scripts' %}
     {% else %}
       <link rel="stylesheet" href="{{ STATIC_URL }}js/scripts.js" >
     {% endif %}
-    {% endcomment %}
     <script type="text/javascript" src="{% static 'js/modalForms.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/request/folder.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/schedule/expand-day.js' %}"></script>
