@@ -12,6 +12,7 @@ from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Div, HTML, Layout
 from multiupload.fields import MultiFileField
 
+from annoying.functions import get_object_or_None
 from artist.models import ArtistProfile
 from social_links.forms import clean_url
 from embed_video.fields import EmbedVideoFormField
@@ -96,6 +97,7 @@ class AlbumAudioForm(ModelForm):
         self.helper.form_tag = False
         self.helper.layout = Layout(
             Div(
+                'id',
                 Div('album',css_class='hidden',),
                     Div(
                     Div('order',css_class='col-xs-2 left',),
@@ -116,9 +118,20 @@ class AlbumAudioForm(ModelForm):
         if track:
             self.fields['title'].initial = track.media.title
 
+    def save(self, commit=False):
+        remove = self.cleaned_data.get('DELETE', False)
+        formData = super(AlbumAudioForm, self).save(commit=False)
+        if remove:
+            track = get_object_or_None(Track, id=formData.id)
+            if track:
+                track.media.delete()
+                track.delete()
+            return None
+        return formData
+
     class Meta:
         model = Track
-        fields = ['album','order',]
+        fields = ['album','order','id']
 
 class AlbumVideoForm(ModelForm):
     video = EmbedVideoFormField(required=False)
