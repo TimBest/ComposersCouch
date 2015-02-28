@@ -22,20 +22,3 @@
 {% block submit %}
   <button type="submit" onclick="this.disabled=true" class="btn btn-primary">Post</button>
 {% endblock %}
-
-
-{% block script %}
-  {{ block.super }}
-  <script type="text/javascript">
-    $("form").on('submit', function() {
-      zipcode_fix();
-    });
-    $(function () {
-        $('#id_start_0').datetimepicker({pickTime: false});
-        $('#id_start_1').datetimepicker({pickDate: false});
-        $('#id_end_0').datetimepicker({pickTime: false});
-        $('#id_end_1').datetimepicker({pickDate: false});
-        $('#id_accept_by').datetimepicker({pickTime: false});
-    });
-  </script>
-{% endblock %}

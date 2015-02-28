@@ -19,7 +19,5 @@
 {% block extraSubmit %}{% progress_bar %}{% endblock %}
 
 {% block script %}
-  {{ block.super }}
-  {% progress_bar_media %}
   {% include "utils/_image_script.html" with selectorID='#id_album_art' uploadDiv='#div_id_image' selectDiv='#div_id_album_art' page=request.GET.page images=images %}
 {% endblock %}

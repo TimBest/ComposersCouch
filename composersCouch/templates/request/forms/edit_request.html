@@ -11,15 +11,3 @@
 {% block form %}
   {% crispy dateForm %}
 {% endblock %}
-
-{% block script %}
-  {{ block.super }}
-  <script type="text/javascript">
-    $(function () {
-      $('#id_start_0').datetimepicker({pickTime: false});
-      $('#id_start_1').datetimepicker({pickDate: false});
-      $('#id_end_0').datetimepicker({pickTime: false});
-      $('#id_end_1').datetimepicker({pickDate: false});
-    });
-  </script>
-{% endblock %}

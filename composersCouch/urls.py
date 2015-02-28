@@ -16,7 +16,7 @@ urlpatterns += patterns('',
 )
 
 urlpatterns += patterns('composersCouch.views',
-    url(r'^$', 'load_template', {'template_name': 'index.html'}, name='home'),
+    url(r'^$', 'load_template', {'template_name': 'landing_page.html'}, name='home'),
     url(r'^about/$', 'load_template', {'template_name': 'footer/about.html'}, name='about'),
     url(r'^team/$', 'load_template', {'template_name': 'footer/team.html'}, name='team'),
     url(r'^credit/$', 'load_template', {'template_name': 'footer/credit.html'}, name='credit'),
@@ -41,12 +41,13 @@ urlpatterns += patterns('',
     url(r'^inbox/', include('threads.urls', namespace='threads')),
     url(r'^photos/', include('photos.urls', namespace='photos')),
     url(r'^progressbarupload/', include('progressbarupload.urls')),
-    url(r'^search', include('search.urls')),
+    # TODO/WARNING: hard coded in base.js
+    url(r'^search/', include('search.urls')),
 )
 
 if settings.DEVELOPMENT:
     urlpatterns += patterns('',
-        # WARNING/TODO: media url is hard coded in auto complete templates
+        # TODO/WARNING: media url is hard coded in auto complete templates
         url(r'^media/(?P<path>.*)$','django.views.static.serve',
             {'document_root':  getattr(settings, 'MEDIA_ROOT', '/media')}),
     )

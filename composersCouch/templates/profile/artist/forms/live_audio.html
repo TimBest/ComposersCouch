@@ -10,8 +10,3 @@
 {% block enctype %}multipart/form-data{% endblock %}
 {% block form %}{% crispy form %}{% endblock %}
 {% block extraSubmit %}{% progress_bar %}{% endblock %}
-
-{% block script %}
-  {{ block.super }}
-  {% progress_bar_media %}
-{% endblock %}

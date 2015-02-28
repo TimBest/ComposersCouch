@@ -13,8 +13,3 @@
     {% crispy seatingForm %}
 {% endblock %}
 {% block extraSubmit %}{% progress_bar %}{% endblock %}
-
-{% block script %}
-  {{ block.super }}
-  {% progress_bar_media %}
-{% endblock %}

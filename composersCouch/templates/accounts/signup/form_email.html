@@ -23,8 +23,3 @@
 {% block submit %}
 <button id="sign-up-submit" onclick="this.disabled=true" type="submit" class="btn btn-primary">Sign up</button>
 {% endblock %}
-
-{% block script %}
-  {{ block.super }}
-  <script type="text/javascript" src="{% static 'js/signup.js' %}"></script>
-{% endblock %}

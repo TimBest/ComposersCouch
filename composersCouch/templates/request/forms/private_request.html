@@ -28,15 +28,6 @@
 {% endblock %}
 
 {% block script %}
-  {{ block.super }}
-  <script type="text/javascript">
-    $(function () {
-        $('#id_start_0').datetimepicker({pickTime: false});
-        $('#id_start_1').datetimepicker({pickDate: false});
-        $('#id_end_0').datetimepicker({pickTime: false});
-        $('#id_end_1').datetimepicker({pickDate: false});
-    });
-  </script>
   {% include "utils/_request_participant_script.html" with email_div='#div_id_email' user_div='#div_id_user' %}
   {% include "utils/_request_participant_script.html" with email_div='#div_id_form-0-email' user_div='#div_id_form-0-user' %}
   {% include "utils/_request_participant_script.html" with email_div='#div_id_form-1-email' user_div='#div_id_form-1-user' %}

@@ -323,7 +323,7 @@ PIPELINE_JS = {
             'js/jquery.jplayer.min.js',
             'js/jplayer.playlist.js',
             'js/image-picker.js',
-            #'js/modalForms.js',
+            'js/modalForms.js',
             #'js/request/folder.js',
             #'js/schedule/expand-day.js',
             #'autocomplete_light/addanother.js',

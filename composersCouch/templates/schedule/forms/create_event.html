@@ -31,26 +31,6 @@
 
 
 {% block script %}
-  {{ block.super }}
-  {% progress_bar_media %}
-  <script type="text/javascript">
-    $(function () {
-        $('#id_start_0').datetimepicker({pickTime: false});
-        $('#id_start_1').datetimepicker({pickDate: false});
-        $('#id_end_0').datetimepicker({pickTime: false});
-        $('#id_end_1').datetimepicker({pickDate: false});
-    });
-    function show_image_form() {
-      $('#add-poster').hide();
-      $('#poster-form').show();
-    }
-    $(document).ready(function() {
-      $('#poster-form').hide();
-      $('#poster-form').before(function() {
-        return $("<p id='add-poster'><button type='button' class='btn btn-link'><span class='text-muted fa fa-picture-o fa-3x'></span> Attach Photo</button></p>").click(show_image_form);
-      })
-    });
-  </script>
   {% include "utils/_image_script.html" with selectorID='#id_poster' uploadDiv='#div_id_image' selectDiv='#div_id_poster' page=request.GET.page images=images %}
   {% include "utils/_show_participant_script.html" with id='id_headliner' choice_class='artist-autocomplete' %}
   {% include "utils/_show_participants_script.html" with id='id_openers' choice_class='artist-autocomplete' %}

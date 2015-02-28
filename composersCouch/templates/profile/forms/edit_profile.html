@@ -21,7 +21,5 @@
 {% block extraSubmit %}{% progress_bar %}{% endblock %}
 
 {% block script %}
-  {{ block.super }}
-  {% progress_bar_media %}
   {% include "utils/_image_script.html" with selectorID='#id_mugshot' uploadDiv='#div_id_image' selectDiv='#div_id_mugshot' page=request.GET.page images=images %}
 {% endblock %}
