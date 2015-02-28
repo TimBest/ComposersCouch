@@ -213,7 +213,7 @@ class AudioField(FileField):
             result = audio_convert_task.delay(conv)
             logger.debug("command :> %s" % conv)
 
-    def _rename_audio(self, instance=None, **kwargs):
+    """def _rename_audio(self, instance=None, **kwargs):
         '''Rename uploaded audio file & calls methods to convert audio file format if
         convert_to is selected'''
         if getattr(instance, self.name):
@@ -241,10 +241,10 @@ class AudioField(FileField):
                         if os.path.exists(dst_fullpath):
                             #Check for no .. and no *
                             #DISABLED Delete file
-                            """
+                            '''
                             if dst_fullpath.find('../../') == -1 and dst_fullpath.find('*') == -1:
                                 os.remove(dst_fullpath)
-                            """
+                            '''
                         ext = '.' + CONVERT_TYPE_CHK[convert_type]
                         dst = self.generate_filename(instance, '%s%s%s' %
                                                     (self.filename_prefix, self.uuid, ext))
@@ -252,7 +252,7 @@ class AudioField(FileField):
                     instance.save()
             else:
                 error_msg = ("file already exists!")
-                logger.error(error_msg)
+                logger.error(error_msg)"""
 
     """def _set_audio_converted(self, instance=None, **kwargs):
         '''Creates a "audio_field" object as attribute of the FileField instance
@@ -290,7 +290,7 @@ class AudioField(FileField):
     def contribute_to_class(self, cls, name):
         '''Call methods for generating all operations on specified signals'''
         super(AudioField, self).contribute_to_class(cls, name)
-        signals.post_save.connect(self._rename_audio, sender=cls)
+        #signals.post_save.connect(self._rename_audio, sender=cls)
         #signals.post_init.connect(self._set_audio_converted, sender=cls)
 
 
