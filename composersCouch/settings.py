@@ -320,11 +320,13 @@ PIPELINE_JS_COMPRESSOR = (
 PIPELINE_JS = {
     'scripts': {
         'source_filenames': (
-            'js/bootstrap.min.js.js',
-
-            #'js/jquery.jplayer.min.js',
-            #'js/jplayer.playlist.js',
-            #'js/image-picker.js',
+            'js/jquery-1.11.0.min.js',
+            'js/bootstrap.min.js',
+            'js/moment.min.js',
+            'js/bootstrap-datetimepicker.min.js',
+            'js/jquery.jplayer.min.js',
+            'js/jplayer.playlist.js',
+            'js/image-picker.js',
             'js/modalForms.js',
             'js/request/folder.js',
             'js/schedule/expand-day.js',
