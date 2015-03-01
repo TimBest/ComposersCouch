@@ -2,8 +2,13 @@
 
 {% block title %}Page not found{% endblock %}
 
-{% block content %}
-<h1>Page not found</h1>
+{% block header %}
+  <div class="panel">
+    <div class="panel-body">
+      <div class="page-header"><h2>Page not found</h2></div>
+      <p>Sorry, but the requested page could not be found.</p>
+      <a class="btn btn-primary" href="{% url 'home' %}">Home Page</a>
 
-<p>Sorry, but the requested page could not be found.</p>
+    </div>
+  </div>
 {% endblock %}
