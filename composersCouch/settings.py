@@ -83,6 +83,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'audiofield.middleware.threadlocals.ThreadLocals',
     'easy_timezones.middleware.EasyTimezoneMiddleware',
+    'pipeline.middleware.MinifyHTMLMiddleware',
 )
 
 ROOT_URLCONF = 'composersCouch.urls'
