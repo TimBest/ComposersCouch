@@ -7322,6 +7322,9 @@ h1 {
     text-align: center;
   }
 }
+.feed .cards .btn {
+  margin-right: 5px;
+}
 .feed .nav-text {
   float: left;
   position: relative;
@@ -7483,6 +7486,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .detail .nametag .nametagInfo form .btn {
   width: 6em;
+  margin-right: 5px;
 }
 .detail .nametag .nametagInfo .edit-profile {
   padding-top: 5px;
