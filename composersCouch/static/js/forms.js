@@ -39,6 +39,7 @@ $(document).ready(function() {
       $('#id_end_0').datetimepicker({pickTime: false});
       $('#id_end_1').datetimepicker({pickDate: false});
       $('#id_accept_by').datetimepicker({pickTime: false});
+
   });
   // add shows poster js
   function show_image_form() {
