@@ -30,7 +30,7 @@
           <h3>Biography</h3>
         </div>
         <div class="panel-body">
-          <p>{{ artist_profile.biography }}</p>
+          <p>{{ artist_profile.biography|linebreaks }}</p>
           <a class="{{isEditable}} editMusicianBiography" href="{% url 'artist:biographyForm' %}">
             Edit
           </a>
@@ -46,7 +46,7 @@
         <div class="member">
           <p>
             <b>{{ member.name }}</b>
-            - {{ member.biography }}
+            - {{ member.biography|linebreaks }}
           </p>
           {% comment %}<p>
             {% for instrument in member.instruments.all %}

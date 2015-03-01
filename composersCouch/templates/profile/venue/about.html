@@ -126,8 +126,8 @@
           <table class="table table-striped">
             {% for policy in venueProfile.policies.all %}
               <tr>
-                <td>{{policy.title}}</td>
-                <td>{{policy.description}}</td>
+                <td>{{ policy.title }}</td>
+                <td>{{ policy.description|linebreaks }}</td>
               <tr>
             {% endfor %}
           </table>
@@ -141,7 +141,7 @@
           <h3>Biography</h3>
         </div>
         <div class="panel-body">
-          <p>{{ venueProfile.biography }}</p>
+          <p>{{ venueProfile.biograph|linebreaksy }}</p>
           <a class="{{isEditable}} editBiography" href="{% url 'venue:biographyForm' %}">Edit</a>
         </div>
       </div>
@@ -154,7 +154,7 @@
           {% for person in venueProfile.staff.all %}
             <h5>{{person.contact.name}}</h5>
             <p>{{person.job_title}}</p>
-            <p>{{person.biography}}</p>
+            <p>{{person.biography|linebreaks}}</p>
             <p>{{person.contact.email}}</p>
             <p>{{person.contact.phone}}</p>
           {% endfor %}

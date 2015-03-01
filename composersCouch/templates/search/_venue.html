@@ -36,7 +36,7 @@
             {% endfor %}
           </p>
           {% if venue.biography %}
-            <p>{{ venue.biography }}</p>
+            <p>{{ venue.biography|linebreaks }}</p>
           {% endif %}
         </div>
         <div class="col-sm-3">
