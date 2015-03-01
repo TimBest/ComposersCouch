@@ -121,12 +121,9 @@ if DEVELOPMENT:
     STATIC_URL = '/static/'
     STATICFILES_STORAGE = 'pipeline.storage.PipelineStorage'
     MEDIA_URL = '/media/'
-    PIPELINE_COMPILERS = (
-      'pipeline.compilers.less.LessCompiler',
-    )
-    PIPELINE_CSS_COMPRESSOR = (
-      'pipeline.compressors.yuglify.YuglifyCompressor'
-    )
+    PIPELINE_COMPILERS = 'pipeline.compilers.less.LessCompiler',
+    PIPELINE_CSS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
+
     PIPELINE_CSS = {
         'less': {
             'source_filenames': (
@@ -316,9 +313,8 @@ CELERY_EAGER_PROPAGATES_EXCEPTIONS = True
 
 
 PIPELINE_ENABLED= True
-PIPELINE_JS_COMPRESSOR = (
-  'pipeline.compressors.yuglify.YuglifyCompressor'
-)
+PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
+
 PIPELINE_JS = {
     'scripts': {
         'source_filenames': (
