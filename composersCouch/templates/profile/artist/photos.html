@@ -11,7 +11,7 @@
       <a class="{{isEditable}} btn btn-success" href="{% url 'photos:upload' %}">
         <span class="fa fa-plus"></span> Add Photo
       </a>
-      <div class="pull-right">
+      <div class="pull-right social-links">
         <a href="{% url 'artist:photoLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
         {% with social=profile.social_links %}
           {% if social.instagram %}<a href="{{ social.instagram }}" target="_blank" class="btn btn-instagram"><span class="fa fa-instagram"></span></a>{% endif %}

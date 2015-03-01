@@ -11,7 +11,7 @@
   <div class="videos">
     <div class="row page-header">
       <div class="col-xs-12">
-        <div class="pull-right">
+        <div class="pull-right social-links">
           <a href="{% url 'artist:videoLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
           {% with social=profile.social_links %}
             {% if social.vimeo %}<a href="{{ social.vimeo }}" target="_blank" class="btn btn-vimeo"><span class="fa fa-vimeo-square"></span></a>{% endif %}

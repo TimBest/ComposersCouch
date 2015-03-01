@@ -5627,9 +5627,6 @@ button.close {
   cursor: inherit;
   display: block;
 }
-.btn {
-  margin-right: 5px;
-}
 /* Social Media Buttons */
 .btn-twitter {
   color: #fbfcfc;
@@ -7325,6 +7322,9 @@ h1 {
     text-align: center;
   }
 }
+.feed .cards .btn {
+  margin-right: 5px;
+}
 .feed .nav-text {
   float: left;
   position: relative;
@@ -7485,6 +7485,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   padding-bottom: 0px;
 }
 .detail .nametag .nametagInfo form .btn {
+  margin-right: 5px;
   width: 6em;
 }
 .detail .nametag .nametagInfo .edit-profile {
@@ -7602,6 +7603,9 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .isFollowing .following {
   display: Inline;
+}
+.social-links .btn {
+  margin-left: 5px;
 }
 .photos .upload {
   float: right;

@@ -14,7 +14,7 @@
             <span> {{ genre }}</span>
           {% endfor %}
         </span>
-        <div class="pull-right">
+        <div class="pull-right social-links">
           <a href="{% url 'artist:socialLinksForm' %}" class="{{isEditable}}">Edit <span class="hidden-xs">Social Media Links</span></a>
           {% with social=profile.social_links %}
               {% if social.facebook %}<a href="{{ social.facebook }}" target="_blank" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>{% endif %}
