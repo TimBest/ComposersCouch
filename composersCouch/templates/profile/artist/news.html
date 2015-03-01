@@ -8,6 +8,16 @@
 {% block panelBody %}
   {% if user.is_authenticated %}
     {% include "profile/_news.html" with post_form=post_form photo_form=photo_form %}
+    <script>
+      var selectorId = "#id_photo";
+      var selectDiv  = "#div_id_photo";
+      var uploadDiv  = "#div_id_image";
+      {% if images %}
+        var images = true;
+      {% else %}
+        var images = false;
+      {% endif %}
+    </script>
   {% endif %}
   {% for activity in activities %}
     {% include "feeds/_post.html" with post=activity.post %}
