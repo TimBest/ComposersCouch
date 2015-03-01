@@ -16,6 +16,17 @@
     {% if images %}
       {% include "utils/_image_select.html" with images=images id="poster" label="Poster" %}
     {% endif %}
+    <script>
+      {% comment %}variables for image select{% endcomment %}
+      var selectorId = "#id_poster";
+      var selectDiv  = "#div_id_photo";
+      var uploadDiv  = "#div_id_poster";
+      {% if images %}
+        var images = true;
+      {% else %}
+        var images = false;
+      {% endif %}
+    </script>
   </div>
   <div class="row">
     <div class="col-sm-6">
@@ -31,7 +42,6 @@
 
 
 {% block script %}
-  {% include "utils/_image_script.html" with selectorID='#id_poster' uploadDiv='#div_id_image' selectDiv='#div_id_poster' page=request.GET.page images=images %}
   {% include "utils/_show_participant_script.html" with id='id_headliner' choice_class='artist-autocomplete' %}
   {% include "utils/_show_participants_script.html" with id='id_openers' choice_class='artist-autocomplete' %}
   {% include "utils/_show_participant_script.html" with id='id_venue' choice_class='user-autocomplete' %}

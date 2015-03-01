@@ -14,10 +14,17 @@
     {% if images %}
       {% include "utils/_image_select.html" with images=images id="album_art" label="Album Art" %}
     {% endif %}
+    <script>
+      {% comment %}variables for image select{% endcomment %}
+      var selectorId = "#id_album_art";
+      var selectDiv  = "#div_id_photo";
+      var uploadDiv  = "#div_id_album_art";
+      {% if images %}
+        var images = true;
+      {% else %}
+        var images = false;
+      {% endif %}
+    </script>
     {% crispy albumForm %}
 {% endblock %}
 {% block extraSubmit %}{% progress_bar %}{% endblock %}
-
-{% block script %}
-  {% include "utils/_image_script.html" with selectorID='#id_album_art' uploadDiv='#div_id_image' selectDiv='#div_id_album_art' page=request.GET.page images=images %}
-{% endblock %}

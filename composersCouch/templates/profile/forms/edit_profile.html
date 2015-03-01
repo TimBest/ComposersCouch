@@ -13,13 +13,20 @@
   {% if images %}
     {% include "utils/_image_select.html" with images=images id="mugshot" label="Mugshot" %}
   {% endif %}
+  <script>
+    {% comment %}variables for image select{% endcomment %}
+    var selectorId = "#id_mugshot";
+    var selectDiv  = "#div_id_mugshot";
+    var uploadDiv  = "#div_id_image";
+    {% if images %}
+      var images = true;
+    {% else %}
+      var images = false;
+    {% endif %}
+  </script>
   {% crispy mugshotFrom %}
   {% crispy typedForm %}
   {% crispy usernameForm %}
   {% crispy profileForm %}
 {% endblock %}
 {% block extraSubmit %}{% progress_bar %}{% endblock %}
-
-{% block script %}
-  {% include "utils/_image_script.html" with selectorID='#id_mugshot' uploadDiv='#div_id_image' selectDiv='#div_id_mugshot' page=request.GET.page images=images %}
-{% endblock %}
