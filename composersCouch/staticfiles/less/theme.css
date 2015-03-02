@@ -5984,6 +5984,9 @@ h1 {
     padding-right: 70px;
   }
 }
+.navbar .navbar-toggle {
+  margin-right: 0px;
+}
 .navbar .navbar-brand {
   padding: 10px 40px 10px 15px;
   position: relative;
@@ -6020,6 +6023,22 @@ h1 {
   /* TODO: fix this hack */
   padding-left: 30px;
   padding-right: 30px;
+}
+.container > .navbar-header,
+.container-fluid > .navbar-header,
+.container > .navbar-collapse,
+.container-fluid > .navbar-collapse {
+  margin-right: 0;
+  margin-left: -15px;
+}
+@media (min-width: 768px) {
+  .container > .navbar-header,
+  .container-fluid > .navbar-header,
+  .container > .navbar-collapse,
+  .container-fluid > .navbar-collapse {
+    margin-right: 0;
+    margin-left: 0;
+  }
 }
 /* Header */
 .header {

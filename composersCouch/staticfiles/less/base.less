@@ -39,6 +39,9 @@ h1 {
     }
 
   }
+  .navbar-toggle {
+    margin-right:0px;
+  }
   .navbar-brand {
     padding: 10px 40px 10px 15px;
     position:relative;
@@ -81,6 +84,20 @@ h1 {
     }
   }
 }
+.container,
+.container-fluid {
+  > .navbar-header,
+  > .navbar-collapse {
+    margin-right: 0;
+    margin-left:  -@navbar-padding-horizontal;
+
+    @media (min-width: @grid-float-breakpoint) {
+      margin-right: 0;
+      margin-left:  0;
+    }
+  }
+}
+
 
 /* Header */
 .header {

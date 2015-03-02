@@ -85,7 +85,7 @@ class Calendar(models.Model):
         """
         date = in_datetime.replace(tzinfo=tzinfo)
         try:
-            return self.events.order_by('-show__date__end').filter(
+            return self.events.order_by('-show__date__start').filter(
                 show__date__end__lt=date,
                 approved=True
             )[0]
