@@ -6608,7 +6608,7 @@ h1 {
 .authentication .sign-up .social-links a {
   width: 100px;
   height: 100px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
 }
 .authentication .sign-up .social-links a .fa {
   display: block;
@@ -6620,6 +6620,7 @@ h1 {
 }
 .authentication .sign-in {
   margin-top: 30px;
+  margin-bottom: 15px;
 }
 .authentication .sign-in .social-links {
   list-style-type: none;
@@ -6627,7 +6628,7 @@ h1 {
   padding: 0;
 }
 .authentication .sign-in .social-links li {
-  padding-bottom: 10px;
+  margin-bottom: 15px;
 }
 .authentication .sign-in .social-links li a {
   width: 100px;
