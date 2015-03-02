@@ -22,5 +22,5 @@
 {% endblock %}
 
 {% block submit %}
-  <button type="submit" onclick="this.disabled=true" class="btn btn-primary">Send</button>
+  <button type="submit" onclick="this.form.onsubmit(); return false; " class="btn btn-primary">Send</button>
 {% endblock %}

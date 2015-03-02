@@ -24,7 +24,7 @@
         </div>
         <div class="modal-footer">
           {% block extraSubmit %}{% endblock %}
-          {% block submit %}<button type="submit" onclick="this.disabled=true" class="btn btn-primary">Save</button>{% endblock %}
+          {% block submit %}<button type="submit" onclick="this.form.onsubmit(); return false; " class="btn btn-primary">Save</button>{% endblock %}
         </div>
     </div>
 </form>

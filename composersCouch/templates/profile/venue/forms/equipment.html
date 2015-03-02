@@ -29,5 +29,5 @@
 
 {% endblock %}
 {% block extraSubmit %}
-  <button type="submit" onclick="this.disabled=true" class="addMore btn btn-primary">Save & Add More</button>
+  <button type="submit" onclick="this.form.onsubmit(); return false; " class="addMore btn btn-primary">Save & Add More</button>
 {% endblock %}

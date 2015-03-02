@@ -21,5 +21,5 @@
 {% endblock %}
 
 {% block submit %}
-<button id="sign-up-submit" onclick="this.disabled=true" type="submit" class="btn btn-primary">Sign up</button>
+<button id="sign-up-submit" onclick="this.form.onsubmit(); return false;" type="submit" class="btn btn-primary">Sign up</button>
 {% endblock %}
