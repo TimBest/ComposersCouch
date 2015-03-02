@@ -129,7 +129,7 @@ if DEVELOPMENT:
             'source_filenames': (
               'less/theme.less',
             ),
-            'output_filename': 'css/style.css',
+            'output_filename': 'css/style.min.css',
             'extra_context': {
                 'media': 'screen',
             },
@@ -344,7 +344,7 @@ PIPELINE_JS = {
             'js/about.js',
             'js/post.js',
         ),
-        'output_filename': 'js/scripts.js',
+        'output_filename': 'js/scripts.min.js',
     }
 }
 
