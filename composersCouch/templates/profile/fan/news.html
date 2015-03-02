@@ -6,6 +6,12 @@
 {% block dropdownTitle %}News{% endblock %}
 
 {% block panelBody %}
+  <p>
+    {% for genre in profile.genre.all %}
+      {% if forloop.first %}Genres:{% else %},{% endif %}
+      <span> {{ genre }}</span>
+    {% endfor %}
+  </p>
   {% if user.is_authenticated %}
     {% include "profile/_news.html" with post_form=post_form photo_form=photo_form %}
     <script>
