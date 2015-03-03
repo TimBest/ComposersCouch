@@ -118,11 +118,8 @@ class Year(Period):
         start = naive_start
         end = naive_end
         if self.tzinfo is not None:
-            local_start = self.tzinfo.localize(naive_start)
-            local_end = self.tzinfo.localize(naive_end)
-            start = local_start.astimezone(pytz.utc)
-            end = local_end.astimezone(pytz.utc)
-
+            start = self.tzinfo.localize(naive_start)
+            end = self.tzinfo.localize(naive_end)
         return start, end
 
     def __unicode__(self):
@@ -182,15 +179,11 @@ class Month(Period):
             naive_end = datetime.datetime.min.replace(month=1, year=year + 1, day=1)
         else:
             naive_end = datetime.datetime.min.replace(month=month + 1, year=year, day=1)
-
         start = naive_start
         end = naive_end
         if self.tzinfo is not None:
-            local_start = self.tzinfo.localize(naive_start)
-            local_end = self.tzinfo.localize(naive_end)
-            start = local_start.astimezone(pytz.utc)
-            end = local_end.astimezone(pytz.utc)
-
+            start = self.tzinfo.localize(naive_start)
+            end = self.tzinfo.localize(naive_end)
         return start, end
 
     def __unicode__(self):
@@ -236,6 +229,7 @@ class Week(Period):
             week = week.date()
         # Adjust the start datetime to midnight of the week datetime
         naive_start = datetime.datetime.combine(week, datetime.time.min)
+
         # Adjust the start datetime to Sunday of the current week
         sub_days = naive_start.isoweekday()
         if sub_days == 7:
@@ -245,10 +239,8 @@ class Week(Period):
         naive_end = naive_start + datetime.timedelta(days=7)
 
         if self.tzinfo is not None:
-            local_start = self.tzinfo.localize(naive_start)
-            local_end = self.tzinfo.localize(naive_end)
-            start = local_start.astimezone(pytz.utc)
-            end = local_end.astimezone(pytz.utc)
+            start = self.tzinfo.localize(naive_start)
+            end = self.tzinfo.localize(naive_end)
         else:
             start = naive_start
             end = naive_end
@@ -279,14 +271,11 @@ class Day(Period):
         naive_end = datetime.datetime.combine(date, datetime.time.max)
 
         if self.tzinfo is not None:
-            local_start = self.tzinfo.localize(naive_start)
-            local_end = self.tzinfo.localize(naive_end)
-            start = local_start.astimezone(pytz.utc)
-            end = local_end.astimezone(pytz.utc)
+            start = self.tzinfo.localize(naive_start)
+            end = self.tzinfo.localize(naive_end)
         else:
             start = naive_start
             end = naive_end
-
         return start, end
 
     def __unicode__(self):

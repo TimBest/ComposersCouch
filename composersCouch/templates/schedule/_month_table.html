@@ -33,7 +33,7 @@
             {% if month.start.month != day.start.month %}cal-day-outmonth noday{% endif %}">
               <div class="dayNumber">
                 <a href="{% url 'calendar' 'day' %}{% querystring_for_date day.start %}">
-                  <span>{{day.start.day}}</span>
+                  <span>{{ day.start.day }}</span>
                 </a>
               </div>
               {% for event in day.get_event_partials %}
