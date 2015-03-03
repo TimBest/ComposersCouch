@@ -48,6 +48,7 @@ class AvailabilityView(AvailabilityMixin, ArtistView):
     template_name = 'feeds/artists/available.html'
 
     def get_posts(self, **kwargs):
+        # TODO: make properally timezone aware
         start = datetime.combine(self.start_date, time()).replace(tzinfo=utc)
         end = datetime.combine(self.end_date, time()).replace(tzinfo=utc)
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')

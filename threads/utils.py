@@ -1,11 +1,11 @@
 # -*- coding:utf-8 -*-
-import datetime
 import re
 
 from django.conf import settings
 from django.core.cache import cache
 from django.template import Context
 from django.template.loader import get_template
+from django.utils.timezone import now
 
 from . import settings as tm_settings
 
@@ -16,10 +16,6 @@ if tm_settings.MESSAGES_USE_SENDGRID:
 
 from django.core.mail import send_mail
 
-try:
-    from django.utils.timezone import now
-except ImportError:
-    now = datetime.datetime.now
 
 
 def fill_count_cache(user):

@@ -1,15 +1,8 @@
-import datetime, pytz
-from urllib import quote
-from urlparse import urlparse
-
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import PermissionDenied
-from django.core.urlresolvers import resolve, reverse
-from django.http import Http404
 from django.shortcuts import redirect
-from django.utils import decorators
+from django.utils import decorators, timezone
 from django.views.decorators.http import require_POST
-from django.views.generic.edit import DeleteView
 from django.views.generic import TemplateView
 
 from annoying.functions import get_object_or_None
@@ -65,10 +58,12 @@ class CalendarView(TemplateView):
         else:
             context['filter'] = filter = 'shows'
             event_list = self.request.user.calendar.events.filter(approved=True)
-        tz = self.request.session.get('django_timezone')
-        if not tz:
-            tz = pytz.timezone('US/Eastern')
-        context['period'] = self.period(event_list, context['date'], tzinfo=tz)
+        tz = timezone.get_current_timezone()
+        if tz:
+            context['period'] = self.period(event_list, context['date'], tzinfo=tz)
+        else:
+            context['period'] = self.period(event_list, context['date'])
+
         context['period_name'] = self.period.__name__.lower()
         return context
 
