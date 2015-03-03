@@ -1,6 +1,6 @@
 # -*- coding:utf-8 -*-
 import logging
-from django.contrib.auth import login,
+from django.contrib.auth import login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
