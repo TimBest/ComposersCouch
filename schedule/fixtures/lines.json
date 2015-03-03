@@ -1,0 +1,38 @@
+[
+  {
+    "pk": 1,
+    "model": "schedule.line",
+    "fields": {
+      "current": 1,
+      "next": 3,
+      "line": "0102000020E61000000200000082E2C798BB7652C0D93D7958A87545408E75711B0D7052C08716D9CEF7534540"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "schedule.line",
+    "fields": {
+      "current": 2,
+      "next": null,
+      "line": "0102000020E61000000200000082E2C798BB7652C0D93D7958A87545408E75711B0D7052C08716D9CEF7534540"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "schedule.line",
+    "fields": {
+      "current": 3,
+      "next": 2,
+      "line": "0102000020E61000000200000082E2C798BB7652C0D93D7958A87545408E75711B0D7052C08716D9CEF7534540"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "schedule.line",
+    "fields": {
+      "current": 4,
+      "next": null,
+      "line": "0102000020E61000000200000082E2C798BB7652C0D93D7958A87545408E75711B0D7052C08716D9CEF7534540"
+    }
+  }
+]

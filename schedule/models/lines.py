@@ -36,28 +36,26 @@ def create_or_update_line(sender, instance, **kwargs):
 
     next_event = calendar.get_next_event(in_datetime=instance.show.date.start)
     prev_event = calendar.get_prev_event(in_datetime=instance.show.date.start)
-    if next_event and prev_event:
-        lines_to_update = Line.objects.order_by('current__show__date__start').filter(
-            current__show__date__start__gte=prev_event.show.date.start,
-            current__show__date__start__lte=next_event.show.date.start,
-            current__approved=True,
+    """if next_event and prev_event:
+        events = calendar.get_events_in_range(
+            start = prev_event.show.date.start,
+            end   = next_event.show.date.start,
         )
     elif next_event:
-        lines_to_update = Line.objects.order_by('current__show__date__start').filter(
-            current__show__date__start__lte=next_event.show.date.start,
-            current__approved=True,
+        events = calendar.get_events_in_range(
+            end   = next_event.show.date.start,
         )
     elif prev_event:
-        lines_to_update = Line.objects.order_by('current__show__date__start').filter(
-            current__show__date__start__gte=prev_event.show.date.start,
-            current__approved=True,
+        events = calendar.get_events_in_range(
+            start = prev_event.show.date.start,
         )
-    else:
-        lines_to_update = Line.objects.all()
+    else:"""
+    events = calendar.events.filter(approved=True)
+    events = events.order_by('show__date__start')
     prev_line = None
-    for line in lines_to_update:
-        update_line(prev_line, calendar, line.current)
-        prev_line = line
+    for event in events:
+        update_line(prev_line, calendar, event)
+        prev_line = event.line
     update_line(prev_line, calendar)
 
 def update_line(line, calendar, next_event=None):

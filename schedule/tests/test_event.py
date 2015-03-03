@@ -13,11 +13,11 @@ from schedule.models import Event, Calendar, Show
 
 class TestEvent(TestCase):
 
-    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
                  'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
                 'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
-                'shows', 'events']
+                'shows', 'events', 'lines']
 
     def test_get_absolute_url(self):
         event = Event.objects.get(pk=3)
@@ -46,7 +46,7 @@ class TestShow(TestCase):
                  'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
                 'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
-                'shows', 'events']
+                'shows', 'events', 'lines']
 
 
     def test_update_visible_and_approved(self):

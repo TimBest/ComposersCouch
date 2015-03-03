@@ -111,13 +111,25 @@ class Calendar(models.Model):
         This shortcut function allows you to get the next event to start after the
         given date.
         """
-        start = start.replace(tzinfo=tzinfo)
-        end = end.replace(tzinfo=tzinfo)
-        try:
-            return self.events.order_by('show__date__start').filter(
-                show__date__end__gte=start,
+        if start:
+            start = start.replace(tzinfo=tzinfo)
+        if end:
+            end = end.replace(tzinfo=tzinfo)
+        if start and end:
+            return self.events.filter(
+                show__date__start__gte=start,
                 show__date__start__lte=end,
-                approved=True
+                approved=True,
             )
-        except:
+        elif start:
+            return self.events.filter(
+                show__date__start__gte=start,
+                approved=True,
+            )
+        elif end:
+            return self.events.filter(
+                show__date__start__lte=end,
+                approved=True,
+            )
+        else:
             return None
