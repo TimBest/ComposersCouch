@@ -65,13 +65,13 @@ class Calendar(models.Model):
         """
         return self.events.order_by('show__date__start').filter(show__date__start__gte=timezone.now(), approved=True)
 
-    def get_yearly_events(self, year=datetime.datetime.now().date().year):
+    def get_yearly_events(self, year=datetime.datetime.now().date().year,  tzinfo=pytz.utc):
         """
         This shortcut function allows you to get events that will or haveb
         hapened in the given year.
         """
-        start = datetime.date(year, 1, 1)
-        end = datetime.date(year+1, 1, 1)
+        start = datetime.datetime(year, 1, 1).replace(tzinfo=tzinfo)
+        end = datetime.datetime(year+1, 1, 1).replace(tzinfo=tzinfo)
         return self.events.order_by('show__date__start').filter(
             show__date__start__gte=start,
             show__date__start__lt=end,

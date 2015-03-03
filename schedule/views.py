@@ -1,4 +1,4 @@
-import datetime
+import datetime, pytz
 from urllib import quote
 from urlparse import urlparse
 
@@ -65,7 +65,10 @@ class CalendarView(TemplateView):
         else:
             context['filter'] = filter = 'shows'
             event_list = self.request.user.calendar.events.filter(approved=True)
-        context['period'] = self.period(event_list, context['date'])
+        tz = self.request.session.get('django_timezone')
+        if not tz:
+            tz = pytz.utc#timezone('US/Eastern')
+        context['period'] = self.period(event_list, context['date'], tzinfo=tz)
         context['period_name'] = self.period.__name__.lower()
         return context
 

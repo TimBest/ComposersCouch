@@ -18,7 +18,7 @@
     {% ifequal start.time end.time %}
       <p class="time">{{ start|time:"fA" }}</p>
     {% else %}
-      <p class="time">{{ start|time:"f" }} - {{ start|time:"fA" }}</p>
+      <p class="time">{{ start|time:"f" }} - {{ end|time:"fA" }}</p>
     {% endifequal %}
   </div>
 </div>

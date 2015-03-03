@@ -56,7 +56,7 @@ class TestScheduleForms(TestCase):
             form = forms.EventForm(data=valid_dict)
             self.failUnless(form.is_valid())
 
-    def test_date_form(self):
+    def test_show_form(self):
         user = User.objects.get(pk=2)
 
         # test field errors
