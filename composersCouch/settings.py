@@ -18,7 +18,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4
 # See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 DEVELOPMENT = os.environ.get('DEVELOPMENT', False)
 TEMPLATE_DEBUG = DEBUG
@@ -158,7 +158,7 @@ else:
     EMAIL_PORT = 587
     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'timbest@composerscouch.com')
     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-    DEFAULT_FROM_EMAIL = 'messenger@composerscouch.com'
+    DEFAULT_FROM_EMAIL = 'ComposersCouch@composerscouch.com'
 
     AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
         'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
