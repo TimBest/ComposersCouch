@@ -6728,6 +6728,10 @@ h1 {
 .feed.sub-nav .filters .dropdown-menu li {
   margin: 0px 10px;
 }
+.feed.sub-nav .filters .dropdown-menu li .label {
+  display: inline-block;
+  margin-right: 4px;
+}
 .feed.sub-nav .filters .dropdown-menu li .genres {
   font-family: Arial, sans-serif;
 }
