@@ -343,6 +343,7 @@ PIPELINE_JS = {
             'js/signup.js',
             'js/about.js',
             'js/post.js',
+            'js/google-analytics.js',
         ),
         'output_filename': 'js/scripts.min.js',
     }
