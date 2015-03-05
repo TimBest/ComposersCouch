@@ -29,7 +29,7 @@
                 </form>
               {% endif %}
             </div>
-            <div class="body"><p>{{ post.message|safe|linebreaksbr }}</p></div>
+            <div class="body"><p>{{ post.message|safe|urlize|linebreaksbr }}</p></div>
             {% if post.photo %}
               {% with height=200|stringformat:"s" width=200|stringformat:"s" %}
                 {% with geometry=height|add:"x"|add:width %}
