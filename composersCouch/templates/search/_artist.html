@@ -38,9 +38,14 @@
               <span> {{ genre }}</span>
             {% endfor %}
           </p>
-          {% if artist.biography %}
-            <p>{{ artist.biography|linebreaks }}</p>
-          {% endif %}
+          {% with biography=artist.biography|linebreaks %}
+            <p>
+              {{ biography|truncatewords_html:75 }}
+              {% ifnotequal biography|truncatewords_html:75|length biography|truncatewords_html:76|length %}
+                <a href="{% url 'artist:about' artist.profile.user.username %}#biography">Continue reading </a>
+                {% endifnotequal %}
+            </p>
+          {% endwith %}
         </div>
         <div class="col-sm-3">
           {% include "profile/_contact.html" with contact_info=artist.profile.contact_info %}
