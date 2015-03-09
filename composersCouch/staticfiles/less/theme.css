@@ -6414,6 +6414,7 @@ h1 {
 .landing-page .composers-couch {
   background-color: #fbfcfc;
   color: #303030;
+  padding-bottom: 30px;
 }
 .landing-page .composers-couch .image-frame {
   margin-bottom: 48px;
@@ -6423,6 +6424,9 @@ h1 {
 }
 .landing-page .composers-couch .container .moto {
   margin-bottom: 30px;
+}
+.landing-page .discover {
+  padding-bottom: 15px;
 }
 .landing-page .section .jumbotron {
   min-height: 450px;

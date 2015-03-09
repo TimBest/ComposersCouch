@@ -3,7 +3,7 @@
 
 
 {% block overwriteHeader %}
-  <div class="landing-page">
+  <div class="landing-page white">
     <div class="jumbotron composers-couch">
       <div class="image-frame">
         <span class="frame-helper"></span>
@@ -18,26 +18,39 @@
         {% endif %}
       </div>
     </div>
+    <div class="text-center row">
+      <h2 class="discover">
+        <a href="{% if not user.is_authenticated %}#profile-types{% else %}#requests{% endif %}" class="text-muted">
+          <span class="fa fa-chevron-down"></span>
+        </a>
+      </h2>
+    </div>
   </div>
 {% endblock %}
 {% block overwriteContent %}
   <div class="landing-page">
     {% if not user.is_authenticated %}
-      <div class="jumbotron black text-center">
+      <div class="jumbotron black text-center" id="profile-types">
         <div class="row">
           <div class="col-sm-4">
-            <span class="fa fa-ticket fa-5x"></span>
-            <h2>Venues</h2>
+            <a href="#venues" class="text-white">
+              <span class="fa fa-ticket fa-5x"></span>
+              <h2>Venues</h2>
+            </a>
             <p>Book better shows by easily comparing artists and managing booking requests.</p>
           </div>
           <div class="col-sm-4">
-            <span class="fa fa-music fa-5x"></span>
-            <h2>Artists</h2>
+            <a href="#artists" class="text-white">
+              <span class="fa fa-music fa-5x"></span>
+              <h2>Artists</h2>
+            </a>
             <p>Find local venues, manage your tour, and host your press kit.</p>
           </div>
           <div class="col-sm-4">
-            <span class="fa fa-users fa-5x"></span>
-            <h2>Fans</h2>
+            <a href="#concerts" class="text-white">
+              <span class="fa fa-users fa-5x"></span>
+              <h2>Fans</h2>
+            </a>
             <p>Discover local artists, find concerts in your area and follow your favorites.</p>
           </div>
         </div>
