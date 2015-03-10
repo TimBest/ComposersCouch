@@ -78,3 +78,9 @@ Setup AWS instance:
 
       add postgis extension to database
       http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.html#Appendix.PostgreSQL.CommonDBATasks.PostGIS
+
+      curl -sL https://rpm.nodesource.com/setup | bash -
+      yum install -y nodejs
+
+      npm -g install yuglify
+      npm -g install less
