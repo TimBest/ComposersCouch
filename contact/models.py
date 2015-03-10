@@ -30,7 +30,7 @@ class Location(models.Model):
 
 class Contact(models.Model):
     name =  models.CharField(_("name"), max_length=64)
-    phone = models.CharField(_("phone"), max_length=15, blank=True)
+    phone = models.CharField(_("phone"), max_length=64, blank=True)
     email = models.EmailField(_("email"), blank=True)
     url =  models.CharField(_("website"), max_length=200, blank=True)
 
