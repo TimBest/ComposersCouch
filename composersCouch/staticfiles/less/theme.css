@@ -7194,6 +7194,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .date-time {
   text-align: center;
   float: right;
+  width: 100px;
 }
 @media (max-width: 767px) {
   .date-time {
