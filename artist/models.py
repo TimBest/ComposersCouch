@@ -34,6 +34,9 @@ class ArtistProfile(Profile):
     def __unicode__(self):
         return '%s' % self.name
 
+    class Meta:
+        ordering = ['-profile__weight']
+
 class Instrument(models.Model):
     name =  models.CharField(_("name"), max_length=64)
 

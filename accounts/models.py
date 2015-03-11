@@ -33,6 +33,7 @@ class Profile(UserenaBaseProfile):
                                      max_length=1,
                                      choices=PROFILE_TYPE_CHOICES,
                                      default=PROFILE_TYPE_CHOICES[1][0])
+    weight = models.IntegerField(default=0)
     objects = models.GeoManager()
 
     def __unicode__(self):

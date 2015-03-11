@@ -18,6 +18,9 @@ class VenueProfile(Profile):
     def __unicode__(self):
         return '%s' % self.name
 
+    class Meta:
+        ordering = ['-profile__weight']
+
 WEEKDAYS = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday',]
 
 class Hours(models.Model):
