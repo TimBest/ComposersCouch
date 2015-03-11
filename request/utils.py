@@ -10,8 +10,8 @@ def send_request_email(request,
 
     recipient_list = []
     for participant in request.thread.participants.all():
-        if not participant.user.profile.has_owner:
-            recipient_list.append(participant.user.email)
+        if participant.user.email and (request.thread.creator != participant.user):
+                recipient_list.append(participant.user.email)
     if recipient_list:
         context = { 'request':request, 'domain':'composerscouch.com', 'protocol':'http' }
         subject = render_to_string(subject_template, context)

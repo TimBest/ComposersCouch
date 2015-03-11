@@ -55,6 +55,12 @@
 
 {% block content %}
   <div class="messages">
+    {% if not request.user.email %}
+      <div class="alert alert-warning" role="alert">
+        To receive notifications for show requests please <a href="{% url 'profile_edit' %}">Add an Email</a> to your profile.
+      </div>
+    {% endif %}
+
     <form action="{% url 'threads:batch_update' %}" method="post">{% csrf_token %}
       <div class="btn-group request-folder-actions">
         {% block markAsRead %}
