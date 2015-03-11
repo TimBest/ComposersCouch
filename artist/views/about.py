@@ -2,6 +2,7 @@ from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic import UpdateView
 
+from accounts.utils import update_profile_weight
 from artist.models import ArtistProfile
 from annoying.functions import get_object_or_None
 from contact.views import ContactView
@@ -32,6 +33,7 @@ class BiographyView(ArtistProfileFormMixin, UpdateView):
         return self.user.profile.artist_profile
 
     def get_success_url(self):
+        update_profile_weight(user=self.user)
         return reverse(self.success_url, kwargs={'username': self.user.username})
 
 biography = BiographyView.as_view()

@@ -6,13 +6,14 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
 from accounts.models import Profile
-from artist.models import ArtistProfile
+from accounts.utils import update_profile_weight
 from annoying.functions import get_object_or_None
+from artist.models import ArtistProfile
+from composersCouch.views import MultipleFormsView
 from customProfile import forms as profile_forms
 from customProfile.decorators import is_artist, is_venue, is_fan
-from composersCouch.views import MultipleFormsView
-from feeds.models import Follow, Post
 from fan.models import FanProfile
+from feeds.models import Follow, Post
 from photos.models import Image
 from photos.forms import MugshotForm
 from photos.views import ImageFormMixin
@@ -128,6 +129,7 @@ class ProfileEdit(ImageFormMixin, MultipleFormsView):
             imageId = self.request.POST.get('mugshot')
             profile.mugshot = get_object_or_None(Image, id=imageId)
         profile.save()
+        update_profile_weight(user=user)
         return redirect(self.success_url, username=username)
 
 profile_edit = login_required(ProfileEdit.as_view())

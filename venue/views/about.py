@@ -5,16 +5,17 @@ from django.http import Http404
 from django.shortcuts import redirect
 from django.views.generic import FormView, UpdateView
 
-from venue.models import VenueProfile
+from accounts.utils import update_profile_weight
 from annoying.functions import get_object_or_None
+from contact.forms import ContactForm
 from contact.views import ContactView
 from composersCouch.views import MultipleModelFormsView
-from venue import forms, models
 from customProfile.views import VenueProfileView, VenueProfileFormMixin
-from contact.forms import ContactForm
 from photos.forms import SeatingChartForm
 from photos.models import Image
 from photos.views import ImageFormMixin
+from venue.models import VenueProfile
+from venue import forms, models
 
 
 class VenueProfileAboutView(VenueProfileView):
@@ -41,6 +42,7 @@ class BiographyView(VenueProfileFormMixin, UpdateView):
         return self.user.profile.venueProfile
 
     def get_success_url(self):
+        update_profile_weight(user=self.user)
         return reverse(self.success_url, kwargs={'username': self.user.username})
 
 biography = BiographyView.as_view()

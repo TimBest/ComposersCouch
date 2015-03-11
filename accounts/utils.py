@@ -37,7 +37,7 @@ def update_profile_weight(sender=None, user=None, request=None, **kwargs):
     if user.profile.profile_type == 'm':
         if user.profile.artist_profile.biography:
             weight = weight + 50
-    elif user.profile.profile_type == 'm':
+    elif user.profile.profile_type == 'v':
         if user.profile.venueProfile.biography:
             weight = weight + 50
     # email
