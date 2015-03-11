@@ -14,13 +14,23 @@ from models import *
 
 class photosTest(TestCase):
 
+    fixtures = [
+        'users', 'contactInfos', 'contacts', 'locations', 'zipcodes',
+        'profiles', 'applications', 'publicRequests', 'numApplicants',
+        'privateRequests', 'requestParticipants', 'threads', 'messages',
+        'participants', 'dates', 'genres', 'albums', 'artists', 'tracks',
+        'media', 'calendars', 'info', 'shows', 'events', 'venues', 'fans',
+    ]
+
     def setUp(self):
         self.image_file = open(os.path.join(os.path.dirname(__file__), 'test_img.jpg'))
-        self.user = User.objects.create_user('zeus', 'zeus@example.com', 'zeus')
+        self.user = User.objects.get(pk=1)
         self.client = Client()
 
-    def _upload_test_image(self, username='zeus', password='zeus'):
-        self.client.login(username=username, password=password)
+    def _upload_test_image(self, identification='john@example.com', password='blowfish'):
+        self.client.post(reverse('signin'),
+                         data={'identification': identification,
+                               'password': password})
         self.image_file = open(os.path.join(os.path.dirname(__file__), 'test_img.jpg'))
         response = self.client.get(reverse('photos:upload'))
         self.assertEqual(response.status_code, 200)
@@ -31,32 +41,39 @@ class photosTest(TestCase):
     def test_image_upload(self):
         response = self._upload_test_image()
         self.assertEqual(response.status_code, 200)
-        img_url = Image.objects.get(user__username='zeus').get_absolute_url()
+        img_url = Image.objects.get(user__pk=1).get_absolute_url()
         response = self.client.get(img_url)
         self.assertEqual(response.status_code, 200)
 
     def test_delete(self):
-        User.objects.create_user('bad', 'bad@example.com', 'bad')
         self._upload_test_image()
-        self.client.login(username='bad', password='bad')
-        image_id = Image.objects.get(user__username='zeus').id
+        self.client.logout()
+        self.client.post(reverse('signin'),
+                         data={'identification': 'jane@example.com',
+                               'password': 'blowfish'})
+        image_id = Image.objects.get(user__pk=1).id
         response = self.client.post(reverse('photos:delete-image', kwargs={'pk': image_id}), follow=True)
         self.assertEqual(response.status_code, 404)
-        self.client.login(username='zeus', password='zeus')
+        self.client.logout()
+        self.client.post(reverse('signin'),
+                         data={'identification': 'john@example.com',
+                               'password': 'blowfish'})
         response = self.client.post(reverse('photos:delete-image', kwargs={'pk': image_id}), follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(len(Image.objects.all()), 0)
 
     def test_update_image(self):
         self._upload_test_image()
-        self.client.login(username='zeus', password='zeus')
-        image_id = Image.objects.get(user__username='zeus').id
+        self.client.post(reverse('signin'),
+                         data={'identification': 'john@example.com',
+                               'password': 'blowfish'})
+        image_id = Image.objects.get(user__pk=1).id
         response = self.client.get(reverse('photos:update-image', kwargs={'pk': image_id}), follow=True)
         self.assertEqual(response.status_code, 200)
         values = {'title' : 'changed title' }
         self.client.post(reverse('photos:update-image', kwargs={'pk': image_id}), values, follow=True)
         self.assertEqual(response.status_code, 200)
-        self.assertTrue(Image.objects.get(user__username='zeus').title == 'changed title')
+        self.assertTrue(Image.objects.get(user__pk=1).title == 'changed title')
 
     def test_prev_next_with_ordering(self):
         for i in range(1, 6):
