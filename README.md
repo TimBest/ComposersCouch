@@ -54,6 +54,12 @@ Setup AWS instance:
       yum update -y
       yum install -y python-devel libpcap libpcap-devel libnet libnet-devel pcre pcre-devel gcc gcc-c++ libtool make libyaml libyaml-devel binutils libxml2 libxml2-devel zlib zlib-devel file-devel postgresql postgresql-devel postgresql-contrib geoip geoip-devel graphviz graphviz-devel gettext libtiff-devel libjpeg-devel libzip-devel freetype-devel lcms2-devel libwebp-devel tcl-devel tk-devel
 
+      curl -sL https://rpm.nodesource.com/setup | bash -
+      yum install -y nodejs
+
+      npm -g install yuglify
+      npm -g install less
+
       wget http://download.osgeo.org/proj/proj-4.8.0.zip
       unzip proj-4.8.0.zip && cd proj-4.8.0
       ./configure && make && sudo make install
@@ -78,9 +84,3 @@ Setup AWS instance:
 
       add postgis extension to database
       http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.PostgreSQL.CommonDBATasks.html#Appendix.PostgreSQL.CommonDBATasks.PostGIS
-
-      curl -sL https://rpm.nodesource.com/setup | bash -
-      yum install -y nodejs
-
-      npm -g install yuglify
-      npm -g install less

@@ -137,11 +137,11 @@ if DEVELOPMENT:
     }
 
 else:
-    ALLOWED_HOSTS += ['djangosite-env-ntjden2apj.elasticbeanstalk.com']
+    ALLOWED_HOSTS += ['djangosite-env-ntjden2apj.elasticbeanstalk.com']#CHANGE: composerscouch.elasticbeanstalk.com
     POSTGIS_VERSION = (2, 1, 1)
     STREAM_REDIS_CONFIG = {
         'default': {
-            'host': 'aws-my-iiivslcgwpn1.og7bpd.0001.use1.cache.amazonaws.com',
+            'host': 'aws-my-iiivslcgwpn1.og7bpd.0001.use1.cache.amazonaws.com',#CHANGE: aws-my-117k7ewvj1nyz.og7bpd.0001.use1.cache.amazonaws.com
             'port': 6379,
             'password': None,# Redis Password goes Here
             'db': 0
