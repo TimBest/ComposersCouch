@@ -126,7 +126,9 @@
       <div class="jumbotron stretchMe" data-stretch="{% static 'img/venue.jpg' %}">
         <div class="row">
           <div class="col-sm-6 col-sm-offset-6">
-            <h2>Venues</h2>
+            <h2><a class="text-white" href="{% url 'venues' 'all' 'all' %}">
+              Venues
+            </a></h2>
             <p>Find local venues or ones between tour stops. Use the
               <a class="text-white" href="{% url 'available_venues' 'all' 2014 32 32 %}">
               availability feed</a> to find out when venues are free.</p>
@@ -141,7 +143,9 @@
       <div class="jumbotron stretchMe" data-stretch="{% static 'img/Updates.jpg' %}">
         <div class="row">
           <div class="col-sm-6">
-            <h2>Updates</h2>
+            <h2><a class="text-white" href="{% url 'updates' 'all' %}">
+              Updates
+            </a></h2>
             <p>Find out what you favorite venues and artists are up to.</p>
             <a href="{% url 'updates' 'all' %}" class="pull-right btn btn-transparent">
               View Updates <span class="fa fa-chevron-right"></span>
