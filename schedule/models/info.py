@@ -19,7 +19,7 @@ class Info(models.Model):
     other models.
     '''
     poster = models.ForeignKey(Image, related_name='event poster',
-                               null=True, blank=True)
+                               null=True, blank=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length = 255, null=True, blank=True,)
     description = models.TextField(null=True, blank=True)
     headliner = models.ForeignKey(ArtistProfile, null=True, blank=True,

@@ -72,7 +72,7 @@ class Seating(models.Model):
                                    verbose_name=_("venue"),
                                    related_name="seating")
     capacity =  models.CharField(_("capacity"), max_length=6, null=True, blank=True)
-    seating_chart = models.ForeignKey(Image, verbose_name=_("seating chart"),null=True, blank=True)
+    seating_chart = models.ForeignKey(Image, verbose_name=_("seating chart"), on_delete=models.SET_NULL, null=True, blank=True)
 
     def __unicode__(self):
         return u'{0}'.format(self.capacity)
