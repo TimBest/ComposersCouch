@@ -138,7 +138,7 @@ if DEVELOPMENT:
 
 else:
     #ALLOWED_HOSTS += ['composerscouch.elasticbeanstalk.com']
-    ALLOWED_HOSTS += ['djangosite-env-ntjden2apj.elasticbeanstalk.com']
+    #ALLOWED_HOSTS += ['djangosite-env-ntjden2apj.elasticbeanstalk.com']
     POSTGIS_VERSION = (2, 1, 1)
     STREAM_REDIS_CONFIG = {
         'default': {
