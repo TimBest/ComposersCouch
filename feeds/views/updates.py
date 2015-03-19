@@ -38,7 +38,7 @@ class UpdateView(ZipcodeMixin, TemplateView):
             params = (location,)
             # TODO: paginate this feed
             feed = getattr(feedly, self.feed)(*params)
-            activities = list(feed[:25])
+            activities = list(feed[:15])
             return enrich_activities(activities)
         return None
 
@@ -62,7 +62,7 @@ class AllView(ZipcodeMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(AllView, self).get_context_data(**kwargs)
         page_num = self.request.GET.get('page')
-        context['posts'] = get_page(page_num, Post.objects.all().order_by('-created_at'), 25)
+        context['posts'] = get_page(page_num, Post.objects.all().order_by('-created_at'), 15)
         return context
 
 class FollowingView(UpdateView):
@@ -76,8 +76,8 @@ class FollowingView(UpdateView):
         context = super(FollowingView, self).get_context_data(**kwargs)
         page_num = self.request.GET.get('page')
         feed = feedly.get_feeds(self.request.user.id)['normal']
-        activities = list(feed[:25])
-        activities = get_page(page_num, activities, 25)
+        activities = list(feed[:15])
+        activities = get_page(page_num, activities, 15)
         context['activities'] = enrich_activities(activities)
         context['location'] = get_location(self.request, self.get_zipcode(), 'code')
         return context
