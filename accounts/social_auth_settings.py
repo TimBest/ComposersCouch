@@ -1,5 +1,5 @@
 # Social Auth
-LOGIN_URL          = '/signin/'
+LOGIN_URL          = '/login/'
 LOGIN_REDIRECT_URL = '/loginredirect/'
 LOGIN_ERROR_URL    = '/error/'
 SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'

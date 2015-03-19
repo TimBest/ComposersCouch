@@ -19,26 +19,26 @@ class ViewsTests(TestCase):
         # Anonymous user is redirected to login
         self.client.logout()
         response = self.client.get(reverse(url_name, kwargs=kwargs))
-        self.assertRedirects(response, '%s?next=%s' % (reverse('signin'),
+        self.assertRedirects(response, '%s?next=%s' % (reverse('login'),
                              response.request['PATH_INFO']), status_code=302,
                              target_status_code=200,)
         # Non Artist is given permission denied
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                          data={'identification': 'john@example.com',
                                'password': 'blowfish'})
         response = self.client.get(reverse(url_name, kwargs=kwargs))
         self.assertEqual(response.status_code, 403)
         self.client.logout()
         # Artist is given the page
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                          data={'identification': 'jane@example.com',
                                'password': 'blowfish'})
         response = self.client.get(reverse(url_name, kwargs=kwargs))
         self.assertEqual(response.status_code, 200)
 
-    def _signin_artist(self):
+    def _login_artist(self):
         self.client.logout()
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                          data={'identification': 'jane@example.com',
                                'password': 'blowfish'})
 
@@ -71,7 +71,7 @@ class ViewsTests(TestCase):
                           Now i will go on to describe another thing about my\
                           self. Hopefully this is not to long.',
         }
-        self._signin_artist()
+        self._login_artist()
         response = self.client.post(reverse(url_name), values, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
@@ -95,7 +95,7 @@ class ViewsTests(TestCase):
         url_names = [['artist:userContactForm', {}],]
         for contact_type in MusicianContactsView.CONTACT_TYPES:
             url_names.append(['artist:contactForm',{'contactType':contact_type}],)
-        self._signin_artist()
+        self._login_artist()
         for url_name in url_names:
             self._test_only_viewable_by_artist(url_name[0], url_name[1])
             response = self.client.post(
@@ -130,7 +130,7 @@ class ViewsTests(TestCase):
             'current_member': True,
             'remove_member': False,
         }
-        self._signin_artist()
+        self._login_artist()
         response = self.client.post(reverse(url_name), values, follow=True)
         self.assertEqual(response.status_code, 200)
         member = Member.objects.get(name=values['name'])
@@ -160,7 +160,7 @@ class ViewsTests(TestCase):
             'description':"This is our album",
             'tracks': mp3_file,
         }
-        self._signin_artist()
+        self._login_artist()
         # create album
         response = self.client.post(reverse('artist:albumForm'), values, follow=True)
         self.assertEqual(response.status_code, 200)

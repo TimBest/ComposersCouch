@@ -32,7 +32,7 @@ class ViewsTests(TestCase):
             response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
             self.assertEqual(response.status_code, 302)
 
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                                  data={'identification': 'jane@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:
@@ -43,7 +43,7 @@ class ParticipantViewsTests(TestCase):
     """  """
     fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles', 'artists', 'threads', 'messages',
                 'participants', 'privateRequests', 'dates', 'calendars',
-                'venues', 'requestParticipants', 'publicRequests', 
+                'venues', 'requestParticipants', 'publicRequests',
                 'applications']
 
     def test_request_participant_views(self):
@@ -57,7 +57,7 @@ class ParticipantViewsTests(TestCase):
             response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
             self.assertEqual(response.status_code, 302)
 
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                                  data={'identification': 'john@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:
@@ -65,7 +65,7 @@ class ParticipantViewsTests(TestCase):
             self.assertEqual(response.status_code, 403)
         self.client.logout()
 
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                                  data={'identification': 'jane@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:
@@ -76,7 +76,7 @@ class IsArtistViewsTests(TestCase):
     """  """
     fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles', 'artists', 'threads', 'messages',
                 'participants', 'privateRequests', 'dates', 'calendars',
-                'venues', 'requestParticipants', 'publicRequests', 
+                'venues', 'requestParticipants', 'publicRequests',
                 'applications']
 
     def test_is_artist_views(self):
@@ -91,7 +91,7 @@ class IsArtistViewsTests(TestCase):
             self.assertEqual(response.status_code, 302)
 
         # fans can't view
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                                  data={'identification': 'john@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:
@@ -100,7 +100,7 @@ class IsArtistViewsTests(TestCase):
         self.client.logout()
 
         # venues can't view
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                                  data={'identification': 'arie@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:
@@ -109,7 +109,7 @@ class IsArtistViewsTests(TestCase):
         self.client.logout()
 
         # artists can view
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                                  data={'identification': 'jane@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:
@@ -127,12 +127,12 @@ class IsArtistViewsTests(TestCase):
         # No user redirects to login
         for url_name in url_names:
             response = self.client.post(reverse(url_name[0]), url_name[1])
-            self.assertRedirects(response, '%s?next=%s' % (reverse('signin'),
+            self.assertRedirects(response, '%s?next=%s' % (reverse('login'),
                                  response.request['PATH_INFO']),
                                  status_code=302, target_status_code=200,)
 
         # user with out permission is denied
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                                  data={'identification': 'john@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:
@@ -141,7 +141,7 @@ class IsArtistViewsTests(TestCase):
         self.client.logout()
 
         # user with permission is redirected
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                                  data={'identification': 'arie@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:

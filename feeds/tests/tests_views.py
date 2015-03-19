@@ -43,7 +43,7 @@ class ViewsTests(TestCase):
             response = self.client.get(reverse('artists',
                 kwargs={'order': order,'scope': 'following', 'zipcode': 12065}))
             self.assertEqual(response.status_code, 302)
-        response = self.client.post(reverse('signin'),
+        response = self.client.post(reverse('login'),
                                     data={'identification': 'jane@example.com',
                                           'password': 'blowfish'})
         for order in orders:
@@ -92,7 +92,7 @@ class ViewsTests(TestCase):
             response = self.client.get(reverse('venues',
                 kwargs={'order': order,'scope': 'following', 'zipcode': 12065}))
             self.assertEqual(response.status_code, 302)
-        response = self.client.post(reverse('signin'),
+        response = self.client.post(reverse('login'),
                                     data={'identification': 'jane@example.com',
                                           'password': 'blowfish'})
         for order in orders:
@@ -136,7 +136,7 @@ class ViewsTests(TestCase):
                             'zipcode': 12065}))
                 self.assertEqual(response.status_code, 302)
 
-        response = self.client.post(reverse('signin'),
+        response = self.client.post(reverse('login'),
                                     data={'identification': 'jane@example.com',
                                           'password': 'blowfish'})
         for request_for in requests_for:
@@ -172,7 +172,7 @@ class ViewsTests(TestCase):
             response = self.client.get(reverse('shows',
                 kwargs={'order': order,'scope': 'following', 'zipcode': 12065}))
             self.assertEqual(response.status_code, 302)
-        response = self.client.post(reverse('signin'),
+        response = self.client.post(reverse('login'),
                                     data={'identification': 'jane@example.com',
                                           'password': 'blowfish'})
         for order in orders:
@@ -200,7 +200,7 @@ class ViewsTests(TestCase):
             kwargs={'scope': 'following', 'zipcode': 12065}))
         self.assertEqual(response.status_code, 302)
 
-        response = self.client.post(reverse('signin'),
+        response = self.client.post(reverse('login'),
                                     data={'identification': 'jane@example.com',
                                           'password': 'blowfish'})
         response = self.client.get(reverse('updates',

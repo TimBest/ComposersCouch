@@ -6,7 +6,7 @@ from userena.compat import auth_views_compat_quirks, password_reset_uid_kwarg
 
 
 urlpatterns = patterns('accounts.views',
-    url(r'^signin/$', 'signin', name='signin'),
+    url(r'^login/$', 'login_view', name='login'),
     url(r'^signup/$', 'signup', {'template_name': 'accounts/signup/form.html'}, name='signup'),
     url(r'^signup/email/$', 'signup_email', name='signup_email'),
     # url is hard coded in getProfileDetails() in accounts.pipeline.py

@@ -28,7 +28,7 @@ class photosTest(TestCase):
         self.client = Client()
 
     def _upload_test_image(self, identification='john@example.com', password='blowfish'):
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                          data={'identification': identification,
                                'password': password})
         self.image_file = open(os.path.join(os.path.dirname(__file__), 'test_img.jpg'))
@@ -48,14 +48,14 @@ class photosTest(TestCase):
     def test_delete(self):
         self._upload_test_image()
         self.client.logout()
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                          data={'identification': 'jane@example.com',
                                'password': 'blowfish'})
         image_id = Image.objects.get(user__pk=1).id
         response = self.client.post(reverse('photos:delete-image', kwargs={'pk': image_id}), follow=True)
         self.assertEqual(response.status_code, 404)
         self.client.logout()
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                          data={'identification': 'john@example.com',
                                'password': 'blowfish'})
         response = self.client.post(reverse('photos:delete-image', kwargs={'pk': image_id}), follow=True)
@@ -64,7 +64,7 @@ class photosTest(TestCase):
 
     def test_update_image(self):
         self._upload_test_image()
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                          data={'identification': 'john@example.com',
                                'password': 'blowfish'})
         image_id = Image.objects.get(user__pk=1).id

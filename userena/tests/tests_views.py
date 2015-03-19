@@ -41,7 +41,7 @@ class UserenaViewsTests(TestCase):
 
     def test_signin_view(self):
         """ A ``GET`` to the signin view should render the correct form """
-        response = self.client.get(reverse('signin'))
+        response = self.client.get(reverse('login'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response,
                                 'accounts/signin_form.html')
@@ -52,7 +52,7 @@ class UserenaViewsTests(TestCase):
         ``REMEMBER_ME_DAYS``.
 
         """
-        response = self.client.post(reverse('signin'),
+        response = self.client.post(reverse('login'),
                                     data={'identification': 'john@example.com',
                                           'password': 'blowfish',
                                           'remember_me': True})
@@ -65,7 +65,7 @@ class UserenaViewsTests(TestCase):
         remembered.
 
         """
-        response = self.client.post(reverse('signin'),
+        response = self.client.post(reverse('login'),
                                     data={'identification': 'john@example.com',
                                           'password': 'blowfish'})
 

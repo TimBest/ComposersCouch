@@ -63,16 +63,16 @@ class ViewsTests(TestCase):
         # TODO: generate token and test this
         pass
 
-    def test_signin_view(self):
+    def test_login_view(self):
         """        """
-        response = self.client.get(reverse('signin'))
+        response = self.client.get(reverse('login'))
         self.assertEqual(response.status_code, 200)
         valid_values = [
             {'identification': 'john@example.com',
              'password': 'blowfish',},
         ]
         for values in valid_values:
-            response = self.client.post(reverse('signin'), values, follow=True)
+            response = self.client.post(reverse('login'), values, follow=True)
             self.assertEqual(response.status_code, 200)
             self.assertEqual(
                 User.objects.get(email=values['identification']),
