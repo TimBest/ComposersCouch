@@ -3,16 +3,19 @@
 {% load crispy_forms_tags %}
 {% crispy SigninForm SigninForm.helper %}
 
-{% block title %}{% block formTitle %}Sign in{% endblock %}{% endblock %}
+{% block title %}Login{% endblock %}
 
 {% block headerClass %}authentication{% endblock %}
 {% block modalHeader %}
-  <div class="nav nav-justified nav-tabs">
-    <li><a href="{% url 'signup' %}">Sign up</a></li>
-    <li class="active"><a href="#">Login</a></li>
+  <div class="modal-header">
+    <div class="row">
+      <div class="col-xs-12">
+      <p class="pull-right">Don't have an account? <a href="{% url 'signup' %}">Sign up</a></p>
+      <h3>Login</h3>
+    </div>
+    </div>
   </div>
 {% endblock %}
-
 {% block formID %}sign-in-form{% endblock %}
 
 {% block form %}
