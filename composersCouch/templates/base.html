@@ -61,8 +61,8 @@
                     {% include "_navbar_dropdown.html" with username=user.username %}
                 </ul>
             {% else %}
-              <a href="{% url 'signin' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-default-nav navbar-btn">Sign in</a>
-              <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-primary navbar-btn">Join</a>
+              <a href="{% url 'signin' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-default-nav navbar-btn">Log in</a>
+              <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-primary navbar-btn">Sign up</a>
             {% endif %}
           </div>
         </div>

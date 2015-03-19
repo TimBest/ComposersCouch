@@ -8,8 +8,8 @@
 {% block headerClass %}authentication{% endblock %}
 {% block modalHeader %}
   <div class="nav nav-justified nav-tabs">
-    <li class="active"><a href="#">Sign in</a></li>
-    <li><a href="{% url 'signup' %}?next={% firstof request.path '/' %}">Join Composers Couch</a></li>
+    <li><a href="{% url 'signup' %}">Sign up</a></li>
+    <li class="active"><a href="#">Login</a></li>
   </div>
 {% endblock %}
 

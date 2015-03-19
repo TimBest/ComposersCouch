@@ -14,7 +14,7 @@
           <h2>A booking service that connects local venues, artists, and fans.</h2>
         </div>
         {% if not user.is_authenticated %}
-          <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-lg btn-primary">Join For Free</a>
+          <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-lg btn-primary">Sign Up For Free</a>
         {% endif %}
       </div>
     </div>
@@ -36,22 +36,24 @@
             <a href="#venues" class="text-white">
               <span class="fa fa-ticket fa-5x"></span>
               <h2>Venues</h2>
+              <p>Book better shows by easily comparing artists and managing booking requests.</p>
             </a>
-            <p>Book better shows by easily comparing artists and managing booking requests.</p>
           </div>
           <div class="col-sm-4">
             <a href="#artists" class="text-white">
               <span class="fa fa-music fa-5x"></span>
               <h2>Artists</h2>
+              <p>Find local venues, manage your tour, and host your press kit.</p>
             </a>
-            <p>Find local venues, manage your tour, and host your press kit.</p>
+
           </div>
           <div class="col-sm-4">
             <a href="#concerts" class="text-white">
               <span class="fa fa-users fa-5x"></span>
               <h2>Fans</h2>
+              <p>Discover local artists, find concerts in your area and follow your favorites.</p>
             </a>
-            <p>Discover local artists, find concerts in your area and follow your favorites.</p>
+
           </div>
         </div>
       </div>
