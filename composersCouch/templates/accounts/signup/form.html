@@ -4,9 +4,13 @@
 {% block headerClass %}authentication text-center{% endblock %}
 
 {% block modalHeader %}
-  <div class="nav nav-justified nav-tabs">
-    <li class="active"><a href="#">Sign up</a></li>
-    <li><a href="{% url 'login' %}">Login</a></li>
+  <div class="modal-header">
+    <div class="row">
+      <div class="col-xs-12">
+      <p class="pull-right">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+      <h3 class="text-left">Sign up</h3>
+    </div>
+    </div>
   </div>
 {% endblock %}
 

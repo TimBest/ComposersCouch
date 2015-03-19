@@ -1,4 +1,8 @@
 .authentication {
+  .modal-header {
+    border-bottom: 1px solid @silver-light;
+    margin-bottom:30px;
+  }
   .container-fluid{
     padding-right:15px;
   }
@@ -11,34 +15,6 @@
 
     }
     input[type="radio"]:checked + label {
-    }
-  }
-  .nav {
-    margin-bottom:30px;
-    li {
-      height: 50px;
-      border: none;
-      background-color: @silver-light;
-      a {
-        height: 50px;
-        padding-top:12px;
-        padding-bottom:11px;
-        color:@gray;
-        border-bottom: 1px solid #DDD;
-        &:hover, &:focus {
-          background-color: rgba(0,0,0,0.1);
-        }
-      }
-      &.active {
-        border:none;
-        a, a:focus, a:hover  {
-          padding-top:10px;
-          padding-bottom:10px;
-          font-size: 17px;
-          background-color: @white;
-          border:none;
-        }
-      }
     }
   }
   .sign-up {
