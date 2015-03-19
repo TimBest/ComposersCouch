@@ -46,11 +46,11 @@ class ViewsTests(TestCase):
 
         for url_name in url_names:
             response = self.client.get(reverse(url_name[0], kwargs=url_name[1]))
-            self.assertRedirects(response, '%s?next=%s' % (reverse('signin'),
+            self.assertRedirects(response, '%s?next=%s' % (reverse('login'),
                                  response.request['PATH_INFO']),
                                  status_code=302, target_status_code=200,)
         # user with out permission is denied
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                                  data={'identification': 'john@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:
@@ -59,7 +59,7 @@ class ViewsTests(TestCase):
         self.client.logout()
 
         # user with permission is redirected
-        self.client.post(reverse('signin'),
+        self.client.post(reverse('login'),
                                  data={'identification': 'arie@example.com',
                                        'password': 'blowfish'})
         for url_name in url_names:

@@ -6,7 +6,7 @@ from accounts import forms
 
 class SignupFormTests(TestCase):
     """ Test the signup form. """
-    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
                  'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
                 'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
@@ -85,7 +85,7 @@ class SignupFormTests(TestCase):
 class EmailFormTests(TestCase):
     """ Test the ``EmailForm`` """
 
-    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
                  'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
                 'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
@@ -99,14 +99,8 @@ class EmailFormTests(TestCase):
         invalid_data_dicts = [
             # Already taken email
             {'data': {'email': 'john@example.com',
-                      'password1': 'foobar',
-                      'password2': 'foobar',},
+                      'password1': 'foobar',},
              'error': ('email', [_(u'This email is already in use. Please supply a different email.')])},
-            # Password is not the same
-            {'data': {'email': 'katy@example.com',
-                      'password1': 'foobar',
-                      'password2': 'foobar2',},
-             'error': ('__all__', [_(u'The two password fields didn\'t match.')])},
         ]
 
         for invalid_dict in invalid_data_dicts:
@@ -117,8 +111,7 @@ class EmailFormTests(TestCase):
 
         # And finally, a valid form.
         form = forms.EmailForm(data={'email': 'foo@example.com',
-                                      'password1': 'foobar',
-                                      'password2': 'foobar'})
+                                      'password1': 'foobar',})
         self.failUnless(form.is_valid())
 
 class ClaimProfileFormTests(TestCase):

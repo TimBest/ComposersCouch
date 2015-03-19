@@ -16,12 +16,12 @@
           </p>
         </div>
         {% endif %}
-        <p>Clicking 'Claim this profile' will send an email to:
+        <p>Please confirm that this is your email:
           <a href="mailto:{{ profile.user.email }}">{{ profile.user.email }}</a></p>
-        <p>In said email will be a one time link that can be used to sign on to this account</p>
+        <p>This will send an email with a one time link that can be used to sign on to this account</p>
       </div>
       <div class="modal-footer">
-        <a href="{% url 'claim_profile' username %}" class="btn btn-primary pull-right">Claim this profile</a>
+        <a href="{% url 'claim_profile' username %}" class="btn btn-primary pull-right">Send Email</a>
       </div>
     </div>
   </div>

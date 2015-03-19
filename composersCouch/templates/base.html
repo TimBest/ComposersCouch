@@ -15,7 +15,7 @@
     <meta name="theme-color" content="#2161A8">
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate, post-check=0, pre-check=0" />
     <meta http-equiv="Pragma" content="no-cache" />
-    <title>{% block title %}Composers Couch{% endblock %}</title>
+    <title>{% block title %}Local booking{% endblock %} - Composer's Couch</title>
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
 
     {% if is_development %}
@@ -61,8 +61,8 @@
                     {% include "_navbar_dropdown.html" with username=user.username %}
                 </ul>
             {% else %}
-              <a href="{% url 'signin' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-default-nav navbar-btn">Sign in</a>
-              <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-primary navbar-btn">Join</a>
+              <a href="{% url 'login' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-default-nav navbar-btn">Login</a>
+              <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-primary navbar-btn">Sign up</a>
             {% endif %}
           </div>
         </div>

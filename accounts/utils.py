@@ -29,6 +29,7 @@ def update_profile_weight(sender=None, user=None, request=None, **kwargs):
         # biography = 50
         # email = 25
     """
+    # TODO: add the year of the last sign on to the weight
     weight = 0
     # mugshot
     if user.profile.mugshot:

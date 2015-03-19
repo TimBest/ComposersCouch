@@ -22,7 +22,7 @@ from annoying.functions import get_object_or_None
 from composersCouch.views import MultipleFormsView
 from contact.forms import ZipcodeForm
 from userena.signals import signup_complete
-from userena.views import signin as userena_signin
+from userena.views import signin
 
 
 login_required_m = method_decorator(login_required)
@@ -175,13 +175,11 @@ def claim_profile_confirm(request, uidb64=None, token=None,
         request.current_app = current_app
     return TemplateResponse(request, template_name, context)
 
-def signin(request, auth_form=SigninForm,
-           template_name='accounts/signin_form.html'):
+def login_view(request):
     if request.user.is_authenticated():
         return redirect(request.user.profile)
-    response = userena_signin(request, auth_form=auth_form,
-                              template_name=template_name)
-    return response
+    return signin(request, auth_form=SigninForm,
+                  template_name='accounts/signin_form.html')
 
 def loginredirect(request, username=None, tab='home'):
     if username == None:

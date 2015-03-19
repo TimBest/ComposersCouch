@@ -38,7 +38,7 @@
               <span> {{ genre }}</span>
             {% endfor %}
           </p>
-          {% with biography=artist.biography|linebreaks %}
+          {% with biography=artist.biography|safe|urlize|linebreaksbr %}
             <p>
               {{ biography|truncatewords_html:75 }}
               {% ifnotequal biography|truncatewords_html:75|length biography|truncatewords_html:76|length %}

@@ -6,7 +6,7 @@ ANONYMOUS_USER_ID = -1
 AUTH_PROFILE_MODULE = 'accounts.Profile'
 
 # Django Settings
-LOGIN_URL = '/accounts/signin/'
+LOGIN_URL = '/accounts/login/'
 
 LOGOUT_URL = '/signout/'
 
@@ -36,6 +36,7 @@ USERENA_FORBIDDEN_USERNAMES = (
     'signup',
     'signout',
     'signin',
+    'login',
     'activate',
     'me',
     'password',

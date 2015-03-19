@@ -113,11 +113,7 @@ class EmailForm(SignupFormOnlyEmail):
         self.helper.form_tag = False
         self.helper.layout = Layout(
             'email',
-            Div(
-              Div('password1',css_class='col-sm-6 left',),
-              Div('password2',css_class='col-sm-6 right',),
-              css_class='row no-gutter',
-            ),
+            'password1',
         )
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -137,6 +133,8 @@ class EmailForm(SignupFormOnlyEmail):
         return email
 
 class ClaimProfileForm(SetPasswordForm):
+    MIN_LENGTH = 5
+
     def __init__(self, data=None, *args, **kw):
         super(ClaimProfileForm, self).__init__(data, *args, **kw)
         self.helper = FormHelper()
@@ -148,6 +146,13 @@ class ClaimProfileForm(SetPasswordForm):
               css_class='row no-gutter',
             ),
         )
+
+    def clean_new_password1(self):
+        password1 = self.cleaned_data.get('new_password1')
+        # At least MIN_LENGTH long
+        if len(password1) < self.MIN_LENGTH:
+            raise forms.ValidationError("The new password must be at least %d characters long." % self.MIN_LENGTH)
+        return password1
 
 class SigninForm(AuthenticationForm):
 

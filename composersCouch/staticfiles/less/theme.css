@@ -6575,39 +6575,12 @@ h1 {
 .light-red {
   background-color: #c4423f;
 }
-.authentication .container-fluid {
-  padding-right: 15px;
-}
-.authentication .nav {
+.authentication .modal-header {
+  border-bottom: 1px solid #dfe5eb;
   margin-bottom: 30px;
 }
-.authentication .nav li {
-  height: 50px;
-  border: none;
-  background-color: #dfe5eb;
-}
-.authentication .nav li a {
-  height: 50px;
-  padding-top: 12px;
-  padding-bottom: 11px;
-  color: #555555;
-  border-bottom: 1px solid #DDD;
-}
-.authentication .nav li a:hover,
-.authentication .nav li a:focus {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-.authentication .nav li.active {
-  border: none;
-}
-.authentication .nav li.active a,
-.authentication .nav li.active a:focus,
-.authentication .nav li.active a:hover {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  font-size: 17px;
-  background-color: #fbfcfc;
-  border: none;
+.authentication .container-fluid {
+  padding-right: 15px;
 }
 .authentication .sign-up .social-links a {
   width: 100px;
