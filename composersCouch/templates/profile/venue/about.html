@@ -141,7 +141,7 @@
           <h3>Biography</h3>
         </div>
         <div class="panel-body">
-          <p>{{ venueProfile.biography|linebreaks }}</p>
+          <p>{{ venueProfile.biography|safe|urlize|linebreaksbr }}</p>
           <a class="{{isEditable}} editBiography" href="{% url 'venue:biographyForm' %}">Edit</a>
         </div>
       </div>

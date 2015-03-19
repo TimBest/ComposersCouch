@@ -30,7 +30,7 @@
           <h3>Biography</h3>
         </div>
         <div class="panel-body">
-          <p>{{ artist_profile.biography|linebreaks }}</p>
+          <p>{{ artist_profile.biography|safe|urlize|linebreaksbr }}</p>
           <a class="{{isEditable}} editMusicianBiography" href="{% url 'artist:biographyForm' %}">
             Edit
           </a>
