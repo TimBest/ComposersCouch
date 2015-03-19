@@ -17,17 +17,9 @@ class SignupFormTests(TestCase):
 
         """
         invalid_data_dicts = [
-            # Password is not the same
-            {'data': {'email': 'katy@newexample.com',
-                      'password1': 'foobar',
-                      'password2': 'foobar2',
-                      'tos': 'on'},
-             'error': ('__all__', [_(u'The two password fields didn\'t match.')])},
-
             # Already taken email
             {'data': {'email': 'john@example.com',
                       'password1': 'foobar',
-                      'password2': 'foobar',
                       'tos': 'on'},
              'error': ('email', [_(u'This email is already in use. Please supply a different email.')])},
         ]
@@ -42,7 +34,6 @@ class SignupFormTests(TestCase):
         # And finally, a valid form.
         form = forms.SignupForm(data={'email': 'foo@example.com',
                                       'password1': 'foobar',
-                                      'password2': 'foobar',
                                       'tos': 'on'})
         self.failUnless(form.is_valid())
 
@@ -115,8 +106,7 @@ class SignupFormOnlyEmailTests(TestCase):
 
         """
         valid_data = {'email': 'hans@gretel.com',
-                      'password1': 'blowfish',
-                      'password2': 'blowfish'}
+                      'password1': 'blowfish'}
 
         form = forms.SignupFormOnlyEmail(data=valid_data)
 

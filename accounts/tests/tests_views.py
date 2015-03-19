@@ -23,7 +23,6 @@ class ViewsTests(TestCase):
         valid_values = [
             {'email': 'signUpEmailArtist@example.com',
              'password1': 'foobar',
-             'password2': 'foobar',
              'profile_type': 'm',
              'zip_code': 12065,
              'first_name': '',
