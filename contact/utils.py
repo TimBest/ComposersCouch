@@ -9,6 +9,6 @@ def get_location(request, code=None, attr='code'):
         zipcode = get_object_or_None(Zipcode, code=code)
     elif hasattr(request, 'zipcode'):
         zipcode = get_object_or_None(Zipcode, code=request.zipcode)
-    elif request.user.is_authenticated():
+    elif hasattr(request, 'user') and request.user.is_authenticated():
         zipcode = request.user.profile.contact_info.location.zip_code
     return getattr(zipcode, attr, None)
