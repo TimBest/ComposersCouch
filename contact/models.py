@@ -6,8 +6,9 @@ from contact import states
 
 class Zipcode(models.Model):
     country = models.CharField(_("country"), max_length=2)
+    state = models.CharField(_("state"), default="", max_length=2)
     code = models.CharField(_("zipcode"), max_length=5, primary_key=True)
-    name = models.CharField(_("place name"), max_length=180)
+    city = models.CharField(_("city"), default="", max_length=64)
     point = models.PointField(null=False, blank=False, srid=4326, verbose_name="point")
     objects = models.GeoManager()
 

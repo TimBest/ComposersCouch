@@ -22,6 +22,16 @@ def run(verbose=True):
         #print row[0], row[1],row[longitude],row[latitude]
         point = GEOSGeometry('POINT(%s %s)' % (row[longitude],row[latitude]))
         try:
-            Zipcode.objects.create(country=row[0], code=row[1], name=row[2], point=point)
+            Zipcode.objects.create(country=row[0], code=row[1], city=row[2], point=point)
+        except IntegrityError:
+            print row[1]
+
+def update(verbose=True):
+    for row in csv.reader(open(zipcode_csv),delimiter=','):
+        try:
+            zipcode = Zipcode.objects.get(code=row[1])
+            Zipcode.city = row[2]
+            Zipcode.state = row[4]
+            zipcode.save()
         except IntegrityError:
             print row[1]
