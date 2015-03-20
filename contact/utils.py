@@ -5,15 +5,10 @@ from contact.models import Zipcode
 
 def get_location(request, code=None, attr='code'):
     zipcode = None
-    if code:
+    if code and code !='None':
         zipcode = get_object_or_None(Zipcode, code=code)
-    if not zipcode:
-        try:
-            zipcode = request.user.profile.contact_info.location.zip_code
-        except:
-            pass
+    elif hasattr(request, 'zipcode'):
+        zipcode = get_object_or_None(Zipcode, code=request.zipcode)
+    elif request.user.is_authenticated():
+        zipcode = request.user.profile.contact_info.location.zip_code
     return getattr(zipcode, attr, None)
-    #else:
-    #g = GeoIP()
-    #print g
-    #return None

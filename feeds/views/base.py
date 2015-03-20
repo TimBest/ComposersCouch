@@ -12,7 +12,7 @@ from genres.models import Category
 
 class ZipcodeMixin(object):
     def get_zipcode(self):
-        return self.kwargs.get('zipcode')
+        return self.kwargs.get('zipcode', None)
 
     def get_context_data(self, **kwargs):
         context = super(ZipcodeMixin, self).get_context_data(**kwargs)
