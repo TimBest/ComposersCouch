@@ -17,8 +17,6 @@ def requests(request, scope='any-distance', *args, **kwargs):
     kwargs['scope'] = scope
     if scope == '50':
         return LocalView.as_view()(request, *args, **kwargs)
-    elif scope == 'following':
-        return FollowingView.as_view()(request, *args, **kwargs)
     else:
         return AllView.as_view()(request, *args, **kwargs)
 
@@ -72,21 +70,6 @@ class LocalView(RequestView):
             return self.band_or_venue(posts, **kwargs)
         else:
             return []
-
-class FollowingView(RequestView):
-    template_name = 'feeds/requests/following.html'
-
-    @login_required_m
-    def dispatch(self, *args, **kwargs):
-        return super(FollowingView, self).dispatch(*args, **kwargs)
-
-    def get_posts(self, **kwargs):
-        following = self.request.user.following_set.values_list('target')
-        posts = self.modelManager.filter(
-            requester__pk__in=following
-        )
-        return self.band_or_venue(posts, **kwargs)
-
 
 class AllView(RequestView):
     template_name = 'feeds/requests/all.html'

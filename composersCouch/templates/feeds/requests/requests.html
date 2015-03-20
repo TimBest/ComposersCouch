@@ -32,15 +32,6 @@
   </li>
 {% endblock %}
 
-
-{% block scopeNav %}
-  {% if user.is_authenticated %}
-    <li class="{% block followingClass %}{% endblock %}">
-      <a href="{% url 'requests' order for 'following' zipcode %}?{{ request.GET.urlencode }}">Following</a>
-    </li>
-  {% endif %}
-{% endblock %}
-
 {% block orderOptions %}
   {% comment %}
   <a class="list-group-item {% ifequal order 'all' %}active{% endifequal %}"
