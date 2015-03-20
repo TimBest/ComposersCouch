@@ -43,9 +43,6 @@
               {% crispy zipcodeForm %}
             </form>
           </div>
-          <div class="col-sm-6">
-            <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" class="btn btn-primary">Join Composers Couch</a>
-          </div>
         </div>
       </div>
     </div>
