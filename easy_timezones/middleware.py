@@ -33,13 +33,16 @@ class EasyTimezoneMiddleware(object):
             load_db()
 
         tz = request.session.get('django_timezone')
-        zipcode = None
-        if not tz:
+        if hasattr(request, 'zipcode'):
+            zipcode = request.zipcode
+        else:
+            zipcode = None
+        if not tz or not zipcode:
             # use the default timezone (settings.TIME_ZONE) for localhost
             tz = timezone.get_default_timezone()
             ip = get_client_ip(request)
             #ip = '96.236.57.160'
-            #ip = '184.154.83.119'
+            #ip = '216.158.94.138'
 
             if ip != '127.0.0.1':
                 # if not local, fetch the timezone from pygeoip
