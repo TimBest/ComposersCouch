@@ -13,9 +13,9 @@ from request.models import PublicRequest
 
 login_required_m = method_decorator(login_required)
 
-def requests(request, scope='all', *args, **kwargs):
+def requests(request, scope='any-distance', *args, **kwargs):
     kwargs['scope'] = scope
-    if scope == 'local':
+    if scope == '50':
         return LocalView.as_view()(request, *args, **kwargs)
     elif scope == 'following':
         return FollowingView.as_view()(request, *args, **kwargs)
@@ -58,6 +58,11 @@ class RequestView(FeedMixin, TemplateView):
 class LocalView(RequestView):
     template_name = 'feeds/requests/local.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(RequestView, self).get_context_data(**kwargs)
+        context['distance'] = "50 miles"
+        return context
+
     def get_posts(self, **kwargs):
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
         if location:
@@ -85,6 +90,11 @@ class FollowingView(RequestView):
 
 class AllView(RequestView):
     template_name = 'feeds/requests/all.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(RequestView, self).get_context_data(**kwargs)
+        context['distance'] = "any distance"
+        return context
 
     def get_posts(self, **kwargs):
         posts = self.modelManager.all()

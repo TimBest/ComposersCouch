@@ -5937,6 +5937,9 @@ fieldset[disabled] .btn-default-nav.active {
   float: none;
   display: inline-block;
 }
+.dotted-bottom {
+  border-bottom: 1px dotted #ffffff;
+}
 /*header and footer CSS*/
 html {
   /* The html and body elements cannot have any padding or margin. */

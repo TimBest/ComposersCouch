@@ -5,14 +5,14 @@
 {% block requestsClass %}active{% endblock %}
 {% block feedType %}Requests{% endblock %}
 {% block forForm %}
-  <span class="text-white">Looking for </span>
+  <span class="text-white">Looking for</span>
   <span class="dropdown">
-    <a class="btn btn-transparent-dropdown text-white dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
-      {{ for|capfirst }}s <span class="caret"></span>
+    <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+      <span class="dotted-bottom text-white" >{{ for }}s</span>
     </a>
     <ul class="dropdown-menu">
       <li class="{% ifequal for 'band' %}active{% endifequal %}">
-        <a href="{% url 'requests' order 'band' 'all' zipcode %}?{{ request.GET.urlencode }}">Bands</a>
+        <a href="{% url 'requests' order 'band' 'all' zipcode %}?{{ request.GET.urlencode }}">Artists</a>
       </li>
       <li class="{% ifequal for 'venue' %}active{% endifequal %}">
         <a href="{% url 'requests' order 'venue' 'all' zipcode %}?{{ request.GET.urlencode }}">Venues</a>
@@ -23,13 +23,17 @@
 
 {% block availabilityForm %}{% endblock %}
 
+{% block within %}
+  <li class="{% ifequal scope '50' %}active{% endifequal %}">
+    <a href="{% url 'requests' order for '50' zipcode %}?{{ request.GET.urlencode }}">50 miles</a>
+  </li>
+  <li class="{% ifequal scope 'any-distance' %}active{% endifequal %}">
+    <a href="{% url 'requests' order for 'any-distance' zipcode %}?{{ request.GET.urlencode }}">any distance</a>
+  </li>
+{% endblock %}
+
+
 {% block scopeNav %}
-  <li class="{% block localClass %}{% endblock %}">
-    <a href="{% url 'requests' order for 'local' zipcode %}?{{ request.GET.urlencode }}">Local</a>
-  </li>
-  <li class="{% block globalClass %}{% endblock %}">
-    <a href="{% url 'requests' order for 'all' zipcode %}?{{ request.GET.urlencode }}">All</a>
-  </li>
   {% if user.is_authenticated %}
     <li class="{% block followingClass %}{% endblock %}">
       <a href="{% url 'requests' order for 'following' zipcode %}?{{ request.GET.urlencode }}">Following</a>

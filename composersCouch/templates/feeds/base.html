@@ -15,9 +15,9 @@
         <ul class="dropdown-menu" role="menu">
           <li class="{% block requestsClass %}{% endblock %}">
             {% if request.user.profile.profile_type == "m" %}
-              <a href="{% url 'requests' 'expiring' 'band' 'all' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
+              <a href="{% url 'requests' 'expiring' 'band' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
             {% else %}
-              <a href="{% url 'requests' 'expiring' 'venue' 'all' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
+              <a href="{% url 'requests' 'expiring' 'venue' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
             {% endif %}
           </li>
           <li class="{% block showsClass %}{% endblock %}">
@@ -51,10 +51,20 @@
         </div>
       {% endblock %}
       {% block zipcodeForm %}
-        <span class="text-white"> near</span>
-        <a href="#" role="button" data-toggle="popover"
-           id="zipcode-select" class="toggle btn btn-transparent-dropdown text-white" title="Zipcode">
-          {% if zipcode %}{{ zipcode }}{% else %}Zipcode{% endif %} <span class="caret"></span>
+        <span class="text-white">within</span>
+        <span class="dropdown">
+          <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+            <span class="dotted-bottom text-white">{{ distance }}</span>
+          </a>
+          <ul class="dropdown-menu">
+            {% block within %}
+            {% endblock %}
+          </ul>
+        </span>
+        <span class="text-white">of</span>
+
+        <a href="#" role="button" data-toggle="popover" id="zipcode-select" class="toggle btn btn-transparent-dropdown" title="Zipcode">
+           <span class="dotted-bottom text-white">{% if zipcode %}{{ zipcode }}{% else %}location{% endif %}</span>
         </a>
         <div class="zipcode-content hide">
           <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
