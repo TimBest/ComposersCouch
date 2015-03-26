@@ -54,7 +54,6 @@ class GenreMixin(object):
 
 class FeedMixin(GenreMixin, ZipcodeMixin):
     modelManager = None
-    feedType = None
 
     def get_order(self, qs):
         return qs

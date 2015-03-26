@@ -10,7 +10,7 @@
     <div class="title">
       <span class="dropdown">
         <a class="btn btn-header dropdown-toggle toggle" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
-          {% block feedType %}Feed{% endblock %}<span class="caret-large text-white"></span>
+          {{ feedType | capfirst }}<span class="caret-large text-white"></span>
         </a>
         <ul class="dropdown-menu" role="menu">
           <li class="{% block requestsClass %}{% endblock %}">
@@ -21,7 +21,7 @@
             {% endif %}
           </li>
           <li class="{% block showsClass %}{% endblock %}">
-            <a href="{% url 'shows' 'upcoming' zipcode %}?{{ request.GET.urlencode }}">Concerts</a>
+            <a href="{% url 'shows' 'upcoming' zipcode %}?{{ request.GET.urlencode }}">Shows</a>
           </li>
           <li class="{% block artistsClass %}{% endblock %}">
             <a href="{% url 'artists' 'all' zipcode %}?{{ request.GET.urlencode }}">Artists</a>
@@ -58,6 +58,12 @@
           </a>
           <ul class="dropdown-menu">
             {% block within %}
+              <li class="{% ifequal scope '50' %}active{% endifequal %}">
+                <a href="{% url feedType order for '50' zipcode %}?{{ request.GET.urlencode }}">50 miles</a>
+              </li>
+              <li class="{% ifequal scope 'any-distance' %}active{% endifequal %}">
+                <a href="{% url feedType order for 'any-distance' zipcode %}?{{ request.GET.urlencode }}">any distance</a>
+              </li>
             {% endblock %}
           </ul>
         </span>
