@@ -64,11 +64,19 @@ class FeedMixin(GenreMixin, ZipcodeMixin):
     def get_posts(self):
         return []
 
+    def get_scope(self, **kwargs):
+        context = {}
+        context['scope'] = self.kwargs.get('scope', 'all')
+        if context['scope'] == "any-distance":
+            context['distance'] = "any distance"
+        elif context['scope'] == "50":
+            context['distance'] = "50 miles"
+        return context
+
     def get_context_data(self, **kwargs):
         context = super(FeedMixin, self).get_context_data(**kwargs)
+        context.update(self.get_scope())
         context['feedType'] = self.feedType
-        context['scope'] = self.kwargs.get('scope', 'all')
-
         page_num = self.request.GET.get('page')
         posts = self.get_posts()
         if posts:

@@ -22,6 +22,15 @@
 
 {% block availabilityForm %}{% endblock %}
 
+{% block within %}
+  <li class="{% ifequal scope '50' %}active{% endifequal %}">
+    <a href="{% url feedType order for '50' zipcode %}?{{ request.GET.urlencode }}">50 miles</a>
+  </li>
+  <li class="{% ifequal scope 'any-distance' %}active{% endifequal %}">
+    <a href="{% url feedType order for 'any-distance' zipcode %}?{{ request.GET.urlencode }}">any distance</a>
+  </li>
+{% endblock %}
+
 {% block orderOptions %}
   <a class="list-group-item {% ifequal order 'expiring' %}active{% endifequal %}"
      href="{% url 'requests' 'expiring' for scope zipcode %}?{{ request.GET.urlencode }}">

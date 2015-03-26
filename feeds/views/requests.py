@@ -57,11 +57,6 @@ class RequestView(FeedMixin, TemplateView):
 class LocalView(RequestView):
     template_name = 'feeds/requests/local.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(RequestView, self).get_context_data(**kwargs)
-        context['distance'] = "50 miles"
-        return context
-
     def get_posts(self, **kwargs):
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
         if location:
@@ -74,11 +69,6 @@ class LocalView(RequestView):
 
 class AllView(RequestView):
     template_name = 'feeds/requests/all.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(RequestView, self).get_context_data(**kwargs)
-        context['distance'] = "any distance"
-        return context
 
     def get_posts(self, **kwargs):
         posts = self.modelManager.all()

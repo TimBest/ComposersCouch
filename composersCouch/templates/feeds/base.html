@@ -21,16 +21,16 @@
             {% endif %}
           </li>
           <li class="{% block showsClass %}{% endblock %}">
-            <a href="{% url 'shows' 'upcoming' zipcode %}?{{ request.GET.urlencode }}">Shows</a>
+            <a href="{% url 'shows' 'upcoming' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Shows</a>
           </li>
           <li class="{% block artistsClass %}{% endblock %}">
-            <a href="{% url 'artists' 'all' zipcode %}?{{ request.GET.urlencode }}">Artists</a>
+            <a href="{% url 'artists' 'all' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Artists</a>
           </li>
           <li class="{% block venuesClass %}{% endblock %}">
-            <a href="{% url 'venues' 'all' zipcode %}?{{ request.GET.urlencode }}">Venues</a>
+            <a href="{% url 'venues' 'all' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Venues</a>
           </li>
           <li class="{% block updatesClass %}{% endblock %}">
-            <a href="{% url 'updates' 'all' zipcode %}?{{ request.GET.urlencode }}">Updates</a>
+            <a href="{% url 'updates' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Updates</a>
           </li>
         </ul>
       </span>
@@ -59,16 +59,15 @@
           <ul class="dropdown-menu">
             {% block within %}
               <li class="{% ifequal scope '50' %}active{% endifequal %}">
-                <a href="{% url feedType order for '50' zipcode %}?{{ request.GET.urlencode }}">50 miles</a>
+                <a href="{% url feedType order '50' zipcode %}?{{ request.GET.urlencode }}">50 miles</a>
               </li>
               <li class="{% ifequal scope 'any-distance' %}active{% endifequal %}">
-                <a href="{% url feedType order for 'any-distance' zipcode %}?{{ request.GET.urlencode }}">any distance</a>
+                <a href="{% url feedType order 'any-distance' zipcode %}?{{ request.GET.urlencode }}">any distance</a>
               </li>
             {% endblock %}
           </ul>
         </span>
         <span class="text-white">of</span>
-
         <a href="#" role="button" data-toggle="popover" id="zipcode-select" class="toggle btn btn-transparent-dropdown" title="Zipcode">
            <span class="dotted-bottom text-white">{% if zipcode %}{{ zipcode }}{% else %}location{% endif %}</span>
         </a>
