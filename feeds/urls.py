@@ -35,10 +35,10 @@ urlpatterns = patterns(view_location,
             url(r'^inbetween/$', 'available_venues_between', name='available_venues_between'),
             url(r'^(?P<zipcode>[-\w]+)/$', 'available_venues', name='available_venues'),
         ))),
+
+        url(r'^updates/(?P<scope>[-\w]+)/$', 'updates', name='updates'),
+        url(r'^updates/(?P<scope>[-\w]+)/(?P<zipcode>[-\w]+)/$', 'updates', name='updates'),
     ))),
 
-    url(r'^updates/', include(patterns(view_location,
-        url(r'^(?P<scope>[-\w]+)/$', 'updates', name='updates'),
-        url(r'^(?P<scope>[-\w]+)/(?P<zipcode>[-\w]+)/$', 'updates', name='updates'),
-    ))),
+
 )

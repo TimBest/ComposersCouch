@@ -144,11 +144,11 @@
       <div class="jumbotron stretchMe" data-stretch="{% static 'img/Updates.jpg' %}">
         <div class="row">
           <div class="col-sm-6">
-            <h2><a class="text-white" href="{% url 'updates' 'any-distance' %}">
+            <h2><a class="text-white" href="{% url 'updates' 'all' 'any-distance' %}">
               Updates
             </a></h2>
             <p>Find out what you favorite venues and artists are up to.</p>
-            <a href="{% url 'updates' 'any-distance' %}" class="pull-right btn btn-transparent">
+            <a href="{% url 'updates' 'all' 'any-distance' %}" class="pull-right btn btn-transparent">
               View Updates <span class="fa fa-chevron-right"></span>
             </a>
           </div>

@@ -1,10 +1,12 @@
 {% extends 'feeds/shows/shows.html' %}
 
 
-{% block followingClass %}active{% endblock %}
-
 {% comment %}remove zipcode form from template{% endcomment %}
 {% block zipcodeForm %}{% endblock %}
+
+{% block currentScope %}I'm following{% endblock %}
+{% block withinClass %}{% endblock %}
+{% block followingClass %}active{% endblock %}
 
 {% block feed %}
   {% include "feeds/shows/_feed.html" with shows=posts following="Ture" %}

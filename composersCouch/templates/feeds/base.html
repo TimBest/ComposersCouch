@@ -30,19 +30,35 @@
             <a href="{% url 'venues' 'all' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Venues</a>
           </li>
           <li class="{% block updatesClass %}{% endblock %}">
-            <a href="{% url 'updates' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Updates</a>
+            <a href="{% url 'updates' 'all' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Updates</a>
           </li>
         </ul>
       </span>
     </div>
     <div class="description">
-      {% block feedDescription %}{% endblock %}
       {% block forForm %}{% endblock %}
+      {% block scope %}
+        <span class="dropdown">
+          <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+            <span class="dotted-bottom text-white">{% block currentScope %}within{% endblock %}</span>
+          </a>
+          <ul class="dropdown-menu">
+            {% block scopeNav %}
+              <li class="{% block withinClass %}active{% endblock %}">
+                <a href="{% url feedType order 'any-distance' zipcode %}?{{ request.GET.urlencode }}">within</a>
+              </li>
+              <li class="{% block followingClass %}{% endblock %}">
+                <a href="{% url feedType order 'following' zipcode %}?{{ request.GET.urlencode }}">I'm following</a>
+              </li>
+            {% endblock %}
+          </ul>
+        </span>
+      {% endblock %}
       {% block availabilityForm %}
-        <span class="text-white"> available on</span>
         <a href="#" role="button" data-toggle="popover"
            id="availability-select" class="toggle btn btn-transparent-dropdown text-white" title="Availability">
-          {% if date %}{{ date|date:"n/j/y" }}{% else %}Availability{% endif %} <span class="caret"></span></a>
+           <span class="dotted-bottom text-white">{% if date %}{{ date|date:"n/j/y" }}{% else %}Date{% endif %}</span>
+        </a>
         <div class="availability-content hide">
           <form class="availability-form" role="filter" method="POST" action="{% url 'availability' %}">
             <input type="hidden" name="path" value="{% firstof request.path '/' %}">
@@ -51,25 +67,26 @@
         </div>
       {% endblock %}
       {% block zipcodeForm %}
-        {% block scope %}<span class="text-white">within</span>{% endblock %}
-        <span class="dropdown">
-          <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
-            <span class="dotted-bottom text-white">{{ distance|default_if_none:"any distance" }}</span>
-          </a>
-          <ul class="dropdown-menu">
-            {% block within %}
-              <li class="{% ifequal scope '50' %}active{% endifequal %}">
-                <a href="{% url feedType order '50' zipcode %}?{{ request.GET.urlencode }}">50 miles</a>
-              </li>
-              <li class="{% ifequal scope 'any-distance' %}active{% endifequal %}">
-                <a href="{% url feedType order 'any-distance' zipcode %}?{{ request.GET.urlencode }}">any distance</a>
-              </li>
-            {% endblock %}
-          </ul>
-        </span>
-        <span class="text-white">of</span>
+        {% block distance %}
+          <span class="dropdown">
+            <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+              <span class="dotted-bottom text-white">{{ distance|default_if_none:"any distance" }}</span>
+            </a>
+            <ul class="dropdown-menu">
+              {% block within %}
+                <li class="{% ifequal scope '50' %}active{% endifequal %}">
+                  <a href="{% url feedType order '50' zipcode %}?{{ request.GET.urlencode }}">50 miles</a>
+                </li>
+                <li class="{% ifequal scope 'any-distance' %}active{% endifequal %}">
+                  <a href="{% url feedType order 'any-distance' zipcode %}?{{ request.GET.urlencode }}">any distance</a>
+                </li>
+              {% endblock %}
+            </ul>
+          </span>
+          <span class="text-white">of</span>
+        {% endblock %}
         <a href="#" role="button" data-toggle="popover" id="zipcode-select" class="toggle btn btn-transparent-dropdown" title="Zipcode">
-           <span class="dotted-bottom text-white">{% if zipcode %}{{ zipcode }}{% else %}location{% endif %}</span>
+          <span class="dotted-bottom text-white">{% if zipcode %}{{ zipcode }}{% else %}location{% endif %}</span>
         </a>
         <div class="zipcode-content hide">
           <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
@@ -87,7 +104,7 @@
   <div class="container-fluid">
     <div class="row no-gutter">
       <div class="col-xs-10 left">
-        <ul class="nav nav-pills">{% block scopeNav %}{% endblock %}</ul>
+        <ul class="nav nav-pills"></ul>
       </div>
       <div class="col-xs-2 right text-right">
         {% block filters %}

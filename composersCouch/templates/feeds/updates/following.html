@@ -1,9 +1,10 @@
 {% extends 'feeds/updates/updates.html' %}
 
 
+{% block currentScope %}I'm following{% endblock %}
+{% block withinClass %}{% endblock %}
 {% block followingClass %}active{% endblock %}
 
-{% comment %}remove zipcode form from template{% endcomment %}
 {% block zipcodeForm %}{% endblock %}
 
 {% block feed %}

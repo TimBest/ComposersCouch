@@ -3,24 +3,21 @@
 {% block showsClass %}active{% endblock %}
 {% block bgColor %}dark-green{% endblock %}
 
-
-{% if user.is_authenticated %}
-  {% block scope %}
+{% block scope %}
   <span class="dropdown">
     <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
-      <span class="dotted-bottom text-white">within</span>
+      <span class="dotted-bottom text-white">{% block currentScope %}within{% endblock %}</span>
     </a>
     <ul class="dropdown-menu">
-        <li class="">
+        <li class="{% block withinClass %}active{% endblock %}">
           <a href="{% url feedType order 'any-distance' zipcode %}?{{ request.GET.urlencode }}">within</a>
         </li>
         <li class="{% block followingClass %}{% endblock %}">
-          <a href="{% url 'shows' order 'following' zipcode %}?{{ request.GET.urlencode }}">following</a>
+          <a href="{% url feedType order 'following' zipcode %}?{{ request.GET.urlencode }}">I'm following</a>
         </li>
     </ul>
   </span>
-  {% endblock %}
-{% endif %}
+{% endblock %}
 
 {% block orderOptions %}
   <a class="list-group-item {% ifequal order 'all' %}active{% endifequal %}"

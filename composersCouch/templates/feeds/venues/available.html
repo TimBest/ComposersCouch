@@ -1,13 +1,17 @@
 {% extends 'feeds/venues/venues.html' %}
 {% load crispy_forms_tags %}
 
-
+{% block currentScope %}available on{% endblock %}
+{% block withinClass %}{% endblock %}
+{% block followingClass %}{% endblock %}
 {% block availableClass %}active{% endblock %}
+{% block distance %}<span class="text-white">near</span>{% endblock %}
 
 {% block zipcodeForm %}
   <span class="dropdown">
-    <a class="btn btn-transparent-dropdown text-white dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
-      {% block nearActive %}near{% endblock %} <span class="caret"></span></a>
+    <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+      <span class="dotted-bottom text-white">{% block nearActive %}near{% endblock %}</span>
+    </a>
     <ul class="dropdown-menu">
       <li class="{% block near %}active{% endblock %}">
         <a href="{% url 'available_venues' order year month day zipcode %}?{{ request.GET.urlencode }}">near</a>
@@ -20,7 +24,7 @@
   {% block betweenForm %}
     <a href="#" role="button" data-toggle="popover"
        id="zipcode-select" class="toggle btn btn-transparent-dropdown text-white" title="Zipcode">
-      {% if zipcode %}{{ zipcode }}{% else %}Zipcode{% endif %}<span class="caret"></span>
+      <span class="dotted-bottom text-white">{% if zipcode %}{{ zipcode }}{% else %}location{% endif %}</span>
     </a>
     <div class="zipcode-content hide">
       <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">

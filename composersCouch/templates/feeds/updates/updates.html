@@ -3,22 +3,5 @@
 {% block updatesClass %}active{% endblock %}
 {% block bgColor %}purple{% endblock %}
 
-{% block scopeNav %}
-  {% if user.is_authenticated %}
-    <li class="{% block followingClass %}{% endblock %}">
-      <a href="{% url 'updates' 'following' zipcode %}?{{ request.GET.urlencode }}">Following</a>
-    </li>
-  {% endif %}
-{% endblock %}
-
-{% block within %}
-  <li class="{% ifequal scope '50' %}active{% endifequal %}">
-    <a href="{% url feedType '50' zipcode %}?{{ request.GET.urlencode }}">50 miles</a>
-  </li>
-  <li class="{% ifequal scope 'any-distance' %}active{% endifequal %}">
-    <a href="{% url feedType 'any-distance' zipcode %}?{{ request.GET.urlencode }}">any distance</a>
-  </li>
-{% endblock %}
-
 {% block availabilityForm %}{% endblock %}
 {% block filters %}{% endblock %}
