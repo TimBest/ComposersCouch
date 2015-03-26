@@ -1,21 +1,23 @@
 {% extends 'feeds/base.html' %}
 
-
 {% block updatesClass %}active{% endblock %}
 {% block bgColor %}purple{% endblock %}
 
 {% block scopeNav %}
-  <li class="{% block localClass %}{% endblock %}">
-    <a href="{% url 'updates' 'local' zipcode %}?{{ request.GET.urlencode }}">Local</a>
-  </li>
-  <li class="{% block globalClass %}{% endblock %}">
-    <a href="{% url 'updates' 'all' zipcode %}?{{ request.GET.urlencode }}">All</a>
-  </li>
   {% if user.is_authenticated %}
     <li class="{% block followingClass %}{% endblock %}">
       <a href="{% url 'updates' 'following' zipcode %}?{{ request.GET.urlencode }}">Following</a>
     </li>
   {% endif %}
+{% endblock %}
+
+{% block within %}
+  <li class="{% ifequal scope '50' %}active{% endifequal %}">
+    <a href="{% url feedType '50' zipcode %}?{{ request.GET.urlencode }}">50 miles</a>
+  </li>
+  <li class="{% ifequal scope 'any-distance' %}active{% endifequal %}">
+    <a href="{% url feedType 'any-distance' zipcode %}?{{ request.GET.urlencode }}">any distance</a>
+  </li>
 {% endblock %}
 
 {% block availabilityForm %}{% endblock %}

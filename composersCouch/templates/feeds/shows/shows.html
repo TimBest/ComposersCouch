@@ -1,17 +1,26 @@
 {% extends 'feeds/base.html' %}
 
-
 {% block showsClass %}active{% endblock %}
 {% block bgColor %}dark-green{% endblock %}
 
-{% block scopeNav %}
-  {% if user.is_authenticated %}
-    <li class="{% block followingClass %}{% endblock %}">
-      <a href="{% url 'shows' order 'following' zipcode %}?{{ request.GET.urlencode }}">Following</a>
-    </li>
-  {% endif %}
-{% endblock %}
 
+{% if user.is_authenticated %}
+  {% block scope %}
+  <span class="dropdown">
+    <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+      <span class="dotted-bottom text-white">within</span>
+    </a>
+    <ul class="dropdown-menu">
+        <li class="">
+          <a href="{% url feedType order 'any-distance' zipcode %}?{{ request.GET.urlencode }}">within</a>
+        </li>
+        <li class="{% block followingClass %}{% endblock %}">
+          <a href="{% url 'shows' order 'following' zipcode %}?{{ request.GET.urlencode }}">following</a>
+        </li>
+    </ul>
+  </span>
+  {% endblock %}
+{% endif %}
 
 {% block orderOptions %}
   <a class="list-group-item {% ifequal order 'all' %}active{% endifequal %}"
