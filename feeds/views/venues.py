@@ -29,6 +29,7 @@ def venues(request, scope='all', *args, **kwargs):
 
 class VenueView(FeedMixin, TemplateView):
     modelManager = VenueProfile.objects
+    feedType = 'venues'
 
     def get_default_order(self):
         return "all"
@@ -61,6 +62,7 @@ available_venues = AvailabilityView.as_view()
 
 class BetweenView(AvailabilityView):
     template_name = 'feeds/venues/available_between.html'
+    feedType = 'venues'
 
     def get_posts(self, **kwargs):
         # TODO: add checking for when its more then a (x time period) away the default to local

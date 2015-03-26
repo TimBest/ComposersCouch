@@ -24,6 +24,7 @@ class RequestView(FeedMixin, TemplateView):
     modelManager = PublicRequest.objects
     path_to_genre = 'requester__profile__genre__slug'
     requests_for = 'artists'
+    feedType = 'requests'
 
     def dispatch(self, *args, **kwargs):
         self.requests_for = self.kwargs.get('for')

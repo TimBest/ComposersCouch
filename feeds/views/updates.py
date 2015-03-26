@@ -31,6 +31,7 @@ class UpdateView(ZipcodeMixin, TemplateView):
     template_name = 'feeds/updates/local.html'
     feed = 'get_local_feed'
     location_type = 'code'
+    feedType = 'updates'
 
     def get_activities(self, page_num, zipcode, **kwargs):
         location = get_location(self.request, zipcode, self.location_type)
@@ -58,6 +59,7 @@ class LocalView(UpdateView):
 class AllView(ZipcodeMixin, TemplateView):
     template_name = 'feeds/updates/all.html'
     path_to_genre = 'user__profile__genre__slug'
+    feedType = 'updates'
 
     def get_context_data(self, **kwargs):
         context = super(AllView, self).get_context_data(**kwargs)

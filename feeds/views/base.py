@@ -54,6 +54,7 @@ class GenreMixin(object):
 
 class FeedMixin(GenreMixin, ZipcodeMixin):
     modelManager = None
+    feedType = None
 
     def get_order(self, qs):
         return qs
@@ -66,6 +67,7 @@ class FeedMixin(GenreMixin, ZipcodeMixin):
 
     def get_context_data(self, **kwargs):
         context = super(FeedMixin, self).get_context_data(**kwargs)
+        context['feedType'] = self.feedType
         context['scope'] = self.kwargs.get('scope', 'all')
 
         page_num = self.request.GET.get('page')

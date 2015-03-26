@@ -26,6 +26,7 @@ def artists(request, scope='all', *args, **kwargs):
 
 class ArtistView(FeedMixin, TemplateView):
     modelManager = ArtistProfile.objects
+    feedType = 'artists'
 
     def get_default_order(self):
         return "all"

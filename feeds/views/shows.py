@@ -30,6 +30,7 @@ class ShowView(FeedMixin, TemplateView):
     modelManager = Show.objects
     path_to_genre = 'info__venue__profile__genre__slug'
     template_name = 'feeds/shows/shows.html'
+    feedType = 'shows'
     # TODO: expand to also match with those preforming
 
     def get_default_order(self):
