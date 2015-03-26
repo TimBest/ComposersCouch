@@ -24,7 +24,7 @@ def shows(request, scope='any-distance', *args, **kwargs):
     elif scope == 'following':
         return FollowingView.as_view()(request, *args, **kwargs)
     else:
-        return AllView.as_view()(request, *args, **kwargs)
+        return ShowView.as_view()(request, *args, **kwargs)
 
 class ShowView(FeedMixin, TemplateView):
     modelManager = Show.objects
@@ -48,7 +48,6 @@ class ShowView(FeedMixin, TemplateView):
         else:
             # Upcoming
             return qs.order_by('date__start').filter(date__start__gte=timezone.now())
-
 
 class LocalView(ShowView):
 
@@ -75,6 +74,3 @@ class FollowingView(ShowView):
         return posts.filter(
             Q(info__openers__profile__user__pk__in=following) | Q(info__headliner__profile__user__pk__in=following) | Q(info__venue__pk__in=following)
         )
-
-class AllView(ShowView):
-    template_name = 'feeds/shows/all.html'
