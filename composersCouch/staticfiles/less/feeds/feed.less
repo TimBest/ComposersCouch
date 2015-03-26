@@ -59,15 +59,11 @@
 }
 
 .feed.sub-nav {
-  .filters {
-    margin-bottom: 0px;
-    .filter {
-      margin: 0px;
-      padding: 11px 12px;
-      border: none;
-    }
+  .filter {
+    margin: 0px;
+    padding: 11px 12px;
+    border: none;
     .dropdown-menu {
-      .dropdown-menu-right();
       width:300px;
       li {
         margin: 0px 10px;
@@ -81,7 +77,13 @@
       }
     }
   }
+  .order {
+    .dropdown-menu {
+      .dropdown-menu-right();
+    }
+  }
 }
+
 
 
 .feed {

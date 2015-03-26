@@ -33,7 +33,7 @@ class ArtistView(FeedMixin, TemplateView):
 
     def get_order(self, qs, **kwargs):
         order = self.kwargs.get('order')
-        if order == "new":
+        if order == "latest":
             return qs.order_by('-profile__user__date_joined')
         #elif order == "distance":
         #    distance_m = 500000

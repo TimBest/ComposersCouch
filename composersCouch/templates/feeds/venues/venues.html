@@ -25,17 +25,6 @@
   </span>
 {% endblock %}
 
-{% block orderOptions %}
-  <a class="list-group-item {% ifequal order 'all' %}active{% endifequal %}"
-     href="{% url 'venues' 'all' scope zipcode %}?{{ request.GET.urlencode }}">
-     All
-  </a>
-  <a class="list-group-item {% ifequal order 'new' %}active{% endifequal %}"
-     href="{% url 'venues' 'new' scope zipcode %}?{{ request.GET.urlencode }}">
-     New
-  </a>
-{% endblock %}
-
 {% block feed %}
   {% include "feeds/venues/_feed.html" with venues=posts %}
 {% endblock %}

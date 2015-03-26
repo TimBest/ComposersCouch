@@ -46,7 +46,7 @@ class RequestView(FeedMixin, TemplateView):
 
     def get_order(self, qs):
         order = self.kwargs.get('order')
-        if order == "new":
+        if order == "latest":
             return qs.order_by('-created_at').filter(fulfilled=False)
         elif order == "all":
             return qs

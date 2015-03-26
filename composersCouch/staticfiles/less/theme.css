@@ -6692,28 +6692,27 @@ h1 {
 .header.feed .nav-options .nav .nav-form div {
   float: left;
 }
-.feed.sub-nav .filters {
-  margin-bottom: 0px;
-}
-.feed.sub-nav .filters .filter {
+.feed.sub-nav .filter {
   margin: 0px;
   padding: 11px 12px;
   border: none;
 }
-.feed.sub-nav .filters .dropdown-menu {
-  left: auto;
-  right: 0;
+.feed.sub-nav .filter .dropdown-menu {
   width: 300px;
 }
-.feed.sub-nav .filters .dropdown-menu li {
+.feed.sub-nav .filter .dropdown-menu li {
   margin: 0px 10px;
 }
-.feed.sub-nav .filters .dropdown-menu li .label {
+.feed.sub-nav .filter .dropdown-menu li .label {
   display: inline-block;
   margin-right: 4px;
 }
-.feed.sub-nav .filters .dropdown-menu li .genres {
+.feed.sub-nav .filter .dropdown-menu li .genres {
   font-family: Arial, sans-serif;
+}
+.feed.sub-nav .order .dropdown-menu {
+  left: auto;
+  right: 0;
 }
 .feed .cards {
   text-align: left;

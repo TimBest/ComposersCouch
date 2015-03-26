@@ -32,14 +32,12 @@
 {% endblock %}
 
 {% block orderOptions %}
-  <a class="list-group-item {% ifequal order 'expiring' %}active{% endifequal %}"
-     href="{% url 'requests' 'expiring' for scope zipcode %}?{{ request.GET.urlencode }}">
-    Expiring
-  </a>
-  <a class="list-group-item {% ifequal order 'new' %}active{% endifequal %}"
-     href="{% url 'requests' 'new' for scope zipcode %}?{{ request.GET.urlencode }}">
-    Latest
-  </a>
+  <li class="{% ifequal order 'expiring' %}active{% endifequal %}">
+    <a href="{% url feedType 'expiring' for scope zipcode %}?{{ request.GET.urlencode }}">Expiring</a>
+  </li>
+  <li class="{% ifequal order 'latest' %}active{% endifequal %}">
+    <a href="{% url feedType 'latest' for scope zipcode %}?{{ request.GET.urlencode }}">Latest</a>
+  </li>
 {% endblock %}
 
 {% block feed %}
