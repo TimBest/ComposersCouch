@@ -13,14 +13,14 @@
         <li class="{% block withinClass %}active{% endblock %}">
           <a href="{% url feedType order 'any-distance' zipcode %}?{{ request.GET.urlencode }}">within</a>
         </li>
+        <li class="{% block availableClass %}{% endblock %}">
+          <a href="{% url 'available_venues' order 2014 32 32 zipcode %}?{{ request.GET.urlencode }}">available on</a>
+        </li>
         {% if user.is_authenticated %}
           <li class="{% block followingClass %}{% endblock %}">
             <a href="{% url feedType order 'following' zipcode %}?{{ request.GET.urlencode }}">I'm following</a>
           </li>
         {% endif %}
-        <li class="{% block availableClass %}{% endblock %}">
-          <a href="{% url 'available_venues' order 2014 32 32 zipcode %}?{{ request.GET.urlencode }}">available on</a>
-        </li>
     </ul>
   </span>
 {% endblock %}

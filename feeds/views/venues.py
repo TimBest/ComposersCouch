@@ -54,7 +54,7 @@ class AvailabilityView(AvailabilityMixin, VenueView):
         if location:
             return posts.filter(
                 profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
-            )
+            ).distinct()
         else:
             return []
 
@@ -83,7 +83,7 @@ class BetweenView(AvailabilityView):
         line = LineString(start,end)
         return posts.filter(
             profile__contact_info__location__zip_code__point__distance_lte=(line, D(m=LocalFeed.distance))
-        )
+        ).distinct()
 
 available_venues_between = login_required(BetweenView.as_view())
 

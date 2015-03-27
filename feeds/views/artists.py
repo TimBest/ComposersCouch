@@ -57,7 +57,7 @@ class AvailabilityView(AvailabilityMixin, ArtistView):
             return self.modelManager.exclude(**self.get_exclude(start, end)).filter(
                 Q(profile__user__calendar__events__line__line__distance_lte=(location, D(m=LocalFeed.distance))) |
                 Q(profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance)))
-            )
+            ).distinct()
         else:
             return []
 
