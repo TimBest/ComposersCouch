@@ -17,6 +17,7 @@ urlpatterns += patterns('',
 
 urlpatterns += patterns('composersCouch.views',
     url(r'^$', 'load_template', {'template_name': 'landing_page.html'}, name='home'),
+    url(r'^test/$', 'load_template', {'template_name': 'footer/test.html'}, name='test'),
     url(r'^about/$', 'load_template', {'template_name': 'footer/about.html'}, name='about'),
     url(r'^team/$', 'load_template', {'template_name': 'footer/team.html'}, name='team'),
     url(r'^credit/$', 'load_template', {'template_name': 'footer/credit.html'}, name='credit'),

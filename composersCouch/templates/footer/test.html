@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Test Location{% endblock %}
+{% load tz %}
+
+{% block content %}
+  <div class="about container">
+    {% localtime on %}
+      <p>Current time: {{ now }}</p>
+    {% endlocaltime %}
+    <p>Zipcode: {{ request.zipcode }}</p>
+  </div>
+{% endblock %}

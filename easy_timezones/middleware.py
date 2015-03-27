@@ -41,8 +41,7 @@ class EasyTimezoneMiddleware(object):
             # use the default timezone (settings.TIME_ZONE) for localhost
             tz = timezone.get_default_timezone()
             ip = get_client_ip(request)
-            #ip = '96.236.57.160'
-            #ip = '216.158.94.138'
+            #ip = '24.56.31.0'
 
             if ip != '127.0.0.1':
                 # if not local, fetch the timezone from pygeoip
