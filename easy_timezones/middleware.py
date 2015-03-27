@@ -41,12 +41,13 @@ class EasyTimezoneMiddleware(object):
             # use the default timezone (settings.TIME_ZONE) for localhost
             tz = timezone.get_default_timezone()
             ip = get_client_ip(request)
-            #ip = '24.56.31.0'
+            #ip = '24.206.228.69'
 
             if ip != '127.0.0.1':
                 # if not local, fetch the timezone from pygeoip
                 tz = db.time_zone_by_addr(ip)
                 record = db.record_by_addr(ip)
+                request.record = record
                 code = record.get('postal_code')
                 zipcode = get_object_or_None(Zipcode, code=code)
             else:
