@@ -11,14 +11,9 @@ class ViewsTests(TestCase):
                 'profiles', 'artists', 'venues', 'fans',]
     claim_profile = Profile(user=User(pk=1), has_owner=False)
 
-    def test_signup_auth_view(self):
-        """ A ``GET`` to the ``signup`` view """
-        response = self.client.get(reverse('signup'))
-        self.assertEqual(response.status_code, 200)
-
-    def test_signup_email_view(self):
+    def test_signup_view(self):
         """ """
-        response = self.client.get(reverse('signup_email'))
+        response = self.client.get(reverse('signup'))
         self.assertEqual(response.status_code, 200)
         valid_values = [
             {'email': 'signUpEmailArtist@example.com',
@@ -32,7 +27,7 @@ class ViewsTests(TestCase):
         ]
         #TODO:: find out how to pass profile type to the view
         for values in valid_values:
-            response = self.client.post(reverse('signup_email'), values, follow=True)
+            response = self.client.post(reverse('signup'), values, follow=True)
             self.assertEqual(response.status_code, 200)
             self.assertEqual(
                 Profile.objects.get(user__email=values['email']).profile_type,

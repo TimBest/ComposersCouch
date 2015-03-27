@@ -10,13 +10,46 @@
 {% endblock %}
 
 {% block headerClass %}authentication{% endblock %}
+
+{% block modalHeader %}
+  <div class="modal-header">
+    <div class="row">
+      <div class="col-xs-12">
+      <p class="pull-right">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+      <h3 class="text-left">Sign up</h3>
+    </div>
+    </div>
+  </div>
+{% endblock %}
+
+
 {% block formID %}sign-up-form{% endblock %}
 
 {% block form %}
-  <div class="sign-up">
-    {% crispy signupForm %}
-    {% crispy zipcodeForm %}
-    {% crispy emailForm %}
+  <div class="sign-in">
+    <div class="row">
+      <div class="col-md-3 col-sm-4">
+        <ul class="social-links text-center">
+          <li>
+            <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter" role="button">
+              <i class="fa fa-twitter"></i>
+              <span>Twitter</span>
+            </a>
+          </li>
+          <li>
+            <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook" role="button">
+              <i class="fa fa-facebook"></i>
+              <span>Facebook</span>
+            </a>
+          </li>
+        </div>
+      </ul>
+      <div class="col-md-9 col-sm-8">
+        {% crispy signupForm %}
+        {% crispy zipcodeForm %}
+        {% crispy emailForm %}
+      </div>
+    </div>
   </div>
 {% endblock %}
 
