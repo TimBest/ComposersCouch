@@ -30,33 +30,6 @@
 {% endblock %}
 {% block overwriteContent %}
   <div class="landing-page">
-    {% if not user.is_authenticated %}
-      <div class="jumbotron black text-center" id="profile-types">
-        <div class="row">
-          <div class="col-sm-4">
-            <a href="#venues" class="text-white">
-              <span class="fa fa-ticket fa-5x"></span>
-              <h2>Venues</h2>
-              <p>Book better shows by easily comparing artists and managing booking requests.</p>
-            </a>
-          </div>
-          <div class="col-sm-4">
-            <a href="#artists" class="text-white">
-              <span class="fa fa-music fa-5x"></span>
-              <h2>Artists</h2>
-              <p>Find local venues, manage your tour, and host your press kit.</p>
-            </a>
-          </div>
-          <div class="col-sm-4">
-            <a href="#concerts" class="text-white">
-              <span class="fa fa-users fa-5x"></span>
-              <h2>Fans</h2>
-              <p>Discover local artists, find concerts in your area and follow your favorites.</p>
-            </a>
-          </div>
-        </div>
-      </div>
-    {% endif %}
     <div class="concerts section" id="concerts">
       <div class="jumbotron stretchMe" data-stretch="{% static 'img/Concert.jpg' %}">
         <div class="main-nav">
@@ -87,8 +60,6 @@
                 </li>
               </ul>
             </span>
-          </div>
-          <div class="description">
             {% block forForm %}{% endblock %}
             {% block scope %}
               <span class="dropdown">
@@ -139,8 +110,83 @@
             {% endblock %}
           </div>
         </div>
+        <div class="navigation feed">
+          <div class="container-fluid">
+            <div class="row no-gutter">
+              <div class="col-xs-10 left">
+                {% block filter %}
+                  <span class="dropdown text-left filter">
+                    <a class="btn btn-transparent-dropdown dropdown-toggle"
+                       data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
+                      {% if category %}{{ category|title }}{% elif my_genres %}My Genres{% else %}All Genres{% endif %}
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                      {% block genreForm %}
+                        <li>
+                          <b>Filter by:</b>
+                          <div class="row no-gutter genres">
+                            {% if my_genres %}
+                              <a class="btn btn-xs btn-primary" href="{{ request.path }}">My genres X</a>
+                            {% else %}
+                              <a class="btn btn-xs btn-default" href="{{ request.path }}?my-genres=on">My genres</a>
+                            {% endif %}
+                            <span> or </span>
+                            {% for genre in categories %}
+                              {% if category == genre.slug %}
+                                <a class="label label-primary" href="{{ request.path }}">{{ genre }} X</a>
+                              {% else %}
+                                <a class="label label-default" href="{{ request.path }}?genre={{ genre.slug }}">{{ genre }}</a>
+                              {% endif %}
+                            {% endfor %}
+                            <span class="more-genres">
+                              {% for genre in more_categories %}
+                                {% if category == genre.slug %}
+                                  <a class="label label-primary" href="{{ request.path }}">{{ genre }} X</a>
+                                {% else %}
+                                  <a class="label label-default" href="{{ request.path }}?genre={{ genre.slug }}">{{ genre }}</a>
+                                {% endif %}
+                              {% endfor %}
+                            </span>
+                          </div>
+                          <a id="load-more-genres" class="btn btn-sm btn-default" href="javascript:void(0)">Show More</a>
+                        </li>
+                      {% endblock %}
+                    </ul>
+                  </span>
+                {% endblock %}
+              </div>
+              <div class="col-xs-2 right text-right">
+                {% block order %}
+                  <span class="dropdown text-left filters order">
+                    <a class="btn btn-transparent-dropdown dropdown-toggle"
+                       data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
+                      {{ order|default_if_none:"Order"|capfirst }} <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                      {% block orderOptions %}
+                        <li class="{% ifequal order 'all' %}active{% endifequal %}">
+                          <a href="{% url feedType 'all' scope zipcode %}?{{ request.GET.urlencode }}">All</a>
+                        </li>
+                        <li class="{% ifequal order 'latest' %}active{% endifequal %}">
+                          <a href="{% url feedType 'latest' scope zipcode %}?{{ request.GET.urlencode }}">Latest</a>
+                        </li>
+                      {% endblock %}
+                    </ul>
+                  </span>
+                {% endblock %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="feed text-black">
+      <div class="cards">
+        {% block feed %}
+          {% include "feeds/shows/_feed.html" with title="Local Shows" shows=posts %}
+        {% endblock %}
       </div>
     </div>
   </div>
-
 {% endblock %}

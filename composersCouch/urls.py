@@ -16,6 +16,8 @@ urlpatterns += patterns('',
 )
 
 urlpatterns += patterns('annoying.views',
+    url(r'^tour/$', 'load_template', {'template_name': 'tour.html'}, name='tour'),
+
     # Footer
     url(r'^about/$', 'load_template', {'template_name': 'footer/about.html'}, name='about'),
     url(r'^team/$', 'load_template', {'template_name': 'footer/team.html'}, name='team'),

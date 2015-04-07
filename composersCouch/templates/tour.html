@@ -3,70 +3,44 @@
 
 
 {% block overwriteHeader %}
-  <div class="landing-page white">
-    <div class="jumbotron composers-couch">
-      <div class="image-frame">
-        <span class="frame-helper"></span>
-        <img class="image-center" id="logo" alt="Composers Couch" src="{% static 'img/logo.png' %}">
-      </div>
-      <div class="text-center container">
-        <div class="moto">
-          <h2>A booking service that connects local venues, artists, and fans.</h2>
-        </div>
-        {% if not user.is_authenticated %}
-          <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-lg btn-primary">Sign Up For Free</a>
-        {% endif %}
-      </div>
-    </div>
-    <div class="text-center row">
-      <h2 class="discover">
-        <a href="{% if not user.is_authenticated %}#profile-types{% else %}#requests{% endif %}" class="text-muted">
-          <span class="fa fa-chevron-down"></span>
+  <div class="jumbotron black text-center" id="profile-types">
+    <div class="row">
+      <div class="col-sm-4">
+        <a href="#venues" class="text-white">
+          <span class="fa fa-ticket fa-5x"></span>
+          <h2>Venues</h2>
+          <p>Book better shows by easily comparing artists and managing booking requests.</p>
         </a>
-      </h2>
+      </div>
+      <div class="col-sm-4">
+        <a href="#artists" class="text-white">
+          <span class="fa fa-music fa-5x"></span>
+          <h2>Artists</h2>
+          <p>Find local venues, manage your tour, and host your press kit.</p>
+        </a>
+      </div>
+      <div class="col-sm-4">
+        <a href="#concerts" class="text-white">
+          <span class="fa fa-users fa-5x"></span>
+          <h2>Fans</h2>
+          <p>Discover local artists, find concerts in your area and follow your favorites.</p>
+        </a>
+
+      </div>
     </div>
   </div>
 {% endblock %}
 {% block overwriteContent %}
   <div class="landing-page">
-    {% if not user.is_authenticated %}
-      <div class="jumbotron black text-center" id="profile-types">
-        <div class="row">
-          <div class="col-sm-4">
-            <a href="#venues" class="text-white">
-              <span class="fa fa-ticket fa-5x"></span>
-              <h2>Venues</h2>
-              <p>Book better shows by easily comparing artists and managing booking requests.</p>
-            </a>
-          </div>
-          <div class="col-sm-4">
-            <a href="#artists" class="text-white">
-              <span class="fa fa-music fa-5x"></span>
-              <h2>Artists</h2>
-              <p>Find local venues, manage your tour, and host your press kit.</p>
-            </a>
-          </div>
-          <div class="col-sm-4">
-            <a href="#concerts" class="text-white">
-              <span class="fa fa-users fa-5x"></span>
-              <h2>Fans</h2>
-              <p>Discover local artists, find concerts in your area and follow your favorites.</p>
-            </a>
-
-          </div>
-        </div>
-      </div>
-      <div class="sub-nav" data-spy="affix" data-offset-top="900">
-    {% else %}
-      <div class="sub-nav" data-spy="affix" data-offset-top="500">
-    {% endif %}
-        <ul class="nav nav-pills nav-centered">
-          <li class="active"><a href="#requests">Requests</a></li>
-          <li class=""><a href="#concerts">Concerts</a></li>
-          <li class=""><a href="#artists">Artists</a></li>
-          <li class=""><a href="#venues">Venues</a></li>
-          <li class=""><a href="#updates">Updates</a></li>
-        </ul>
+    <div class="sub-nav" data-spy="affix" data-offset-top="400">
+      <ul class="nav nav-pills nav-centered">
+        <li class="active"><a href="#requests">Requests</a></li>
+        <li class=""><a href="#concerts">Concerts</a></li>
+        <li class=""><a href="#artists">Artists</a></li>
+        <li class=""><a href="#venues">Venues</a></li>
+        <li class=""><a href="#updates">Updates</a></li>
+        <a href="{% url 'signup' %}" type="button" class="pull-right btn btn-primary">Sign Up</a>
+      </ul>
     </div>
     <div class="requests section" id="requests">
       <div class="jumbotron stretchMe" data-stretch="{% static 'img/Requests.jpg' %}">
