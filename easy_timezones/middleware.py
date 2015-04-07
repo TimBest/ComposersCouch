@@ -4,8 +4,6 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.utils import timezone
 
-from annoying.functions import get_object_or_None
-from contact.models import Zipcode
 
 db_loaded = False
 db = None
@@ -31,33 +29,16 @@ class EasyTimezoneMiddleware(object):
             load_db()
 
         tz = request.session.get('django_timezone')
-        if hasattr(request, 'zipcode'):
-            zipcode = request.zipcode
-        else:
-            zipcode = None
-        if not tz or not zipcode:
+        if not tz:
             # use the default timezone (settings.TIME_ZONE) for localhost
             tz = timezone.get_default_timezone()
             ip = get_client_ip(request)
             #ip = '24.206.228.69'
-            try:
+            if ip != '127.0.0.1':
                 # if not local, fetch the timezone from pygeoip
                 tz = db.time_zone_by_addr(ip)
-                record = db.record_by_addr(ip)
-                request.record = [
-                    db.country_code_by_addr(ip),
-                    db.country_name_by_addr(ip),
-                    db.record_by_addr(ip),
-                    db.region_by_addr(ip),
-                ]
-                request.users_current_ip = ip
-                code = record.get('postal_code')
-                zipcode = get_object_or_None(Zipcode, code=code)
-            except:
+            else:
                 tz = pytz.timezone('US/Eastern')
-                zipcode = get_object_or_None(Zipcode, code=12065)
-        if zipcode:
-            request.zipcode = zipcode
         if tz:
             timezone.activate(tz)
         else:

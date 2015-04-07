@@ -16,10 +16,22 @@ def load_template(request, template_name, extra_context=None):
     return render(request, template_name, extra_context)
 
 def test_template(request, template_name):
-    from easy_timezones.middleware import get_client_ip
+    from easy_timezones.middleware import get_client_ip, db
+    from annoying.functions import get_object_or_None
+    from contact.models import Zipcode
+    ip = get_client_ip(request)
+    #ip = '24.206.228.69'
+    if ip != '127.0.0.1':
+        record = db.record_by_addr(ip)
+        code = record.get('postal_code')
+        zipcode = get_object_or_None(Zipcode, code=code)
+    else:
+        zipcode = get_object_or_None(Zipcode, code=12065)
     context = {
-        'ipaddress' : get_client_ip(request)
+        'zipcode' : zipcode,
+        'ipaddress' : ip,
     }
+
     return render(request, template_name, context)
 
 # Mixin to handle multiple form classses
