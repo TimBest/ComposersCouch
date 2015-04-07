@@ -13,6 +13,8 @@
       <p>Current time: {{ now }}</p>
     {% endlocaltime %}
     <p>Zipcode: {{ request.zipcode }}</p>
-    <p>Record: {{ request.record }}</p>
+    {% for record in request.record %}
+      <p>Record: {{ record }}</p>
+    {% endfor %}
   </div>
 {% endblock %}
