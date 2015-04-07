@@ -9,7 +9,7 @@ from accounts.models import Profile
 from accounts.utils import update_profile_weight
 from annoying.functions import get_object_or_None
 from artist.models import ArtistProfile
-from composersCouch.views import MultipleFormsView
+from annoying.views import MultipleFormsView
 from customProfile import forms as profile_forms
 from customProfile.decorators import is_artist, is_venue, is_fan
 from fan.models import FanProfile

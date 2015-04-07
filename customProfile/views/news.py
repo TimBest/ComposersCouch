@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.views.generic import FormView
 
-from composersCouch.views import MultipleFormsView
+from annoying.views import MultipleFormsView
 from customProfile.views import ProfileMixin
 from feeds.forms import PostForm
 from feeds.post_feedly import feedly

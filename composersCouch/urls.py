@@ -15,11 +15,15 @@ urlpatterns += patterns('',
     url(r'^admin/', include(admin.site.urls)),
 )
 
-urlpatterns += patterns('composersCouch.views',
-    url(r'^$', 'load_template', {'template_name': 'landing_page.html'}, name='home'),
+urlpatterns += patterns('annoying.views',
+    # Footer
     url(r'^about/$', 'load_template', {'template_name': 'footer/about.html'}, name='about'),
     url(r'^team/$', 'load_template', {'template_name': 'footer/team.html'}, name='team'),
     url(r'^credit/$', 'load_template', {'template_name': 'footer/credit.html'}, name='credit'),
+)
+urlpatterns += patterns('composersCouch.views',
+    # Landing Page
+    url(r'^$', 'landing_page', name='home'),
 )
 
 urlpatterns += patterns('',

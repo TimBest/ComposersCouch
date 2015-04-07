@@ -6,7 +6,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
 
 from annoying.functions import get_object_or_None
-from composersCouch.views import MultipleModelFormsView
+from annoying.views import MultipleModelFormsView
 from customProfile.views import ArtistProfileView, ArtistProfileFormMixin
 from photos.models import Image
 from photos.forms import AlbumArtForm

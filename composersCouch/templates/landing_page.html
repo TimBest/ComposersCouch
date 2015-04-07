@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static from staticfiles %}
-
+{% load crispy_forms_tags  %}
+{% crispy ZipcodeForm ZipcodeForm.helper %}
 
 {% block overwriteHeader %}
   <div class="landing-page white">
@@ -52,116 +53,94 @@
               <h2>Fans</h2>
               <p>Discover local artists, find concerts in your area and follow your favorites.</p>
             </a>
-
           </div>
         </div>
       </div>
-      <div class="sub-nav" data-spy="affix" data-offset-top="900">
-    {% else %}
-      <div class="sub-nav" data-spy="affix" data-offset-top="500">
     {% endif %}
-        <ul class="nav nav-pills nav-centered">
-          <li class="active"><a href="#requests">Requests</a></li>
-          <li class=""><a href="#concerts">Concerts</a></li>
-          <li class=""><a href="#artists">Artists</a></li>
-          <li class=""><a href="#venues">Venues</a></li>
-          <li class=""><a href="#updates">Updates</a></li>
-        </ul>
-    </div>
-    <div class="requests section" id="requests">
-      <div class="jumbotron stretchMe" data-stretch="{% static 'img/Requests.jpg' %}">
-        <div class="row">
-          <div class="col-sm-6">
-            <h2>
-              {% if request.user.profile.profile_type == "m" %}
-                <a href="{% url 'requests' 'expiring' 'artist' 'any-distance' %}" class="text-white">
-                  Requests
-                </a>
-              {% else %}
-                <a href="{% url 'requests' 'expiring' 'venue' 'any-distance' %}" class="text-white">
-                  Requests
-                </a>
-              {% endif %}
-            </h2>
-            <p>Find artist and venues looking to put on shows in your area.</p>
-            {% if request.user.profile.profile_type == "m" %}
-              <a href="{% url 'requests' 'expiring' 'artist' 'any-distance' %}" class="pull-right btn btn-transparent">
-                View Requests <small><span class="fa fa-chevron-right text-white"></span></small>
-              </a>
-            {% else %}
-              <a href="{% url 'requests' 'expiring' 'venue' 'any-distance' %}" class="pull-right btn btn-transparent">
-                View Requests <small><span class="fa fa-chevron-right text-white"></span></small>
-              </a>
-            {% endif %}
-          </div>
-        </div>
-      </div>
-    </div>
     <div class="concerts section" id="concerts">
       <div class="jumbotron stretchMe" data-stretch="{% static 'img/Concert.jpg' %}">
-        <div class="row">
-          <div class="col-sm-6 col-sm-offset-6">
-            <h2><a class="text-white" href="{% url 'shows' 'upcoming' 'any-distance' %}">
-              Shows
-            </a></h2>
-            <p>Promote your shows. Find out who is coming to your area. Filter concerts by genre and location.</p>
-            <a href="{% url 'shows' 'upcoming' 'any-distance' %}" class="pull-right btn btn-transparent">
-              View Shows <small><span class="fa fa-chevron-right text-white"></span></small>
-            </a>
+        <div class="main-nav">
+          <div class="title">
+            <span class="dropdown">
+              <a class="btn btn-header dropdown-toggle toggle" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
+                {{ feedType | capfirst }}<span class="caret-large text-white"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li class="{% block requestsClass %}{% endblock %}">
+                  {% if request.user.profile.profile_type == "m" %}
+                    <a href="{% url 'requests' 'expiring' 'band' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
+                  {% else %}
+                    <a href="{% url 'requests' 'expiring' 'venue' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
+                  {% endif %}
+                </li>
+                <li class="{% block showsClass %}{% endblock %}">
+                  <a href="{% url 'shows' 'upcoming' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Shows</a>
+                </li>
+                <li class="{% block artistsClass %}{% endblock %}">
+                  <a href="{% url 'artists' 'all' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Artists</a>
+                </li>
+                <li class="{% block venuesClass %}{% endblock %}">
+                  <a href="{% url 'venues' 'all' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Venues</a>
+                </li>
+                <li class="{% block updatesClass %}{% endblock %}">
+                  <a href="{% url 'updates' 'all' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Updates</a>
+                </li>
+              </ul>
+            </span>
           </div>
-        </div>
-      </div>
-    </div>
-    <div class="artists section" id="artists">
-      <div class="jumbotron stretchMe" data-stretch="{% static 'img/Artist.jpg' %}">
-        <div class="row">
-          <div class="col-sm-6">
-            <h2><a class="text-white" href="{% url 'artists' 'all' 'any-distance' %}">
-              Artists
-            </a></h2>
-            <p>Discover local artists by genre. Use the
-              <a class="text-white" href="{% url 'available_artists' 'all' 2014 32 32 %}">
-              availability feed</a> to find out when local artists are free or
-              when touring artists are passing through.</p>
-            <a href="{% url 'artists' 'all' 'any-distance' %}" class="pull-right btn btn-transparent">
-              View Artists <small><span class="fa fa-chevron-right"></span></small>
-            </a>
-          </div>
-
-        </div>
-      </div>
-    </div>
-    <div class="venues section" id="venues">
-      <div class="jumbotron stretchMe" data-stretch="{% static 'img/venue.jpg' %}">
-        <div class="row">
-          <div class="col-sm-6 col-sm-offset-6">
-            <h2><a class="text-white" href="{% url 'venues' 'all' 'any-distance' %}">
-              Venues
-            </a></h2>
-            <p>Find local venues or ones between tour stops. Use the
-              <a class="text-white" href="{% url 'available_venues' 'all' 2014 32 32 %}">
-              availability feed</a> to find out when venues are free.</p>
-            <a href="{% url 'venues' 'all' 'any-distance' %}" class="pull-right btn btn-transparent">
-              View Venues <small><span class="fa fa-chevron-right"></span></small>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="updates section" id="updates">
-      <div class="jumbotron stretchMe" data-stretch="{% static 'img/Updates.jpg' %}">
-        <div class="row">
-          <div class="col-sm-6">
-            <h2><a class="text-white" href="{% url 'updates' 'all' 'any-distance' %}">
-              Updates
-            </a></h2>
-            <p>Find out what you favorite venues and artists are up to.</p>
-            <a href="{% url 'updates' 'all' 'any-distance' %}" class="pull-right btn btn-transparent">
-              View Updates <span class="fa fa-chevron-right"></span>
-            </a>
+          <div class="description">
+            {% block forForm %}{% endblock %}
+            {% block scope %}
+              <span class="dropdown">
+                <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+                  <span class="dotted-bottom text-white">{% block currentScope %}within{% endblock %}</span>
+                </a>
+                <ul class="dropdown-menu">
+                  {% block scopeNav %}
+                    <li class="{% block withinClass %}active{% endblock %}">
+                      <a href="{% url feedType order 'any-distance' zipcode %}?{{ request.GET.urlencode }}">within</a>
+                    </li>
+                    <li class="{% block followingClass %}{% endblock %}">
+                      <a href="{% url feedType order 'following' zipcode %}?{{ request.GET.urlencode }}">I'm following</a>
+                    </li>
+                  {% endblock %}
+                </ul>
+              </span>
+            {% endblock %}
+            {% block availabilityForm %}{% endblock %}
+            {% block zipcodeForm %}
+              {% block distance %}
+                <span class="dropdown">
+                  <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+                    <span class="dotted-bottom text-white">{{ distance|default:"any distance" }}</span>
+                  </a>
+                  <ul class="dropdown-menu">
+                    {% block within %}
+                      <li class="{% ifequal scope '50' %}active{% endifequal %}">
+                        <a href="{% url feedType order '50' zipcode %}?{{ request.GET.urlencode }}">50 miles</a>
+                      </li>
+                      <li class="{% ifequal scope 'any-distance' %}active{% endifequal %}">
+                        <a href="{% url feedType order 'any-distance' zipcode %}?{{ request.GET.urlencode }}">any distance</a>
+                      </li>
+                    {% endblock %}
+                  </ul>
+                </span>
+                <span class="text-white">of</span>
+              {% endblock %}
+              <a href="#" role="button" data-toggle="popover" id="zipcode-select" class="toggle btn btn-transparent-dropdown" title="Zipcode">
+                <span class="dotted-bottom text-white">{% if zipcode %}{{ zipcode }}{% else %}location{% endif %}</span>
+              </a>
+              <div class="zipcode-content hide">
+                <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
+                  <input type="hidden" name="path" value="{% firstof request.path '/' %}">
+                  {% crispy zipcodeForm %}
+                </form>
+              </div>
+            {% endblock %}
           </div>
         </div>
       </div>
     </div>
   </div>
+
 {% endblock %}

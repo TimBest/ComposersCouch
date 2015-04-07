@@ -12,7 +12,7 @@ from django.views.generic.base import TemplateView
 
 from annoying.functions import get_object_or_None
 from composersCouch.utils import get_page
-from composersCouch.views import MultipleFormsView, MultipleModelFormsView
+from annoying.views import MultipleFormsView, MultipleModelFormsView
 from customProfile.decorators import is_venue, is_artist
 from request import forms
 from request.decorators import is_participant as is_request_participant

@@ -19,7 +19,7 @@ from accounts.pipeline import create_profile
 from accounts.forms import ClaimProfileForm, EmailForm, SignupForm, SigninForm
 from accounts.models import Profile
 from annoying.functions import get_object_or_None
-from composersCouch.views import MultipleFormsView
+from annoying.views import MultipleFormsView
 from contact.forms import ZipcodeForm
 from userena.signals import signup_complete
 from userena.views import signin

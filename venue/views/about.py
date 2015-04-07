@@ -9,7 +9,7 @@ from accounts.utils import update_profile_weight
 from annoying.functions import get_object_or_None
 from contact.forms import ContactForm
 from contact.views import ContactView
-from composersCouch.views import MultipleModelFormsView
+from annoying.views import MultipleModelFormsView
 from customProfile.views import VenueProfileView, VenueProfileFormMixin
 from photos.forms import SeatingChartForm
 from photos.models import Image

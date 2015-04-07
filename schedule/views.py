@@ -6,7 +6,7 @@ from django.views.decorators.http import require_POST
 from django.views.generic import TemplateView
 
 from annoying.functions import get_object_or_None
-from composersCouch.views import MultipleModelFormsView
+from annoying.views import MultipleModelFormsView
 from threads.models import Participant
 from threads.views import MessageView
 from threads.utils import create_thread
