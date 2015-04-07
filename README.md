@@ -7,7 +7,7 @@ Setting development to true
     load with source ~/.bashrs and ~/.profile respectivly
 
 SSH into production server
-    ssh -i djangosite-eb.pem ec2-user@54.86.112.184
+    ssh -i djangosite-eb.pem ec2-user@54.174.8.168
     /opt/python/current/app/
     /opt/python/run/venv/bin/activate
 
