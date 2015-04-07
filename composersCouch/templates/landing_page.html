@@ -72,12 +72,20 @@
       <div class="jumbotron stretchMe" data-stretch="{% static 'img/Requests.jpg' %}">
         <div class="row">
           <div class="col-sm-6">
-            <h2><a class="text-white" href="{% url 'requests' 'expiring' 'default' 'any-distance' %}">
-              Requests
-            </a></h2>
+            <h2>
+              {% if request.user.profile.profile_type == "m" %}
+                <a href="{% url 'requests' 'expiring' 'artist' 'any-distance' %}" class="text-white">
+                  Requests
+                </a>
+              {% else %}
+                <a href="{% url 'requests' 'expiring' 'venue' 'any-distance' %}" class="text-white">
+                  Requests
+                </a>
+              {% endif %}
+            </h2>
             <p>Find artist and venues looking to put on shows in your area.</p>
             {% if request.user.profile.profile_type == "m" %}
-              <a href="{% url 'requests' 'expiring' 'band' 'any-distance' %}" class="pull-right btn btn-transparent">
+              <a href="{% url 'requests' 'expiring' 'artist' 'any-distance' %}" class="pull-right btn btn-transparent">
                 View Requests <small><span class="fa fa-chevron-right text-white"></span></small>
               </a>
             {% else %}
