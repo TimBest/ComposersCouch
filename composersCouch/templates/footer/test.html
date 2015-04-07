@@ -13,6 +13,7 @@
       <p>Current time: {{ now }}</p>
     {% endlocaltime %}
     <p>Zipcode: {{ request.zipcode }}</p>
+    <p>ip address: {{ ipaddress }}</p>
     <p>IP: {{ request.users_current_ip }}</p>
     {% for record in request.record %}
       <p>Record: {{ record }}</p>

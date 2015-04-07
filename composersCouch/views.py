@@ -15,6 +15,13 @@ def load_template(request, template_name, extra_context=None):
     if not extra_context: extra_context = dict()
     return render(request, template_name, extra_context)
 
+def test_template(request, template_name):
+    from easy_timezones.middleware import get_client_ip
+    context = {
+        'ipaddress' : get_client_ip(request)
+    }
+    return render(request, template_name, context)
+
 # Mixin to handle multiple form classses
 class MultipleFormsView(FormView):
     form_classes = {}

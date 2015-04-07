@@ -6,7 +6,6 @@ from django.utils import timezone
 
 from annoying.functions import get_object_or_None
 from contact.models import Zipcode
-from easy_timezones.signals import detected_timezone
 
 db_loaded = False
 db = None
@@ -24,7 +23,6 @@ def get_client_ip(request):
         ip = x_forwarded_for.split(',')[0]
     else:
         ip = request.META.get('REMOTE_ADDR')
-
     return ip
 
 class EasyTimezoneMiddleware(object):
@@ -62,6 +60,6 @@ class EasyTimezoneMiddleware(object):
             request.zipcode = zipcode
         if tz:
             timezone.activate(tz)
-            detected_timezone.send(sender=get_user_model(), instance=request.user, timezone=tz)
         else:
             timezone.deactivate()
+        return None
