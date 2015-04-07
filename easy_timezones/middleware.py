@@ -47,12 +47,12 @@ class EasyTimezoneMiddleware(object):
                 tz = db.time_zone_by_addr(ip)
                 record = db.record_by_addr(ip)
                 request.record = [
-                    ip,
                     db.country_code_by_addr(ip),
                     db.country_name_by_addr(ip),
                     db.record_by_addr(ip),
                     db.region_by_addr(ip),
                 ]
+                request.users_current_ip = ip
                 code = record.get('postal_code')
                 zipcode = get_object_or_None(Zipcode, code=code)
             except:
