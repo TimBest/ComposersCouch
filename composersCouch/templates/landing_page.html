@@ -1,22 +1,55 @@
-{% extends 'base.html' %}
+{% extends 'feeds/shows/shows.html' %}
 {% load static from staticfiles %}
-{% load crispy_forms_tags  %}
-{% crispy ZipcodeForm ZipcodeForm.helper %}
+{% load crispy_forms_tags %}
+{% crispy signupForm signupForm.helper %}
+{% crispy zipcodeForm zipcodeForm.helper %}
 
-{% block overwriteHeader %}
+{% block aboveFeed %}
   <div class="landing-page white">
     <div class="jumbotron composers-couch">
-      <div class="image-frame">
-        <span class="frame-helper"></span>
-        <img class="image-center" id="logo" alt="Composers Couch" src="{% static 'img/logo.png' %}">
-      </div>
-      <div class="text-center container">
-        <div class="moto">
-          <h2>A booking service that connects local venues, artists, and fans.</h2>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="image-frame">
+            <span class="frame-helper"></span>
+            <img class="image-center" id="logo" alt="Composers Couch" src="{% static 'img/logo.png' %}">
+          </div>
+          <div class="text-center container">
+            <div class="moto">
+              <h2>A booking service that connects local venues, artists, and fans.</h2>
+            </div>
+          </div>
         </div>
-        {% if not user.is_authenticated %}
-          <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-lg btn-primary">Sign Up For Free</a>
-        {% endif %}
+        <div class="col-sm-6 text-right">
+          <h3>Sign up form will go here</h3>
+          {% if not user.is_authenticated %}
+            <a href="{% url 'signup' %}?next={% firstof request.path '/' %}" type="button" class="btn btn-lg btn-primary">Sign Up</a>
+          {% endif %}
+          <div class="sign-in">
+            <div class="row">
+              <div class="col-md-3 col-sm-4">
+                <ul class="social-links text-center">
+                  <li>
+                    <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter" role="button">
+                      <i class="fa fa-twitter"></i>
+                      <span>Twitter</span>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook" role="button">
+                      <i class="fa fa-facebook"></i>
+                      <span>Facebook</span>
+                    </a>
+                  </li>
+                </div>
+              </ul>
+              <div class="col-md-9 col-sm-8">
+                {% crispy signupForm %}
+                {% crispy zipcodeForm %}
+                {% crispy emailForm %}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
     <div class="text-center row">
@@ -25,168 +58,6 @@
           <span class="fa fa-chevron-down"></span>
         </a>
       </h2>
-    </div>
-  </div>
-{% endblock %}
-{% block overwriteContent %}
-  <div class="landing-page">
-    <div class="concerts section" id="concerts">
-      <div class="jumbotron stretchMe" data-stretch="{% static 'img/Concert.jpg' %}">
-        <div class="main-nav">
-          <div class="title">
-            <span class="dropdown">
-              <a class="btn btn-header dropdown-toggle toggle" data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
-                {{ feedType | capfirst }}<span class="caret-large text-white"></span>
-              </a>
-              <ul class="dropdown-menu" role="menu">
-                <li class="{% block requestsClass %}{% endblock %}">
-                  {% if request.user.profile.profile_type == "m" %}
-                    <a href="{% url 'requests' 'expiring' 'band' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
-                  {% else %}
-                    <a href="{% url 'requests' 'expiring' 'venue' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Requests</a>
-                  {% endif %}
-                </li>
-                <li class="{% block showsClass %}{% endblock %}">
-                  <a href="{% url 'shows' 'upcoming' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Shows</a>
-                </li>
-                <li class="{% block artistsClass %}{% endblock %}">
-                  <a href="{% url 'artists' 'all' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Artists</a>
-                </li>
-                <li class="{% block venuesClass %}{% endblock %}">
-                  <a href="{% url 'venues' 'all' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Venues</a>
-                </li>
-                <li class="{% block updatesClass %}{% endblock %}">
-                  <a href="{% url 'updates' 'all' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Updates</a>
-                </li>
-              </ul>
-            </span>
-            {% block forForm %}{% endblock %}
-            {% block scope %}
-              <span class="dropdown">
-                <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
-                  <span class="dotted-bottom text-white">{% block currentScope %}within{% endblock %}</span>
-                </a>
-                <ul class="dropdown-menu">
-                  {% block scopeNav %}
-                    <li class="{% block withinClass %}active{% endblock %}">
-                      <a href="{% url feedType order 'any-distance' zipcode %}?{{ request.GET.urlencode }}">within</a>
-                    </li>
-                    <li class="{% block followingClass %}{% endblock %}">
-                      <a href="{% url feedType order 'following' zipcode %}?{{ request.GET.urlencode }}">I'm following</a>
-                    </li>
-                  {% endblock %}
-                </ul>
-              </span>
-            {% endblock %}
-            {% block availabilityForm %}{% endblock %}
-            {% block zipcodeForm %}
-              {% block distance %}
-                <span class="dropdown">
-                  <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
-                    <span class="dotted-bottom text-white">{{ distance|default:"any distance" }}</span>
-                  </a>
-                  <ul class="dropdown-menu">
-                    {% block within %}
-                      <li class="{% ifequal scope '50' %}active{% endifequal %}">
-                        <a href="{% url feedType order '50' zipcode %}?{{ request.GET.urlencode }}">50 miles</a>
-                      </li>
-                      <li class="{% ifequal scope 'any-distance' %}active{% endifequal %}">
-                        <a href="{% url feedType order 'any-distance' zipcode %}?{{ request.GET.urlencode }}">any distance</a>
-                      </li>
-                    {% endblock %}
-                  </ul>
-                </span>
-                <span class="text-white">of</span>
-              {% endblock %}
-              <a href="#" role="button" data-toggle="popover" id="zipcode-select" class="toggle btn btn-transparent-dropdown" title="Zipcode">
-                <span class="dotted-bottom text-white">{% if zipcode %}{{ zipcode }}{% else %}location{% endif %}</span>
-              </a>
-              <div class="zipcode-content hide">
-                <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
-                  <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-                  {% crispy zipcodeForm %}
-                </form>
-              </div>
-            {% endblock %}
-          </div>
-        </div>
-        <div class="navigation feed">
-          <div class="container-fluid">
-            <div class="row no-gutter">
-              <div class="col-xs-10 left">
-                {% block filter %}
-                  <span class="dropdown text-left filter">
-                    <a class="btn btn-transparent-dropdown dropdown-toggle"
-                       data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
-                      {% if category %}{{ category|title }}{% elif my_genres %}My Genres{% else %}All Genres{% endif %}
-                      <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                      {% block genreForm %}
-                        <li>
-                          <b>Filter by:</b>
-                          <div class="row no-gutter genres">
-                            {% if my_genres %}
-                              <a class="btn btn-xs btn-primary" href="{{ request.path }}">My genres X</a>
-                            {% else %}
-                              <a class="btn btn-xs btn-default" href="{{ request.path }}?my-genres=on">My genres</a>
-                            {% endif %}
-                            <span> or </span>
-                            {% for genre in categories %}
-                              {% if category == genre.slug %}
-                                <a class="label label-primary" href="{{ request.path }}">{{ genre }} X</a>
-                              {% else %}
-                                <a class="label label-default" href="{{ request.path }}?genre={{ genre.slug }}">{{ genre }}</a>
-                              {% endif %}
-                            {% endfor %}
-                            <span class="more-genres">
-                              {% for genre in more_categories %}
-                                {% if category == genre.slug %}
-                                  <a class="label label-primary" href="{{ request.path }}">{{ genre }} X</a>
-                                {% else %}
-                                  <a class="label label-default" href="{{ request.path }}?genre={{ genre.slug }}">{{ genre }}</a>
-                                {% endif %}
-                              {% endfor %}
-                            </span>
-                          </div>
-                          <a id="load-more-genres" class="btn btn-sm btn-default" href="javascript:void(0)">Show More</a>
-                        </li>
-                      {% endblock %}
-                    </ul>
-                  </span>
-                {% endblock %}
-              </div>
-              <div class="col-xs-2 right text-right">
-                {% block order %}
-                  <span class="dropdown text-left filters order">
-                    <a class="btn btn-transparent-dropdown dropdown-toggle"
-                       data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
-                      {{ order|default_if_none:"Order"|capfirst }} <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu">
-                      {% block orderOptions %}
-                        <li class="{% ifequal order 'all' %}active{% endifequal %}">
-                          <a href="{% url feedType 'all' scope zipcode %}?{{ request.GET.urlencode }}">All</a>
-                        </li>
-                        <li class="{% ifequal order 'latest' %}active{% endifequal %}">
-                          <a href="{% url feedType 'latest' scope zipcode %}?{{ request.GET.urlencode }}">Latest</a>
-                        </li>
-                      {% endblock %}
-                    </ul>
-                  </span>
-                {% endblock %}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="feed text-black">
-      <div class="cards">
-        {% block feed %}
-          {% include "feeds/shows/_feed.html" with title="Local Shows" shows=posts %}
-        {% endblock %}
-      </div>
     </div>
   </div>
 {% endblock %}

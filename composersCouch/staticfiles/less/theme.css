@@ -6428,15 +6428,6 @@ h1 {
 .landing-page .composers-couch .container .moto {
   margin-bottom: 30px;
 }
-.landing-page .discover {
-  padding-bottom: 15px;
-}
-.landing-page .section .jumbotron {
-  min-height: 450px;
-}
-.landing-page .section .jumbotron .row {
-  margin-top: 100px;
-}
 .landing-page .section .jumbotron h2 {
   font-size: 40px;
 }
@@ -6469,15 +6460,6 @@ h1 {
 }
 .landing-page .updates .jumbotron {
   background-color: #362cb4;
-}
-.landing-page .sub-nav {
-  position: relative;
-  z-index: 2;
-}
-.landing-page .sub-nav.affix {
-  position: fixed;
-  top: 0;
-  width: 100%;
 }
 /*Content*/
 .about.container {
