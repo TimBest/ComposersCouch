@@ -9,71 +9,63 @@
     <div class="jumbotron composers-couch">
       <div class="row">
         <div class="col-sm-6">
-          <div class="image-frame">
-            <span class="frame-helper"></span>
-            <img class="image-center" id="logo" alt="Composers Couch" src="{% static 'img/logo.png' %}">
-          </div>
-          <div class="text-center container">
+          <div class="container">
+            <h1 class="composers">COMPOSERS<strong class="couch">COUCH</strong></h1>
             <div class="moto">
-              <h2>A booking service that connects local venues, artists, and fans.</h2>
+              <p>A booking service that connects local venues, artists, and fans.</p>
             </div>
             <a href="{% url 'learn' %}" type="button" class="btn btn-lg btn-default">Learn more</a>
           </div>
         </div>
-        <div class="col-sm-6">
-          <form id="sign-up-form" method="post" class="non-modal-form modal-dialog"
-                action="{{ request.path }}">
-              <div class="modal-content">
-                <div class="modal-header">
-                  <div class="row">
-                    <div class="col-xs-12">
-                    <p class="pull-right">Already have an account? <a href="{% url 'login' %}">Login</a></p>
-                    <h3 class="text-left">Sign up</h3>
+        <div class="col-sm-6 authentication">
+          <div class="sign-in">
+            <form id="sign-up-form" method="post" class="non-modal-form"
+                  action="{{ request.path }}">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <div class="row">
+                      <div class="col-xs-12">
+                      <p class="pull-right">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+                      <h3 class="text-left">Sign up</h3>
+                    </div>
+                    </div>
                   </div>
-                  </div>
-                </div>
-                  <div class="modal-body">
-                    <div class="sign-in">
-                      <div class="row">
-                        <div class="col-md-3 col-sm-4">
-                          <ul class="social-links text-center">
-                            <li>
-                              <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter" role="button">
-                                <i class="fa fa-twitter"></i>
-                                <span>Twitter</span>
-                              </a>
-                            </li>
-                            <li>
-                              <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook" role="button">
-                                <i class="fa fa-facebook"></i>
-                                <span>Facebook</span>
-                              </a>
-                            </li>
+                    <div class="modal-body">
+                      <div class="sign-in">
+                        <div class="row">
+                          <div class="col-md-3 col-sm-4">
+                            <ul class="social-links text-center">
+                              <li>
+                                <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter" role="button">
+                                  <i class="fa fa-twitter"></i>
+                                  <span>Twitter</span>
+                                </a>
+                              </li>
+                              <li>
+                                <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook" role="button">
+                                  <i class="fa fa-facebook"></i>
+                                  <span>Facebook</span>
+                                </a>
+                              </li>
+                            </div>
+                          </ul>
+                          <div class="col-md-9 col-sm-8">
+                            {% crispy signupForm %}
+                            {% crispy zipcodeForm %}
+                            {% crispy emailForm %}
                           </div>
-                        </ul>
-                        <div class="col-md-9 col-sm-8">
-                          {% crispy signupForm %}
-                          {% crispy zipcodeForm %}
-                          {% crispy emailForm %}
                         </div>
                       </div>
+                      <input type="hidden" name="next" value="{{next|default:""}}"/>
                     </div>
-                    <input type="hidden" name="next" value="{{next|default:""}}"/>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="submit" onclick="this.form.onsubmit(); return false; " class="btn btn-primary">Sign Up</button>
-                  </div>
-              </div>
-          </form>
+                    <div class="modal-footer">
+                      <button type="submit" onclick="this.form.onsubmit(); return false; " class="btn btn-primary">Sign Up</button>
+                    </div>
+                </div>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="text-center row">
-      <h2 class="discover">
-        <a href="{% if not user.is_authenticated %}#profile-types{% else %}#requests{% endif %}" class="text-muted">
-          <span class="fa fa-chevron-down"></span>
-        </a>
-      </h2>
     </div>
   </div>
 {% endblock %}
