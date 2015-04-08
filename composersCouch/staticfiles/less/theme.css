@@ -1690,7 +1690,7 @@ output {
 .form-control {
   display: block;
   width: 100%;
-  height: 34px;
+  height: 22px;
   padding: 6px 12px;
   font-size: 14px;
   line-height: 1.42857143;
@@ -1734,7 +1734,7 @@ input[type="search"] {
   -webkit-appearance: none;
 }
 input[type="date"] {
-  line-height: 34px;
+  line-height: 22px;
 }
 .form-group {
   margin-bottom: 15px;
@@ -1793,30 +1793,30 @@ fieldset[disabled] .checkbox-inline {
   cursor: not-allowed;
 }
 .input-sm {
-  height: 30px;
+  height: 20px;
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
   border-radius: 2px;
 }
 select.input-sm {
-  height: 30px;
-  line-height: 30px;
+  height: 20px;
+  line-height: 20px;
 }
 textarea.input-sm,
 select[multiple].input-sm {
   height: auto;
 }
 .input-lg {
-  height: 46px;
+  height: 26px;
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
   border-radius: 5px;
 }
 select.input-lg {
-  height: 46px;
-  line-height: 46px;
+  height: 26px;
+  line-height: 26px;
 }
 textarea.input-lg,
 select[multiple].input-lg {
@@ -1826,16 +1826,16 @@ select[multiple].input-lg {
   position: relative;
 }
 .has-feedback .form-control {
-  padding-right: 42.5px;
+  padding-right: 27.5px;
 }
 .has-feedback .form-control-feedback {
   position: absolute;
   top: 25px;
   right: 0;
   display: block;
-  width: 34px;
-  height: 34px;
-  line-height: 34px;
+  width: 22px;
+  height: 22px;
+  line-height: 22px;
   text-align: center;
 }
 .has-success .help-block,
@@ -2694,7 +2694,7 @@ input[type="button"].btn-block {
 .input-group-lg > .form-control,
 .input-group-lg > .input-group-addon,
 .input-group-lg > .input-group-btn > .btn {
-  height: 46px;
+  height: 26px;
   padding: 10px 16px;
   font-size: 18px;
   line-height: 1.33;
@@ -2703,8 +2703,8 @@ input[type="button"].btn-block {
 select.input-group-lg > .form-control,
 select.input-group-lg > .input-group-addon,
 select.input-group-lg > .input-group-btn > .btn {
-  height: 46px;
-  line-height: 46px;
+  height: 26px;
+  line-height: 26px;
 }
 textarea.input-group-lg > .form-control,
 textarea.input-group-lg > .input-group-addon,
@@ -2717,7 +2717,7 @@ select[multiple].input-group-lg > .input-group-btn > .btn {
 .input-group-sm > .form-control,
 .input-group-sm > .input-group-addon,
 .input-group-sm > .input-group-btn > .btn {
-  height: 30px;
+  height: 20px;
   padding: 5px 10px;
   font-size: 12px;
   line-height: 1.5;
@@ -2726,8 +2726,8 @@ select[multiple].input-group-lg > .input-group-btn > .btn {
 select.input-group-sm > .form-control,
 select.input-group-sm > .input-group-addon,
 select.input-group-sm > .input-group-btn > .btn {
-  height: 30px;
-  line-height: 30px;
+  height: 20px;
+  line-height: 20px;
 }
 textarea.input-group-sm > .form-control,
 textarea.input-group-sm > .input-group-addon,
@@ -3227,8 +3227,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-bottom: 1px solid transparent;
   -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1), 0 1px 0 rgba(255, 255, 255, 0.1);
-  margin-top: 13px;
-  margin-bottom: 13px;
+  margin-top: 19px;
+  margin-bottom: 19px;
 }
 @media (min-width: 768px) {
   .navbar-form .form-group {
@@ -3295,12 +3295,12 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-bottom-left-radius: 0;
 }
 .navbar-btn {
-  margin-top: 13px;
-  margin-bottom: 13px;
+  margin-top: 19px;
+  margin-bottom: 19px;
 }
 .navbar-btn.btn-sm {
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .navbar-btn.btn-xs {
   margin-top: 19px;
@@ -5720,6 +5720,9 @@ label {
   font-weight: normal;
   margin-bottom: 0px;
 }
+.form-group {
+  margin-bottom: 10px;
+}
 textarea,
 textarea.form-control,
 input.form-control,
@@ -6718,24 +6721,27 @@ h1 {
 .bootstrap-datetimepicker-widget ul.list-unstyled li div.timepicker div.timepicker-picker table.table-condensed tbody > tr > td {
   padding: 0px !important;
 }
-.landing-page .jumbotron {
+.landing-page {
   background-color: #ffffff;
   margin-bottom: 0px;
 }
-.landing-page .jumbotron h1 {
+.landing-page h1 {
   font-family: Lato, Helvetica, Arial, sans-serif;
   font-size: 50px;
 }
-.landing-page .jumbotron .couch {
+.landing-page .couch {
   color: #2063a9;
 }
-.landing-page .jumbotron .modal-dialog {
+.landing-page .modal-dialog {
   width: auto;
 }
-.landing-page .jumbotron .authentication .sign-in {
+.landing-page .modal-header {
+  margin-bottom: 15px;
+}
+.landing-page .authentication .sign-in {
   margin: 0px;
 }
-.landing-page .jumbotron .authentication .sign-in p {
+.landing-page .authentication .sign-in p {
   font-size: 14px;
 }
 /*Content*/
