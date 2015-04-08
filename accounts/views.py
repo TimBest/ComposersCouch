@@ -21,6 +21,7 @@ from accounts.models import Profile
 from annoying.functions import get_object_or_None
 from annoying.views import MultipleFormsView
 from contact.forms import ZipcodeForm
+from contact.utils import get_location
 from userena.signals import signup_complete
 from userena.views import signin
 
@@ -34,6 +35,12 @@ class SignupView(MultipleFormsView):
       'signupForm'  : SignupForm,
       'zipcodeForm' : ZipcodeForm,
     }
+
+    def get_initial_data(self):
+        return {
+            'signupForm':{},
+            'zipcodeForm':{'zip_code': get_location(self.request, None, 'code')},
+        }
 
     def forms_valid(self, forms):
         info = {}
@@ -66,6 +73,14 @@ class SignupEmailView(SignupAuthView):
       'zipcodeForm' : ZipcodeForm,
       'emailForm'   : EmailForm,
     }
+
+    def get_initial_data(self):
+        print get_location(self.request, None, 'code')
+        return {
+            'signupForm':{},
+            'emailForm':{},
+            'zipcodeForm':{'zip_code': get_location(self.request, None, 'code')},
+        }
 
     def create_user_profile(self, info):
         user = create_profile(

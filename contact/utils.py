@@ -11,8 +11,9 @@ def get_location(request, code=None, attr='code'):
         zipcode = request.user.profile.contact_info.location.zip_code
     else:
         ip = get_client_ip(request)
-        if ip != '127.0.0.1':
-            record = db.record_by_addr(ip)
-            code = record.get('postal_code')
-            zipcode = get_object_or_None(Zipcode, code=code)
+        if ip == '127.0.0.1':
+            ip = "24.206.228.69"
+        record = db.record_by_addr(ip)
+        code = record.get('postal_code')
+        zipcode = get_object_or_None(Zipcode, code=code)
     return getattr(zipcode, attr, None)
