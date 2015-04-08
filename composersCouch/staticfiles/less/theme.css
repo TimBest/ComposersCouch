@@ -5715,7 +5715,10 @@ fieldset[disabled] .btn-default-nav.active {
   border-left: 7px solid transparent;
 }
 label {
+  color: #999999;
+  font-size: 12px;
   font-weight: normal;
+  margin-bottom: 0px;
 }
 textarea,
 textarea.form-control,

@@ -7,7 +7,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from crispy_forms.bootstrap import InlineRadios
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, HTML, Layout
+from crispy_forms.layout import Div, HTML, Layout, Field
 
 from accounts.pipeline import create_profile
 from accounts.models import PROFILE_TYPE_CHOICES, Profile
@@ -22,7 +22,6 @@ from venue.models import VenueProfile
 profile_type = Layout(
     HTML(
         "<div class='profile-type form-group' style='display:none;'>\
-          <label for='id_profile_type' class='control-label  requiredField'>Profile type<span class='asteriskField'>*</span></label>\
           <div><div class='btn-group' role='group'>\
               <button type='button' id='f' class='btn btn-default'><span class='fa fa-users'></span> Fan</button>\
               <button type='button' id='m' class='btn btn-default'><span class='fa fa-music'></span> Artist</button>\
@@ -58,12 +57,12 @@ class SignupForm(forms.ModelForm):
                 profile_type,
                 InlineRadios('profile_type'),
                 Div(
-                  Div('first_name',css_class='col-sm-6 left',),
-                  Div('last_name',css_class='col-sm-6 right',),
+                  Div(Field('first_name', placeholder='First name'),css_class='col-sm-6 left',),
+                  Div(Field('last_name', placeholder='Last name'),css_class='col-sm-6 right',),
                   css_class='row no-gutter',
                 ),
-                'band_name',
-                'venue_name',
+                Field('band_name', placeholder='Band name'),
+                Field('venue_name', placeholder='Venue name'),
             ),
         )
         if data and data.get('profile_type', None) == self.FAN:
@@ -112,9 +111,10 @@ class EmailForm(SignupFormOnlyEmail):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            'email',
-            'password1',
+            Field('email', placeholder='Email'),
+            Field('password1', placeholder='Password'),
         )
+
     def clean_email(self):
         email = self.cleaned_data.get('email')
         user = get_object_or_None(User, email=email)

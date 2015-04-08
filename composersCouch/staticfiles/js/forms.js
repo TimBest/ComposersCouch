@@ -54,4 +54,21 @@ $(document).ready(function() {
   });
   // show latest message first
   updateScroll();
+
+  // label is only visible when feil is not empty
+  $('input').each(function() {
+    if($(this).val().length <= 0) {
+      $(this).closest('.form-group').find('label').css("visibility", "hidden");
+    }
+  });
+  $('input').blur(function() {
+    if($(this).val().length > 0) {
+      $(this).closest('.form-group').find('label').css("visibility", "visible");
+    } else {
+      $(this).closest('.form-group').find('label').css("visibility", "hidden");
+    }
+  });
+  $('input').keypress(function() {
+    $(this).closest('.form-group').find('label').css("visibility", "visible");
+  });
 });
