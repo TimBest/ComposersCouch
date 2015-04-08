@@ -45,7 +45,7 @@
         </ul>
       </div>
       <a class="pull-right {{isEditable}}" href="{% url 'venue:live_video_form' username %}">
-        {% include "_addLink.html" with text='Add Live Track' %}
+        <span class="text-success fa fa-plus"> Add Live Track</span>
       </a>
     </div>
   </div>
@@ -76,7 +76,7 @@
         </ul>
       </div>
       <a class="text-primary pull-right {{isEditable}}" href="{% url 'venue:interview_video_form' username %}">
-        {% include "_addLink.html" with text='Add Interview' %}
+        <span class="text-success fa fa-plus">Add Interview</span>
       </a>
     </div>
   </div>
