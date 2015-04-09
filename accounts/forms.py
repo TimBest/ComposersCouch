@@ -59,12 +59,12 @@ class SignupForm(forms.ModelForm):
                 profile_type,
                 InlineRadios('profile_type'),
                 Div(
-                  Div(Field('first_name', placeholder='First name'),css_class='col-sm-6 left',),
-                  Div(Field('last_name', placeholder='Last name'),css_class='col-sm-6 right',),
+                  Div('first_name', css_class='col-sm-6 left',),
+                  Div('last_name', css_class='col-sm-6 right',),
                   css_class='row no-gutter',
                 ),
-                Field('band_name', placeholder='Band name'),
-                Field('venue_name', placeholder='Venue name'),
+                'band_name',
+                'venue_name',
             ),
         )
         if data and data.get('profile_type', None) == self.FAN:
@@ -113,8 +113,8 @@ class EmailForm(SignupFormOnlyEmail):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            Field('email', placeholder='Email'),
-            Field('password1', placeholder='Password'),
+            'email',
+            'password1',
         )
 
     def clean_email(self):

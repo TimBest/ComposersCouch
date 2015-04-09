@@ -15,7 +15,7 @@ autocomplete_light.register(Location ,LocationAutocomplete)
 class ZipcodeAutocomplete(autocomplete_light.AutocompleteModelBase):
     model = Zipcode
     attrs = {
-        'placeholder': 'Zipcode',
+        'placeholder': '',
     }
     search_fields = ['^code',]
 

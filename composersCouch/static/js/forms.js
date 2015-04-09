@@ -56,26 +56,3 @@ $(document).ready(function() {
   updateScroll();
 
 });
-$(document).ready(function() {
-  // label is only visible when field is not empty
-  $('input').each(function() {
-    if($(this).val().length <= 0) {
-      $(this).closest('.form-group').find('label').css("visibility", "hidden");
-    }
-    if($(this).closest('.form-group').find('.deck').children().length > 0) {
-      $(this).closest('.form-group').find('label').css("visibility", "visible");
-      $(this).hide();
-    }
-
-  });
-  $('input').blur(function() {
-    if($(this).val().length > 0) {
-      $(this).closest('.form-group').find('label').css("visibility", "visible");
-    } else {
-      $(this).closest('.form-group').find('label').css("visibility", "hidden");
-    }
-  });
-  $('input').keypress(function() {
-    $(this).closest('.form-group').find('label').css("visibility", "visible");
-  });
-});
