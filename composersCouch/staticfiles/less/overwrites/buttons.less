@@ -30,6 +30,15 @@
 .btn-google {
   .social-media-btn(@google);
 }
+.btn-google-inv {
+  .button-variant(@google; @white; @google);
+  &:hover,
+  &:focus,
+  .open .dropdown-toggle& {
+    color: @google;
+    border-color: @google;
+  }
+}
 .btn-instagram {
   .social-media-btn(@instagram);
 }

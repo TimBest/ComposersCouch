@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, REDIRECT_FIELD_NAME
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
@@ -14,6 +14,7 @@ from django.utils.translation import ugettext as _
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
 from django.views.generic.base import View, TemplateView
+from django.views.generic import FormView
 
 from accounts.pipeline import create_profile
 from accounts.forms import ClaimProfileForm, EmailForm, SignupForm, SigninForm
@@ -24,6 +25,7 @@ from contact.forms import ZipcodeForm
 from contact.utils import get_location
 from userena.signals import signup_complete
 from userena.views import signin
+from userena.utils import signin_redirect
 
 
 login_required_m = method_decorator(login_required)
@@ -190,11 +192,34 @@ def claim_profile_confirm(request, uidb64=None, token=None,
         request.current_app = current_app
     return TemplateResponse(request, template_name, context)
 
-def login_view(request):
-    if request.user.is_authenticated():
-        return redirect(request.user.profile)
-    return signin(request, auth_form=SigninForm,
-                  template_name='accounts/signin_form.html')
+class LoginView(FormView):
+    template_name = 'accounts/signin_form.html'
+    success_url = 'redirectToProfile'
+    form_class = SigninForm
+
+    def get_context_data(self, **kwargs):
+        context = super(LoginView, self).get_context_data(**kwargs)
+        context['login_form'] = context.get('form')
+        return context
+
+    def form_valid(self, form):
+        identification, password, remember_me = (form.cleaned_data['identification'],
+                                                 form.cleaned_data['password'],
+                                                 form.cleaned_data['remember_me'])
+        user = authenticate(identification=identification,
+                            password=password)
+        if user.is_active:
+            login(self.request, user)
+            if remember_me:
+                self.request.session.set_expiry(userena_settings.USERENA_REMEMBER_ME_DAYS[1] * 86400)
+            else: self.request.session.set_expiry(0)
+
+            # Whereto now?
+            redirect_to = signin_redirect(self.request.REQUEST.get(REDIRECT_FIELD_NAME), user)
+            return HttpResponseRedirect(redirect_to)
+
+login_view = LoginView.as_view()
+
 
 def loginredirect(request, username=None, tab='home'):
     if username == None:

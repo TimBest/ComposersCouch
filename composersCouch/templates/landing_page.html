@@ -3,6 +3,7 @@
 {% load crispy_forms_tags %}
 {% crispy signupForm signupForm.helper %}
 {% crispy zipcodeForm zipcodeForm.helper %}
+{% crispy SigninForm SigninForm.helper %}
 
 {% block aboveFeed %}
   <div class="header landing-page">
@@ -17,31 +18,37 @@
             Learn more <small><span class="fa fa-chevron-right"></span></small>
           </a>
         </div>
-        <div class="col-sm-4 authentication">
+        <div class="col-sm-4">
           <div class="sign-in">
-            <form id="sign-up-form" method="post" class="non-modal-form"
-                  action="{{ request.path }}">
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <p class="pull-right">Already have an account? <a href="{% url 'login' %}">Login</a></p>
-                    <h3 class="text-left">Sign up</h3>
-                  </div>
-                    <div class="modal-body">
-                    <div class="sign-in">
-                          {% crispy signupForm %}
-                          {% crispy zipcodeForm %}
-                          {% crispy emailForm %}
-                    </div>
-                    <input type="hidden" name="next" value="{{next|default:""}}"/>
-                    <div class="text-right">
-                      <button type="submit" onclick="this.form.onsubmit();return false;" class="btn btn-primary">
-                        Sign up
-                      </button>
-                    </div>
+            <div role="tabpanel" class="modal-content">
+              <div class="modal-header">
+                <ul class="nav nav-tabs nav-justified" role="tablist">
+                  <li role="presentation" class="active">
+                    <a href="#signup" aria-controls="signup" role="tab" data-toggle="tab">Sign up</a>
+                  </li>
+                  <li role="presentation">
+                    <a href="#login" aria-controls="login" role="tab" data-toggle="tab">Login</a>
+                  </li>
+                </ul>
+              </div>
+              <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="signup">
+                  <div class="modal-body">
+                    <form id="sign-up-form" method="post" class="non-modal-form" action="{{ request.path }}">
+                      {% crispy signupForm %}
+                      {% crispy zipcodeForm %}
+                      {% crispy emailForm %}
+                      <input type="hidden" name="next" value="{{next|default:""}}"/>
+                      <div class="text-right">
+                        <button type="submit" onclick="this.form.onsubmit();return false;" class="btn btn-primary">
+                            Sign up
+                        </button>
+                      </div>
+                    </form>
                   </div>
                   <div class="modal-footer">
                     <div class="social-links text-center">
-                      <p>Or sign up with:</p>
+                      <p>or sign up with:</p>
                       <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter-inv" role="button">
                         <span class="fa fa-twitter"></span> Twitter
                       </a>
@@ -51,7 +58,35 @@
                     </div>
                   </div>
                 </div>
-            </form>
+                <div role="tabpanel" class="tab-pane" id="login">
+                  <div class="modal-body">
+                    <form id="sign-in-form" method="post" class="non-modal-form" action="{{ request.path }}">
+                      {% crispy login_form %}
+                      <input type="hidden" name="next" value="{{next|default:""}}"/>
+                      <div class="text-right">
+                        <button type="submit" onclick="this.form.onsubmit();return false;" class="btn btn-primary">
+                          Login
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <div class="social-links text-center">
+                      <p>or login with:</p>
+                      <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter-inv" role="button">
+                        <span class="fa fa-twitter"></span> Twitter
+                      </a>
+                      <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook-inv" role="button">
+                        <span class="fa fa-facebook"></span> Facebook
+                      </a>
+                      <a href="{% url 'socialauth_begin' 'google' %}" class="btn btn-google-inv" role="button">
+                        <span class="fa fa-google"></span> Google
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -5208,6 +5208,53 @@ fieldset[disabled] .btn-google.active {
   color: #dd4b39;
   background-color: #ffffff;
 }
+.btn-google-inv {
+  color: #dd4b39;
+  background-color: #ffffff;
+  border-color: #dd4b39;
+}
+.btn-google-inv:hover,
+.btn-google-inv:focus,
+.btn-google-inv:active,
+.btn-google-inv.active,
+.open .dropdown-toggle.btn-google-inv {
+  color: #dd4b39;
+  background-color: #ebebeb;
+  border-color: #b93120;
+}
+.btn-google-inv:active,
+.btn-google-inv.active,
+.open .dropdown-toggle.btn-google-inv {
+  background-image: none;
+}
+.btn-google-inv.disabled,
+.btn-google-inv[disabled],
+fieldset[disabled] .btn-google-inv,
+.btn-google-inv.disabled:hover,
+.btn-google-inv[disabled]:hover,
+fieldset[disabled] .btn-google-inv:hover,
+.btn-google-inv.disabled:focus,
+.btn-google-inv[disabled]:focus,
+fieldset[disabled] .btn-google-inv:focus,
+.btn-google-inv.disabled:active,
+.btn-google-inv[disabled]:active,
+fieldset[disabled] .btn-google-inv:active,
+.btn-google-inv.disabled.active,
+.btn-google-inv[disabled].active,
+fieldset[disabled] .btn-google-inv.active {
+  background-color: #ffffff;
+  border-color: #dd4b39;
+}
+.btn-google-inv .badge {
+  color: #ffffff;
+  background-color: #dd4b39;
+}
+.btn-google-inv:hover,
+.btn-google-inv:focus,
+.open .dropdown-toggle.btn-google-inv {
+  color: #dd4b39;
+  border-color: #dd4b39;
+}
 .btn-instagram {
   color: #ffffff;
   background-color: #517fa4;
