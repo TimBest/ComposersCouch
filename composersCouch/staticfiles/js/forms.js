@@ -55,11 +55,18 @@ $(document).ready(function() {
   // show latest message first
   updateScroll();
 
-  // label is only visible when feil is not empty
+});
+$(document).ready(function() {
+  // label is only visible when field is not empty
   $('input').each(function() {
     if($(this).val().length <= 0) {
       $(this).closest('.form-group').find('label').css("visibility", "hidden");
     }
+    if($(this).closest('.form-group').find('.deck').children().length > 0) {
+      $(this).closest('.form-group').find('label').css("visibility", "visible");
+      $(this).hide();
+    }
+
   });
   $('input').blur(function() {
     if($(this).val().length > 0) {

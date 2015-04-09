@@ -5053,6 +5053,53 @@ fieldset[disabled] .btn-twitter.active {
   color: #00aced;
   background-color: #ffffff;
 }
+.btn-twitter-inv {
+  color: #00aced;
+  background-color: #ffffff;
+  border-color: #00aced;
+}
+.btn-twitter-inv:hover,
+.btn-twitter-inv:focus,
+.btn-twitter-inv:active,
+.btn-twitter-inv.active,
+.open .dropdown-toggle.btn-twitter-inv {
+  color: #00aced;
+  background-color: #ebebeb;
+  border-color: #0080b0;
+}
+.btn-twitter-inv:active,
+.btn-twitter-inv.active,
+.open .dropdown-toggle.btn-twitter-inv {
+  background-image: none;
+}
+.btn-twitter-inv.disabled,
+.btn-twitter-inv[disabled],
+fieldset[disabled] .btn-twitter-inv,
+.btn-twitter-inv.disabled:hover,
+.btn-twitter-inv[disabled]:hover,
+fieldset[disabled] .btn-twitter-inv:hover,
+.btn-twitter-inv.disabled:focus,
+.btn-twitter-inv[disabled]:focus,
+fieldset[disabled] .btn-twitter-inv:focus,
+.btn-twitter-inv.disabled:active,
+.btn-twitter-inv[disabled]:active,
+fieldset[disabled] .btn-twitter-inv:active,
+.btn-twitter-inv.disabled.active,
+.btn-twitter-inv[disabled].active,
+fieldset[disabled] .btn-twitter-inv.active {
+  background-color: #ffffff;
+  border-color: #00aced;
+}
+.btn-twitter-inv .badge {
+  color: #ffffff;
+  background-color: #00aced;
+}
+.btn-twitter-inv:hover,
+.btn-twitter-inv:focus,
+.open .dropdown-toggle.btn-twitter-inv {
+  color: #00aced;
+  border-color: #00aced;
+}
 .btn-facebook {
   color: #ffffff;
   background-color: #3b5998;
@@ -5093,6 +5140,53 @@ fieldset[disabled] .btn-facebook.active {
 .btn-facebook .badge {
   color: #3b5998;
   background-color: #ffffff;
+}
+.btn-facebook-inv {
+  color: #3b5998;
+  background-color: #ffffff;
+  border-color: #3b5998;
+}
+.btn-facebook-inv:hover,
+.btn-facebook-inv:focus,
+.btn-facebook-inv:active,
+.btn-facebook-inv.active,
+.open .dropdown-toggle.btn-facebook-inv {
+  color: #3b5998;
+  background-color: #ebebeb;
+  border-color: #2a3f6c;
+}
+.btn-facebook-inv:active,
+.btn-facebook-inv.active,
+.open .dropdown-toggle.btn-facebook-inv {
+  background-image: none;
+}
+.btn-facebook-inv.disabled,
+.btn-facebook-inv[disabled],
+fieldset[disabled] .btn-facebook-inv,
+.btn-facebook-inv.disabled:hover,
+.btn-facebook-inv[disabled]:hover,
+fieldset[disabled] .btn-facebook-inv:hover,
+.btn-facebook-inv.disabled:focus,
+.btn-facebook-inv[disabled]:focus,
+fieldset[disabled] .btn-facebook-inv:focus,
+.btn-facebook-inv.disabled:active,
+.btn-facebook-inv[disabled]:active,
+fieldset[disabled] .btn-facebook-inv:active,
+.btn-facebook-inv.disabled.active,
+.btn-facebook-inv[disabled].active,
+fieldset[disabled] .btn-facebook-inv.active {
+  background-color: #ffffff;
+  border-color: #3b5998;
+}
+.btn-facebook-inv .badge {
+  color: #ffffff;
+  background-color: #3b5998;
+}
+.btn-facebook-inv:hover,
+.btn-facebook-inv:focus,
+.open .dropdown-toggle.btn-facebook-inv {
+  color: #3b5998;
+  border-color: #3b5998;
 }
 .btn-google {
   color: #ffffff;
@@ -6722,7 +6816,6 @@ h1 {
   padding: 0px !important;
 }
 .landing-page {
-  background-color: #ffffff;
   margin-bottom: 0px;
 }
 .landing-page h1 {

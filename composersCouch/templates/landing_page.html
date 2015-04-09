@@ -6,7 +6,7 @@
 
 {% block aboveFeed %}
   <div class="header landing-page">
-    <div class="container-fluid white">
+    <div class="container-fluid">
       <div class="row">
         <div class="col-sm-8">
           <h1 class="composers">COMPOSERS<strong class="couch">COUCH</strong></h1>
@@ -42,10 +42,10 @@
                   <div class="modal-footer">
                     <div class="social-links text-center">
                       <p>Or sign up with:</p>
-                      <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter" role="button">
+                      <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter-inv" role="button">
                         <span class="fa fa-twitter"></span> Twitter
                       </a>
-                      <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook" role="button">
+                      <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook-inv" role="button">
                         <span class="fa fa-facebook"></span> Facebook
                       </a>
                     </div>

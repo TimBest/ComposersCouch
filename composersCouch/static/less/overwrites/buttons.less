@@ -28,8 +28,26 @@
 .btn-twitter {
   .social-media-btn(@twitter);
 }
+.btn-twitter-inv {
+  .button-variant(@twitter; @white; @twitter);
+  &:hover,
+  &:focus,
+  .open .dropdown-toggle& {
+    color: @twitter;
+    border-color: @twitter;
+  }
+}
 .btn-facebook {
   .social-media-btn(@facebook);
+}
+.btn-facebook-inv {
+  .button-variant(@facebook; @white; @facebook);
+  &:hover,
+  &:focus,
+  .open .dropdown-toggle& {
+    color: @facebook;
+    border-color: @facebook;
+  }
 }
 .btn-google {
   .social-media-btn(@google);
