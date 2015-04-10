@@ -2845,7 +2845,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav > li > a:hover,
 .nav > li > a:focus {
   text-decoration: none;
-  background-color: #dfe5eb;
+  background-color: #dddddd;
 }
 .nav > li.disabled > a {
   color: #999999;
@@ -2860,7 +2860,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav .open > a,
 .nav .open > a:hover,
 .nav .open > a:focus {
-  background-color: #dfe5eb;
+  background-color: #dddddd;
   border-color: #2063a9;
 }
 .nav .nav-divider {
@@ -2873,7 +2873,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   max-width: none;
 }
 .nav-tabs {
-  border-bottom: 1px solid #dddddd;
+  border-bottom: 1px solid #ffffff;
 }
 .nav-tabs > li {
   float: left;
@@ -2886,14 +2886,14 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-radius: 1px 1px 0 0;
 }
 .nav-tabs > li > a:hover {
-  border-color: #dfe5eb #dfe5eb #dddddd;
+  border-color: #dddddd #dddddd #ffffff;
 }
 .nav-tabs > li.active > a,
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
   color: #555555;
-  background-color: #dadfe1;
-  border: 1px solid #dddddd;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
   border-bottom-color: transparent;
   cursor: default;
 }
@@ -2928,17 +2928,17 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs.nav-justified > .active > a,
 .nav-tabs.nav-justified > .active > a:hover,
 .nav-tabs.nav-justified > .active > a:focus {
-  border: 1px solid #dddddd;
+  border: 1px solid #ffffff;
 }
 @media (min-width: 768px) {
   .nav-tabs.nav-justified > li > a {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #ffffff;
     border-radius: 1px 1px 0 0;
   }
   .nav-tabs.nav-justified > .active > a,
   .nav-tabs.nav-justified > .active > a:hover,
   .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom-color: #dadfe1;
+    border-bottom-color: #ffffff;
   }
 }
 .nav-pills > li {
@@ -2996,17 +2996,17 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .nav-tabs-justified > .active > a,
 .nav-tabs-justified > .active > a:hover,
 .nav-tabs-justified > .active > a:focus {
-  border: 1px solid #dddddd;
+  border: 1px solid #ffffff;
 }
 @media (min-width: 768px) {
   .nav-tabs-justified > li > a {
-    border-bottom: 1px solid #dddddd;
+    border-bottom: 1px solid #ffffff;
     border-radius: 1px 1px 0 0;
   }
   .nav-tabs-justified > .active > a,
   .nav-tabs-justified > .active > a:hover,
   .nav-tabs-justified > .active > a:focus {
-    border-bottom-color: #dadfe1;
+    border-bottom-color: #ffffff;
   }
 }
 .tab-content > .tab-pane {
@@ -6268,6 +6268,10 @@ input[type="checkbox"]:disabled:checked:after,
     width: 900px;
   }
 }
+.nav-tabs > li > a {
+  background-color: #ddd;
+  color: #555555;
+}
 .panel-default .panel-heading {
   border-bottom: 0px;
 }
@@ -6581,18 +6585,6 @@ h1 {
 .rightNav span.fa {
   font-size: 2em;
 }
-.rightNav .comingSoon {
-  -webkit-transform: rotate(-45deg);
-  -moz-transform: rotate(-45deg);
-  -ms-transform: rotate(-45deg);
-  -o-transform: rotate(-45deg);
-  transform: rotate(-45deg);
-  font-size: 8px;
-  /*height: 200px;
-              width: 200px;
-              float: left;
-              vertical-align:top; */
-}
 .non-modal-form .modal-content {
   border: 1px solid #cbcfd3;
   box-shadow: none;
@@ -6838,6 +6830,7 @@ h1 {
 }
 .landing-page .modal-header {
   margin-bottom: 15px;
+  padding: 0px;
 }
 .landing-page .authentication .sign-in {
   margin: 0px;
@@ -7515,10 +7508,10 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   border: 0px;
 }
 .messages .nav-tabs {
-  border-top: 1px solid #dddddd;
+  border-top: 1px solid #ffffff;
 }
 .messages .nav-tabs > li > a {
-  border-right: 1px solid #dddddd;
+  border-right: 1px solid #ffffff;
   border-radius: 0;
   margin-right: 0px;
 }
