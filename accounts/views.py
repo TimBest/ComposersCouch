@@ -4,16 +4,14 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render_to_response, render, redirect, resolve_url
-from django.template import RequestContext
+from django.shortcuts import get_object_or_404, redirect, resolve_url
 from django.template.response import TemplateResponse
-from django.utils.crypto import get_random_string
 from django.utils.decorators import method_decorator
 from django.utils.http import urlsafe_base64_decode
 from django.utils.translation import ugettext as _
 from django.views.decorators.debug import sensitive_post_parameters
 from django.views.decorators.cache import never_cache
-from django.views.generic.base import View, TemplateView
+from django.views.generic.base import TemplateView
 from django.views.generic import FormView
 
 from accounts.pipeline import create_profile
@@ -199,7 +197,8 @@ class LoginView(FormView):
 
     def get_context_data(self, **kwargs):
         context = super(LoginView, self).get_context_data(**kwargs)
-        context['login_form'] = context.get('form')
+        form_class = self.get_form_class()
+        context['login_form'] = self.get_form(form_class)
         return context
 
     def form_valid(self, form):
