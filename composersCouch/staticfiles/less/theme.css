@@ -3295,8 +3295,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-bottom-left-radius: 0;
 }
 .navbar-btn {
-  margin-top: 19px;
-  margin-bottom: 19px;
+  margin-top: 13px;
+  margin-bottom: 13px;
 }
 .navbar-btn.btn-sm {
   margin-top: 20px;
@@ -6446,6 +6446,7 @@ h1 {
 }
 .navbar .navbar-form {
   border-left: 1px solid #EEE;
+  margin-bottom: 18px;
 }
 .navbar .navbar-form input#search {
   font-family: 'FontAwesome', PT-sans, sans-serif;
