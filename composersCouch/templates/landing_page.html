@@ -34,7 +34,7 @@
               <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="signup">
                   <div class="modal-body">
-                    <form id="sign-up-form" method="post" action="{{ request.path }}">
+                    <form id="sign-up-form" method="post" action="{% url 'signup' %}">
                       {% crispy signupForm %}
                       {% crispy zipcodeForm %}
                       {% crispy emailForm %}
@@ -60,7 +60,7 @@
                 </div>
                 <div role="tabpanel" class="tab-pane" id="login">
                   <div class="modal-body">
-                    <form id="sign-in-form" method="post" action="{{ request.path }}">
+                    <form id="sign-in-form" method="post" action="{% url 'login' %}">
                       {% crispy login_form %}
                       <input type="hidden" name="next" value="{{next|default:""}}"/>
                       <div class="text-right">
