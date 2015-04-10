@@ -6822,9 +6822,13 @@ h1 {
 .landing-page h1 {
   font-family: Lato, Helvetica, Arial, sans-serif;
   font-size: 50px;
+  padding-top: 75px;
 }
 .landing-page .couch {
   color: #2063a9;
+}
+.landing-page .moto {
+  padding: 5px 0px;
 }
 .landing-page .modal-dialog {
   width: auto;
