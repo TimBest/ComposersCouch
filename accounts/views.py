@@ -21,9 +21,11 @@ from annoying.functions import get_object_or_None
 from annoying.views import MultipleFormsView
 from contact.forms import ZipcodeForm
 from contact.utils import get_location
+from userena.decorators import secure_required
 from userena.signals import signup_complete
 from userena.views import signin
 from userena.utils import signin_redirect
+from userena import settings as userena_settings
 
 
 login_required_m = method_decorator(login_required)
@@ -75,7 +77,6 @@ class SignupEmailView(SignupAuthView):
     }
 
     def get_initial_data(self):
-        print get_location(self.request, None, 'code')
         return {
             'signupForm':{},
             'emailForm':{},
@@ -217,7 +218,7 @@ class LoginView(FormView):
             redirect_to = signin_redirect(self.request.REQUEST.get(REDIRECT_FIELD_NAME), user)
             return HttpResponseRedirect(redirect_to)
 
-login_view = LoginView.as_view()
+login_view = secure_required(LoginView.as_view())
 
 
 def loginredirect(request, username=None, tab='home'):
