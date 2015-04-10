@@ -27,24 +27,24 @@
 
 {% block form %}
   <div class="sign-in">
-    <div class="row">
-      <div class="col-md-3 col-sm-4">
+    <div class="row no-gutter">
+      <div class="col-md-3 col-sm-4 left">
         <ul class="social-links text-center">
           <li>
-            <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter" role="button">
+            <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter-inv" role="button">
               <i class="fa fa-twitter"></i>
               <span>Twitter</span>
             </a>
           </li>
           <li>
-            <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook" role="button">
+            <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook-inv" role="button">
               <i class="fa fa-facebook"></i>
               <span>Facebook</span>
             </a>
           </li>
         </div>
       </ul>
-      <div class="col-md-9 col-sm-8">
+      <div class="col-md-9 col-sm-8 right">
         {% crispy signupForm %}
         {% crispy zipcodeForm %}
         {% crispy emailForm %}
