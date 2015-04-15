@@ -166,10 +166,10 @@ class SigninForm(AuthenticationForm):
             'identification',
             'password',
             Div(
-              Div('remember_me',css_class='col-xs-6 left',),
+              Div('remember_me',css_class='col-xs-5 left',),
               Div(
                 HTML("<a href='{% url 'userena_password_reset' %}' class='text-right checkbox'>Forgot your password?</a>"),
-                css_class='col-xs-6 right',
+                css_class='col-xs-7 right',
               ),
               css_class='row no-gutter',
             ),
