@@ -24,43 +24,54 @@
     {% endif %}
   </head>
   <body>
+    <h1 class="hidden">COMPOSERS COUCH</h1>
     <div class="navbar navbar-default navbar-static-top" role="navigation">
       <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="{% url 'home' %}">
-            <img class="couch" src="{% static 'img/CouchNavBar.png' %}" height="40" alt="COMPOSERS COUCH"/>
-            <h1 class="hidden">COMPOSERS COUCH</h1>
-            <span class="beta-badge"> BETA</span>
-          </a>
-        </div>
-        <form class="navbar-form navbar-left" action="{% url 'search' %}" method="get" role="search">
-          <input type="search" name="q" id="search" placeholder="&#xf002; Search" class="form-control" />
-        </form>
-        <div class="navbar-right">
-          {% if user.is_authenticated %}
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="{{ user.profile.get_absolute_url }}">{{ user.profile }}</a></li>
-              <li class="dropdown">
-                <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
-                <ul class="dropdown-menu">
-                  <li><a href="{% url 'profile_edit' %}">Edit profile</a></li>
-                  <li class="divider"></li>
-                  <li><a href="{% url 'signout' %}">Log out</a></li>
+        <div class="row no-gutter">
+          <div class="col-sm-2 col-xs-12 left">
+            <div class="navbar-header">
+              <a class="navbar-brand image-frame" href="{% url 'home' %}">
+                <div class="logo ">
+                  <span class="frame-helper"></span>
+                  <img class="couch image-center" src="{% static 'img/CouchNavBar.png' %}" height="40" alt="COMPOSERS COUCH"/>
+                  <span class="beta-badge"> BETA</span>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-sm-4 col-xs-6 center">
+            <form class="navbar-form navbar-left" action="{% url 'search' %}" method="get" role="search">
+              <input type="search" name="q" id="search" placeholder="&#xf002; Search" class="form-control" />
+            </form>
+          </div>
+          <div class="col-xs-6 right text-right">
+            <div class="navbar-right">
+              {% if user.is_authenticated %}
+                <ul class="nav navbar-nav navbar-right">
+                  <li><a href="{{ user.profile.get_absolute_url }}">{{ user.profile }}</a></li>
+                  <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{% url 'profile_edit' %}">Edit profile</a></li>
+                      <li class="divider"></li>
+                      <li><a href="{% url 'signout' %}">Log out</a></li>
+                    </ul>
+                  </li>
                 </ul>
-              </li>
-            </ul>
-          {% else %}
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
-            <li>
-              <p class="navbar-btn">
-                <a href="{% url 'signup' %}?next={{ request.path }}" type="button" class="btn btn-primary">
-                  Sign up
-                </a>
-              </p>
-            </li>
-          </ul>
-          {% endif %}
+              {% else %}
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="{% url 'login' %}?next={{ request.path }}">Login</a></li>
+                <li>
+                  <p class="navbar-btn">
+                    <a href="{% url 'signup' %}?next={{ request.path }}" type="button" class="btn btn-primary">
+                      Sign up
+                    </a>
+                  </p>
+                </li>
+              </ul>
+              {% endif %}
+            </div>
+          </div>
         </div>
       </div>
     </div>

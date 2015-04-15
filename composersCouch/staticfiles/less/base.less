@@ -41,14 +41,22 @@ h1 {
   }
   .navbar-brand {
     padding: 10px 40px 10px 15px;
-    position:relative;
     .beta-badge {
-      position:absolute;
-      bottom:8px;
-      right:8px;
+      position:relative;
+      bottom:-12px;
+      right:3px;
       color: @dark-red;
       font-size: 14px;
       font-family: PT-sans, sans-serif;
+    }
+    @media (max-width: @screen-sm-min) {
+      display: inline-block;
+      margin: 0px auto;
+      width: 100%;
+      .couch {
+        // add the with of the beta tag to the other side of the image
+        padding-left:35px;
+      }
     }
 
   }

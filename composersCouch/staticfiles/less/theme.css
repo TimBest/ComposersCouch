@@ -6434,15 +6434,24 @@ h1 {
 }
 .navbar .navbar-brand {
   padding: 10px 40px 10px 15px;
-  position: relative;
 }
 .navbar .navbar-brand .beta-badge {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
+  position: relative;
+  bottom: -12px;
+  right: 3px;
   color: #820a07;
   font-size: 14px;
   font-family: PT-sans, sans-serif;
+}
+@media (max-width: 768px) {
+  .navbar .navbar-brand {
+    display: inline-block;
+    margin: 0px auto;
+    width: 100%;
+  }
+  .navbar .navbar-brand .couch {
+    padding-left: 35px;
+  }
 }
 .navbar .navbar-form {
   border-left: 1px solid #EEE;
@@ -7573,9 +7582,8 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .image-frame {
   white-space: nowrap;
   text-align: center;
-  margin: 1em 0;
 }
-.image-frame frame-helper {
+.image-frame .frame-helper {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
