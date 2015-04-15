@@ -5825,7 +5825,11 @@ fieldset[disabled] .btn-default-nav.active {
 }
 .btn:active,
 .btn.active {
-  box-shadow: 0px 0px 1px #ffffff inset, 0px 2px 9px rgba(0, 0, 0, 0.1) inset;
+  box-shadow: none;
+}
+/* remove double border */
+.btn-border-right-none {
+  border-right-width: 0px;
 }
 .caret-large {
   display: inline-block;

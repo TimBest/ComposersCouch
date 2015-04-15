@@ -24,9 +24,9 @@ profile_type = Layout(
         "<div class='profile-type form-group' style='display:none;'>\
           <div class='btn-group btn-group-justified' role='group'>\
             <div class='btn-group' role='group'>\
-              <button type='button' id='f' class='btn btn-default'><span class='fa fa-users'></span> Fan</button>\
+              <button type='button' id='f' class='btn btn-default btn-border-right-none'><span class='fa fa-users'></span> Fan</button>\
             </div><div class='btn-group' role='group'>\
-              <button type='button' id='m' class='btn btn-default'><span class='fa fa-music'></span> Artist</button>\
+              <button type='button' id='m' class='btn btn-default btn-border-right-none'><span class='fa fa-music'></span> Artist</button>\
             </div><div class='btn-group' role='group'>\
               <button type='button' id='v' class='btn btn-default'><span class='fa fa-ticket'></span> Venue</button>\
         </div></div></div>"
