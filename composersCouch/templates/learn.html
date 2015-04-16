@@ -14,124 +14,42 @@
     </div>
   </div>
 {% endblock %}
-{% block overwriteContent %}
-<div class="jumbotron text-center" id="profile-types">
-  <div class="row">
-    <div class="col-sm-4">
-      <a href="#venues">
-        <span class="fa fa-ticket fa-5x"></span>
-        <h2 class="text-black">Venues</h2>
-        <p class="text-black">Book better shows by easily comparing artists and managing booking requests.</p>
-      </a>
-    </div>
-    <div class="col-sm-4">
-      <a href="#artists" class="text-black">
-        <span class="fa fa-music fa-5x"></span>
-        <h2>Artists</h2>
-        <p>Find local venues, manage your tour, and host your press kit.</p>
-      </a>
-    </div>
-    <div class="col-sm-4">
-      <a href="#concerts" class="text-black">
-        <span class="fa fa-users fa-5x"></span>
-        <h2>Fans</h2>
-        <p>Discover local artists, find concerts in your area and follow your favorites.</p>
-      </a>
-    </div>
-  </div>
-</div>
-  <div class="landing-page">
-    <div class="requests section" id="requests">
-        <div class="row">
-          <div class="col-sm-6">
-            <h2>
-              {% if request.user.profile.profile_type == "m" %}
-                <a href="{% url 'requests' 'expiring' 'artist' 'any-distance' %}" class="text-white">
-                  Requests
-                </a>
-              {% else %}
-                <a href="{% url 'requests' 'expiring' 'venue' 'any-distance' %}" class="text-white">
-                  Requests
-                </a>
-              {% endif %}
-            </h2>
-            <p>
-              Requests are a way of starting a dialog between a potential client.
-              They come in two types: public and private. Public requests can be
-              seen by any one on the site. They are used when you know when and
-              where you want to play a show and are looking for bands or venues
-              in an area. After posting a public request other users will apply
-              and you and you can easily sort through the applications and chose
-              the best ones. On the other hand private request are a way of putting together a 
-              show when you already know where or who you want to play..</p>
-            {% if request.user.profile.profile_type == "m" %}
-              <a href="{% url 'requests' 'expiring' 'artist' 'any-distance' %}" class="pull-right btn btn-transparent">
-                View Requests <small><span class="fa fa-chevron-right text-white"></span></small>
-              </a>
-            {% else %}
-              <a href="{% url 'requests' 'expiring' 'venue' 'any-distance' %}" class="pull-right btn btn-transparent">
-                View Requests <small><span class="fa fa-chevron-right text-white"></span></small>
-              </a>
-            {% endif %}
-          </div>
-        </div>
-    </div>
-    <div class="concerts section" id="concerts">
-        <div class="row">
-          <div class="col-sm-6 col-sm-offset-6">
-            <h2><a class="text-white" href="{% url 'shows' 'upcoming' 'any-distance' %}">
-              Shows
-            </a></h2>
-            <p>Promote your shows. Find out who is coming to your area. Filter concerts by genre and location.</p>
-            <a href="{% url 'shows' 'upcoming' 'any-distance' %}" class="pull-right btn btn-transparent">
-              View Shows <small><span class="fa fa-chevron-right text-white"></span></small>
+{% block content %}
+  <div class="text-center" id="profile-types">
+    <div class="sign-in non-modal-form">
+      <div role="tabpanel" class="modal-content">
+        <ul class="nav nav-tabs nav-justified" role="tablist">
+          <li role="presentation">
+            <a href="#venue" aria-controls="venue" role="tab" data-toggle="tab">
+              <span class="fa fa-ticket fa-5x"></span>
+              <h2 class="text-black">Venues</h2>
             </a>
-          </div>
-      </div>
-    </div>
-    <div class="artists section" id="artists">
-        <div class="row">
-          <div class="col-sm-6">
-            <h2><a class="text-white" href="{% url 'artists' 'all' 'any-distance' %}">
-              Artists
-            </a></h2>
-            <p>Discover local artists by genre. Use the
-              <a class="text-white" href="{% url 'available_artists' 'all' 2014 32 32 %}">
-              availability feed</a> to find out when local artists are free or
-              when touring artists are passing through.</p>
-            <a href="{% url 'artists' 'all' 'any-distance' %}" class="pull-right btn btn-transparent">
-              View Artists <small><span class="fa fa-chevron-right"></span></small>
+          </li>
+          <li role="presentation" class="active">
+            <a href="#artist" aria-controls="artist" role="tab" data-toggle="tab">
+              <span class="fa fa-music fa-5x"></span>
+              <h2>Artists</h2>
             </a>
-          </div>
+          </li>
+          <li role="presentation">
+            <a href="#fan" aria-controls="fan" role="tab" data-toggle="tab">
+              <span class="fa fa-users fa-5x"></span>
+              <h2>Fans</h2>
+            </a>
+          </li>
+        </ul>
+        <div class="tab-content">
+          <div role="tabpanel" class="tab-pane active" id="venue">
+            <p class="text-black">Book better shows by easily comparing artists and managing booking requests.</p>
 
-        </div>
-    </div>
-    <div class="venues section" id="venues">
-        <div class="row">
-          <div class="col-sm-6 col-sm-offset-6">
-            <h2><a class="text-white" href="{% url 'venues' 'all' 'any-distance' %}">
-              Venues
-            </a></h2>
-            <p>Find local venues or ones between tour stops. Use the
-              <a class="text-white" href="{% url 'available_venues' 'all' 2014 32 32 %}">
-              availability feed</a> to find out when venues are free.</p>
-            <a href="{% url 'venues' 'all' 'any-distance' %}" class="pull-right btn btn-transparent">
-              View Venues <small><span class="fa fa-chevron-right"></span></small>
-            </a>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="artist">
+            <p>Find local venues, manage your tour, and host your press kit.</p>
+          </div>
+          <div role="tabpanel" class="tab-pane" id="fan">
+            <p>Discover local artists, find concerts in your area and follow your favorites.</p>
           </div>
         </div>
-    </div>
-    <div class="updates section" id="updates">
-        <div class="row">
-          <div class="col-sm-6">
-            <h2><a class="text-white" href="{% url 'updates' 'all' 'any-distance' %}">
-              Updates
-            </a></h2>
-            <p>Find out what you favorite venues and artists are up to.</p>
-            <a href="{% url 'updates' 'all' 'any-distance' %}" class="pull-right btn btn-transparent">
-              View Updates <span class="fa fa-chevron-right"></span>
-            </a>
-          </div>
       </div>
     </div>
   </div>
