@@ -6273,6 +6273,9 @@ input[type="checkbox"]:disabled:checked:after,
 .panel-default .panel-heading {
   border-bottom: 0px;
 }
+.jumbotron {
+  margin-bottom: 0;
+}
 /* remove padding on grid system columns. used in crispy forms and in profile display
  * credit to: Skelly*/
 .no-gutter .left {
@@ -6849,7 +6852,6 @@ h1 {
 .landing-page h1 {
   font-family: Lato, Helvetica, Arial, sans-serif;
   font-size: 50px;
-  font-size: 5vw;
   padding-top: 75px;
 }
 .landing-page .couch {
@@ -6865,11 +6867,9 @@ h1 {
   margin-bottom: 15px;
   padding: 0px;
 }
-.landing-page .authentication .sign-in {
-  margin: 0px;
-}
-.landing-page .authentication .sign-in p {
-  font-size: 14px;
+.landing-page .sign-in ul li {
+  float: left;
+  width: 50%;
 }
 /*Content*/
 .about.container {

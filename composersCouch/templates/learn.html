@@ -3,46 +3,45 @@
 
 {% block title %}Learn{% endblock %}
 {% block overwriteHeader %}
-  <div class="jumbotron black text-center" id="profile-types">
-    <div class="row">
-      <div class="col-sm-4">
-        <a href="#venues" class="text-white">
-          <span class="fa fa-ticket fa-5x"></span>
-          <h2>Venues</h2>
-          <p>Book better shows by easily comparing artists and managing booking requests.</p>
-        </a>
-      </div>
-      <div class="col-sm-4">
-        <a href="#artists" class="text-white">
-          <span class="fa fa-music fa-5x"></span>
-          <h2>Artists</h2>
-          <p>Find local venues, manage your tour, and host your press kit.</p>
-        </a>
-      </div>
-      <div class="col-sm-4">
-        <a href="#concerts" class="text-white">
-          <span class="fa fa-users fa-5x"></span>
-          <h2>Fans</h2>
-          <p>Discover local artists, find concerts in your area and follow your favorites.</p>
-        </a>
-      </div>
+  <div class="jumbotron text-center" id="profile-types">
+    <div class="container">
+      <h2>Changing how local shows and booked and promoted.</h2>
+      <p>
+        Composer's Couch is a tool that allows for hassle free booking of shows.
+        Giving artist and venues all the tools necessary to allow them to book the
+        best bands.
+      </p>
     </div>
   </div>
 {% endblock %}
 {% block overwriteContent %}
-  <div class="landing-page">
-    <div class="sub-nav" data-spy="affix" data-offset-top="400">
-      <ul class="nav nav-pills nav-centered">
-        <li class="active"><a href="#requests">Requests</a></li>
-        <li class=""><a href="#concerts">Concerts</a></li>
-        <li class=""><a href="#artists">Artists</a></li>
-        <li class=""><a href="#venues">Venues</a></li>
-        <li class=""><a href="#updates">Updates</a></li>
-        <a href="{% url 'signup' %}" type="button" class="pull-right btn btn-primary">Sign Up</a>
-      </ul>
+<div class="jumbotron text-center" id="profile-types">
+  <div class="row">
+    <div class="col-sm-4">
+      <a href="#venues">
+        <span class="fa fa-ticket fa-5x"></span>
+        <h2 class="text-black">Venues</h2>
+        <p class="text-black">Book better shows by easily comparing artists and managing booking requests.</p>
+      </a>
     </div>
+    <div class="col-sm-4">
+      <a href="#artists" class="text-black">
+        <span class="fa fa-music fa-5x"></span>
+        <h2>Artists</h2>
+        <p>Find local venues, manage your tour, and host your press kit.</p>
+      </a>
+    </div>
+    <div class="col-sm-4">
+      <a href="#concerts" class="text-black">
+        <span class="fa fa-users fa-5x"></span>
+        <h2>Fans</h2>
+        <p>Discover local artists, find concerts in your area and follow your favorites.</p>
+      </a>
+    </div>
+  </div>
+</div>
+  <div class="landing-page">
     <div class="requests section" id="requests">
-      <div class="jumbotron stretchMe" data-stretch="{% static 'img/Requests.jpg' %}">
         <div class="row">
           <div class="col-sm-6">
             <h2>
@@ -56,7 +55,15 @@
                 </a>
               {% endif %}
             </h2>
-            <p>Find artist and venues looking to put on shows in your area.</p>
+            <p>
+              Requests are a way of starting a dialog between a potential client.
+              They come in two types: public and private. Public requests can be
+              seen by any one on the site. They are used when you know when and
+              where you want to play a show and are looking for bands or venues
+              in an area. After posting a public request other users will apply
+              and you and you can easily sort through the applications and chose
+              the best ones. On the other hand private request are a way of putting together a 
+              show when you already know where or who you want to play..</p>
             {% if request.user.profile.profile_type == "m" %}
               <a href="{% url 'requests' 'expiring' 'artist' 'any-distance' %}" class="pull-right btn btn-transparent">
                 View Requests <small><span class="fa fa-chevron-right text-white"></span></small>
@@ -68,10 +75,8 @@
             {% endif %}
           </div>
         </div>
-      </div>
     </div>
     <div class="concerts section" id="concerts">
-      <div class="jumbotron stretchMe" data-stretch="{% static 'img/Concert.jpg' %}">
         <div class="row">
           <div class="col-sm-6 col-sm-offset-6">
             <h2><a class="text-white" href="{% url 'shows' 'upcoming' 'any-distance' %}">
@@ -82,11 +87,9 @@
               View Shows <small><span class="fa fa-chevron-right text-white"></span></small>
             </a>
           </div>
-        </div>
       </div>
     </div>
     <div class="artists section" id="artists">
-      <div class="jumbotron stretchMe" data-stretch="{% static 'img/Artist.jpg' %}">
         <div class="row">
           <div class="col-sm-6">
             <h2><a class="text-white" href="{% url 'artists' 'all' 'any-distance' %}">
@@ -102,10 +105,8 @@
           </div>
 
         </div>
-      </div>
     </div>
     <div class="venues section" id="venues">
-      <div class="jumbotron stretchMe" data-stretch="{% static 'img/venue.jpg' %}">
         <div class="row">
           <div class="col-sm-6 col-sm-offset-6">
             <h2><a class="text-white" href="{% url 'venues' 'all' 'any-distance' %}">
@@ -119,10 +120,8 @@
             </a>
           </div>
         </div>
-      </div>
     </div>
     <div class="updates section" id="updates">
-      <div class="jumbotron stretchMe" data-stretch="{% static 'img/Updates.jpg' %}">
         <div class="row">
           <div class="col-sm-6">
             <h2><a class="text-white" href="{% url 'updates' 'all' 'any-distance' %}">
@@ -133,7 +132,6 @@
               View Updates <span class="fa fa-chevron-right"></span>
             </a>
           </div>
-        </div>
       </div>
     </div>
   </div>
