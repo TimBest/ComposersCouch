@@ -1724,7 +1724,7 @@ output {
 .form-control[readonly],
 fieldset[disabled] .form-control {
   cursor: not-allowed;
-  background-color: #dfe5eb;
+  background-color: #dddddd;
   opacity: 1;
 }
 textarea.form-control {
@@ -2431,7 +2431,7 @@ input[type="button"].btn-block {
 .dropdown-menu > li > a:focus {
   text-decoration: none;
   color: #232323;
-  background-color: #dfe5eb;
+  background-color: #dddddd;
 }
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
@@ -2439,7 +2439,7 @@ input[type="button"].btn-block {
   color: #303030;
   text-decoration: none;
   outline: 0;
-  background-color: #dfe5eb;
+  background-color: #dddddd;
 }
 .dropdown-menu > .disabled > a,
 .dropdown-menu > .disabled > a:hover,
@@ -3547,7 +3547,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .pagination > li > a:focus,
 .pagination > li > span:focus {
   color: #143d69;
-  background-color: #dfe5eb;
+  background-color: #dddddd;
   border-color: #dddddd;
 }
 .pagination > .active > a,
@@ -3623,7 +3623,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .pager li > a:hover,
 .pager li > a:focus {
   text-decoration: none;
-  background-color: #dfe5eb;
+  background-color: #dddddd;
 }
 .pager .next > a,
 .pager .next > span {
