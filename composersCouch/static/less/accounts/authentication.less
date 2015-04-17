@@ -6,75 +6,40 @@
   .container-fluid{
     padding-right:15px;
   }
-  #div_id_profile_type {
-    input[type="radio"] {
-
-
-    }
-    input[type="radio"] + label {
-
-    }
-    input[type="radio"]:checked + label {
-    }
-  }
-  .sign-up {
-    .social-links {
-      a {
-        width:100px;
-        height:100px;
-        margin-bottom:30px;
-        .fa {
-          display: block;
-          font-size: 2em;
-          padding-top: 18px;
-        }
-        label {
-          padding-top: 15px;
-        }
-      }
-    }
-  }
-  .sign-in {
-    margin-top:30px;
+  .social-links {
+    list-style-type:none;
     margin-bottom:15px;
-    .social-links {
-      list-style-type:none;
-      margin:0;
-      padding:0;
-      li {
-        margin-bottom:15px;
-        a {
-          width: 100px;
-          text-align:left;
-          span {
-            padding-left: 5px;
-          }
-        }
-      }
-    }
-
-    @media (max-width: 767px) {
-      .social-links {
-        li {
-          display: inline;
-          a {
-            width: auto;
-            margin-right: 10px;
-          }
-        }
-      }
-    }
-    @media (max-width: 400px) {
-      .social-links > li > a {
-        width: 50px;
-        text-align:center;
-        margin-right:0px;
+    padding:0;
+    li {
+      margin-bottom:15px;
+      a {
+        width: 100px;
+        text-align:left;
         span {
-          display: none;
+          padding-left: 5px;
         }
       }
     }
   }
-
-
+  @media (max-width: 767px) {
+    .social-links {
+      li {
+        display: inline;
+        a {
+          width: auto;
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+  @media (max-width: 400px) {
+    .social-links > li > a {
+      width: 50px;
+      text-align:center;
+      margin-right:0px;
+      span {
+        display: none;
+      }
+    }
+  }
 }

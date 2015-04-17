@@ -5,9 +5,12 @@
 {% block overwriteHeader %}
   <div class="jumbotron text-center" id="profile-types">
     <div class="container">
-      <h2>Changing how local shows and booked and promoted.</h2>
+      <div class="image-frame">
+        <span class="frame-helper"></span>
+        <img class="image-center" id="logo" alt="Composers Couch" src="{% static 'img/logo.png' %}">
+      </div>
       <p>
-        Composer's Couch is a tool that allows for hassle free booking of shows.
+        A tool that allows for hassle free booking of shows.
         Giving artist and venues all the tools necessary to allow them to book the
         best bands.
       </p>
@@ -21,58 +24,58 @@
         <ul class="nav nav-tabs nav-justified" role="tablist">
           <li role="presentation">
             <a href="#venue" aria-controls="venue" role="tab" data-toggle="tab">
-              <span class="fa fa-ticket fa-5x"></span>
+              <h1><span class="fa fa-ticket"></span></h1>
               <h2 class="text-black">Venues</h2>
             </a>
           </li>
           <li role="presentation" class="active">
             <a href="#artist" aria-controls="artist" role="tab" data-toggle="tab">
-              <span class="fa fa-music fa-5x"></span>
+              <h1><span class="fa fa-music"></span></h1>
               <h2>Artists</h2>
             </a>
           </li>
           <li role="presentation">
             <a href="#fan" aria-controls="fan" role="tab" data-toggle="tab">
-              <span class="fa fa-users fa-5x"></span>
+              <h1><span class="fa fa-users"></span></h1>
               <h2>Fans</h2>
             </a>
           </li>
         </ul>
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane active" id="venue">
-            <h4>Book better shows by easily comparing artists and managing booking requests.</h4>
-            <ul>
-              <li>
-                <b>Public requests</b> can be seen by any one on the site.
-                They are a way of saying i am willing to put on a show at this
-                time near this location. Venues can specify how many bands
-                they are looking for.  After a public request is posted users
-                of the site can apply then the poster of the request can go
-                through the submissions and choose the best candidates to
-                finalize a show with.
-              </li>
-              <li>
-                <b>Private Requests</b> Are a way of asking artist(s) if they
-                want to play a show. They can be sent to anyone on the site to
-                non site users via email. When reviewing a private request the
-                users is given:
+            <div class="container">
+              <h2 class="text-center">Book better shows by easily comparing artists and managing booking requests.</h2>
+
+              <h3>Public requests</h3>
+              <p>can be seen by anyone on the site.
+              They are a way of saying i am willing to put on a show at this
+              time near this location. Venues can specify how many bands
+              they are looking for.  After a public request is posted users
+              of the site can apply then the poster of the request can go
+              through the submissions and choose the best candidates to
+              finalize a show with.</p>
+
+              <h3>Private Requests</h3>
+              <p>Are a way of asking artist(s) if they
+              want to play a show. They can be sent to anyone on the site to
+              non site users via email. When reviewing a private request the
+              users is given:
                 <ul>
                   <li>The option to accept or decline the request</li>
                   <li>An overview of the participants of a request</li>
                   <li>A quick view at events they already have scheduled close to the date of the request</li>
                   <li>A thread to discuss the details of the event</li>
                 </ul>
-                After the details are sorted out a participant can create an
-                event from the request to finalize the show. and when the
-                participants are ready they can choose to make this event
-                viewable .
-              </li>
-              <li>
-                <b>Availability Feed</b> A list of artist in the area or passing
-                by on a tour that may be available. Searchable by location and
-                genre.
-              </li>
-            <ul>
+              After the details are sorted out a participant can create an
+              event from the request to finalize the show. and when the
+              participants are ready they can choose to make this event
+              viewable .</p>
+
+              <h3>Availability Feed</h3>
+              <p>A list of artist in the area or passing
+              by on a tour that may be available. Searchable by location and
+              genre.</p>
+            </div>
           </div>
           <div role="tabpanel" class="tab-pane" id="artist">
             <p>Find local venues, manage your tour, and host your press kit.</p>
