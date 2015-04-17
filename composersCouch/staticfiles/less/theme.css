@@ -5563,55 +5563,6 @@ fieldset[disabled] .btn-danger-inv.active {
   color: #a62421;
   border-color: #a62421;
 }
-.btn-transparent {
-  color: #ffffff;
-  background-color: transparent;
-  border-color: #ffffff;
-}
-.btn-transparent:hover,
-.btn-transparent:focus,
-.btn-transparent:active,
-.btn-transparent.active,
-.open .dropdown-toggle.btn-transparent {
-  color: #ffffff;
-  background-color: rgba(0, 0, 0, 0);
-  border-color: #e0e0e0;
-}
-.btn-transparent:active,
-.btn-transparent.active,
-.open .dropdown-toggle.btn-transparent {
-  background-image: none;
-}
-.btn-transparent.disabled,
-.btn-transparent[disabled],
-fieldset[disabled] .btn-transparent,
-.btn-transparent.disabled:hover,
-.btn-transparent[disabled]:hover,
-fieldset[disabled] .btn-transparent:hover,
-.btn-transparent.disabled:focus,
-.btn-transparent[disabled]:focus,
-fieldset[disabled] .btn-transparent:focus,
-.btn-transparent.disabled:active,
-.btn-transparent[disabled]:active,
-fieldset[disabled] .btn-transparent:active,
-.btn-transparent.disabled.active,
-.btn-transparent[disabled].active,
-fieldset[disabled] .btn-transparent.active {
-  background-color: transparent;
-  border-color: #ffffff;
-}
-.btn-transparent .badge {
-  color: transparent;
-  background-color: #ffffff;
-}
-.btn-transparent:hover,
-.btn-transparent:focus,
-.open .dropdown-toggle.btn-transparent {
-  color: #ffffff;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-color: #dfe5eb;
-  box-shadow: none;
-}
 .btn-header {
   color: #ffffff;
   background-color: transparent;
@@ -6971,40 +6922,6 @@ h1 {
 .header.feed .main-nav .description span {
   vertical-align: middle;
 }
-.header.feed .nav-options {
-  color: #dfe5eb;
-}
-.header.feed .nav-options .feed-type {
-  padding: 0px 5px;
-}
-.header.feed .nav-options .nav {
-  margin-top: 20px;
-  border-bottom: 0px;
-}
-.header.feed .nav-options .nav .dropdown,
-.header.feed .nav-options .nav .popover-form {
-  padding-right: 10px;
-  margin-bottom: 5px;
-}
-@media (min-width: 768px) {
-  .header.feed .nav-options .nav .dropdown,
-  .header.feed .nav-options .nav .popover-form {
-    padding-right: 0px;
-    margin-bottom: 0px;
-  }
-}
-.header.feed .nav-options .nav .last {
-  margin-bottom: 0px;
-}
-.header.feed .nav-options .nav .popover-form {
-  color: #303030;
-}
-.header.feed .nav-options .nav .nav-form {
-  float: left;
-}
-.header.feed .nav-options .nav .nav-form div {
-  float: left;
-}
 .feed.sub-nav .filter {
   margin: 0px;
   padding: 11px 12px;
@@ -7037,13 +6954,6 @@ h1 {
 }
 .feed .cards .btn {
   margin-right: 5px;
-}
-.feed .nav-text {
-  float: left;
-  position: relative;
-  display: block;
-  padding: 8px 5px;
-  margin-bottom: 0px;
 }
 .post form {
   padding: 0px;
