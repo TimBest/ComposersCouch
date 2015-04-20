@@ -6738,25 +6738,27 @@ h1 {
 .landing-page {
   margin-bottom: 0px;
 }
-.landing-page h1 {
+.landing-page .title {
+  padding: 75px 0px;
+}
+.landing-page .title h1 {
   font-family: Lato, Helvetica, Arial, sans-serif;
   font-size: 50px;
-  padding-top: 75px;
 }
-.landing-page .couch {
+.landing-page .title .couch {
   color: #2063a9;
 }
-.landing-page .moto {
+.landing-page .title .moto {
   padding: 5px 0px;
 }
-.landing-page .modal-dialog {
+.landing-page .authentication .modal-dialog {
   width: auto;
 }
-.landing-page .modal-header {
+.landing-page .authentication .modal-header {
   margin-bottom: 15px;
   padding: 0px;
 }
-.landing-page .sign-in ul li {
+.landing-page .authentication .sign-in ul li {
   float: left;
   width: 50%;
 }

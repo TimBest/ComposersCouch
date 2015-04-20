@@ -11,7 +11,7 @@
   <div class="header landing-page">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-sm-8">
+        <div class="col-sm-8 title">
           <h1 class="composers">COMPOSERS<strong class="couch">COUCH</strong></h1>
           <div class="moto">
             <h3>Changing how local shows and booked and promoted.</h3>
@@ -20,7 +20,8 @@
             Learn more <small><span class="fa fa-chevron-right"></span></small>
           </a>
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-4 authentication">
+          {% if not request.user.is_authenticated %}
           <div class="sign-in non-modal-form">
             <div role="tabpanel" class="modal-content">
               <div class="modal-header">
@@ -90,6 +91,7 @@
               </div>
             </div>
           </div>
+          {% endif %}
         </div>
       </div>
     </div>
