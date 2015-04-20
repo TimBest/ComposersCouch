@@ -6902,59 +6902,57 @@ h1 {
     display: none;
   }
 }
-.header.feed {
+.feed {
   padding: 0px;
   font-size: 15px;
 }
-.header.feed .main-nav .title {
-  margin: 10px 0px 5px 0px;
-  font-size: 30px;
-}
-.header.feed .main-nav .description {
+.feed .main-nav {
   display: inline-block;
-  margin-left: 15px;
 }
-.header.feed .main-nav .description .dropdown .btn {
+.feed .main-nav .nav-text {
+  display: inline-block;
+  padding: 6px 0px;
+  margin-bottom: 2px;
+}
+.feed .main-nav .dropdown {
+  vertical-align: bottom;
+}
+.feed .main-nav .dropdown .btn {
   font-size: 15px;
   margin-bottom: 2px;
 }
-.header.feed .main-nav .description a {
+.feed .main-nav .dropdown .title {
+  font-size: 30px;
+}
+.feed .main-nav a {
   padding: 6px;
 }
-.header.feed .main-nav .description span {
-  vertical-align: middle;
-}
-.feed.sub-nav .filter {
-  margin: 0px;
-  padding: 11px 12px;
-  border: none;
-}
-.feed.sub-nav .filter .dropdown-menu {
+.feed .filter .dropdown-menu {
   width: 300px;
 }
-.feed.sub-nav .filter .dropdown-menu li {
+.feed .filter .dropdown-menu li {
   margin: 0px 10px;
 }
-.feed.sub-nav .filter .dropdown-menu li .label {
+.feed .filter .dropdown-menu li .label {
   display: inline-block;
   margin-right: 4px;
 }
-.feed.sub-nav .filter .dropdown-menu li .genres {
+.feed .filter .dropdown-menu li .genres {
   font-family: Arial, sans-serif;
 }
-.feed.sub-nav .order .dropdown-menu {
+.feed .order .dropdown-menu {
   left: auto;
   right: 0;
 }
-.feed .cards {
+.cards {
   text-align: left;
 }
 @media (max-width: 767px) {
-  .feed .cards {
+  .cards {
     text-align: center;
   }
 }
-.feed .cards .btn {
+.cards .btn {
   margin-right: 5px;
 }
 .post form {
