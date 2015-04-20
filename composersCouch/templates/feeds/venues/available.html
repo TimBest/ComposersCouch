@@ -9,7 +9,7 @@
 
 {% block zipcodeForm %}
   <span class="dropdown">
-    <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+    <a class="btn btn-transparent-dropdown dropdown-toggle" href="javascript:void(0)" type="button" data-toggle="dropdown" aria-expanded="true">
       <span class="dotted-bottom text-white">{% block nearActive %}near{% endblock %}</span>
     </a>
     <ul class="dropdown-menu">
@@ -22,7 +22,7 @@
     </ul>
   </span>
   {% block betweenForm %}
-    <a href="#" role="button" data-toggle="popover"
+    <a href="javascript:void(0)" role="button" data-toggle="popover"
        id="zipcode-select" class="toggle btn btn-transparent-dropdown text-white" title="Zipcode">
       <span class="dotted-bottom text-white">{% if zipcode %}{{ zipcode }}{% else %}location{% endif %}</span>
     </a>

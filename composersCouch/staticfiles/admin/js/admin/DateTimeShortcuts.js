@@ -127,12 +127,12 @@ var DateTimeShortcuts = {
         // <div id="clockbox1" class="clockbox module">
         //     <h2>Choose a time</h2>
         //     <ul class="timelist">
-        //         <li><a href="#">Now</a></li>
-        //         <li><a href="#">Midnight</a></li>
-        //         <li><a href="#">6 a.m.</a></li>
-        //         <li><a href="#">Noon</a></li>
+        //         <li><a href="javascript:void(0)">Now</a></li>
+        //         <li><a href="javascript:void(0)">Midnight</a></li>
+        //         <li><a href="javascript:void(0)">6 a.m.</a></li>
+        //         <li><a href="javascript:void(0)">Noon</a></li>
         //     </ul>
-        //     <p class="calendar-cancel"><a href="#">Cancel</a></p>
+        //     <p class="calendar-cancel"><a href="javascript:void(0)">Cancel</a></p>
         // </div>
 
         var clock_box = document.createElement('div');
@@ -229,16 +229,16 @@ var DateTimeShortcuts = {
         //
         // <div id="calendarbox3" class="calendarbox module">
         //     <h2>
-        //           <a href="#" class="link-previous">&lsaquo;</a>
-        //           <a href="#" class="link-next">&rsaquo;</a> February 2003
+        //           <a href="javascript:void(0)" class="link-previous">&lsaquo;</a>
+        //           <a href="javascript:void(0)" class="link-next">&rsaquo;</a> February 2003
         //     </h2>
         //     <div class="calendar" id="calendarin3">
         //         <!-- (cal) -->
         //     </div>
         //     <div class="calendar-shortcuts">
-        //          <a href="#">Yesterday</a> | <a href="#">Today</a> | <a href="#">Tomorrow</a>
+        //          <a href="javascript:void(0)">Yesterday</a> | <a href="javascript:void(0)">Today</a> | <a href="javascript:void(0)">Tomorrow</a>
         //     </div>
-        //     <p class="calendar-cancel"><a href="#">Cancel</a></p>
+        //     <p class="calendar-cancel"><a href="javascript:void(0)">Cancel</a></p>
         // </div>
         var cal_box = document.createElement('div');
         cal_box.style.display = 'none';

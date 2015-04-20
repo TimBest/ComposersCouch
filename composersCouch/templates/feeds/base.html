@@ -42,7 +42,7 @@
           {% if request.user.is_authenticated %}
             {% block scope %}
               <span class="dropdown">
-                <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+                <a class="btn btn-transparent-dropdown dropdown-toggle" href="javascript:void(0)" type="button" data-toggle="dropdown" aria-expanded="true">
                   <span class="dotted-bottom text-white">{% block currentScope %}within{% endblock %}</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -61,7 +61,7 @@
             <span class="text-white">within</span>
           {% endif %}
           {% block availabilityForm %}
-            <a href="#" role="button" data-toggle="popover"
+            <a href="javascript:void(0)" role="button" data-toggle="popover"
                id="availability-select" class="toggle btn btn-transparent-dropdown text-white" title="Availability">
                <span class="dotted-bottom text-white">{% if date %}{{ date|date:"n/j/y" }}{% else %}Date{% endif %}</span>
             </a>
@@ -75,7 +75,7 @@
           {% block zipcodeForm %}
             {% block distance %}
               <span class="dropdown">
-                <a class="btn btn-transparent-dropdown dropdown-toggle" href="#" type="button" data-toggle="dropdown" aria-expanded="true">
+                <a class="btn btn-transparent-dropdown dropdown-toggle" href="javascript:void(0)" type="button" data-toggle="dropdown" aria-expanded="true">
                   <span class="dotted-bottom text-white">{{ distance|default:"any distance" }}</span>
                 </a>
                 <ul class="dropdown-menu">
@@ -91,7 +91,7 @@
               </span>
               <span class="text-white">of</span>
             {% endblock %}
-            <a href="#" role="button" data-toggle="popover" id="zipcode-select" class="toggle btn btn-transparent-dropdown" title="Zipcode">
+            <a href="javascript:void(0)" role="button" data-toggle="popover" id="zipcode-select" class="toggle btn btn-transparent-dropdown" title="Zipcode">
               <span class="dotted-bottom text-white">{% if zipcode %}{{ zipcode }}{% else %}location{% endif %}</span>
             </a>
             <div class="zipcode-content hide">
