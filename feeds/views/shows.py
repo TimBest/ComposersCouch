@@ -6,8 +6,8 @@ from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils import timezone
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView
 
+from accounts.views import SignupEmailView, LoginView
 from contact.utils import get_location
 from feeds.models import Follow
 from feeds.post_feed import LocalFeed
@@ -19,25 +19,22 @@ login_required_m = method_decorator(login_required)
 
 def shows(request, scope='any-distance', *args, **kwargs):
     kwargs['scope'] = scope
-    if scope == '50':
-        return LocalView.as_view()(request, *args, **kwargs)
-    elif scope == 'following':
-        return FollowingView.as_view()(request, *args, **kwargs)
+    if request.user.is_authenticated():
+        views = AUTH_VIEWS
     else:
-        return ShowView.as_view()(request, *args, **kwargs)
+        views = VIEWS
+    return views.get(scope, views['any-distance'])(request, *args, **kwargs)
 
-class ShowView(FeedMixin, TemplateView):
-    modelManager = Show.objects
+class ShowViewAuth(FeedMixin):
+    model = Show
     path_to_genre = 'info__venue__profile__genre__slug'
     template_name = 'feeds/shows/shows.html'
     feedType = 'shows'
+    default_order = "upcoming"
     # TODO: expand to also match with those preforming
 
-    def get_default_order(self):
-        return "upcoming"
-
     def get_posts(self, **kwargs):
-        return self.modelManager.filter(visible=True)
+        return self.model.objects.filter(visible=True)
 
     def get_order(self, qs):
         order = self.kwargs.get('order')
@@ -49,10 +46,13 @@ class ShowView(FeedMixin, TemplateView):
             # Upcoming
             return qs.order_by('date__start').filter(date__start__gte=timezone.now())
 
-class LocalView(ShowView):
+class ShowView (ShowViewAuth, SignupEmailView, LoginView):
+    pass
+
+class LocalViewAuth(ShowView):
 
     def get_posts(self, **kwargs):
-        posts = super(LocalView, self).get_posts(**kwargs)
+        posts = super(LocalViewAuth, self).get_posts(**kwargs)
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
         if location:
             return posts.filter(
@@ -61,16 +61,34 @@ class LocalView(ShowView):
         else:
             return []
 
-class FollowingView(ShowView):
+class LocalView(LocalViewAuth, SignupEmailView, LoginView):
+    pass
+
+class FollowingViewAuth(ShowView):
     template_name = 'feeds/shows/following.html'
 
     @login_required_m
     def dispatch(self, *args, **kwargs):
-        return super(FollowingView, self).dispatch(*args, **kwargs)
+        return super(FollowingViewAuth, self).dispatch(*args, **kwargs)
 
     def get_posts(self,**kwargs):
-        posts = super(FollowingView, self).get_posts(**kwargs)
+        posts = super(FollowingViewAuth, self).get_posts(**kwargs)
         following = self.request.user.following_set.values_list('target')
         return posts.filter(
             Q(info__openers__profile__user__pk__in=following) | Q(info__headliner__profile__user__pk__in=following) | Q(info__venue__pk__in=following)
         )
+
+class FollowingView(FollowingViewAuth, SignupEmailView, LoginView):
+    pass
+
+AUTH_VIEWS = {
+    '50' : LocalViewAuth.as_view(),
+    'following' : FollowingViewAuth.as_view(),
+    'any-distance' : ShowViewAuth.as_view(),
+}
+
+VIEWS = {
+    '50' : LocalView.as_view(),
+    'following' : FollowingView.as_view(),
+    'any-distance' : ShowView.as_view(),
+}

@@ -7,32 +7,29 @@ from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
 from django.utils.timezone import utc
-from django.views.generic import TemplateView
 
-from venue.models import VenueProfile
+from accounts.views import SignupEmailView, LoginView
 from composersCouch.utils import get_page
 from contact.utils import get_location
 from feeds.views import AvailabilityMixin, FeedMixin, GenreMixin
 from feeds.post_feed import LocalFeed
+from venue.models import VenueProfile
 
 
 login_required_m = method_decorator(login_required)
 
 def venues(request, scope='any-distance', *args, **kwargs):
     kwargs['scope'] = scope
-    if scope == '50':
-        return LocalView.as_view()(request, *args, **kwargs)
-    elif scope == 'following':
-        return FollowingView.as_view()(request, *args, **kwargs)
+    if request.user.is_authenticated():
+        views = AUTH_VIEWS
     else:
-        return AllView.as_view()(request, *args, **kwargs)
+        views = VIEWS
+    return views.get(scope, views['any-distance'])(request, *args, **kwargs)
 
-class VenueView(FeedMixin, TemplateView):
-    modelManager = VenueProfile.objects
+class VenueView(FeedMixin):
+    model = VenueProfile
     feedType = 'venues'
-
-    def get_default_order(self):
-        return "all"
+    default_order = "all"
 
     def get_order(self, qs):
         order = self.kwargs.get('order')
@@ -49,7 +46,7 @@ class AvailabilityView(AvailabilityMixin, VenueView):
         # TODO: add checking for when its more then a (x time period) away the default to local
         start = datetime.combine(self.start_date, time()).replace(tzinfo=utc)
         end = datetime.combine(self.end_date, time()).replace(tzinfo=utc)
-        posts = self.modelManager.exclude(**self.get_exclude(start, end))
+        posts = self.model.objects.exclude(**self.get_exclude(start, end))
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
         if location:
             return posts.filter(
@@ -68,7 +65,7 @@ class BetweenView(AvailabilityView):
         # TODO: add checking for when its more then a (x time period) away the default to local
         start = datetime.combine(self.start_date, time()).replace(tzinfo=utc)
         end = datetime.combine(self.end_date, time()).replace(tzinfo=utc)
-        posts = self.modelManager.exclude(**self.get_exclude(start, end))
+        posts = self.model.objects.exclude(**self.get_exclude(start, end))
         calendar = self.request.user.calendar
         prev = calendar.get_prev_event(in_datetime=end)
         next = calendar.get_next_event(in_datetime=end)
@@ -87,32 +84,53 @@ class BetweenView(AvailabilityView):
 
 available_venues_between = login_required(BetweenView.as_view())
 
-class LocalView(VenueView):
+class LocalViewAuth(VenueView):
     template_name = 'feeds/venues/local.html'
 
     def get_posts(self, **kwargs):
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
         if location:
-            return self.modelManager.filter(
+            return self.model.objects.filter(
                 profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
             )
         else:
             return []
 
-class FollowingView(VenueView):
+class LocalView (LocalViewAuth, SignupEmailView, LoginView,):
+    pass
+
+class FollowingViewAuth(VenueView):
     template_name = 'feeds/venues/following.html'
 
     @login_required_m
     def dispatch(self, *args, **kwargs):
-        return super(FollowingView, self).dispatch(*args, **kwargs)
+        return super(FollowingViewAuth, self).dispatch(*args, **kwargs)
 
     def get_posts(self, **kwargs):
-        return self.modelManager.filter(
+        return self.model.objects.filter(
             profile__user__pk__in=self.request.user.following_set.values_list('target')
         )
 
-class AllView(VenueView):
+class FollowingView (FollowingViewAuth, SignupEmailView, LoginView,):
+    pass
+
+class AllViewAuth(VenueView):
     template_name = 'feeds/venues/all.html'
 
     def get_posts(self, **kwargs):
-        return self.modelManager.all()
+        return self.model.objects.all()
+
+class AllView (AllViewAuth, SignupEmailView, LoginView,):
+    pass
+
+AUTH_VIEWS = {
+    '50' : LocalViewAuth.as_view(),
+    'following' : FollowingViewAuth.as_view(),
+    'any-distance' : AllViewAuth.as_view(),
+}
+
+VIEWS = {
+    '50' : LocalView.as_view(),
+    'following' : FollowingView.as_view(),
+    'any-distance' : AllView.as_view(),
+}

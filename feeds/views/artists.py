@@ -5,8 +5,8 @@ from django.contrib.gis.measure import D
 from django.db.models import Q
 from django.utils.decorators import method_decorator
 from django.utils.timezone import utc
-from django.views.generic import TemplateView
 
+from accounts.views import SignupEmailView, LoginView
 from artist.models import ArtistProfile
 from contact.utils import get_location
 from feeds.post_feed import LocalFeed
@@ -17,19 +17,16 @@ login_required_m = method_decorator(login_required)
 
 def artists(request, scope='any-distance', *args, **kwargs):
     kwargs['scope'] = scope
-    if scope == '50':
-        return LocalView.as_view()(request, *args, **kwargs)
-    elif scope == 'following':
-        return FollowingView.as_view()(request, *args, **kwargs)
+    if request.user.is_authenticated():
+        views = AUTH_VIEWS
     else:
-        return AllView.as_view()(request, *args, **kwargs)
+        views = VIEWS
+    return views.get(scope, views['any-distance'])(request, *args, **kwargs)
 
-class ArtistView(FeedMixin, TemplateView):
-    modelManager = ArtistProfile.objects
+class ArtistView(FeedMixin):
+    model = ArtistProfile
     feedType = 'artists'
-
-    def get_default_order(self):
-        return "all"
+    default_order = "all"
 
     def get_order(self, qs, **kwargs):
         order = self.kwargs.get('order')
@@ -54,7 +51,7 @@ class AvailabilityView(AvailabilityMixin, ArtistView):
         end = datetime.combine(self.end_date, time()).replace(tzinfo=utc)
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
         if location:
-            return self.modelManager.exclude(**self.get_exclude(start, end)).filter(
+            return self.model.objects.exclude(**self.get_exclude(start, end)).filter(
                 Q(profile__user__calendar__events__line__line__distance_lte=(location, D(m=LocalFeed.distance))) |
                 Q(profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance)))
             ).distinct()
@@ -63,32 +60,50 @@ class AvailabilityView(AvailabilityMixin, ArtistView):
 
 available_artists = AvailabilityView.as_view()
 
-class LocalView(ArtistView):
+class LocalViewAuth(ArtistView):
     template_name = 'feeds/artists/local.html'
 
     def get_posts(self, **kwargs):
         location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
         if location:
-            return self.modelManager.filter(
+            return self.model.objects.filter(
                 profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
             )
         else:
             return []
 
-class FollowingView(ArtistView):
+class LocalView(SignupEmailView, LoginView, LocalViewAuth):
+    pass
+
+class FollowingViewAuth(ArtistView):
     template_name = 'feeds/artists/following.html'
 
     @login_required_m
     def dispatch(self, *args, **kwargs):
-        return super(FollowingView, self).dispatch(*args, **kwargs)
+        return super(FollowingViewAuth, self).dispatch(*args, **kwargs)
 
     def get_posts(self, **kwargs):
-        return self.modelManager.filter(
+        return self.model.objects.filter(
             profile__user__pk__in=self.request.user.following_set.values_list('target')
         )
 
-class AllView(ArtistView):
+class FollowingView(SignupEmailView, LoginView, FollowingViewAuth):
+    pass
+
+class AllViewAuth(ArtistView):
     template_name = 'feeds/artists/all.html'
 
-    def get_posts(self, **kwargs):
-        return self.modelManager.all()
+class AllView (AllViewAuth, SignupEmailView, LoginView,):
+    pass
+
+AUTH_VIEWS = {
+    '50' : LocalViewAuth.as_view(),
+    'following' : FollowingViewAuth.as_view(),
+    'any-distance' : AllViewAuth.as_view(),
+}
+
+VIEWS = {
+    '50' : LocalView.as_view(),
+    'following' : FollowingView.as_view(),
+    'any-distance' : AllView.as_view(),
+}

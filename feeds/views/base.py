@@ -2,12 +2,14 @@ from datetime import datetime, timedelta, time
 from django.core.urlresolvers import resolve, reverse
 from django.shortcuts import redirect, render
 from django.utils import timezone
+from django.views.generic import ListView
 
 from annoying.functions import get_object_or_None
 from composersCouch.utils import get_page
 from contact.utils import get_location
 from feeds.forms import ZipcodeForm, AvailabilityForm
 from genres.models import Category
+from schedule.models import Show
 
 
 class ZipcodeMixin(object):
@@ -52,17 +54,23 @@ class GenreMixin(object):
                 context['genres'] = category.genres.all()
         return context
 
-class FeedMixin(GenreMixin, ZipcodeMixin):
-    modelManager = None
+class FeedMixin(GenreMixin, ZipcodeMixin, ListView):
+    object_list = []
+    model = Show
+    template_name = 'feeds/show_list.html'
+    paginate_by = 15
+    default_order = "default"
 
     def get_order(self, qs):
         return qs
 
-    def get_default_order(self):
-        return "default"
-
     def get_posts(self):
-        return []
+        return self.model.objects.all()
+
+    def get_queryset(self):
+        queryset = self.get_posts()
+        queryset = self.get_order(queryset)
+        return queryset
 
     def get_scope(self, **kwargs):
         context = {}
@@ -77,15 +85,10 @@ class FeedMixin(GenreMixin, ZipcodeMixin):
         context = super(FeedMixin, self).get_context_data(**kwargs)
         context.update(self.get_scope())
         context['feedType'] = self.feedType
-        page_num = self.request.GET.get('page')
-        posts = self.get_posts()
-        if posts:
-            posts = self.get_order(posts)
-            if context.get('genres'):
-                posts = self.filter_by_genre(context['genres'], posts)
-        context['posts'] = get_page(page_num, posts, 15)
-        if not self.kwargs.get('order'):
-          context['order'] = self.get_default_order()
+        context['order'] = self.kwargs.get('order', self.default_order)
+
+        if context.get('genres') and context.get('object_list'):
+            context['object_list'] = self.filter_by_genre(context['genres'], context['object_list'])
         return context
 
 class AvailabilityMixin(object):

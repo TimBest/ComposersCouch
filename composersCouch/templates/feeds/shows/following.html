@@ -9,5 +9,5 @@
 {% block followingClass %}active{% endblock %}
 
 {% block feed %}
-  {% include "feeds/shows/_feed.html" with shows=posts following="Ture" %}
+  {% include "feeds/shows/_feed.html" with shows=object_list following="Ture" %}
 {% endblock %}

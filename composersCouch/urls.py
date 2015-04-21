@@ -23,9 +23,9 @@ urlpatterns += patterns('annoying.views',
     url(r'^team/$', 'load_template', {'template_name': 'footer/team.html'}, name='team'),
     url(r'^credit/$', 'load_template', {'template_name': 'footer/credit.html'}, name='credit'),
 )
-urlpatterns += patterns('composersCouch.views',
+urlpatterns += patterns('feeds.views',
     # Landing Page
-    url(r'^$', 'landing_page', name='home'),
+    url(r'^$', 'shows', name='home'),
 )
 
 urlpatterns += patterns('',

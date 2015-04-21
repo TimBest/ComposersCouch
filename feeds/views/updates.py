@@ -5,8 +5,9 @@ from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
+from accounts.views import SignupEmailView, LoginView
 from composersCouch.utils import get_page
-from feeds.views import FeedMixin, ZipcodeMixin
+from feeds.views import ZipcodeMixin
 from feeds.utils import enrich_activities
 from contact.utils import get_location
 from feeds.models import Post
@@ -20,12 +21,11 @@ login_required_m = method_decorator(login_required)
 
 def updates(request, scope='any-distance', *args, **kwargs):
     kwargs['scope'] = scope
-    if scope == '50':
-        return LocalView.as_view()(request, *args, **kwargs)
-    elif scope == 'following':
-        return FollowingView.as_view()(request, *args, **kwargs)
+    if request.user.is_authenticated():
+        views = AUTH_VIEWS
     else:
-        return AllView.as_view()(request, *args, **kwargs)
+        views = VIEWS
+    return views.get(scope, views['any-distance'])(request, *args, **kwargs)
 
 class UpdateView(ZipcodeMixin, TemplateView):
     template_name = 'feeds/updates/local.html'
@@ -62,42 +62,36 @@ class UpdateView(ZipcodeMixin, TemplateView):
         context['location'] = get_location(self.request, zipcode, 'code')
         return context
 
-class LocalView(UpdateView):
+class LocalViewAuth(UpdateView):
     template_name = 'feeds/updates/local.html'
     feed = 'get_local_feed'
     location_type = 'code'
 
-class AllView(ZipcodeMixin, TemplateView):
-    template_name = 'feeds/updates/all.html'
-    path_to_genre = 'user__profile__genre__slug'
-    feedType = 'updates'
+class LocalView(LocalViewAuth, SignupEmailView, LoginView):
+    pass
 
-    def get_scope(self, **kwargs):
-        context = {}
-        context['feedType'] = self.feedType
-        context['scope'] = self.kwargs.get('scope', 'all')
-        if context['scope'] == "any-distance":
-            context['distance'] = "any distance"
-        elif context['scope'] == "50":
-            context['distance'] = "50 miles"
-        return context
+class AllViewAuth(UpdateView):
+    template_name = 'feeds/updates/all.html'
 
     def get_context_data(self, **kwargs):
-        context = super(AllView, self).get_context_data(**kwargs)
+        context = super(AllViewAuth, self).get_context_data(**kwargs)
         context.update(self.get_scope())
         page_num = self.request.GET.get('page')
-        context['posts'] = get_page(page_num, Post.objects.all().order_by('-created_at'), 15)
+        context['object_list'] = get_page(page_num, Post.objects.all().order_by('-created_at'), 15)
         return context
 
-class FollowingView(UpdateView):
+class AllView(AllViewAuth, SignupEmailView, LoginView):
+    pass
+
+class FollowingViewAuth(UpdateView):
     template_name='feeds/updates/following.html'
 
     @login_required_m
     def dispatch(self, *args, **kwargs):
-        return super(FollowingView, self).dispatch(*args, **kwargs)
+        return super(FollowingViewAuth, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(FollowingView, self).get_context_data(**kwargs)
+        context = super(FollowingViewAuth, self).get_context_data(**kwargs)
         page_num = self.request.GET.get('page')
         feed = feedly.get_feeds(self.request.user.id)['normal']
         activities = list(feed[:15])
@@ -105,3 +99,18 @@ class FollowingView(UpdateView):
         context['activities'] = enrich_activities(activities)
         context['location'] = get_location(self.request, self.get_zipcode(), 'code')
         return context
+
+class FollowingView(FollowingViewAuth, SignupEmailView, LoginView):
+    pass
+
+AUTH_VIEWS = {
+    '50' : LocalViewAuth.as_view(),
+    'following' : FollowingViewAuth.as_view(),
+    'any-distance' : AllViewAuth.as_view(),
+}
+
+VIEWS = {
+    '50' : LocalView.as_view(),
+    'following' : FollowingView.as_view(),
+    'any-distance' : AllView.as_view(),
+}
