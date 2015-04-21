@@ -49,7 +49,7 @@ class ShowViewAuth(FeedMixin):
 class ShowView (ShowViewAuth, SignupEmailView, LoginView):
     pass
 
-class LocalViewAuth(ShowView):
+class LocalViewAuth(ShowViewAuth):
 
     def get_posts(self, **kwargs):
         posts = super(LocalViewAuth, self).get_posts(**kwargs)
@@ -64,26 +64,25 @@ class LocalViewAuth(ShowView):
 class LocalView(LocalViewAuth, SignupEmailView, LoginView):
     pass
 
-class FollowingViewAuth(ShowView):
+class FollowingView(ShowViewAuth):
     template_name = 'feeds/shows/following.html'
 
     @login_required_m
     def dispatch(self, *args, **kwargs):
-        return super(FollowingViewAuth, self).dispatch(*args, **kwargs)
+        print "folloing view dispatch"
+        return super(FollowingView, self).dispatch(*args, **kwargs)
 
     def get_posts(self,**kwargs):
-        posts = super(FollowingViewAuth, self).get_posts(**kwargs)
+        print "get_posts"
+        posts = super(FollowingView, self).get_posts(**kwargs)
         following = self.request.user.following_set.values_list('target')
         return posts.filter(
             Q(info__openers__profile__user__pk__in=following) | Q(info__headliner__profile__user__pk__in=following) | Q(info__venue__pk__in=following)
         )
 
-class FollowingView(FollowingViewAuth, SignupEmailView, LoginView):
-    pass
-
 AUTH_VIEWS = {
     '50' : LocalViewAuth.as_view(),
-    'following' : FollowingViewAuth.as_view(),
+    'following' : FollowingView.as_view(),
     'any-distance' : ShowViewAuth.as_view(),
 }
 
