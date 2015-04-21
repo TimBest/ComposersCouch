@@ -6927,11 +6927,11 @@ h1 {
 .feed .main-nav a {
   padding: 6px;
 }
+.feed .dropdown-menu.dropdown-form li {
+  margin: 0px 10px;
+}
 .feed .filter .dropdown-menu {
   width: 300px;
-}
-.feed .filter .dropdown-menu li {
-  margin: 0px 10px;
 }
 .feed .filter .dropdown-menu li .label {
   display: inline-block;

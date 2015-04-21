@@ -41,6 +41,7 @@ class VenueView(FeedMixin):
 
 class AvailabilityView(AvailabilityMixin, VenueView):
     template_name = 'feeds/venues/available.html'
+    model = VenueProfile
 
     def get_posts(self, **kwargs):
         # TODO: add checking for when its more then a (x time period) away the default to local

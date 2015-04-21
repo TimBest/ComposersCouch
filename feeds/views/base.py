@@ -95,18 +95,18 @@ class AvailabilityMixin(object):
     model = None
 
     def dispatch(self, request, *args, **kwargs):
-        year = kwargs.get('year')
-        month = kwargs.get('month')
-        day = kwargs.get('day')
+        year = self.kwargs.get('year')
+        month = self.kwargs.get('month')
+        day = self.kwargs.get('day')
         try:
             self.start_date = datetime(int(year), int(month), int(day))
         except:
             now = timezone.now()
-            kwargs['year'] = now.year
-            kwargs['month'] = now.month
-            kwargs['day'] = now.day
+            self.kwargs['year'] = now.year
+            self.kwargs['month'] = now.month
+            self.kwargs['day'] = now.day
             url_name = resolve(self.request.path_info).url_name
-            response = redirect(reverse(url_name, kwargs=kwargs))
+            response = redirect(reverse(url_name, kwargs=self.kwargs))
             response['Location'] += '?' + self.request.GET.urlencode()
             return response
         self.end_date = self.start_date + timedelta(1)
@@ -122,4 +122,7 @@ class AvailabilityMixin(object):
         context = super(AvailabilityMixin, self).get_context_data(**kwargs)
         context['date'] = self.start_date
         context['availabilityForm'] = AvailabilityForm()
+        context['year'] = self.kwargs.get('year')
+        context['month'] = self.kwargs.get('month')
+        context['day'] = self.kwargs.get('day')
         return context
