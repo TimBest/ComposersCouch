@@ -1,18 +1,12 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.gis.measure import D
 from django.utils import timezone
-from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView
 
 from accounts.views import SignupEmailView, LoginView
 from contact.utils import get_location
-from feeds.models import Follow
 from feeds.post_feed import LocalFeed
-from feeds.views import FeedMixin, GenreMixin
+from feeds.views import FeedMixin
 from request.models import PublicRequest
 
-
-login_required_m = method_decorator(login_required)
 
 def requests(request, scope='any-distance', *args, **kwargs):
     kwargs['scope'] = scope
@@ -65,7 +59,7 @@ class LocalViewAuth(RequestView):
         else:
             return []
 
-class LocalView(SignupEmailView, LoginView, LocalViewAuth):
+class LocalView(LocalViewAuth, SignupEmailView, LoginView):
     pass
 
 class AllViewAuth(RequestView):
@@ -75,7 +69,7 @@ class AllViewAuth(RequestView):
         posts = self.model.objects.all()
         return self.band_or_venue(posts, **kwargs)
 
-class AllView(SignupEmailView, LoginView, AllViewAuth):
+class AllView(AllViewAuth, SignupEmailView, LoginView):
     pass
 
 
