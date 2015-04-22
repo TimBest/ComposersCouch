@@ -3,7 +3,8 @@
 
 {% block title %}Learn{% endblock %}
 {% block overwriteHeader %}
-  <div class="jumbotron text-center" id="profile-types">
+<div class="tour text-center">
+  <div class="jumbotron">
     <div class="container">
       <div class="image-frame">
         <span class="frame-helper"></span>
@@ -14,11 +15,9 @@
       </p>
     </div>
   </div>
-{% endblock %}
-{% block content %}
-  <div id="profile-types">
-    <div class="sign-in non-modal-form">
-      <div role="tabpanel" class="modal-content">
+  <div class="profile-types" id="profile-types">
+    <div role="tabpanel">
+      <div class="readable-text">
         <ul class="nav nav-tabs nav-justified" role="tablist">
           <li role="presentation">
             <a href="#venue" aria-controls="venue" role="tab" data-toggle="tab">
@@ -39,111 +38,168 @@
             </a>
           </li>
         </ul>
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane" id="venue">
-            <h2 class="text-center">Book better shows by easily comparing artists and managing booking requests.</h2>
-            <div class="readable-text">
-              <h3>Public requests</h3>
-              <p>can be seen by anyone on the site.
-              They are a way of saying i am willing to put on a show at this
-              time near this location. Venues can specify how many bands
-              they are looking for.  After a public request is posted users
-              of the site can apply then the poster of the request can go
-              through the submissions and choose the best candidates to
-              finalize a show with.</p>
-
-              <h3>Private Requests</h3>
-              <p>Are a way of asking artist(s) if they
-              want to play a show. They can be sent to anyone on the site to
-              non site users via email. When reviewing a private request the
-              users is given:
-                <ul>
-                  <li>The option to accept or decline the request</li>
-                  <li>An overview of the participants of a request</li>
-                  <li>A quick view at events they already have scheduled close to the date of the request</li>
-                  <li>A thread to discuss the details of the event</li>
-                </ul>
-              After the details are sorted out a participant can create an
-              event from the request to finalize the show. and when the
-              participants are ready they can choose to make this event
-              viewable .</p>
-
-              <h3>Availability Feed</h3>
-              <p>A list of artist in the area or passing
-              by on a tour that may be available. Searchable by location, date, and
-              genre.</p>
-            </div>
+      </div>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane" id="venue">
+          <div class="jumbotron">
+            <h2 class="readable-text">
+              Book better shows by easily comparing artists and managing booking requests.
+            </h2>
           </div>
-          <div role="tabpanel" class="tab-pane active" id="artist">
-            <h2 class="text-center">
+          <div class="readable-text">
+            <h3>Public requests</h3>
+            <p>can be seen by anyone on the site.
+            They are a way of saying i am willing to put on a show at this
+            time near this location. Venues can specify how many bands
+            they are looking for.  After a public request is posted users
+            of the site can apply then the poster of the request can go
+            through the submissions and choose the best candidates to
+            finalize a show with.</p>
+
+            <h3>Private Requests</h3>
+            <p>Are a way of asking artist(s) if they
+            want to play a show. They can be sent to anyone on the site to
+            non site users via email. When reviewing a private request the
+            users is given:
+              <ul>
+                <li>The option to accept or decline the request</li>
+                <li>An overview of the participants of a request</li>
+                <li>A quick view at events they already have scheduled close to the date of the request</li>
+                <li>A thread to discuss the details of the event</li>
+              </ul>
+            After the details are sorted out a participant can create an
+            event from the request to finalize the show. and when the
+            participants are ready they can choose to make this event
+            viewable .</p>
+
+            <h3>Availability Feed</h3>
+            <p>A list of artist in the area or passing
+            by on a tour that may be available. Searchable by location, date, and
+            genre.</p>
+          </div>
+        </div>
+        <div role="tabpanel" class="tab-pane active" id="artist">
+          <div class="jumbotron">
+            <h2 class="readable-text">
               Find local venues, manage your tour, and host your press kit.
             </h2>
-            <div class="readable-text">
-              <h3>Profile as a press kit</h3>
-              <p>Use your profile as a press kit. allow other user to post news
-              and photos about you to help build your kit. synch your event from/to
-              facebook and your website.</p>
-
-              <h3>Calendar App</h3>
-              <p>Build your tour.</p>
-
-              <h3>Public requests</h3>
-              <p>can be seen by anyone on the site. They are a way of saying i
-              am willing to put on a show at this
-              time near this location. Venues can specify how many bands
-              they are looking for.  After a public request is posted users
-              of the site can apply then the poster of the request can go
-              through the submissions and choose the best candidates to
-              finalize a show with.</p>
-
-              <h3>Private Requests</h3>
-              <p>Are a way of asking artist(s) if they
-              want to play a show. They can be sent to anyone on the site to
-              non site users via email. When reviewing a private request the
-              users is given:
-                <ul>
-                  <li>The option to accept or decline the request</li>
-                  <li>An overview of the participants of a request</li>
-                  <li>A quick view at events they already have scheduled close to the date of the request</li>
-                  <li>A thread to discuss the details of the event</li>
-                </ul>
-              After the details are sorted out a participant can create an
-              event from the request to finalize the show. and when the
-              participants are ready they can choose to make this event
-              viewable .</p>
-
-              <h3>Availability Feed</h3>
-              <p>A list of potentially available venues in your area or inbetween
-              two of your shows. Searchable by location, date, and
-              genre.</p>
+          </div>
+          <div class="readable-text">
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="panel">
+                  <div class="panel-body">
+                    <h3>Profile as a press kit</h3>
+                    <p>Use your profile as a press kit. Allow other users to post news
+                    and photos about you to help build your kit.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="panel">
+                  <div class="panel-body">
+                    <h3>Calendar App</h3>
+                    <p>Build your tour.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="panel">
+                  <div class="panel-body">
+                    <h3>Public requests</h3>
+                    <p>can be seen by anyone on the site. They are a way of saying i
+                    am willing to put on a show at this
+                    time near this location. Venues can specify how many bands
+                    they are looking for.  After a public request is posted users
+                    of the site can apply then the poster of the request can go
+                    through the submissions and choose the best candidates to
+                    finalize a show with.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-4">
+                <div class="panel">
+                  <div class="panel-body">
+                    <h3>Private Requests</h3>
+                    <p>Are a way of asking artist(s) if they
+                    want to play a show. They can be sent to anyone on the site to
+                    non site users via email. When reviewing a private request the
+                    users is given:
+                      <ul>
+                        <li>The option to accept or decline the request</li>
+                        <li>An overview of the participants of a request</li>
+                        <li>A quick view at events they already have scheduled close to the date of the request</li>
+                        <li>A thread to discuss the details of the event</li>
+                      </ul>
+                    After the details are sorted out a participant can create an
+                    event from the request to finalize the show. and when the
+                    participants are ready they can choose to make this event
+                    viewable .</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="panel">
+                  <div class="panel-body">
+                    <h3>Availability Feed</h3>
+                    <p>A list of potentially available venues in your area or inbetween
+                    two of your shows. Searchable by location, date, and
+                    genre.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div class="panel">
+                  <div class="panel-body">
+                    <h3>Coming Soon</h3>
+                    <ul class="text-left">
+                      <li>Import/export your shows.</li>
+                      <li>Synch your accounts data with facebook.</li>
+                      <li>Pin content other users have posted about you to your profile.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-          <div role="tabpanel" class="tab-pane" id="fan">
-            <h2 class="text-center">
+        </div>
+        <div role="tabpanel" class="tab-pane" id="fan">
+          <div class="jumbotron">
+            <h2 class="readable-text">
               Discover local artists, find concerts in your area and follow your favorites.
             </h2>
-            <div class="readable-text">
+          </div>
+          <div class="readable-text">
+            <h3>Follow favorite artists and venues</h3>
+            <p>add links to both the venue and artist feeds</p>
 
-              <h3>Follow favorite artists and venues</h3>
-              <p>add links to both the venue and artist feeds</p>
+            <h3>Check out shows in your area</h3>
+            <p>Add a link to the shows feed here.</p>
 
-              <h3>Check out shows in your area</h3>
-              <p>Add a link to the shows feed here.</p>
+            <h3>Post photos (and videos [coming soon]) of your favorite bands to help them build out their profiles</h3>
+            <p>By posting media bands can decide to add this to their profiles.
+            Helpig them build and maintain their profiles</p>
 
-              <h3>Post photos (and videos [coming soon]) of your favorite bands to help them build out their profiles</h3>
-              <p>By posting media bands can decide to add this to their profiles.
-              Helpig them build and maintain their profiles</p>
+            <h3>Support artist by requesting them to your area [Coming Soon]</h3>
+            <p>Show your support by requesting artist to your area. show venues
+            that you will show you if they book certain artists</p>
 
-              <h3>Support artist by requesting them to your area [Coming Soon]</h3>
-              <p>Show your support by requesting artist to your area. show venues
-              that you will show you if they book certain artists</p>
-
-              <h3>Book your favorite artist for an event or house party [Coming Soon]</h3>
-              <p>ask them to play a show.</p>
-            </div>
+            <h3>Book your favorite artist for an event or house party [Coming Soon]</h3>
+            <p>ask them to play a show.</p>
           </div>
         </div>
       </div>
     </div>
   </div>
+  <div class="jumbotron white">
+    <h2 class="readable-text">
+      Closing Remark
+    </h2>
+    <a href="{% url 'signup' %}" type="button" class="btn btn-primary btn-lg">
+      Sign up
+    </a>
+  </div>
+</div>
 {% endblock %}
