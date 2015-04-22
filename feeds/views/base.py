@@ -1,7 +1,9 @@
 from datetime import datetime, timedelta, time
+from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import resolve, reverse
 from django.shortcuts import redirect, render
 from django.utils import timezone
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 
 from annoying.functions import get_object_or_None
@@ -11,6 +13,8 @@ from feeds.forms import ZipcodeForm, AvailabilityForm
 from genres.models import Category
 from schedule.models import Show
 
+
+login_required_m = method_decorator(login_required)
 
 class ZipcodeMixin(object):
     def get_zipcode(self):
@@ -94,6 +98,7 @@ class FeedMixin(GenreMixin, ZipcodeMixin, ListView):
 class AvailabilityMixin(object):
     model = None
 
+    @login_required_m
     def dispatch(self, request, *args, **kwargs):
         year = self.kwargs.get('year')
         month = self.kwargs.get('month')

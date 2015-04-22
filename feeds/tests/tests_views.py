@@ -21,14 +21,14 @@ class ViewsTests(TestCase):
                         'year':2015,
                         'month':02,
                         'day':15,}))
-            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.status_code, 302)
             response = self.client.get(reverse('available_artists',
                 kwargs={'order': order,
                         'year':2015,
                         'month':02,
                         'day':15,
                         'zipcode':12065}))
-            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.status_code, 302)
             for scope in scopes:
                 response = self.client.get(reverse('artists',
                     kwargs={'order': order,'scope': scope}))
@@ -64,7 +64,7 @@ class ViewsTests(TestCase):
                         'year':2015,
                         'month':02,
                         'day':15,}))
-            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.status_code, 302)
             response = self.client.get(reverse('available_venues_between',
                 kwargs={'order': order,
                         'year':2015,
@@ -77,7 +77,7 @@ class ViewsTests(TestCase):
                         'month':02,
                         'day':15,
                         'zipcode':12065}))
-            self.assertEqual(response.status_code, 200)
+            self.assertEqual(response.status_code, 302)
             for scope in scopes:
                 response = self.client.get(reverse('venues',
                     kwargs={'order': order,'scope': scope}))
