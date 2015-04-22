@@ -118,9 +118,6 @@ class FollowingView (FollowingViewAuth, SignupEmailView, LoginView,):
 class AllViewAuth(VenueView):
     template_name = 'feeds/venues/all.html'
 
-    def get_posts(self, **kwargs):
-        return self.model.objects.all()
-
 class AllView (AllViewAuth, SignupEmailView, LoginView,):
     pass
 

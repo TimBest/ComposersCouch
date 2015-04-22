@@ -3,7 +3,7 @@ from django.contrib.gis.measure import D
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
-from django.views.generic import TemplateView
+from django.views.generic import ListView
 
 from accounts.views import SignupEmailView, LoginView
 from composersCouch.utils import get_page
@@ -27,15 +27,16 @@ def updates(request, scope='any-distance', *args, **kwargs):
         views = VIEWS
     return views.get(scope, views['any-distance'])(request, *args, **kwargs)
 
-class UpdateView(ZipcodeMixin, TemplateView):
+class UpdateView(ZipcodeMixin, ListView):
     template_name = 'feeds/updates/local.html'
     feed = 'get_local_feed'
     location_type = 'code'
     feedType = 'updates'
+    object_list = []
+    model = Post
 
     def get_scope(self, **kwargs):
         context = {}
-        context['feedType'] = self.feedType
         context['scope'] = self.kwargs.get('scope', 'all')
         if context['scope'] == "any-distance":
             context['distance'] = "any distance"
@@ -58,6 +59,8 @@ class UpdateView(ZipcodeMixin, TemplateView):
         context.update(self.get_scope())
         page_num = self.request.GET.get('page')
         zipcode = self.get_zipcode()
+        context['feedType'] = self.feedType
+        context['order'] = '-created_at'
         context['activities'] = self.get_activities(page_num, zipcode)
         context['location'] = get_location(self.request, zipcode, 'code')
         return context

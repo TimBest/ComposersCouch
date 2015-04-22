@@ -32,12 +32,6 @@ class ArtistView(FeedMixin):
         order = self.kwargs.get('order')
         if order == "latest":
             return qs.order_by('-profile__user__date_joined')
-        #elif order == "distance":
-        #    distance_m = 500000
-        #    location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
-        #    return qs.filter(
-        #             profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=distance_m))
-        #           ).distance(location).order_by('distance')
         else:
             # all
             return qs

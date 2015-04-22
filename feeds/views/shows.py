@@ -69,11 +69,9 @@ class FollowingView(ShowViewAuth):
 
     @login_required_m
     def dispatch(self, *args, **kwargs):
-        print "folloing view dispatch"
         return super(FollowingView, self).dispatch(*args, **kwargs)
 
     def get_posts(self,**kwargs):
-        print "get_posts"
         posts = super(FollowingView, self).get_posts(**kwargs)
         following = self.request.user.following_set.values_list('target')
         return posts.filter(
