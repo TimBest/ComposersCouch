@@ -58,9 +58,9 @@ class UpdateView(ZipcodeMixin, ListView):
         context = super(UpdateView, self).get_context_data(**kwargs)
         context.update(self.get_scope())
         page_num = self.request.GET.get('page')
-        zipcode = self.get_zipcode()
+        zipcode = self.kwargs.get('zipcode')
         context['feedType'] = self.feedType
-        context['order'] = '-created_at'
+        context['order'] = 'latest'
         context['activities'] = self.get_activities(page_num, zipcode)
         context['location'] = get_location(self.request, zipcode, 'code')
         return context
@@ -100,7 +100,7 @@ class FollowingViewAuth(UpdateView):
         activities = list(feed[:15])
         activities = get_page(page_num, activities, 15)
         context['activities'] = enrich_activities(activities)
-        context['location'] = get_location(self.request, self.get_zipcode(), 'code')
+        context['location'] = get_location(self.request, self.kwargs.get('zipcode'), 'code')
         return context
 
 class FollowingView(FollowingViewAuth, SignupEmailView, LoginView):

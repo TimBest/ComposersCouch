@@ -17,13 +17,11 @@ from schedule.models import Show
 login_required_m = method_decorator(login_required)
 
 class ZipcodeMixin(object):
-    def get_zipcode(self):
-        return self.kwargs.get('zipcode', None)
 
     def get_context_data(self, **kwargs):
         context = super(ZipcodeMixin, self).get_context_data(**kwargs)
-        context['zipcodeForm'] = ZipcodeForm()
-        context['zipcode'] = get_location(self.request, self.get_zipcode(), 'code')
+        context['locationForm'] = ZipcodeForm()
+        context['zipcode'] = get_location(self.request, self.kwargs.get('zipcode'), 'code')
         return context
 
 class GenreMixin(object):
@@ -45,7 +43,6 @@ class GenreMixin(object):
         context = super(GenreMixin, self).get_context_data(**kwargs)
         context['categories'] = Category.objects.filter(popular=True)
         context['more_categories'] = Category.objects.filter(popular=False)
-
         category_slug = self.request.GET.get('genre')
         my_genres = self.request.GET.get('my-genres')
         if self.request.user.is_authenticated() and my_genres :
@@ -63,12 +60,20 @@ class FeedMixin(GenreMixin, ZipcodeMixin, ListView):
     model = Show
     template_name = 'feeds/show_list.html'
     paginate_by = 15
-    default_order = "default"
+    default_order = "Default"
+    orders = {}
+    filters = None
 
     def get_order(self, qs):
-        return qs
+        order = self.orders.get(self.kwargs.get('order'))
+        if order:
+            return qs.order_by(order)
+        else:
+            return qs
 
     def get_posts(self):
+        if self.filters:
+            return self.model.objects.filter(**self.filters)
         return self.model.objects.all()
 
     def get_queryset(self):

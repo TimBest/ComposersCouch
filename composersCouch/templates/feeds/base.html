@@ -19,7 +19,7 @@
         </a>
       </div>
       <div class="col-sm-4 authentication">
-        {% if not request.user.is_authenticated %}
+        {% if signupForm %}
         <div class="sign-in non-modal-form">
           <div role="tabpanel" class="modal-content">
             <div class="modal-header">
@@ -122,7 +122,7 @@
             <a href="{% url 'venues' 'all' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Venues</a>
           </li>
           <li class="{% block updatesClass %}{% endblock %}">
-            <a href="{% url 'updates' 'all' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Updates</a>
+            <a href="{% url 'updates' 'latest' 'any-distance' zipcode %}?{{ request.GET.urlencode }}">Updates</a>
           </li>
         </ul>
       </span>
@@ -148,26 +148,26 @@
       {% else %}
         <span class="text-white">within</span>
       {% endif %}
-      {% block availabilityForm %}
-      <span class="dropdown">
-        <a class="btn btn-transparent-dropdown dropdown-toggle"
-           data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
-           <span class="dotted-bottom text-white">{% if date %}{{ date|date:"n/j/y" }}{% else %}Date{% endif %}</span>
-        </a>
-        <ul class="dropdown-menu dropdown-form" role="menu">
-          <li>
-            <div class="row">
-              <label>Date:</label>
-              <form class="availability-form" role="filter" method="POST" action="{% url 'availability' %}">
-                <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-                {% crispy availabilityForm %}
-              </form>
-            </div>
-          </li>
-        </ul>
-      </span>
-      {% endblock %}
-      {% block zipcodeForm %}
+      {% if availabilityForm %}
+        <span class="dropdown">
+          <a class="btn btn-transparent-dropdown dropdown-toggle"
+             data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
+             <span class="dotted-bottom text-white">{% if date %}{{ date|date:"n/j/y" }}{% else %}Date{% endif %}</span>
+          </a>
+          <ul class="dropdown-menu dropdown-form" role="menu">
+            <li>
+              <div class="row">
+                <label>Date:</label>
+                <form class="availability-form" role="filter" method="POST" action="{% url 'availability' %}">
+                  <input type="hidden" name="path" value="{% firstof request.path '/' %}">
+                  {% crispy availabilityForm %}
+                </form>
+              </div>
+            </li>
+          </ul>
+        </span>
+      {% endif %}
+      {% block locationForm %}
         {% block distance %}
           <span class="dropdown">
             <a class="btn btn-transparent-dropdown dropdown-toggle" href="javascript:void(0)" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -197,17 +197,17 @@
                 <label>Zipcode:</label>
                 <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
                   <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-                  {% crispy zipcodeForm %}
+                  {% crispy locationForm %}
                 </form>
               </div>
             </li>
           </ul>
         </span>
-      {% endblock %}
+    {% endblock %}
     </div>
     <div class="row no-gutter">
       <div class="col-xs-10 left">
-        {% block filter %}
+        {% if categories %}
           <span class="dropdown text-left filter">
             <a class="btn btn-transparent-dropdown dropdown-toggle"
                data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
@@ -248,10 +248,10 @@
               {% endblock %}
             </ul>
           </span>
-        {% endblock %}
+        {% endif %}
       </div>
       <div class="col-xs-2 right text-right">
-        {% block order %}
+        {% if order %}
           <span class="dropdown text-left filters order">
             <a class="btn btn-transparent-dropdown dropdown-toggle"
                data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
@@ -268,7 +268,7 @@
               {% endblock %}
             </ul>
           </span>
-        {% endblock %}
+        {% endif %}
       </div>
     </div>
   </div>

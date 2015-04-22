@@ -26,20 +26,20 @@ def venues(request, scope='any-distance', *args, **kwargs):
         views = VIEWS
     return views.get(scope, views['any-distance'])(request, *args, **kwargs)
 
-class VenueView(FeedMixin):
+class VenueViewAuth(FeedMixin):
     model = VenueProfile
     feedType = 'venues'
+    template_name = 'feeds/venues/venues.html'
     default_order = "all"
+    orders = {
+        'latest': '-profile__user__date_joined',
+        'all': None,
+    }
 
-    def get_order(self, qs):
-        order = self.kwargs.get('order')
-        if order == "latest":
-            return qs.order_by('-profile__user__date_joined')
-        else:
-            # all
-            return qs
+class VenueView(VenueViewAuth, SignupEmailView, LoginView):
+    pass
 
-class AvailabilityView(AvailabilityMixin, VenueView):
+class AvailabilityView(AvailabilityMixin, VenueViewAuth):
     template_name = 'feeds/venues/available.html'
     model = VenueProfile
 
@@ -48,7 +48,7 @@ class AvailabilityView(AvailabilityMixin, VenueView):
         start = datetime.combine(self.start_date, time()).replace(tzinfo=utc)
         end = datetime.combine(self.end_date, time()).replace(tzinfo=utc)
         posts = self.model.objects.exclude(**self.get_exclude(start, end))
-        location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
+        location = get_location(self.request, self.kwargs.get('zipcode'), 'point')
         if location:
             return posts.filter(
                 profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
@@ -73,11 +73,11 @@ class BetweenView(AvailabilityView):
         if prev:
             start = prev.get_location().zip_code.point
         else:
-            start = get_location(self.request, self.get_zipcode(**kwargs), 'point')
+            start = get_location(self.request, self.kwargs.get('zipcode'), 'point')
         if next:
             end = next.get_location().zip_code.point
         else:
-            end = get_location(self.request, self.get_zipcode(**kwargs), 'point')
+            end = get_location(self.request, self.kwargs.get('zipcode'), 'point')
         line = LineString(start,end)
         return posts.filter(
             profile__contact_info__location__zip_code__point__distance_lte=(line, D(m=LocalFeed.distance))
@@ -85,11 +85,10 @@ class BetweenView(AvailabilityView):
 
 available_venues_between = login_required(BetweenView.as_view())
 
-class LocalViewAuth(VenueView):
-    template_name = 'feeds/venues/local.html'
+class LocalViewAuth(VenueViewAuth):
 
     def get_posts(self, **kwargs):
-        location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
+        location = get_location(self.request, self.kwargs.get('zipcode'), 'point')
         if location:
             return self.model.objects.filter(
                 profile__contact_info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
@@ -100,35 +99,25 @@ class LocalViewAuth(VenueView):
 class LocalView (LocalViewAuth, SignupEmailView, LoginView,):
     pass
 
-class FollowingViewAuth(VenueView):
+class FollowingViewAuth(VenueViewAuth):
     template_name = 'feeds/venues/following.html'
 
     @login_required_m
     def dispatch(self, *args, **kwargs):
+        self.filters = {'profile__user__pk__in': self.request.user.following_set.values_list('target')}
         return super(FollowingViewAuth, self).dispatch(*args, **kwargs)
 
-    def get_posts(self, **kwargs):
-        return self.model.objects.filter(
-            profile__user__pk__in=self.request.user.following_set.values_list('target')
-        )
-
-class FollowingView (FollowingViewAuth, SignupEmailView, LoginView,):
-    pass
-
-class AllViewAuth(VenueView):
-    template_name = 'feeds/venues/all.html'
-
-class AllView (AllViewAuth, SignupEmailView, LoginView,):
+class FollowingView (FollowingViewAuth, SignupEmailView, LoginView):
     pass
 
 AUTH_VIEWS = {
     '50' : LocalViewAuth.as_view(),
     'following' : FollowingViewAuth.as_view(),
-    'any-distance' : AllViewAuth.as_view(),
+    'any-distance' : VenueViewAuth.as_view(),
 }
 
 VIEWS = {
     '50' : LocalView.as_view(),
     'following' : FollowingView.as_view(),
-    'any-distance' : AllView.as_view(),
+    'any-distance' : VenueView.as_view(),
 }

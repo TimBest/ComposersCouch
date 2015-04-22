@@ -1,12 +1,9 @@
 {% extends 'feeds/shows/shows.html' %}
 
-
-{% comment %}remove zipcode form from template{% endcomment %}
-{% block zipcodeForm %}{% endblock %}
-
 {% block currentScope %}I'm following{% endblock %}
 {% block withinClass %}{% endblock %}
 {% block followingClass %}active{% endblock %}
+{% block locationForm %}{% endblock %}
 
 {% block feed %}
   {% include "feeds/shows/_feed.html" with shows=object_list following="Ture" %}

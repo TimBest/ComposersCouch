@@ -12,13 +12,13 @@
         {% endif %}
       </div>
     </div>
-  {% elif zipcodeForm %}
+  {% elif locationForm %}
     <div class="panel">
       <div class="panel-body">
         <p>No {{ feed_type }} feel free to try a diffrent zipcode.</p>
         <form class="form-inline zipcode-form" role="filter" method="POST" action="{% url 'zipcode' %}">
           <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-          {% crispy zipcodeForm %}
+          {% crispy locationForm %}
         </form>
       </div>
     </div>
@@ -40,7 +40,7 @@
           <div class="col-sm-6">
             <form class="form-inline zipcode-form" role="filter" method="POST" action="{% url 'zipcode' %}">
               <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-              {% crispy zipcodeForm %}
+              {% crispy locationForm %}
             </form>
           </div>
         </div>

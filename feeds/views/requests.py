@@ -50,7 +50,7 @@ class LocalViewAuth(RequestView):
     template_name = 'feeds/requests/local.html'
 
     def get_posts(self, **kwargs):
-        location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
+        location = get_location(self.request, self.kwargs.get('zipcode'), 'point')
         if location:
             posts = self.model.objects.filter(
                 zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))

@@ -53,7 +53,7 @@ class LocalViewAuth(ShowViewAuth):
 
     def get_posts(self, **kwargs):
         posts = super(LocalViewAuth, self).get_posts(**kwargs)
-        location = get_location(self.request, self.get_zipcode(**kwargs), 'point')
+        location = get_location(self.request, self.kwargs.get('zipcode'), 'point')
         if location:
             return posts.filter(
                 info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
