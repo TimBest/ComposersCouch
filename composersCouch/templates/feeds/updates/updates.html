@@ -2,9 +2,14 @@
 
 {% block updatesClass %}active{% endblock %}
 {% block bgColor %}purple{% endblock %}
+{% block availabilityScope %}{% endblock %}
 
 {% block orderOptions %}
   <li class="{% ifequal order 'latest' %}active{% endifequal %}">
     <a href="{% url feedType 'latest' scope zipcode %}?{{ request.GET.urlencode }}">Latest</a>
   </li>
+{% endblock %}
+
+{% block feed %}
+  {% include "feeds/updates/_feed.html" with activities=activities %}
 {% endblock %}

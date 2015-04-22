@@ -3,27 +3,6 @@
 {% block artistsClass %}active{% endblock %}
 {% block bgColor %}gray{% endblock %}
 
-{% block scope %}
-  <span class="dropdown">
-    <a class="btn btn-transparent-dropdown dropdown-toggle" href="javascript:void(0)" type="button" data-toggle="dropdown" aria-expanded="true">
-      <span class="dotted-bottom text-white">{% block currentScope %}within{% endblock %}</span>
-    </a>
-    <ul class="dropdown-menu">
-      <li class="{% block withinClass %}active{% endblock %}">
-        <a href="{% url feedType order 'any-distance' zipcode %}?{{ request.GET.urlencode }}">within</a>
-      </li>
-      <li class="{% block availableClass %}{% endblock %}">
-        <a href="{% url 'available_artists' order 2014 32 32 zipcode %}?{{ request.GET.urlencode }}">available on</a>
-      </li>
-      {% if user.is_authenticated %}
-        <li class="{% block followingClass %}{% endblock %}">
-          <a href="{% url feedType order 'following' zipcode %}?{{ request.GET.urlencode }}">I'm following</a>
-        </li>
-      {% endif %}
-    </ul>
-  </span>
-{% endblock %}
-
 {% block feed %}
   {% include "feeds/artists/_feed.html" with artists=object_list %}
 {% endblock %}

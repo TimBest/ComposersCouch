@@ -28,7 +28,7 @@ def updates(request, scope='any-distance', *args, **kwargs):
     return views.get(scope, views['any-distance'])(request, *args, **kwargs)
 
 class UpdateView(ZipcodeMixin, ListView):
-    template_name = 'feeds/updates/local.html'
+    template_name = 'feeds/updates/updates.html'
     feed = 'get_local_feed'
     location_type = 'code'
     feedType = 'updates'
@@ -66,7 +66,6 @@ class UpdateView(ZipcodeMixin, ListView):
         return context
 
 class LocalViewAuth(UpdateView):
-    template_name = 'feeds/updates/local.html'
     feed = 'get_local_feed'
     location_type = 'code'
 
