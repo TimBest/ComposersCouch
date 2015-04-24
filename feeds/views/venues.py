@@ -99,7 +99,7 @@ class LocalViewAuth(VenueViewAuth):
 class LocalView (LocalViewAuth, SignupEmailView, LoginView,):
     pass
 
-class FollowingViewAuth(VenueViewAuth):
+class FollowingView(VenueViewAuth):
     template_name = 'feeds/venues/following.html'
 
     @login_required_m
@@ -107,12 +107,9 @@ class FollowingViewAuth(VenueViewAuth):
         self.filters = {'profile__user__pk__in': self.request.user.following_set.values_list('target')}
         return super(FollowingViewAuth, self).dispatch(*args, **kwargs)
 
-class FollowingView (FollowingViewAuth, SignupEmailView, LoginView):
-    pass
-
 AUTH_VIEWS = {
     '50' : LocalViewAuth.as_view(),
-    'following' : FollowingViewAuth.as_view(),
+    'following' : FollowingView.as_view(),
     'any-distance' : VenueViewAuth.as_view(),
 }
 

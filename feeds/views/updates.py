@@ -85,7 +85,7 @@ class AllViewAuth(UpdateView):
 class AllView(AllViewAuth, SignupEmailView, LoginView):
     pass
 
-class FollowingViewAuth(UpdateView):
+class FollowingView(UpdateView):
     template_name='feeds/updates/following.html'
 
     @login_required_m
@@ -102,12 +102,9 @@ class FollowingViewAuth(UpdateView):
         context['location'] = get_location(self.request, self.kwargs.get('zipcode'), 'code')
         return context
 
-class FollowingView(FollowingViewAuth, SignupEmailView, LoginView):
-    pass
-
 AUTH_VIEWS = {
     '50' : LocalViewAuth.as_view(),
-    'following' : FollowingViewAuth.as_view(),
+    'following' : FollowingView.as_view(),
     'any-distance' : AllViewAuth.as_view(),
 }
 

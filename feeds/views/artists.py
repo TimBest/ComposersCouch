@@ -70,7 +70,7 @@ class LocalViewAuth(ArtistViewAuth):
 class LocalView(LocalViewAuth, SignupEmailView, LoginView):
     pass
 
-class FollowingViewAuth(ArtistViewAuth):
+class FollowingView(ArtistViewAuth):
     template_name = 'feeds/artists/following.html'
 
     @login_required_m
@@ -78,12 +78,9 @@ class FollowingViewAuth(ArtistViewAuth):
         self.filters = {'profile__user__pk__in': self.request.user.following_set.values_list('target')}
         return super(FollowingViewAuth, self).dispatch(*args, **kwargs)
 
-class FollowingView(SignupEmailView, LoginView, FollowingViewAuth):
-    pass
-
 AUTH_VIEWS = {
     '50' : LocalViewAuth.as_view(),
-    'following' : FollowingViewAuth.as_view(),
+    'following' : FollowingView.as_view(),
     'any-distance' : ArtistViewAuth.as_view(),
 }
 
