@@ -6870,24 +6870,27 @@ h1 {
 .tour .tiles {
   margin-top: 30px;
 }
+.tour .tiles li {
+  border-bottom: 1px solid #ddd;
+}
 .tour .fa {
   font-size: 40px;
 }
 .tour .nav-tabs li a {
-  background-color: #2063a9;
+  background-color: #0b4c8f;
   border: none;
   border-bottom: 3px transparent solid;
   color: #d3d3d3;
 }
 .tour .nav-tabs li a:hover,
 .tour .nav-tabs li a:focus {
-  background-color: #2063a9;
+  background-color: #0b4c8f;
   color: #ffffff;
 }
 .tour .nav-tabs li.active a,
 .tour .nav-tabs li.active a:hover,
 .tour .nav-tabs li.active a:focus {
-  background-color: #2063a9;
+  background-color: #0b4c8f;
   border: none;
   border-bottom: 3px #ffffff solid;
   color: #ffffff;

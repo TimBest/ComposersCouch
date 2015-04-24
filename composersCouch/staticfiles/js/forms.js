@@ -54,5 +54,4 @@ $(document).ready(function() {
   });
   // show latest message first
   updateScroll();
-
 });
