@@ -6303,8 +6303,7 @@ h1 {
 /* Navbar */
 .navbar {
   margin-bottom: 0px;
-  -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
-  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #ddd;
 }
 .navbar .container-fluid {
   padding-left: 0px;
@@ -6344,7 +6343,7 @@ h1 {
   }
 }
 .navbar .navbar-form {
-  border-left: 1px solid #EEE;
+  border-left: 1px solid #DDD;
   margin-bottom: 18px;
 }
 .navbar .navbar-form input#search {
@@ -6466,6 +6465,9 @@ h1 {
   width: 50px;
   position: absolute;
   right: 0;
+  top: 60px;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
   -webkit-box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
   box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
 }
@@ -6864,6 +6866,31 @@ h1 {
 .tour .profile-types .panel {
   height: 230px;
   margin-bottom: 30px;
+}
+.tour .tiles {
+  margin-top: 30px;
+}
+.tour .fa {
+  font-size: 40px;
+}
+.tour .nav-tabs li a {
+  background-color: #2063a9;
+  border: none;
+  border-bottom: 3px transparent solid;
+  color: #d3d3d3;
+}
+.tour .nav-tabs li a:hover,
+.tour .nav-tabs li a:focus {
+  background-color: #2063a9;
+  color: #ffffff;
+}
+.tour .nav-tabs li.active a,
+.tour .nav-tabs li.active a:hover,
+.tour .nav-tabs li.active a:focus {
+  background-color: #2063a9;
+  border: none;
+  border-bottom: 3px #ffffff solid;
+  color: #ffffff;
 }
 .authentication .modal-header {
   border-bottom: 1px solid #ebebeb;
@@ -7839,8 +7866,8 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
  * -------------------------- */
 @font-face {
   font-family: 'FontAwesome';
-  src: url('../fonts/fontawesome-webfont.eot?v=4.2.0');
-  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.2.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff?v=4.2.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.2.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.2.0#fontawesomeregular') format('svg');
+  src: url('../fonts/fontawesome-webfont.eot?v=4.3.0');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.3.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.3.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.3.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.3.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -7851,6 +7878,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transform: translate(0, 0);
 }
 /* Font Awesome uses the Unicode Private Use Area (PUA) to ensure screen
    readers do not read off random characters that represent icons */
@@ -8301,6 +8329,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .fa-twitter:before {
   content: "\f099";
 }
+.fa-facebook-f:before,
 .fa-facebook:before {
   content: "\f09a";
 }
@@ -8950,7 +8979,8 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .fa-male:before {
   content: "\f183";
 }
-.fa-gittip:before {
+.fa-gittip:before,
+.fa-gratipay:before {
   content: "\f184";
 }
 .fa-sun-o:before {
@@ -9217,6 +9247,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .fa-history:before {
   content: "\f1da";
 }
+.fa-genderless:before,
 .fa-circle-thin:before {
   content: "\f1db";
 }
@@ -9360,6 +9391,127 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .fa-meanpath:before {
   content: "\f20c";
+}
+.fa-buysellads:before {
+  content: "\f20d";
+}
+.fa-connectdevelop:before {
+  content: "\f20e";
+}
+.fa-dashcube:before {
+  content: "\f210";
+}
+.fa-forumbee:before {
+  content: "\f211";
+}
+.fa-leanpub:before {
+  content: "\f212";
+}
+.fa-sellsy:before {
+  content: "\f213";
+}
+.fa-shirtsinbulk:before {
+  content: "\f214";
+}
+.fa-simplybuilt:before {
+  content: "\f215";
+}
+.fa-skyatlas:before {
+  content: "\f216";
+}
+.fa-cart-plus:before {
+  content: "\f217";
+}
+.fa-cart-arrow-down:before {
+  content: "\f218";
+}
+.fa-diamond:before {
+  content: "\f219";
+}
+.fa-ship:before {
+  content: "\f21a";
+}
+.fa-user-secret:before {
+  content: "\f21b";
+}
+.fa-motorcycle:before {
+  content: "\f21c";
+}
+.fa-street-view:before {
+  content: "\f21d";
+}
+.fa-heartbeat:before {
+  content: "\f21e";
+}
+.fa-venus:before {
+  content: "\f221";
+}
+.fa-mars:before {
+  content: "\f222";
+}
+.fa-mercury:before {
+  content: "\f223";
+}
+.fa-transgender:before {
+  content: "\f224";
+}
+.fa-transgender-alt:before {
+  content: "\f225";
+}
+.fa-venus-double:before {
+  content: "\f226";
+}
+.fa-mars-double:before {
+  content: "\f227";
+}
+.fa-venus-mars:before {
+  content: "\f228";
+}
+.fa-mars-stroke:before {
+  content: "\f229";
+}
+.fa-mars-stroke-v:before {
+  content: "\f22a";
+}
+.fa-mars-stroke-h:before {
+  content: "\f22b";
+}
+.fa-neuter:before {
+  content: "\f22c";
+}
+.fa-facebook-official:before {
+  content: "\f230";
+}
+.fa-pinterest-p:before {
+  content: "\f231";
+}
+.fa-whatsapp:before {
+  content: "\f232";
+}
+.fa-server:before {
+  content: "\f233";
+}
+.fa-user-plus:before {
+  content: "\f234";
+}
+.fa-user-times:before {
+  content: "\f235";
+}
+.fa-hotel:before,
+.fa-bed:before {
+  content: "\f236";
+}
+.fa-viacoin:before {
+  content: "\f237";
+}
+.fa-train:before {
+  content: "\f238";
+}
+.fa-subway:before {
+  content: "\f239";
+}
+.fa-medium:before {
+  content: "\f23a";
 }
 /*
  * Admin specific styling are prefixed with body.change-form.

@@ -25,7 +25,7 @@ h1 {
 /* Navbar */
 .navbar {
   margin-bottom:0px;
-  .box-shadow(0px 0px 3px rgba(0,0,0,.2));
+  border-bottom: 1px solid #ddd;
   .container-fluid {
     padding-left: 0px;
     padding-right: 0px;
@@ -60,7 +60,7 @@ h1 {
     }
   }
   .navbar-form {
-    border-left: 1px solid #EEE;
+    border-left: 1px solid #DDD;
     margin-bottom: 18px;
     input#search {
       font-family: 'FontAwesome', PT-sans, sans-serif;
@@ -196,6 +196,9 @@ h1 {
   //float: right;
   position:absolute;
   right:0;
+  top:@navbar-height;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
   .box-shadow(1px 2px 2px rgba(0,0,0,.2));
   a.rightNavItem {
     color: @black;
