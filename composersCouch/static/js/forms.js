@@ -34,6 +34,7 @@ $(document).ready(function() {
   });
   // datetimepickers
   $(function () {
+      $('#id_date').datetimepicker({pickTime: false});
       $('#id_start_0').datetimepicker({pickTime: false});
       $('#id_start_1').datetimepicker({pickDate: false});
       $('#id_end_0').datetimepicker({pickTime: false});
