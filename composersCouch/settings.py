@@ -333,7 +333,6 @@ PIPELINE_JS = {
             'js/progress_bar.js',
             'js/base.js',
             'js/feeds.js',
-            'js/landing_page.js',
             'js/forms.js',
             'js/signup.js',
             'js/about.js',
