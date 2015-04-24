@@ -6467,7 +6467,6 @@ h1 {
   width: 50px;
   position: absolute;
   right: 0;
-  top: 60px;
   border-bottom: 1px solid #ddd;
   border-left: 1px solid #ddd;
   -webkit-box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.1);
@@ -6492,7 +6491,7 @@ h1 {
   position: relative;
   display: block;
   padding: 10px 10px;
-  margin-bottom: -1px;
+  margin-top: -1px;
   background-color: #ffffff;
   border: 0px solid #303030;
   border-right: 0px;
@@ -6866,8 +6865,12 @@ h1 {
   background-color: #c4423f;
 }
 .tour .profile-types .panel {
-  height: 230px;
   margin-bottom: 30px;
+}
+@media (min-width: 768px) {
+  .tour .profile-types .panel {
+    height: 230px;
+  }
 }
 .tour .tiles {
   margin-top: 30px;

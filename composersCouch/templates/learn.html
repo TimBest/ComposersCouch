@@ -48,8 +48,9 @@
                 <div class="panel">
                   <div class="panel-body">
                     <span class="fa fa-user"></span>
-                    <h3>Profile</h3>
-                    <p>...</p>
+                    <h3>Build a profile</h3>
+                    <p>Manage your web presence to attract new fans and the best
+                       artists</p>
                   </div>
                 </div>
               </div>
@@ -57,8 +58,8 @@
                 <div class="panel">
                   <div class="panel-body">
                     <span class="fa fa-calendar-o"></span>
-                    <h3>Calendar App</h3>
-                    <p>Plan out and publish your upcoming events.</p>
+                    <h3>Calendar app</h3>
+                    <p>Plan, book, and promote your shows all in one tool.</p>
                   </div>
                 </div>
               </div>
@@ -79,9 +80,10 @@
                 <div class="panel">
                   <div class="panel-body">
                     <span class="fa fa-envelope-o"></span>
-                    <h3>Private Requests</h3>
-                    <p>Submit a show request to another user or to an email
-                      address.</p>
+                    <h3>Private requests</h3>
+                    <p>Send show requests to a user or an email address. Plan
+                      out the details of the event and then add it to your
+                      calendar.</p>
                   </div>
                 </div>
               </div>
@@ -89,9 +91,9 @@
                 <div class="panel">
                   <div class="panel-body">
                     <span class="fa fa-check"></span>
-                    <h3>Availability Feed</h3>
+                    <h3>Availability feed</h3>
                     <p>A list of potentially available artist in your area.
-                    Searchable by location, date, and genre.</p>
+                    Filterable by date, and genre.</p>
                   </div>
                 </div>
               </div>
@@ -99,11 +101,11 @@
                 <div class="panel">
                   <div class="panel-body">
                     <span class="fa fa-clock-o"></span>
-                    <h3>Coming Soon</h3>
+                    <h3>Coming soon</h3>
                     <ul class="text-left list-unstyled">
                       <li>Thrid party calendar syncing.</li>
                       <li>Sync account data with facebook.</li>
-                      <li>Pin content other users have posted about you to your profile.</li>
+                      <li>Pin content users have posted about you to your profile.</li>
                     </ul>
                   </div>
                 </div>
@@ -114,7 +116,7 @@
         <div role="tabpanel" class="tab-pane active" id="artist">
           <div class="jumbotron dark-blue text-white">
             <h2 class="readable-text">
-              Find local venues, manage your tour, and host your press kit.
+              Find local venues, manage a tour, and host your press kit.
             </h2>
           </div>
           <div class="readable-text tiles">
@@ -133,8 +135,8 @@
                 <div class="panel">
                   <div class="panel-body">
                     <span class="fa fa-calendar-o"></span>
-                    <h3>Calendar App</h3>
-                    <p>Publish your upcoming events. Build your tour.</p>
+                    <h3>Calendar app</h3>
+                    <p>Publish your upcoming events. Build and manage your tour.</p>
                   </div>
                 </div>
               </div>
@@ -155,10 +157,10 @@
                 <div class="panel">
                   <div class="panel-body">
                     <span class="fa fa-envelope-o"></span>
-                    <h3>Private Requests</h3>
-                    <p>Submit a show request to another user or to an email
-                      address. Your profile will act as a press kit and be sent
-                      with your request.</p>
+                    <h3>Private requests</h3>
+                    <p>Send show requests to another user or to an email
+                      address. Your profile and will act as a press kit and be
+                      attached to the request.</p>
                   </div>
                 </div>
               </div>
@@ -166,10 +168,10 @@
                 <div class="panel">
                   <div class="panel-body">
                     <span class="fa fa-check"></span>
-                    <h3>Availability Feed</h3>
-                    <p>A list of potentially available venues in your area or inbetween
-                    two of your shows. Searchable by location, date, and
-                    genre.</p>
+                    <h3>Availability feed</h3>
+                    <p>A list of potentially available venues in your area or in
+                       between your shows. Searchable by location, date, and
+                       genre.</p>
                   </div>
                 </div>
               </div>
@@ -177,11 +179,11 @@
                 <div class="panel">
                   <div class="panel-body">
                     <span class="fa fa-clock-o"></span>
-                    <h3>Coming Soon</h3>
+                    <h3>Coming soon</h3>
                     <ul class="text-left list-unstyled">
                       <li>Thrid party calendar syncing.</li>
                       <li>Sync account data with facebook.</li>
-                      <li>Pin content other users have posted about you to your profile.</li>
+                      <li>Pin content users have posted about you to your profile.</li>
                     </ul>
                   </div>
                 </div>
@@ -202,7 +204,7 @@
                   <div class="panel-body">
                     <span class="fa fa-user-plus"></span>
                     <h3>Follow artists and venues</h3>
-                    <p>Keep up with their latest updates.</p>
+                    <p>Keep up with the latest updates and show information.</p>
                   </div>
                 </div>
               </div>
@@ -219,11 +221,11 @@
                 <div class="panel">
                   <div class="panel-body">
                     <span class="fa fa-clock-o"></span>
-                    <h3>Coming Soon</h3>
+                    <h3>Coming soon</h3>
                     <ul class="text-left list-unstyled">
                       <li>Help bands build their profiles.</li>
                       <li>Support artists by requesting them to your area.</li>
-                      <li>Find artists for an event or house party.</li>
+                      <li>Book artists for an event or house party.</li>
                     </ul>
                   </div>
                 </div>
@@ -236,11 +238,13 @@
   </div>
   <div class="jumbotron black text-white">
     <h2 class="readable-text">
-      Composers Couch Closing Remark
+      Changing how local shows and booked and promoted.
     </h2>
+    {% if not request.user.is_authenticated %}
     <a href="{% url 'signup' %}" type="button" class="btn btn-primary btn-lg">
       Sign up
     </a>
+    {% endif %}
   </div>
 </div>
 {% endblock %}
