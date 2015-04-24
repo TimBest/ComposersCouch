@@ -205,8 +205,6 @@ FACEBOOK_APP_ID             = os.environ.get('FACEBOOK_APP_ID', '525965254182714
 FACEBOOK_API_SECRET         = os.environ.get('FACEBOOK_API_SECRET', 'bdd9cdd707d80d08bd53660852b91c51')
 TWITTER_CONSUMER_KEY        = os.environ.get('TWITTER_CONSUMER_KEY', 't64bvuxy0triEzEnHcyg')
 TWITTER_CONSUMER_SECRET     = os.environ.get('TWITTER_CONSUMER_SECRET', 'jm41BJqDger9veDu3Aa7jswN4ZgQ9yIktlZIY4cSps')
-GOOGLE_OAUTH2_CLIENT_ID     = os.environ.get('GOOGLE_OAUTH2_CLIENT_ID', '566838544572.apps.googleusercontent.com')
-GOOGLE_OAUTH2_CLIENT_SECRET = os.environ.get('GOOGLE_OAUTH2_CLIENT_SECRET', 'BpAQ6KT37BLQxNc5ETzC0sMS')
 
 
 SITE_ID = 1
@@ -268,9 +266,6 @@ PROGRESSBARUPLOAD_INCLUDE_JQUERY = False
 AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
     'social_auth.backends.facebook.FacebookBackend',
-    'social_auth.backends.google.GoogleOAuthBackend',
-    'social_auth.backends.google.GoogleOAuth2Backend',
-    'social_auth.backends.google.GoogleBackend',
     'userena.backends.UserenaAuthenticationBackend',
     'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',

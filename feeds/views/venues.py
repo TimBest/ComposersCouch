@@ -105,7 +105,7 @@ class FollowingView(VenueViewAuth):
     @login_required_m
     def dispatch(self, *args, **kwargs):
         self.filters = {'profile__user__pk__in': self.request.user.following_set.values_list('target')}
-        return super(FollowingViewAuth, self).dispatch(*args, **kwargs)
+        return super(FollowingView, self).dispatch(*args, **kwargs)
 
 AUTH_VIEWS = {
     '50' : LocalViewAuth.as_view(),

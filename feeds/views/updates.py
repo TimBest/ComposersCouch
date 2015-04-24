@@ -90,10 +90,10 @@ class FollowingView(UpdateView):
 
     @login_required_m
     def dispatch(self, *args, **kwargs):
-        return super(FollowingViewAuth, self).dispatch(*args, **kwargs)
+        return super(FollowingView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
-        context = super(FollowingViewAuth, self).get_context_data(**kwargs)
+        context = super(FollowingView, self).get_context_data(**kwargs)
         page_num = self.request.GET.get('page')
         feed = feedly.get_feeds(self.request.user.id)['normal']
         activities = list(feed[:15])

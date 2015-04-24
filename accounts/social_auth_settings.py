@@ -6,7 +6,7 @@ SOCIAL_AUTH_DEFAULT_USERNAME = 'new_social_auth_user'
 SOCIAL_AUTH_UUID_LENGTH = 16
 
 SESSION_SERIALIZER='django.contrib.sessions.serializers.PickleSerializer'
-SOCIAL_AUTH_ENABLED_BACKENDS = ('google', 'facebook', 'twitter')
+SOCIAL_AUTH_ENABLED_BACKENDS = ('facebook', 'twitter')
 
 LOGGING = {
     'version': 1,
