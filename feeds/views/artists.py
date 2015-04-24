@@ -67,7 +67,7 @@ class LocalViewAuth(ArtistViewAuth):
             self.filters = {'profile__pk': -1}
         return super(LocalViewAuth, self).dispatch(*args, **kwargs)
 
-class LocalView(SignupEmailView, LoginView, LocalViewAuth):
+class LocalView(LocalViewAuth, SignupEmailView, LoginView):
     pass
 
 class FollowingViewAuth(ArtistViewAuth):
