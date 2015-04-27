@@ -95,10 +95,31 @@ class FeedMixin(GenreMixin, ZipcodeMixin, ListView):
         context.update(self.get_scope())
         context['feedType'] = self.feedType
         context['order'] = self.kwargs.get('order', self.default_order)
-        context['object_list'] = self.get_queryset()
+        page_num = self.request.GET.get('page')
+        context['object_list'] = get_page(page_num, self.get_queryset(), self.paginate_by)
         if context.get('genres') and context.get('object_list'):
             context['object_list'] = self.filter_by_genre(context['genres'], context['object_list'])
         return context
+
+    def paginate_queryset(self, queryset, page_size):
+        """
+        Paginate the queryset, if needed.
+        """
+        paginator = self.get_paginator(queryset, page_size, allow_empty_first_page=self.get_allow_empty())
+        page = self.kwargs.get('page') or self.request.GET.get('page') or 1
+        try:
+            page_number = int(page)
+        except ValueError:
+            if page == 'last':
+                page_number = paginator.num_pages
+            else:
+                raise Http404(_(u"Page is not 'last', nor can it be converted to an int."))
+        try:
+            page = paginator.page(page_number)
+            return (paginator, page, page.object_list, page.has_other_pages())
+        except:
+            return (None, None, queryset, False)
+
 
 class AvailabilityMixin(object):
     model = None
