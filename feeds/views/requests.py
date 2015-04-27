@@ -40,11 +40,14 @@ class RequestView(FeedMixin):
 
     def get_order(self, qs):
         order = self.kwargs.get('order')
-        if order == "latest":
-            return qs.order_by('-created_at').filter(fulfilled=False)
+        if qs:
+            if order == "latest":
+                return qs.order_by('-created_at').filter(fulfilled=False)
+            else:
+                #expiring
+                return qs.order_by('accept_by').filter(accept_by__gte=timezone.now(), fulfilled=False)
         else:
-            #expiring
-            return qs.order_by('accept_by').filter(accept_by__gte=timezone.now(), fulfilled=False)
+            return qs
 
 class LocalViewAuth(RequestView):
     template_name = 'feeds/requests/local.html'

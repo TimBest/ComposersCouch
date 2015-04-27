@@ -66,7 +66,7 @@ class FeedMixin(GenreMixin, ZipcodeMixin, ListView):
 
     def get_order(self, qs):
         order = self.orders.get(self.kwargs.get('order'))
-        if order:
+        if order and qs:
             return qs.order_by(order)
         else:
             return qs
@@ -95,7 +95,7 @@ class FeedMixin(GenreMixin, ZipcodeMixin, ListView):
         context.update(self.get_scope())
         context['feedType'] = self.feedType
         context['order'] = self.kwargs.get('order', self.default_order)
-
+        context['object_list'] = self.get_queryset()
         if context.get('genres') and context.get('object_list'):
             context['object_list'] = self.filter_by_genre(context['genres'], context['object_list'])
         return context

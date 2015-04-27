@@ -38,13 +38,16 @@ class ShowViewAuth(FeedMixin):
 
     def get_order(self, qs):
         order = self.kwargs.get('order')
-        if order == "latest":
-            return qs.order_by('-created_at')
-        elif order == "all":
-            return qs
+        if qs:
+            if order == "latest":
+                return qs.order_by('-created_at')
+            elif order == "all":
+                return qs
+            else:
+                # Upcoming
+                return qs.order_by('date__start').filter(date__start__gte=timezone.now())
         else:
-            # Upcoming
-            return qs.order_by('date__start').filter(date__start__gte=timezone.now())
+            return qs
 
 class ShowView (ShowViewAuth, SignupEmailView, LoginView):
     pass

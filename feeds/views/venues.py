@@ -96,7 +96,7 @@ class LocalViewAuth(VenueViewAuth):
         else:
             return []
 
-class LocalView (LocalViewAuth, SignupEmailView, LoginView,):
+class LocalView (LocalViewAuth, SignupEmailView, LoginView):
     pass
 
 class FollowingView(VenueViewAuth):
