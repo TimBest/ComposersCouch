@@ -35,7 +35,7 @@ class GenreMixin(object):
                     genre_qs = self.model.objects.filter(**{self.path_to_genre:genre.slug})
                 else:
                     genre_qs = genre_qs | self.model.objects.filter(**{self.path_to_genre:genre.slug})
-            return qs & genre_qs
+            return qs.distinct() & genre_qs.distinct()
         else:
             return qs
 
