@@ -32,9 +32,9 @@ class GenreMixin(object):
             genre_qs = []
             for i, genre in enumerate(genres):
                 if i==0:
-                    genre_qs = self.modelManager.filter(**{self.path_to_genre:genre.slug})
+                    genre_qs = self.model.objects.filter(**{self.path_to_genre:genre.slug})
                 else:
-                    genre_qs = genre_qs | self.modelManager.filter(**{self.path_to_genre:genre.slug})
+                    genre_qs = genre_qs | self.model.objects.filter(**{self.path_to_genre:genre.slug})
             return qs & genre_qs
         else:
             return qs
@@ -96,9 +96,11 @@ class FeedMixin(GenreMixin, ZipcodeMixin, ListView):
         context['feedType'] = self.feedType
         context['order'] = self.kwargs.get('order', self.default_order)
         page_num = self.request.GET.get('page')
-        context['object_list'] = get_page(page_num, self.get_queryset(), self.paginate_by)
-        if context.get('genres') and context.get('object_list'):
-            context['object_list'] = self.filter_by_genre(context['genres'], context['object_list'])
+        queryset = self.get_queryset()
+        if context.get('genres') and queryset:
+            queryset = self.filter_by_genre(context['genres'], queryset)
+        context['object_list'] = get_page(page_num, queryset, self.paginate_by)
+
         return context
 
     def paginate_queryset(self, queryset, page_size):
