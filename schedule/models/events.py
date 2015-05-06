@@ -91,9 +91,10 @@ class Event(models.Model):
         app_label = 'schedule'
 
     def __unicode__(self):
-        return ugettext('%(title)s') % {
-            'title': self.show.info.title,
-        }
+        if self.show.info.title:
+            return u'%s' % (self.show.info.title,)
+        else:
+            return u'%s at %s' % (self.show.info.headliner_text, self.show.info.venue_text)
 
     def get_absolute_url(self):
         return reverse('show', kwargs={'show_id':self.show.id})

@@ -61,6 +61,7 @@
     </div>
     {% if request.user|has_event_for_show:show %}
         <div class="panel-footer">
+          <a href="{% url 'export_event' show.id %}">Export Event</a></p>
           <div class="pull-right">
             <form method="POST" class="accept-form inline-block {% hide_confirm show request.user %}" action="{% url 'show_confirm' %}">
               {% csrf_token %}

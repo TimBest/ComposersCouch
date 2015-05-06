@@ -1,7 +1,6 @@
-import datetime
-
 from django.utils import timezone
 
+from datetime import datetime
 
 def coerce_date_dict(date_dict):
     keys = ['year', 'month', 'day', 'hour', 'minute',]
@@ -15,7 +14,7 @@ def coerce_date_dict(date_dict):
             break
     if modified:
         try:
-            return datetime.datetime(**ret_val)
+            return datetime(**ret_val)
         except:
             pass
     return timezone.now()

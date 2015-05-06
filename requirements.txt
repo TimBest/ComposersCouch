@@ -26,6 +26,7 @@ django-storages==1.1.8
 futures==2.2.0
 html2text==2014.12.5
 httplib2==0.9
+icalendar==3.9.0
 kombu==3.0.24
 mutagen==1.27
 oauth2==1.5.211
