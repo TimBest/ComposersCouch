@@ -8,6 +8,7 @@ from django.contrib.sitemaps.views import sitemap
 from artist.sitemap import ArtistSitemap
 from composersCouch.sitemap import StaticViewSitemap
 from fan.sitemap import FanSitemap
+from feeds.sitemap import FeedsSitemap
 from schedule.sitemap import ShowSitemap
 from venue.sitemap import VenueSitemap
 
@@ -16,6 +17,7 @@ sitemaps = {
     'static': StaticViewSitemap(),
     'artists': ArtistSitemap(),
     'fans': FanSitemap(),
+    'feeds': FeedsSitemap(),
     'shows': ShowSitemap(),
     'venues': VenueSitemap(),
 }
