@@ -1,16 +1,11 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.sites.models import Site
 from django.core.exceptions import PermissionDenied
-from django.http import HttpResponse
 from django.shortcuts import redirect
 from django.utils import decorators, timezone
 from django.views.decorators.http import require_POST
 from django.views.generic import TemplateView
-from django.template.defaultfilters import slugify
 
 from datetime import datetime
-from icalendar import Calendar as iCalendar
-from icalendar import Event as iEvent
 
 from annoying.functions import get_object_or_None
 from annoying.views import MultipleModelFormsView
@@ -25,7 +20,7 @@ from request.models import PrivateRequest
 from schedule.forms import DateForm, EventForm, ShowInfoForm
 from schedule.models import Calendar, Event, Show
 from schedule.periods import Year, Month, Week, Day
-from schedule.utils import coerce_date_dict
+from schedule.utils import coerce_date_dict, export
 from schedule.decorators import view_show, edit_show
 
 
@@ -112,30 +107,8 @@ class ShowMessageView(MessageView):
 
 show_message = ShowMessageView.as_view()
 
-def export(request, show_id):
-    show = get_object_or_None(Show, id=show_id)
-    cal = iCalendar()
-    site = Site.objects.get_current()
-
-    cal.add('prodid', '-//%s Events Calendar//%s//' % (site.name, site.domain))
-    cal.add('version', '2.0')
-
-    site_token = site.domain.split('.')
-    site_token.reverse()
-    site_token = '.'.join(site_token)
-
-    ical_event = iEvent()
-    ical_event.add('summary', show.info.description)
-    ical_event.add('dtstart', show.date.start)
-    ical_event.add('dtend', show.date.end and show.date.end or show.date.start)
-    ical_event.add('dtstamp', show.date.end and show.date.end or show.date.start)
-    ical_event['uid'] = '%d.event.events.%s' % (show.id, site_token)
-    cal.add_component(ical_event)
-
-    response = HttpResponse(cal.to_ical(), content_type="text/calendar")
-    # title or headliner
-    response['Content-Disposition'] = 'attachment; filename=%s.ics' % slugify(show.events.first())
-    return response
+def export_event(request, show_id):
+    return export(shows=[get_object_or_None(Show, id=show_id),])
 
 """ Forms """
 class EventFormView(ImageFormMixin, MultipleModelFormsView):

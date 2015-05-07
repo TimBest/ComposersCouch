@@ -14,7 +14,7 @@ urlpatterns = patterns(view_location,
     url(r'^show/', include(patterns(view_location,
         url(r'^create/$', 'create_event', name='calendar_create_event'),
         url(r'^edit/(?P<show_id>\d+)/$', 'edit_event', name='edit_event'),
-        url(r'^export/(?P<show_id>\d+)/$', 'export', name='export_event'),
+        url(r'^export/(?P<show_id>\d+)/$', 'export_event', name='export_event'),
         url(r'^requestToEvent/(?P<request_id>\d+)/$', 'request_to_event',
             name='calendar_request_to_event'
         ),
