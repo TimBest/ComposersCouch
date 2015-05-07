@@ -20,6 +20,7 @@ django-feedly==0.6.4
 django-multiupload==0.3
 django-pagination==1.0.7
 django-pipeline==1.4.6
+django-robots==1.0
 django-social-auth==0.7.28
 django-static-precompiler==0.8
 django-storages==1.1.8

@@ -16,7 +16,7 @@ def get_page(page_num, item_list, items_per_page):
 ALL_FIXTURES = [
     'users', 'profiles',
     'artists', 'members',
-       
+
     'fans',
     'genres',
     'applications', 'numApplicants', 'privateRequests', 'publicRequests', 'requestParticipants',

@@ -3,7 +3,14 @@ from django.conf.urls import include, patterns, url
 from django.conf import settings
 from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.contrib.sitemaps.views import sitemap
 
+from composersCouch.sitemap import StaticViewSitemap
+
+
+sitemaps = {
+    'static': StaticViewSitemap()
+}
 
 autocomplete_light.autodiscover()
 admin.autodiscover()
@@ -13,6 +20,8 @@ urlpatterns = staticfiles_urlpatterns()
 urlpatterns += patterns('',
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^sitemap\.xml$', sitemap, {'sitemaps': sitemaps}, name='sitemap'),
+    url(r'^robots.txt$', include('robots.urls')),
 )
 
 urlpatterns += patterns('annoying.views',

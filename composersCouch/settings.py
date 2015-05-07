@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.sites',
+    'django.contrib.sitemaps',
     'django.contrib.staticfiles',
 
     'autocomplete_light',
@@ -46,6 +47,7 @@ INSTALLED_APPS = (
     'easy_timezones',
     'pagination',
     'pipeline',
+    'robots',
     'social_auth',
     'storages',
     'stream_framework',
@@ -342,6 +344,10 @@ PIPELINE_JS = {
         'output_filename': 'js/scripts.min.js',
     }
 }
+
+ROBOTS_SITEMAP_URLS = [
+    'http://www.composerscouch.com/sitemap.xml',
+]
 
 import djcelery
 djcelery.setup_loader()
