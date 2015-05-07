@@ -49,6 +49,11 @@ class Show(models.Model):
         verbose_name_plural = _('shows')
         app_label = 'schedule'
 
+    def get_absolute_url(self):
+        return ('show', [self.id])
+    get_absolute_url = models.permalink(get_absolute_url)
+
+
 def update_visible_and_approved(sender, instance, **kwargs):
     """
         one non approved event sets the shows visibility and approved to False.
