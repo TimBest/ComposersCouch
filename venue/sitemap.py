@@ -4,7 +4,7 @@ from venue.models import VenueProfile
 
 class VenueSitemap(Sitemap):
     changefreq = "monthly"
-    priority = 0.5
+    priority = 0.8
 
     def items(self):
         return VenueProfile.objects.filter(profile__has_owner=True)

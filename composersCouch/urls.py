@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.sitemaps.views import sitemap
 
+from accounts.sitemap import AuthViewSitemap
 from artist.sitemap import ArtistSitemap
 from composersCouch.sitemap import StaticViewSitemap
 from fan.sitemap import FanSitemap
@@ -14,11 +15,12 @@ from venue.sitemap import VenueSitemap
 
 
 sitemaps = {
-    'static': StaticViewSitemap(),
     'artists': ArtistSitemap(),
+    'auth': AuthViewSitemap(),
     'fans': FanSitemap(),
     'feeds': FeedsSitemap(),
     'shows': ShowSitemap(),
+    'static': StaticViewSitemap(),
     'venues': VenueSitemap(),
 }
 

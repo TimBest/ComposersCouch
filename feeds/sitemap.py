@@ -2,7 +2,7 @@ from django.contrib.sitemaps import Sitemap
 from django.core.urlresolvers import reverse
 
 class FeedsSitemap(Sitemap):
-    priority = 0.5
+    priority = 1.0
     changefreq = 'monthly'
 
     def items(self):

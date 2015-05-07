@@ -1,12 +1,12 @@
 from django.contrib.sitemaps import Sitemap
 from django.core.urlresolvers import reverse
 
-class StaticViewSitemap(Sitemap):
-    priority = 0.5
+class AuthViewSitemap(Sitemap):
+    priority = 0.9
     changefreq = 'monthly'
 
     def items(self):
-        return ['learn', 'about', 'team', 'credit',]
+        return ['login', 'signup',]
 
     def location(self, item):
         return reverse(item)
