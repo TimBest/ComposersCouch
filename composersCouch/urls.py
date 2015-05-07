@@ -5,11 +5,17 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.sitemaps.views import sitemap
 
+from artist.sitemap import ArtistSitemap
 from composersCouch.sitemap import StaticViewSitemap
+from fan.sitemap import FanSitemap
+from venue.sitemap import VenueSitemap
 
 
 sitemaps = {
-    'static': StaticViewSitemap()
+    'static': StaticViewSitemap(),
+    'artists': ArtistSitemap(),
+    'fan': FanSitemap(),
+    'venues': VenueSitemap(),
 }
 
 autocomplete_light.autodiscover()
