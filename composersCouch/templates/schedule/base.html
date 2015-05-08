@@ -41,13 +41,23 @@
           {% comment %}<a href="{% url 'calendar' %}" class="btn btn-default">Today</a>{% endcomment %}
         </div>
         <div class="col-sm-3 col-sm-push-6 col-xs-6 right">
-          <div class="btn-group pull-right">
-            <a href="{% url 'calendar' period_name 'shows' %}{% querystring_for_date date %}" class="{% ifequal filter 'shows' %}active{% endifequal %} btn btn-sm btn-default">
-              Shows
-            </a>
-            <a href="{% url 'calendar' period_name 'requests' %}{% querystring_for_date date %}" class="{% ifequal filter 'requests' %}active{% endifequal %} btn btn-sm btn-default">
-              Requests
-            </a>
+          <div class="text-right">
+            <div class="dropdown pull-right">
+              <a class="more-dropdown btn btn-sm btn-default dropdown-toggle" href="javascript:void(0)" type="button" data-toggle="dropdown" aria-expanded="true">
+                <span class="fa fa-ellipsis-h text-muted"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li><a href="{% url 'export_event' 46 %}">Export</a></li>
+              </ul>
+            </div>
+            <div class="btn-group pull-right">
+              <a href="{% url 'calendar' period_name 'shows' %}{% querystring_for_date date %}" class="{% ifequal filter 'shows' %}active{% endifequal %} btn btn-sm btn-default">
+                Shows
+              </a>
+              <a href="{% url 'calendar' period_name 'requests' %}{% querystring_for_date date %}" class="{% ifequal filter 'requests' %}active{% endifequal %} btn btn-sm btn-default">
+                Requests
+              </a>
+            </div>
           </div>
         </div>
         <div class="col-sm-6 col-sm-pull-3 col-xs-12 center">
