@@ -7752,6 +7752,21 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .more-dropdown {
   margin-left: 5px;
 }
+.dropdown-menu {
+  margin-left: 5px;
+}
+.dropdown-menu .dropdown-item .btn-link {
+  color: #303030;
+  margin: 0px;
+  border: 0px;
+  padding: 0px;
+  width: 100%;
+  text-align: left;
+}
+.dropdown-menu .dropdown-item .btn-link:hover,
+.dropdown-menu .dropdown-item .btn-link:focus {
+  text-decoration: none;
+}
 .calendar-wrapper {
   text-align: center;
   position: relative;

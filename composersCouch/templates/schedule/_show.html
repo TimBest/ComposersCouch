@@ -60,20 +60,27 @@
       </div>
     </div>
     {% if request.user|has_event_for_show:show %}
+
         <div class="panel-footer">
+          <div class="pull-right">
+          <form method="POST" class="decline-form inline-block {% hide_deny show request.user %}" action="{% url 'show_deny' %}">
+            {% csrf_token %}
+            <input type="hidden" name="show" value="{{ show.id }}">
             <div class="dropdown pull-right">
               <a class="btn btn-default dropdown-toggle" href="javascript:void(0)" type="button" data-toggle="dropdown" aria-expanded="true">
                 <span class="fa fa-ellipsis-h text-muted"></span>
               </a>
-              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li><a href="{% url 'export_event' show.id %}">Export</a></li>
-                <form method="POST" class="decline-form inline-block {% hide_deny show request.user %}" action="{% url 'show_deny' %}">
-                  {% csrf_token %}
-                  <input type="hidden" name="show" value="{{ show.id }}">
-                  <li><button class="btn btn-danger-inv" onclick="this.form.onsubmit(); return false; " type="submit"><span class="fa fa-ban" ></span> {% trans "Deny" %}</button></li>
-                </form>
-              </ul>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                  <li><a href="{% url 'export_event' show.id %}">Export</a></li>
+                  <li class="dropdown-item"><a>
+                    <button class="btn btn-link" onclick="this.form.onsubmit(); return false; " type="submit">
+                      Remove
+                    </button>
+                  </a></li>
+                </ul>
             </div>
+          </form>
+        </div>
           <div class="pull-right">
             <form method="POST" class="accept-form inline-block {% hide_confirm show request.user %}" action="{% url 'show_confirm' %}">
               {% csrf_token %}
