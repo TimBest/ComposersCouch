@@ -3,7 +3,7 @@
 
 
 {% with info=show.info %}
-<div class="show text-left">
+<div class="show cards">
   <div class="panel panel-default">
     <div class="panel-body">
       <div class="row">
@@ -61,20 +61,27 @@
     </div>
     {% if request.user|has_event_for_show:show %}
         <div class="panel-footer">
-          <a href="{% url 'export_event' show.id %}">Export Event</a></p>
+            <div class="dropdown pull-right">
+              <a class="btn btn-default dropdown-toggle" href="javascript:void(0)" type="button" data-toggle="dropdown" aria-expanded="true">
+                <span class="fa fa-ellipsis-h text-muted"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li><a href="{% url 'export_event' show.id %}">Export</a></li>
+                <form method="POST" class="decline-form inline-block {% hide_deny show request.user %}" action="{% url 'show_deny' %}">
+                  {% csrf_token %}
+                  <input type="hidden" name="show" value="{{ show.id }}">
+                  <li><button class="btn btn-danger-inv" onclick="this.form.onsubmit(); return false; " type="submit"><span class="fa fa-ban" ></span> {% trans "Deny" %}</button></li>
+                </form>
+              </ul>
+            </div>
           <div class="pull-right">
             <form method="POST" class="accept-form inline-block {% hide_confirm show request.user %}" action="{% url 'show_confirm' %}">
               {% csrf_token %}
               <input type="hidden" name="show" value="{{ show.id }}">
               <button class="btn btn-success" onclick="this.form.onsubmit(); return false; " type="submit"><span class="fa fa-check" ></span> {% trans "Confirm" %}</button>
             </form>
-            <form method="POST" class="decline-form inline-block {% hide_deny show request.user %}" action="{% url 'show_deny' %}">
-              {% csrf_token %}
-              <input type="hidden" name="show" value="{{ show.id }}">
-              <button class="btn btn-danger-inv" onclick="this.form.onsubmit(); return false; " type="submit"><span class="fa fa-ban" ></span> {% trans "Deny" %}</button>
-            </form>
           </div>
-          <p><a href="{% url 'edit_event' show.id %}">Edit</a></p>
+          <p class="text-left"><a href="{% url 'edit_event' show.id %}">Edit</a></p>
         </div>
     {% endif %}
   </div>

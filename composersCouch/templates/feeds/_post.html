@@ -19,8 +19,8 @@
                   {% csrf_token %}
                   <input type="hidden" name="post" value="{{ post.id }}">
                   <div class="dropdown pull-right">
-                    <a class="dropdown-toggle" href="javascript:void(0)" type="button" data-toggle="dropdown" aria-expanded="true">
-                      <span class="caret text-muted"></span>
+                    <a class="btn btn-default dropdown-toggle" href="javascript:void(0)" type="button" data-toggle="dropdown" aria-expanded="true">
+                      <span class="fa fa-ellipsis-v text-muted"></span>
                     </a>
                     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
                       <li><input class="btn btn-link" type="submit" onclick="this.form.onsubmit(); return false; " value="Remove Post"></li>
