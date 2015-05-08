@@ -24,7 +24,7 @@ def coerce_date_dict(date_dict):
             pass
     return timezone.now()
 
-def export(shows):
+def export(request, events, year):
     cal = iCalendar()
     site = Site.objects.get_current()
 
@@ -35,7 +35,8 @@ def export(shows):
     site_token.reverse()
     site_token = '.'.join(site_token)
 
-    for show in shows:
+    for event in events:
+        show = event.show
         ical_event = iEvent()
         ical_event.add('summary', show.info.get_title())
         description = "Headliner: " + show.info.headliner_text + "\n"
@@ -54,5 +55,8 @@ def export(shows):
 
     response = HttpResponse(cal.to_ical(), content_type="text/calendar")
     # title or headliner
-    response['Content-Disposition'] = 'attachment; filename=%s.ics' % slugify(show.events.first())
+    if year:
+        response['Content-Disposition'] = 'attachment; filename=%ss-calendar-%s.ics' % (slugify(request.user.profile), year)
+    else:
+        response['Content-Disposition'] = 'attachment; filename=%s.ics' % slugify(s[0])
     return response

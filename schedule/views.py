@@ -108,7 +108,15 @@ class ShowMessageView(MessageView):
 show_message = ShowMessageView.as_view()
 
 def export_event(request, show_id):
-    return export(shows=[get_object_or_None(Show, id=show_id),])
+    show = get_object_or_None(Show, id=show_id)
+    return export(request=request, events=[show.events.first(),])
+
+def export_years_event(request, year):
+    return export(
+        request=request,
+        events=request.user.calendar.get_yearly_events(year=int(year)),
+        year=year,
+    )
 
 """ Forms """
 class EventFormView(ImageFormMixin, MultipleModelFormsView):
