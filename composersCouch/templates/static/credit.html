@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static from staticfiles %}
+
+{% block headerClass %}dark-blue{% endblock %}
+
+{% block header%}
+  <div class="page-header text-white">
+    <h2>{% block title %}Credit{% endblock %}</h2>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="about container">
+    <div class="panel">
+      <div class="panel-body">
+        <div id="about">
+          <div class="page-header"><h2>Code</h2></div>
+          <ul>
+            <li>Django <a target="_blank" href="https://www.djangoproject.com/">djangoproject.com</a></li>
+            <li>Bootstrap <a target="_blank" href="http://getbootstrap.com/">getbootstrap.com</a></li>
+            <li>GeoDjango: a world-class geographic web framework <a target="_blank" href="http://geodjango.org/">geodjango.org</a></li>
+            <li>GeoNames: a geographical database <a target="_blank" href="http://www.geonames.org/">geonames.org</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block title %}Changelog{% endblock %}
+{% load static from staticfiles %}
+
+{% block headerClass %}dark-blue{% endblock %}
+
+{% block header%}
+  <div class="dark-blue">
+    <div class="page-header text-white">
+      <h2>Changelog</h2>
+    </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="about container">
+    <div class="panel">
+      <div class="panel-body">
+        <div id="about">
+          <h4>5/15/2015</h4>
+          <ul>
+            <li>New Feature: Shows and now exportable </li>
+            <li>New Feature: Added sitemap.xml and robots.txt </li>
+          </ul>
+          <h4>5/5/2015</h4>
+          <ul>
+            <li>Fix: Removed duplicate entries when filtering by genre </li>
+            <li>Fix: Fix issue that would sometimes prevent filtering by genre </li>
+          </ul>
+          <h4>4/27/2015</h4>
+          <ul>
+            <li>New Feature: Auto detect users location via IP address </li>
+            <li>New Feature: Added 'learn more page' </li>
+            <li>Improvement: Navbar no longer uses a hamburger menu </li>
+            <li>Improvement: Major styling changes </li>
+            <li>Improvement: Added Sign up and login forms to the home page </li>
+            <li>Improvement: Added the show feed onto the home page </li>
+            <li>Fix: Fixed how the users location is stored </li>
+          </ul>
+          <h4>3/19/2015</h4>
+          <ul>
+            <li>Improvement: Shortened sign up form </li>
+            <li>Improvement: Renamed 'sign in' to 'login'</li>
+          </ul>
+          <h4>3/15/2015</h4>
+          <ul>
+            <li>Fix: deleting profile picture no longer removes users profile </li>
+          </ul>
+          <h4>3/11/2015</h4>
+          <ul>
+            <li>Improvement: User Profiles are now ranked by completeness and activity </li>
+            <li>Fix: Show dates are no longer cut off </li>
+          </ul>
+          <h4>3/10/2015</h4>
+          <ul>
+            <li>Fix: Phone numbers can now include more than 15 characters </li>
+          </ul>
+          <h4>3/5/2015</h4>
+          <ul>
+            <li>Improvement: Active URLs can now be added to biographies and updates </li>
+            <li>Improvement: Limited biograph length on users card </li>
+            <li>Improvement: Shows can now be created on the shows tab </li>
+            <li>Improvement: added Google analytics </li>
+          </ul>
+          <h4>3/3/2015</h4>
+          <ul>
+            <li>Composer's Couch Launches </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

@@ -6393,6 +6393,9 @@ h1 {
   padding-bottom: 10px;
   min-height: 100px;
 }
+.header .page-header {
+  margin: 0px;
+}
 /* Navigation */
 .navigation {
   margin-bottom: 15px;
@@ -6771,6 +6774,7 @@ h1 {
 .about.container {
   padding-left: 0px;
   padding-right: 0px;
+  margin-top: px;
 }
 .about .panel-body {
   margin: 0px;
@@ -6842,29 +6846,17 @@ h1 {
 .orange {
   background-color: #ffa51f;
 }
-.light-orange {
-  background-color: #ffb64a;
-}
 .dark-purple {
   background-color: #1f1599;
 }
 .purple {
   background-color: #362cb4;
 }
-.light-purple {
-  background-color: #534abf;
-}
-.faded-purple {
-  background-color: #756ed0;
-}
 .dark-red {
   background-color: #820a07;
 }
 .red {
   background-color: #a62421;
-}
-.light-red {
-  background-color: #c4423f;
 }
 .tour .profile-types .panel {
   margin-bottom: 30px;

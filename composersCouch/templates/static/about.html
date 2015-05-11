@@ -1,16 +1,22 @@
 {% extends 'base.html' %}
-{% block title %}About{% endblock %}
 {% load static from staticfiles %}
+
+{% block headerClass %}dark-blue{% endblock %}
+
+{% block header%}
+  <div class="page-header text-white">
+    <h2>{% block title %}About{% endblock %}</h2>
+  </div>
+{% endblock %}
 
 {% block content %}
   <div class="about container">
     <div class="panel">
       <div class="panel-body">
         <div id="about">
-          <div class="page-header"><h2>About</h2></div>
+          <div class="page-header"><h2>Composer's Couch</h2></div>
           <h4>
-            Composer's Couch: a booking service to connect local venues, artists,
-            and fans.
+            A booking service to connect local venues, artists, and fans.
           </h4>
           <p>
             We strive to minimize the time spent on booking and promoting. To do
@@ -96,21 +102,6 @@
                 <div class="row no-gutter colors">
                   <div class="left col-sm-2"></div>
                   <div class="center col-sm-2 col-xs-3">
-                    <div class="color dark-purple"></div>
-                  </div>
-                  <div class="center col-sm-2 col-xs-3">
-                    <div class="color purple"></div>
-                  </div>
-                  <div class="center col-sm-2 col-xs-3">
-                    <div class="color light-purple"></div>
-                  </div>
-                  <div class="right col-sm-2 col-xs-3">
-                    <div class="color faded-purple"></div>
-                  </div>
-                </div>
-                <div class="row no-gutter colors">
-                  <div class="left col-sm-2"></div>
-                  <div class="center col-sm-2 col-xs-3">
                     <div class="color black"></div>
                   </div>
                   <div class="center col-sm-2 col-xs-3">
@@ -121,6 +112,21 @@
                   </div>
                   <div class="right col-sm-2 col-xs-3">
                     <div class="color silver"></div>
+                  </div>
+                </div>
+                <div class="row no-gutter colors">
+                  <div class="left col-sm-2"></div>
+                  <div class="center col-sm-2 col-xs-3">
+                    <div class="color purple"></div>
+                  </div>
+                  <div class="center col-sm-2 col-xs-3">
+                    <div class="color red"></div>
+                  </div>
+                  <div class="center col-sm-2 col-xs-3">
+                    <div class="color orange"></div>
+                  </div>
+                  <div class="right col-sm-2 col-xs-3">
+                    <div class="color orange"></div>
                   </div>
                 </div>
               </div>
