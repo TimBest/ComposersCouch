@@ -39,6 +39,7 @@ urlpatterns += patterns('',
 urlpatterns += patterns('annoying.views',
     url(r'^learn/$', 'load_template', {'template_name': 'static/learn.html'}, name='learn'),
     url(r'^changelog/$', 'load_template', {'template_name': 'static/changelog.html'}, name='changelog'),
+    url(r'^pipeline/$', 'load_template', {'template_name': 'static/pipeline.html'}, name='pipeline'),
 
     # Footer
     url(r'^about/$', 'load_template', {'template_name': 'static/about.html'}, name='about'),

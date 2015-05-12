@@ -1,13 +1,11 @@
 {% extends 'base.html' %}
-{% block title %}Changelog{% endblock %}
-{% load static from staticfiles %}
 
 {% block headerClass %}dark-blue{% endblock %}
 
 {% block header%}
   <div class="dark-blue">
     <div class="page-header text-white">
-      <h2>Changelog</h2>
+      <h2>{% block title %}Changelog{% endblock %}</h2>
     </div>
   </div>
 {% endblock %}
