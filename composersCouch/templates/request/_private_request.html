@@ -20,7 +20,7 @@
             <ul class="list-unstyled">
               {% for opener in request.openers %}
               <li>
-                <a href="{% url 'redirectToProfile' opener.participant.user.username 'about' %}"> {{ opener.participant.user.profile }}</a>
+                <a href="{% url 'redirectToProfile' opener.participant.user.username 'about' %}">{{ opener.participant.user.profile }} </a>
                 {% include "request/_accepted.html" with accepted=opener.accepted %}
               </li>
               {% endfor %}
@@ -28,9 +28,13 @@
           </div>
           {% endif %}
           <div class="venue">
-            <b>venue:</b>
-            <a href="{% url 'redirectToProfile' request.venue.participant.user.username 'about' %}">{{ request.venue.participant.user.profile }}</a>
-            {% include "request/_accepted.html" with accepted=request.venue.accepted %}
+            <b>Venue:</b>
+            <ul class="list-unstyled">
+              <li>
+                <a href="{% url 'redirectToProfile' request.venue.participant.user.username 'about' %}">{{ request.venue.participant.user.profile }} </a>
+                {% include "request/_accepted.html" with accepted=request.venue.accepted %}
+              </li>
+            </ul>
           </div>
         </div>
         <div class="col-sm-6">

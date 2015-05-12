@@ -3,15 +3,17 @@
 {% crispy ReplyForm ReplyForm.helper %}
 
 {% block header %}
-  <h3>{{ thread.subject }}</h3>
-  {% block from %}
-    <h5>
-      {% for participant in participant.others %}
-        <a href="{{ participant.user.get_absolute_url }}" class="text-white">{{ participant.user.profile }}</a>
-        {% if not forloop.last %},{% endif %}
-      {% endfor %}
-    </h5>
-  {% endblock %}
+  <div class="text-white">
+    <h3 class="page-header">{{ thread.subject }}</h3>
+    {% block from %}
+      <h5>
+        {% for participant in participant.others %}
+          <a href="{{ participant.user.get_absolute_url }}" class="text-white">{{ participant.user.profile }}</a>
+          {% if not forloop.last %},{% endif %}
+        {% endfor %}
+      </h5>
+    {% endblock %}
+  </div>
 {% endblock %}
 
 {% block navigation %}{% endblock %}
