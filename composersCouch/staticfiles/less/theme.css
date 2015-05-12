@@ -6285,7 +6285,7 @@ html {
 }
 body {
   font-family: Lato, Helvetica, Arial, sans-serif;
-  margin-bottom: 75px;
+  margin-bottom: 100px;
 }
 h1,
 h2,
@@ -6535,7 +6535,7 @@ h1 {
   bottom: 0;
   width: 100%;
   /* Set the fixed height of the footer here */
-  height: 60px;
+  height: 85px;
   background-color: #ffffff;
   color: #303030;
 }

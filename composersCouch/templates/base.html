@@ -106,12 +106,16 @@
     {% endblock %}
 
     <div id="footer" class="text-center">
-        </br>
+      </br>
+      <p>
         <a href="{% url 'about' %}">About</a><small><span class="text-muted"> &#149; </span></small>
         <a href="{% url 'about' %}#contact">Contact</a><small><span class="text-muted"> &#149; </span></small>
         <a href="{% url 'about' %}#team">Team</a><small><span class="text-muted"> &#149; </span></small>
         <a href="{% url 'about' %}#brand">Brand Info</a><small><span class="text-muted"> &#149; </span></small>
         <a href="{% url 'credit' %}">Credit</a>
+      </p>
+      <a href="{% url 'changelog' %}">Changelog</a><small><span class="text-muted"> &#149; </span></small>
+      <a href="{% url 'pipeline' %}">Pipeline</a>
     </div>
 
     <script type="text/javascript" src="{% static 'js/jquery-1.11.0.min.js' %}"></script>
