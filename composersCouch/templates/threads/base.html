@@ -5,10 +5,12 @@
 
 {% block title %}Messages{% endblock %}
 
-{% block headerClass %}thread{% endblock %}
+{% block headerClass %}dark-blue{% endblock %}
 
 {% block header%}
-  <h2 class="text-white">{% block messageType %}All Messages{% endblock %}</h2>
+  <div class="page-header text-white">
+    <h2>{% block messageType %}Messages{% endblock %}</h2>
+  </div>
 {% endblock %}
 
 {% block navigation %}

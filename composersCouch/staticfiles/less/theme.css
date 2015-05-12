@@ -7034,29 +7034,6 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   background: #3e79b5;
   color: #ffffff;
 }
-.header.thread {
-  color: #ffffff;
-  background-color: #0b4c8f;
-  padding: 10px 0px 0px 0px;
-}
-.header.thread .nav {
-  margin-top: 54px;
-}
-.header.thread .nav li a {
-  color: #fff;
-}
-.header.thread .nav li a:hover,
-.header.thread .nav li a:focus {
-  background-color: transparent;
-  color: #d3d3d3;
-}
-.header.thread .nav li.active a,
-.header.thread .nav li.active a:focus,
-.header.thread .nav li.active a:hover {
-  background-color: #d3d3d3;
-  border-radius: 3px 3px 0px 0px;
-  color: #303030;
-}
 .navigation.thread {
   margin-bottom: 0px;
 }
