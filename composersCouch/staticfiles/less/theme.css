@@ -6752,7 +6752,12 @@ h1 {
 }
 .landing-page .title h1 {
   font-family: Lato, Helvetica, Arial, sans-serif;
-  font-size: 50px;
+  font-size: 9vw;
+}
+@media (min-width: 768px) {
+  .landing-page .title h1 {
+    font-size: 50px;
+  }
 }
 .landing-page .title .couch {
   color: #2063a9;
