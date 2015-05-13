@@ -76,7 +76,7 @@ function saveForm(url, modalForm, deleteTriger){
                   }
                   if (addMore == true) {
                       getForm(url, modalForm, deleteTriger)
-                  }else {
+                  } else {
                       document.open();
                       document.write(response);
                       document.close();

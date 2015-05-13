@@ -343,6 +343,9 @@ PIPELINE_JS = {
             'js/google-analytics.js',
         ),
         'output_filename': 'js/scripts.min.js',
+        'extra_context': {
+            'async': True,
+        },
     }
 }
 
