@@ -40,6 +40,8 @@ urlpatterns += patterns('annoying.views',
     url(r'^learn/$', 'load_template', {'template_name': 'static/learn.html'}, name='learn'),
     url(r'^changelog/$', 'load_template', {'template_name': 'static/changelog.html'}, name='changelog'),
     url(r'^pipeline/$', 'load_template', {'template_name': 'static/pipeline.html'}, name='pipeline'),
+    url(r'^privacy/$', 'load_template', {'template_name': 'static/privacy.html'}, name='privacy'),
+    url(r'^terms/$', 'load_template', {'template_name': 'static/terms.html'}, name='terms'),
 
     # Footer
     url(r'^about/$', 'load_template', {'template_name': 'static/about.html'}, name='about'),

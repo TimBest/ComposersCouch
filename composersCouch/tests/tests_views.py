@@ -17,6 +17,8 @@ class TemplateViewsTests(TestCase):
             ['learn',  {}],
             ['changelog',  {}],
             ['pipeline',  {}],
+            ['privacy',  {}],
+            ['terms',  {}],
             ['sitemap',  {}],
             ['robots_rule_list',  {}],
         ]
