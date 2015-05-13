@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-{% block title %}Team{% endblock %}
 {% load static from staticfiles %}
 
 {% block meta %}
@@ -7,35 +6,36 @@
   <meta name="googlebot" content="noindex" />
 {% endblock %}
 
-{% block header %}
-  <h2>The Team</h2>
+{% block headerClass %}dark-blue{% endblock %}
+
+{% block header%}
+  <div class="page-header text-white">
+    <h2>{% block title %}The Team{% endblock %}</h2>
+  </div>
 {% endblock %}
 
 {% block content %}
-  <div class="TimBest">
+  <div class="about container">
     <div class="panel">
       <div class="panel-body">
-        <div class="TimBest">
-          <div class="row ">
-            <div class="col-sm-3 col-md-2">
-              <div class="image-frame">
-                <span class="frame-helper"></span>
-                <img class="image-center img-circle" alt="Tim Best" src="{% static 'img/TimBest.jpg' %}" height"125" width="125"/>
-              </div>
+        <div class="row ">
+          <div class="col-sm-3 col-md-2">
+            <div class="image-frame">
+              <span class="frame-helper"></span>
+              <img class="image-center img-circle" alt="Tim Best" src="{% static 'img/TimBest.jpg' %}" height"125" width="125"/>
             </div>
-            <div class="col-sm-9 col-md-10">
-              <h4>Tim Best</h4>
-              <span class="text-muted">PRESIDENT AND CEO</span>
-              <p>
-                A computer scientist with a passion for music. Tim is looking
-                to improve how artists are booked and promoted by
-                creating Composers Couch a website dedicated to improving
-                artist booking. He is currently in charge of managing all
-                daily operations.
-              </p>
-              <a href="mailto:timbest@composerscouch.com">timbest@composerscouch.com</a>
-
-            </div>
+          </div>
+          <div class="col-sm-9 col-md-10">
+            <h4>Tim Best</h4>
+            <span class="text-muted">PRESIDENT AND CEO</span>
+            <p>
+              A computer scientist with a passion for music. Tim is looking
+              to improve how artists are booked and promoted by
+              creating Composers Couch a website dedicated to improving
+              artist booking. He is currently in charge of managing all
+              daily operations.
+            </p>
+            <a href="mailto:timbest@composerscouch.com">timbest@composerscouch.com</a>
           </div>
         </div>
       </div>
