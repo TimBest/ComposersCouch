@@ -6861,37 +6861,37 @@ h1 {
 .red {
   background-color: #a62421;
 }
-.tour .profile-types .panel {
+.learn .profile-types .panel {
   margin-bottom: 30px;
 }
 @media (min-width: 768px) {
-  .tour .profile-types .panel {
+  .learn .profile-types .panel {
     height: 230px;
   }
 }
-.tour .tiles {
+.learn .tiles {
   margin-top: 30px;
 }
-.tour .tiles li {
+.learn .tiles li {
   border-bottom: 1px solid #ddd;
 }
-.tour .fa {
+.learn .fa {
   font-size: 40px;
 }
-.tour .nav-tabs li a {
+.learn .nav-tabs li a {
   background-color: #0b4c8f;
   border: none;
   border-bottom: 3px transparent solid;
   color: #d3d3d3;
 }
-.tour .nav-tabs li a:hover,
-.tour .nav-tabs li a:focus {
+.learn .nav-tabs li a:hover,
+.learn .nav-tabs li a:focus {
   background-color: #0b4c8f;
   color: #ffffff;
 }
-.tour .nav-tabs li.active a,
-.tour .nav-tabs li.active a:hover,
-.tour .nav-tabs li.active a:focus {
+.learn .nav-tabs li.active a,
+.learn .nav-tabs li.active a:hover,
+.learn .nav-tabs li.active a:focus {
   background-color: #0b4c8f;
   border: none;
   border-bottom: 3px #ffffff solid;
