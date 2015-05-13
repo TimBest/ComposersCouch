@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'djcelery',
     'embed_video',
     'easy_timezones',
+    'grunt',
     'pagination',
     'pipeline',
     'robots',
