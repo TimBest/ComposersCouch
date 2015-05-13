@@ -316,7 +316,7 @@ PIPELINE_JS_COMPRESSOR = 'pipeline.compressors.yuglify.YuglifyCompressor'
 PIPELINE_JS = {
     'scripts': {
         'source_filenames': (
-            #'js/jquery-1.11.0.min.js',
+            'js/jquery-1.11.0.min.js',
             'js/bootstrap.min.js',
             'js/moment.min.js',
             'js/bootstrap-datetimepicker.min.js',
@@ -324,8 +324,8 @@ PIPELINE_JS = {
             'autocomplete_light/autocomplete.js',
             'autocomplete_light/text_widget.js',
             'autocomplete_light/widget.js',
-            #'js/jquery.jplayer.min.js',
-            #'js/jplayer.playlist.js',
+            'js/jquery.jplayer.min.js',
+            'js/jplayer.playlist.js',
             'js/image-picker.js',
             'js/image-field.js',
             'js/modalForms.js',
