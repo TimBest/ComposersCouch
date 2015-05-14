@@ -5,12 +5,10 @@
 {% block dropdownTitle %}Photos{% endblock %}
 
 {% block panelBody %}
-  <div class="row page-header">
-    <div class="col-xs-12">
-      <a class="{{isEditable}} btn btn-success" href="{% url 'photos:upload' %}">
-        <span class="fa fa-plus"></span> Add Photo
-      </a>
-    </div>
+  <div class="row no-gutter page-header">
+    <a class="{{isEditable}} btn btn-success" href="{% url 'photos:upload' %}">
+      <span class="fa fa-plus"></span> Add Photo
+    </a>
   </div>
   <div class="{% if not images %}{{isEditable}}{% endif %}">
     {% include "profile/photos.html" with images=images %}
