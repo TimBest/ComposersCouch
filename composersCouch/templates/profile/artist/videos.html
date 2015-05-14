@@ -44,12 +44,14 @@
                       <li>
                         <h5 class="video-title">{{ track.media.title }}</h5>
                         {% if track.media.video %}
-                          <a href="javascript:;" class="btn btn-default btn-video toggle-album-video">
-                            <span class="fa fa-video-camera"></span> <sub class="caret"></sub>
-                          </a>
-                          <div style="display: none;" class="album-video" >
+                        <a  class="btn btn-default btn-video" data-toggle="collapse" href="#{{ track.id }}" aria-expanded="false" aria-controls="{{ track.id }}">
+                          <span class="fa fa-video-camera"></span><sub class="caret"></sub>
+                        </a>
+                        <div class="collapse" id="{{ track.id }}">
+                          <div class="album-video" >
                             {% video track.media.video 'tiny' %}
                           </div>
+                        </div>
                         {% endif %}
                       </li>
                     {% endfor %}
