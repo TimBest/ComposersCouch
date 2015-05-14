@@ -6,18 +6,16 @@
 {% block dropdownTitle %}Photos{% endblock %}
 
 {% block panelBody %}
-  <div class="row page-header">
-    <div class="col-xs-12">
-      <a class="{{isEditable}} btn btn-success" href="{% url 'photos:upload' %}">
-        <span class="fa fa-plus"></span> Add Photo
-      </a>
-      <div class="pull-right social-links">
-        <a href="{% url 'artist:photoLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
-        {% with social=profile.social_links %}
-          {% if social.instagram %}<a href="{{ social.instagram }}" target="_blank" class="btn btn-instagram"><span class="fa fa-instagram"></span></a>{% endif %}
-          {% if social.tumblr %}<a href="{{ social.tumblr }}" target="_blank" class="btn btn-tumblr"><span class="fa fa-tumblr"></span></a>{% endif %}
-        {% endwith %}
-      </div>
+  <div class="row no-gutter page-header">
+    <a class="{{isEditable}} btn btn-success" href="{% url 'photos:upload' %}">
+      <span class="fa fa-plus"></span> Add Photo
+    </a>
+    <div class="pull-right social-links">
+      <a href="{% url 'artist:photoLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
+      {% with social=profile.social_links %}
+        {% if social.instagram %}<a href="{{ social.instagram }}" target="_blank" class="btn btn-instagram"><span class="fa fa-instagram"></span></a>{% endif %}
+        {% if social.tumblr %}<a href="{{ social.tumblr }}" target="_blank" class="btn btn-tumblr"><span class="fa fa-tumblr"></span></a>{% endif %}
+      {% endwith %}
     </div>
   </div>
   <div class="{% if not images %}{{isEditable}}{% endif %}">

@@ -7,20 +7,18 @@
 
 {% block panelBody %}
   <div class="music">
-    <div class="row page-header">
-      <div class="col-xs-12">
-        <a class="{{isEditable}} btn btn-success" href="{% url 'artist:albumForm' %}">
-          <span class="fa fa-plus"></span> Add Album
-        </a>
-        <div class="pull-right social-links">
-          <a href="{% url 'artist:musicLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
-          {% with music=artist_profile.music_links %}
-            {% if music.bandcamp %}<a href="{{ music.bandcamp }}" target="_blank" class="btn btn-bandcamp">bc</a>{% endif %}
-            {% if music.itunes %}<a href="{{ music.itunes }}" target="_blank" class="btn btn-itunes"><span class="fa fa-apple"></span></a>{% endif %}
-            {% if music.spotify %}<a href="{{ music.spotify }}" target="_blank" class="btn btn-spotify"><span class="fa fa-spotify"></span></a>{% endif %}
-            {% if music.soundcloud %}<a href="{{ music.soundcloud }}" target="_blank" class="btn btn-soundcloud"><span class="fa fa-soundcloud"></span></a>{% endif %}
-          {% endwith %}
-        </div>
+    <div class="row no-gutter page-header">
+      <a class="{{isEditable}} btn btn-success" href="{% url 'artist:albumForm' %}">
+        <span class="fa fa-plus"></span> Add Album
+      </a>
+      <div class="pull-right social-links">
+        <a href="{% url 'artist:musicLinksForm' %}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
+        {% with music=artist_profile.music_links %}
+          {% if music.bandcamp %}<a href="{{ music.bandcamp }}" target="_blank" class="btn btn-bandcamp">bc</a>{% endif %}
+          {% if music.itunes %}<a href="{{ music.itunes }}" target="_blank" class="btn btn-itunes"><span class="fa fa-apple"></span></a>{% endif %}
+          {% if music.spotify %}<a href="{{ music.spotify }}" target="_blank" class="btn btn-spotify"><span class="fa fa-spotify"></span></a>{% endif %}
+          {% if music.soundcloud %}<a href="{{ music.soundcloud }}" target="_blank" class="btn btn-soundcloud"><span class="fa fa-soundcloud"></span></a>{% endif %}
+        {% endwith %}
       </div>
     </div>
     {% for album in artist_profile.albums.all %}
