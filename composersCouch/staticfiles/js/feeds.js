@@ -1,6 +1,8 @@
 $(document).ready(function() {
-    $('.load-more-genres').click(function(e) {
+    $('.more-genres').hide();
+    $('#load-more-genres').click(function(e) {
         e.stopPropagation();
-        $('.load-more-genres').hide();
+        $('.more-genres').show();
+        $('#load-more-genres').hide();
     });
 });
