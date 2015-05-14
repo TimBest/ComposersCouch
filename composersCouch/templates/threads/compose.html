@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block modalHeader %}
-  <div class="nav nav-justified nav-tabs">
+  <div class="nav nav-justified nav-tabs nav-no-colapse">
     <li class="{% block message %}{% endblock %}"><a href="{% url 'threads:compose' %}">Send Message</a></li>
     <li class="{% block private_request %}{% endblock %}"><a href="{% url 'request_write' %}">Send Private Request</a></li>
     <li class="{% block public_request %}{% endblock %}">

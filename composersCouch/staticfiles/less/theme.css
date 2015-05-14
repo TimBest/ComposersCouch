@@ -6153,8 +6153,12 @@ input[type="checkbox"]:disabled:checked:after,
   }
 }
 .nav-tabs > li > a {
-  background-color: #EBEBEB;
+  background-color: #ebebeb;
   color: #555555;
+}
+.nav-no-colapse li {
+  display: table-cell;
+  width: 1%;
 }
 .panel-default .panel-heading {
   border-bottom: 0px;
@@ -6883,10 +6887,6 @@ h1 {
 }
 .learn .fa {
   font-size: 40px;
-}
-.learn .nav-tabs li {
-  display: table-cell;
-  width: 1%;
 }
 .learn .nav-tabs li a {
   background-color: #0b4c8f;
