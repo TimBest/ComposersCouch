@@ -328,7 +328,6 @@ PIPELINE_JS = {
             'js/includes/jplayer.playlist.js',
             'js/includes/image-picker.js',
             'js/includes/jquery.anystretch.min.js',
-
             'js/image-field.js',
             'js/modal-forms.js',
             'js/request.js',
