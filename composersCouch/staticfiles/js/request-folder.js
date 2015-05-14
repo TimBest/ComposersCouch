@@ -8,7 +8,7 @@ function displayFolderControls() {
 
 $(document).ready(function() {
   displayFolderControls();
-    $(".request-folder-checkbox").click(function(e) {
-      displayFolderControls();
-    });
+  $(".request-folder-checkbox").click(function(e) {
+    displayFolderControls();
+  });
 });

@@ -21,10 +21,3 @@ $(document).ready(function() {
       $('#jquery_jplayer_'+id).hide();
   });
 });
-
-// Expand video
-$(document).ready(function() {
-  $(".toggle-album-video").click(function() {
-    $(this).closest("li").find(".album-video").toggle();
-  });
-});
