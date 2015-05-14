@@ -71,15 +71,14 @@
             </div>
           </div>
         </div>
+        <div class="hidden">
+          <div class="json_playlist" id="{{ album.id }}">
+            {{ album.get_json_playlist }}
+          </div>
+        </div>
       </div>
     {% empty %}
       <p>This artist has not added any music yet.</p>
     {% endfor %}
   </div>
-{% endblock %}
-
-{% block script %}
-  {% for album in artist_profile.albums.all %}
-    {% include "tracks/_player_script.html" with id=album.id playlist=album.get_json_playlist %}
-  {% endfor %}
 {% endblock %}
