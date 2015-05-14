@@ -39,10 +39,3 @@
   </div>
 {% endblock %}
 {% block extraSubmit %}{% progress_bar %}{% endblock %}
-
-
-{% block script %}
-  {% include "utils/_show_participant_script.html" with id='id_headliner' choice_class='artist-autocomplete' %}
-  {% include "utils/_show_participants_script.html" with id='id_openers' choice_class='artist-autocomplete' %}
-  {% include "utils/_show_participant_script.html" with id='id_venue' choice_class='user-autocomplete' %}
-{% endblock %}

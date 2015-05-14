@@ -7,6 +7,9 @@ from artist.models import ArtistProfile
 
 class ArtistProfileAutocomplete(autocomplete_light.AutocompleteModelTemplate):
     model = ArtistProfile
+    attrs = {
+        'placeholder': '',
+    }
     search_fields = ['^name',]
 
 autocomplete_light.register(
