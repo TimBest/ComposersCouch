@@ -44,11 +44,11 @@
                       <li>
                         <h5 class="video-title">{{ track.media.title }}</h5>
                         {% if track.media.video %}
-                          <a href="javascript:;" id="toggle-album-video-{{track.id}}" class="btn btn-default btn-video">
+                          <a href="javascript:;" class="btn btn-default btn-video toggle-album-video">
                             <span class="fa fa-video-camera"></span> <sub class="caret"></sub>
                           </a>
-                          <div style="display: none;" id="album-video-{{track.id}}" >
-                            {% video  track.media.video 'tiny' %}
+                          <div style="display: none;" class="album-video" >
+                            {% video track.media.video 'tiny' %}
                           </div>
                         {% endif %}
                       </li>
@@ -77,16 +77,4 @@
       <p class="{{isEditable}}">Videos must be attached to an album. <a href="{% url 'artist:albumForm' %}">Add an album</a> to get started.</p>
     {% endfor %}
   </div>
-{% endblock %}
-
-{% block script %}
-  <script type="text/javascript">
-    {% for album in artist_profile.albums.all %}
-      {% for track in album.track_set.all %}
-        $("#toggle-album-video-{{track.id}}").click(function() {
-            $("#album-video-{{track.id}}").toggle();
-        });
-      {% endfor %}
-    {% endfor %}
-  </script>
 {% endblock %}
