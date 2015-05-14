@@ -22,8 +22,8 @@ function profileType() {
 }
 $(document).ready(function() {
     /* Alows for a button group to be used as a radio input */
-    var profileType = $("#div_id_profile_type");
-    if (profileType.length > 0) {
+    var signup = $("#sign-up-form");
+    if (signup.length > 0) {
       $(".profile-type").show();
       $("#div_id_profile_type").hide();
       $("#"+$("input[type=radio]:checked").val()).addClass('active');
