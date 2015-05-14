@@ -22,14 +22,17 @@ function profileType() {
 }
 $(document).ready(function() {
     /* Alows for a button group to be used as a radio input */
-    $(".profile-type").show();
-    $("#div_id_profile_type").hide();
-    $("#"+$("input[type=radio]:checked").val()).addClass('active');
-    profileType();
-    $(".btn-profile-type").click(function() {
-        $(this).addClass('active');
-        $('input[type=radio]').val([$(this).attr('id')]);
-        $('.btn-profile-type').removeClass('active');
-        profileType();
-    });
+    var profileType = $("#div_id_profile_type");
+    if (profileType.length > 0) {
+      $(".profile-type").show();
+      $("#div_id_profile_type").hide();
+      $("#"+$("input[type=radio]:checked").val()).addClass('active');
+      profileType();
+      $(".btn-profile-type").click(function() {
+          $(this).addClass('active');
+          $('input[type=radio]').val([$(this).attr('id')]);
+          $('.btn-profile-type').removeClass('active');
+          profileType();
+      });
+    }
 });
