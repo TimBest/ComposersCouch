@@ -24,28 +24,12 @@ $(document).ready(function() {
     /* Alows for a button group to be used as a radio input */
     $(".profile-type").show();
     $("#div_id_profile_type").hide();
-    var inputValue = "#" + $("input[type=radio]:checked").val();
-    $(inputValue).addClass('active');
-    $("#f").click(function() {
-        $('button').removeClass('active');
+    $("#"+$("input[type=radio]:checked").val()).addClass('active');
+    profileType();
+    $(".btn-profile-type").click(function() {
         $(this).addClass('active');
-        $('input[type=radio]').val(['f']);
+        $('input[type=radio]').val([$(this).attr('id')]);
+        $('.btn-profile-type').removeClass('active');
         profileType();
-    });
-    $("#m").click(function() {
-        $('button').removeClass('active');
-        $(this).addClass('active');
-        $('input[type=radio]').val(['m']);
-        profileType();
-    });
-    $("#v").click(function() {
-        $('button').removeClass('active');
-        $(this).addClass('active');
-        $('input[type=radio]').val(['v']);
-        profileType();
-    });
-    $("input[type=radio]").change(profileType()).change();
-    $("form").on('submit', function() {
-        zipcode_fix();
     });
 });

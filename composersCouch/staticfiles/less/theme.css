@@ -3359,28 +3359,28 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   border-color: #073360;
 }
 .navbar-inverse .navbar-brand {
-  color: #d3d3d3;
+  color: #dddddd;
 }
 .navbar-inverse .navbar-brand:hover,
 .navbar-inverse .navbar-brand:focus {
-  color: #d3d3d3;
+  color: #dddddd;
   background-color: #073360;
 }
 .navbar-inverse .navbar-text {
-  color: #d3d3d3;
+  color: #dddddd;
 }
 .navbar-inverse .navbar-nav > li > a {
-  color: #d3d3d3;
+  color: #dddddd;
 }
 .navbar-inverse .navbar-nav > li > a:hover,
 .navbar-inverse .navbar-nav > li > a:focus {
-  color: #d3d3d3;
+  color: #dddddd;
   background-color: #073360;
 }
 .navbar-inverse .navbar-nav > .active > a,
 .navbar-inverse .navbar-nav > .active > a:hover,
 .navbar-inverse .navbar-nav > .active > a:focus {
-  color: #d3d3d3;
+  color: #dddddd;
   background-color: #073360;
 }
 .navbar-inverse .navbar-nav > .disabled > a,
@@ -3407,7 +3407,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-inverse .navbar-nav > .open > a:hover,
 .navbar-inverse .navbar-nav > .open > a:focus {
   background-color: #073360;
-  color: #d3d3d3;
+  color: #dddddd;
 }
 @media (max-width: 767px) {
   .navbar-inverse .navbar-nav .open .dropdown-menu > .dropdown-header {
@@ -3417,17 +3417,17 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
     background-color: #073360;
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
-    color: #d3d3d3;
+    color: #dddddd;
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:hover,
   .navbar-inverse .navbar-nav .open .dropdown-menu > li > a:focus {
-    color: #d3d3d3;
+    color: #dddddd;
     background-color: #073360;
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a,
   .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:hover,
   .navbar-inverse .navbar-nav .open .dropdown-menu > .active > a:focus {
-    color: #d3d3d3;
+    color: #dddddd;
     background-color: #073360;
   }
   .navbar-inverse .navbar-nav .open .dropdown-menu > .disabled > a,
@@ -3438,10 +3438,10 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
 }
 .navbar-inverse .navbar-link {
-  color: #d3d3d3;
+  color: #dddddd;
 }
 .navbar-inverse .navbar-link:hover {
-  color: #d3d3d3;
+  color: #dddddd;
 }
 .pagination {
   display: inline-block;
@@ -6401,7 +6401,7 @@ h1 {
   margin-bottom: 15px;
 }
 .sub-nav {
-  background-color: #d3d3d3;
+  background-color: #dddddd;
 }
 .sub-nav .row .btn {
   margin-top: 5px;
@@ -6514,7 +6514,7 @@ h1 {
   font-size: 2em;
 }
 .non-modal-form .modal-content {
-  border: 1px solid #d3d3d3;
+  border: 1px solid #dddddd;
   box-shadow: none;
 }
 .row {
@@ -6811,7 +6811,7 @@ h1 {
   background-color: #303030;
 }
 .silver {
-  background-color: #d3d3d3;
+  background-color: #dddddd;
 }
 .silver-light {
   background-color: #ebebeb;
@@ -6892,7 +6892,7 @@ h1 {
   background-color: #0b4c8f;
   border: none;
   border-bottom: 3px transparent solid;
-  color: #d3d3d3;
+  color: #dddddd;
 }
 .learn .nav-tabs li a:hover,
 .learn .nav-tabs li a:focus {
@@ -7328,7 +7328,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .track-formset {
   padding-bottom: 5px;
   margin-bottom: 5px;
-  border-bottom: 1px solid #d3d3d3;
+  border-bottom: 1px solid #dddddd;
 }
 #id_tracks {
   border: 0px;
@@ -7593,7 +7593,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   background-color: #ebebeb;
 }
 .calendar-wrapper .day-cell:hover {
-  background-color: #d3d3d3;
+  background-color: #dddddd;
 }
 .calendar-wrapper .cal-month-box [class*="cal-cell"] {
   min-height: 100px;
@@ -7726,7 +7726,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .calendar-header a:focus,
 .calendar-header a:active,
 .calendar-header a .active {
-  color: #d3d3d3;
+  color: #dddddd;
 }
 .calendar-header .preiod-name {
   font-size: 36px;
@@ -7834,7 +7834,7 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   /* The seeking class is added/removed inside jPlayer */
 }
 .jplayer-controls .jp-progress .jp-seek-bar {
-  background-color: #d3d3d3;
+  background-color: #dddddd;
   width: 0px;
   height: 100%;
   cursor: pointer;
