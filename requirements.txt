@@ -1,4 +1,6 @@
-Django==1.7.7
+Django==1.8.1
+Jinja2==2.7.3
+MarkupSafe==0.23
 Pillow==2.7.0
 Wand==0.3.8
 amqp==1.4.6
@@ -26,9 +28,10 @@ django-robots==1.0
 django-social-auth==0.7.28
 django-static-precompiler==0.8
 django-storages==1.1.8
+django-test-without-migrations==0.2
 futures==2.2.0
 html2text==2014.12.5
-httplib2==0.9
+httplib2==0.9.1
 icalendar==3.9.0
 kombu==3.0.24
 mutagen==1.27

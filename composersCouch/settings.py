@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'social_auth',
     'storages',
     'stream_framework',
+    'test_without_migrations',
 
     'accounts',
     'annoying',
@@ -257,6 +258,17 @@ STATICFILES_FINDERS = (
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
 )
+
+"""TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.jinja2.Jinja2',
+        'DIRS': [os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'environment' : 'composersCouch.jinja2.environment',
+        }
+    },
+]"""
 
 FILE_UPLOAD_HANDLERS = (
     "progressbarupload.uploadhandler.ProgressBarUploadHandler",

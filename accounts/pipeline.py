@@ -87,6 +87,7 @@ def create_profile(user, profile_type, location, first_name=None, last_name=None
         user.profile.profile_type = 'v'
         contact = Contact(name=venue.name)
 
+    location.save()
     contact.save()
     Contact_info = ContactInfo(contact=contact,location=location)
     Contact_info.save()

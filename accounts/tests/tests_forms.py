@@ -6,7 +6,7 @@ from accounts import forms
 
 class SignupFormTests(TestCase):
     """ Test the signup form. """
-    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
+    fixtures = ['site', 'users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
                  'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
                 'albums', 'artists', 'tracks', 'media', 'calendars', 'info',

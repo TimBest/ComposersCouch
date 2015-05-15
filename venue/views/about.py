@@ -78,7 +78,7 @@ class EquipmentView(VenueProfileFormMixin, FormView):
         return context
 
     def get_form(self, form_class=None):
-        formset = modelformset_factory(self.model, form_class, extra=self.extra)
+        formset = modelformset_factory(self.model, self.form_class, extra=self.extra, fields =['id','name','quantity','category',])
         form_kwargs = self.get_form_kwargs()
         equipment = models.Equipment.objects.filter(
                         profile=self.user.profile.venueProfile,
@@ -110,7 +110,7 @@ class HoursView(VenueProfileFormMixin, FormView):
         return context
 
     def get_form(self, form_class=None):
-        formset = modelformset_factory(self.model, form_class, extra=7, max_num=7)
+        formset = modelformset_factory(self.model, self.form_class, extra=7, max_num=7, fields = ('id','start','end',))
         hours = models.Hours.objects.filter(profile=self.user.profile.venueProfile)
         form_kwargs = self.get_form_kwargs()
         return formset(queryset=hours, **form_kwargs)
@@ -139,7 +139,7 @@ class PoliciesView(VenueProfileFormMixin, FormView):
     extra = 1
 
     def get_form(self, form_class=None):
-        formset = modelformset_factory(self.model, form_class, extra=self.extra)
+        formset = modelformset_factory(self.model, self.form_class, extra=self.extra, exclude=('',))
         policies = self.model.objects.filter(profile=self.user.profile.venueProfile)
         form_kwargs = self.get_form_kwargs()
         return formset(queryset=policies, **form_kwargs)

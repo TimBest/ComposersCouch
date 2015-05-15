@@ -23,7 +23,7 @@ class Profile(UserenaBaseProfile):
                                 related_name='profile')
     genre = models.ManyToManyField(Genre, verbose_name=_("genre"),
                                    related_name='genre_artist',
-                                   null=True, blank=True)
+                                   blank=True)
     contact_info = models.OneToOneField(ContactInfo, unique=True,
                                         blank=True, null=True,
                                         verbose_name=_('contactInfo'),

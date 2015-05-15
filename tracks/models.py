@@ -28,12 +28,12 @@ class Album(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     album_art = models.ForeignKey(Image,
-                          related_name='artist Album art',null=True,
+                          related_name='artist_album_art',null=True,
                           blank=True, on_delete=models.SET_NULL)
     title = models.CharField(_('Title'), max_length=100)
     genre = models.ManyToManyField(Genre, verbose_name=_("genre"),
                                    related_name='album_genre',
-                                   null=True, blank=True)
+                                   blank=True)
     year = models.CharField(_("Year"), max_length="4", null=True,
                             blank=True)
     description = models.TextField(_("Description"), null=True,

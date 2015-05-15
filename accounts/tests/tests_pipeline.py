@@ -8,7 +8,7 @@ from contact.models import Location, Zipcode
 
 class CreateProfileTests(TestCase):
     """ Test the extra utils methods """
-    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles']
+    fixtures = ['site', 'users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles']
 
     def test_create_profile(self):
         # test fan createion

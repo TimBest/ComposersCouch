@@ -18,14 +18,14 @@ class Info(models.Model):
     This model stores meta data for a date.  You can relate this data to many
     other models.
     '''
-    poster = models.ForeignKey(Image, related_name='event poster',
+    poster = models.ForeignKey(Image, related_name='event_poster',
                                null=True, blank=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length = 255, null=True, blank=True,)
     description = models.TextField(null=True, blank=True)
     headliner = models.ForeignKey(ArtistProfile, null=True, blank=True,
                                   related_name='shows_headlining')
     headliner_text = models.CharField(max_length=255, null=True, blank=True,)
-    openers = models.ManyToManyField(ArtistProfile, null=True, blank=True,
+    openers = models.ManyToManyField(ArtistProfile, blank=True,
                                      related_name='shows_opening')
     openers_text = models.CharField(max_length=255, null=True, blank=True,)
     venue = models.ForeignKey(User, null=True, blank=True)

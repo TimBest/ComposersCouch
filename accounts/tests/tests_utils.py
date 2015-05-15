@@ -7,13 +7,17 @@ from contact.models import Contact, ContactInfo, Location, Zipcode
 
 class UtilsTests(TestCase):
     """ Test the extra utils methods """
-    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles']
+    fixtures = ['site', 'users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles']
 
     def test_create_user_profile(self):
         creator = User.objects.get(pk=1)
         location = Location(zip_code=Zipcode(pk=12065))
         contact = Contact(name=creator.username)
-        creator.profile.contact_info = ContactInfo(contact=contact,location=location)
+        location.save()
+        contact.save()
+        contact_info = ContactInfo(contact=contact,location=location)
+        contact_info.save()
+        creator.profile.contact_info = contact_info
         # test artist creation
         user = create_user_profile("Mouse Rat", "mouserat@example.com", "m", creator)
         self.failIf(user.profile.has_owner)

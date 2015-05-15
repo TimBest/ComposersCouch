@@ -23,9 +23,14 @@ class UtilsTests(TestCase):
         user = User.objects.get(email='john@example.com')
         location = Location(pk=1)
         location.zip_code = Zipcode(pk=12065)
+        location.pk = None
         location.save()
-        user.profile.contact_info = ContactInfo(location=location,
-                                                contact=Contact(pk=1))
+        contact=Contact(pk=1)
+        contact.pk = None
+        contact.save()
+        contact_info = ContactInfo(location=location, contact=contact)
+        contact_info.save()
+        user.profile.contact_info = contact_info
         user.profile.save()
         request.user = user
         self.assertEqual(get_location(request),

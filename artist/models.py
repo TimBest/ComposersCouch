@@ -13,20 +13,20 @@ class ArtistProfile(Profile):
     name =  models.CharField(_('band name'), max_length=64,
                                   blank=False)
     biography = models.TextField(_("biography"), null=True, blank=True)
-    booking_contact = models.ForeignKey(ContactInfo,
-                                unique=True, null=True, blank=True,
+    booking_contact = models.OneToOneField(ContactInfo,
+                                null=True, blank=True,
                                 verbose_name=_('bookingContact'),
                                 related_name='bookingContact')
-    label_contact = models.ForeignKey(ContactInfo,
-                                unique=True, null=True, blank=True,
+    label_contact = models.OneToOneField(ContactInfo,
+                                null=True, blank=True,
                                 verbose_name=_('labelContact'),
                                 related_name='labelContact')
-    management_contact = models.ForeignKey(ContactInfo,
-                                unique=True, null=True, blank=True,
+    management_contact = models.OneToOneField(ContactInfo,
+                                null=True, blank=True,
                                 verbose_name=_('managementContact'),
                                 related_name='managementContact')
-    press_contact = models.ForeignKey(ContactInfo,
-                                unique=True, null=True, blank=True,
+    press_contact = models.OneToOneField(ContactInfo,
+                                null=True, blank=True,
                                 verbose_name=_('pressContact'),
                                 related_name='pressContact')
     objects = models.GeoManager()
@@ -48,7 +48,7 @@ class Member(models.Model):
     name =  models.CharField(_("name"), max_length=64)
     current_member =  models.BooleanField(_("is current member"), default=True)
     instruments = models.ManyToManyField(Instrument, verbose_name=_("instrument"),
-                                related_name='instrument', null=True, blank=True)
+                                related_name='instrument', blank=True)
     biography = models.TextField(_("biography"), null=True, blank=True)
 
     def __unicode__(self):

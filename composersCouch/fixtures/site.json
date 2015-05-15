@@ -1,0 +1,6 @@
+[{"pk": 1,
+  "model": "django.contrib.sites.site",
+  "fields": {"id": 1,
+             "domain": "composerscouch.com",
+             "name": "composerscouch.com"}}
+]
