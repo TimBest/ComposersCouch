@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static from staticfiles %}
+
 
 {% block meta %}
   <meta name="robots" content="noindex" />
@@ -22,7 +22,7 @@
           <div class="col-sm-3 col-md-2">
             <div class="image-frame">
               <span class="frame-helper"></span>
-              <img class="image-center img-circle" alt="Tim Best" src="{% static 'img/TimBest.jpg' %}" height"125" width="125"/>
+              <img class="image-center img-circle" alt="Tim Best" src="{{ static('img/TimBest.jpg') }}" height"125" width="125"/>
             </div>
           </div>
           <div class="col-sm-9 col-md-10">

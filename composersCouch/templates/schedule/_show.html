@@ -1,5 +1,5 @@
 {% load i18n scheduletags thumbnail %}
-{% load static from staticfiles %}
+
 
 
 {% with info=show.info %}
@@ -12,8 +12,8 @@
             <span class="frame-helper"></span>
             {% thumbnail info.get_poster "100x100" crop="center" as im %}
               <img class="image-center" src="{{ MEDIA_URL }}{{ im }}" alt="{{ info.title }}"/>
-            {% empty %}
-              <img class="image-center" src="{% static 'img/logo.png' %}" alt="{% trans 'Composers Couch logo' %}"  width="200" />
+            {% else %}
+              <img class="image-center" src="{{ static('img/logo.png') }}" alt="{% trans 'Composers Couch logo' %}"  width="200" />
             {% endthumbnail %}
           </div>
         </div>
@@ -28,11 +28,11 @@
               <h4>{{ info.headliner_text }}</h4>
             {% endif %}
             <div class="openers">
-              {% comment %}{% if info.opener.first %}
+              {# {% if info.opener.first %}
                 {% for opener in info.openers.all %}
                   {% if forloop.first %}with:{% else %},{% endif %}
                   <a class="text-black" href="{% url 'artist:news' opener.user.username  %}" > {{ opener }}</a>
-                  {% endfor %}{% endcomment %}
+                  {% endfor %} #}
               {% if info.openers_text %}
                 <span>with: {{ info.openers_text }}</span>
               {% endif %}
@@ -63,7 +63,7 @@
 
         <div class="panel-footer">
           <div class="pull-right">
-          <form method="POST" class="decline-form inline-block {% hide_deny show request.user %}" action="{% url 'show_deny' %}">
+          <form method="POST" class="decline-form inline-block {% hide_deny show request.user %}" action="{{ url('show_deny') }}">
             {% csrf_token %}
             <input type="hidden" name="show" value="{{ show.id }}">
             <div class="dropdown pull-right">
@@ -82,7 +82,7 @@
           </form>
         </div>
           <div class="pull-right">
-            <form method="POST" class="accept-form inline-block {% hide_confirm show request.user %}" action="{% url 'show_confirm' %}">
+            <form method="POST" class="accept-form inline-block {% hide_confirm show request.user %}" action="{{ url('show_confirm') }}">
               {% csrf_token %}
               <input type="hidden" name="show" value="{{ show.id }}">
               <button class="btn btn-success" onclick="this.form.onsubmit(); return false; " type="submit"><span class="fa fa-check" ></span> {% trans "Confirm" %}</button>

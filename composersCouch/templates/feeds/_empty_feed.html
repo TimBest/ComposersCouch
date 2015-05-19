@@ -16,7 +16,7 @@
     <div class="panel">
       <div class="panel-body">
         <p>No {{ feed_type }} feel free to try a diffrent zipcode.</p>
-        <form class="form-inline zipcode-form" role="filter" method="POST" action="{% url 'zipcode' %}">
+        <form class="form-inline zipcode-form" role="filter" method="POST" action="{{ url('zipcode') }}">
           <input type="hidden" name="path" value="{% firstof request.path '/' %}">
           {% crispy locationForm %}
         </form>
@@ -35,10 +35,10 @@
       <div class="panel-body">
         <div class="row">
           <p>No {{ feed_type }} at this time. please enter a {% if zipcode %}different{% endif %}
-             zipcode or <a href="{% url 'signup' %}?next={% firstof request.path '/' %}">sign up</a>
+             zipcode or <a href="{{ url('signup') }}?next={% firstof request.path '/' %}">sign up</a>
              for more options.</p>
           <div class="col-sm-6">
-            <form class="form-inline zipcode-form" role="filter" method="POST" action="{% url 'zipcode' %}">
+            <form class="form-inline zipcode-form" role="filter" method="POST" action="{{ url('zipcode') }}">
               <input type="hidden" name="path" value="{% firstof request.path '/' %}">
               {% crispy locationForm %}
             </form>
@@ -49,7 +49,7 @@
   {% else %}
     <div class="panel">
       <div class="panel-body">
-        <p>No {{ feed_type }} at this time. <a href="{% url 'signup' %}?next={% firstof request.path '/' %}">Sign Up</a> for more options.</p>
+        <p>No {{ feed_type }} at this time. <a href="{{ url('signup') }}?next={% firstof request.path '/' %}">Sign Up</a> for more options.</p>
       </div>
     </div>
   {% endif %}

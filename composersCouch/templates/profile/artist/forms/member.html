@@ -17,12 +17,12 @@
     {% if members %}
       <span>Edit members: </span>
       {% for m in members %}
-        <a class="{% ifequal m member %}text-bold{% endifequal %} editMusicianMembers" href="{% url 'artist:memberForm' m.id %}">
+        <a class="{% if m == member %}text-bold{% endif %} editMusicianMembers" href="{% url 'artist:memberForm' m.id %}">
           {{m.name}},
         </a>
       {% endfor %}
       <span>or </span>
-      <a class="editMusicianMembers text-success" href="{% url 'artist:memberForm' %}">
+      <a class="editMusicianMembers text-success" href="{{ url('artist:memberForm') }}">
         Add New
       </a>
     {% endif %}
@@ -31,7 +31,7 @@
     {% if past_members %}
       <span>Edit past members: </span>
       {% for m in past_members %}
-        <a class="{% ifequal m member %}text-bold{% endifequal %} editMusicianMembers" href="{% url 'artist:memberForm' m.id %}">
+        <a class="{% if m == member %}text-bold{% endif %} editMusicianMembers" href="{% url 'artist:memberForm' m.id %}">
           {{m.name}}{% if not forloop.last %},{% endif %}
         </a>
       {% endfor %}

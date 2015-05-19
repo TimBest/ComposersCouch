@@ -4,10 +4,10 @@
 
 {% block periodName %}
   <span class="hidden-xs">
-    {{ period.start|date:"F j" }} - {% ifequal period.end.month period.start.month %}{{ period.end|date:"d" }}{% else %}{{ period.end|date:"F j" }}{% endifequal %}
+    {{ period.start|date:"F j" }} - {% if period.end.month == period.start.month %}{{ period.end|date:"d" }}{% else %}{{ period.end|date:"F j" }}{% endif %}
   </span>
   <span class="visible-xs">
-    {{ period.start|date:"M j" }} - {% ifequal period.end.month period.start.month %}{{ period.end|date:"d" }}{% else %}{{ period.end|date:"M j" }}{% endifequal %}
+    {{ period.start|date:"M j" }} - {% if period.end.month == period.start.month %}{{ period.end|date:"d" }}{% else %}{{ period.end|date:"M j" }}{% endif %}
   </span>
 {% endblock %}
 
@@ -23,12 +23,12 @@
             <a href="{% url 'calendar' 'day' filter %}{% querystring_for_date date %}" class="text-black" >{{ day.start|date:"l" }} the {{ day.start|date:"j" }}:</a>
           </h4>
           {% for event in day.get_event_partials %}
-            {% ifequal filter 'shows' %}
+            {% if filter == 'shows' %}
               {% include "schedule/_show.html" with show=event.show %}
             {% else %}
               {% include "request/_private_request.html" with request=event.thread.request %}
-            {% endifequal %}
-          {% empty %}
+            {% endif %}
+          {% else %}
             <p class="text-left">No {{ filter }}</p>
           {% endfor %}
         </div>

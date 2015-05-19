@@ -5,15 +5,15 @@
 {% block messageType %}Private Requests{% endblock %}
 
 {% block send_message %}
-  <a href="{% url 'request_write' %}" class="btn btn-primary">Send Private Request</a>
+  <a href="{{ url('request_write') }}" class="btn btn-primary">Send Private Request</a>
 {% endblock %}
 
 {% block center_nav %}
   <li class="{% if inbox %}active{% endif %}">
-    <a href="{% url 'private_requests' %}"><span class="fa fa-inbox"></span> Inbox</a>
+    <a href="{{ url('private_requests') }}"><span class="fa fa-inbox"></span> Inbox</a>
   </li>
   <li class="{% if sent %}active{% endif %}">
-    <a href="{% url 'sent_private_requests' %}"><span class="fa fa-send"></span> Sent</a>
+    <a href="{{ url('sent_private_requests') }}"><span class="fa fa-send"></span> Sent</a>
   </li>
 {% endblock %}
 
@@ -22,7 +22,7 @@
     {% for p in participants %}
       <a href="{{ p.thread.get_absolute_url }}" class="btn btn-link pull-right" >Veiw messages</a>
       {% include "request/_private_request.html" with request=p.thread.request %}
-    {% empty %}
+    {% else %}
       <p>No Public Requests</p>
     {% endfor %}
     {% include "utils/_pagination.html" with page=participants %}

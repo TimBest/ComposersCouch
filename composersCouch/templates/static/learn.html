@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static from staticfiles %}
+
 
 {% block title %}Learn{% endblock %}
 {% block overwriteHeader %}
@@ -8,7 +8,7 @@
     <div class="container">
       <div class="image-frame">
         <span class="frame-helper"></span>
-        <img class="image-center" id="logo" alt="Composers Couch" src="{% static 'img/logo.png' %}">
+        <img class="image-center" id="logo" alt="Composers Couch" src="{{ static('img/logo.png') }}">
       </div>
     </div>
   </div>
@@ -241,7 +241,7 @@
       Changing how local shows are booked and promoted.
     </h2>
     {% if not request.user.is_authenticated %}
-    <a href="{% url 'signup' %}" type="button" class="btn btn-primary btn-lg">
+    <a href="{{ url('signup') }}" type="button" class="btn btn-primary btn-lg">
       Sign up
     </a>
     {% endif %}

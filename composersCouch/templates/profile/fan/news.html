@@ -12,10 +12,10 @@
       <span> {{ genre }}</span>
     {% endfor %}
   </p>
-  {% if user.is_authenticated %}
+  {% if request.user.is_authenticated() %}
     {% include "profile/_news.html" with post_form=post_form photo_form=photo_form %}
     <script>
-      {% comment %}variables for image select{% endcomment %}
+      {# variables for image select #}
       var selectorId = "#id_photo";
       var selectDiv  = "#div_id_photo";
       var uploadDiv  = "#div_id_image";
@@ -28,7 +28,7 @@
   {% endif %}
   {% for activity in activities %}
     {% include "feeds/_post.html" with post=activity.post %}
-  {% empty %}
+  {% else %}
     <p>No news to display.</p>
   {% endfor %}
 {% endblock %}

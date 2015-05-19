@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% load scheduletags i18n %}
-{% load static from staticfiles %}
+
 
 {% block title %}Calendar{% endblock %}
 
@@ -36,9 +36,9 @@
     <div class="container-fluid">
       <div class="row no-gutter">
         <div class="col-sm-3 col-xs-6 left">
-          <a href="{% url 'calendar_create_event' %}{% querystring_for_date date %}&hour=19&next={% url 'calendar' period_name 'shows' %}"
+          <a href="{{ url('calendar_create_event') }}{% querystring_for_date date %}&hour=19&next={% url 'calendar' period_name 'shows' %}"
           class="btn btn-primary" role="button">Add Show</a>
-          {% comment %}<a href="{% url 'calendar' %}" class="btn btn-default">Today</a>{% endcomment %}
+          {# <a href="{{ url('calendar') }}" class="btn btn-default">Today</a> #}
         </div>
         <div class="col-sm-3 col-sm-push-6 col-xs-6 right">
           <div class="text-right">
@@ -51,10 +51,10 @@
               </ul>
             </div>
             <div class="btn-group pull-right">
-              <a href="{% url 'calendar' period_name 'shows' %}{% querystring_for_date date %}" class="{% ifequal filter 'shows' %}active{% endifequal %} btn btn-sm btn-default">
+              <a href="{% url 'calendar' period_name 'shows' %}{% querystring_for_date date %}" class="{% if filter == 'shows' %}active{% endif %} btn btn-sm btn-default">
                 Shows
               </a>
-              <a href="{% url 'calendar' period_name 'requests' %}{% querystring_for_date date %}" class="{% ifequal filter 'requests' %}active{% endifequal %} btn btn-sm btn-default">
+              <a href="{% url 'calendar' period_name 'requests' %}{% querystring_for_date date %}" class="{% if filter == 'requests' %}active{% endif %} btn btn-sm btn-default">
                 Requests
               </a>
             </div>

@@ -6,18 +6,18 @@
 
 {% block send_message %}
   {% if user.profile.profile_type == 'm' %}
-    <a href="{% url 'public_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
+    <a href="{{ url('public_request') }}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
   {% else %}
-    <a href="{% url 'public_band_request' %}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
+    <a href="{{ url('public_band_request') }}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
   {% endif %}
 {% endblock %}
 
 {% block center_nav %}
   <li class="{% if is_requests %}active{% endif %}">
-    <a href="{% url 'public_requests' %}">Sent</a>
+    <a href="{{ url('public_requests') }}">Sent</a>
   </li>
   <li class="{% if is_applications %}active{% endif %}">
-    <a href="{% url 'public_applications' %}">Applied For</a>
+    <a href="{{ url('public_applications') }}">Applied For</a>
   </li>
 {% endblock %}
 
@@ -31,13 +31,13 @@
             {% for application in publicRequest.applications.all %}
               {% if forloop.first %}<h4>Applicants:</h4>{% endif %}
               {% include "request/_application.html" with application=application %}
-            {% empty %}
+            {% else %}
               <p>No applicants at this time</p>
             {% endfor %}
           </div>
         </div>
       </div>
-    {% empty %}
+    {% else %}
       <p>No Private Requests</p>
     {% endfor %}
     {% include "utils/_pagination.html" with page=requests %}

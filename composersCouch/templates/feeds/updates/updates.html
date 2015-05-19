@@ -5,7 +5,7 @@
 {% block availabilityScope %}{% endblock %}
 
 {% block orderOptions %}
-  <li class="{% ifequal order 'latest' %}active{% endifequal %}">
+  <li class="{% if order == 'latest' %}active{% endif %}">
     <a href="{% url feedType 'latest' scope zipcode %}?{{ request.GET.urlencode }}">Latest</a>
   </li>
 {% endblock %}

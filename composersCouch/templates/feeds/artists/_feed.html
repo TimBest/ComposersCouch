@@ -3,7 +3,7 @@
     <div class="artist">
       {% include "search/_artist.html" with artist=artist %}
     </div>
-  {% empty %}
+  {% else %}
     {% include "feeds/_empty_feed.html" with feed_type="artists" following=following %}
   {% endfor %}
   {% include "utils/_pagination.html" with page=artists %}

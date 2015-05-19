@@ -1,15 +1,15 @@
-{% ifequal start.year end.year %}
+{% if start.year == end.year %}
   {{ start|date:"l" }},
-  {% ifequal start.month end.month %}
+  {% if start.month == end.month %}
     {{ start|date:"F" }}
-    {% ifequal start.day end.day %}
+    {% if start.day == end.day %}
       {{ start|date:"d, Y: P" }} - {{ end|date:"P" }}
     {% else %}
       {{ start|date:"d P" }} - {{ end|date:"d P, Y" }}
-    {% endifequal %}
+    {% endif %}
   {% else %}
     {{ start|date:"F d, Y: P" }} - {{ end|date:"F d: P" }}
-  {% endifequal %}
+  {% endif %}
 {% else %}
   {{ start|date:"l, F d, Y: P" }} - {{ end|date:"l, F d, Y: P" }}
-{% endifequal %}
+{% endif %}

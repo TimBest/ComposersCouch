@@ -4,7 +4,7 @@
     {% if show.events.first %}
       {% include "schedule/_show.html" with show=show %}
     {% endif %}
-  {% empty %}
+  {% else %}
     {% include "feeds/_empty_feed.html" with feed_type="shows" following=following %}
   {% endfor %}
   {% include "utils/_pagination.html" with page=shows %}

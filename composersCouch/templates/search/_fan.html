@@ -1,5 +1,5 @@
 {% load i18n feed %}
-{% load static from staticfiles %}
+
 
 <div class="fan">
   <div class="panel panel-default">
@@ -16,10 +16,10 @@
         <div class="col-sm-9">
           <h3><a class="text-black" href="{% url 'fan:home' fan.profile.user.username %}">{{ fan }}</a></h3>
           <div class="btn-group">
-            <form method="POST" action="{% url 'follow' %}">
+            <form method="POST" action="{{ url('follow') }}">
               {% csrf_token %}
               <input type="hidden" name="target" value="{{ fan.profile.user.id }}">
-              <button class="btn btn-sm btn-primary {% if user.is_authenticated %}{% is_following request.user fan.profile.user %}{% endif %}" onclick="this.form.onsubmit(); return false; " type="submit">
+              <button class="btn btn-sm btn-primary {% if request.user.is_authenticated() %}{% is_following request.user fan.profile.user %}{% endif %}" onclick="this.form.onsubmit(); return false; " type="submit">
                 <span class="follow">Follow</span>
                 <span class="following">Following</span>
                 <span class="unfollow">Unfollow</span>

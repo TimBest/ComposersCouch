@@ -14,7 +14,7 @@
         <div class="moto">
           <h3>Changing how local shows are booked and promoted.</h3>
         </div>
-        <a href="{% url 'learn' %}" type="button" class="btn btn-lg btn-default">
+        <a href="{{ url('learn') }}" type="button" class="btn btn-lg btn-default">
           Learn more <small><span class="fa fa-chevron-right"></span></small>
         </a>
       </div>
@@ -35,7 +35,7 @@
             <div class="tab-content">
               <div role="tabpanel" class="tab-pane active" id="signup">
                 <div class="modal-body">
-                  <form id="sign-up-form" method="post" action="{% url 'signup' %}">
+                  <form id="sign-up-form" method="post" action="{{ url('signup') }}">
                     {% crispy signupForm %}
                     {% crispy zipcodeForm %}
                     {% crispy emailForm %}
@@ -61,7 +61,7 @@
               </div>
               <div role="tabpanel" class="tab-pane" id="login">
                 <div class="modal-body">
-                  <form id="sign-in-form" method="post" action="{% url 'login' %}">
+                  <form id="sign-in-form" method="post" action="{{ url('login') }}">
                     {% crispy login_form %}
                     <input type="hidden" name="next" value="{{next|default:""}}"/>
                     <div class="text-right">
@@ -158,7 +158,7 @@
             <li>
               <div class="row">
                 <label>Date:</label>
-                <form class="availability-form" role="filter" method="POST" action="{% url 'availability' %}">
+                <form class="availability-form" role="filter" method="POST" action="{{ url('availability') }}">
                   <input type="hidden" name="path" value="{% firstof request.path '/' %}">
                   {% crispy availabilityForm %}
                 </form>
@@ -175,10 +175,10 @@
             </a>
             <ul class="dropdown-menu">
               {% block within %}
-                <li class="{% ifequal scope '50' %}active{% endifequal %}">
+                <li class="{% if scope == '50' %}active{% endif %}">
                   <a href="{% url feedType order '50' zipcode %}?{{ request.GET.urlencode }}">50 miles</a>
                 </li>
-                <li class="{% ifequal scope 'any-distance' %}active{% endifequal %}">
+                <li class="{% if scope == 'any-distance' %}active{% endif %}">
                   <a href="{% url feedType order 'any-distance' zipcode %}?{{ request.GET.urlencode }}">any distance</a>
                 </li>
               {% endblock %}
@@ -195,7 +195,7 @@
             <li>
               <div class="row">
                 <label>Zipcode:</label>
-                <form class="nav-form" role="filter" method="POST" action="{% url 'zipcode' %}">
+                <form class="nav-form" role="filter" method="POST" action="{{ url('zipcode') }}">
                   <input type="hidden" name="path" value="{% firstof request.path '/' %}">
                   {% crispy locationForm %}
                 </form>
@@ -259,10 +259,10 @@
             </a>
             <ul class="dropdown-menu" role="menu">
               {% block orderOptions %}
-                <li class="{% ifequal order 'all' %}active{% endifequal %}">
+                <li class="{% order == 'all' %}active{% endif %}">
                   <a href="{% url feedType 'all' scope zipcode %}?{{ request.GET.urlencode }}">All</a>
                 </li>
-                <li class="{% ifequal order 'latest' %}active{% endifequal %}">
+                <li class="{% order == 'latest' %}active{% endif %}">
                   <a href="{% url feedType 'latest' scope zipcode %}?{{ request.GET.urlencode }}">Latest</a>
                 </li>
               {% endblock %}

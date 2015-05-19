@@ -6,7 +6,7 @@
 
 {% block panelBody %}
   <div class="row no-gutter page-header">
-    <a class="{{isEditable}} btn btn-success" href="{% url 'photos:upload' %}">
+    <a class="{{isEditable}} btn btn-success" href="{{ url('photos:upload') }}">
       <span class="fa fa-plus"></span> Add Photo
     </a>
   </div>

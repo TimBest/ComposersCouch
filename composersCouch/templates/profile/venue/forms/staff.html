@@ -1,6 +1,6 @@
 {% extends 'profile/venue/forms/about_modal.html' %}
 {% load i18n crispy_forms_tags %}
-{% load static from staticfiles %}
+
 {% crispy StaffForm StaffForm.helper %}
 
 {% block title %}{% trans "Edit Staff" %}{% endblock %}
@@ -19,7 +19,7 @@
     </a>
   {% endfor %}
   <span>or </span>
-    <a class="{{isEditable}} editStaff text-success" href="{% url 'venue:staffForm' %}">
+    <a class="{{isEditable}} editStaff text-success" href="{{ url('venue:staffForm') }}">
       Add New
     </a>
   {% crispy contactForm %}

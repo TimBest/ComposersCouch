@@ -1,5 +1,11 @@
 Django powered site for composers couch
 
+REGEX
+
+find:
+{% url (\S*) (\S*) %}
+replace:
+{{ url($1, $2) }}
 
 Setting development to true
     add 'DEVELOPMENT=True' to the end of ~/.bashrc

@@ -46,6 +46,7 @@ INSTALLED_APPS = (
     'embed_video',
     'easy_timezones',
     'grunt',
+    'jinja2',
     'pagination',
     'pipeline',
     'robots',
@@ -255,11 +256,8 @@ STATICFILES_FINDERS = (
 )
 
 # Templates
-TEMPLATE_DIRS = (
-    os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),
-)
 
-"""TEMPLATES = [
+TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.jinja2.Jinja2',
         'DIRS': [os.path.join(os.path.dirname(__file__), 'templates').replace('\\','/'),],
@@ -268,7 +266,7 @@ TEMPLATE_DIRS = (
             'environment' : 'composersCouch.jinja2.environment',
         }
     },
-]"""
+]
 
 FILE_UPLOAD_HANDLERS = (
     "progressbarupload.uploadhandler.ProgressBarUploadHandler",

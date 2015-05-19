@@ -15,7 +15,7 @@
           <div class="message-content-col">
             <div class="message-content">
               {% if request.user == post.user or request.user == post.target %}
-                <form method="POST" action="{% url 'remove_post' %}">
+                <form method="POST" action="{{ url('remove_post') }}">
                   {% csrf_token %}
                   <input type="hidden" name="post" value="{{ post.id }}">
                   <div class="dropdown pull-right">

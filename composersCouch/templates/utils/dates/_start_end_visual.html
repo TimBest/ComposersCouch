@@ -4,21 +4,21 @@
     {{ start|date:"l" }}
   </div>
   <div class="middle">
-    {% ifequal start.month end.month %}
+    {% if start.month == end.month %}
       <span class="month">{{ start|date:"F" }}</span>
     {% else %}
       <span class="months">{{ start|date:"F" }} - {{ end|date:"F" }}</span>
-    {% endifequal %}
+    {% endif %}
     {% ifnotequal start.year now.year %}
       <span class="year">{{ start|date:"Y" }}</span>
     {% endifnotequal %}
     <p class="day">{{ start|date:"j" }}</p>
   </div>
   <div class="bottom">
-    {% ifequal start.time end.time %}
+    {% if start.time == end.time %}
       <p class="time">{{ start|time:"fA" }}</p>
     {% else %}
       <p class="time">{{ start|time:"f" }} - {{ end|time:"fA" }}</p>
-    {% endifequal %}
+    {% endif %}
   </div>
 </div>

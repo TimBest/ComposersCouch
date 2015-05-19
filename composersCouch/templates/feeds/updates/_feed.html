@@ -3,7 +3,7 @@
     <div class="activity">
       {% include "feeds/_post.html" with post=activity.post %}
     </div>
-  {% empty %}
+  {% else %}
     {% include "feeds/_empty_feed.html" with feed_type="object_list" following=following %}
   {% endfor %}
   {% include "utils/_pagination.html" with page=activities %}

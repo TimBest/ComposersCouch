@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static from staticfiles %}
+
 
 {% block headerClass %}dark-blue{% endblock %}
 
@@ -25,7 +25,7 @@
             requesting and scheduling shows. By having these features in an all in
             one service we hope to be able provide a better booking experience.
             Right no we are working on expanding the site's users base and functionality.
-            <a href="{% url 'learn' %}">
+            <a href="{{ url('learn') }}">
               Learn more <small><span class="fa fa-chevron-right"></span></small>
             </a>
           </p>
@@ -44,7 +44,7 @@
             <div class="col-xs-12">
               <div class="image-frame">
                 <span class="frame-helper"></span>
-                <img class="image-center" id="logo" alt="Composers Couch" src="{% static 'img/logo.png' %}">
+                <img class="image-center" id="logo" alt="Composers Couch" src="{{ static('img/logo.png') }}">
               </div>
               <div class="color-blocks">
                 <div class="row no-gutter colors">

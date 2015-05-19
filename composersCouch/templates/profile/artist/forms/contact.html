@@ -9,11 +9,11 @@
 {% block formID %}contactMusicianForm{% endblock %}
 {% block form %}
   <span>Edit: </span>
-  <a class="editMusicianContact {% ifequal contactType 'band' %}text-bold{% endifequal %}" href="{% url 'artist:userContactForm' %}">Band</a>,
-  <a class="editMusicianContact {% ifequal contactType 'booking' %}text-bold{% endifequal %}" href="{% url 'artist:contactForm' 'booking' %}">Booking</a>,
-  <a class="editMusicianContact {% ifequal contactType 'label' %}text-bold{% endifequal %}" href="{% url 'artist:contactForm' 'label' %}">Label</a>,
-  <a class="editMusicianContact {% ifequal contactType 'management' %}text-bold{% endifequal %}" href="{% url 'artist:contactForm' 'management' %}">Management</a>,
-  <a class="editMusicianContact {% ifequal contactType 'press' %}text-bold{% endifequal %}" href="{% url 'artist:contactForm' 'press' %}">Press</a>
+  <a class="editMusicianContact {% if contactType == 'band' %}text-bold{% endif %}" href="{{ url('artist:userContactForm') }}">Band</a>,
+  <a class="editMusicianContact {% if contactType == 'booking' %}text-bold{% endif %}" href="{% url 'artist:contactForm' 'booking' %}">Booking</a>,
+  <a class="editMusicianContact {% if contactType == 'label' %}text-bold{% endif %}" href="{% url 'artist:contactForm' 'label' %}">Label</a>,
+  <a class="editMusicianContact {% if contactType == 'management' %}text-bold{% endif %}" href="{% url 'artist:contactForm' 'management' %}">Management</a>,
+  <a class="editMusicianContact {% if contactType == 'press' %}text-bold{% endif %}" href="{% url 'artist:contactForm' 'press' %}">Press</a>
   {% crispy contactForm %}
   {% crispy locationForm %}
 {% endblock %}

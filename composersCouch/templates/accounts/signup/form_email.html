@@ -1,6 +1,6 @@
 {% extends 'utils/form.html' %}
 {% load i18n crispy_forms_tags %}
-{% load static from staticfiles %}
+
 {% crispy signupForm signupForm.helper %}
 {% crispy zipcodeForm zipcodeForm.helper %}
 {% crispy emailForm emailForm.helper %}
@@ -15,7 +15,7 @@
   <div class="modal-header">
     <div class="row">
       <div class="col-xs-12">
-      <p class="pull-right">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+      <p class="pull-right">Already have an account? <a href="{{ url('login') }}">Login</a></p>
       <h3 class="text-left">Sign up</h3>
     </div>
     </div>

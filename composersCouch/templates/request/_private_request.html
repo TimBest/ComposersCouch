@@ -53,7 +53,7 @@
               <span class="label label-warning">pending</span>
               {% endif %}
             </p>
-            {% empty %}
+            {% else %}
               <p>Your calendar is free</p>
             {% endfor %}
           </div>
@@ -63,12 +63,12 @@
     </div>
     <div class="panel-footer">
       <div class="pull-right">
-        <form method="POST" class="accept-form inline-block {% hide_accept request user %}" action="{% url 'request_accept' %}">
+        <form method="POST" class="accept-form inline-block {% hide_accept request user %}" action="{{ url('request_accept') }}">
           {% csrf_token %}
           <input type="hidden" name="private_request" value="{{ request.id }}">
           <button class="btn btn-success" type="submit"><span class="fa fa-check" ></span> Accept</button>
         </form>
-        <form method="POST" class="decline-form inline-block {% hide_decline request user %}" action="{% url 'request_decline' %}">
+        <form method="POST" class="decline-form inline-block {% hide_decline request user %}" action="{{ url('request_decline') }}">
           {% csrf_token %}
           <input type="hidden" name="private_request" value="{{ request.id }}">
           <button class="btn btn-danger-inv" type="submit"><span class="fa fa-ban" ></span> Decline</button>

@@ -13,7 +13,7 @@
         <div class="nametagInfo">
           <h2 class="name">{% block name %}{% endblock %}</h2>
           <div class="row">
-            <form method="POST" action="{% url 'follow' %}">
+            <form method="POST" action="{{ url('follow') }}">
               {% csrf_token %}
               <input type="hidden" name="target" value="{{ profile.user.id }}">
               <button class="btn btn-primary {{isFollowing}}" onclick="this.form.onsubmit(); return false; " type="submit">
@@ -26,7 +26,7 @@
           </div>
           <div class="row">
             {% block editNametag %}
-              <a href="{% url 'profile_edit' %}" class="{{isEditable}} edit-profile pull-right">
+              <a href="{{ url('profile_edit') }}" class="{{isEditable}} edit-profile pull-right">
                 Edit
               </a>
             {% endblock %}

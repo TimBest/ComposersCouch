@@ -1,8 +1,6 @@
-{% load i18n %}
-{% load inbox %}
-{% load pipeline %}
+{#{% load inbox %}
 {% load progress_bar %}
-{% load static from staticfiles %}
+#}
 
 
 <!DOCTYPE html>
@@ -16,7 +14,7 @@
     <meta http-equiv="Pragma" content="no-cache" />
     {% block meta %}{% endblock %}
     <title>{% block overwriteTitle %}{% block title %}Local booking{% endblock %} - Composer's Couch{% endblock %}</title>
-    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ static('img/favicon.png') }}">
     {% if is_development %}
       {% stylesheet 'less' %}
     {% else %}
@@ -30,41 +28,41 @@
         <div class="row no-gutter">
           <div class="col-sm-2 col-xs-12 left">
             <div class="navbar-header">
-              <a class="navbar-brand image-frame" href="{% url 'home' %}">
+              <a class="navbar-brand image-frame" href="{{ url('home') }}">
                 <div class="logo ">
                   <span class="frame-helper"></span>
-                  <img class="couch image-center" src="{% static 'img/CouchNavBar.png' %}" height="40" alt="COMPOSERS COUCH"/>
+                  <img class="couch image-center" src="{{ static('img/CouchNavBar.png') }}" height="40" alt="COMPOSERS COUCH"/>
                   <span class="beta-badge"> BETA</span>
                 </div>
               </a>
             </div>
           </div>
           <div class="col-sm-4 col-xs-6 center">
-            <form class="navbar-form navbar-left" action="{% url 'search' %}" method="get" role="search">
+            <form class="navbar-form navbar-left" action="{{ url('search') }}" method="get" role="search">
               <input type="search" name="q" id="search" placeholder="&#xf002; Search" class="form-control" />
             </form>
           </div>
           <div class="col-xs-6 right text-right">
             <div class="navbar-right">
-              {% if user.is_authenticated %}
+              {% if request.user.is_authenticated() %}
                 <ul class="nav navbar-nav">
-                  <li><a href="{{ user.profile.get_absolute_url }}" class="navbar-xs-link">{{ user.profile }}</a></li>
+                  <li><a href="{{ request.user.profile.get_absolute_url }}" class="navbar-xs-link">{{ request.user.profile }}</a></li>
                   <li class="dropdown">
                     <a href="javascript:void(0)" class="dropdown-toggle navbar-xs-link" data-toggle="dropdown">
                       <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                      <li><a href="{% url 'profile_edit' %}">Edit profile</a></li>
-                      <li><a href="{% url 'signout' %}">Log out</a></li>
+                      <li><a href="{{ url('profile_edit') }}">Edit profile</a></li>
+                      <li><a href="{{ url('signout') }}">Log out</a></li>
                     </ul>
                   </li>
                 </ul>
               {% else %}
               <ul class="nav navbar-nav">
-                <li><a href="{% url 'login' %}?next={{ request.path }}" class="navbar-xs-link">Login</a></li>
+                <li><a href="{{ url('login') }}?next={{ request.path }}" class="navbar-xs-link">Login</a></li>
                 <li>
                   <p class="navbar-btn">
-                    <a href="{% url 'signup' %}?next={{ request.path }}" type="button" class="btn btn-primary">
+                    <a href="{{ url('signup') }}?next={{ request.path }}" type="button" class="btn btn-primary">
                       Sign up
                     </a>
                   </p>
@@ -76,14 +74,14 @@
         </div>
       </div>
     </div>
-    {% if user.is_authenticated %}
+    {% if request.user.is_authenticated() %}
       <div class="rightNav" id="sidebar" role="navigation">
-        <a href="{% url 'threads:inbox' %}" class="rightNavItem request">
+        <a href="{{ url('threads:inbox') }}" class="rightNavItem request">
           <span class="fa fa-envelope-o"></span>
-          {% inbox_count as unread_count %}
-          {% include "utils/_alert_badge.html" with count=unread_count %}
+          {#{% inbox_count as unread_count %}
+          {% include "utils/_alert_badge.html" with count=unread_count %}#}
         </a>
-        <a href="{% url 'calendar' %}" class="rightNavItem calendar">
+        <a href="{{ url('calendar') }}" class="rightNavItem calendar">
           <span class="fa fa-calendar-o"></span>
         </a>
       </div>
@@ -107,15 +105,15 @@
     <div id="footer" class="text-center">
       </br>
       <p>
-        <a href="{% url 'about' %}">About</a><small><span class="text-muted"> &#149; </span></small>
-        <a href="{% url 'about' %}#contact">Contact</a><small><span class="text-muted"> &#149; </span></small>
-        <a href="{% url 'about' %}#brand">Brand Info</a><small><span class="text-muted"> &#149; </span></small>
-        <a href="{% url 'changelog' %}">Changelog</a><small><span class="text-muted"> &#149; </span></small>
-        <a href="{% url 'pipeline' %}">Pipeline</a>
+        <a href="{{ url('about') }}">About</a><small><span class="text-muted"> &#149; </span></small>
+        <a href="{{ url('about') }}#contact">Contact</a><small><span class="text-muted"> &#149; </span></small>
+        <a href="{{ url('about') }}#brand">Brand Info</a><small><span class="text-muted"> &#149; </span></small>
+        <a href="{{ url('changelog') }}">Changelog</a><small><span class="text-muted"> &#149; </span></small>
+        <a href="{{ url('pipeline') }}">Pipeline</a>
       </p>
-      <a href="{% url 'terms' %}">Terms</a><small><span class="text-muted"> &#149; </span></small>
-      <a href="{% url 'privacy' %}">Privacy</a><small><span class="text-muted"> &#149; </span></small>
-      <a href="{% url 'credit' %}">Credit</a>
+      <a href="{{ url('terms') }}">Terms</a><small><span class="text-muted"> &#149; </span></small>
+      <a href="{{ url('privacy') }}">Privacy</a><small><span class="text-muted"> &#149; </span></small>
+      <a href="{{ url('credit') }}">Credit</a>
     </div>
     {% javascript 'scripts' %}
   </body>
