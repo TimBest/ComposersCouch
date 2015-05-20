@@ -24,7 +24,7 @@ def artists(request, scope='any-distance', *args, **kwargs):
     return views.get(scope, views['any-distance'])(request, *args, **kwargs)
 
 class ArtistViewAuth(FeedMixin):
-    template_name = 'feeds/artists/artists.html'
+    template_name = 'feeds/artists_artists.html'
     model = ArtistProfile
     feedType = 'artists'
     default_order = "all"
@@ -37,7 +37,7 @@ class ArtistView (ArtistViewAuth, SignupEmailView, LoginView):
     pass
 
 class AvailabilityView(AvailabilityMixin, ArtistViewAuth):
-    template_name = 'feeds/artists/available.html'
+    template_name = 'feeds/artists_available.html'
     model = ArtistProfile
 
     def get_posts(self, **kwargs):
@@ -71,7 +71,7 @@ class LocalView(LocalViewAuth, SignupEmailView, LoginView):
     pass
 
 class FollowingView(ArtistViewAuth):
-    template_name = 'feeds/artists/following.html'
+    template_name = 'feeds/artists_following.html'
 
     @login_required_m
     def dispatch(self, *args, **kwargs):

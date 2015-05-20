@@ -40,7 +40,7 @@
         <div class="col-sm-6">
           <h4>Suggested dates:</h4>
           <p>
-            {% include "utils/dates/_start_end_full.html" with start=request.date.start end=request.date.end %}
+            {% include "utils/_date_start_end_full.html" with start=request.date.start end=request.date.end %}
           </p>
           <div>
             {% for event in events %}

@@ -21,7 +21,7 @@ urlpatterns = patterns('userena.views',
     url(r'^password/reset/$',
        auth_views.password_reset,
        merged_dict({'template_name': 'accounts/password_reset_form.html',
-                    'email_template_name': 'accounts/emails/password_reset_message.txt',
+                    'email_template_name': 'accounts/email_password_reset_message.txt',
                     'extra_context': {'without_usernames': userena_settings.USERENA_WITHOUT_USERNAMES}
                    }, auth_views_compat_quirks['userena_password_reset']),
        name='userena_password_reset'),

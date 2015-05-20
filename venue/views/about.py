@@ -19,7 +19,7 @@ from venue import forms, models
 
 
 class VenueProfileAboutView(VenueProfileView):
-    template_name = 'profile/venue/about.html'
+    template_name = 'venue/about.html'
 
     def get_context_data(self, **kwargs):
         context = super(VenueProfileAboutView, self).get_context_data(**kwargs)
@@ -34,7 +34,7 @@ venue_about = VenueProfileAboutView.as_view()
 
 class BiographyView(VenueProfileFormMixin, UpdateView):
     form_class = forms.BiographyForm
-    template_name = 'profile/venue/forms/biography.html'
+    template_name = 'venue/forms_biography.html'
     model = VenueProfile
     success_url = 'venue:about'
 
@@ -49,12 +49,12 @@ biography = BiographyView.as_view()
 
 class ContactInfoView(VenueProfileFormMixin, ContactView):
     success_url = 'venue:about'
-    template_name = 'profile/venue/forms/contact.html'
+    template_name = 'venue/forms_contact.html'
 
 contact_info = ContactInfoView.as_view()
 
 class EquipmentView(VenueProfileFormMixin, FormView):
-    template_name = 'profile/venue/forms/equipment.html'
+    template_name = 'venue/forms_equipment.html'
     success_url = 'venue:about'
     model = models.Equipment
     form_class = forms.EquipmentForm
@@ -98,7 +98,7 @@ class EquipmentView(VenueProfileFormMixin, FormView):
 equipment = EquipmentView.as_view()
 
 class HoursView(VenueProfileFormMixin, FormView):
-    template_name = 'profile/venue/forms/hours.html'
+    template_name = 'venue/forms_hours.html'
     model = models.Hours
     form_class = forms.HoursForm
     success_url = 'venue:about'
@@ -132,7 +132,7 @@ class HoursView(VenueProfileFormMixin, FormView):
 hours = HoursView.as_view()
 
 class PoliciesView(VenueProfileFormMixin, FormView):
-    template_name = 'profile/venue/forms/policies.html'
+    template_name = 'venue/forms_policies.html'
     model = models.Policies
     form_class = forms.PoliciesForm
     success_url = 'venue:about'
@@ -160,7 +160,7 @@ class SeatingView(VenueProfileFormMixin, ImageFormMixin, MultipleModelFormsView)
       'seatingForm' : forms.SeatingForm,
       'seatingChartForm' : SeatingChartForm
     }
-    template_name = 'profile/venue/forms/seating.html'
+    template_name = 'venue/forms_seating.html'
     model = models.Seating
     success_url = 'venue:about'
 
@@ -193,7 +193,7 @@ class StaffView(VenueProfileFormMixin, MultipleModelFormsView):
       'staffForm' : forms.StaffForm,
       'contactForm' : ContactForm
     }
-    template_name = 'profile/venue/forms/staff.html'
+    template_name = 'venue/forms_staff.html'
     model = models.Staff
     success_url = 'venue:about'
     staff_id=None

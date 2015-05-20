@@ -31,7 +31,7 @@ from userena import settings as userena_settings
 login_required_m = method_decorator(login_required)
 
 class SignupView(MultipleFormsView):
-    template_name = 'accounts/signup/form.html'
+    template_name = 'accounts/signup_form.html'
     success_url = 'redirectToProfile'
     form_classes = {
       'signupForm'  : SignupForm,
@@ -69,7 +69,7 @@ class SignupAuthView(SignupView):
 signup = SignupAuthView.as_view()
 
 class SignupEmailView(SignupAuthView):
-    template_name = 'accounts/signup/form_email.html'
+    template_name = 'accounts/signup_form_email.html'
     form_classes = {
       'signupForm'  : SignupForm,
       'zipcodeForm' : ZipcodeForm,
@@ -104,7 +104,7 @@ class SignupSocialView(SignupAuthView):
       'signupForm'  : SignupForm,
       'zipcodeForm' : ZipcodeForm,
     }
-    template_name = 'accounts/signup/form_social.html'
+    template_name = 'accounts/signup_form_social.html'
 
     def create_user_profile(self, info):
         self.request.session.update(info)
@@ -120,7 +120,7 @@ def claim_profile(request, username):
         assert reset_form.is_valid()
         reset_form.save(
             domain_override="composerscouch.com",
-            email_template_name='accounts/emails/profile_claim_message.txt',
+            email_template_name='accounts/email_profile_claim_message.txt',
 
         )
         return redirect('userena_password_reset_done')
@@ -128,7 +128,7 @@ def claim_profile(request, username):
         return redirect('claim_profile_error', username=username, error="error")
 
 class VerifyProfileClaimView(TemplateView):
-    template_name = 'accounts/signup/claim_profile.html'
+    template_name = 'accounts/signup_claim_profile.html'
 
     def get_context_data(self, **kwargs):
         username = kwargs.get('username')

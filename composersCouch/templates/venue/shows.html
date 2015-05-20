@@ -1,0 +1,10 @@
+{% extends 'venue/detail.html' %}
+{% load i18n %}
+
+
+{% block showsClass %}active{% endblock %}
+{% block dropdownTitle %}Shows{% endblock %}
+
+{% block panelBody %}
+  {% include "profile/_shows.html" with currentYear=currentYear year=year request=request slug=venueProfile.profile.user.calendar.slug name=venueProfile events=events  %}
+{% endblock %}

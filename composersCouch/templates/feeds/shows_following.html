@@ -1,0 +1,10 @@
+{% extends 'feeds/shows_shows.html' %}
+
+{% block currentScope %}I'm following{% endblock %}
+{% block withinClass %}{% endblock %}
+{% block followingClass %}active{% endblock %}
+{% block locationForm %}{% endblock %}
+
+{% block feed %}
+  {% include "feeds/_shows_feed.html" with shows=object_list following="Ture" %}
+{% endblock %}

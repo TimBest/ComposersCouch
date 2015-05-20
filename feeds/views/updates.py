@@ -28,7 +28,7 @@ def updates(request, scope='any-distance', *args, **kwargs):
     return views.get(scope, views['any-distance'])(request, *args, **kwargs)
 
 class UpdateView(ZipcodeMixin, ListView):
-    template_name = 'feeds/updates/updates.html'
+    template_name = 'feeds/updates_updates.html'
     feed = 'get_local_feed'
     location_type = 'code'
     feedType = 'updates'
@@ -73,7 +73,7 @@ class LocalView(LocalViewAuth, SignupEmailView, LoginView):
     pass
 
 class AllViewAuth(UpdateView):
-    template_name = 'feeds/updates/all.html'
+    template_name = 'feeds/updates_all.html'
 
     def get_context_data(self, **kwargs):
         context = super(AllViewAuth, self).get_context_data(**kwargs)
@@ -86,7 +86,7 @@ class AllView(AllViewAuth, SignupEmailView, LoginView):
     pass
 
 class FollowingView(UpdateView):
-    template_name='feeds/updates/following.html'
+    template_name='feeds/updates_following.html'
 
     @login_required_m
     def dispatch(self, *args, **kwargs):

@@ -125,7 +125,7 @@ class RequestFormView(MultipleFormsView):
     }
     model = Participant
     form_class = forms.ArtistParticipantForm
-    template_name = 'request/forms/private_request.html'
+    template_name = 'request/forms_private_request.html'
     success_url = 'sent_private_requests'
     artist = {}
 
@@ -210,7 +210,7 @@ class RequestEditFormView(MultipleModelFormsView):
     form_classes = {
       'dateForm': forms.DateForm,
     }
-    template_name = 'request/forms/edit_request.html'
+    template_name = 'request/forms_edit_request.html'
     success_url = 'sent_private_requests'
 
     def dispatch(self, *args, **kwargs):

@@ -29,7 +29,7 @@ def venues(request, scope='any-distance', *args, **kwargs):
 class VenueViewAuth(FeedMixin):
     model = VenueProfile
     feedType = 'venues'
-    template_name = 'feeds/venues/venues.html'
+    template_name = 'feeds/venues_venues.html'
     default_order = "all"
     orders = {
         'latest': '-profile__user__date_joined',
@@ -40,7 +40,7 @@ class VenueView(VenueViewAuth, SignupEmailView, LoginView):
     pass
 
 class AvailabilityView(AvailabilityMixin, VenueViewAuth):
-    template_name = 'feeds/venues/available.html'
+    template_name = 'feeds/venues_available.html'
     model = VenueProfile
 
     def get_posts(self, **kwargs):
@@ -59,7 +59,7 @@ class AvailabilityView(AvailabilityMixin, VenueViewAuth):
 available_venues = AvailabilityView.as_view()
 
 class BetweenView(AvailabilityView):
-    template_name = 'feeds/venues/available_between.html'
+    template_name = 'feeds/venues_available_between.html'
     feedType = 'venues'
 
     def get_posts(self, **kwargs):
@@ -100,7 +100,7 @@ class LocalView (LocalViewAuth, SignupEmailView, LoginView):
     pass
 
 class FollowingView(VenueViewAuth):
-    template_name = 'feeds/venues/following.html'
+    template_name = 'feeds/venues_following.html'
 
     @login_required_m
     def dispatch(self, *args, **kwargs):

@@ -28,7 +28,7 @@ def shows(request, scope='any-distance', *args, **kwargs):
 class ShowViewAuth(FeedMixin):
     model = Show
     path_to_genre = 'info__venue__profile__genre__slug'
-    template_name = 'feeds/shows/shows.html'
+    template_name = 'feeds/shows_shows.html'
     feedType = 'shows'
     default_order = "upcoming"
     # TODO: expand to also match with those preforming
@@ -68,7 +68,7 @@ class LocalView(LocalViewAuth, SignupEmailView, LoginView):
     pass
 
 class FollowingView(ShowViewAuth):
-    template_name = 'feeds/shows/following.html'
+    template_name = 'feeds/shows_following.html'
 
     @login_required_m
     def dispatch(self, *args, **kwargs):

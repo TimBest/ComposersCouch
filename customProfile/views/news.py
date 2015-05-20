@@ -51,7 +51,7 @@ class ProfileNewsMixin(ProfileMixin, ImageFormMixin, MultipleFormsView):
 
 
 class ArtistNewsView(ProfileNewsMixin):
-    template_name = 'profile/artist/news.html'
+    template_name = 'artist/news.html'
     success_url = 'artist:news'
 
     def get_context_data(self, **kwargs):
@@ -62,7 +62,7 @@ class ArtistNewsView(ProfileNewsMixin):
 artist_news = ArtistNewsView.as_view()
 
 class FanNewsView(ProfileNewsMixin):
-    template_name = 'profile/fan/news.html'
+    template_name = 'fan/news.html'
     success_url = 'fan:news'
 
     def get_context_data(self, **kwargs):
@@ -73,7 +73,7 @@ class FanNewsView(ProfileNewsMixin):
 fan_news = FanNewsView.as_view()
 
 class VenueNewsView(ProfileNewsMixin):
-    template_name = 'profile/venue/news.html'
+    template_name = 'venue/news.html'
     success_url = 'venue:news'
 
     def get_context_data(self, **kwargs):

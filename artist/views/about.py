@@ -13,7 +13,7 @@ from artist.forms import BiographyForm, MemberForm
 
 
 class AboutView(ArtistProfileView):
-    template_name = 'profile/artist/about.html'
+    template_name = 'artist/about.html'
 
     def get_context_data(self, **kwargs):
         context = super(AboutView, self).get_context_data(**kwargs)
@@ -25,7 +25,7 @@ about = AboutView.as_view()
 
 class BiographyView(ArtistProfileFormMixin, UpdateView):
     form_class = BiographyForm
-    template_name = 'profile/artist/forms/biography.html'
+    template_name = 'artist/forms_biography.html'
     model = ArtistProfile
     success_url = 'artist:about'
 
@@ -40,7 +40,7 @@ biography = BiographyView.as_view()
 
 class ContactInfoView(ArtistProfileFormMixin, ContactView):
     success_url = 'artist:about'
-    template_name = 'profile/artist/forms/contact.html'
+    template_name = 'artist/forms_contact.html'
 
     def get_context_data(self, **kwargs):
         context = super(ContactInfoView, self).get_context_data(**kwargs)
@@ -53,7 +53,7 @@ class MemberView(ArtistProfileFormMixin, UpdateView):
     form_class = MemberForm
     model = Member
     memberID=None
-    template_name = 'profile/artist/forms/member.html'
+    template_name = 'artist/forms_member.html'
     success_url = 'artist:about'
 
     def dispatch(self, *args, **kwargs):
@@ -80,7 +80,7 @@ members = MemberView.as_view()
 
 class MusicianContactsView(ArtistProfileFormMixin, ContactView):
     locationForm = NonUserLocationForm
-    template_name = 'profile/artist/forms/contact.html'
+    template_name = 'artist/forms_contact.html'
     success_url = 'artist:about'
     contactType = None
     CONTACT_TYPES = {

@@ -74,7 +74,7 @@ class ImageView(DetailView):
 veiw_image = ImageView.as_view()
 
 class CreateImage(CreateView):
-    template_name = 'photos/forms/image_form.html'
+    template_name = 'photos/forms_image_form.html'
     model = Image
     form_class = ImageForm
 
@@ -91,7 +91,7 @@ create_image = login_required(CreateImage.as_view())
 
 
 class UpdateImage(UpdateView):
-    template_name = 'photos/forms/image_form.html'
+    template_name = 'photos/forms_image_form.html'
     model = Image
     form_class = ImageForm
 

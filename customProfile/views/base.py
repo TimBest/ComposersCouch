@@ -69,7 +69,7 @@ def profileRedirect(request, username, redirect_url):
     return redirect(redirect_url, username=username)
 
 class FanProfileView(ProfileMixin, TemplateView):
-    template_name = 'profile/fan/news.html'
+    template_name = 'fan/news.html'
 
     def get_context_data(self, **kwargs):
         context = super(FanProfileView, self).get_context_data(**kwargs)
@@ -77,7 +77,7 @@ class FanProfileView(ProfileMixin, TemplateView):
         return context
 
 class ArtistProfileView(ProfileMixin, TemplateView):
-    template_name = 'profile/artist/news.html'
+    template_name = 'artist/news.html'
 
     def get_context_data(self, **kwargs):
         context = super(ArtistProfileView, self).get_context_data(**kwargs)
@@ -85,7 +85,7 @@ class ArtistProfileView(ProfileMixin, TemplateView):
         return context
 
 class VenueProfileView(ProfileMixin, TemplateView):
-    template_name = 'profile/fan/news.html'
+    template_name = 'fan/news.html'
 
     def get_context_data(self, **kwargs):
         context = super(VenueProfileView, self).get_context_data(**kwargs)
@@ -93,7 +93,7 @@ class VenueProfileView(ProfileMixin, TemplateView):
         return context
 
 class ProfileEdit(ImageFormMixin, MultipleFormsView):
-    template_name = 'profile/forms/edit_profile.html',
+    template_name = 'profile/forms_edit_profile.html',
     success_url = 'redirectToProfile'
 
     def get_forms(self):

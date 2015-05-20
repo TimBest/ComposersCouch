@@ -9,7 +9,7 @@ from tracks.models import Album, Media
 
 
 class VideoView(ArtistProfileView):
-    template_name = 'profile/artist/videos.html'
+    template_name = 'artist/videos.html'
 
     def get_context_data(self, **kwargs):
         context = super(VideoView, self).get_context_data(**kwargs)
@@ -26,7 +26,7 @@ videos = VideoView.as_view()
 
 class TrackVideoView(TracksView):
     form_class = AlbumVideoForm
-    template_name = 'profile/artist/forms/track_video.html'
+    template_name = 'artist/forms_track_video.html'
     success_url = 'artist:videos'
 
     def get_context_data(self):
@@ -49,7 +49,7 @@ add_video_to_album = TrackVideoView.as_view()
 
 """class LiveVideoView(LiveTrackView):
     form_class = LiveVideoForm
-    template_name = 'profile/artist/forms/live_video.html'
+    template_name = 'artist/forms_live_video.html'
     success_url = 'artist:videos'
 
 live_video_form = LiveVideoView.as_view()
@@ -57,7 +57,7 @@ live_video_form = LiveVideoView.as_view()
 class InterviewView(LiveVideoView):
     form_class = InterviewVideoForm
     model = Interview
-    template_name = 'profile/artist/forms/interview_video.html'
+    template_name = 'artist/forms_interview_video.html'
     success_url = 'artist:videos'
 
 interview_video_form = InterviewView.as_view()"""

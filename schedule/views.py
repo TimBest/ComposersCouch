@@ -126,7 +126,7 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
       'show_info_form' : ShowInfoForm,
       'poster_form': PosterForm,
     }
-    template_name='schedule/forms/create_event.html'
+    template_name='schedule/forms_create_event.html'
     success_url = 'calendar'
     images_on_page = 6
 

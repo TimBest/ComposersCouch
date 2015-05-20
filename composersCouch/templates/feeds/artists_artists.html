@@ -1,0 +1,8 @@
+{% extends 'feeds/base.html' %}
+
+{% block artistsClass %}active{% endblock %}
+{% block bgColor %}gray{% endblock %}
+
+{% block feed %}
+  {% include "feeds/_artists_feed.html" with artists=object_list %}
+{% endblock %}

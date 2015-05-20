@@ -1,0 +1,28 @@
+{% extends 'artist/detail.html' %}
+{% load crispy_forms_tags i18n progress_bar %}
+{% crispy PostForm PostForm.helper %}
+
+{% block newsClass %}active{% endblock %}
+{% block dropdownTitle %}News{% endblock %}
+
+{% block panelBody %}
+  {% if request.user.is_authenticated() %}
+    {% include "profile/_news.html" with post_form=post_form photo_form=photo_form %}
+    <script>
+      {# variables for image select #}
+      var selectorId = "#id_photo";
+      var selectDiv  = "#div_id_photo";
+      var uploadDiv  = "#div_id_image";
+      {% if images %}
+        var images = true;
+      {% else %}
+        var images = false;
+      {% endif %}
+    </script>
+  {% endif %}
+  {% for activity in activities %}
+    {% include "feeds/_post.html" with post=activity.post %}
+  {% else %}
+    <p>No news to display.</p>
+  {% endfor %}
+{% endblock %}

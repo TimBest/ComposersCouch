@@ -1,0 +1,14 @@
+{% extends 'feeds/updates_updates.html' %}
+
+{% block feed %}
+  <div class="posts">
+    {% for object in object_list %}
+    <div class="post">
+      {% include "feeds/_post.html" with post=object %}
+    </div>
+    {% else %}
+      {% include "feeds/_empty_feed.html" with feed_type="object_list" following=following %}
+    {% endfor %}
+    {% include "utils/_pagination.html" with page=object_list %}
+  </div>
+{% endblock %}

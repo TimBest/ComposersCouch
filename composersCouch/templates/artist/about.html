@@ -1,0 +1,131 @@
+{% extends 'artist/detail.html' %}
+{% load staticfiles %}
+
+{% block aboutClass %}active{% endblock %}
+{% block dropdownTitle %}About{% endblock %}
+
+{% block panelBody %}
+  <div class='about'>
+    <div class="row no-gutter page-header">
+      <span>
+        {% for genre in profile.genre.all %}
+          {% if forloop.first %}Genres:{% else %},{% endif %}
+          <span> {{ genre }}</span>
+        {% endfor %}
+      </span>
+      <div class="pull-right social-links">
+        <a href="{{ url('artist:socialLinksForm') }}" class="{{isEditable}}">Edit <span class="hidden-xs">Social Media Links</span></a>
+        {% with social=profile.social_links %}
+            {% if social.facebook %}<a href="{{ social.facebook }}" target="_blank" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>{% endif %}
+            {% if social.twitter %}<a href="{{ social.twitter }}" target="_blank" class="btn btn-twitter"><span class="fa fa-twitter"></span></a>{% endif %}
+            {% if social.google_plus %}<a href="{{ social.google_plus }}" target="_blank" class="btn btn-google"><span class="fa fa-google-plus"></span></a>{% endif %}
+        {% endwith %}
+      </div>
+    </div>
+    <div class="biography" id="biography">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Biography</h3>
+        </div>
+        <div class="panel-body">
+          <p>{{ artist_profile.biography|safe|urlize|linebreaksbr }}</p>
+          <a class="{{isEditable}} editMusicianBiography" href="{{ url('artist:biographyForm') }}">
+            Edit
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default members">
+      <div class="panel-heading">
+        <h3>Members</h3>
+      </div>
+      <div class="panel-body">
+      {% for member in members %}
+        <div class="member">
+          <p>
+            <b>{{ member.name }}</b>
+            - {{ member.biography|linebreaks }}
+          </p>
+          {# <p>
+            {% for instrument in member.instruments.all %}
+              {{ instrument }}
+              {% if not forloop.last %},{% endif %}
+            {% endfor %}
+          </p> #}
+
+        </div>
+      {% endfor %}
+      <a class="{{isEditable}} editMusicianMembers" href="{{ url('artist:memberForm') }}">
+        Edit
+      </a>
+      </div>
+    </div>
+    <div class='contact'>
+      <div class="row no-gutter">
+        <div class="col-sm-5ths left">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="row no-gutter">
+                <div class="col-md-6 left">
+                  <h4 class="pull-left">Band</h4>
+                </div>
+                <div class="col-md-6 right">
+                  <a href="{% url 'threads:compose' username %}" class="pull-right btn btn-default">Contact</a>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body">
+              {% include "profile/_contact.html" with contact_info=profile.contact_info %}
+              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:userContactForm') }}">Edit</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5ths center">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>Booking</h4>
+            </div>
+            <div class="panel-body">
+              {% include "profile/_contact.html" with contact_info=artist_profile.booking_contact %}
+              <a class="editMusicianContact {{isEditable}}" href="{% url 'artist:contactForm' 'booking' %}">Edit</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5ths center">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>Label</h4>
+            </div>
+            <div class="panel-body">
+              {% include "profile/_contact.html" with contact_info=artist_profile.label_contact %}
+              <a class="editMusicianContact {{isEditable}}" href="{% url 'artist:contactForm' 'label' %}">Edit</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5ths center">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>Management</h4>
+            </div>
+            <div class="panel-body">
+              {% include "profile/_contact.html" with contact_info=artist_profile.management_contact %}
+              <a class="editMusicianContact {{isEditable}}" href="{% url 'artist:contactForm' 'management' %}">Edit</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-5ths right">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h4>Press</h4>
+            </div>
+            <div class="panel-body">
+              {% include "profile/_contact.html" with contact_info=artist_profile.press_contact %}
+              <a class="editMusicianContact {{isEditable}}" href="{% url 'artist:contactForm' 'press' %}">Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal" id=""  tabindex="-1" role="dialog" aria-hidden="true"></div>
+{% endblock %}

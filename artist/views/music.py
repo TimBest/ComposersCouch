@@ -17,7 +17,7 @@ from tracks.utils import json_playlist
 
 
 class MusicView(ArtistProfileView):
-    template_name = 'profile/artist/music.html'
+    template_name = 'artist/music.html'
 
 music = MusicView.as_view()
 
@@ -27,7 +27,7 @@ class AlbumView(ArtistProfileFormMixin, ImageFormMixin, MultipleModelFormsView):
       'albumArtForm' : AlbumArtForm
     }
     albumID=None
-    template_name = 'profile/artist/forms/album.html'
+    template_name = 'artist/forms_album.html'
     success_url = 'artist:tracksForm'
 
     def get_objects(self, queryset=None):
@@ -63,7 +63,7 @@ class TracksView(ArtistProfileFormMixin, UpdateView):
     inline_model = Track
     object = None
     albumID = None
-    template_name = 'profile/artist/forms/track.html'
+    template_name = 'artist/forms_track.html'
     success_url = 'artist:music'
 
     def get_object(self, queryset=None):

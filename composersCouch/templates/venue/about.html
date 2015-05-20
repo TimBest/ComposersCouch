@@ -1,0 +1,165 @@
+{% extends 'venue/detail.html' %}
+{% load thumbnail %}
+
+
+{% block aboutClass %}active{% endblock %}
+{% block dropdownTitle %}About{% endblock %}
+
+{% block panelBody %}
+  <div class='about'>
+    <div class="row no-gutter page-header">
+      <span>
+        {% for genre in profile.genre.all %}
+          {% if forloop.first %}Genres:{% else %},{% endif %}
+          <span> {{ genre }}</span>
+        {% endfor %}
+      </span>
+      <div class="pull-right social-links">
+        <a href="{{ url('venue:socialLinksForm') }}" class="{{isEditable}}">Edit <span class="hidden-xs">Social Media Links</span></a>
+        {% with social=profile.social_links %}
+            {% if social.facebook %}<a href="{{ social.facebook }}" target="_blank" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>{% endif %}
+            {% if social.twitter %}<a href="{{ social.twitter }}" target="_blank" class="btn btn-twitter"><span class="fa fa-twitter"></span></a>{% endif %}
+            {% if social.google_plus %}<a href="{{ social.google_plus }}" target="_blank" class="btn btn-google"><span class="fa fa-google-plus"></span></a>{% endif %}
+        {% endwith %}
+      </div>
+    </div>
+    <div class="row no-gutter">
+      <div class="col-sm-4 left">
+        <div class="hours">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>Hours</h3>
+            </div>
+            <div class="panel-body">
+              {% for day in venueProfile.hours.all %}
+                <div class="row no-gutter {% if today == forloop.counter0 %}text-bold{% endif %}">
+                  <div class="col-xs-4 left">{{ day }}</div>
+                  {% if day.start and day.end %}
+                    <div class="col-xs-8 right">{{ day.start }} - {{ day.end }}</div>
+                  {% else %}
+                    <div class="col-xs-8 right">Closed</div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+              <a class="{{isEditable}} editHours" href="{{ url('venue:hoursForm') }}">Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 center">
+        <div class="contactInfo">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div class="row no-gutter">
+                <div class="col-sm-6 left">
+                  <h3 class="pull-left">Contact</h3>
+                </div>
+                <div class="col-sm-6 right">
+                  <a href="{% url 'threads:compose' username %}" class="pull-right btn btn-default">Contact</a>
+                </div>
+              </div>
+            </div>
+            <div class="panel-body">
+              {% include "profile/_contact.html" with contact_info=profile.contact_info %}
+              <a class="{{isEditable}} editContact" href="{{ url('venue:contactForm') }}">Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-4 right">
+        <div class='seating'>
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3>Seating</h3>
+            </div>
+            <div class="panel-body">
+              {% with seating=venueProfile.seating %}
+                {% with seating.seating_chart as image %}
+                  <div class='image-preview'>
+                  {% thumbnail image.image "120x120" crop="center" as im %}
+                    <a class="thumb" rel='gallery-image[ilist]' href="{{ image.image.url }}">
+                      <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ im.url }}">
+                    </a>
+                  {% endthumbnail %}
+                  </div>
+                {% endwith %}
+              <p>Capacity: {{seating.capacity}}</p>
+              {% endwith %}
+              <a class="{{isEditable}} editSeating" href="{{ url('venue:seatingForm') }}">Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='equipment'>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Equipment</h3>
+        </div>
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-xs-4">
+              <h4>Sound</h4>
+              {% include "venue/_equipment.html" with equipment=sound %}
+            </div>
+            <div class="col-xs-4">
+              <h4>Effects</h4>
+              {% include "venue/_equipment.html" with equipment=effects %}
+            </div>
+            <div class="col-xs-4">
+              <h4>Accessories</h4>
+              {% include "venue/_equipment.html" with equipment=accessories %}
+            </div>
+          </div>
+          <a class="{{isEditable}} editEquipment" href="{% url 'venue:equipmentForm' 'sound' %}">Edit</a>
+        </div>
+      </div>
+    </div>
+    <div class='policies'>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Policies</h3>
+        </div>
+        <div class="panel-body">
+          <table class="table table-striped">
+            {% for policy in venueProfile.policies.all %}
+              <tr>
+                <td>{{ policy.title }}</td>
+                <td>{{ policy.description|linebreaks }}</td>
+              <tr>
+            {% endfor %}
+          </table>
+          <a class="{{isEditable}} editPolicies" href="{{ url('venue:policiesForm') }}">Edit</a>
+        </div>
+      </div>
+    </div>
+    <div class='biography' id="biography">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Biography</h3>
+        </div>
+        <div class="panel-body">
+          <p>{{ venueProfile.biography|safe|urlize|linebreaksbr }}</p>
+          <a class="{{isEditable}} editBiography" href="{{ url('venue:biographyForm') }}">Edit</a>
+        </div>
+      </div>
+    <div class='staff'>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3>Staff</h3>
+        </div>
+        <div class="panel-body">
+          {% for person in venueProfile.staff.all %}
+            <h5>{{person.contact.name}}</h5>
+            <p>{{person.job_title}}</p>
+            <p>{{person.biography|linebreaks}}</p>
+            <p>{{person.contact.email}}</p>
+            <p>{{person.contact.phone}}</p>
+          {% endfor %}
+          <a class="{{isEditable}} editStaff" href="{{ url('venue:staffForm') }}">Edit</a>
+        </div>
+      </div>
+    </div>
+    <div class="modal" id=""  tabindex="-1" role="dialog" aria-hidden="true"></div>
+  </div>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'venue/forms_about_modal.html' %}
+{% load i18n crispy_forms_tags %}
+{% crispy HoursForm HoursForm.helper %}
+
+{% block title %}{% block formTitle %}{% trans "Edit Hours" %}{% endblock %}{% endblock %}
+{% block formID %}hoursForm{% endblock %}
+{% block hoursClass %}active{% endblock %}
+
+{% block form %}
+  {{ form.management_form|crispy }}
+  <div class="row no-gutter">
+    <div class="col-sm-2 left"></div>
+    <div class="col-sm-5 center">
+      <label class="control-label" for='equipmentForm'>Open</label>
+    </div>
+    <div class="col-sm-5 right">
+      <label class="control-label" for='equipmentForm'>Close</label>
+    </div>
+  </div>
+  {% for day, form in forms %}
+    {% with day=day %}
+      {% crispy form %}
+    {% endwith %}
+  {% endfor %}
+{% endblock %}

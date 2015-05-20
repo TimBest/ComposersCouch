@@ -4,8 +4,8 @@ from django.template.loader import render_to_string
 
 
 def send_request_email(request,
-                       subject_template='request/emails/create_request_subject.txt',
-                       message_template='request/emails/create_request_message.txt',):
+                       subject_template='request/email_create_request_subject.txt',
+                       message_template='request/email_create_request_message.txt',):
     """Compose and send an email."""
 
     recipient_list = []

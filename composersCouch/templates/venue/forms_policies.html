@@ -1,0 +1,19 @@
+{% extends 'venue/forms_about_modal.html' %}
+{% load i18n crispy_forms_tags %}
+{% load staticfiles %}
+{% crispy PoliciesForm PoliciesForm.helper %}
+
+{% block title %}{% block formTitle %}{% trans "Edit Policies" %}{% endblock %}{% endblock %}
+{% block formID %}policiesForm{% endblock %}
+{% block policiesClass %}active{% endblock %}
+
+{% block form %}
+  {{ form.management_form|crispy }}
+  {% for f in form %}
+    {% crispy f %}
+  {% endfor %}
+{% endblock %}
+
+{% block extraSubmit %}
+  <button type="submit" onclick="this.form.onsubmit(); return false; " class="addMore btn btn-primary">Save & Add More</button>
+{% endblock %}

@@ -23,13 +23,13 @@ class LinksView(UpdateView):
 #About page links to social media
 class ArtistSocialView(ArtistProfileFormMixin, LinksView):
     form_class = SocialLinksForm
-    template_name = 'profile/forms/social_links.html'
+    template_name = 'profile/forms_social_links.html'
     success_url = 'artist:about'
 artist_social_links = ArtistSocialView.as_view()
 
 class VenueSocialView(VenueProfileFormMixin, LinksView):
     form_class = SocialLinksForm
-    template_name = 'profile/forms/social_links.html'
+    template_name = 'profile/forms_social_links.html'
     success_url = 'venue:about'
 venue_social_links = VenueSocialView.as_view()
 
@@ -37,13 +37,13 @@ venue_social_links = VenueSocialView.as_view()
 #Photo page links to image sites
 class ArtistPhotoView(ArtistProfileFormMixin, LinksView):
     form_class = PhotoLinksForm
-    template_name = 'profile/forms/photo_links.html'
+    template_name = 'profile/forms_photo_links.html'
     success_url = 'artist:photos'
 artist_photo_links = ArtistPhotoView.as_view()
 
 class VenuePhotoView(VenueProfileFormMixin, LinksView):
     form_class = PhotoLinksForm
-    template_name = 'profile/forms/photo_links.html'
+    template_name = 'profile/forms_photo_links.html'
     success_url = 'venue:photos'
 venue_photo_links = VenuePhotoView.as_view()
 
@@ -51,13 +51,13 @@ venue_photo_links = VenuePhotoView.as_view()
 #video page links to video sites
 class ArtistVideoView(ArtistProfileFormMixin, LinksView):
     form_class = VideoLinksForm
-    template_name = 'profile/forms/video_links.html'
+    template_name = 'profile/forms_video_links.html'
     success_url = 'artist:videos'
 artist_video_links = ArtistVideoView.as_view()
 
 class VenueVideoView(VenueProfileFormMixin, LinksView):
     form_class = VideoLinksForm
-    template_name = 'profile/forms/video_links.html'
+    template_name = 'profile/forms_video_links.html'
     success_url = 'venue:videos'
 venue_video_links = VenueVideoView.as_view()
 
@@ -66,7 +66,7 @@ venue_video_links = VenueVideoView.as_view()
 class MusicLinksView(ArtistProfileFormMixin, UpdateView):
     form_class = MusicLinksForm
     model = MusicLinks
-    template_name = 'profile/forms/music_links.html'
+    template_name = 'profile/forms_music_links.html'
     success_url = 'artist:music'
 
     def get_object(self, queryset=None):

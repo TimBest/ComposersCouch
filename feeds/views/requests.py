@@ -50,7 +50,7 @@ class RequestView(FeedMixin):
             return qs
 
 class LocalViewAuth(RequestView):
-    template_name = 'feeds/requests/local.html'
+    template_name = 'feeds/requests_local.html'
 
     def get_posts(self, **kwargs):
         location = get_location(self.request, self.kwargs.get('zipcode'), 'point')
@@ -66,7 +66,7 @@ class LocalView(LocalViewAuth, SignupEmailView, LoginView):
     pass
 
 class AllViewAuth(RequestView):
-    template_name = 'feeds/requests/all.html'
+    template_name = 'feeds/requests_all.html'
 
     def get_posts(self, **kwargs):
         posts = self.model.objects.all()

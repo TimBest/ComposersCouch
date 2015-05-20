@@ -1,0 +1,11 @@
+{% extends 'feeds/artists_artists.html' %}
+
+{% block currentScope %}I'm following{% endblock %}
+{% block withinClass %}{% endblock %}
+{% block followingClass %}active{% endblock %}
+{% block availableClass %}{% endblock %}
+{% block locationForm %}{% endblock %}
+
+{% block feed %}
+  {% include "feeds/_artists_feed.html" with artists=object_list following="Ture" %}
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'artist/forms_about_modal.html' %}
+{% load crispy_forms_tags %}
+{% crispy ContactForm ContactForm.helper %}
+{% crispy NonUserLocationForm NonUserLocationForm.helper %}
+
+{% block contactClass %}active{% endblock %}
+
+{% block title %}{% block formTitle %}{{ contactType|capfirst }} Contact Info{% endblock %}{% endblock %}
+{% block formID %}contactMusicianForm{% endblock %}
+{% block form %}
+  <span>Edit: </span>
+  <a class="editMusicianContact {% if contactType == 'band' %}text-bold{% endif %}" href="{{ url('artist:userContactForm') }}">Band</a>,
+  <a class="editMusicianContact {% if contactType == 'booking' %}text-bold{% endif %}" href="{% url 'artist:contactForm' 'booking' %}">Booking</a>,
+  <a class="editMusicianContact {% if contactType == 'label' %}text-bold{% endif %}" href="{% url 'artist:contactForm' 'label' %}">Label</a>,
+  <a class="editMusicianContact {% if contactType == 'management' %}text-bold{% endif %}" href="{% url 'artist:contactForm' 'management' %}">Management</a>,
+  <a class="editMusicianContact {% if contactType == 'press' %}text-bold{% endif %}" href="{% url 'artist:contactForm' 'press' %}">Press</a>
+  {% crispy contactForm %}
+  {% crispy locationForm %}
+{% endblock %}
