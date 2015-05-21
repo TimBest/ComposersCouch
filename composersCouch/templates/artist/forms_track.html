@@ -1,7 +1,7 @@
 {% extends 'utils/form.html' %}
 {% load crispy_forms_tags progress_bar %}
-{% crispy AlbumTrackForm AlbumTrackForm.helper %}
-{% crispy TracksForm TracksForm.helper %}
+
+
 
 {% block title %}{% block formTitle %}Add Tracks{% endblock %}{% endblock %}
 
@@ -18,9 +18,9 @@
   {{ formset.management_form }}
   {% for form,track in formset_tracks %}
     {{ form.id }}
-    {% crispy form %}
+    {{ render_form(form) }}
   {% endfor %}
-  {% crispy tracks_form %}
+  {{ render_form(tracks_form) }}
 
 {% endblock %}
 {% block extraSubmit %}{% progress_bar %}{% endblock %}

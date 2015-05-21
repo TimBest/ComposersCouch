@@ -1,7 +1,7 @@
-{% load i18n %}
 
 
-<a class="div choice" href="{% url 'artist:home' artist.profile.user.username %}">
+
+<a class="div choice" href="{{ url('artist:home', kwargs={'username':'artist.profile.user.username'}) }}">
   {% include "utils/_mugshot.html" with profile=artist.profile height=45 width=45 %}
   {{ artist.name }}
 </a>

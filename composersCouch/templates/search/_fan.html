@@ -8,13 +8,13 @@
         <div class="col-sm-3">
           <div class="image-frame">
             <span class="frame-helper"></span>
-            <a href="{% url 'fan:home' fan.profile.user.username %}">
+            <a href="{{ url('fan:home', kwargs={'username':'fan.profile.user.username'}) }}">
               {% include "utils/_mugshot.html" with profile=fan.profile height=125 width=125  %}
             </a>
           </div>
         </div>
         <div class="col-sm-9">
-          <h3><a class="text-black" href="{% url 'fan:home' fan.profile.user.username %}">{{ fan }}</a></h3>
+          <h3><a class="text-black" href="{{ url('fan:home', kwargs={'username':'fan.profile.user.username'}) }}">{{ fan }}</a></h3>
           <div class="btn-group">
             <form method="POST" action="{{ url('follow') }}">
               {% csrf_token %}

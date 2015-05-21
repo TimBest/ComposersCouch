@@ -1,6 +1,6 @@
 {% extends 'utils/form.html' %}
-{% load crispy_forms_tags %}
-{% crispy MessageForm MessageForm.helper %}
+{% from "utils/form_macros.html" import form as render_form %}
+
 
 {% block title %}
   {% block formTitle %}
@@ -14,7 +14,7 @@
   <div class="well">
     {% include "request/_public_request.html" with publicRequest=publicRequest %}
   </div>
-  {% crispy form %}
+  {{ render_form(form) }}
 {% endblock %}
 
 {% block submit %}<button type="submit" onclick="this.form.onsubmit(); return false; " class="btn btn-primary">Send</button>{% endblock %}

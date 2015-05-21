@@ -8,7 +8,7 @@
           {% include "request/_public_request.html" with publicRequest=app.public_request %}
           <div class="panel-footer">
             {% include "request/_application.html" with application=app %}
-            <a class="text-right" href="{% url 'application_view' app.thread.id %}">View Application</a>
+            <a class="text-right" href="{{ url('application_view', kwargs={'thread_id':'app.thread.id'}) }}">View Application</a>
           </div>
         </div>
       </div>

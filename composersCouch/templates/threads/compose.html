@@ -1,5 +1,5 @@
 {% extends "utils/form.html" %}
-{% load crispy_forms_tags %}
+{% from "utils/form_macros.html" import form as render_form %}
 
 {% block title %}
   {% block formTitle %}Send Message{% endblock %}

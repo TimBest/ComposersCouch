@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load i18n %}
+
 
 {% block header %}
   <div class="modal-dialog">
@@ -21,7 +21,7 @@
         <p>This will send an email with a one time link that can be used to sign on to this account</p>
       </div>
       <div class="modal-footer">
-        <a href="{% url 'claim_profile' username %}" class="btn btn-primary pull-right">Send Email</a>
+        <a href="{{ url('claim_profile', kwargs={'username':'username'}) }}" class="btn btn-primary pull-right">Send Email</a>
       </div>
     </div>
   </div>

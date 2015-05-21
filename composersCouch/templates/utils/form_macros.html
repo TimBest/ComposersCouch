@@ -1,0 +1,74 @@
+{# Credit to: jinja-bootstrap #}
+
+{% macro alert(content, type=None, alert_header=None, close_button=True) -%}
+  {# type can be success, error (or danger), info. Defaults to a warning style. #}
+  <div class="alert
+    {%- if alert_header %} alert-block{% endif -%}
+    {%- if type %} alert-{{ type }}{% endif -%}
+    {%- if close_button %} fade in{% endif %}">
+    {% if close_button -%}
+      <a class="close" data-dismiss="alert">&times;</a>
+    {%- endif %}
+    {% if alert_header -%}
+      <h4 class="alert-heading">{{ alert_header|safe }}</h4>
+    {%- endif %}
+    {{ content|safe }}
+  </div>
+{%- endmacro %}
+
+{% macro non_field_errors(form) %}
+  {% if form.non_field_errors %}
+    {% for error in form.non_field_errors() %}
+      {{ alert(content=error, type='danger', close_button=False) }}
+    {% endfor %}
+  {% endif %}
+{% endmacro %}
+
+{% macro label(field) -%}
+  <label class="control-label"{% if field.auto_id %} for="{{ field.auto_id|safe }}"{% endif %}>{{ field.label|safe }}</label>
+{%- endmacro %}
+
+{% macro input(field, prepend_content=None, append_content=None, input_container_class="") -%}
+  {# Helper macro for rendering the input itself #}
+  {%- if prepend_content -%}
+    <span class="input-group-addon">{{ prepend_content }}</span>
+  {%- endif -%}
+
+  <div class="{{ input_container_class }}">
+    {{ field|field_attrs(class="form-control")|safe }}
+  </div>
+
+  {%- if append_content -%}
+    <span class="input-group-addon">{{ append_content }}</span>
+  {%- endif -%}
+
+  {% if field.errors %}
+    <span class="help-block">{{ field.errors|join(' ')|safe }}</span>
+  {% endif %}
+
+{%- endmacro %}
+
+{% macro field(field, classes=None, prepend_content=None, append_content=None, hide_label=False, inline=False, input_container_class="") -%}
+  {% if field.is_hidden %}
+    {{ field|safe }}
+  {% else %}
+    <div class="form-group{% if field.errors %} has-error{% endif -%}{%- if classes %} {{ classes }}{% endif %}">
+      {% if not hide_label %}
+        {{ label(field) }}
+      {% endif %}
+
+      {{ input(field, prepend_content, append_content, input_container_class) }}
+
+      {% if field.help_text %}
+        <p class="help-block">{{ field.help_text|safe }}</p>
+      {% endif %}
+    </div>
+  {% endif %}
+{%- endmacro %}
+
+{% macro form(form) -%}
+  {{ non_field_errors(form) }}
+  {% for f in form %}
+    {{ field(f) }}
+  {% endfor %}
+{%- endmacro %}

@@ -70,7 +70,7 @@
                   <h4 class="pull-left">Band</h4>
                 </div>
                 <div class="col-md-6 right">
-                  <a href="{% url 'threads:compose' username %}" class="pull-right btn btn-default">Contact</a>
+                  <a href="{{ url('threads:compose', kwargs={'recipient':'username'}) }}" class="pull-right btn btn-default">Contact</a>
                 </div>
               </div>
             </div>
@@ -87,7 +87,7 @@
             </div>
             <div class="panel-body">
               {% include "profile/_contact.html" with contact_info=artist_profile.booking_contact %}
-              <a class="editMusicianContact {{isEditable}}" href="{% url 'artist:contactForm' 'booking' %}">Edit</a>
+              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':''booking''}) }}">Edit</a>
             </div>
           </div>
         </div>
@@ -98,7 +98,7 @@
             </div>
             <div class="panel-body">
               {% include "profile/_contact.html" with contact_info=artist_profile.label_contact %}
-              <a class="editMusicianContact {{isEditable}}" href="{% url 'artist:contactForm' 'label' %}">Edit</a>
+              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':''label''}) }}">Edit</a>
             </div>
           </div>
         </div>
@@ -109,7 +109,7 @@
             </div>
             <div class="panel-body">
               {% include "profile/_contact.html" with contact_info=artist_profile.management_contact %}
-              <a class="editMusicianContact {{isEditable}}" href="{% url 'artist:contactForm' 'management' %}">Edit</a>
+              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':''management''}) }}">Edit</a>
             </div>
           </div>
         </div>
@@ -120,7 +120,7 @@
             </div>
             <div class="panel-body">
               {% include "profile/_contact.html" with contact_info=artist_profile.press_contact %}
-              <a class="editMusicianContact {{isEditable}}" href="{% url 'artist:contactForm' 'press' %}">Edit</a>
+              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':''press''}) }}">Edit</a>
             </div>
           </div>
         </div>

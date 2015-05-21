@@ -44,7 +44,7 @@ class UserenaViewsTests(TestCase):
         response = self.client.get(reverse('login'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response,
-                                'accounts/signin_form.html')
+                                'accounts/login_form.html')
 
     def test_signin_view_remember_me_on(self):
         """

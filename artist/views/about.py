@@ -44,7 +44,7 @@ class ContactInfoView(ArtistProfileFormMixin, ContactView):
 
     def get_context_data(self, **kwargs):
         context = super(ContactInfoView, self).get_context_data(**kwargs)
-        context['contactType'] = 'band'
+        context['contact_type'] = 'band'
         return context
 
 contact_info = ContactInfoView.as_view()
@@ -52,13 +52,13 @@ contact_info = ContactInfoView.as_view()
 class MemberView(ArtistProfileFormMixin, UpdateView):
     form_class = MemberForm
     model = Member
-    memberID=None
+    member_id=None
     template_name = 'artist/forms_member.html'
     success_url = 'artist:about'
 
     def dispatch(self, *args, **kwargs):
-        memberID = self.kwargs.get('memberID', None)
-        self.member = get_object_or_None(self.model, id=memberID)
+        member_id = self.kwargs.get('member_id', None)
+        self.member = get_object_or_None(self.model, id=member_id)
         return super(MemberView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
@@ -82,7 +82,7 @@ class MusicianContactsView(ArtistProfileFormMixin, ContactView):
     locationForm = NonUserLocationForm
     template_name = 'artist/forms_contact.html'
     success_url = 'artist:about'
-    contactType = None
+    contact_type = None
     CONTACT_TYPES = {
         'booking':'booking_contact',
         'label':'label_contact',
@@ -91,23 +91,23 @@ class MusicianContactsView(ArtistProfileFormMixin, ContactView):
     }
 
     def dispatch(self, *args, **kwargs):
-        if not self.contactType:
-            self.contactType = self.kwargs.get('contactType', None)
-        if self.contactType not in self.CONTACT_TYPES:
-            self.contactType = self.CONTACT_TYPES.keys()[0]
+        if not self.contact_type:
+            self.contact_type = self.kwargs.get('contact_type', None)
+        if self.contact_type not in self.CONTACT_TYPES:
+            self.contact_type = self.CONTACT_TYPES.keys()[0]
         return super(MusicianContactsView, self).dispatch(*args, **kwargs)
 
     def get_contact_info(self):
-        return getattr(self.user.profile.artist_profile, self.CONTACT_TYPES[self.contactType])
+        return getattr(self.user.profile.artist_profile, self.CONTACT_TYPES[self.contact_type])
 
     def set_contact_info(self, contact_info):
-        setattr(self.user.profile.artist_profile, self.CONTACT_TYPES[self.contactType],contact_info)
+        setattr(self.user.profile.artist_profile, self.CONTACT_TYPES[self.contact_type],contact_info)
         self.user.profile.artist_profile.save()
         return contact_info
 
     def get_context_data(self, **kwargs):
         context = super(MusicianContactsView, self).get_context_data(**kwargs)
-        context['contactType'] = self.contactType
+        context['contact_type'] = self.contact_type
         return context
 
 contacts = MusicianContactsView.as_view()

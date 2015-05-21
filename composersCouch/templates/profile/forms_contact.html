@@ -1,11 +1,11 @@
 {% extends 'artist/forms_about_modal.html' %}
 {% load i18n crispy_forms_tags %}
-{% crispy ContactForm ContactForm.helper %}
-{% crispy NonUserLocationForm NonUserLocationForm.helper %}
+
+
 
 {% block title %}{% block formTitle %}{% trans "Edit Contact Info" %}{% endblock %}{% endblock %}
 
 {% block form %}
-  {% crispy contactForm %}
-  {% crispy locationForm %}
+  {{ render_form(contactForm) }}
+  {{ render_form(locationForm) }}
 {% endblock %}

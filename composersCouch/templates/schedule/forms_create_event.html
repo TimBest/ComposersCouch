@@ -1,8 +1,8 @@
 {% extends "utils/form.html" %}
 {% load crispy_forms_tags i18n progress_bar %}
-{% crispy DateForm DateForm.helper %}
-{% crispy EventForm EventForm.helper %}
-{% crispy ShowInfoForm ShowInfoForm.helper %}
+
+
+
 
 {% block title %}
   {% block formTitle %}Create Show{% endblock %}
@@ -12,7 +12,7 @@
 {% block enctype %}multipart/form-data{% endblock %}
 {% block form %}
   <div id="poster-form">
-    {% crispy poster_form %}
+    {{ render_form(poster_form) }}
     {% if images %}
       {% include "utils/_image_select.html" with images=images id="poster" label="Poster" %}
     {% endif %}
@@ -30,11 +30,11 @@
   </div>
   <div class="row">
     <div class="col-sm-6">
-      {% crispy show_info_form %}
+      {{ render_form(show_info_form) }}
     </div>
     <div class="col-sm-6">
-      {% crispy date_form %}
-      {% crispy event_form %}
+      {{ render_form(date_form) }}
+      {{ render_form(event_form) }}
     </div>
   </div>
 {% endblock %}

@@ -55,7 +55,7 @@
                   <h3 class="pull-left">Contact</h3>
                 </div>
                 <div class="col-sm-6 right">
-                  <a href="{% url 'threads:compose' username %}" class="pull-right btn btn-default">Contact</a>
+                  <a href="{{ url('threads:compose', kwargs={'recipient':'username'}) }}" class="pull-right btn btn-default">Contact</a>
                 </div>
               </div>
             </div>
@@ -111,7 +111,7 @@
               {% include "venue/_equipment.html" with equipment=accessories %}
             </div>
           </div>
-          <a class="{{isEditable}} editEquipment" href="{% url 'venue:equipmentForm' 'sound' %}">Edit</a>
+          <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':''sound''}) }}">Edit</a>
         </div>
       </div>
     </div>

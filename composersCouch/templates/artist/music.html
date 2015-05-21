@@ -57,12 +57,12 @@
             </div>
             <div class="row no-gutter">
               <div class="col-sm-2 left">
-                <a class="text-primary {{isEditable}}" href="{% url 'artist:editAlbumForm' album %}">
+                <a class="text-primary {{isEditable}}" href="{{ url('artist:editAlbumForm', kwargs={'album_id':'album'}) }}">
                   <span class="fa fa-pencil"> Edit Album</span>
                 </a>
               </div>
               <div class="col-sm-10 right">
-                <a class="text-primary {{isEditable}}" href="{% url 'artist:tracksForm' album %}">
+                <a class="text-primary {{isEditable}}" href="{{ url('artist:tracksForm', kwargs={'album_id':'album'}) }}">
                   <span class="fa fa-pencil"> Edit Tracks</span>
                 </a>
               </div>

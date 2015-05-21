@@ -1,10 +1,10 @@
 {% extends 'utils/form.html' %}
 {% load crispy_forms_tags i18n progress_bar %}
-{% crispy InterviewForm InterviewForm.helper %}
+
 
 {% block title %}{% block formTitle %}{% trans "Add Interview" %}{% endblock %}{% endblock %}
 
 {% block formID %}interview-form{% endblock %}
 {% block enctype %}multipart/form-data{% endblock %}
-{% block form %}{% crispy form %}{% endblock %}
+{% block form %}{{ render_form(form) }}{% endblock %}
 {% block extraSubmit %}{% progress_bar %}{% endblock %}

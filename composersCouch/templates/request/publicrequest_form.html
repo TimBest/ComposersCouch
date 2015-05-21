@@ -1,8 +1,8 @@
 {% extends "threads/compose.html" %}
 {% load i18n crispy_forms_tags %}
-{% crispy DateForm DateForm.helper %}
-{% crispy PublicRequestForm PublicRequestForm.helper %}
-{% crispy NumberOfApplicantsForm NumberOfApplicantsForm.helper %}
+
+
+
 
 {% block title %}
   {% block formTitle %}Post Public Request{% endblock %}
@@ -12,11 +12,11 @@
 {% block formID %}publicRequestForm{% endblock %}
 
 {% block form %}
-    {% crispy dateForm %}
+    {{ render_form(dateForm) }}
     {% if numApplicantsForm %}
-      {% crispy numApplicantsForm %}
+      {{ render_form(numApplicantsForm) }}
     {% endif %}
-    {% crispy requestForm %}
+    {{ render_form(requestForm) }}
 {% endblock %}
 
 {% block submit %}

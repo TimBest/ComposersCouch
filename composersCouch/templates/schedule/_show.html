@@ -52,7 +52,7 @@
         </div>
         <div class="col-sm-2">
           <div class="date-block">
-            <a href="{% url 'calendar' 'day' %}{% querystring_for_date show.date.start %}" class="text-black">
+            <a href="{{ url('calendar', kwargs={'period':''day''}) }}{% querystring_for_date show.date.start %}" class="text-black">
               {% include "utils/_date_start_end_visual.html" with start=show.date.start end=show.date.end %}
             </a>
           </div>
@@ -71,7 +71,7 @@
                 <span class="fa fa-ellipsis-h text-muted"></span>
               </a>
                 <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                  <li><a href="{% url 'export_event' show.id %}">Export</a></li>
+                  <li><a href="{{ url('export_event', kwargs={'show_id':'show.id'}) }}">Export</a></li>
                   <li class="dropdown-item"><a>
                     <button class="btn btn-link" onclick="this.form.onsubmit(); return false; " type="submit">
                       Remove
@@ -88,7 +88,7 @@
               <button class="btn btn-success" onclick="this.form.onsubmit(); return false; " type="submit"><span class="fa fa-check" ></span> {% trans "Confirm" %}</button>
             </form>
           </div>
-          <p class="text-left"><a href="{% url 'edit_event' show.id %}">Edit</a></p>
+          <p class="text-left"><a href="{{ url('edit_event', kwargs={'show_id':'show.id'}) }}">Edit</a></p>
         </div>
     {% endif %}
   </div>

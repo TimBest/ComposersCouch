@@ -1,6 +1,6 @@
 {% extends "threads/base.html" %}
 {% load i18n inbox crispy_forms_tags %}
-{% crispy ReplyForm ReplyForm.helper %}
+
 
 {% block header %}
   <div class="text-white">
@@ -29,8 +29,8 @@
           {% endwith %}
         {% endfor %}
       </div>
-      <form action="{% url 'threads:reply' thread.pk %}?next={{ request.path }}" class="reply-form" method="post">
-        {% crispy form %}
+      <form action="{{ url('threads:reply', kwargs={'thread_id':'thread.pk'}) }}?next={{ request.path }}" class="reply-form" method="post">
+        {{ render_form(form) }}
         <button type="submit" class="btn btn-primary"><span class="fa fa-send" ></span> {% trans 'Send' %}</button>
       </form>
     </div>

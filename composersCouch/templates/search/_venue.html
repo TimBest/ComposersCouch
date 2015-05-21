@@ -8,13 +8,13 @@
         <div class="col-sm-3">
           <div class="image-frame">
             <span class="frame-helper"></span>
-            <a href="{% url 'venue:home' venue.profile.user.username %}">
+            <a href="{{ url('venue:home', kwargs={'username':'venue.profile.user.username'}) }}">
               {% include "utils/_mugshot.html" with profile=venue.profile height=125 width=125  %}
             </a>
           </div>
         </div>
         <div class="col-sm-6">
-          <h3><a class="text-black" href="{% url 'venue:home' venue.profile.user.username %}">{{ venue.name }}</a></h3>
+          <h3><a class="text-black" href="{{ url('venue:home', kwargs={'username':'venue.profile.user.username'}) }}">{{ venue.name }}</a></h3>
           <div class="btn-group">
             <form method="POST" action="{{ url('follow') }}">
               {% csrf_token %}
@@ -27,7 +27,7 @@
             </form>
           </div>
           <div class="btn-group">
-            <a href="{% url 'request_write' venue.profile.user.username %}" class="btn btn-sm btn-default">{% trans "Request" %}</a>
+            <a href="{{ url('request_write', kwargs={'username':'venue.profile.user.username'}) }}" class="btn btn-sm btn-default">{% trans "Request" %}</a>
           </div>
           <p>
             {% for genre in venue.profile.genre.all %}
@@ -39,7 +39,7 @@
             <p>
               {{ biography|truncatewords_html:75  }}
               {% ifnotequal biography|truncatewords_html:75|length biography|truncatewords_html:76|length %}
-                <a href="{% url 'venue:about' venue.profile.user.username %}#biography">Continue reading </a>
+                <a href="{{ url('venue:about', kwargs={'username':'venue.profile.user.username'}) }}#biography">Continue reading </a>
                 {% endifnotequal %}
             </p>
           {% endwith %}

@@ -1,6 +1,6 @@
 {% extends 'utils/form.html' %}
 {% load i18n crispy_forms_tags  %}
-{% crispy LiveVideoForm LiveVideoForm.helper %}
+
 
 {% block title %}
   {% block formTitle %}{% trans "Add Live Video" %}{% endblock %}
@@ -9,5 +9,5 @@
 {% block formID %}live-video-form{% endblock %}
 
 {% block form %}
-    {% crispy form %}
+    {{ render_form(form) }}
 {% endblock %}

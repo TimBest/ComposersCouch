@@ -8,11 +8,11 @@
           {% if user.is_authenticated and not noApply and not publicRequest.fulfilled %}
             {% if publicRequest.applicants and user.profile.profile_type == 'm' %}
             <div class="panel-footer text-right">
-              <a href="{% url 'request_appy_to_venue' publicRequest.id %}" class="btn btn-default">Apply</a>
+              <a href="{{ url('request_appy_to_venue', kwargs={'request_id':'publicRequest.id'}) }}" class="btn btn-default">Apply</a>
             </div>
           {% elif not publicRequest.applicants %}
           <div class="panel-footer text-right">
-            <a href="{% url 'request_appy_to_band' publicRequest.id %}" class="btn btn-default">Apply</a>
+            <a href="{{ url('request_appy_to_band', kwargs={'request_id':'publicRequest.id'}) }}" class="btn btn-default">Apply</a>
           </div>
           {% endif %}
         {% endif %}

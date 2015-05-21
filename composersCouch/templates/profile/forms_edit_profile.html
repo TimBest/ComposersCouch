@@ -1,9 +1,9 @@
 {% extends 'utils/form.html' %}
 {% load crispy_forms_tags i18n progress_bar %}
-{% crispy ArtistProfileForm ArtistProfileForm.helper %}
-{% crispy VenueProfileForm VenueProfileForm.helper %}
-{% crispy UserForm UserForm.helper %}
-{% crispy ProfileForm ProfileForm.helper %}
+
+
+
+
 
 {% block title %}{% block formTitle %}{% trans "Edit Profile" %}{% endblock %}{% endblock %}
 
@@ -24,9 +24,9 @@
       var images = false;
     {% endif %}
   </script>
-  {% crispy mugshotFrom %}
-  {% crispy typedForm %}
-  {% crispy usernameForm %}
-  {% crispy profileForm %}
+  {{ render_form(mugshotFrom) }}
+  {{ render_form(typedForm) }}
+  {{ render_form(usernameForm) }}
+  {{ render_form(profileForm) }}
 {% endblock %}
 {% block extraSubmit %}{% progress_bar %}{% endblock %}

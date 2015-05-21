@@ -32,14 +32,14 @@
             {% if now.day == day.start.day and now.month == day.start.month %}cal-day-today{% endif %}
             {% if month.start.month != day.start.month %}cal-day-outmonth noday{% endif %}">
               <div class="dayNumber">
-                <a href="{% url 'calendar' 'day' %}{% querystring_for_date day.start %}">
+                <a href="{{ url('calendar', kwargs={'period':''day''}) }}{% querystring_for_date day.start %}">
                   <span>{{ day.start.day }}</span>
                 </a>
               </div>
               {% for event in day.get_event_partials %}
                 {% filter == 'shows' %}
                   <div class="center-block cal-event">
-                    <a href="{% url 'show' event.show.id %}">
+                    <a href="{{ url('show', kwargs={'show_id':'event.show.id'}) }}">
                       <span class="visible-xs">{{ event.show.date.start|date:'g:i' }}</span>
                       <span class="hidden-xs">
                         <b>{{ event.show.date.start|date:'fA' }}:</b>
@@ -52,7 +52,7 @@
                     </a>
                   </div>
                   <div class="hidden">
-                    <li class="events"><a class="show-title" href="{% url 'show' event.show.id %}">
+                    <li class="events"><a class="show-title" href="{{ url('show', kwargs={'show_id':'event.show.id'}) }}">
                       <b>{{ event.show.date.start|date:'fA' }}:</b>
                       {% if event.show.info.title %}
                         {{ event.show.info.title }}
@@ -64,7 +64,7 @@
                 {% else %}
                   {% with request=event.thread.request %}
                     <div class="center-block cal-event">
-                      <a href="{% url 'request_detail' request.thread.id %}">
+                      <a href="{{ url('request_detail', kwargs={'thread_id':'request.thread.id'}) }}">
                         <span class="visible-xs">{{ request.date.start|date:'g:i' }}</span>
                         <span class="hidden-xs">
                           <b>{{ request.date.start|date:'fA' }}:</b>
@@ -77,7 +77,7 @@
                       </a>
                     </div>
                     <div class="hidden">
-                      <li class="events"><a class="show-title" href="{% url 'request_detail' request.thread.id %}">
+                      <li class="events"><a class="show-title" href="{{ url('request_detail', kwargs={'thread_id':'request.thread.id'}) }}">
                         <b>{{ request.date.start|date:'fA' }}:</b>
                         {% if user.profile.profile_type == 'v' %}
                           {{ request.headliner.participant.user.profile }}

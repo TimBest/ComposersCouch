@@ -1,7 +1,7 @@
 {% extends 'utils/form.html' %}
 {% load crispy_forms_tags i18n progress_bar %}
-{% crispy AlbumForm AlbumForm.helper %}
-{% crispy AlbumArtForm AlbumArtForm.helper %}
+
+
 
 {% block title %}
   {% block formTitle %}{% trans "Add Album" %}{% endblock %}
@@ -10,7 +10,7 @@
 {% block formID %}album-form{% endblock %}
 {% block enctype %}multipart/form-data{% endblock %}
 {% block form %}
-    {% crispy albumArtForm %}
+    {{ render_form(albumArtForm) }}
     {% if images %}
       {% include "utils/_image_select.html" with images=images id="album_art" label="Album Art" %}
     {% endif %}
@@ -25,6 +25,6 @@
         var images = false;
       {% endif %}
     </script>
-    {% crispy albumForm %}
+    {{ render_form(albumForm) }}
 {% endblock %}
 {% block extraSubmit %}{% progress_bar %}{% endblock %}

@@ -1,7 +1,7 @@
 {% extends 'venue/forms_about_modal.html' %}
 {% load i18n crispy_forms_tags %}
 
-{% crispy StaffForm StaffForm.helper %}
+
 
 {% block title %}{% trans "Edit Staff" %}{% endblock %}
 
@@ -14,7 +14,7 @@
 {% block form %}
     <span>Edit: </span>
   {% for s in staff %}
-    <a class="{{isEditable}} editStaff" href="{% url 'venue:staffForm' s.id %}">
+    <a class="{{isEditable}} editStaff" href="{{ url('venue:staffForm', kwargs={'staff_id':'s.id'}) }}">
       {{s.contact.name}},
     </a>
   {% endfor %}
@@ -22,7 +22,7 @@
     <a class="{{isEditable}} editStaff text-success" href="{{ url('venue:staffForm') }}">
       Add New
     </a>
-  {% crispy contactForm %}
-  {% crispy staffForm %}
+  {{ render_form(contactForm) }}
+  {{ render_form(staffForm) }}
 
 {% endblock %}

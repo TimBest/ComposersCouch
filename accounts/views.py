@@ -192,7 +192,7 @@ def claim_profile_confirm(request, uidb64=None, token=None,
     return TemplateResponse(request, template_name, context)
 
 class LoginView(FormView):
-    template_name = 'accounts/signin_form.html'
+    template_name = 'accounts/login_form.html'
     success_url = 'redirectToProfile'
     form_class = SigninForm
 

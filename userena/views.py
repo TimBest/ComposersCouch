@@ -176,7 +176,7 @@ def direct_to_user_template(request, username, template_name,
 
 @secure_required
 def signin(request, auth_form=AuthenticationForm,
-           template_name='accounts/signin_form.html',
+           template_name='accounts/login_form.html',
            redirect_field_name=REDIRECT_FIELD_NAME,
            redirect_signin_function=signin_redirect, extra_context=None):
     """
@@ -197,7 +197,7 @@ def signin(request, auth_form=AuthenticationForm,
 
     :param template_name:
         String defining the name of the template to use. Defaults to
-        ``userena/signin_form.html``.
+        ``userena/login_form.html``.
 
     :param redirect_field_name:
         Form field name which contains the value for a redirect to the

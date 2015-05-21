@@ -1,9 +1,4 @@
 {% extends 'utils/form.html' %}
-{% load i18n crispy_forms_tags %}
-
-{% crispy signupForm signupForm.helper %}
-{% crispy zipcodeForm zipcodeForm.helper %}
-{% crispy emailForm emailForm.helper %}
 
 {% block title %}
   {% block formTitle %}Sign up{% endblock %}
@@ -31,13 +26,13 @@
       <div class="col-md-3 col-sm-4 left">
         <ul class="social-links text-center">
           <li>
-            <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter-inv" role="button">
+            <a href="{{ url('socialauth_begin', kwargs={'backend':''twitter''}) }}" class="btn btn-twitter-inv" role="button">
               <i class="fa fa-twitter"></i>
               <span>Twitter</span>
             </a>
           </li>
           <li>
-            <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook-inv" role="button">
+            <a href="{{ url('socialauth_begin', kwargs={'backend':''facebook''}) }}" class="btn btn-facebook-inv" role="button">
               <i class="fa fa-facebook"></i>
               <span>Facebook</span>
             </a>
@@ -45,9 +40,9 @@
         </div>
       </ul>
       <div class="col-md-9 col-sm-8 right">
-        {% crispy signupForm %}
-        {% crispy zipcodeForm %}
-        {% crispy emailForm %}
+        {{ render_form(signupForm) }}
+        {{ render_form(zipcodeForm) }}
+        {{ render_form(emailForm) }}
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 {% extends 'utils/form.html' %}
 {% load crispy_forms_tags i18n progress_bar %}
-{% crispy LiveAudioForm LiveAudioForm.helper %}
+
 
 {% block title %}
   {% block formTitle %}{% trans "Add Live Track" %}{% endblock %}
@@ -8,5 +8,5 @@
 
 {% block formID %}live-track-form{% endblock %}
 {% block enctype %}multipart/form-data{% endblock %}
-{% block form %}{% crispy form %}{% endblock %}
+{% block form %}{{ render_form(form) }}{% endblock %}
 {% block extraSubmit %}{% progress_bar %}{% endblock %}

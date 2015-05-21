@@ -47,7 +47,7 @@
                 <span class="fa fa-ellipsis-h text-muted"></span>
               </a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li><a href="{% url 'export_years_event' date.year %}">Export</a></li>
+                <li><a href="{{ url('export_years_event', kwargs={'year':'date.year'}) }}">Export</a></li>
               </ul>
             </div>
             <div class="btn-group pull-right">

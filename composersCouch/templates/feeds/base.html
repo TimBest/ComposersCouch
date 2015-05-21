@@ -1,9 +1,6 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags  %}
-{% crispy AvailabilityForm AvailabilityForm.helper %}
-{% crispy ZipcodeForm ZipcodeForm.helper %}
-{% crispy signupForm signupForm.helper %}
-{% crispy SigninForm SigninForm.helper %}
+{% from "utils/form_macros.html" import form as render_form %}
+
 
 {% block overwriteHeader %}
 <div class="header landing-page">
@@ -36,9 +33,9 @@
               <div role="tabpanel" class="tab-pane active" id="signup">
                 <div class="modal-body">
                   <form id="sign-up-form" method="post" action="{{ url('signup') }}">
-                    {% crispy signupForm %}
-                    {% crispy zipcodeForm %}
-                    {% crispy emailForm %}
+                    {{ render_form(signupForm) }}
+                    {{ render_form(zipcodeForm) }}
+                    {{ render_form(emailForm) }}
                     <input type="hidden" name="next" value="{{next|default:""}}"/>
                     <div class="text-right">
                       <button type="submit" onclick="this.form.onsubmit();return false;" class="btn btn-primary">
@@ -50,10 +47,10 @@
                 <div class="modal-footer">
                   <div class="social-links text-center">
                     <p>or sign up with:</p>
-                    <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter-inv" role="button">
+                    <a href="{{ url('socialauth_begin', kwargs={'backend':''twitter''}) }}" class="btn btn-twitter-inv" role="button">
                       <span class="fa fa-twitter"></span> Twitter
                     </a>
-                    <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook-inv" role="button">
+                    <a href="{{ url('socialauth_begin', kwargs={'backend':''facebook''}) }}" class="btn btn-facebook-inv" role="button">
                       <span class="fa fa-facebook"></span> Facebook
                     </a>
                   </div>
@@ -62,7 +59,7 @@
               <div role="tabpanel" class="tab-pane" id="login">
                 <div class="modal-body">
                   <form id="sign-in-form" method="post" action="{{ url('login') }}">
-                    {% crispy login_form %}
+                    {{ render_form(login_form) }}
                     <input type="hidden" name="next" value="{{next|default:""}}"/>
                     <div class="text-right">
                       <button type="submit" onclick="this.form.onsubmit();return false;" class="btn btn-primary">
@@ -74,10 +71,10 @@
                 <div class="modal-footer">
                   <div class="social-links text-center">
                     <p>or login with:</p>
-                    <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter-inv" role="button">
+                    <a href="{{ url('socialauth_begin', kwargs={'backend':''twitter''}) }}" class="btn btn-twitter-inv" role="button">
                       <span class="fa fa-twitter"></span> Twitter
                     </a>
-                    <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook-inv" role="button">
+                    <a href="{{ url('socialauth_begin', kwargs={'backend':''facebook''}) }}" class="btn btn-facebook-inv" role="button">
                       <span class="fa fa-facebook"></span> Facebook
                     </a>
                   </div>
@@ -160,7 +157,7 @@
                 <label>Date:</label>
                 <form class="availability-form" role="filter" method="POST" action="{{ url('availability') }}">
                   <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-                  {% crispy availabilityForm %}
+                  {{ render_form(availabilityForm) }}
                 </form>
               </div>
             </li>
@@ -197,7 +194,7 @@
                 <label>Zipcode:</label>
                 <form class="nav-form" role="filter" method="POST" action="{{ url('zipcode') }}">
                   <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-                  {% crispy locationForm %}
+                  {{ render_form(locationForm) }}
                 </form>
               </div>
             </li>

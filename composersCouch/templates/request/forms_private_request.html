@@ -1,8 +1,8 @@
 {% extends "threads/compose.html" %}
-{% load crispy_forms_tags %}
-{% crispy DateForm DateForm.helper %}
-{% crispy MessageForm MessageForm.helper %}
-{% crispy ParticipantForm ParticipantForm.helper %}
+{% from "utils/form_macros.html" import form as render_form %}
+
+
+
 
 
 {% block title %}{% block formTitle %}Send Private Request{% endblock %}{% endblock %}
@@ -11,7 +11,7 @@
 {% block formID %}privateRequestForm{% endblock %}
 
 {% block form %}
-  {% crispy dateForm %}
+  {{ render_form(dateForm) }}
   <label>Artists*</label>
   {{ ArtistFormset.management_form|crispy }}
   {% if ArtistFormset.non_form_errors %}
@@ -20,9 +20,9 @@
     </div>
   {% endif %}
   {% for form in ArtistFormset %}
-    {% crispy form %}
+    {{ render_form(form) }}
   {% endfor %}
   <label>Venue*</label>
-  {% crispy venueForm %}
-  {% crispy messageForm %}
+  {{ render_form(venueForm) }}
+  {{ render_form(messageForm) }}
 {% endblock %}

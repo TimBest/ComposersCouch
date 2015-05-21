@@ -1,7 +1,7 @@
 {% extends 'utils/form.html' %}
 {% load i18n crispy_forms_tags static %}
-{% crispy signupForm signupForm.helper %}
-{% crispy zipcodeForm zipcodeForm.helper %}
+
+
 
 {% block title %}
   {% block formTitle %}Sign up{% endblock %}
@@ -12,8 +12,8 @@
 
 {% block form %}
   <div class="sign-up">
-    {% crispy signupForm %}
-    {% crispy zipcodeForm %}
+    {{ render_form(signupForm) }}
+    {{ render_form(zipcodeForm) }}
   </div>
 {% endblock %}
 

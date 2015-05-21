@@ -1,6 +1,6 @@
 {% extends 'artist/forms_about_modal.html' %}
 {% load i18n crispy_forms_tags %}
-{% crispy BiographyForm BiographyForm.helper %}
+
 
 {% block title %}{% trans "Edit Biography" %}{% endblock %}
 
@@ -12,5 +12,5 @@
 
 {% block form %}
   {% csrf_token %}
-  {% crispy form %}
+  {{ render_form(form) }}
 {% endblock %}

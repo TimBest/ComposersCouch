@@ -1,6 +1,6 @@
 {% extends 'utils/form.html' %}
 {% load crispy_forms_tags i18n %}
-{% crispy PhotoLinksForm PhotoLinksForm.helper %}
+
 
 {% block title %}
   {% block formTitle %}{% trans "Edit Links" %}{% endblock %}
@@ -8,5 +8,5 @@
 
 {% block formID %}links-form{% endblock %}
 {% block form %}
-    {% crispy form %}
+    {{ render_form(form) }}
 {% endblock %}

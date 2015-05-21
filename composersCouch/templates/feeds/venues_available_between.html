@@ -1,5 +1,5 @@
 {% extends 'feeds/venues_available.html' %}
-{% load crispy_forms_tags %}
+{% from "utils/form_macros.html" import form as render_form %}
 
 {% block nearActive %}located between my shows{% endblock %}
 {% block near %}{% endblock %}

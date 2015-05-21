@@ -26,13 +26,13 @@ class AlbumView(ArtistProfileFormMixin, ImageFormMixin, MultipleModelFormsView):
       'albumForm' : AlbumForm,
       'albumArtForm' : AlbumArtForm
     }
-    albumID=None
+    album_id=None
     template_name = 'artist/forms_album.html'
     success_url = 'artist:tracksForm'
 
     def get_objects(self, queryset=None):
-        self.albumID = self.kwargs.get('albumID', None)
-        album = get_object_or_None(Album, id=self.albumID)
+        self.album_id = self.kwargs.get('album_id', None)
+        album = get_object_or_None(Album, id=self.album_id)
         return {
           'albumForm' : album,
           'albumArtForm' : album.album_art if album else None
@@ -53,7 +53,7 @@ class AlbumView(ArtistProfileFormMixin, ImageFormMixin, MultipleModelFormsView):
         album.save()
         forms['albumForm'].save(request=self.request)
         forms['albumForm'].save_m2m()
-        return redirect(self.success_url, albumID=album.id)
+        return redirect(self.success_url, album_id=album.id)
 
 AddEditAlbum = AlbumView.as_view()
 
@@ -62,13 +62,13 @@ class TracksView(ArtistProfileFormMixin, UpdateView):
     model = Album
     inline_model = Track
     object = None
-    albumID = None
+    album_id = None
     template_name = 'artist/forms_track.html'
     success_url = 'artist:music'
 
     def get_object(self, queryset=None):
-        self.albumID = self.kwargs.get('albumID', None)
-        album = get_object_or_None(self.model, id=self.albumID)
+        self.album_id = self.kwargs.get('album_id', None)
+        album = get_object_or_None(self.model, id=self.album_id)
         self.object = album
         return album
 
@@ -84,7 +84,7 @@ class TracksView(ArtistProfileFormMixin, UpdateView):
     def get_context_data(self):
         self.get_object()
         formset = self.get_formset()
-        tracks = Track.objects.filter(album=self.albumID)
+        tracks = Track.objects.filter(album=self.album_id)
         formset_tracks = zip(formset, tracks)
         context = {
             'formset'        : formset,

@@ -1,11 +1,11 @@
 {% extends "utils/form.html" %}
-{% load crispy_forms_tags %}
+{% from "utils/form_macros.html" import form as render_form %}
 
 {% block formTitle %}{% block title %}Claim Profile{% endblock %}{% endblock %}
 
 {% block form %}
   {% csrf_token %}
-  {% crispy form %}
+  {{ render_form(form) }}
 {% endblock %}
 
 {% block submit %}<button type="submit" onclick="this.form.onsubmit(); return false; " class="btn btn-primary">Sign in</button>{% endblock %}

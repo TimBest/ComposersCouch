@@ -1,5 +1,5 @@
 {% extends 'feeds/venues_venues.html' %}
-{% load crispy_forms_tags %}
+{% from "utils/form_macros.html" import form as render_form %}
 
 {% block currentScope %}available on{% endblock %}
 {% block withinClass %}{% endblock %}
@@ -33,7 +33,7 @@
             <label>Zipcode:</label>
             <form class="nav-form" role="filter" method="POST" action="{{ url('zipcode') }}">
               <input type="hidden" name="path" value="{% firstof request.path '/' %}">
-              {% crispy locationForm %}
+              {{ render_form(locationForm) }}
             </form>
           </div>
         </li>

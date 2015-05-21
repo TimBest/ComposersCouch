@@ -1,6 +1,6 @@
 {% extends 'artist/forms_about_modal.html' %}
 {% load i18n crispy_forms_tags %}
-{% crispy MemberForm MemberForm.helper %}
+
 
 {% block title %}
   {% block formTitle %}
@@ -17,7 +17,7 @@
     {% if members %}
       <span>Edit members: </span>
       {% for m in members %}
-        <a class="{% if m == member %}text-bold{% endif %} editMusicianMembers" href="{% url 'artist:memberForm' m.id %}">
+        <a class="{% if m == member %}text-bold{% endif %} editMusicianMembers" href="{{ url('artist:memberForm', kwargs={'member_id':'m.id'}) }}">
           {{m.name}},
         </a>
       {% endfor %}
@@ -31,11 +31,11 @@
     {% if past_members %}
       <span>Edit past members: </span>
       {% for m in past_members %}
-        <a class="{% if m == member %}text-bold{% endif %} editMusicianMembers" href="{% url 'artist:memberForm' m.id %}">
+        <a class="{% if m == member %}text-bold{% endif %} editMusicianMembers" href="{{ url('artist:memberForm', kwargs={'member_id':'m.id'}) }}">
           {{m.name}}{% if not forloop.last %},{% endif %}
         </a>
       {% endfor %}
     {% endif %}
   </div>
-  {% crispy form %}
+  {{ render_form(form) }}
 {% endblock %}

@@ -94,7 +94,7 @@ class ViewsTests(TestCase):
         }
         url_names = [['artist:userContactForm', {}],]
         for contact_type in MusicianContactsView.CONTACT_TYPES:
-            url_names.append(['artist:contactForm',{'contactType':contact_type}],)
+            url_names.append(['artist:contactForm',{'contact_type':contact_type}],)
         self._login_artist()
         for url_name in url_names:
             self._test_only_viewable_by_artist(url_name[0], url_name[1])
@@ -121,7 +121,7 @@ class ViewsTests(TestCase):
 
     def test_member_forms_view(self):
         url_name = 'artist:memberForm'
-        kwargs = {'memberID':1}
+        kwargs = {'member_id':1}
         self._test_only_viewable_by_artist(url_name, {})
         self._test_only_viewable_by_artist(url_name, kwargs)
         values = {
@@ -137,7 +137,7 @@ class ViewsTests(TestCase):
         self.assertEqual(member.biography, values['biography'])
         values['biography'] = "No cats are."
         response = self.client.post(
-            reverse(url_name, kwargs={'memberID':member.id}),
+            reverse(url_name, kwargs={'member_id':member.id}),
             values, follow=True
         )
         member_edited = Member.objects.get(name=values['name'])
@@ -147,8 +147,8 @@ class ViewsTests(TestCase):
     def test_music_form_views(self):
         url_names = [
             ['artist:albumForm',         {}],
-            ['artist:editAlbumForm',     {'albumID':1}],
-            ['artist:tracksForm',        {'albumID':1}],
+            ['artist:editAlbumForm',     {'album_id':1}],
+            ['artist:tracksForm',        {'album_id':1}],
         ]
         for url_name in url_names:
             self._test_only_viewable_by_artist(url_name[0], url_name[1])
@@ -170,7 +170,7 @@ class ViewsTests(TestCase):
         values['description'] = "This is our album."
         values['tracks'] = ""
         response = self.client.post(
-            reverse('artist:editAlbumForm', kwargs={'albumID':album.id}),
+            reverse('artist:editAlbumForm', kwargs={'album_id':album.id}),
             values, follow=True
         )
         self.assertEqual(response.status_code, 200)
@@ -183,8 +183,8 @@ class ViewsTests(TestCase):
     def test_video_form_views(self):
         url_names = [
             ['artist:video_album_form',  {}],
-            ['artist:video_edit_album',  {'albumID':1}],
-            ['artist:video_tracks_form', {'albumID':1}],
+            ['artist:video_edit_album',  {'album_id':1}],
+            ['artist:video_tracks_form', {'album_id':1}],
         ]
 
         for url_name in url_names:

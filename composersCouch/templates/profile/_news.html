@@ -3,9 +3,9 @@
 <div class="panel panel-default">
   <form  method="post" id="post-form" enctype="multipart/form-data">
     <div class="panel-body">
-      {% crispy post_form %}
+      {{ render_form(post_form) }}
       <div id="attach-photo-form">
-        {% crispy photo_form %}
+        {{ render_form(photo_form) }}
         {% if images %}
           {% include "utils/_image_select.html" with images=images id="photo" label="Photo" %}
         {% endif %}

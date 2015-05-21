@@ -1,7 +1,5 @@
 {% extends 'utils/form.html' %}
-{% load i18n %}
-{% load crispy_forms_tags %}
-{% crispy SigninForm SigninForm.helper %}
+{% from "utils/form_macros.html" import form as render_form %}
 
 {% block title %}Login{% endblock %}
 
@@ -24,13 +22,13 @@
     <div class="col-md-3 col-sm-4">
       <ul class="social-links text-center">
         <li>
-          <a href="{% url 'socialauth_begin' 'twitter' %}" class="btn btn-twitter-inv" role="button">
+          <a href="{{ url('socialauth_begin', kwargs={'backend':'twitter'}) }}" class="btn btn-twitter-inv" role="button">
             <i class="fa fa-twitter"></i>
             <span>Twitter</span>
           </a>
         </li>
         <li>
-          <a href="{% url 'socialauth_begin' 'facebook' %}" class="btn btn-facebook-inv" role="button">
+          <a href="{{ url('socialauth_begin', kwargs={'backend':'facebook'}) }}" class="btn btn-facebook-inv" role="button">
             <i class="fa fa-facebook"></i>
             <span>Facebook</span>
           </a>
@@ -38,7 +36,7 @@
       </div>
     </ul>
     <div class="col-md-9 col-sm-8">
-      {% crispy login_form %}
+      {{ render_form(login_form) }}
     </div>
   </div>
 </div>

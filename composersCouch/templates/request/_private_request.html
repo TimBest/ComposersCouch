@@ -57,7 +57,7 @@
               <p>Your calendar is free</p>
             {% endfor %}
           </div>
-          <a href="{% url 'request_edit' request.id %}" class="">Edit</a>
+          <a href="{{ url('request_edit', kwargs={'thread_id':'request.id'}) }}" class="">Edit</a>
         </div>
       </div>
     </div>
@@ -74,7 +74,7 @@
           <button class="btn btn-danger-inv" type="submit"><span class="fa fa-ban" ></span> Decline</button>
         </form>
       </div>
-      <a href="{% url 'calendar_request_to_event' request.id %}" class="btn btn-link">Add to Calendar</a>
+      <a href="{{ url('calendar_request_to_event', kwargs={'request_id':'request.id'}) }}" class="btn btn-link">Add to Calendar</a>
     </div>
   </div>
 </div>

@@ -1,15 +1,15 @@
 {% extends "base.html" %}
-{% load i18n thumbnail %}
+{% load thumbnail %}
 
 {% block title %}Photo: {{ image.title }}{% endblock %}
 
 {% block header %}
   <h3>{{ image.title }}</h3>
   {% if request.user == image.user %}
-    <a href="{% url 'photos:update-image' image.id %}">
+    <a href="{{ url('photos:update-image', kwargs={'pk':'image.id'}) }}">
       <span class="fa fa-pencil"> Edit</span>
     </a>
-    <a class="pull-right" href="{% url 'photos:delete-image' image.id %}">
+    <a class="pull-right" href="{{ url('photos:delete-image', kwargs={'pk':'image.id'}) }}">
       <span class="text-danger fa fa-times"> Remove</span>
     </a>
   {% endif %}

@@ -1,7 +1,7 @@
 {% extends "base.html" %}
-{% load i18n %}
-{% load crispy_forms_tags %}
-{% crispy EditProfileForm EditProfileForm.helper %}
+
+{% from "utils/form_macros.html" import form as render_form %}
+
 
 
 {% block title %}{% trans "Account edit" %}{% endblock %}
@@ -11,6 +11,6 @@
 {% block header %}
   <div class="container">
     <h2>{% trans "Edit Profile" %}</h2>
-    {% crispy form %}
+    {{ render_form(form) }}
   </div>
 {% endblock %}

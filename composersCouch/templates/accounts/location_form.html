@@ -1,11 +1,11 @@
 {% extends 'base.html' %}
-{% load crispy_forms_tags %}
-{% crispy LocationForm LocationForm.helper %}
+{% from "utils/form_macros.html" import form as render_form %}
+
 
 {% block title %}Add Location{% endblock %}
 
 {% block content %}
   <div class="container">
-    {% crispy form %}
+    {{ render_form(form) }}
   </div>
 {% endblock %}
