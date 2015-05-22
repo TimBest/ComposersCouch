@@ -2,6 +2,6 @@
 
 
 <a class="div choice" href="{{ url('fan:home', kwargs={'username':'fan.profile.user.username'}) }}">
-  {% include "utils/_mugshot.html" with profile=fan.profile height=45 width=45 %}
+  {{ mugshot(profile=fan.profile, width=45, height=45) }}
   {{ fan }}
 </a>

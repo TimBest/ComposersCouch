@@ -8,7 +8,7 @@
           <div class="message-image-col">
             <div class="message-image">
               <a href="{{ post.user.profile.get_absolute_url }}">
-                {% include "utils/_mugshot.html" with profile=post.user.profile height=50 width=50 %}
+                {{ mugshot(profile=post.user.profile, width=50, height=50) }}
               </a>
             </div>
           </div>

@@ -7,7 +7,7 @@
         <div class="image-frame">
           <span class="frame-helper"></span>
           <a href="{{ publicRequest.requester.profile.get_absolute_url }}">
-            {% include "utils/_mugshot.html" with profile=publicRequest.requester.profile width=100 height=100 %}
+            {{ mugshot(profile==publicRequest.requester.profile, width=100, height=100) }}
           </a>
         </div>
       </div>

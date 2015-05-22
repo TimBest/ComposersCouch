@@ -1,6 +1,6 @@
 {% with profile_type=choice.profile.profile_type %}
   <div class="user-autocomplete" data-value="{{ choice.pk }}">
-    {% include "utils/_mugshot.html" with profile=choice.profile height=45 width=45 %}
+    {{ mugshot(profile=choice.profile, width=45, height=45) }}
     {{ choice.profile }}
   </div>
 {% endwith %}

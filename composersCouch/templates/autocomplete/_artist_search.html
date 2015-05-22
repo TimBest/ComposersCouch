@@ -2,6 +2,6 @@
 
 
 <a class="div choice" href="{{ url('artist:home', kwargs={'username':'artist.profile.user.username'}) }}">
-  {% include "utils/_mugshot.html" with profile=artist.profile height=45 width=45 %}
+  {{ mugshot(profile=artist.profile, width=45, height=45) }}
   {{ artist.name }}
 </a>

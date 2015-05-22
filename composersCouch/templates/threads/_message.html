@@ -6,7 +6,7 @@
         <div class="message-image-col">
           <div class="message-image">
             <a href="{{ message.sender.profile.get_absolute_url }}">
-              {% include "utils/_mugshot.html" with profile=message.sender.profile height=50 width=50 %}
+              {{ mugshot(profile=message.sender.profile, width=50, height=50) }}
             </a>
           </div>
         </div>
