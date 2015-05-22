@@ -40,6 +40,7 @@
     {% else %}
       <p>No Private Requests</p>
     {% endfor %}
-    {% include "utils/_pagination.html" with page=requests %}
+    {% from "utils/macros.html" import paginate %}
+{{ paginate(request=request, page=requests) }}
   </div>
 {% endblock %}

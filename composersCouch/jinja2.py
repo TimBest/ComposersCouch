@@ -5,8 +5,10 @@ from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.template.defaultfilters import linebreaks
+
 from jinja2 import Environment
 
+from feeds.templatetags.ext import FeedGlobals
 
 
 def field_attrs(field_inst, **kwargs):
@@ -25,17 +27,19 @@ def environment(**options):
     environment = Environment (
         extensions = [
             'pipeline.jinja2.ext.PipelineExtension',
-            'feeds.templatetags.ext.FeedExtension',
             'jinja2.ext.with_',
         ],
         **options
     )
-    environment.filters['field_attrs'] = field_attrs
-    environment.filters['linebreaks'] = linebreaks
+    environment.filters.update({
+        'field_attrs': field_attrs,
+        'linebreaks': linebreaks,
+    })
     environment.globals.update({
         'static': staticfiles_storage.url,
         'url': reverse,
         'is_development': settings.DEVELOPMENT,
         'now':timezone.now(),
     })
+    environment.globals.update(FeedGlobals)
     return environment

@@ -7,5 +7,6 @@
   {% else %}
     {% include "feeds/_empty_feed.html" with feed_type="shows" following=following %}
   {% endfor %}
-  {% include "utils/_pagination.html" with page=shows %}
+  {% from "utils/macros.html" import paginate %}
+{{ paginate(request=request, page=shows) }}
 </div>

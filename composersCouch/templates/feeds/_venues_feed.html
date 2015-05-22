@@ -5,7 +5,8 @@
         {% include "search/_venue.html" with venue=venue %}
       </div>
     {% endfor %}
-    {% include "utils/_pagination.html" with page=venues %}
+    {% from "utils/macros.html" import paginate %}
+{{ paginate(request=request, page=venues) }}
   </div>
 {% else %}
   {% include "feeds/_empty_feed.html" with feed_type="venues" following=following %}

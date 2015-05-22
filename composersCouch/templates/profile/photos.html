@@ -36,4 +36,5 @@
   </div>
 </div>
 
-{% include "utils/_pagination.html" with page=images %}
+{% from "utils/macros.html" import paginate %}
+{{ paginate(request=request, page=images) }}

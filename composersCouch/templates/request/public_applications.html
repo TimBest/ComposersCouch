@@ -15,6 +15,7 @@
     {% else %}
       <p>No Public Requests</p>
     {% endfor %}
-    {% include "utils/_pagination.html" with page=applications %}
+    {% from "utils/macros.html" import paginate %}
+{{ paginate(request=request, page=applications) }}
   </div>
 {% endblock %}

@@ -120,6 +120,7 @@
         </table>
       </div>
     </form>
-    {% include "utils/_pagination.html" with page=thread_list %}
+    {% from "utils/macros.html" import paginate %}
+{{ paginate(request=request, page=thread_list) }}
   </div>
 {% endblock %}

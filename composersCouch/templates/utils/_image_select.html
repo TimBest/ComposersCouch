@@ -7,6 +7,7 @@
           <option value="{{ image.id }}" data-img-src="{{ MEDIA_URL }}{{ image.image }}">{{ image.title }}</option>
       {% endfor %}
     </select>
-    {% include "utils/_pagination.html" with page=images %}
+    {% from "utils/macros.html" import paginate %}
+{{ paginate(request=request, page=images) }}
   </div>
 </div>
