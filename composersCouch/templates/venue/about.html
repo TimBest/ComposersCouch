@@ -1,5 +1,4 @@
 {% extends 'venue/detail.html' %}
-{% load thumbnail %}
 
 
 {% block aboutClass %}active{% endblock %}
@@ -60,7 +59,8 @@
               </div>
             </div>
             <div class="panel-body">
-              {% include "profile/_contact.html" with contact_info=profile.contact_info %}
+              {% from "profile/macros.html" import contact %}{{ contact(contact_info=profile.contact_info) }}
+
               <a class="{{isEditable}} editContact" href="{{ url('venue:contactForm') }}">Edit</a>
             </div>
           </div>
@@ -76,11 +76,9 @@
               {% with seating=venueProfile.seating %}
                 {% with seating.seating_chart as image %}
                   <div class='image-preview'>
-                  {% thumbnail image.image "120x120" crop="center" as im %}
                     <a class="thumb" rel='gallery-image[ilist]' href="{{ image.image.url }}">
-                      <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ im.url }}">
+                      <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ image.image.url }}" width="120" height="120">
                     </a>
-                  {% endthumbnail %}
                   </div>
                 {% endwith %}
               <p>Capacity: {{seating.capacity}}</p>
