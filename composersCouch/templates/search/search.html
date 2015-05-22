@@ -2,24 +2,27 @@
 {% from "search/cards.html" import artist_card, venue_card, fan_card %}
 {% from "utils/macros.html" import paginate %}
 
-{% block title %}
-  Search: {{ q }}
-{% endblock %}
 
-{% block header %}
-  <h2>Search results for: {{ q }}</h2>
+{% block headerClass %}dark-blue{% endblock %}
+
+{% block header%}
+  <div class="page-header text-white">
+    <h2>{% block title %}Search Results For: {{ q }}{% endblock %}</h2>
+  </div>
 {% endblock %}
 
 {% block content %}
-  {% for profile in profiles %}
-    {% if profile.profile_type == 'm' %}
-      {{ artist_card(request, profile.artist_profile) }}
-    {% elif profile.profile_type == 'v' %}
-      {{ venue_card(request, profile.venueProfile) }}
-    {% else %}
-      {{ fan_card(request, profile.fanProfile) }}
-    {% endif %}
-  {% endfor %}
-  {% from "utils/macros.html" import paginate %}
-{{ paginate(request=request, page=profiles) }}
+  <div class="about container">
+    {% for profile in profiles %}
+      {% if profile.profile_type == 'm' %}
+        {{ artist_card(request, profile.artist_profile) }}
+      {% elif profile.profile_type == 'v' %}
+        {{ venue_card(request, profile.venueProfile) }}
+      {% else %}
+        {{ fan_card(request, profile.fanProfile) }}
+      {% endif %}
+    {% endfor %}
+    {% from "utils/macros.html" import paginate %}
+    {{ paginate(request=request, page=profiles) }}
+  </div>
 {% endblock %}
