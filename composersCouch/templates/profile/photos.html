@@ -6,7 +6,7 @@
     <div class="panel-body">
       <div class="row">
         {% for image in images %}
-          {% if forloop.counter0|divisibleby:6 %}
+          {% if loop.counter0|divisibleby:6 %}
             </div>
             <div class="row">
           {% endif %}

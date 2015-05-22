@@ -18,7 +18,7 @@
         {% endwith %}
       </div>
     </div>
-    {% for album in artist_profile.albums.all %}
+    {% for album in artist_profile.albums.all() %}
       <div class="album">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -38,7 +38,7 @@
               <div class="col-sm-10">
                 <div class="jp-playlist">
                   <ul class="jp-track-list">
-                    {% for track in album.track_set.all %}
+                    {% for track in album.track_set.all() %}
                       <li>
                         {% if track.media.video %}
                           <h5 class="video-title">

@@ -21,7 +21,7 @@
         {% endwith %}
       </div>
     </div>
-    {% for album in artist_profile.albums.all %}
+    {% for album in artist_profile.albums.all() %}
       <div class="album">
         <div class="panel panel-default">
           <div class="panel-heading">
@@ -33,7 +33,7 @@
                 <p>{{ album.description|linebreaks }}</p>
                 <div>
                   Genres:
-                  {% for genre in album.genre.all %}
+                  {% for genre in album.genre.all() %}
                     {{genre}}
                   {% endfor %}
                 </div>

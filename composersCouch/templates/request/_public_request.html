@@ -16,8 +16,8 @@
           <h3>{{ publicRequest.requester.profile }}</h3>
         </a>
         <div>
-          {% for genre in publicRequest.requester.profile.genre.all %}
-            {% if forloop.first %}Genres:{% else %},{% endif %}
+          {% for genre in publicRequest.requester.profile.genre.all() %}
+            {% if loop.first %}Genres:{% else %},{% endif %}
             <span> {{ genre }}</span>
           {% endfor %}
         </div>

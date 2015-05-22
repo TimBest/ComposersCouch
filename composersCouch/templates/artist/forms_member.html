@@ -32,7 +32,7 @@
       <span>Edit past members: </span>
       {% for m in past_members %}
         <a class="{% if m == member %}text-bold{% endif %} editMusicianMembers" href="{{ url('artist:memberForm', kwargs={'member_id':'m.id'}) }}">
-          {{m.name}}{% if not forloop.last %},{% endif %}
+          {{m.name}}{% if not loop.last %},{% endif %}
         </a>
       {% endfor %}
     {% endif %}

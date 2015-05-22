@@ -88,9 +88,9 @@
               <tr class="message {% if message.new %}unread{% endif %}">
                 <td><input class="request-folder-checkbox" name="batchupdateids" type="checkbox" value="{{message.thread.pk}}" /></td>
                 <td>
-                  {% for participant in message.others.all %}
+                  {% for participant in message.others.all() %}
                     <a href="{{ participant.user.get_absolute_url }}">{{ participant.user.profile }}</a>
-                    {% if not forloop.last %},{% endif %}
+                    {% if not loop.last %},{% endif %}
                   {% else %}
                     <a href="{{ message.thread.latest_msg.sender.get_absolute_url }}">{{ message.thread.latest_msg.sender.profile }}</a>
                   {% endfor %}

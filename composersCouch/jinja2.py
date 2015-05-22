@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.urlresolvers import reverse
 from django.utils import timezone
-
+from django.template.defaultfilters import linebreaksbr
 from jinja2 import Environment
 
 
@@ -27,10 +27,12 @@ def environment(**options):
             'pipeline.jinja2.ext.PipelineExtension',
             'feeds.templatetags.ext.FeedExtension',
             'jinja2.ext.i18n',
+            'jinja2.ext.with_',
         ],
         **options
     )
     environment.filters['field_attrs'] = field_attrs
+    environment.filters['linebreaksbr'] = linebreaksbr
     environment.globals.update({
         'static': staticfiles_storage.url,
         'url': reverse,

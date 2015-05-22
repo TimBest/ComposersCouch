@@ -12,11 +12,11 @@
 {% block content %}
   {% for profile in profiles %}
     {% if profile.profile_type == 'm' %}
-      {{ artist_card(profile.artist_profile) }}
+      {{ artist_card(request, profile.artist_profile) }}
     {% elif profile.profile_type == 'v' %}
-      {{ venue_card(profile.venueProfile) }}
+      {{ venue_card(request, profile.venueProfile) }}
     {% else %}
-      {{ fan_card(profile.fanProfile) }}
+      {{ fan_card(request, profile.fanProfile) }}
     {% endif %}
   {% endfor %}
   {#{% include "utils/_pagination.html" ignore missing with page=profiles %}#}

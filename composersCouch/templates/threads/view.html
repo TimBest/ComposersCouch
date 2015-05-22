@@ -9,7 +9,7 @@
       <h5>
         {% for participant in participant.others %}
           <a href="{{ participant.user.get_absolute_url }}" class="text-white">{{ participant.user.profile }}</a>
-          {% if not forloop.last %},{% endif %}
+          {% if not loop.last %},{% endif %}
         {% endfor %}
       </h5>
     {% endblock %}

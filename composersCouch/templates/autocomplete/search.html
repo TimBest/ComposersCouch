@@ -1,12 +1,12 @@
 {% for artist in artists %}
-  {% if forloop.first %}<p><b>Artists</b></p>{% endif %}
+  {% if loop.first %}<p><b>Artists</b></p>{% endif %}
   {% include "autocomplete/_artist_search.html" with artist=artist %}
 {% endfor %}
 {% for venue in venues %}
-  {% if forloop.first %}<p><b>Venues</b></p>{% endif %}
+  {% if loop.first %}<p><b>Venues</b></p>{% endif %}
   {% include "autocomplete/_venue_search.html" with venue=venue %}
 {% endfor %}
 {% for fan in fans %}
-  {% if forloop.first %}<p><b>Fans</b></p>{% endif %}
+  {% if loop.first %}<p><b>Fans</b></p>{% endif %}
   {% include "autocomplete/_fan_search.html" with fan=fan %}
 {% endfor %}

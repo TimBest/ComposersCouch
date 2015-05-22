@@ -29,8 +29,8 @@
             {% endif %}
             <div class="openers">
               {# {% if info.opener.first %}
-                {% for opener in info.openers.all %}
-                  {% if forloop.first %}with:{% else %},{% endif %}
+                {% for opener in info.openers.all() %}
+                  {% if loop.first %}with:{% else %},{% endif %}
                   <a class="text-black" href="{% url 'artist:news' opener.user.username  %}" > {{ opener }}</a>
                   {% endfor %} #}
               {% if info.openers_text %}

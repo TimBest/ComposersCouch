@@ -7,8 +7,8 @@
 
 {% block panelBody %}
   <p>
-    {% for genre in profile.genre.all %}
-      {% if forloop.first %}Genres:{% else %},{% endif %}
+    {% for genre in profile.genre.all() %}
+      {% if loop.first %}Genres:{% else %},{% endif %}
       <span> {{ genre }}</span>
     {% endfor %}
   </p>

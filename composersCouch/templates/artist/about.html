@@ -8,8 +8,8 @@
   <div class='about'>
     <div class="row no-gutter page-header">
       <span>
-        {% for genre in profile.genre.all %}
-          {% if forloop.first %}Genres:{% else %},{% endif %}
+        {% for genre in profile.genre.all() %}
+          {% if loop.first %}Genres:{% else %},{% endif %}
           <span> {{ genre }}</span>
         {% endfor %}
       </span>
@@ -47,9 +47,9 @@
             - {{ member.biography|linebreaks }}
           </p>
           {# <p>
-            {% for instrument in member.instruments.all %}
+            {% for instrument in member.instruments.all() %}
               {{ instrument }}
-              {% if not forloop.last %},{% endif %}
+              {% if not loop.last %},{% endif %}
             {% endfor %}
           </p> #}
 

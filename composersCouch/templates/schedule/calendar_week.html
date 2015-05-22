@@ -17,7 +17,7 @@
 {% block body %}
   <div id="week">
     {% for day in period.get_days %}
-      <div class="weekday weekday{{forloop.counter}}">
+      <div class="weekday weekday{{loop.counter}}">
         <div class="weekdaytable">
           <h4 class="text-left">
             <a href="{% url 'calendar' 'day' filter %}{% querystring_for_date date %}" class="text-black" >{{ day.start|date:"l" }} the {{ day.start|date:"j" }}:</a>

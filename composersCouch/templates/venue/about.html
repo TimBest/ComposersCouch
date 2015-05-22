@@ -9,8 +9,8 @@
   <div class='about'>
     <div class="row no-gutter page-header">
       <span>
-        {% for genre in profile.genre.all %}
-          {% if forloop.first %}Genres:{% else %},{% endif %}
+        {% for genre in profile.genre.all() %}
+          {% if loop.first %}Genres:{% else %},{% endif %}
           <span> {{ genre }}</span>
         {% endfor %}
       </span>
@@ -31,8 +31,8 @@
               <h3>Hours</h3>
             </div>
             <div class="panel-body">
-              {% for day in venueProfile.hours.all %}
-                <div class="row no-gutter {% if today == forloop.counter0 %}text-bold{% endif %}">
+              {% for day in venueProfile.hours.all() %}
+                <div class="row no-gutter {% if today == loop.counter0 %}text-bold{% endif %}">
                   <div class="col-xs-4 left">{{ day }}</div>
                   {% if day.start and day.end %}
                     <div class="col-xs-8 right">{{ day.start }} - {{ day.end }}</div>
@@ -122,7 +122,7 @@
         </div>
         <div class="panel-body">
           <table class="table table-striped">
-            {% for policy in venueProfile.policies.all %}
+            {% for policy in venueProfile.policies.all() %}
               <tr>
                 <td>{{ policy.title }}</td>
                 <td>{{ policy.description|linebreaks }}</td>
@@ -149,7 +149,7 @@
           <h3>Staff</h3>
         </div>
         <div class="panel-body">
-          {% for person in venueProfile.staff.all %}
+          {% for person in venueProfile.staff.all() %}
             <h5>{{person.contact.name}}</h5>
             <p>{{person.job_title}}</p>
             <p>{{person.biography|linebreaks}}</p>

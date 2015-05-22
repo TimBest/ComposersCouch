@@ -28,8 +28,8 @@
         <div class="panel panel-default">
           {% include "request/_public_request.html" with publicRequest=publicRequest %}
           <div class="panel-footer">
-            {% for application in publicRequest.applications.all %}
-              {% if forloop.first %}<h4>Applicants:</h4>{% endif %}
+            {% for application in publicRequest.applications.all() %}
+              {% if loop.first %}<h4>Applicants:</h4>{% endif %}
               {% include "request/_application.html" with application=application %}
             {% else %}
               <p>No applicants at this time</p>
