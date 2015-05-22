@@ -256,7 +256,6 @@ STATICFILES_FINDERS = (
 )
 
 # Templates
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.jinja2.Jinja2',

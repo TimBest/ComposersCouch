@@ -25,6 +25,7 @@ def environment(**options):
     environment = Environment (
         extensions = [
             'pipeline.jinja2.ext.PipelineExtension',
+            'feeds.templatetags.ext.FeedExtension',
             'jinja2.ext.i18n',
         ],
         **options

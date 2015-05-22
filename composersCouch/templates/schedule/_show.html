@@ -85,7 +85,7 @@
             <form method="POST" class="accept-form inline-block {% hide_confirm show request.user %}" action="{{ url('show_confirm') }}">
               {% csrf_token %}
               <input type="hidden" name="show" value="{{ show.id }}">
-              <button class="btn btn-success" onclick="this.form.onsubmit(); return false; " type="submit"><span class="fa fa-check" ></span> {% trans "Confirm" %}</button>
+              <button class="btn btn-success" onclick="this.form.onsubmit(); return false; " type="submit"><span class="fa fa-check" ></span> Confirm</button>
             </form>
           </div>
           <p class="text-left"><a href="{{ url('edit_event', kwargs={'show_id':'show.id'}) }}">Edit</a></p>

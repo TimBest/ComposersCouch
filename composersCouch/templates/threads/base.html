@@ -39,13 +39,13 @@
           <ul class="nav nav-pills nav-centered" role="tablist">
             {% block center_nav %}
               <li class="{% block inboxClass %}{% endblock %}">
-                <a href="{{ url('threads:inbox') }}"><span class="fa fa-inbox"></span> {% trans "Inbox" %}{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a>
+                <a href="{{ url('threads:inbox') }}"><span class="fa fa-inbox"></span> Inbox{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a>
               </li>
               <li class="{% block sentClass %}{% endblock %}">
-                <a href="{{ url('threads:sent') }}"><span class="fa fa-send"></span> {% trans "Sent" %}</a>
+                <a href="{{ url('threads:sent') }}"><span class="fa fa-send"></span> Sent</a>
               </li>
               <li class="{% block trashClass %}{% endblock %}">
-                <a href="{{ url('threads:trash') }}"><span class="fa fa-trash-o"></span> {% trans "Trash" %}</a>
+                <a href="{{ url('threads:trash') }}"><span class="fa fa-trash-o"></span> Trash</a>
               </li>
             {% endblock %}
           </ul>

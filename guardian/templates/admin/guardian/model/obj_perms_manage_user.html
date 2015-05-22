@@ -7,12 +7,12 @@
 
 {% block breadcrumbs %}{% if not is_popup %}
 <div class="breadcrumbs">
-     <a href="../../../../../../">{% trans "Home" %}</a> &rsaquo;
-     <a href="../../../../../">{{ app_label|capfirst|escape }}</a> &rsaquo; 
-     {% if has_change_permission %}<a href="../../../../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} &rsaquo; 
+     <a href="../../../../../../">Home</a> &rsaquo;
+     <a href="../../../../../">{{ app_label|capfirst|escape }}</a> &rsaquo;
+     {% if has_change_permission %}<a href="../../../../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} &rsaquo;
      {% if has_change_permission %}<a href="../../../">{{ original|truncatewords:"18" }}</a>{% else %}{{ original|truncatewords:"18" }}{% endif %} &rsaquo;
-     {% if has_change_permission %}<a href="../../">{% trans "Object permissions" %}</a>{% else %}{% trans "Object permissions" %}{% endif %} &rsaquo;
-     {% trans "Manage user" %}: {{ user_obj|truncatewords:"18" }}
+     {% if has_change_permission %}<a href="../../">Object permissions</a>{% else %}Object permissions{% endif %} &rsaquo;
+     Manage user: {{ user_obj|truncatewords:"18" }}
 </div>
 {% endif %}{% endblock %}
 
@@ -22,19 +22,19 @@
 <form action="." method="post">
     {% csrf_token %}
     <fieldset class="module aligned">
-        <h2>{% trans "Object permissions" %}</h2>
+        <h2>Object permissions</h2>
         <div class="form-row">
-            <label>{% trans "Object" %}</label>{{ object }}
+            <label>Object</label>{{ object }}
         </div>
         <div class="form-row">
-            <label>{% trans "User" %}</label>{{ user_obj }}
+            <label>User</label>{{ user_obj }}
         </div>
         <div class="form-row group_permissions">
             {{ form }}
         </div>
     </fieldset>
     <div class="submit-row">
-        <input id="submit" type="submit" value="{% trans "Save" %}"/>
+        <input id="submit" type="submit" value="Save"/>
     </div>
 </form>
 </div>

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% from "search/cards.html" import artist_card, venue_card, fan_card %}
 
 {% block title %}
   Search: {{ q }}
@@ -12,12 +12,12 @@
 {% block content %}
   {% for profile in profiles %}
     {% if profile.profile_type == 'm' %}
-      {% include "search/_artist.html" with artist=profile.artist_profile %}
+      {{ artist_card(profile.artist_profile) }}
     {% elif profile.profile_type == 'v' %}
-      {% include "search/_venue.html" with venue=profile.venueProfile %}
+      {{ venue_card(profile.venueProfile) }}
     {% else %}
-      {% include "search/_fan.html" with fan=profile.fanProfile %}
+      {{ fan_card(profile.fanProfile) }}
     {% endif %}
   {% endfor %}
-  {% include "utils/_pagination.html" with page=profiles %}
+  {#{% include "utils/_pagination.html" ignore missing with page=profiles %}#}
 {% endblock %}

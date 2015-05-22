@@ -4,13 +4,13 @@
 
 
 
-{% block title %}{% trans "Account edit" %}{% endblock %}
+{% block title %}Account edit{% endblock %}
 
 {% block content_title %}<h2>{% blocktrans with profile.user.username as username %}Account &raquo; {{ username }}{% endblocktrans %}</h2>{% endblock %}
 
 {% block header %}
   <div class="container">
-    <h2>{% trans "Edit Profile" %}</h2>
+    <h2>Edit Profile</h2>
     {{ render_form(form) }}
   </div>
 {% endblock %}

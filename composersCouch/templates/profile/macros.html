@@ -1,0 +1,9 @@
+
+
+{% macro mugshot(profile, width, height) -%}
+  {% if profile.mugshot %}
+    <img class="mugshot {{class}}" src="{{ im.url }}" alt="{% trans 'Profile mugshot' %}"/>
+  {% else %}
+    <img class="mugshot {{class}}" src="{{ static('img/mugshot.png') }}" alt="{% trans 'Profile mugshot' %}"  height="{{ height }}" width="{{ width }}" />
+  {% endif %}
+{%- endmacro %}

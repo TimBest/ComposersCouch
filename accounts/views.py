@@ -31,7 +31,7 @@ from userena import settings as userena_settings
 login_required_m = method_decorator(login_required)
 
 class SignupView(MultipleFormsView):
-    template_name = 'accounts/signup_form.html'
+    template_name = 'accounts/signup_form_email.html'
     success_url = 'redirectToProfile'
     form_classes = {
       'signupForm'  : SignupForm,
