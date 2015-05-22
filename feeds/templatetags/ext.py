@@ -1,6 +1,3 @@
-from django.contrib.staticfiles.storage import staticfiles_storage
-from django import template
-
 import urllib, urlparse
 
 from feeds.models import Follow
@@ -14,8 +11,6 @@ def is_following(user, target):
 
 
 def append_to_get(url, params):
-    print url
-    print params
     url_parts = list(urlparse.urlparse(url))
     #query = dict(urlparse.parse_qs(url_parts[4]))
     #query.update(params)
