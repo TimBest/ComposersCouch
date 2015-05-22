@@ -41,7 +41,7 @@
               {% endfor %}
             </p>
             {% if biography %}
-              {% with biography=biography|safe|urlize|linebreaksbr %}
+              {% with biography=biography|urlize|linebreaks|replace("&lt;br /&gt;", "<br/>")|safe %}
                 <p>
                   {{ biography|truncate(455) }}
                   {% if biography|truncate(455)|length != biography|truncate(456)|length %}
@@ -59,13 +59,6 @@
     </div>
   </div>
 {%- endmacro %}
-
-
-
-
-
-
-
 
 {% macro artist_card(request,artist) -%}
   {{ card(
