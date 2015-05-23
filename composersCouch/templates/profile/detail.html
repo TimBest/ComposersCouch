@@ -14,7 +14,7 @@
           <h2 class="name">{% block name %}{% endblock %}</h2>
           <div class="row">
             <form method="POST" action="{{ url('follow') }}">
-              {% csrf_token %}
+              <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
               <input type="hidden" name="target" value="{{ profile.user.id }}">
               <button class="btn btn-primary {{isFollowing}}" onclick="this.form.onsubmit(); return false; " type="submit">
                 <span class="follow">Follow</span>

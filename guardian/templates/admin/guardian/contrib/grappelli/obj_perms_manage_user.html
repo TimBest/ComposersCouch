@@ -19,7 +19,7 @@
 
 {% block content %}
 <form action="." method="post">
-    {% csrf_token %}
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     <div>
     <fieldset class="grp-module">
         <h2 class="grp-collapse-handler">Object permissions</h2>

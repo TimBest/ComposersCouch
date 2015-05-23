@@ -15,7 +15,7 @@
 
 {% block content %}
 <form action="." method="post">
-    {% csrf_token %}
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     <div>
     {% if user_form.errors %}
         <p class="errornote">{% blocktrans count user_form.errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}</p>
@@ -76,7 +76,7 @@
 </form>
 
 <form action="." method="post">
-    {% csrf_token %}
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     <div>
     {% if group_form.errors %}
         <p class="errornote">{% blocktrans count group_form.errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}</p>

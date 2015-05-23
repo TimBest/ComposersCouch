@@ -11,6 +11,6 @@
 {% block formTitle %}Edit Biography{% endblock %}
 
 {% block form %}
-  {% csrf_token %}
+  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
   {{ render_form(form) }}
 {% endblock %}

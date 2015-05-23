@@ -9,7 +9,7 @@
 {% block formID %}tracks-form{% endblock %}
 
 {% block form %}
-  {% csrf_token %}
+  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
   {{ formset.management_form }}
   {% for form in formset %}
     {{ form.id }}

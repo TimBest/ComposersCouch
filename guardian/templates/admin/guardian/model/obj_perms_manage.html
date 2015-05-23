@@ -22,7 +22,7 @@
 <div id="content-main">
 
 <form action="." method="post">
-    {% csrf_token %}
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     {% if user_form.errors %}
     <div>
         <p class="errornote">Please correct the errors below.</p>
@@ -76,7 +76,7 @@
 </form>
 
 <form action="." method="post">
-    {% csrf_token %}
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     {% if group_form.errors %}
     <div>
         <p class="errornote">Please correct the errors below.</p>

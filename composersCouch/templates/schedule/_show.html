@@ -64,7 +64,7 @@
         <div class="panel-footer">
           <div class="pull-right">
           <form method="POST" class="decline-form inline-block {% hide_deny show request.user %}" action="{{ url('show_deny') }}">
-            {% csrf_token %}
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
             <input type="hidden" name="show" value="{{ show.id }}">
             <div class="dropdown pull-right">
               <a class="btn btn-default dropdown-toggle" href="javascript:void(0)" type="button" data-toggle="dropdown" aria-expanded="true">
@@ -83,7 +83,7 @@
         </div>
           <div class="pull-right">
             <form method="POST" class="accept-form inline-block {% hide_confirm show request.user %}" action="{{ url('show_confirm') }}">
-              {% csrf_token %}
+              <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
               <input type="hidden" name="show" value="{{ show.id }}">
               <button class="btn btn-success" onclick="this.form.onsubmit(); return false; " type="submit"><span class="fa fa-check" ></span> Confirm</button>
             </form>
