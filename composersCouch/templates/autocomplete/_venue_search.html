@@ -1,7 +1,0 @@
-{% from "profile/macros.html" import contact, mugshot %}
-
-
-<a class="div choice" href="{{ url('venue:home', kwargs={'username':'venue.profile.user.username'}) }}">
-  {{ mugshot(profile=venue.profile, width=45, height=45) }}
-  {{ venue.name }}
-</a>

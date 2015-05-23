@@ -1,12 +1,26 @@
+{% from "profile/macros.html" import mugshot %}
+
+
 {% for artist in artists %}
   {% if loop.first %}<p><b>Artists</b></p>{% endif %}
-  {% include "autocomplete/_artist_search.html" with artist=artist %}
+  <a class="div choice" href="{{ url('artist:home', kwargs={'username':artist.profile.user.username}) }}">
+    {{ mugshot(profile=artist.profile, width=45, height=45) }}
+    {{ artist.name }}
+  </a>
 {% endfor %}
+
 {% for venue in venues %}
   {% if loop.first %}<p><b>Venues</b></p>{% endif %}
-  {% include "autocomplete/_venue_search.html" with venue=venue %}
+  <a class="div choice" href="{{ url('venue:home', kwargs={'username':venue.profile.user.username}) }}">
+    {{ mugshot(profile=venue.profile, width=45, height=45) }}
+    {{ venue.name }}
+  </a>
 {% endfor %}
+
 {% for fan in fans %}
   {% if loop.first %}<p><b>Fans</b></p>{% endif %}
-  {% include "autocomplete/_fan_search.html" with fan=fan %}
+  <a class="div choice" href="{{ url('fan:home', kwargs={'username':fan.profile.user.username}) }}">
+    {{ mugshot(profile=fan.profile, width=45, height=45) }}
+    {{ fan }}
+  </a>
 {% endfor %}
