@@ -1,5 +1,4 @@
 {% extends 'artist/detail.html' %}
-{% load i18n thumbnail %}
 
 
 {% block musicClass %}active{% endblock %}
@@ -45,9 +44,7 @@
               <div class="col-sm-2 left">
                 <div class="image-frame">
                   <span class="frame-helper"></span>
-                  {% thumbnail album.album_art.image "120x120" as im %}
-                    <img class="image-center" style="margin:{{ im|margin:'120x120' }}" width="{{im.x}}" height="{{im.y}}" alt="{{ album.title }} Album Art" src="{{media_url}}{{ im }}">
-                  {% endthumbnail %}
+                  <img class="image-center" style="margin:{{ album.album_art.image|margin:'120x120' }}" width="120" height="120" alt="{{ album.title }} Album Art" src="{{media_url}}{{ album.album_art.image }}">
                 </div>
                 {% include "tracks/_playlist_controls.html" with id=album.id %}
               </div>

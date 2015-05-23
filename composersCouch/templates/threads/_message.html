@@ -7,7 +7,7 @@
       <div class="message-row {% if message.sender == user %}sender{% else %}reciver{% endif %}">
         <div class="message-image-col">
           <div class="message-image">
-            <a href="{{ message.sender.profile.get_absolute_url }}">
+            <a href="{{ message.sender.profile.get_absolute_url() }}">
               {{ mugshot(profile=message.sender.profile, width=50, height=50) }}
             </a>
           </div>

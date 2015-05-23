@@ -1,5 +1,4 @@
 {% extends 'utils/form.html' %}
-{% load crispy_forms_tags i18n progress_bar %}
 
 
 {% block formTitle %}{% block title %}Upload image{% endblock %}{% endblock %}
@@ -7,4 +6,4 @@
 {% block formID %}uploadImageForm{% endblock %}
 {% block enctype %}multipart/form-data{% endblock %}
 {% block form %}{{ render_form(form) }}{% endblock %}
-{% block extraSubmit %}{% progress_bar %}{% endblock %}
+{% block extraSubmit %}{{ progress_bar() }}{% endblock %}

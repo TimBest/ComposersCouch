@@ -1,5 +1,5 @@
 {% extends "schedule/base.html" %}
-{% load scheduletags %}
+
 
 
 {% block periodName %}
@@ -20,7 +20,7 @@
       <div class="weekday weekday{{loop.counter}}">
         <div class="weekdaytable">
           <h4 class="text-left">
-            <a href="{{ url('calendar', kwargs={'period':'day', 'filter':filter}) }}{{ querystring_for_date(date) }}" class="text-black" >{{ day.start|date:"l" }} the {{ day.start|date:"j" }}:</a>
+            <a href="{{ url('calendar', kwargs={'period':'day', 'filter':filter'}) }}{{ querystring_for_date(date) }}" class="text-black" >{{ day.start|date:"l" }} the {{ day.start|date:"j" }}:</a>
           </h4>
           {% for event in day.get_event_partials %}
             {% if filter == 'shows' %}

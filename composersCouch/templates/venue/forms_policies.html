@@ -1,5 +1,5 @@
 {% extends 'venue/forms_about_modal.html' %}
-{% load i18n crispy_forms_tags %}
+
 
 
 
@@ -8,7 +8,7 @@
 {% block policiesClass %}active{% endblock %}
 
 {% block form %}
-  {{ form.management_form|crispy }}
+  {{ form.management_form }}
   {% for f in form %}
     {{ render_form(f) }}
   {% endfor %}

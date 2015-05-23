@@ -13,7 +13,7 @@
 {% block form %}
   {{ render_form(dateForm) }}
   <label>Artists*</label>
-  {{ ArtistFormset.management_form|crispy }}
+  {{ ArtistFormset.management_form }}
   {% if ArtistFormset.non_form_errors %}
     <div class="alert alert-danger" role="alert">
       {{ ArtistFormset.non_form_errors }}

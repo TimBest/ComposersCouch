@@ -1,5 +1,5 @@
 {% extends "threads/base.html" %}
-{% load i18n inbox crispy_forms_tags %}
+{% load  inbox  %}
 
 
 {% block header %}
@@ -8,7 +8,7 @@
     {% block from %}
       <h5>
         {% for participant in participant.others %}
-          <a href="{{ participant.user.get_absolute_url }}" class="text-white">{{ participant.user.profile }}</a>
+          <a href="{{ participant.user.get_absolute_url() }}" class="text-white">{{ participant.user.profile }}</a>
           {% if not loop.last %},{% endif %}
         {% endfor %}
       </h5>

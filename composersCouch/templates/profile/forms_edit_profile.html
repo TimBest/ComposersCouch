@@ -1,5 +1,5 @@
 {% extends 'utils/form.html' %}
-{% load crispy_forms_tags i18n progress_bar %}
+
 
 
 
@@ -29,4 +29,4 @@
   {{ render_form(usernameForm) }}
   {{ render_form(profileForm) }}
 {% endblock %}
-{% block extraSubmit %}{% progress_bar %}{% endblock %}
+{% block extraSubmit %}{{ progress_bar() }}{% endblock %}

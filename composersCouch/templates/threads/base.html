@@ -89,14 +89,14 @@
                 <td><input class="request-folder-checkbox" name="batchupdateids" type="checkbox" value="{{message.thread.pk}}" /></td>
                 <td>
                   {% for participant in message.others.all() %}
-                    <a href="{{ participant.user.get_absolute_url }}">{{ participant.user.profile }}</a>
+                    <a href="{{ participant.user.get_absolute_url() }}">{{ participant.user.profile }}</a>
                     {% if not loop.last %},{% endif %}
                   {% else %}
-                    <a href="{{ message.thread.latest_msg.sender.get_absolute_url }}">{{ message.thread.latest_msg.sender.profile }}</a>
+                    <a href="{{ message.thread.latest_msg.sender.get_absolute_url() }}">{{ message.thread.latest_msg.sender.profile }}</a>
                   {% endfor %}
                 </td>
                 <td>
-                  <a href="{{ message.thread.get_absolute_url }}">{% if message.new %}<b>{% endif %}
+                  <a href="{{ message.thread.get_absolute_url() }}">{% if message.new %}<b>{% endif %}
                   {% with message.thread.subject|truncatewords:5 as truncated_subject %}
                     <span class="text-black">{{ truncated_subject }}</span>
                     {% with truncated_subject|wordcount as subject_wc %}{% with 12|sub:subject_wc as wc %}

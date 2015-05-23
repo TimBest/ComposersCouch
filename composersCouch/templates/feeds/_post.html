@@ -1,5 +1,5 @@
 {% from "profile/macros.html" import contact, mugshot %}
-{% load inbox thumbnail %}
+{% load inbox %}
 
 
 {% if post %}
@@ -9,7 +9,7 @@
         <div class="message-row reciver">
           <div class="message-image-col">
             <div class="message-image">
-              <a href="{{ post.user.profile.get_absolute_url }}">
+              <a href="{{ post.user.profile.get_absolute_url() }}">
                 {{ mugshot(profile=post.user.profile, width=50, height=50) }}
               </a>
             </div>
@@ -33,16 +33,10 @@
             </div>
             <div class="body"><p>{{ post.message|safe|urlize|linebreaks }}</p></div>
             {% if post.photo %}
-              {% with height=200|stringformat:"s" width=200|stringformat:"s" %}
-                {% with geometry=height|add:"x"|add:width %}
-                  {% thumbnail post.photo.image geometry crop="center" as im %}
-                  <img src="{{ im.url }}" alt="{{ post.title }}"/>
-                  {% endthumbnail %}
-                {% endwith %}
-              {% endwith %}
+              <img src="{{ post.photo.image.url }}" alt="{{ post.title }}" width="200" height="200"/>
             {% endif %}
             <div class="footer text-muted">
-              <a class="text-muted" href="{{ post.user.profile.get_absolute_url }}">{{ post.user.profile }}</a>
+              <a class="text-muted" href="{{ post.user.profile.get_absolute_url() }}">{{ post.user.profile }}</a>
               <span> | </span>
               <span class="date">{{ post.created_at|timesince }} ago</span>
             </div>

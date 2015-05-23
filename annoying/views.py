@@ -35,8 +35,7 @@ class MultipleFormsView(FormView):
         context = self.get_context_data()
         context.update(self.get_forms())
         # TODO: append next url to response?
-        return render_to_response(self.template_name,
-                                  context_instance=RequestContext(request, context))
+        return render_to_response(self.template_name, context=context)
 
     def get_context_data(self, **kwargs):
         context = super(MultipleFormsView, self).get_context_data(**kwargs)

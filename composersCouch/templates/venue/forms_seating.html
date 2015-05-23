@@ -1,5 +1,5 @@
 {% extends 'venue/forms_about_modal.html' %}
-{% load crispy_forms_tags i18n progress_bar %}
+
 
 
 {% block title %}Edit Seating{% endblock %}
@@ -12,4 +12,4 @@
     {{ render_form(seatingChartForm) }}
     {{ render_form(seatingForm) }}
 {% endblock %}
-{% block extraSubmit %}{% progress_bar %}{% endblock %}
+{% block extraSubmit %}{{ progress_bar() }}{% endblock %}

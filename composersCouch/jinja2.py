@@ -10,6 +10,7 @@ from jinja2 import Environment
 
 from feeds.templatetags.ext import FeedGlobals
 from schedule.templatetags.ext import ScheduleGlobals
+from progressbarupload.templatetags.progress_bar import ProgressBarGlobals
 
 
 def field_attrs(field_inst, **kwargs):
@@ -46,4 +47,5 @@ def environment(**options):
     })
     environment.globals.update(FeedGlobals)
     environment.globals.update(ScheduleGlobals)
+    environment.globals.update(ProgressBarGlobals)
     return environment

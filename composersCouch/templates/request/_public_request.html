@@ -7,7 +7,7 @@
       <div class="col-lg-2 col-sm-3">
         <div class="image-frame">
           <span class="frame-helper"></span>
-          <a href="{{ publicRequest.requester.profile.get_absolute_url }}">
+          <a href="{{ publicRequest.requester.profile.get_absolute_url() }}">
             {{ mugshot(profile==publicRequest.requester.profile, width=100, height=100) }}
           </a>
         </div>

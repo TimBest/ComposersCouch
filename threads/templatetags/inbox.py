@@ -69,31 +69,6 @@ register.tag('inbox_count', do_print_inbox_count)
 ##########
 # filters
 ##########
-@register.filter
-def sub(value, arg):
-    """Subtract the arg from the value."""
-    try:
-        return int(value) - int(arg)
-    except (ValueError, TypeError):
-        return value
-sub.is_safe = True
-
-
-@register.filter
-def or_me(value, arg):
-    """
-    Replace the value by a fixed pattern, if it equals the argument.
-
-    Typical usage: message.obfuscated_sender|or_me:user
-
-    """
-    user_model = User
-    if not isinstance(value, six.string_types):
-        value = (get_user_representation if isinstance(value, user_model) else force_text)(value)
-    if not isinstance(arg, six.string_types):
-        arg = (get_user_representation if isinstance(arg, user_model) else force_text)(arg)
-    return _('<me>') if value == arg else value
-
 
 @register.filter(**({'expects_localtime': True, 'is_safe': False} if VERSION >= (1, 4) else {}))
 def compact_date(value, arg):

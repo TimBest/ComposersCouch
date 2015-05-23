@@ -17,11 +17,13 @@
       </span>
       <div class="pull-right social-links">
         <a href="{{ url('venue:socialLinksForm') }}" class="{{isEditable}}">Edit <span class="hidden-xs">Social Media Links</span></a>
-        {% with social=profile.social_links %}
+        {% if profile.social_links %}
+          {% with social=profile.social_links %}
             {% if social.facebook %}<a href="{{ social.facebook }}" target="_blank" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>{% endif %}
             {% if social.twitter %}<a href="{{ social.twitter }}" target="_blank" class="btn btn-twitter"><span class="fa fa-twitter"></span></a>{% endif %}
             {% if social.google_plus %}<a href="{{ social.google_plus }}" target="_blank" class="btn btn-google"><span class="fa fa-google-plus"></span></a>{% endif %}
-        {% endwith %}
+          {% endwith %}
+        {% endif %}
       </div>
     </div>
     <div class="row no-gutter">
@@ -56,7 +58,7 @@
                   <h3 class="pull-left">Contact</h3>
                 </div>
                 <div class="col-sm-6 right">
-                  <a href="{{ url('threads:compose', kwargs={'recipient':'username'}) }}" class="pull-right btn btn-default">Contact</a>
+                  <a href="{{ url('threads:compose', kwargs={'recipient':username}) }}" class="pull-right btn btn-default">Contact</a>
                 </div>
               </div>
             </div>

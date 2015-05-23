@@ -1,5 +1,5 @@
 {% extends 'venue/forms_about_modal.html' %}
-{% load i18n crispy_forms_tags %}
+
 
 
 {% block title %}{% block formTitle %}Edit Equipment{% endblock %}{% endblock %}
@@ -7,10 +7,10 @@
 {% block equipmentClass %}active{% endblock %}
 
 {% block form %}
-  <h3>{{ category|capfirst }}</h3>
-  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'sound}) }}">Sound</a>,
-  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'effects}) }}">Effects</a>,
-  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'accessories}) }}">Accessories</a>
+  <h3>{{ category|title }}</h3>
+  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'sound'}) }}">Sound</a>,
+  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'effects'}) }}">Effects</a>,
+  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'accessories'}) }}">Accessories</a>
   <div class="row no-gutter">
     <div class="col-xs-3 left">
       <label class="control-label" for='equipmentForm'>Quantity</label>
@@ -22,7 +22,7 @@
       <label class="control-label" for='equipmentForm'>Remove</label>
     </div>
   </div>
-  {{ form.management_form|crispy }}
+  {{ form.management_form }}
   {% for f in form %}
     {{ render_form(f) }}
   {% endfor %}
