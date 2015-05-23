@@ -1,0 +1,97 @@
+{% from "utils/macros.html" import day_calender %}
+
+
+{% macro show(show) -%}
+  {% with info=show.info %}
+  <div class="show cards">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-2 col-sm-3">
+            <div class="image-frame">
+              <span class="frame-helper"></span>
+              {% if info.get_poster() %}
+                <img class="image-center" src="{{ MEDIA_URL }}{{ info.get_poster() }}" alt="{{ info.title }}" width="100" height="100" />
+              {% else %}
+                <img class="image-center" src="{{ static('img/logo.png') }}" alt="Composers Couch logo"  width="200" />
+              {% endif %}
+            </div>
+          </div>
+          <div class="col-lg-8 col-sm-7">
+            <div>
+              {% if info.title %}
+                <h3>{{ info.title }}</h3>
+              {% endif %}
+              {% if info.headliner %}
+                <h4><a class="text-black" href="{{ url('artist:news', kwargs={'username':info.headliner.user.username}) }}" >{{ info.headliner }}</a></h4>
+              {% elif info.headliner_text %}
+                <h4>{{ info.headliner_text }}</h4>
+              {% endif %}
+              <div class="openers">
+                {# {% if info.opener.first %}
+                  {% for opener in info.openers.all() %}
+                    {% if loop.first %}with:{% else %},{% endif %}
+                    <a class="text-black" href="{{ url('artist:news', kwargs={'username':opener.user.username}) }}" > {{ opener }}</a>
+                    {% endfor %} #}
+                {% if info.openers_text %}
+                  <span>with: {{ info.openers_text }}</span>
+                {% endif %}
+              </div>
+            </div>
+            <div>
+              <p>
+                <span class="fa fa-map-marker text-muted"></span>
+                {% if info.venue %}
+                  <a class="text-black" href="{{ url('redirectToProfile', kwargs={'username':info.venue.username, 'tab':'about'}) }}">{{ info.venue.profile }}</a>
+                {% else %}
+                  {{ info.venue_text }}
+                {% endif %}
+              </p>
+            </div>
+            <p>{{ info.disciption }}</p>
+          </div>
+          <div class="col-sm-2">
+            <div class="date-block">
+              <a href="{{ url('calendar', kwargs={'period':'day'}) }}{{ querystring_for_date(show.date.start) }}" class="text-black">
+                {{ day_calender(start=show.date.start, end=show.date.end) }}
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% if has_event_for_show(request.user, show) %}
+
+          <div class="panel-footer">
+            <div class="pull-right">
+            <form method="POST" class="decline-form inline-block {{ hide_deny(show, request.user) }}" action="{{ url('show_deny') }}">
+              <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+              <input type="hidden" name="show" value="{{ show.id }}">
+              <div class="dropdown pull-right">
+                <a class="btn btn-default dropdown-toggle" href="javascript:void(0)" type="button" data-toggle="dropdown" aria-expanded="true">
+                  <span class="fa fa-ellipsis-h text-muted"></span>
+                </a>
+                  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li><a href="{{ url('export_event', kwargs={'show_id':'show.id'}) }}">Export</a></li>
+                    <li class="dropdown-item"><a>
+                      <button class="btn btn-link" onclick="this.form.onsubmit(); return false; " type="submit">
+                        Remove
+                      </button>
+                    </a></li>
+                  </ul>
+              </div>
+            </form>
+          </div>
+            <div class="pull-right">
+              <form method="POST" class="accept-form inline-block {{ hide_confirm(show, request.user) }}" action="{{ url('show_confirm') }}">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                <input type="hidden" name="show" value="{{ show.id }}">
+                <button class="btn btn-success" onclick="this.form.onsubmit(); return false; " type="submit"><span class="fa fa-check" ></span> Confirm</button>
+              </form>
+            </div>
+            <p class="text-left"><a href="{{ url('edit_event', kwargs={'show_id':'show.id'}) }}">Edit</a></p>
+          </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endwith %}
+{%- endmacro %}

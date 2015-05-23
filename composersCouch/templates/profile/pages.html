@@ -1,0 +1,54 @@
+{% from "schedule/macros.html" import show %}
+
+
+{% macro shows(current_year, year, request, slug, name, events) -%}
+  <div class="row no-gutter page-header">
+    <div class="col-xs-12 center">
+      {% if currentYear %}
+        <h3>Upcoming shows</h3>
+      {% else %}
+        <h3>Shows in {{year}}</h3>
+      {% endif %}
+      <a href="{{ url('calendar_create_event') }}?next={{ url('redirectToProfile', kwargs={'username':name.profile.user.username, 'tab':'shows'}) }}"
+         class="{{isEditable}} btn btn-success" role="button">
+        <span class="fa fa-plus"></span> Add Show
+      </a>
+    </div>
+  </div>
+  {% if events %}
+    {% for event in events %}
+      {{ show(show=event.show) }}
+    {% endfor %}
+  {% else %}
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p>No Shows</p>
+      </div>
+    </div>
+  {% endif %}
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-4">
+          {% if currentYear  %}
+            <a href="{{ request.path }}?year={{ year }}">Past Shows</a>
+          {% else %}
+            <a href="{{ request.path }}?year={{ year - 1 }}">Shows in {{ year - 1 }}</a>
+          {% endif %}
+        </div>
+        {% if not currentYear %}
+          <div class="col-xs-4 text-center">
+            <a  href="{{ request.path }}">Upcoming shows</a>
+          </div>
+          <div class="col-xs-4">
+        {% else %}
+          <div class="col-xs-offset-4 col-xs-4">
+        {% endif %}
+          <div class="pull-right">
+            <a href="{{ request.path }}?year={{ year + 1 }}">Shows in {{ year + 1 }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endmacro %}

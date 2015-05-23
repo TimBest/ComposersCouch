@@ -1,10 +1,10 @@
 {% extends 'artist/detail.html' %}
-
+{% from "profile/pages.html" import shows %}
 
 
 {% block showsClass %}active{% endblock %}
 {% block dropdownTitle %}Shows{% endblock %}
 
 {% block panelBody %}
-  {% include "profile/_shows.html" with currentYear=currentYear year=year request=request slug=artist_profile.profile.user.calendar.slug name=artist_profile events=events  %}
+  {{ shows(current_year=currentYear, year=year, request=request, slug=artist_profile.profile.user.calendar.slug, name=artist_profile, events=events) }}
 {% endblock %}

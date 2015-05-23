@@ -1,13 +1,9 @@
-from django import template
 from django.core.urlresolvers import reverse
 
 from annoying.functions import get_object_or_None
 from schedule.models import Event
 
 
-register = template.Library()
-
-@register.simple_tag
 def querystring_for_date(date, num=3):
     query_string = '?'
     qs_parts = ['year=%d', 'month=%d', 'day=%d', 'hour=%d', 'minute=%d', 'second=%d']
@@ -15,19 +11,16 @@ def querystring_for_date(date, num=3):
     query_string += '&'.join(qs_parts[:num]) % qs_vars[:num]
     return query_string
 
-@register.simple_tag
 def prev_url(period, filter):
     return '%s%s' % (
         reverse("calendar", kwargs=dict(period=period.__class__.__name__.lower(), filter=filter)),
         querystring_for_date(period.prev().start))
 
-@register.simple_tag
 def next_url(period, filter):
     return '%s%s' % (
         reverse("calendar", kwargs=dict(period=period.__class__.__name__.lower(), filter=filter)),
         querystring_for_date(period.next().start))
 
-@register.filter
 def has_event_for_show(value, arg):
     # value: request.user
     # arg: show
@@ -40,7 +33,6 @@ def has_event_for_show(value, arg):
     else:
         return False
 
-@register.simple_tag
 def hide_confirm(show, user):
     event = get_object_or_None(Event, show=show, calendar=user.calendar)
     try:
@@ -50,7 +42,6 @@ def hide_confirm(show, user):
         pass
     return None
 
-@register.simple_tag
 def hide_deny(show, user):
     event = get_object_or_None(Event, show=show, calendar=user.calendar)
     try:
@@ -59,3 +50,12 @@ def hide_deny(show, user):
     except:
         pass
     return None
+
+ScheduleGlobals = {
+    'querystring_for_date': querystring_for_date,
+    'prev_url': prev_url,
+    'next_url': next_url,
+    'has_event_for_show': has_event_for_show,
+    'hide_confirm': hide_confirm,
+    'hide_deny': hide_deny,
+}

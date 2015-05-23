@@ -4,11 +4,12 @@ from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.urlresolvers import reverse
 from django.utils import timezone
-from django.template.defaultfilters import linebreaks
+from django.template.defaultfilters import linebreaks, date, time
 
 from jinja2 import Environment
 
 from feeds.templatetags.ext import FeedGlobals
+from schedule.templatetags.ext import ScheduleGlobals
 
 
 def field_attrs(field_inst, **kwargs):
@@ -34,6 +35,8 @@ def environment(**options):
     environment.filters.update({
         'field_attrs': field_attrs,
         'linebreaks': linebreaks,
+        'date': date,
+        'time': time,
     })
     environment.globals.update({
         'static': staticfiles_storage.url,
@@ -42,4 +45,5 @@ def environment(**options):
         'now':timezone.now(),
     })
     environment.globals.update(FeedGlobals)
+    environment.globals.update(ScheduleGlobals)
     return environment
