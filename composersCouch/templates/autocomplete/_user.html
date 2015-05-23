@@ -1,7 +1,9 @@
+{% from "profile/macros.html" import contact, mugshot %}
+
+
 {% with profile_type=choice.profile.profile_type %}
   <div class="user-autocomplete" data-value="{{ choice.pk }}">
     {{ mugshot(profile=choice.profile, width=45, height=45) }}
     {{ choice.profile }}
   </div>
 {% endwith %}
-  
