@@ -1,5 +1,42 @@
 {% from "schedule/macros.html" import show %}
+{% from "utils/macros.html" import paginate %}
 
+
+{% macro photos(images) -%}
+  <div class="photos">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          {% for image in images %}
+            {% if (loop.index - 1) is divisibleby(6) %}
+              </div>
+              <div class="row">
+            {% endif %}
+            <div class="col-sm-2">
+              <div class="photo">
+                <div class="image-frame">
+                  <span class="frame-helper"></span>
+                  <a class="thumb" rel='gallery-image[ilist]' href="{{ image.get_absolute_url }}">
+                    <img class="img-responsive" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ image.image.url }}" width="120" height="120">
+                  </a>
+                </div>
+              </div>
+            </div>
+          {% else %}
+            <p>
+              <span>No photos.</span>
+              {% if request.user.is_authenticated() %}
+                <a class="{{isEditable}}" href="{{ url('photos:upload') }}">Add a photo</a>
+                <span> to get started.</span>
+              {% endif %}
+            </p>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ paginate(request=request, page=images) }}
+{%- endmacro %}
 
 {% macro shows(current_year, year, request, slug, name, events) -%}
   <div class="row no-gutter page-header">

@@ -11,6 +11,7 @@
     </a>
   </div>
   <div class="{% if not images %}{{isEditable}}{% endif %}">
-    {% include "profile/photos.html" with images=images %}
+    {% from "profile/pages.html" import photos %}{{ photos(images=images) }}
+
   </div>
 {% endblock %}

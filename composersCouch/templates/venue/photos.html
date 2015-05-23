@@ -1,4 +1,5 @@
 {% extends 'venue/detail.html' %}
+{% from "profile/pages.html" import photos %}
 
 
 
@@ -19,6 +20,6 @@
     </div>
   </div>
   <div class="{% if not images %}{{isEditable}}{% endif %}">
-    {% include "profile/photos.html" with images=images %}
+    {{ photos(images=images) }}
   </div>
 {% endblock %}
