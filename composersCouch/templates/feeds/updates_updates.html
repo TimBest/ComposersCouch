@@ -6,7 +6,7 @@
 
 {% block orderOptions %}
   <li class="{% if order == 'latest' %}active{% endif %}">
-    <a href="{% url feedType 'latest' scope zipcode %}?{{ request.GET.urlencode }}">Latest</a>
+    <a href="{{ url(feedType, kwargs={'order':'latest', 'scope':scope, 'zipcode':zipcode}) }}?{{ request.GET.urlencode }}">Latest</a>
   </li>
 {% endblock %}
 

@@ -1,0 +1,18 @@
+{% from "schedule/macros.html" import show %}
+{% from "utils/macros.html" import paginate %}
+
+
+{% macro shows_feed(request, shows) -%}
+  <div class="shows">
+    {% for show in shows %}
+      {# hack to until show clean up is ensured #}
+      {% if show.events.first %}
+        {{ show(show=show) %}
+        {% include "schedule/_show.html" with show=show %}
+      {% endif %}
+    {% else %}
+      {% include "feeds/_empty_feed.html" with feed_type="shows" following=following %}
+    {% endfor %}
+    {{ paginate(request=request, page=shows) }}
+  </div>
+{%- endmacro %}
