@@ -12,7 +12,7 @@
         </div>
       </div>
       <div class="col-lg-8 col-sm-7">
-        <a class="text-black" href="{% url 'redirectToProfile' publicRequest.requester.username 'about' %}">
+        <a class="text-black" href="{{ url('redirectToProfile', kwargs={'username':publicRequest.requester.username, 'tab':'about'}) }}">
           <h3>{{ publicRequest.requester.profile }}</h3>
         </a>
         <div>

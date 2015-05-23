@@ -25,7 +25,7 @@
       <div class="week">
         <div class="cal-row-fluid row-eq-height cal-day-row">
           <div id="week-link">
-            <a href="{% url 'calendar' 'week' filter %}{% querystring_for_date week.start %}">Week</a>
+            <a href="{{ url('calendar', kwargs={'period':'week', 'filter':filter}) }}{% querystring_for_date week.start %}">Week</a>
           </div>
           {% for day in week.get_days %}
             <div id="expand-day" class="cal-cell1 cal-cell day-cell expand-day
@@ -92,7 +92,7 @@
               <div class="links pull-right">
                 {% with date=day.start  %}
                   <div>
-                    <a class="btn btn-primary btn-sm" href="{{ url('calendar_create_event') }}{% querystring_for_date date %}&hour=19&next={% url 'calendar' period_name 'shows' %}"
+                    <a class="btn btn-primary btn-sm" href="{{ url('calendar_create_event') }}{% querystring_for_date date %}&hour=19&next={{ url('calendar', kwargs={'period':period_name, 'filter':'shows'}) }}"
                       <span>Add Show</span>
                     </a>
                   </div>

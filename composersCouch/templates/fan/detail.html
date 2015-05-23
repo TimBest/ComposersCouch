@@ -8,9 +8,9 @@
 
 {% block tabs %}{% block dropdownTabs %}
   <li class="{% block newsClass %}{% endblock %}">
-    <a href="{% url 'fan:news' username  %}">News</a>
+    <a href="{{ url('fan:news', kwargs={'username':username}) }}">News</a>
   </li>
   <li class="{% block photosClass %}{% endblock %}">
-    <a href="{% url 'fan:photos' username  %}">Photos</a>
+    <a href="{{ url('fan:photos', kwargs={'username':username}) }}">Photos</a>
   </li>
 {% endblock %}{% endblock %}

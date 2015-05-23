@@ -1,4 +1,6 @@
 {% extends 'venue/detail.html' %}
+{% from "profile/macros.html" import contact %}
+{% from "venue/macros.html" import render_equipment %}
 
 
 {% block aboutClass %}active{% endblock %}
@@ -59,8 +61,7 @@
               </div>
             </div>
             <div class="panel-body">
-              {% from "profile/macros.html" import contact %}{{ contact(contact_info=profile.contact_info) }}
-
+              {{ contact(contact_info=profile.contact_info) }}
               <a class="{{isEditable}} editContact" href="{{ url('venue:contactForm') }}">Edit</a>
             </div>
           </div>
@@ -74,7 +75,7 @@
             </div>
             <div class="panel-body">
               {% with seating=venueProfile.seating %}
-                {% with seating.seating_chart as image %}
+                {% with image=seating.seating_chart %}
                   <div class='image-preview'>
                     <a class="thumb" rel='gallery-image[ilist]' href="{{ image.image.url }}">
                       <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ image.image.url }}" width="120" height="120">
@@ -98,18 +99,19 @@
           <div class="row">
             <div class="col-xs-4">
               <h4>Sound</h4>
-              {% include "venue/_equipment.html" with equipment=sound %}
+              {{ render_equipment(sound) }}
             </div>
             <div class="col-xs-4">
               <h4>Effects</h4>
-              {% include "venue/_equipment.html" with equipment=effects %}
+              {{ render_equipment(effects) }}
+
             </div>
             <div class="col-xs-4">
               <h4>Accessories</h4>
-              {% include "venue/_equipment.html" with equipment=accessories %}
+              {{ render_equipment(accessories) }}
             </div>
           </div>
-          <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':''sound''}) }}">Edit</a>
+          <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'sound'}) }}">Edit</a>
         </div>
       </div>
     </div>
@@ -137,7 +139,7 @@
           <h3>Biography</h3>
         </div>
         <div class="panel-body">
-          <p>{{ venueProfile.biography|safe|urlize|linebreaksbr }}</p>
+          <p>{{ venueProfile.biography|safe|urlize|linebreaks }}</p>
           <a class="{{isEditable}} editBiography" href="{{ url('venue:biographyForm') }}">Edit</a>
         </div>
       </div>

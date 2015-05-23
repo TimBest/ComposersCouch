@@ -5,7 +5,7 @@
     {% else %}
       <h3>Shows in {{year}}</h3>
     {% endif %}
-    <a href="{{ url('calendar_create_event') }}?next={% url 'redirectToProfile' name.profile.user.username 'shows' %}"
+    <a href="{{ url('calendar_create_event') }}?next={{ url('redirectToProfile', kwargs={'username':name.profile.user.username, 'tab':'shows'}) }}"
        class="{{isEditable}} btn btn-success" role="button">
       <span class="fa fa-plus"></span> Add Show
     </a>

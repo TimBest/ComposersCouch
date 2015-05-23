@@ -10,22 +10,22 @@
 {% block tabs %}
   {% block dropdownTabs %}
     <li class="left {% block aboutClass %}{% endblock %}">
-      <a href="{% url 'artist:about' username  %}">About</a>
+      <a href="{{ url('artist:about', kwargs={'username':username}) }}">About</a>
     </li>
     <li class="{% block newsClass %}{% endblock %}">
-      <a href="{% url 'artist:news' username  %}">News</a>
+      <a href="{{ url('artist:news', kwargs={'username':username}) }}">News</a>
     </li>
     <li class="{% block showsClass %}{% endblock %}">
-      <a href="{% url 'artist:shows' username  %}">Shows</a>
+      <a href="{{ url('artist:shows', kwargs={'username':username}) }}">Shows</a>
     </li>
     <li class="{% block musicClass %}{% endblock %}">
-      <a href="{% url 'artist:music' username  %}">Music</a>
+      <a href="{{ url('artist:music', kwargs={'username':username}) }}">Music</a>
     </li>
     <li class="{% block photosClass %}{% endblock %}">
-      <a href="{% url 'artist:photos' username  %}">Photos</a>
+      <a href="{{ url('artist:photos', kwargs={'username':username}) }}">Photos</a>
     </li>
     <li class="{% block videosClass %}{% endblock %}">
-      <a href="{% url 'artist:videos' username  %}">Videos</a>
+      <a href="{{ url('artist:videos', kwargs={'username':username}) }}">Videos</a>
     </li>
   {% endblock %}
 {% endblock %}

@@ -3,9 +3,10 @@ Django powered site for composers couch
 REGEX
 
 find:
-{% url (\S*) (\S*) %}
+{{ url((\S*), kwargs={'':(\S*), '':(\S*)}) }}
 replace:
-{{ url($1, $2) }}
+{{ url($1, kwargs={'':$2, '':$3}) }}
+
 
 Setting development to true
     add 'DEVELOPMENT=True' to the end of ~/.bashrc

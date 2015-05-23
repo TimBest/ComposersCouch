@@ -10,16 +10,16 @@
 {% block tabs %}
   {% block dropdownTabs %}
     <li class="left {% block aboutClass %}{% endblock %}">
-      <a href="{% url 'venue:about' username  %}">About</a>
+      <a href="{{ url('venue:about', kwargs={'username':username}) }}">About</a>
     </li>
     <li class="{% block newsClass %}{% endblock %}">
-      <a href="{% url 'venue:news' username  %}">News</a>
+      <a href="{{ url('venue:news', kwargs={'username':username}) }}">News</a>
     </li>
     <li class="{% block showsClass %}{% endblock %}">
-      <a href="{% url 'venue:shows' username  %}">Shows</a>
+      <a href="{{ url('venue:shows', kwargs={'username':username}) }}">Shows</a>
     </li>
     <li class="{% block photosClass %}{% endblock %}">
-      <a href="{% url 'venue:photos' username  %}">Photos</a>
+      <a href="{{ url('venue:photos', kwargs={'username':username}) }}">Photos</a>
     </li>
   {% endblock %}
 {% endblock %}
