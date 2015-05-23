@@ -9,6 +9,7 @@
 {%- endmacro %}
 
 {% macro contact(contact_info) -%}
+  {% if contact_info %}
   {% with contact=contact_info.contact, location=contact_info.location %}
     <address>
       {% if contact.name %}
@@ -43,5 +44,5 @@
       {% endwith %}
     </address>
   {% endwith %}
-
+  {% endif %}
 {%- endmacro %}

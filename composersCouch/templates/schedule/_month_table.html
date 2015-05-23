@@ -32,7 +32,7 @@
             {% if now.day == day.start.day and now.month == day.start.month %}cal-day-today{% endif %}
             {% if month.start.month != day.start.month %}cal-day-outmonth noday{% endif %}">
               <div class="dayNumber">
-                <a href="{{ url('calendar', kwargs={'period':''day''}) }}{{ querystring_for_date(day.start) }}">
+                <a href="{{ url('calendar', kwargs={'period':'day}) }}{{ querystring_for_date(day.start) }}">
                   <span>{{ day.start.day }}</span>
                 </a>
               </div>

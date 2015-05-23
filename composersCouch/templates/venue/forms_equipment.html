@@ -8,9 +8,9 @@
 
 {% block form %}
   <h3>{{ category|capfirst }}</h3>
-  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':''sound''}) }}">Sound</a>,
-  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':''effects''}) }}">Effects</a>,
-  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':''accessories''}) }}">Accessories</a>
+  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'sound}) }}">Sound</a>,
+  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'effects}) }}">Effects</a>,
+  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'accessories}) }}">Accessories</a>
   <div class="row no-gutter">
     <div class="col-xs-3 left">
       <label class="control-label" for='equipmentForm'>Quantity</label>

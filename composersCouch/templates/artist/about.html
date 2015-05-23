@@ -1,5 +1,6 @@
 {% extends 'artist/detail.html' %}
-{% load staticfiles %}
+{% from "profile/macros.html" import contact %}
+
 
 {% block aboutClass %}active{% endblock %}
 {% block dropdownTitle %}About{% endblock %}
@@ -28,7 +29,7 @@
           <h3>Biography</h3>
         </div>
         <div class="panel-body">
-          <p>{{ artist_profile.biography|safe|urlize|linebreaks }}</p>
+          <p>{{ artist_profile.biography|urlize|linebreaks|replace("&lt;br /&gt;", "<br/>")|safe }}</p>
           <a class="{{isEditable}} editMusicianBiography" href="{{ url('artist:biographyForm') }}">
             Edit
           </a>
@@ -44,15 +45,8 @@
         <div class="member">
           <p>
             <b>{{ member.name }}</b>
-            - {{ member.biography|linebreaks }}
+            - {{ member.biography|linebreaks|replace("&lt;br /&gt;", "<br/>")|safe }}
           </p>
-          {# <p>
-            {% for instrument in member.instruments.all() %}
-              {{ instrument }}
-              {% if not loop.last %},{% endif %}
-            {% endfor %}
-          </p> #}
-
         </div>
       {% endfor %}
       <a class="{{isEditable}} editMusicianMembers" href="{{ url('artist:memberForm') }}">
@@ -75,8 +69,7 @@
               </div>
             </div>
             <div class="panel-body">
-              {% from "profile/macros.html" import contact %}{{ contact(contact_info=profile.contact_info) }}
-
+              {{ contact(contact_info=profile.contact_info) }}
               <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:userContactForm') }}">Edit</a>
             </div>
           </div>
@@ -87,9 +80,8 @@
               <h4>Booking</h4>
             </div>
             <div class="panel-body">
-              {% from "profile/macros.html" import contact %}{{ contact(contact_info=artist_profile.booking_contact) }}
-
-              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':''booking''}) }}">Edit</a>
+              {{ contact(contact_info=artist_profile.booking_contact) }}
+              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':'booking'}) }}">Edit</a>
             </div>
           </div>
         </div>
@@ -99,9 +91,8 @@
               <h4>Label</h4>
             </div>
             <div class="panel-body">
-              {% from "profile/macros.html" import contact %}{{ contact(contact_info=artist_profile.label_contact) }}
-
-              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':''label''}) }}">Edit</a>
+              {{ contact(contact_info=artist_profile.label_contact) }}
+              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':'label'}) }}">Edit</a>
             </div>
           </div>
         </div>
@@ -111,9 +102,8 @@
               <h4>Management</h4>
             </div>
             <div class="panel-body">
-              {% from "profile/macros.html" import contact %}{{ contact(contact_info=artist_profile.management_contact) }}
-
-              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':''management''}) }}">Edit</a>
+              {{ contact(contact_info=artist_profile.management_contact) }}
+              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':'management'}) }}">Edit</a>
             </div>
           </div>
         </div>
@@ -123,9 +113,8 @@
               <h4>Press</h4>
             </div>
             <div class="panel-body">
-              {% from "profile/macros.html" import contact %}{{ contact(contact_info=artist_profile.press_contact) }}
-
-              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':''press''}) }}">Edit</a>
+              {{ contact(contact_info=artist_profile.press_contact) }}
+              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':'press'}) }}">Edit</a>
             </div>
           </div>
         </div>
