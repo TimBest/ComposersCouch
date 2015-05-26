@@ -4,7 +4,7 @@
       {% include "search/_artist.html" with artist=artist %}
     </div>
   {% else %}
-    {% include "feeds/_empty_feed.html" with feed_type="artists" following=following %}
+    {{ empty_feed(feed_type="artists" following=folloing) }}
   {% endfor %}
   {% from "utils/macros.html" import paginate %}
 {{ paginate(request=request, page=artists) }}

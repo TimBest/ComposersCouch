@@ -54,7 +54,7 @@
   </div>
   {% if events %}
     {% for event in events %}
-      {{ show(show=event.show) }}
+      {{ show(request=request, show=event.show) }}
     {% endfor %}
   {% else %}
     <div class="panel panel-default">

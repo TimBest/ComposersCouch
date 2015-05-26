@@ -1,4 +1,4 @@
 {% extends "threads/view.html" %}
 
 {% block from %}{% endblock %}
-{% block card %}{% include "schedule/_show.html" with show=thread.show calendar=calendar %}{% endblock %}
+{% block card %}{% from "schedule/macros.html" import show %}{{ show(request=request, show=thread.show) }}{% endblock %}

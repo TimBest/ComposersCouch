@@ -40,10 +40,11 @@ def environment(**options):
         'time': time,
     })
     environment.globals.update({
-        'static': staticfiles_storage.url,
-        'url': reverse,
-        'is_development': settings.DEVELOPMENT,
-        'now':timezone.now(),
+        'static' : staticfiles_storage.url,
+        'url' : reverse,
+        'is_development' : settings.DEVELOPMENT,
+        'now' : timezone.now(),
+        'MEDIA_URL' : settings.MEDIA_URL,
     })
     environment.globals.update(FeedGlobals)
     environment.globals.update(ScheduleGlobals)

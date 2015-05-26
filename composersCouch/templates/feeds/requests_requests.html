@@ -11,10 +11,10 @@
     </a>
     <ul class="dropdown-menu">
       <li class="{% if for == 'band' %}active{% endif %}">
-        <a href="{% url 'requests' order 'artist' scope zipcode %}?{{ request.GET.urlencode }}">artists</a>
+        <a href="{{ url('requests', kwargs={'order':order, 'for':'artist', 'scope':scope, 'zipcode':zipcode}) }}?{{ request.GET.urlencode() }}">artists</a>
       </li>
       <li class="{% if for == 'venue' %}active{% endif %}">
-        <a href="{% url 'requests' order 'venue' scope zipcode %}?{{ request.GET.urlencode }}">venues</a>
+        <a href="{{ url('requests', kwargs={'order':order, 'for':'venue', 'scope':scope, 'zipcode':zipcode}) }}?{{ request.GET.urlencode() }}">venues</a>
       </li>
     </ul>
   </span>
@@ -23,19 +23,19 @@
 {% block scope %}<span class="text-white">within</span>{% endblock %}
 {% block within %}
   <li class="{% if scope == '50' %}active{% endif %}">
-    <a href="{% url feedType order for '50' zipcode %}?{{ request.GET.urlencode }}">50 miles</a>
+    <a href="{{ url(feedType, kwargs={'order':order, 'for':for, 'scope':'50', 'zipcode':zipcode}) }}?{{ request.GET.urlencode() }}">50 miles</a>
   </li>
   <li class="{% if scope == 'any-distance' %}active{% endif %}">
-    <a href="{% url feedType order for 'any-distance' zipcode %}?{{ request.GET.urlencode }}">any distance</a>
+    <a href="{{ url(feedType, kwargs={'order':order, 'for':for, 'scope':'any-distance', 'zipcode':zipcode}) }}?{{ request.GET.urlencode() }}">any distance</a>
   </li>
 {% endblock %}
 
 {% block orderOptions %}
   <li class="{% if order == 'expiring' %}active{% endif %}">
-    <a href="{% url feedType 'expiring' for scope zipcode %}?{{ request.GET.urlencode }}">Expiring</a>
+    <a href="{{ url(feedType, kwargs={'order':'expiring', 'for':for, 'scope':scope, 'zipcode':zipcode}) }}?{{ request.GET.urlencode() }}">Expiring</a>
   </li>
   <li class="{% if order == 'latest' %}active{% endif %}">
-    <a href="{% url feedType 'latest' for scope zipcode %}?{{ request.GET.urlencode }}">Latest</a>
+    <a href="{{ url(feedType, kwargs={'order':'latest', 'for':for, 'scope':scope, 'zipcode':zipcode}) }}?{{ request.GET.urlencode() }}">Latest</a>
   </li>
 {% endblock %}
 

@@ -4,10 +4,10 @@
 
 {% block periodName %}
   <span class="hidden-xs">
-    {{ period.start|date:"F j" }} - {% if period.end.month == period.start.month %}{{ period.end|date:"d" }}{% else %}{{ period.end|date:"F j" }}{% endif %}
+    {{ period.start|date("F j") }} - {% if period.end.month == period.start.month %}{{ period.end|date("d") }}{% else %}{{ period.end|date("F j") }}{% endif %}
   </span>
   <span class="visible-xs">
-    {{ period.start|date:"M j" }} - {% if period.end.month == period.start.month %}{{ period.end|date:"d" }}{% else %}{{ period.end|date:"M j" }}{% endif %}
+    {{ period.start|date("M j") }} - {% if period.end.month == period.start.month %}{{ period.end|date("d") }}{% else %}{{ period.end|date("M j") }}{% endif %}
   </span>
 {% endblock %}
 
@@ -20,11 +20,11 @@
       <div class="weekday weekday{{loop.counter}}">
         <div class="weekdaytable">
           <h4 class="text-left">
-            <a href="{{ url('calendar', kwargs={'period':'day', 'filter':filter'}) }}{{ querystring_for_date(date) }}" class="text-black" >{{ day.start|date:"l" }} the {{ day.start|date:"j" }}:</a>
+            <a href="{{ url('calendar', kwargs={'period':'day', 'filter':filter'}) }}{{ querystring_for_date(date) }}" class="text-black" >{{ day.start|date("l") }} the {{ day.start|date("j") }}:</a>
           </h4>
           {% for event in day.get_event_partials %}
             {% if filter == 'shows' %}
-              {% include "schedule/_show.html" with show=event.show %}
+              {% from "schedule/macros.html" import show %}{{ show(request=request, show=event.show) }}
             {% else %}
               {% include "request/_private_request.html" with request=event.thread.request %}
             {% endif %}

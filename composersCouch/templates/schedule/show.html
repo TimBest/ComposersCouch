@@ -3,5 +3,5 @@
 {% block title %}{{ show.info.get_title }}{% endblock %}
 
 {% block header %}
-  {% include "schedule/_show.html" with show=show %}
+  {% from "schedule/macros.html" import show %}{{ show(request=request, show=show) }}
 {% endblock %}

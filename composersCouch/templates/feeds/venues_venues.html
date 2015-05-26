@@ -5,7 +5,7 @@
 
 {% block availabilityScope %}
   <li class="{% block availableClass %}{% endblock %}">
-    <a href="{% url 'available_venues' order 2014 32 32 zipcode %}?{{ request.GET.urlencode }}">available on</a>
+    <a href="{{ url('available_venues', kwargs={'order':order, 'year':2014, 'month':32, 'day':32, 'zipcode':zipcode}) }}?{{ request.GET.urlencode() }}">available on</a>
   </li>
 {% endblock %}
 

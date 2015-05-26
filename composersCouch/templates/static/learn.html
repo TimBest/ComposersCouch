@@ -240,7 +240,7 @@
     <h2 class="readable-text">
       Changing how local shows are booked and promoted.
     </h2>
-    {% if not request.user.is_authenticated %}
+    {% if not request.user.is_authenticated() %}
     <a href="{{ url('signup') }}" type="button" class="btn btn-primary btn-lg">
       Sign up
     </a>

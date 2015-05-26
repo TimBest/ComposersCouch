@@ -2,16 +2,72 @@
 {% from "utils/macros.html" import paginate %}
 
 
-{% macro shows_feed(request, shows) -%}
+{% macro empty_feed(feed_type, following) -%}
+  {% if request.user.is_authenticated() %}
+    {% if following %}
+      <div class="panel">
+        <div class="panel-body">
+          {% if feed_type == "artists" or feed_type == "venues" %}
+            <p>You are not currently following any {{ feed_type }}.</p>
+          {% else %}
+            <p>No {{ feed_type }} at this time.</p>
+          {% endif %}
+        </div>
+      </div>
+    {% elif locationForm %}
+      <div class="panel">
+        <div class="panel-body">
+          <p>No {{ feed_type }} feel free to try a diffrent zipcode.</p>
+          <form class="form-inline zipcode-form" role="filter" method="POST" action="{{ url('zipcode') }}">
+            <input type="hidden" name="path" value="{{ request.path|default('/') }}">
+            {{ render_form(locationForm) }}
+          </form>
+        </div>
+      </div>
+    {% else %}
+      <div class="panel">
+        <div class="panel-body">
+          <p>No {{ feed_type }} at this time.</p>
+        </div>
+      </div>
+    {% endif %}
+  {% else %}
+    {% if zipcode %}
+      <div class="panel">
+        <div class="panel-body">
+          <div class="row">
+            <p>No {{ feed_type }} at this time. please enter a {% if zipcode %}different{% endif %}
+               zipcode or <a href="{{ url('signup') }}?next={{ request.path|default('/') }}">sign up</a>
+               for more options.</p>
+            <div class="col-sm-6">
+              <form class="form-inline zipcode-form" role="filter" method="POST" action="{{ url('zipcode') }}">
+                <input type="hidden" name="path" value="{{ request.path|default('/') }}">
+                {{ render_form(locationForm) }}
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    {% else %}
+      <div class="panel">
+        <div class="panel-body">
+          <p>No {{ feed_type }} at this time. <a href="{{ url('signup') }}?next={{ request.path|default('/') }}">Sign Up</a> for more options.</p>
+        </div>
+      </div>
+    {% endif %}
+  {% endif %}
+{%- endmacro %}
+
+
+{% macro shows_feed(request, shows, following='') -%}
   <div class="shows">
-    {% for show in shows %}
+    {% for s in shows %}
       {# hack to until show clean up is ensured #}
-      {% if show.events.first %}
-        {{ show(show=show) %}
-        {% include "schedule/_show.html" with show=show %}
+      {% if s.events.first %}
+        {{ show(request=request, show=s) }}
       {% endif %}
     {% else %}
-      {% include "feeds/_empty_feed.html" with feed_type="shows" following=following %}
+      {{ empty_feed(feed_type="shows", following=following) }}
     {% endfor %}
     {{ paginate(request=request, page=shows) }}
   </div>

@@ -9,5 +9,5 @@
 {{ paginate(request=request, page=venues) }}
   </div>
 {% else %}
-  {% include "feeds/_empty_feed.html" with feed_type="venues" following=following %}
+  {{ empty_feed(feed_type="venues" following=folloing) }}
 {% endif %}

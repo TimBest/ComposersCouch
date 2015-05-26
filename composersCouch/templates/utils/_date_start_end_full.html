@@ -1,11 +1,11 @@
 {% if start.year == end.year %}
-  {{ start|date:"l" }},
+  {{ start|date("l") }},
   {% if start.month == end.month %}
-    {{ start|date:"F" }}
+    {{ start|date("F") }}
     {% if start.day == end.day %}
-      {{ start|date:"d, Y: P" }} - {{ end|date:"P" }}
+      {{ start|date:"d, Y: P" }} - {{ end|date("P") }}
     {% else %}
-      {{ start|date:"d P" }} - {{ end|date:"d P, Y" }}
+      {{ start|date("d P") }} - {{ end|date:"d P, Y" }}
     {% endif %}
   {% else %}
     {{ start|date:"F d, Y: P" }} - {{ end|date:"F d: P" }}

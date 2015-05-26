@@ -8,8 +8,8 @@
 {% block breadcrumbs %}{% if not is_popup %}
 <ul>
     <li><a href="../../../../../../">Home</a></li>
-    <li><a href="../../../../../">{% trans app_label|capfirst|escape %}</a></li>
-    <li>{% if has_change_permission %}<a href="../../../../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %}</li>
+    <li><a href="../../../../../">app_label|title|escape</a></li>
+    <li>{% if has_change_permission %}<a href="../../../../">{{ opts.verbose_name_plural|title }}</a>{% else %}{{ opts.verbose_name_plural|title }}{% endif %}</li>
     <li>{% if has_change_permission %}<a href="../../../">{{ original|truncatewords:"18" }}</a>{% else %}{{ original|truncatewords:"18" }}{% endif %}</li>
     <li>{% if has_change_permission %}<a href="../../">Object permissions</a>{% else %}Object permissions{% endif %}</li>
     <li>Manage group: {{ group_obj|truncatewords:"18" }}</li>

@@ -7,13 +7,13 @@
 
 {% block orderOptions %}
   <li class="{% if order == 'all' %}active{% endif %}">
-    <a href="{{ url(feedType, kwargs={'order':'all', 'scope':scope, 'zipcode':zipcode}) }}?{{ request.GET.urlencode }}">All</a>
+    <a href="{{ url(feedType, kwargs={'order':'all', 'scope':scope, 'zipcode':zipcode}) }}?{{ request.GET.urlencode() }}">All</a>
   </li>
   <li class="{% if order == 'upcoming' %}active{% endif %}">
-    <a href="{{ url(feedType, kwargs={'order':'upcoming', 'scope':scope, 'zipcode':zipcode}) }}?{{ request.GET.urlencode }}">Upcoming</a>
+    <a href="{{ url(feedType, kwargs={'order':'upcoming', 'scope':scope, 'zipcode':zipcode}) }}?{{ request.GET.urlencode() }}">Upcoming</a>
   </li>
   <li class="{% if order == 'latest' %}active{% endif %}">
-    <a href="{{ url(feedType, kwargs={'order':'latest', 'scope':scope, 'zipcode':zipcode}) }}?{{ request.GET.urlencode }}">Latest</a>
+    <a href="{{ url(feedType, kwargs={'order':'latest', 'scope':scope, 'zipcode':zipcode}) }}?{{ request.GET.urlencode() }}">Latest</a>
   </li>
 {% endblock %}
 

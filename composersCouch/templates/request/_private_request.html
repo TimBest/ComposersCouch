@@ -45,10 +45,10 @@
           <div>
             {% for event in events %}
             {% ifchanged event.show.date.start.day %}
-            <p><b>{{ event.show.date.start|date:'N j' }}</b></p>
+            <p><b>{{ event.show.date.start|date('N j') }}</b></p>
             {% endifchanged %}
             <p>
-              {{ event.show.date.start|date:'fA' }} - {{ event.show.info.title }} {{ event.show.info.headliner }}
+              {{ event.show.date.start|date('fA') }} - {{ event.show.info.title }} {{ event.show.info.headliner }}
               {% if event.approved == None %}
               <span class="label label-warning">pending</span>
               {% endif %}
