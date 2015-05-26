@@ -1,4 +1,6 @@
 {% extends 'feeds/updates_updates.html' %}
+{% from "feeds/feeds.html" import updates_feed %}
+
 
 {% block currentScope %}I'm following{% endblock %}
 {% block withinClass %}{% endblock %}
@@ -6,5 +8,5 @@
 {% block locationForm %}{% endblock %}
 
 {% block feed %}
-  {% include "feeds/_updates_feed.html" with activities=activities following="Ture" %}
+  {{ updates_feed(request=request, activities=activities, following="Ture") }}
 {% endblock %}

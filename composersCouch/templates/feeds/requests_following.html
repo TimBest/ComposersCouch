@@ -1,9 +1,10 @@
 {% extends 'feeds/requests_requests.html' %}
+{% from "feeds/feeds.html" import requests_feed %}
 
 {% block followingClass %}active{% endblock %}
 
 {% block zipcodeForm %}{% endblock %}
 
 {% block feed %}
-  {% include "feeds/_requests_feed.html" with requests=object_list following="Ture" %}
+  {{ requests_feed(request=request, requests=object_list, following="True") }}
 {% endblock %}

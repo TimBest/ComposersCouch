@@ -1,4 +1,6 @@
 {% extends 'feeds/base.html' %}
+{% from "feeds/feeds.html" import updates_feed %}
+
 
 {% block updatesClass %}active{% endblock %}
 {% block bgColor %}purple{% endblock %}
@@ -11,5 +13,5 @@
 {% endblock %}
 
 {% block feed %}
-  {% include "feeds/_updates_feed.html" with activities=activities %}
+  {{ updates_feed(request=request, activities=activities, following="Ture") }}
 {% endblock %}

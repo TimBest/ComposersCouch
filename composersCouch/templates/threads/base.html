@@ -39,7 +39,7 @@
           <ul class="nav nav-pills nav-centered" role="tablist">
             {% block center_nav %}
               <li class="{% block inboxClass %}{% endblock %}">
-                <a href="{{ url('threads:inbox') }}"><span class="fa fa-inbox"></span> Inbox{% if unread_count %} <strong>({{ unread_count }})</strong>{% endif %}</a>
+                <a href="{{ url('threads:inbox') }}"><span class="fa fa-inbox"></span> Inbox <strong>({{ unread_count(request.user) }})</strong></a>
               </li>
               <li class="{% block sentClass %}{% endblock %}">
                 <a href="{{ url('threads:sent') }}"><span class="fa fa-send"></span> Sent</a>
@@ -63,11 +63,16 @@
       </div>
     {% endif %}
 
-    <form action="{{ url('threads:batch_update') }}" method="post"><input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+    <form action="{{ url('threads:batch_update') }}" method="post">
+      <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
       <div class="btn-group request-folder-actions">
         {% block markAsRead %}
-        <button type="submit" onclick="this.form.onsubmit(); return false; " name="action" value="read" class="btn btn-default">mark as read</button>
-        <button type="submit" onclick="this.form.onsubmit(); return false; " name="action" value="unread" class="btn btn-default">mark as unread</button>
+        <button type="submit" onclick="this.form.onsubmit(); return false; " name="action" value="read" class="btn btn-default">
+          mark as read
+        </button>
+        <button type="submit" onclick="this.form.onsubmit(); return false; " name="action" value="unread" class="btn btn-default">
+          mark as unread
+        </button>
         {% endblock %}
         {% block delete %}
         <button type="submit" onclick="this.form.onsubmit(); return false; " name="action" value="delete" class="btn btn-default">

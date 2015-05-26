@@ -1,4 +1,5 @@
 {% extends 'feeds/shows_shows.html' %}
+{% from "feeds/feeds.html" import shows_feed %}
 
 {% block currentScope %}I'm following{% endblock %}
 {% block withinClass %}{% endblock %}
@@ -6,5 +7,5 @@
 {% block locationForm %}{% endblock %}
 
 {% block feed %}
-  {% include "feeds/_shows_feed.html" with shows=object_list following="Ture" %}
+  {{ shows_feed(request=request, shows=object_list, following="Ture") }}
 {% endblock %}

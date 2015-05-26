@@ -1,4 +1,6 @@
 {% extends 'feeds/base.html' %}
+{% from "feeds/feeds.html" import requests_feed %}
+
 
 {% block bgColor %}dark-blue{% endblock %}
 {% block requestsClass %}active{% endblock %}
@@ -40,5 +42,5 @@
 {% endblock %}
 
 {% block feed %}
-  {% include "feeds/_requests_feed.html" with requests=object_list %}
+  {{ requests_feed(request=request, requests=object_list) }}
 {% endblock %}

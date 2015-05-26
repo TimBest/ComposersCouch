@@ -1,4 +1,6 @@
 {% extends 'feeds/base.html' %}
+{% from "feeds/feeds.html" import venues_feed %}
+
 
 {% block venuesClass %}active{% endblock %}
 {% block bgColor %}blue{% endblock %}
@@ -10,5 +12,5 @@
 {% endblock %}
 
 {% block feed %}
-  {% include "feeds/_venues_feed.html" with venues=object_list %}
+  {{ venues_feed(requests=requests, venues=object_list) }}
 {% endblock %}

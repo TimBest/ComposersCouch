@@ -1,8 +1,10 @@
 {% extends 'feeds/base.html' %}
+{% from "feeds/feeds.html" import artists_feed %}
+
 
 {% block artistsClass %}active{% endblock %}
 {% block bgColor %}gray{% endblock %}
 
 {% block feed %}
-  {% include "feeds/_artists_feed.html" with artists=object_list %}
+  {{ artists_feed(request=request, artists=object_list) }}
 {% endblock %}

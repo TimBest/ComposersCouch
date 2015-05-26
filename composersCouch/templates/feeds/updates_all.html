@@ -9,7 +9,6 @@
     {% else %}
       {{ empty_feed(feed_type="updates" following=folloing) }}
     {% endfor %}
-    {% from "utils/macros.html" import paginate %}
-{{ paginate(request=request, page=object_list) }}
+    {{ paginate(request=request, page=object_list) }}
   </div>
 {% endblock %}

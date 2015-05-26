@@ -1,4 +1,6 @@
 {% extends 'feeds/venues_venues.html' %}
+{% from "feeds/feeds.html" import venues_feed %}
+
 
 {% block currentScope %}I'm following{% endblock %}
 {% block withinClass %}{% endblock %}
@@ -7,5 +9,5 @@
 {% block locationForm %}{% endblock %}
 
 {% block feed %}
-  {% include "feeds/_venues_feed.html" with venues=object_list following="Ture" %}
+  {{ venues_feed(requests=requests, venues=object_list, following="Ture") }}
 {% endblock %}
