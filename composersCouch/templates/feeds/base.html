@@ -100,7 +100,7 @@
         </a>
         <ul class="dropdown-menu" role="menu">
           <li class="{% block requestsClass %}{% endblock %}">
-            {% if request.user.profile.profile_type == "m" %}
+            {% if request.user.is_authenticated() and request.user.profile.profile_type == "m" %}
               <a href="{{ url('requests', kwargs={'order':'expiring', 'for':'band', 'scope':'any-distance', 'zipcode':zipcode}) }}?{{ request.GET.urlencode() }}">Requests</a>
             {% else %}
               <a href="{{ url('requests', kwargs={'order':'expiring', 'for':'venue', 'scope':'any-distance', 'zipcode':zipcode}) }}?{{ request.GET.urlencode() }}">Requests</a>

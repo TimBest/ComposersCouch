@@ -40,6 +40,7 @@ class MultipleFormsView(FormView):
     def get_context_data(self, **kwargs):
         context = super(MultipleFormsView, self).get_context_data(**kwargs)
         context['next'] = self.request.GET.get('next')
+        context['request'] = self.request
         return context
 
     def get_forms(self):
