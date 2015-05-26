@@ -1,4 +1,3 @@
-{#{% load inbox %}#}
 
 
 <!DOCTYPE html>
@@ -76,8 +75,17 @@
       <div class="rightNav" id="sidebar" role="navigation">
         <a href="{{ url('threads:inbox') }}" class="rightNavItem request">
           <span class="fa fa-envelope-o"></span>
-          {#{% inbox_count as unread_count %}
-          {% include "utils/_alert_badge.html" with count=unread_count %}#}
+          {% with count=inbox_count(request.user) %}
+            {% if count %}
+              <span class="badge alert-badge">
+                {% if count < 100 %}
+                  {{ count }}
+                {% else %}
+                  99+
+                {% endif %}
+              </span>
+            {% endif %}
+          {% endwith %}
         </a>
         <a href="{{ url('calendar') }}" class="rightNavItem calendar">
           <span class="fa fa-calendar-o"></span>

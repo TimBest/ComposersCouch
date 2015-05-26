@@ -11,6 +11,7 @@ from jinja2 import Environment
 from feeds.templatetags.ext import FeedGlobals
 from schedule.templatetags.ext import ScheduleGlobals
 from progressbarupload.templatetags.progress_bar import ProgressBarGlobals
+from threads.templatetags.inbox import InboxGlobals
 
 
 def field_attrs(field_inst, **kwargs):
@@ -49,4 +50,5 @@ def environment(**options):
     environment.globals.update(FeedGlobals)
     environment.globals.update(ScheduleGlobals)
     environment.globals.update(ProgressBarGlobals)
+    environment.globals.update(InboxGlobals)
     return environment

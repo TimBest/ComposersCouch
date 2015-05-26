@@ -18,6 +18,12 @@ from django.template import Library, Node, TemplateSyntaxError
 from threads.models import cached_inbox_count_for
 
 
+
+InboxGlobals = {
+    'inbox_count': cached_inbox_count_for,
+}
+
+
 class InboxOutput(Node):
     def __init__(self, varname=None):
         self.varname = varname
