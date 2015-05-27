@@ -1,5 +1,5 @@
 {% extends "threads/view.html" %}
-{% from "request/macros.html" import public_request %}
+{% from "request/macros.html" import public_request, render_application %}
 
 
 {% block from %}{% endblock %}
@@ -10,7 +10,7 @@
       {{ public_request(request=request, publicRequest=publicRequest) }}
       <div class="panel-footer">
         <h4>Applicant:</h4>
-        {% include "request/_application.html" with application=application %}
+        {{ render_application(application=application) }}
       </div>
     </div>
   </div>

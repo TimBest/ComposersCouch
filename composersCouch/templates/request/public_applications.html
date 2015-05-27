@@ -1,5 +1,6 @@
 {% extends "request/public_requests.html" %}
-{% from "request/macros.html" import public_request %}
+{% from "utils/macros.html" import paginate %}
+{% from "request/macros.html" import public_request, render_application %}
 
 
 {% block content %}
@@ -9,15 +10,16 @@
         <div class="panel panel-default">
           {{ public_request(request=request, publicRequest=app.public_request) }}
           <div class="panel-footer">
-            {% include "request/_application.html" with application=app %}
-            <a class="text-right" href="{{ url('application_view', kwargs={'thread_id':app.thread.id}) }}">View Application</a>
+            {{ render_application(application=app) }}
+            <a class="text-right" href="{{ url('application_view', kwargs={'thread_id':app.thread.id}) }}">
+              View Application
+            </a>
           </div>
         </div>
       </div>
     {% else %}
       <p>No Public Requests</p>
     {% endfor %}
-    {% from "utils/macros.html" import paginate %}
-{{ paginate(request=request, page=applications) }}
+    {{ paginate(request=request, page=applications) }}
   </div>
 {% endblock %}

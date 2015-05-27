@@ -37,7 +37,7 @@
           <ul class="nav nav-pills nav-centered" role="tablist">
             {% block center_nav %}
               <li class="{% block inboxClass %}{% endblock %}">
-                <a href="{{ url('threads:inbox') }}"><span class="fa fa-inbox"></span> Inbox <strong>({{ unread_count(request.user) }})</strong></a>
+                <a href="{{ url('threads:inbox') }}"><span class="fa fa-inbox"></span> Inbox <strong>({{ inbox_count(request.user) }})</strong></a>
               </li>
               <li class="{% block sentClass %}{% endblock %}">
                 <a href="{{ url('threads:sent') }}"><span class="fa fa-send"></span> Sent</a>
@@ -91,7 +91,7 @@
               <tr class="message {% if message.new %}unread{% endif %}">
                 <td><input class="request-folder-checkbox" name="batchupdateids" type="checkbox" value="{{message.thread.pk}}" /></td>
                 <td>
-                  {% for participant in message.others.all() %}
+                  {% for participant in message.others() %}
                     <a href="{{ participant.user.get_absolute_url() }}">{{ participant.user.profile }}</a>
                     {% if not loop.last %},{% endif %}
                   {% else %}
@@ -102,18 +102,20 @@
                   <a href="{{ message.thread.get_absolute_url() }}">{% if message.new %}<b>{% endif %}
                   {% with truncated_subject = message.thread.subject|truncate(50) %}
                     <span class="text-black">{{ truncated_subject }}</span>
-                    {% with subject_wc = truncated_subject|wordcount %}{% with wc = 12|sub:subject_wc %}
-                      {% if message.thread.latest_msg.body and wc > 0 %}
-                       - <span class="text-muted">{{ message.thread.latest_msg.body|safe|truncatewords:wc }}</span>
-                      {% endif %}
-                    {% endwith %}{% endwith %}
+                    {% with subject_len = truncated_subject|length %}
+                      {% with len = 100 - subject_len %}
+                        {% if message.thread.latest_msg.body %}
+                         <span class="text-muted"> - {{ message.thread.latest_msg.body|truncate(len)|safe }}</span>
+                        {% endif %}
+                      {% endwith %}
+                    {% endwith %}
                   {% endwith %}
                   {% if message.new %}</b>{% endif %}</a>
                 </td>
                 <td>
-                  {% localtime on %}
-                    <span class="date pull-right">{{ message.thread.latest_msg.sent_at|compact_date:_("g:i A,M j,n/j/y") }}</span>
-                  {% endlocaltime %}
+                  {#{% localtime on %}#}
+                    <span class="date pull-right">{{ compact_date(message.thread.latest_msg.sent_at, "g:i A","M j","n/j/y") }}</span>
+                  {#{% endlocaltime %}#}
                 </td>
               </tr>
             {% else %}

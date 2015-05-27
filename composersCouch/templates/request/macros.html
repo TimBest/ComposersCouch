@@ -1,6 +1,6 @@
 {% from "profile/macros.html" import mugshot %}
 {% from "schedule/macros.html" import day_calendar %}
-
+{% from "search/cards.html" import artist_card, venue_card %}
 
 
 {% macro public_request(request, publicRequest) -%}
@@ -40,4 +40,159 @@
       </div>
     </div>
   </div>
+{%- endmacro %}
+{% macro render_application(application) -%}
+  <div class="application">
+    {% if application.applicant.profile.profile_type == 'm' %}
+      {{ artist_card(request=request, artist=application.applicant.profile.artist_profile) }}
+    {% else %}
+      {{ venue_card(request=request, venue=application.applicant.profile.venueProfile) }}
+    {% endif %}
+    {% if user == publicRequest.requester %}
+    <div class="row">
+      <div class="col-xs-6">
+        <a href="{{ url('application_view', kwargs={'thread_id':application.thread.id}) }}">
+          View Application
+        </a>
+      </div>
+      <div class="col-xs-6">
+        <div class="text-right">
+          <form method="POST" class="accept-form inline-block {% if application.approved %}hidden{% endif %}" action="{{ url('approve_public_request') }}">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            <input type="hidden" name="application" value="{{ application.id }}">
+            <button class="btn btn-success" type="submit">
+              <span class="fa fa-check" ></span> Accept
+            </button>
+          </form>
+          <form method="POST" class="decline-form inline-block {% if application.approved %}{% elif application.approved != None %}hidden{% endif %}" action="{{ url('deny_public_request') }}">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            <input type="hidden" name="application" value="{{ application.id }}">
+            <button class="btn btn-danger" type="submit">
+              <span class="fa fa-ban" ></span> Decline
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+</div>
+
+{%- endmacro %}
+
+{% macro accepted(is_accepted) -%}
+  {% if is_accepted %}
+    <span class="text-success" ><span class="fa fa-check"></span>Accepted</span>
+  {% elif is_accepted != None %}
+    <span class="text-danger" ><span class="fa fa-ban"></span> Declined</span>
+  {% endif %}
+{%- endmacro %}
+
+{% macro private_request(request, private_request) -%}
+  <div class="request">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-sm-6">
+            {% if private_request.headliner() %}
+            <div class="Headliner">
+              <b>Headliner:</b>
+              <a href="{{ url('redirectToProfile', kwargs={'username':private_request.headliner().participant.user.username, 'tab':'about'}) }}">
+                {{ private_request.headliner().participant.user.profile }}
+              </a>
+              {{ accepted(is_accepted=private_request.headliner().accepted) }}
+            </div>
+            {% endif %}
+            {% if private_request.openers() %}
+            <div class="Artists">
+              <b>Artists:</b>
+              <ul class="list-unstyled">
+                {% for opener in private_request.openers() %}
+                <li>
+                  <a href="{{ url('redirectToProfile', kwargs={'username':opener.participant.user.username, 'tab':'about'}) }}">
+                    {{ opener.participant.user.profile }}
+                  </a>
+                  {{ accepted(is_accepted=opener.accepted) }}
+                </li>
+                {% endfor %}
+              </ul>
+            </div>
+            {% endif %}
+            <div class="venue">
+              <b>Venue:</b>
+              <ul class="list-unstyled">
+                <li>
+                  <a href="{{ url('redirectToProfile', kwargs={'username':private_request.venue().participant.user.username, 'tab':'about'}) }}">
+                    {{ private_request.venue().participant.user.profile }}
+                  </a>
+                  {{ accepted(is_accepted=private_request.venue().accepted) }}
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <h4>Suggested dates:</h4>
+            <p>
+              {% with start=private_request.date.start, end=private_request.date.end %}
+                {% if start.year == end.year %}
+                  {{ start|date("l") }},
+                  {% if start.month == end.month %}
+                    {{ start|date("F") }}
+                    {% if start.day == end.day %}
+                      {{ start|date("d, Y: P") }} - {{ end|date("P") }}
+                    {% else %}
+                      {{ start|date("d P") }} - {{ end|date("d P, Y") }}
+                    {% endif %}
+                  {% else %}
+                    {{ start|date("F d, Y: P") }} - {{ end|date("F d: P") }}
+                  {% endif %}
+                {% else %}
+                  {{ start|date("l, F d, Y: P") }} - {{ end|date("l, F d, Y: P") }}
+                {% endif %}
+              {% endwith %}
+            </p>
+            <div>
+              {% for event in events %}
+              {% if event.show.date.start.day != previous_day %}
+                {% set previous_day = event.show.date.start.day %}
+                <p><b>{{ event.show.date.start|date('N j') }}</b></p>
+              {% endif %}
+              <p>
+                {{ event.show.date.start|date('fA') }} - {{ event.show.info.title }} {{ event.show.info.headliner }}
+                {% if event.approved == None %}
+                <span class="label label-warning">pending</span>
+                {% endif %}
+              </p>
+              {% else %}
+                <p>Your calendar is free</p>
+              {% endfor %}
+            </div>
+            <a href="{{ url('request_edit', kwargs={'request_id':private_request.id}) }}" class="">Edit</a>
+          </div>
+        </div>
+      </div>
+      <div class="panel-footer">
+        <div class="pull-right">
+          <form method="POST" class="accept-form inline-block {{ hide_accept(private_request, request.user) }}" action="{{ url('request_accept') }}">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            <input type="hidden" name="private_request" value="{{ request.id }}">
+            <button class="btn btn-success" type="submit">
+              <span class="fa fa-check" ></span> Accept
+            </button>
+          </form>
+          <form method="POST" class="decline-form inline-block {{ hide_decline(private_request, request.user) }}" action="{{ url('request_decline') }}">
+            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+            <input type="hidden" name="private_request" value="{{ request.id }}">
+            <button class="btn btn-danger-inv" type="submit">
+              <span class="fa fa-ban" ></span> Decline
+            </button>
+          </form>
+        </div>
+        <a href="{{ url('calendar_request_to_event', kwargs={'request_id':private_request.id}) }}" class="btn btn-link">
+          Add to Calendar
+        </a>
+      </div>
+    </div>
+  </div>
+
 {%- endmacro %}

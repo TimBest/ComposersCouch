@@ -18,9 +18,27 @@ from django.template import Library, Node, TemplateSyntaxError
 from threads.models import cached_inbox_count_for
 
 
+def compact_date(value, same_day, same_year, other):
+    """
+    Output a date as short as possible.
+
+    The argument must provide 3 patterns: for same day, for same year, otherwise
+    Typical usage: |compact_date("G:i,j b,j/n/y")
+
+    """
+
+    today = datetime.date.today()
+    if value.date() == today:
+        return date(value, same_day)
+    elif value.year == today.year:
+        return date(value, same_year)
+    else:
+        return date(value, other)
+
 
 InboxGlobals = {
     'inbox_count': cached_inbox_count_for,
+    'compact_date': compact_date,
 }
 
 

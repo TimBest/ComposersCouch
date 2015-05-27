@@ -1,12 +1,13 @@
 {% extends "threads/base.html" %}
-{% from "request/macros.html" import public_request %}
+{% from "request/macros.html" import public_request, render_application %}
+{% from "utils/macros.html" import paginate %}
 
 
 {% block publicClass %}active{% endblock %}
 {% block messageType %}Public Requests{% endblock %}
 
 {% block send_message %}
-  {% if user.profile.profile_type == 'm' %}
+  {% if request.user.profile.profile_type == 'm' %}
     <a href="{{ url('public_request') }}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
   {% else %}
     <a href="{{ url('public_band_request') }}?next={{ request.get_full_path }}" class="btn btn-primary">Post Public Request</a>
@@ -31,7 +32,7 @@
           <div class="panel-footer">
             {% for application in publicRequest.applications.all() %}
               {% if loop.first %}<h4>Applicants:</h4>{% endif %}
-              {% include "request/_application.html" with application=application %}
+              {{ render_application(application=application) }}
             {% else %}
               <p>No applicants at this time</p>
             {% endfor %}
@@ -41,7 +42,6 @@
     {% else %}
       <p>No Private Requests</p>
     {% endfor %}
-    {% from "utils/macros.html" import paginate %}
-{{ paginate(request=request, page=requests) }}
+    {{ paginate(request=request, page=requests) }}
   </div>
 {% endblock %}

@@ -26,7 +26,7 @@
             {% if filter == 'shows' %}
               {% from "schedule/macros.html" import show %}{{ show(request=request, show=event.show) }}
             {% else %}
-              {% include "request/_private_request.html" with request=event.thread.request %}
+              {% from "request/macros.html" import private_request %}  {{ private_request(request=request, private_request=event.thread.request) }}
             {% endif %}
           {% else %}
             <p class="text-left">No {{ filter }}</p>
