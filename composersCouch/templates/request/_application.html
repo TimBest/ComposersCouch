@@ -1,10 +1,11 @@
+{% from "search/cards.html" import artist_card, venue_card %}
 
 
 <div class="application">
   {% if application.applicant.profile.profile_type == 'm' %}
-    {% include "search/_artist.html" with artist=application.applicant.profile.artist_profile %}
+    {{ artist_card(request=request, artist=application.applicant.profile.artist_profile) }}
   {% else %}
-    {% include "search/_venue.html" with venue=application.applicant.profile.venueProfile %}
+    {{ venue_card(request=request, venue=application.applicant.profile.venueProfile) }}
   {% endif %}
   {% if user == publicRequest.requester %}
   <div class="row">

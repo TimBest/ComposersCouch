@@ -1,5 +1,6 @@
 {% extends 'utils/form.html' %}
 {% from "utils/form_macros.html" import form as render_form %}
+{% from "request/macros.html" import public_request %}
 
 
 {% block title %}
@@ -12,7 +13,7 @@
 
 {% block form %}
   <div class="well">
-    {% include "request/_public_request.html" with publicRequest=publicRequest %}
+    {{ public_request(request=request, publicRequest=publicRequest) }}
   </div>
   {{ render_form(form) }}
 {% endblock %}

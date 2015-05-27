@@ -1,4 +1,5 @@
 {% extends "threads/view.html" %}
+{% from "request/macros.html" import public_request %}
 
 
 {% block from %}{% endblock %}
@@ -6,7 +7,7 @@
 {% block card %}
   <div class="publicRequest">
     <div class="panel panel-default">
-      {% include "request/_public_request.html" with publicRequest=publicRequest %}
+      {{ public_request(request=request, publicRequest=publicRequest) }}
       <div class="panel-footer">
         <h4>Applicant:</h4>
         {% include "request/_application.html" with application=application %}

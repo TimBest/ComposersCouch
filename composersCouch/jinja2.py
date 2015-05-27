@@ -4,7 +4,7 @@ from django.conf import settings
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.core.urlresolvers import reverse
 from django.utils import timezone
-from django.template.defaultfilters import linebreaks, date, time
+from django.template.defaultfilters import linebreaks, date, time, timesince
 
 from jinja2 import Environment
 
@@ -39,6 +39,7 @@ def environment(**options):
         'linebreaks': linebreaks,
         'date': date,
         'time': time,
+        'timesince': timesince,
     })
     environment.globals.update({
         'static' : staticfiles_storage.url,

@@ -1,5 +1,7 @@
 {% from "schedule/macros.html" import show %}
 {% from "utils/macros.html" import paginate %}
+{% from "search/cards.html" import artist_card, venue_card, post_card %}
+{% from "request/macros.html" import public_request %}
 
 
 {% macro empty_feed(feed_type, following) -%}
@@ -77,36 +79,36 @@
   <div class="artists">
     {% for artist in artists %}
       <div class="artist">
-        {% include "search/_artist.html" with artist=artist %}
+        {{ artist_card(request=request, artist=artist) }}
       </div>
     {% else %}
-      {{ empty_feed(feed_type="artists" following=folloing) }}
+      {{ empty_feed(feed_type="artists", following=folloing) }}
     {% endfor %}
     {{ paginate(request=request, page=artists) }}
   </div>
 {%- endmacro %}
 
 {% macro venues_feed(request, venues, following='') -%}
-    <div class="venues">
-      {% for venue in venues %}
-        <div class="venue">
-          {% include "search/_venue.html" with venue=venue %}
-        </div>
-      {% else %}
-        {{ empty_feed(feed_type="venues" following=folloing) }}
-      {% endfor %}
-      {{ paginate(request=request, page=venues) }}
-    </div>
+  <div class="venues">
+    {% for venue in venues %}
+      <div class="venue">
+        {{ venue_card(request=request, venue=venue) }}
+      </div>
+    {% else %}
+      {{ empty_feed(feed_type="venues", following=folloing) }}
+    {% endfor %}
+    {{ paginate(request=request, page=venues) }}
+  </div>
 {%- endmacro %}
 
 {% macro updates_feed(request, activities, following='') -%}
   <div class="activities">
     {% for activity in activities %}
       <div class="activity">
-        {% include "feeds/_post.html" with post=activity.post %}
+        {{ post_card(request=request, post=activity.post) }}
       </div>
     {% else %}
-      {{ empty_feed(feed_type="updates" following=folloing) }}
+      {{ empty_feed(feed_type="updates", following=folloing) }}
     {% endfor %}
     {{ paginate(request=request, page=activities) }}
   </div>
@@ -117,8 +119,8 @@
     {% for publicRequest in requests %}
       <div class="publicRequest">
         <div class="panel panel-default">
-          {% include "request/_public_request.html" with publicRequest=publicRequest %}
-          {% ifnotequal user publicRequest.requester %}
+          {{ public_request(request=request, publicRequest=publicRequest) }}
+          {% if user != publicRequest.requester %}
             {% if user.is_authenticated and not noApply and not publicRequest.fulfilled %}
               {% if publicRequest.applicants and user.profile.profile_type == 'm' %}
               <div class="panel-footer text-right">
@@ -130,11 +132,11 @@
             </div>
             {% endif %}
           {% endif %}
-        {% endifnotequal %}
+        {% endif %}
         </div>
       </div>
     {% else %}
-      {{ empty_feed(feed_type="requests" following=folloing) }}
+      {{ empty_feed(feed_type="requests", following=folloing) }}
     {% endfor %}
     {{ paginate(request=request, page=requests) }}
   </div>

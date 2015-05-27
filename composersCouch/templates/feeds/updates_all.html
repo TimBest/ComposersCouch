@@ -1,10 +1,11 @@
 {% extends 'feeds/updates_updates.html' %}
+{% from "search/cards.html" import post_card %}
 
 {% block feed %}
   <div class="posts">
     {% for object in object_list %}
     <div class="post">
-      {% include "feeds/_post.html" with post=object %}
+      {{ post_card(request=request, post=object) }}
     </div>
     {% else %}
       {{ empty_feed(feed_type="updates" following=folloing) }}

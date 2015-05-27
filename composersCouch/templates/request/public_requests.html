@@ -1,4 +1,5 @@
 {% extends "threads/base.html" %}
+{% from "request/macros.html" import public_request %}
 
 
 {% block publicClass %}active{% endblock %}
@@ -26,7 +27,7 @@
     {% for publicRequest in requests %}
       <div class="publicRequest">
         <div class="panel panel-default">
-          {% include "request/_public_request.html" with publicRequest=publicRequest %}
+          {{ public_request(request=request, publicRequest=publicRequest) }}
           <div class="panel-footer">
             {% for application in publicRequest.applications.all() %}
               {% if loop.first %}<h4>Applicants:</h4>{% endif %}

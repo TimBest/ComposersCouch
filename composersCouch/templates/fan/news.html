@@ -1,5 +1,5 @@
 {% extends 'fan/detail.html' %}
-
+{% from "search/cards.html" import post_card %}
 
 
 {% block newsClass %}active{% endblock %}
@@ -27,7 +27,7 @@
     </script>
   {% endif %}
   {% for activity in activities %}
-    {% include "feeds/_post.html" with post=activity.post %}
+    {{ post_card(request=request, post=activity.post) }}
   {% else %}
     <p>No news to display.</p>
   {% endfor %}
