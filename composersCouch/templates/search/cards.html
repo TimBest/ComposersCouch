@@ -45,7 +45,7 @@
                 <p>
                   {{ biography|truncate(455) }}
                   {% if biography|truncate(455)|length != biography|truncate(456)|length %}
-                    <a href="{{ url('artist:about', kwargs={'username':'artist.profile.user.username'}) }}#biography">Continue reading </a>
+                    <a href="{{ url('artist:about', kwargs={'username':artist.profile.user.username}) }}#biography">Continue reading </a>
                     {% endif %}
                 </p>
               {% endwith %}
@@ -94,7 +94,6 @@
 {%- endmacro %}
 
 {% macro post_card(request, post) -%}
-  {#{% load inbox %}#}
   {% if post %}
     <div class="post message">
       <div class="panel">

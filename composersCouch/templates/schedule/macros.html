@@ -96,7 +96,7 @@
                   <span class="fa fa-ellipsis-h text-muted"></span>
                 </a>
                   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                    <li><a href="{{ url('export_event', kwargs={'show_id':'show.id'}) }}">Export</a></li>
+                    <li><a href="{{ url('export_event', kwargs={'show_id':show.id}) }}">Export</a></li>
                     <li class="dropdown-item"><a>
                       <button class="btn btn-link" onclick="this.form.onsubmit(); return false; " type="submit">
                         Remove
@@ -113,7 +113,7 @@
                 <button class="btn btn-success" onclick="this.form.onsubmit(); return false; " type="submit"><span class="fa fa-check" ></span> Confirm</button>
               </form>
             </div>
-            <p class="text-left"><a href="{{ url('edit_event', kwargs={'show_id':'show.id'}) }}">Edit</a></p>
+            <p class="text-left"><a href="{{ url('edit_event', kwargs={'show_id':show.id}) }}">Edit</a></p>
           </div>
       {% endif %}
     </div>

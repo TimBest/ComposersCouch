@@ -47,7 +47,7 @@
                 <span class="fa fa-ellipsis-h text-muted"></span>
               </a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-                <li><a href="{{ url('export_years_event', kwargs={'year':'date.year'}) }}">Export</a></li>
+                <li><a href="{{ url('export_years_event', kwargs={'year':date.year}) }}">Export</a></li>
               </ul>
             </div>
             <div class="btn-group pull-right">
@@ -63,16 +63,16 @@
         <div class="col-sm-6 col-sm-pull-3 col-xs-12 center">
           <ul class="nav nav-pills nav-centered" role="tablist">
             <li class="{% block dayClass %}{% endblock %}">
-              <a href="{{ url('calendar', kwargs={'period':'day', 'filter':filter'}) }}{{ querystring_for_date(date) }}">Day</a>
+              <a href="{{ url('calendar', kwargs={'period':'day', 'filter':filter}) }}{{ querystring_for_date(date) }}">Day</a>
             </li>
             <li class="{% block weekClass %}{% endblock %}">
-              <a href="{{ url('calendar', kwargs={'period':'week', 'filter':filter'}) }}{{ querystring_for_date(date) }}">Week</a>
+              <a href="{{ url('calendar', kwargs={'period':'week', 'filter':filter}) }}{{ querystring_for_date(date) }}">Week</a>
             </li>
             <li class="{% block monthClass %}{% endblock %}">
-              <a href="{{ url('calendar', kwargs={'period':'month', 'filter':filter'}) }}{{ querystring_for_date(date) }}">Month</a>
+              <a href="{{ url('calendar', kwargs={'period':'month', 'filter':filter}) }}{{ querystring_for_date(date) }}">Month</a>
             </li>
             <li class="{% block yearClass %}{% endblock %}">
-              <a href="{{ url('calendar', kwargs={'period':'year', 'filter':filter'}) }}{{ querystring_for_date(date) }}">Year</a>
+              <a href="{{ url('calendar', kwargs={'period':'year', 'filter':filter}) }}{{ querystring_for_date(date) }}">Year</a>
             </li>
           </ul>
         </div>

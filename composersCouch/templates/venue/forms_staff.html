@@ -14,7 +14,7 @@
 {% block form %}
     <span>Edit: </span>
   {% for s in staff %}
-    <a class="{{isEditable}} editStaff" href="{{ url('venue:staffForm', kwargs={'staff_id':'s.id'}) }}">
+    <a class="{{isEditable}} editStaff" href="{{ url('venue:staffForm', kwargs={'staff_id':s.id}) }}">
       {{s.contact.name}},
     </a>
   {% endfor %}

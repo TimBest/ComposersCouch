@@ -29,7 +29,7 @@
           {% endwith %}
         {% endfor %}
       </div>
-      <form action="{{ url('threads:reply', kwargs={'thread_id':'thread.pk'}) }}?next={{ request.path }}" class="reply-form" method="post">
+      <form action="{{ url('threads:reply', kwargs={'thread_id':thread.pk}) }}?next={{ request.path }}" class="reply-form" method="post">
         {{ render_form(form) }}
         <button type="submit" class="btn btn-primary"><span class="fa fa-send" ></span> 'Send'</button>
       </form>

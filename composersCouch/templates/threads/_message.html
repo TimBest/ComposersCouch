@@ -1,6 +1,6 @@
 {% from "profile/macros.html" import mugshot %}
 
-{% load inbox  %}
+
 <div class="message">
   <div class="panel">
     <div class="panel-body">
@@ -14,7 +14,7 @@
         </div>
         <div class="message-content-col">
           <div class="message-content">
-            <div class="body"><p>{{ message.body|safe|linebreaks }}</p></div>
+            <div class="body"><p>{{ message.body|linebreaks|safe }}</p></div>
             <div class="footer text-muted">
               <span class="sender">{{ message.sender.profile }}</span>
               <span> | </span>

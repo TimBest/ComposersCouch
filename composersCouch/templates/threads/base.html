@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-{% load inbox %}
-{% load tz %}
 
 {% block title %}Messages{% endblock %}
 
@@ -102,10 +100,12 @@
                 </td>
                 <td>
                   <a href="{{ message.thread.get_absolute_url() }}">{% if message.new %}<b>{% endif %}
-                  {% with message.thread.subject|truncatewords:5 as truncated_subject %}
+                  {% with truncated_subject = message.thread.subject|truncate(50) %}
                     <span class="text-black">{{ truncated_subject }}</span>
-                    {% with truncated_subject|wordcount as subject_wc %}{% with 12|sub:subject_wc as wc %}
-                      {% if message.thread.latest_msg.body and wc > 0 %} - <span class="text-muted">{{ message.thread.latest_msg.body|safe|truncatewords:wc }}</span>{% endif %}
+                    {% with subject_wc = truncated_subject|wordcount %}{% with wc = 12|sub:subject_wc %}
+                      {% if message.thread.latest_msg.body and wc > 0 %}
+                       - <span class="text-muted">{{ message.thread.latest_msg.body|safe|truncatewords:wc }}</span>
+                      {% endif %}
                     {% endwith %}{% endwith %}
                   {% endwith %}
                   {% if message.new %}</b>{% endif %}</a>

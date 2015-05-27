@@ -25,7 +25,7 @@
       <div class="week">
         <div class="cal-row-fluid row-eq-height cal-day-row">
           <div id="week-link">
-            <a href="{{ url('calendar', kwargs={'period':'week', 'filter':filter'}) }}{{ querystring_for_date(week.start) }}">Week</a>
+            <a href="{{ url('calendar', kwargs={'period':'week', 'filter':filter}) }}{{ querystring_for_date(week.start) }}">Week</a>
           </div>
           {% for day in week.get_days %}
             <div id="expand-day" class="cal-cell1 cal-cell day-cell expand-day
@@ -39,7 +39,7 @@
               {% for event in day.get_event_partials %}
                 {% filter == 'shows' %}
                   <div class="center-block cal-event">
-                    <a href="{{ url('show', kwargs={'show_id':'event.show.id'}) }}">
+                    <a href="{{ url('show', kwargs={'show_id':event.show.id}) }}">
                       <span class="visible-xs">{{ event.show.date.start|date('g:i') }}</span>
                       <span class="hidden-xs">
                         <b>{{ event.show.date.start|date('fA') }}:</b>
@@ -52,7 +52,7 @@
                     </a>
                   </div>
                   <div class="hidden">
-                    <li class="events"><a class="show-title" href="{{ url('show', kwargs={'show_id':'event.show.id'}) }}">
+                    <li class="events"><a class="show-title" href="{{ url('show', kwargs={'show_id':event.show.id}) }}">
                       <b>{{ event.show.date.start|date('fA') }}:</b>
                       {% if event.show.info.title %}
                         {{ event.show.info.title }}
@@ -64,7 +64,7 @@
                 {% else %}
                   {% with request=event.thread.request %}
                     <div class="center-block cal-event">
-                      <a href="{{ url('request_detail', kwargs={'thread_id':'request.thread.id'}) }}">
+                      <a href="{{ url('request_detail', kwargs={'thread_id':request.thread.id}) }}">
                         <span class="visible-xs">{{ request.date.start|date('g:i') }}</span>
                         <span class="hidden-xs">
                           <b>{{ request.date.start|date('fA') }}:</b>
@@ -77,7 +77,7 @@
                       </a>
                     </div>
                     <div class="hidden">
-                      <li class="events"><a class="show-title" href="{{ url('request_detail', kwargs={'thread_id':'request.thread.id'}) }}">
+                      <li class="events"><a class="show-title" href="{{ url('request_detail', kwargs={'thread_id':request.thread.id}) }}">
                         <b>{{ request.date.start|date('fA') }}:</b>
                         {% if user.profile.profile_type == 'v' %}
                           {{ request.headliner.participant.user.profile }}

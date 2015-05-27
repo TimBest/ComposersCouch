@@ -23,7 +23,7 @@
                 <span class="unfollow">Unfollow</span>
               </button>
             </form>
-            <a  href="{{ url('request_write', kwargs={'username':'username'}) }}" class="btn btn-default">Request</a>
+            <a  href="{{ url('request_write', kwargs={'username':username}) }}" class="btn btn-default">Request</a>
           </div>
           <div class="row">
             {% block editNametag %}
@@ -32,7 +32,7 @@
               </a>
             {% endblock %}
             {% if not profile.has_owner and not user.is_authenticated %}
-              <a href="{{ url('claim_profile_verify', kwargs={'username':'username'}) }}" class="claim-profile pull-right">Claim this profile</a>
+              <a href="{{ url('claim_profile_verify', kwargs={'username':username}) }}" class="claim-profile pull-right">Claim this profile</a>
             {% endif %}
           </div>
         </div>

@@ -10,7 +10,7 @@
   {% if user == publicRequest.requester %}
   <div class="row">
     <div class="col-xs-6">
-      <a href="{{ url('application_view', kwargs={'thread_id':'application.thread.id'}) }}">View Application</a>
+      <a href="{{ url('application_view', kwargs={'thread_id':application.thread.id}) }}">View Application</a>
     </div>
     <div class="col-xs-6">
       <div class="text-right">
