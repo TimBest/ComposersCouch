@@ -1,5 +1,7 @@
 {% extends 'feeds/updates_updates.html' %}
 {% from "search/cards.html" import post_card %}
+{% from "utils/macros.html" import paginate %}
+
 
 {% block feed %}
   <div class="posts">
@@ -8,7 +10,7 @@
       {{ post_card(request=request, post=object) }}
     </div>
     {% else %}
-      {{ empty_feed(feed_type="updates" following=folloing) }}
+      {{ empty_feed(request=request, feed_type="updates", following=folloing) }}
     {% endfor %}
     {{ paginate(request=request, page=object_list) }}
   </div>

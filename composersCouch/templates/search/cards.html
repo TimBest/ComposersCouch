@@ -124,7 +124,7 @@
                   </form>
                 {% endif %}
               </div>
-              <div class="body"><p>{{ post.message|safe|urlize|linebreaks }}</p></div>
+              <div class="body"><p>{{ post.message|urlize|linebreaks|safe }}</p></div>
               {% if post.photo %}
                 <img src="{{ post.photo.image.url }}" alt="{{ post.title }}" width="200" height="200"/>
               {% endif %}
