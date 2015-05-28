@@ -41,6 +41,7 @@
     </div>
   </div>
 {%- endmacro %}
+
 {% macro render_application(application) -%}
   <div class="application">
     {% if application.applicant.profile.profile_type == 'm' %}
@@ -75,9 +76,7 @@
       </div>
     </div>
   {% endif %}
-
 </div>
-
 {%- endmacro %}
 
 {% macro accepted(is_accepted) -%}

@@ -1,4 +1,5 @@
 {% extends 'fan/detail.html' %}
+{% from "profile/pages.html" import photos %}
 
 
 {% block photosClass %}active{% endblock %}
@@ -11,7 +12,6 @@
     </a>
   </div>
   <div class="{% if not images %}{{isEditable}}{% endif %}">
-    {% from "profile/pages.html" import photos %}{{ photos(images=images) }}
-
+    {{ photos(request=request, images=images) }}
   </div>
 {% endblock %}

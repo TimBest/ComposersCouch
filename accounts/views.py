@@ -215,7 +215,7 @@ class LoginView(FormView):
             else: self.request.session.set_expiry(0)
 
             # Whereto now?
-            redirect_to = signin_redirect(self.request.REQUEST.get(REDIRECT_FIELD_NAME), user)
+            redirect_to = signin_redirect(self.request.GET.get(REDIRECT_FIELD_NAME), user)
             return HttpResponseRedirect(redirect_to)
 
 login_view = secure_required(LoginView.as_view())

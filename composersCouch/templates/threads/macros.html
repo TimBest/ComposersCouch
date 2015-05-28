@@ -1,0 +1,29 @@
+{% from "profile/macros.html" import mugshot %}
+
+{% macro render_message(message) -%}
+  <div class="message">
+    <div class="panel">
+      <div class="panel-body">
+        <div class="message-row {% if message.sender == user %}sender{% else %}reciver{% endif %}">
+          <div class="message-image-col">
+            <div class="message-image">
+              <a href="{{ message.sender.profile.get_absolute_url() }}">
+                {{ mugshot(profile=message.sender.profile, width=50, height=50) }}
+              </a>
+            </div>
+          </div>
+          <div class="message-content-col">
+            <div class="message-content">
+              <div class="body"><p>{{ message.body|linebreaks|safe }}</p></div>
+              <div class="footer text-muted">
+                <span class="sender">{{ message.sender.profile }}</span>
+                <span> | </span>
+                <span class="date">{{ compact_date(message.sent_at, "g:i A","M j","n/j/y") }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endmacro %}

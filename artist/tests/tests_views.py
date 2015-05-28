@@ -101,7 +101,7 @@ class ViewsTests(TestCase):
             response = self.client.post(
                 reverse(url_name[0], kwargs=url_name[1]), values, follow=True
             )
-            user = response.context["user"]
+            user = response.context.get("user")
             self.assertEqual(response.status_code, 200)
             self.assertNotEqual(
                 reverse(url_name[0], kwargs=url_name[1]),

@@ -22,6 +22,6 @@
     </div>
   </div>
   <div class="{% if not images %}{{isEditable}}{% endif %}">
-    {{ photos(images=images) }}
+    {{ photos(request=request, images=images) }}
   </div>
 {% endblock %}

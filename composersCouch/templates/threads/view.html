@@ -1,5 +1,6 @@
 {% extends "threads/base.html" %}
 {% from "profile/macros.html" import mugshot %}
+{% from "threads/macros.html" import render_message %}
 {% from "utils/form_macros.html" import form as render_form %}
 
 
@@ -8,7 +9,7 @@
     <h3 class="page-header">{{ thread.subject }}</h3>
     {% block from %}
       <h5>
-        {% for participant in participant.others %}
+        {% for participant in participant.others() %}
           <a href="{{ participant.user.get_absolute_url() }}" class="text-white">{{ participant.user.profile }}</a>
           {% if not loop.last %},{% endif %}
         {% endfor %}
@@ -26,35 +27,7 @@
       <div class="message-list">
         {% for message_tuple in message_list %}
           {% with message=message_tuple.0 %}
-            <div class="message">
-              <div class="panel">
-                <div class="panel-body">
-                  <div class="message-row {% if message.sender == request.user %}sender{% else %}reciver{% endif %}">
-                    <div class="message-image-col">
-                      <div class="message-image">
-                        <a href="{{ message.sender.profile.get_absolute_url() }}">
-                          {{ mugshot(profile=message.sender.profile, width=50, height=50) }}
-                        </a>
-                      </div>
-                    </div>
-                    <div class="message-content-col">
-                      <div class="message-content">
-                        <div class="body">
-                          <p>{{ message.body|linebreaks|safe }}</p>
-                        </div>
-                        <div class="footer text-muted">
-                          <span class="sender">{{ message.sender.profile }}</span>
-                          <span> | </span>
-                          <span class="date">
-                            {{ compact_date(message.sent_at, "g:i A", "M j", "n/j/y") }}
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            {{ render_message(message) }}
           {% endwith %}
         {% endfor %}
       </div>
