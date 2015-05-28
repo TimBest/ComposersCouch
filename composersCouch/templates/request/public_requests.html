@@ -32,7 +32,7 @@
           <div class="panel-footer">
             {% for application in publicRequest.applications.all() %}
               {% if loop.first %}<h4>Applicants:</h4>{% endif %}
-              {{ render_application(application=application) }}
+              {{ render_application(request=request, application=application) }}
             {% else %}
               <p>No applicants at this time</p>
             {% endfor %}

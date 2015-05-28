@@ -76,15 +76,16 @@
               <h3>Seating</h3>
             </div>
             <div class="panel-body">
-              {% with seating=venueProfile.seating %}
-                {% with image=seating.seating_chart %}
+              {% if venueProfile.seating %}
+                {% with image=venueProfile.seating.seating_chart %}
                   <div class='image-preview'>
                     <a class="thumb" rel='gallery-image[ilist]' href="{{ image.image.url }}">
                       <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ image.image.url }}" width="120" height="120">
                     </a>
                   </div>
                 {% endwith %}
-              <p>Capacity: {{seating.capacity}}</p>
+              {% endif %}
+              <p>Capacity: {{venueProfile.seating.capacity}}</p>
               {% endwith %}
               <a class="{{isEditable}} editSeating" href="{{ url('venue:seatingForm') }}">Edit</a>
             </div>

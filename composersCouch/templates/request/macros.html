@@ -42,7 +42,7 @@
   </div>
 {%- endmacro %}
 
-{% macro render_application(application) -%}
+{% macro render_application(request, application) -%}
   <div class="application">
     {% if application.applicant.profile.profile_type == 'm' %}
       {{ artist_card(request=request, artist=application.applicant.profile.artist_profile) }}
