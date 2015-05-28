@@ -8,6 +8,7 @@ from django.template.defaultfilters import linebreaks, date, time, timesince
 
 from jinja2 import Environment
 
+from embed_video.templatetags.embed_video_tags import EmbedVideoGlobals
 from feeds.templatetags.ext import FeedGlobals
 from schedule.templatetags.ext import ScheduleGlobals
 from progressbarupload.templatetags.progress_bar import ProgressBarGlobals
@@ -49,6 +50,7 @@ def environment(**options):
         'now' : timezone.now(),
         'MEDIA_URL' : settings.MEDIA_URL,
     })
+    environment.globals.update(EmbedVideoGlobals)
     environment.globals.update(FeedGlobals)
     environment.globals.update(ScheduleGlobals)
     environment.globals.update(ProgressBarGlobals)

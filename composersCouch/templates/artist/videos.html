@@ -1,8 +1,6 @@
 {% extends 'artist/detail.html' %}
 
 
-{% load embed_video_tags %}
-
 {% block videosClass %}active{% endblock %}
 {% block dropdownTitle %}Videos{% endblock %}
 
@@ -10,11 +8,21 @@
   <div class="videos">
     <div class="row no-gutter page-header">
       <div class="pull-right social-links">
-        <a href="{{ url('artist:videoLinksForm') }}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
+        <a href="{{ url('artist:videoLinksForm') }}" class="{{isEditable}}">
+          Edit<span class="hidden-xs"> Links</span>
+        </a>
         {% if profile.social_links %}
           {% with social=profile.social_links %}
-            {% if social.vimeo %}<a href="{{ social.vimeo }}" target="_blank" class="btn btn-vimeo"><span class="fa fa-vimeo-square"></span></a>{% endif %}
-            {% if social.youtube %}<a href="{{ social.youtube }}" target="_blank" class="btn btn-youtube"><span class="fa fa-youtube-play"></span></a>{% endif %}
+            {% if social.vimeo %}
+              <a href="{{ social.vimeo }}" target="_blank" class="btn btn-vimeo">
+                <span class="fa fa-vimeo-square"></span>
+              </a>
+            {% endif %}
+            {% if social.youtube %}
+              <a href="{{ social.youtube }}" target="_blank" class="btn btn-youtube">
+                <span class="fa fa-youtube-play"></span>
+              </a>
+            {% endif %}
           {% endwith %}
         {% endif %}
       </div>
@@ -30,7 +38,7 @@
               <div class="col-sm-2">
                 <div id="image-thumbnails">
                   <div class='image-preview'>
-                      <img style="margin:{{ album.album_art.image|margin:'120x120' }}" width="120" height="120" alt="{{ album.title }} Album Art" src="{{media_url}}{{ album.album_art.image }}">
+                    <img width="120" height="120" alt="{{ album.title }} Album Art" src="{{media_url}}{{ album.album_art.image }}">
                   </div>
                 </div>
               </div>
@@ -47,7 +55,7 @@
                           </h5>
                           <div class="collapse" id="{{ track.id }}">
                             <div class="album-video" >
-                              {% video track.media.video 'tiny' %}
+                              {{ embed(track.media.video, 'tiny') }}
                             </div>
                           </div>
                         {% else %}
