@@ -12,7 +12,7 @@
   <div id="poster-form">
     {{ render_form(poster_form) }}
     {% if images %}
-      {{ image_select(images=images, id="poster", label="Poster") }}
+      {{ image_select(request=request, images=images, id="poster", label="Poster") }}
     {% endif %}
     <script>
       {# variables for image select #}

@@ -1,5 +1,5 @@
 {% extends 'utils/form.html' %}
-
+{% from "utils/macros.html" import image_select %}
 
 
 {% block title %}
@@ -11,7 +11,7 @@
 {% block form %}
     {{ render_form(albumArtForm) }}
     {% if images %}
-      {% include "utils/_image_select.html" with images=images id="album_art" label="Album Art" %}
+      {{ image_select(request=request, images=images, id="album_art", label="Album Art") }}
     {% endif %}
     <script>
       {# variables for image select #}
@@ -26,4 +26,6 @@
     </script>
     {{ render_form(albumForm) }}
 {% endblock %}
-{% block extraSubmit %}{{ progress_bar() }}{% endblock %}
+{% block extraSubmit %}
+  {{ progress_bar() }}
+{% endblock %}

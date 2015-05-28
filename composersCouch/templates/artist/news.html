@@ -1,4 +1,5 @@
 {% extends 'artist/detail.html' %}
+{% from "profile/pages.html" import news %}
 {% from "search/cards.html" import post_card %}
 
 
@@ -7,7 +8,7 @@
 
 {% block panelBody %}
   {% if request.user.is_authenticated() %}
-    {% include "profile/_news.html" with post_form=post_form photo_form=photo_form %}
+    {{ news(post_form=post_form, photo_form=photo_form) }}
     <script>
       {# variables for image select #}
       var selectorId = "#id_photo";

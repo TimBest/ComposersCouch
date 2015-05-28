@@ -2,9 +2,6 @@
 {% from "utils/form_macros.html" import form as render_form %}
 
 
-
-
-
 {% block title %}{% block formTitle %}Send Private Request{% endblock %}{% endblock %}
 {% block private_request %}active{% endblock %}
 
@@ -14,9 +11,9 @@
   {{ render_form(dateForm) }}
   <label>Artists*</label>
   {{ ArtistFormset.management_form }}
-  {% if ArtistFormset.non_form_errors %}
+  {% if ArtistFormset.non_form_errors() %}
     <div class="alert alert-danger" role="alert">
-      {{ ArtistFormset.non_form_errors }}
+      {{ ArtistFormset.non_form_errors() }}
     </div>
   {% endif %}
   {% for form in ArtistFormset %}

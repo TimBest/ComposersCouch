@@ -45,7 +45,7 @@
   </div>
 {%- endmacro %}
 
-{% macro image_select(images, id, label) -%}
+{% macro image_select(request, images, id, label) -%}
   <div id="div_id_{{ id }}" class="form-group">
     <label for="id_{{ id }}" class="control-label ">{{ label }}</label>
     <div class="controls ">

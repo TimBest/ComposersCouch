@@ -1,6 +1,37 @@
 {% from "schedule/macros.html" import show %}
-{% from "utils/macros.html" import paginate %}
+{% from "utils/macros.html" import image_select, paginate %}
+{% from "utils/form_macros.html" import form as render_form %}
 
+
+{% macro news(post_form, photo_form) -%}
+<div class="panel panel-default">
+  <form  method="post" id="post-form" enctype="multipart/form-data">
+    <div class="panel-body">
+      {{ render_form(post_form) }}
+      <div id="attach-photo-form">
+        {{ render_form(photo_form) }}
+        {% if images %}
+          {{ image_select(request=request, images=images, id="photo", label="Photo") }}
+        {% endif %}
+      </div>
+    </div>
+    <div class="panel-footer">
+      <div class="row no-gutter" >
+        <div class="col-xs-12 center" >
+          <button type="button" id="attach-photo" class="btn btn-default">
+            <span class='fa fa-camera'></span> Add Photo
+          </button>
+          <div class="pull-right">
+            <button type="submit" onclick="this.form.onsubmit(); return false; " class="btn btn-primary">
+              Post
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+{%- endmacro %}
 
 {% macro photos(images) -%}
   <div class="photos">
@@ -26,7 +57,9 @@
             <p>
               <span>No photos.</span>
               {% if request.user.is_authenticated() %}
-                <a class="{{isEditable}}" href="{{ url('photos:upload') }}">Add a photo</a>
+                <a class="{{isEditable}}" href="{{ url('photos:upload') }}">
+                  Add a photo
+                </a>
                 <span> to get started.</span>
               {% endif %}
             </p>

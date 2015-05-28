@@ -13,10 +13,26 @@
       <div class="pull-right social-links">
         <a href="{{ url('artist:musicLinksForm') }}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
         {% with music=artist_profile.music_links %}
-          {% if music.bandcamp %}<a href="{{ music.bandcamp }}" target="_blank" class="btn btn-bandcamp">bc</a>{% endif %}
-          {% if music.itunes %}<a href="{{ music.itunes }}" target="_blank" class="btn btn-itunes"><span class="fa fa-apple"></span></a>{% endif %}
-          {% if music.spotify %}<a href="{{ music.spotify }}" target="_blank" class="btn btn-spotify"><span class="fa fa-spotify"></span></a>{% endif %}
-          {% if music.soundcloud %}<a href="{{ music.soundcloud }}" target="_blank" class="btn btn-soundcloud"><span class="fa fa-soundcloud"></span></a>{% endif %}
+          {% if music.bandcamp %}
+            <a href="{{ music.bandcamp }}" target="_blank" class="btn btn-bandcamp">
+              bc
+            </a>
+          {% endif %}
+          {% if music.itunes %}
+            <a href="{{ music.itunes }}" target="_blank" class="btn btn-itunes">
+              <span class="fa fa-apple"></span>
+            </a>
+          {% endif %}
+          {% if music.spotify %}
+            <a href="{{ music.spotify }}" target="_blank" class="btn btn-spotify">
+              <span class="fa fa-spotify"></span>
+            </a>
+          {% endif %}
+          {% if music.soundcloud %}
+            <a href="{{ music.soundcloud }}" target="_blank" class="btn btn-soundcloud">
+              <span class="fa fa-soundcloud"></span>
+            </a>
+          {% endif %}
         {% endwith %}
       </div>
     </div>
@@ -29,7 +45,7 @@
                 <h4>{{ album.title }} {% if album.year %}({{album.year}}){% endif %}</h4>
               </div>
               <div class="col-sm-10">
-                <p>{{ album.description|linebreaks }}</p>
+                <p>{{ album.description|linebreaks|safe }}</p>
                 <div>
                   Genres:
                   {% for genre in album.genre.all() %}
@@ -44,12 +60,45 @@
               <div class="col-sm-2 left">
                 <div class="image-frame">
                   <span class="frame-helper"></span>
-                  <img class="image-center" style="margin:{{ album.album_art.image|margin:'120x120' }}" width="120" height="120" alt="{{ album.title }} Album Art" src="{{media_url}}{{ album.album_art.image }}">
+                  <img class="image-center" width="120" height="120" alt="{{ album.title }} Album Art" src="{{media_url}}{{ album.album_art.image }}">
                 </div>
-                {% include "tracks/_playlist_controls.html" with id=album.id %}
+                <div class="jplayer-controls">
+                  <div id="jp_container_{{ album.id }}" class="jp-audio">
+                    <div class="row no-gutter">
+                      <div class="col-sm-2 left">
+                        <div class="jp-controls" >
+                          <a href="javascript:;" class="jp-play jp-button" tabindex="1"><span class="fa fa-play"></span></a>
+                          <a style="display: none;" href="javascript:;" class="jp-pause jp-button" tabindex="1"><span class="fa fa-pause"></span></a>
+                        </div>
+                      </div>
+                      <div class="col-sm-8 center">
+                        <div class="jp-progress">
+                          <div style="width: 100%;" class="jp-seek-bar">
+                            <div style="width: 0%;" class="jp-play-bar"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-2 right">
+                        <div class="jp-controls">
+                          <a href="javascript:;" class="jp-mute jp-button" tabindex="1" title="mute"><span class="fa fa-volume-up"></span></a>
+                          <a href="javascript:;" class="jp-unmute jp-button" tabindex="1" title="unmute"><span class="fa fa-volume-off"></span></a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div class="col-sm-10 right">
-                {% include "tracks/_player.html" with id=album.id %}
+                <div id="jp_container_{{ album.id }}" class="jp-audio">
+                  <div class="jp-type-playlist">
+                    <div id="jquery_jplayer_{{ album.id }}">
+                    </div>
+                    <div class="jp-playlist">
+                      <ul class="jp-track-list" style="display: block;">
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="row no-gutter">

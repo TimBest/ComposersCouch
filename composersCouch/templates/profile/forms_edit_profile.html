@@ -1,8 +1,5 @@
 {% extends 'utils/form.html' %}
-
-
-
-
+{% from "utils/macros.html" import image_select %}
 
 
 {% block title %}{% block formTitle %}Edit Profile{% endblock %}{% endblock %}
@@ -11,7 +8,7 @@
 {% block enctype %}multipart/form-data{% endblock %}
 {% block form %}
   {% if images %}
-    {% from "utils/macros.html" import image_select %} {{ image_select(images=images, id="mugshot", label="Mugshot") }}
+     {{ image_select(request=request, images=images, id="mugshot", label="Mugshot") }}
   {% endif %}
   <script>
     {# variables for image select #}
