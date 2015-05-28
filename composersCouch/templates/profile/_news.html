@@ -7,7 +7,7 @@
       <div id="attach-photo-form">
         {{ render_form(photo_form) }}
         {% if images %}
-          {% include "utils/_image_select.html" with images=images id="photo" label="Photo" %}
+          {% from "utils/macros.html" import image_select %} {{ image_select(images=images, id="photo", label="Photo") }}
         {% endif %}
       </div>
     </div>

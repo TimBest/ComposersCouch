@@ -44,3 +44,18 @@
     </div>
   </div>
 {%- endmacro %}
+
+{% macro image_select(images, id, label) -%}
+  <div id="div_id_{{ id }}" class="form-group">
+    <label for="id_{{ id }}" class="control-label ">{{ label }}</label>
+    <div class="controls ">
+      <select class="image-picker imageselectwidget form-control" id="id_{{ id }}" name="{{ id }}">
+        <option value="" selected="selected">---------</option>
+        {% for image in images %}
+            <option value="{{ image.id }}" data-img-src="{{ MEDIA_URL }}{{ image.image }}">{{ image.title }}</option>
+        {% endfor %}
+      </select>
+      {{ paginate(request=request, page=images) }}
+    </div>
+  </div>
+{%- endmacro %}

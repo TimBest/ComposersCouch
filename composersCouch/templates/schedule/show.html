@@ -1,7 +1,9 @@
 {% extends "base.html" %}
+{% from "schedule/macros.html" import show %}
+
 
 {% block title %}{{ show.info.get_title }}{% endblock %}
 
 {% block header %}
-  {% from "schedule/macros.html" import show %}{{ show(request=request, show=show) }}
+  {{ show(request=request, show=show) }}
 {% endblock %}

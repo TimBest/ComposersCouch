@@ -15,7 +15,7 @@
     <div class="preiod-name">
       <div class="row no-gutter">
         <div class="col-xs-1 left">
-          <a href="{% prev_url period filter %}" class="pull-left" role="button">
+          <a href="{{ prev_url(period, filter) }}" class="pull-left" role="button">
               <span class="fa fa-chevron-left"></span>
           </a>
         </div>
@@ -23,7 +23,7 @@
           {% block periodName %}{% endblock %}
         </div>
         <div class="col-xs-1 right">
-          <a href="{% next_url period filter %}" class="pull-right" role="button">
+          <a href="{{ next_url(period, filter) }}" class="pull-right" role="button">
             <span class="fa fa-chevron-right"></span>
           </a>
         </div>

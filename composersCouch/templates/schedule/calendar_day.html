@@ -1,23 +1,27 @@
 {% extends "schedule/base.html" %}
-
-
+{% from "schedule/macros.html" import show %}
+{% from "request/macros.html" import private_request %}
 
 {% block periodName %}
-  <span class="hidden-xs">{{ date|date:"l, F j" }}</span>
-  <span class="visible-xs">{{ date|date:"D, M j" }}</span>
+  <span class="hidden-xs">{{ date|date("l, F j") }}</span>
+  <span class="visible-xs">{{ date|date("D, M j") }}</span>
 {% endblock %}
 
 {% block dropdownTitle %}Day{% endblock %}
 {% block dayClass %}active{% endblock %}
 
 {% block body %}
-  {% for event in period.get_event_partials %}
+  {% for event in period.get_event_partials() %}
     {% if filter == 'shows' %}
-      {% from "schedule/macros.html" import show %}{{ show(request=request, show=event.show) }}
+      {{ show(request=request, show=event.show) }}
     {% else %}
-      {% from "request/macros.html" import private_request %}  {{ private_request(request=request, private_request=event.thread.request) }}
+      {{ private_request(request=request, private_request=event.thread.request) }}
     {% endif %}
   {% else %}
-    <p class="text-left">No {{ filter }} scheduled for {{ date|date("SHORT_DATE_FORMAT") }}</p>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <p class="text-left">No {{ filter }} scheduled for {{ date|date("SHORT_DATE_FORMAT") }}</p>
+      </div>
+    </div>
   {% endfor %}
 {% endblock %}

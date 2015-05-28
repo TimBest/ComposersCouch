@@ -1,5 +1,5 @@
 {% extends "schedule/base.html" %}
-
+{% from "schedule/macros.html" import month_table %}
 
 
 {% block toptitle %}{% endblock %}
@@ -12,14 +12,16 @@
 {% block body %}
   <div class="panel year">
     <div class="row no-gutter">
-      {% for month in period.get_months %}
+      {% for month in period.get_months() %}
         <div class="col-md-4 center">
           <a href="{{ url('calendar', kwargs={'period':'month'}) }}{{ querystring_for_date(month.start) }}" class="text-black">
-            <h3>{{month.name}}</h3>
+            <h3>{{ month.name() }}</h3>
           </a>
-          {% include "schedule/_month_table.html" with month=month size="small" %}
+          {{ month_table(request=request, month=month, filter=filter, period_name=period_name, size="small") }}
         </div>
-        {% if loop.counter|divisibleby:3 %}</div><div class="row">{% endif %}
+        {% if loop.index is divisibleby(3) %}
+          </div><div class="row">
+        {% endif %}
       {% endfor %}
     </div>
   </div>
