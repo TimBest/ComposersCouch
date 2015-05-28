@@ -40,7 +40,11 @@
         </div>
       </div>
     {% else %}
-      <p>No Private Requests</p>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <p>No Public Requests</p>
+        <div>
+      <div>
     {% endfor %}
     {{ paginate(request=request, page=requests) }}
   </div>

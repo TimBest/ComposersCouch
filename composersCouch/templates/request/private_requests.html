@@ -25,7 +25,11 @@
       <a href="{{ p.thread.get_absolute_url() }}" class="btn btn-link pull-right" >Veiw messages</a>
       {{ private_request(request=request, private_request=p.thread.request) }}
     {% else %}
-      <p>No Public Requests</p>
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <p>No Private Requests</p>
+        <div>
+      <div>
     {% endfor %}
     {{ paginate(request=request, page=participants) }}
   </div>
