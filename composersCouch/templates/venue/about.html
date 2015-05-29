@@ -84,9 +84,8 @@
                     </a>
                   </div>
                 {% endwith %}
+                <p>Capacity: {{venueProfile.seating.capacity}}</p>
               {% endif %}
-              <p>Capacity: {{venueProfile.seating.capacity}}</p>
-              {% endwith %}
               <a class="{{isEditable}} editSeating" href="{{ url('venue:seatingForm') }}">Edit</a>
             </div>
           </div>

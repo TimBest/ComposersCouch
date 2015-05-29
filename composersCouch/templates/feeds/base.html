@@ -33,6 +33,7 @@
               <div role="tabpanel" class="tab-pane active" id="signup">
                 <div class="modal-body">
                   <form id="sign-up-form" method="post" action="{{ url('signup') }}">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                     {{ render_form(signupForm) }}
                     {{ render_form(zipcodeForm) }}
                     {{ render_form(emailForm) }}
@@ -60,6 +61,7 @@
                 <div class="modal-body">
                   <form id="sign-in-form" method="post" action="{{ url('login') }}">
                     {{ render_form(login_form) }}
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                     <input type="hidden" name="next" value="{{next|default("")}}"/>
                     <div class="text-right">
                       <button type="submit" onclick="this.form.onsubmit();return false;" class="btn btn-primary">
@@ -156,6 +158,7 @@
               <div class="row">
                 <label>Date:</label>
                 <form class="availability-form" role="filter" method="POST" action="{{ url('availability') }}">
+                  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                   <input type="hidden" name="path" value="{{ request.path|default('/') }}">
                   {{ render_form(availabilityForm) }}
                   <button type="submit" onclick="this.form.onsubmit(); return false; " class="btn btn-primary">
@@ -196,6 +199,7 @@
               <div class="row">
                 <label>Zipcode:</label>
                 <form class="nav-form" role="filter" method="POST" action="{{ url('zipcode') }}">
+                  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
                   <input type="hidden" name="path" value="{{ request.path|default('/') }}">
                   {{ render_form(locationForm) }}
                   <button type="submit" onclick="this.form.onsubmit(); return false; " class="btn btn-primary">

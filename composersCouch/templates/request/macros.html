@@ -49,7 +49,7 @@
     {% else %}
       {{ venue_card(request=request, venue=application.applicant.profile.venueProfile) }}
     {% endif %}
-    {% if user == publicRequest.requester %}
+    {% if user == application.public_request.requester %}
     <div class="row">
       <div class="col-xs-6">
         <a href="{{ url('application_view', kwargs={'thread_id':application.thread.id}) }}">
