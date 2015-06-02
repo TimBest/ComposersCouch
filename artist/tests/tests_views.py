@@ -1,13 +1,28 @@
-import os
+from __future__ import absolute_import  # Python 2 only
+
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import signals, TestCase
 from django.contrib.auth.models import User
+
+from jinja2 import Template as Jinja2Template
+import os
 
 from accounts.models import Profile
 from artist.models import ArtistProfile, Member
 from artist.views import MusicianContactsView
 from tracks.models import Album
 
+#note - this code can be run only once
+ORIGINAL_JINJA2_RENDERER = Jinja2Template.render
+def instrumented_render(template_object, *args, **kwargs):
+    context = dict(*args, **kwargs)
+    signals.template_rendered.send(
+                            sender=template_object,
+                            template=template_object,
+                            context=context
+                        )
+    return ORIGINAL_JINJA2_RENDERER(template_object, *args, **kwargs)
+Jinja2Template.render = instrumented_render
 
 class ViewsTests(TestCase):
     """  """
@@ -75,7 +90,7 @@ class ViewsTests(TestCase):
         response = self.client.post(reverse(url_name), values, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(
-            response.context["user"].profile.artist_profile.biography,
+            response.context["request"].user.profile.artist_profile.biography,
             values['biography']
         )
 
@@ -101,7 +116,7 @@ class ViewsTests(TestCase):
             response = self.client.post(
                 reverse(url_name[0], kwargs=url_name[1]), values, follow=True
             )
-            user = response.context.get("user")
+            user = response.context["request"].user
             self.assertEqual(response.status_code, 200)
             self.assertNotEqual(
                 reverse(url_name[0], kwargs=url_name[1]),

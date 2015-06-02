@@ -1,9 +1,25 @@
+from __future__ import absolute_import  # Python 2 only
+
 from django.core.urlresolvers import reverse
-from django.test import TestCase
+from django.test import signals, TestCase
 from django.contrib.auth.models import User
+
+from jinja2 import Template as Jinja2Template
 
 from accounts.models import Profile
 
+
+#note - this code can be run only once
+ORIGINAL_JINJA2_RENDERER = Jinja2Template.render
+def instrumented_render(template_object, *args, **kwargs):
+    context = dict(*args, **kwargs)
+    signals.template_rendered.send(
+                            sender=template_object,
+                            template=template_object,
+                            context=context
+                        )
+    return ORIGINAL_JINJA2_RENDERER(template_object, *args, **kwargs)
+Jinja2Template.render = instrumented_render
 
 class ViewsTests(TestCase):
     """ Test the account views """
@@ -70,7 +86,7 @@ class ViewsTests(TestCase):
             self.assertEqual(response.status_code, 200)
             self.assertEqual(
                 User.objects.get(email=values['identification']),
-                response.context["user"]
+                response.context["request"].user
             )
 
     def test_loginredirect_view(self):

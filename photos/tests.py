@@ -1,16 +1,29 @@
 #!/usr/bin/env python
 # vim:fileencoding=utf-8
-
-import os
+from __future__ import absolute_import  # Python 2 only
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.db import models
-from django.test import TestCase
+from django.test import signals, TestCase
 from django.test.client import Client
 
-from models import *
+from jinja2 import Template as Jinja2Template
+import os
 
+from photos.models import *
+
+#note - this code can be run only once
+ORIGINAL_JINJA2_RENDERER = Jinja2Template.render
+def instrumented_render(template_object, *args, **kwargs):
+    context = dict(*args, **kwargs)
+    signals.template_rendered.send(
+                            sender=template_object,
+                            template=template_object,
+                            context=context
+                        )
+    return ORIGINAL_JINJA2_RENDERER(template_object, *args, **kwargs)
+Jinja2Template.render = instrumented_render
 
 class photosTest(TestCase):
 

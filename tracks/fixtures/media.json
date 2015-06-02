@@ -4,7 +4,7 @@
     "model": "tracks.media",
     "fields": {
       "title": "Intro",
-      "video": "http://www.youtube.com",
+      "video": "https://www.youtube.com/watch?v=BpkOuLp2Alw&list=TLuezgr9BxcQc",
       "audio": "",
       "live": false
     }
@@ -14,7 +14,7 @@
     "model": "tracks.media",
     "fields": {
       "title": "He's Not Mine",
-      "video": "http://www.video.com",
+      "video": "https://vimeo.com/36525519",
       "audio": "",
       "live": false
     }
