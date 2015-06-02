@@ -1,27 +1,12 @@
 from django import forms
-from django.utils.translation import ugettext as _
 
-from autocomplete_light import MultipleChoiceWidget
-from autocomplete_light import ModelForm
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Field, Div, Layout, Submit
 
 from models import Follow, Post
 from post_feedly import feedly
-from annoying.functions import get_object_or_None
 from contact.forms import ZipcodeForm
 
 
 class PostForm(forms.ModelForm):
-
-    def __init__(self, *args, **kwargs):
-        super(PostForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.form_show_labels = False
-        self.helper.layout = Layout(
-            Field('message', placeholder="Message"),
-        )
 
     class Meta:
         model = Post
@@ -29,7 +14,6 @@ class PostForm(forms.ModelForm):
           'message' : forms.Textarea(attrs={'rows': 3,}),
         }
         fields = ['message',]
-
 
 class RemovePostForm(forms.Form):
 
@@ -53,24 +37,12 @@ class AvailabilityForm(forms.Form):
     date = forms.DateField(label="Availability", required=False)
     def __init__(self, *args, **kwargs):
         super(AvailabilityForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
         self.fields['date'].label = ''
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            'date',
-            Submit('submit', 'Submit', css_class='btn btn-default'),
-        )
 
 class ZipcodeForm(ZipcodeForm):
     def __init__(self, *args, **kwargs):
         super(ZipcodeForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
         self.fields['zip_code'].label = ''
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            'zip_code',
-            Submit('submit', 'Submit', css_class='btn btn-default'),
-        )
 
 class FollowForm(forms.Form):
 

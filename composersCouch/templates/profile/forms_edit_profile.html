@@ -1,4 +1,5 @@
 {% extends 'utils/form.html' %}
+{% from "utils/form_macros.html" import form as render_form %}
 {% from "utils/macros.html" import image_select %}
 
 
@@ -26,4 +27,5 @@
   {{ render_form(usernameForm) }}
   {{ render_form(profileForm) }}
 {% endblock %}
+
 {% block extraSubmit %}{{ progress_bar() }}{% endblock %}

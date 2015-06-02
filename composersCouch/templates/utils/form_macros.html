@@ -48,6 +48,26 @@
 
 {%- endmacro %}
 
+{% macro upload(field, prepend_content=None, append_content=None, input_container_class="") -%}
+  {# Helper macro for rendering the input itself #}
+  {%- if prepend_content -%}
+    <span class="input-group-addon">{{ prepend_content }}</span>
+  {%- endif -%}
+
+  <div class="{{ input_container_class }}">
+    {{ field|safe }}
+  </div>
+
+  {%- if append_content -%}
+    <span class="input-group-addon">{{ append_content }}</span>
+  {%- endif -%}
+
+  {% if field.errors %}
+    <span class="help-block">{{ field.errors|join(' ')|safe }}</span>
+  {% endif %}
+
+{%- endmacro %}
+
 {% macro checkbox(field, prepend_content=None, append_content=None, input_container_class="") -%}
   {# Helper macro for rendering the input itself #}
   {%- if prepend_content -%}
@@ -76,7 +96,10 @@
     <div class="form-group{% if field.errors %} has-error{% endif -%}{%- if classes %} {{ classes }}{% endif %}" id="{% if field.auto_id %}div_{{ field.auto_id|safe }}{% endif %}">
 
       {% set field_type = fieldtype(field) %}
-      {% if field_type == "CheckboxInput" %}
+      {% if field_type == "ClearableFileInput" %}
+        {% if not hide_label %}{{ label(field) }}{% endif %}
+        {{ upload(field, prepend_content, append_content, input_container_class) }}
+      {% elif field_type == "CheckboxInput" %}
         {{ checkbox(field, prepend_content, append_content, input_container_class) }}
       {% else %}
         {% if not hide_label %}{{ label(field) }}{% endif %}

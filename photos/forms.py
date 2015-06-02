@@ -1,13 +1,9 @@
-from django import forms
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.template.defaultfilters import filesizeformat
 from django.utils.translation import ugettext_lazy as _
 
 from autocomplete_light import ModelForm
-from crispy_forms.bootstrap import FormActions
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Layout
 
 from models import Image
 
@@ -28,13 +24,6 @@ class ImageOnlyForm(ModelForm):
         super(ImageOnlyForm, self).__init__(*args, **kwargs)
         self.fields['image'].label = 'Photo'
         self.fields['image'].required = False
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-              'image',
-            ),
-        )
 
     class Meta(object):
         model = Image
@@ -49,15 +38,7 @@ class ImageOnlyForm(ModelForm):
 class ImageForm(ImageOnlyForm):
     def __init__(self, *args, **kwargs):
         super(ImageForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
         self.fields['image'].required = True
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-                'image',
-                'title',
-            ),
-        )
 
     class Meta(object):
         model = Image

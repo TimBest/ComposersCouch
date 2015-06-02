@@ -1,10 +1,10 @@
 {% extends 'profile/detail.html' %}
 
 
-{% block title %}{{ profile.user.get_full_name }}{% endblock %}
-{% block content_title %}<h2>{{ profile.user.get_full_name }}</h2>{% endblock %}
+{% block title %}{{ profile.user.get_full_name() }}{% endblock %}
+{% block content_title %}<h2>{{ profile.user.get_full_name() }}</h2>{% endblock %}
 
-{% block name %}{{ profile.user.get_full_name }}{% endblock %}
+{% block name %}{{ profile.user.get_full_name() }}{% endblock %}
 
 {% block tabs %}{% block dropdownTabs %}
   <li class="{% block newsClass %}{% endblock %}">
