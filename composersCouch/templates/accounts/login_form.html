@@ -1,5 +1,5 @@
 {% extends 'utils/form.html' %}
-{% from "utils/form_macros.html" import form as render_form %}
+{% from "accounts/macros.html" import login_form as render_login_form %}
 
 {% block title %}Login{% endblock %}
 
@@ -36,7 +36,7 @@
       </div>
     </ul>
     <div class="col-md-9 col-sm-8">
-      {{ render_form(login_form) }}
+      {{ render_login_form(login_form) }}
     </div>
   </div>
 </div>

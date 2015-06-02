@@ -2,6 +2,7 @@ from django.test import TestCase
 from django.utils.translation import ugettext_lazy as _
 
 from accounts import forms
+from userena.forms import AuthenticationForm
 
 
 class SignupFormTests(TestCase):
@@ -146,13 +147,13 @@ class ClaimProfileFormTests(TestCase):
         self.failUnless(form.is_valid())"""
         pass
 
-class SigninFormTests(TestCase):
+class LoginFormTests(TestCase):
     """ Test the ``ChangeEmailForm`` """
     fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',]
 
-    def test_sigin_form(self):
+    def test_login_form(self):
         """
-        Check that the ``SigninForm`` requires both identification and password
+        Check that the ``LoginForm`` requires both identification and password
 
         """
         invalid_data_dicts = [
@@ -165,7 +166,7 @@ class SigninFormTests(TestCase):
         ]
 
         for invalid_dict in invalid_data_dicts:
-            form = forms.SigninForm(data=invalid_dict['data'])
+            form = AuthenticationForm(data=invalid_dict['data'])
             self.failIf(form.is_valid())
             self.assertEqual(form.errors[invalid_dict['error'][0]],
                              invalid_dict['error'][1])
@@ -176,5 +177,5 @@ class SigninFormTests(TestCase):
         ]
 
         for valid_dict in valid_data_dicts:
-            form = forms.SigninForm(valid_dict)
+            form = AuthenticationForm(valid_dict)
             self.failUnless(form.is_valid())

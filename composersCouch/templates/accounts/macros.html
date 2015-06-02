@@ -1,0 +1,37 @@
+{% from "utils/form_macros.html" import non_field_errors, field %}
+
+{% macro singup_form(form) -%}
+  {{ non_field_errors(form) }}
+  {{ field(form.profile_type) }}
+  <div class='profile-type form-group' style='display:none;'>
+    <div class="btn-group" data-toggle="buttons">
+      <label class="btn btn-default btn-profile-type" id="f">
+        <span class='hidden-xs fa fa-users'></span> Fan
+      </label>
+      <label class="btn btn-default btn-profile-type" id="m">
+        <span class='hidden-xs fa fa-music'></span> Artist
+      </label>
+      <label class="btn btn-default btn-profile-type" id="v">
+        <span class='hidden-xs fa fa-ticket'></span> Venue
+      </label>
+    </div>
+  </div>
+  <div class="row no-gutter">
+    <div class="col-xs-6 left">{{ field(form.first_name) }}</div>
+    <div class="col-xs-6 right">{{ field(form.last_name) }}</div>
+  </div>
+  {{ field(form.band_name) }}
+  {{ field(form.venue_name) }}
+{%- endmacro %}
+
+{% macro login_form(form) -%}
+  {{ non_field_errors(form) }}
+  {{ field(form.identification) }}
+  {{ field(form.password) }}
+  <div class="row no-gutter">
+    <div class="col-xs-5 left">{{ field(form.remember_me) }}</div>
+    <div class="col-xs-7 right">
+      <a href="{{ url('userena_password_reset') }}" class="text-right checkbox">Forgot your password?</a>
+    </div>
+  </div>
+{%- endmacro %}

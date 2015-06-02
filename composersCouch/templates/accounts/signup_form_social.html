@@ -1,5 +1,6 @@
 {% extends 'utils/form.html' %}
-
+{% from "accounts/macros.html" import singup_form %}
+{% from "utils/form_macros.html" import form as render_form %}
 
 {% block title %}
   {% block formTitle %}Sign up{% endblock %}
@@ -10,7 +11,7 @@
 
 {% block form %}
   <div class="sign-up">
-    {{ render_form(signupForm) }}
+    {{ singup_form(signupForm) }}
     {{ render_form(zipcodeForm) }}
   </div>
 {% endblock %}

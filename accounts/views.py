@@ -15,13 +15,14 @@ from django.views.generic.base import TemplateView
 from django.views.generic import FormView
 
 from accounts.pipeline import create_profile
-from accounts.forms import ClaimProfileForm, EmailForm, SignupForm, SigninForm
+from accounts.forms import ClaimProfileForm, EmailForm, SignupForm
 from accounts.models import Profile
 from annoying.functions import get_object_or_None
 from annoying.views import MultipleFormsView
 from contact.forms import ZipcodeForm
 from contact.utils import get_location
 from userena.decorators import secure_required
+from userena.forms import AuthenticationForm
 from userena.signals import signup_complete
 from userena.views import signin
 from userena.utils import signin_redirect
@@ -194,7 +195,7 @@ def claim_profile_confirm(request, uidb64=None, token=None,
 class LoginView(FormView):
     template_name = 'accounts/login_form.html'
     success_url = 'redirectToProfile'
-    form_class = SigninForm
+    form_class = AuthenticationForm
 
     def get_context_data(self, **kwargs):
         context = super(LoginView, self).get_context_data(**kwargs)
@@ -219,7 +220,6 @@ class LoginView(FormView):
             return HttpResponseRedirect(redirect_to)
 
 login_view = secure_required(LoginView.as_view())
-
 
 def loginredirect(request, username=None, tab='home'):
     if username == None:

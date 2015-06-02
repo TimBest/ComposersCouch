@@ -1,5 +1,6 @@
 {% extends 'utils/form.html' %}
-{% from "utils/form_macros.html" import form as render_form, non_field_errors, field %}
+{% from "accounts/macros.html" import singup_form %}
+{% from "utils/form_macros.html" import form as render_form %}
 
 {% block title %}
   {% block formTitle %}Sign up{% endblock %}
@@ -41,27 +42,7 @@
         </div>
       </ul>
       <div class="col-md-9 col-sm-8 right">
-        {{ non_field_errors(signupForm) }}
-        {{ field(signupForm.profile_type) }}
-        <div class='profile-type form-group' style='display:none;'>
-          <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-default btn-profile-type" id="f">
-              <span class='hidden-xs fa fa-users'></span> Fan
-            </label>
-            <label class="btn btn-default btn-profile-type" id="m">
-              <span class='hidden-xs fa fa-music'></span> Artist
-            </label>
-            <label class="btn btn-default btn-profile-type" id="v">
-              <span class='hidden-xs fa fa-ticket'></span> Venue
-            </label>
-          </div>
-        </div>
-        <div class="row no-gutter">
-          <div class="col-xs-6 left">{{ field(signupForm.first_name) }}</div>
-          <div class="col-xs-6 right">{{ field(signupForm.last_name) }}</div>
-        </div>
-        {{ field(signupForm.band_name) }}
-        {{ field(signupForm.venue_name) }}
+        {{ singup_form(signupForm) }}
         {{ render_form(zipcodeForm) }}
         {{ render_form(emailForm) }}
       </div>

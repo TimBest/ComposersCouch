@@ -11,28 +11,22 @@ from annoying.functions import get_object_or_None
 from artist.models import ArtistProfile
 from contact.forms import ZipcodeForm
 from fan.models import FanProfile
-from userena.forms import SignupFormOnlyEmail, AuthenticationForm
+from userena.forms import SignupFormOnlyEmail
 from venue.models import VenueProfile
 
-
-profile_type = ""
 
 class SignupForm(forms.ModelForm):
     FAN = PROFILE_TYPE_CHOICES[0][1]
     MUSICIAN = PROFILE_TYPE_CHOICES[1][1]
     VENUE = PROFILE_TYPE_CHOICES[2][1]
 
-    first_name = forms.CharField(label=_(u'First name'),
-                                 max_length=64,
+    first_name = forms.CharField(label=_(u'First name'), max_length=64,
                                  required=False)
-    last_name = forms.CharField(label=_(u'Last name'),
-                                max_length=64,
+    last_name = forms.CharField(label=_(u'Last name'), max_length=64,
                                 required=False)
-    band_name = forms.CharField(label=_(u'Band name'),
-                                 max_length=64,
-                                 required=False)
-    venue_name = forms.CharField(label=_(u'Venue name'),
-                                 max_length=64,
+    band_name = forms.CharField(label=_(u'Band name'), max_length=64,
+                                required=False)
+    venue_name = forms.CharField(label=_(u'Venue name'), max_length=64,
                                  required=False)
     def __init__(self, data=None, *args, **kwargs):
         super(SignupForm, self).__init__(data, *args, **kwargs)
@@ -104,23 +98,3 @@ class ClaimProfileForm(SetPasswordForm):
         if len(password1) < self.MIN_LENGTH:
             raise forms.ValidationError("The new password must be at least %d characters long." % self.MIN_LENGTH)
         return password1
-
-class SigninForm(AuthenticationForm):
-
-    """def __init__(self, data=None, *args, **kw):
-        super(SigninForm, self).__init__(data, *args, **kw)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            'identification',
-            'password',
-            Div(
-              Div('remember_me',css_class='col-xs-5 left',),
-              Div(
-                HTML("<a href='{% url 'userena_password_reset' %}' class='text-right checkbox'>Forgot your password?</a>"),
-                css_class='col-xs-7 right',
-              ),
-              css_class='row no-gutter',
-            ),
-        )
-        self.fields['remember_me'].label = _(u'Remember me')"""
