@@ -46,10 +46,10 @@ class Instrument(models.Model):
 class Member(models.Model):
     profile = models.ForeignKey(ArtistProfile, related_name='members', null=True, blank=True)
     name =  models.CharField(_("name"), max_length=64)
-    current_member =  models.BooleanField(_("is current member"), default=True)
-    instruments = models.ManyToManyField(Instrument, verbose_name=_("instrument"),
-                                related_name='instrument', blank=True)
     biography = models.TextField(_("biography"), null=True, blank=True)
+    instruments = models.ManyToManyField(Instrument, verbose_name=_("instrument"),
+                                    related_name='instrument', blank=True)
+    current_member =  models.BooleanField(_("is current member"), default=True)
 
     def __unicode__(self):
         return u'{0}'.format(self.name)

@@ -1,4 +1,18 @@
+{% from "utils/form_macros.html" import non_field_errors, field %}
 
+
+{% macro location_form(form) -%}
+  {{ non_field_errors(form) }}
+  <div class="row no-gutter">
+    <div class="col-sm-6 left">{{ field(form.address_1) }}</div>
+    <div class="col-sm-6 right">{{ field(form.address_2) }}</div>
+  </div>
+  <div class="row no-gutter">
+    <div class="col-sm-4 left">{{ field(form.city) }}</div>
+    <div class="col-sm-4 center">{{ field(form.state) }}</div>
+    <div class="col-sm-4 right">{{ field(form.zip_code) }}</div>
+  </div>
+{%- endmacro %}
 
 {% macro mugshot(profile, width, height, class="") -%}
   {% if profile.mugshot %}
