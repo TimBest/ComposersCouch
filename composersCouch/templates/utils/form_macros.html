@@ -48,17 +48,40 @@
 
 {%- endmacro %}
 
+{% macro checkbox(field, prepend_content=None, append_content=None, input_container_class="") -%}
+  {# Helper macro for rendering the input itself #}
+  {%- if prepend_content -%}
+    <span class="input-group-addon">{{ prepend_content }}</span>
+  {%- endif -%}
+  <div class="checkbox">
+    <label>
+      {{ field|safe }}{{ field.label|safe }}
+    </label>
+  </div>
+
+  {%- if append_content -%}
+    <span class="input-group-addon">{{ append_content }}</span>
+  {%- endif -%}
+
+  {% if field.errors %}
+    <span class="help-block">{{ field.errors|join(' ')|safe }}</span>
+  {% endif %}
+
+{%- endmacro %}
+
 {% macro field(field, classes=None, prepend_content=None, append_content=None, hide_label=False, inline=False, input_container_class="") -%}
   {% if field.is_hidden %}
     {{ field|safe }}
   {% else %}
-    <div class="form-group{% if field.errors %} has-error{% endif -%}{%- if classes %} {{ classes }}{% endif %}">
-      {% if not hide_label %}
-        {{ label(field) }}
+    <div class="form-group{% if field.errors %} has-error{% endif -%}{%- if classes %} {{ classes }}{% endif %}" id="{% if field.auto_id %}div_{{ field.auto_id|safe }}{% endif %}">
+
+      {% set field_type = fieldtype(field) %}
+      {% if field_type == "CheckboxInput" %}
+        {{ checkbox(field, prepend_content, append_content, input_container_class) }}
+      {% else %}
+        {% if not hide_label %}{{ label(field) }}{% endif %}
+        {{ input(field, prepend_content, append_content, input_container_class) }}
       {% endif %}
-
-      {{ input(field, prepend_content, append_content, input_container_class) }}
-
       {% if field.help_text %}
         <p class="help-block">{{ field.help_text|safe }}</p>
       {% endif %}

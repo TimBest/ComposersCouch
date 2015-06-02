@@ -5,10 +5,6 @@ from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-from crispy_forms.bootstrap import InlineRadios
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, HTML, Layout, Field
-
 from accounts.pipeline import create_profile
 from accounts.models import PROFILE_TYPE_CHOICES, Profile
 from annoying.functions import get_object_or_None
@@ -19,19 +15,7 @@ from userena.forms import SignupFormOnlyEmail, AuthenticationForm
 from venue.models import VenueProfile
 
 
-profile_type = Layout(
-    HTML(
-        "<div class='profile-type form-group' style='display:none;'>\
-          <div class='btn-group btn-group-justified' role='group'>\
-            <div class='btn-group' role='group'>\
-              <button type='button' id='f' class='btn btn-default btn-border-right-none btn-profile-type'><span class='hidden-xs fa fa-users'></span> Fan</button>\
-            </div><div class='btn-group' role='group'>\
-              <button type='button' id='m' class='btn btn-default btn-border-right-none btn-profile-type'><span class='hidden-xs fa fa-music'></span> Artist</button>\
-            </div><div class='btn-group' role='group'>\
-              <button type='button' id='v' class='btn btn-default btn-profile-type'><span class='hidden-xs fa fa-ticket'></span> Venue</button>\
-        </div></div></div>"
-    )
-)
+profile_type = ""
 
 class SignupForm(forms.ModelForm):
     FAN = PROFILE_TYPE_CHOICES[0][1]
@@ -52,21 +36,6 @@ class SignupForm(forms.ModelForm):
                                  required=False)
     def __init__(self, data=None, *args, **kwargs):
         super(SignupForm, self).__init__(data, *args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-                profile_type,
-                InlineRadios('profile_type'),
-                Div(
-                  Div('first_name', css_class='col-sm-6 left',),
-                  Div('last_name', css_class='col-sm-6 right',),
-                  css_class='row no-gutter',
-                ),
-                'band_name',
-                'venue_name',
-            ),
-        )
         if data and data.get('profile_type', None) == self.FAN:
             self.fields['first_name'].required = True
             self.fields['last_name'].required = True
@@ -108,14 +77,6 @@ class SignupForm(forms.ModelForm):
         fields = ('profile_type',)
 
 class EmailForm(SignupFormOnlyEmail):
-    def __init__(self, data=None, *args, **kw):
-        super(EmailForm, self).__init__(data, *args, **kw)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            'email',
-            'password1',
-        )
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -137,18 +98,6 @@ class EmailForm(SignupFormOnlyEmail):
 class ClaimProfileForm(SetPasswordForm):
     MIN_LENGTH = 5
 
-    def __init__(self, data=None, *args, **kw):
-        super(ClaimProfileForm, self).__init__(data, *args, **kw)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-              Div('new_password1',css_class='col-sm-6 left',),
-              Div('new_password2',css_class='col-sm-6 right',),
-              css_class='row no-gutter',
-            ),
-        )
-
     def clean_new_password1(self):
         password1 = self.cleaned_data.get('new_password1')
         # At least MIN_LENGTH long
@@ -158,7 +107,7 @@ class ClaimProfileForm(SetPasswordForm):
 
 class SigninForm(AuthenticationForm):
 
-    def __init__(self, data=None, *args, **kw):
+    """def __init__(self, data=None, *args, **kw):
         super(SigninForm, self).__init__(data, *args, **kw)
         self.helper = FormHelper()
         self.helper.form_tag = False
@@ -174,4 +123,4 @@ class SigninForm(AuthenticationForm):
               css_class='row no-gutter',
             ),
         )
-        self.fields['remember_me'].label = _(u'Remember me')
+        self.fields['remember_me'].label = _(u'Remember me')"""

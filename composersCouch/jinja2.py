@@ -8,6 +8,7 @@ from django.template.defaultfilters import linebreaks, date, time, timesince
 
 from jinja2 import Environment
 
+from annoying.templatetags.annoying import AnnoyingGlobals
 from embed_video.templatetags.embed_video_tags import EmbedVideoGlobals
 from feeds.templatetags.ext import FeedGlobals
 from schedule.templatetags.ext import ScheduleGlobals
@@ -51,6 +52,7 @@ def environment(**options):
         'now' : timezone.now(),
         'MEDIA_URL' : settings.MEDIA_URL,
     })
+    environment.globals.update(AnnoyingGlobals)
     environment.globals.update(EmbedVideoGlobals)
     environment.globals.update(FeedGlobals)
     environment.globals.update(ScheduleGlobals)

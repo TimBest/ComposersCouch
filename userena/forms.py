@@ -138,14 +138,11 @@ class AuthenticationForm(forms.Form):
                                widget=forms.PasswordInput(attrs=attrs_dict, render_value=False))
     remember_me = forms.BooleanField(widget=forms.CheckboxInput(),
                                      required=False,
-                                     label=_(u'Remember me for %(days)s') % {'days': _(userena_settings.USERENA_REMEMBER_ME_DAYS[0])})
+                                     label=_(u'Remember me'))
 
     def __init__(self, *args, **kwargs):
         """ A custom init because we need to change the label if no usernames is used """
         super(AuthenticationForm, self).__init__(*args, **kwargs)
-        # Dirty hack, somehow the label doesn't get translated without declaring
-        # it again here.
-        self.fields['remember_me'].label = _(u'Remember me for %(days)s') % {'days': _(userena_settings.USERENA_REMEMBER_ME_DAYS[0])}
         if userena_settings.USERENA_WITHOUT_USERNAMES:
             self.fields['identification'] = identification_field_factory(_(u"Email"),
                                                                          _(u"Please supply your email."))
