@@ -1,27 +1,29 @@
 {% extends 'venue/forms/about_modal.html' %}
+{% from "profile/macros.html" import contact_form, location_form %}
 {% from "utils/form_macros.html" import form as render_form %}
 
 
-{% block title %}Edit Staff{% endblock %}
+{% block title %}
+  {% block formTitle %}Edit Staff{% endblock %}
+{% endblock %}
 
 {% block staffClass %}active{% endblock %}
 
 {% block formID %}staffForm{% endblock %}
 
-{% block formTitle %}Edit Staff{% endblock %}
 
 {% block form %}
     <span>Edit: </span>
   {% for s in staff %}
-    <a class="{{isEditable}} editStaff" href="{{ url('venue:staffForm', kwargs={'staff_id':s.id}) }}">
+    <a class="editStaff" href="{{ url('venue:staffForm', kwargs={'staff_id':s.id}) }}">
       {{s.contact.name}},
     </a>
   {% endfor %}
   <span>or </span>
-    <a class="{{isEditable}} editStaff text-success" href="{{ url('venue:staffForm') }}">
+    <a class="editStaff text-success" href="{{ url('venue:staffForm') }}">
       Add New
     </a>
-  {{ render_form(contactForm) }}
+  {{ contact_form(contactForm) }}
   {{ render_form(staffForm) }}
 
 {% endblock %}

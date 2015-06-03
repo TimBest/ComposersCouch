@@ -1,10 +1,10 @@
 {% extends 'artist/forms_about_modal.html' %}
-{% from "profile/macros.html" import location_form %}
+{% from "profile/macros.html" import contact_form, location_form %}
 
 
 {% block title %}{% block formTitle %}Edit Contact Info{% endblock %}{% endblock %}
 
 {% block form %}
-  {{ render_form(contactForm) }}
+  {{ contact_form(contactForm) }}
   {{ location_form(locationForm) }}
 {% endblock %}

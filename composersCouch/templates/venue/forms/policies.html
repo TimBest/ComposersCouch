@@ -1,16 +1,23 @@
 {% extends 'venue/forms/about_modal.html' %}
+{% from "utils/form_macros.html" import non_field_errors, field %}
 
 
-
-
-{% block title %}{% block formTitle %}Edit Policies{% endblock %}{% endblock %}
+{% block title %}
+  {% block formTitle %}Edit Policies{% endblock %}
+{% endblock %}
 {% block formID %}policiesForm{% endblock %}
 {% block policiesClass %}active{% endblock %}
 
 {% block form %}
   {{ form.management_form }}
   {% for f in form %}
-    {{ render_form(f) }}
+    {{ non_field_errors(f) }}
+    {{ field(f.id) }}
+    <div class="row no-gutter">
+      <div class="col-xs-3 left">{{ field(f.title) }}</div>
+      <div class="col-xs-7 center">{{ field(f.description) }}</div>
+      <div class="col-xs-2 right"><div class="pull-right">{{ field(f.remove) }}</div></div>
+    </div>
   {% endfor %}
 {% endblock %}
 

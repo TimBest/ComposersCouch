@@ -1,5 +1,5 @@
 {% extends 'venue/forms/about_modal.html' %}
-
+{% from "utils/form_macros.html" import non_field_errors, field %}
 
 
 {% block title %}{% block formTitle %}Edit Equipment{% endblock %}{% endblock %}
@@ -7,10 +7,15 @@
 {% block equipmentClass %}active{% endblock %}
 
 {% block form %}
-  <h3>{{ category|title }}</h3>
-  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'sound'}) }}">Sound</a>,
-  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'effects'}) }}">Effects</a>,
-  <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'accessories'}) }}">Accessories</a>
+  <a class="editEquipment {% if category == "sound" %}text-bold{% endif %}" href="{{ url('venue:equipmentForm', kwargs={'category':'sound'}) }}">
+    Sound
+  </a>,
+  <a class="editEquipment {% if category == "effects" %}text-bold{% endif %}" href="{{ url('venue:equipmentForm', kwargs={'category':'effects'}) }}">
+    Effects
+  </a>,
+  <a class="editEquipment {% if category == "accessories" %}text-bold{% endif %}" href="{{ url('venue:equipmentForm', kwargs={'category':'accessories'}) }}">
+    Accessories
+  </a>
   <div class="row no-gutter">
     <div class="col-xs-3 left">
       <label class="control-label" for='equipmentForm'>Quantity</label>
@@ -24,10 +29,19 @@
   </div>
   {{ form.management_form }}
   {% for f in form %}
-    {{ render_form(f) }}
+    {{ non_field_errors(f) }}
+    {{ field(f.id) }}
+    <div class="hidden">{{ field(f.category) }}</div>
+    <div class="row no-gutter">
+      <div class="col-xs-3 left">{{ field(f.quantity, hide_label=True) }}</div>
+      <div class="col-xs-7 center">{{ field(f.name, hide_label=True) }}</div>
+      <div class="col-xs-2 right"><div class="pull-right">{{ field(f.remove, hide_label=True) }}</div></div>
+    </div>
   {% endfor %}
-
 {% endblock %}
+
 {% block extraSubmit %}
-  <button type="submit" onclick="this.form.onsubmit(); return false; " class="addMore btn btn-primary">Save & Add More</button>
+  <button type="submit" onclick="this.form.onsubmit(); return false;" class="addMore btn btn-primary">
+    Save & Add More
+  </button>
 {% endblock %}

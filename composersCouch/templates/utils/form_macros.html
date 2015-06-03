@@ -68,14 +68,14 @@
 
 {%- endmacro %}
 
-{% macro checkbox(field, prepend_content=None, append_content=None, input_container_class="") -%}
+{% macro checkbox(field, prepend_content=None, append_content=None, input_container_class="", hide_label) -%}
   {# Helper macro for rendering the input itself #}
   {%- if prepend_content -%}
     <span class="input-group-addon">{{ prepend_content }}</span>
   {%- endif -%}
   <div class="checkbox">
     <label>
-      {{ field|safe }}{{ field.label|safe }}
+      {{ field|safe }}{% if not hide_label %}{{ label(field) }}{% endif %}
     </label>
   </div>
 
@@ -100,7 +100,7 @@
         {% if not hide_label %}{{ label(field) }}{% endif %}
         {{ upload(field, prepend_content, append_content, input_container_class) }}
       {% elif field_type == "CheckboxInput" %}
-        {{ checkbox(field, prepend_content, append_content, input_container_class) }}
+        {{ checkbox(field, prepend_content, append_content, input_container_class, hide_label) }}
       {% else %}
         {% if not hide_label %}{{ label(field) }}{% endif %}
         {{ input(field, prepend_content, append_content, input_container_class) }}

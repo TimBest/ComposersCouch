@@ -14,6 +14,16 @@
   </div>
 {%- endmacro %}
 
+{% macro contact_form(form) -%}
+  {{ non_field_errors(form) }}
+  {{ field(form.name) }}
+  <div class="row no-gutter">
+    <div class="col-sm-4 left">{{ field(form.email) }}</div>
+    <div class="col-sm-4 center">{{ field(form.phone) }}</div>
+    <div class="col-sm-4 right">{{ field(form.url) }}</div>
+  </div>
+{%- endmacro %}
+
 {% macro mugshot(profile, width, height, class="") -%}
   {% if profile.mugshot %}
     <img class="mugshot {{class}}" src="{{ profile.mugshot.image.url }}" alt="Profile mugshot" height="{{ height }}" width="{{ width }}"/>

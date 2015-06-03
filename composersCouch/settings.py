@@ -41,7 +41,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'autocomplete_light',
-    'crispy_forms',
     'djcelery',
     'grunt',
     'jinja2',
@@ -303,10 +302,6 @@ ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: "/redirect/%s/" % u.username,
 }
 
-
-# Crispy Form Settings
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
-CRISPY_FAIL_SILENTLY = not DEBUG
 
 #sorl.thumbnail
 THUMBNAIL_DEBUG = DEBUG

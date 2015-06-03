@@ -1,5 +1,5 @@
 {% extends 'artist/forms_about_modal.html' %}
-{% from "profile/macros.html" import location_form %}
+{% from "profile/macros.html" import contact_form, location_form %}
 
 
 {% block contactClass %}active{% endblock %}
@@ -13,6 +13,6 @@
   <a class="editMusicianContact {% if contact_type == 'label' %}text-bold{% endif %}" href="{{ url('artist:contactForm', kwargs={'contact_type':'label'}) }}">Label</a>,
   <a class="editMusicianContact {% if contact_type == 'management' %}text-bold{% endif %}" href="{{ url('artist:contactForm', kwargs={'contact_type':'management'}) }}">Management</a>,
   <a class="editMusicianContact {% if contact_type == 'press' %}text-bold{% endif %}" href="{{ url('artist:contactForm', kwargs={'contact_type':'press'}) }}">Press</a>
-  {{ render_form(contactForm) }}
+  {{ contact_form(contactForm) }}
   {{ location_form(locationForm) }}
 {% endblock %}

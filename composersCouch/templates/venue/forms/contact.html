@@ -1,5 +1,5 @@
 {% extends 'venue/forms/about_modal.html' %}
-{% from "profile/macros.html" import location_form %}
+{% from "profile/macros.html" import contact_form, location_form %}
 
 
 {% block contactClass %}active{% endblock %}
@@ -9,6 +9,6 @@
 {% endblock %}
 {% block formID %}contactForm{% endblock %}
 {% block form %}
-  {{ render_form(contactForm) }}
+  {{ contact_form(contactForm) }}
   {{ location_form(locationForm) }}
 {% endblock %}

@@ -29,25 +29,6 @@ class HoursForm(forms.ModelForm):
 
 class EquipmentForm(forms.ModelForm):
     remove = forms.BooleanField(required=False)
-    def __init__(self, *args, **kw):
-      super(EquipmentForm, self).__init__(*args, **kw)
-      self.fields['quantity'].label = False
-      self.fields['name'].label = False
-      self.fields['remove'].label = ''
-      self.helper = FormHelper()
-      self.helper.form_tag = False
-      self.helper.layout = Layout(
-            Div(
-              Div('id',css_class='hidden',),
-              Div(
-                Div('quantity',css_class='col-xs-3 left',),
-                Div('name',css_class='col-xs-7',),
-                Div('remove',css_class='col-xs-2',),
-                css_class='row no-gutter',
-              ),
-              Div('category',css_class='hidden',),
-            ),
-      )
 
     def save(self, commit=False):
         remove = self.cleaned_data.get('remove', False)
@@ -67,19 +48,7 @@ class PoliciesForm(forms.ModelForm):
     remove = forms.BooleanField(label=_(u'remove'),
                                 initial=False,
                                 required=False)
-    def __init__(self, *args, **kw):
-      super(PoliciesForm, self).__init__(*args, **kw)
-      self.helper = FormHelper()
-      self.helper.form_tag = False
-      self.helper.layout = Layout(
-        'id',
-        Div(
-          Div('title',css_class='col-sm-5 left',),
-          Div('description',css_class='col-sm-5 center',),
-          Div('remove',css_class='col-sm-2 right',),
-          css_class='row no-gutter',
-        ),
-      )
+
     def save(self,  commit=False):
         remove = self.cleaned_data.get('remove', False)
         formData = super(PoliciesForm, self).save(commit=False)
@@ -99,14 +68,6 @@ class PoliciesForm(forms.ModelForm):
 
 class SeatingForm(forms.ModelForm):
 
-    def __init__(self, *args, **kw):
-        super(SeatingForm, self).__init__(*args, **kw)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-          'capacity',
-        )
-
     class Meta:
         model = models.Seating
         fields = ('capacity',)
@@ -115,17 +76,6 @@ class StaffForm(forms.ModelForm):
     delete = forms.BooleanField(label=_(u'delete'),
                                 initial=False,
                                 required=False)
-    def __init__(self, *args, **kw):
-        super(StaffForm, self).__init__(*args, **kw)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-                'job_title',
-                'biography',
-                'delete',
-            ),
-        )
 
     def save(self, id=None, commit=False):
         delete = self.cleaned_data.get('delete', False)

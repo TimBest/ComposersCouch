@@ -1,5 +1,5 @@
 {% extends 'utils/form.html' %}
-
+{% from "utils/form_macros.html" import non_field_errors, field %}
 
 
 {% block title %}
@@ -9,10 +9,15 @@
 {% block formID %}tracks-form{% endblock %}
 
 {% block form %}
-  <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
   {{ formset.management_form }}
   {% for form in formset %}
-    {{ form.id }}
-    {{ render_form(form) }}
+    {{ non_field_errors(form) }}
+    {{ field(form.id) }}
+    <div class="hidden">{{ field(form.album) }}</div>
+    <div class="row audio-layout no-gutter">
+      <div class="col-sm-2 left">{{ field(form.order) }}</div>
+      <div class="col-sm-5 center">{{ field(form.title) }}</div>
+      <div class="col-sm-5 right">{{ field(form.video) }}</div>
+    </div>
   {% endfor %}
 {% endblock %}

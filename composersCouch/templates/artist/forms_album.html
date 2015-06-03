@@ -1,5 +1,6 @@
 {% extends 'utils/form.html' %}
 {% from "utils/macros.html" import image_select %}
+{% from "utils/form_macros.html" import non_field_errors, field %}
 
 
 {% block title %}
@@ -8,6 +9,7 @@
 
 {% block formID %}album-form{% endblock %}
 {% block enctype %}multipart/form-data{% endblock %}
+
 {% block form %}
     {{ render_form(albumArtForm) }}
     {% if images %}
@@ -24,8 +26,15 @@
         var images = false;
       {% endif %}
     </script>
-    {{ render_form(albumForm) }}
+    {{ non_field_errors(albumForm) }}
+    <div class="row no-gutter">
+      <div class="col-sm-6 left">{{ field(albumForm.title) }}</div>
+      <div class="col-sm-6 right">{{ field(albumForm.year) }}</div>
+    </div>
+    {{ field(albumForm.genre) }}
+    {{ field(albumForm.description) }}
 {% endblock %}
+
 {% block extraSubmit %}
   {{ progress_bar() }}
 {% endblock %}

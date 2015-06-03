@@ -1,6 +1,5 @@
 {% extends 'utils/form.html' %}
-
-
+{% from "utils/form_macros.html" import non_field_errors, field %}
 
 
 {% block title %}{% block formTitle %}Add Tracks{% endblock %}{% endblock %}
@@ -17,10 +16,29 @@
   {% endif %}
   {{ formset.management_form }}
   {% for form,track in formset_tracks %}
-    {{ form.id }}
-    {{ render_form(form) }}
+    <div class="track-formset">
+      {{ non_field_errors(form) }}
+      {{ field(form.id) }}
+      <div class="hidden">{{ field(form.album) }}</div>
+      <div class="row audio-layout no-gutter">
+        <div class="col-sm-2 left">{{ field(form.order) }}</div>
+        <div class="col-sm-9 center">{{ field(form.title) }}</div>
+        <div class="col-sm-1 right">
+          <label>Remove</label>
+          <div class="pull-right">
+            {{ field(form.DELETE, hide_label=True) }}
+          </div>
+        </div>
+        <label>Currently</label>
+        <audio controls>
+          <source src='{{media_url}}{{track.media.audio}}' type='audio/mp3'>
+            Your browser does not support the audio element.
+        </audio>
+      </div>
+    </div>
   {% endfor %}
   {{ render_form(tracks_form) }}
 
 {% endblock %}
+
 {% block extraSubmit %}{{ progress_bar() }}{% endblock %}
