@@ -5,10 +5,6 @@ from django.utils.translation import ugettext_lazy as _
 
 import autocomplete_light
 from autocomplete_light import ModelForm
-from crispy_forms.bootstrap import PrependedText
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, HTML, Layout
-from crispy_forms.bootstrap import AppendedText
 
 from annoying.functions import get_object_or_None
 from artist.models import ArtistProfile
@@ -31,15 +27,6 @@ class DateForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(DateForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-              Div('start',css_class='col-md-6 left',),
-              Div('end',css_class='col-md-6 right',css_id='end-div',),
-              css_class='row no-gutter',
-            ),
-        )
 
     def clean(self):
         # allows for equal start and end dates
@@ -69,11 +56,6 @@ class EventForm(ModelForm):
     def __init__(self, *args, **kwargs):
         kwargs.pop('user', None)
         super(EventForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            'visible',
-        )
 
     class Meta:
         model = Event
@@ -83,15 +65,11 @@ class ShowInfoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(ShowInfoForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
         self.fields['headliner'].required = False
         self.fields['headliner_text'].label = "Headliner"
         self.fields['openers_text'].help_text = "Separate artists by commas"
         self.fields['openers_text'].label = "Openers"
         self.fields['venue_text'].label = "Venue"
-        self.helper.layout = Layout('title', 'headliner_text', 'headliner',
-            'openers_text', 'openers', 'venue_text', 'venue','description',)
 
     def clean(self):
         # user must be a participant in the evnet or request
@@ -117,8 +95,8 @@ class ShowInfoForm(ModelForm):
 
     class Meta:
         model = Info
-        fields = ('title','headliner','openers','venue','headliner_text',
-                  'openers_text','venue_text','description',)
+        fields = ('title', 'headliner_text', 'headliner', 'openers_text',
+                  'openers', 'venue', 'venue_text','description',)
         widgets = {
             'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
             'headliner_text' : autocomplete_light.TextWidget('ArtistProfileAutocomplete'),

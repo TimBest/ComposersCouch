@@ -1,5 +1,5 @@
-{% extends 'venue/forms_about_modal.html' %}
-
+{% extends 'venue/forms/about_modal.html' %}
+{% from "utils/form_macros.html" import non_field_errors, field %}
 
 
 {% block title %}{% block formTitle %}Edit Hours{% endblock %}{% endblock %}
@@ -18,8 +18,11 @@
     </div>
   </div>
   {% for day, form in forms %}
-    {% with day=day %}
-      {{ render_form(form) }}
-    {% endwith %}
+    {{ non_field_errors(form) }}
+    <div class="row no-gutter">
+      <div class="col-sm-2 left">{{ day }}</div>
+      <div class="col-sm-5 left">{{ field(form.start, hide_label=True) }}</div>
+      <div class="col-sm-5 right">{{ field(form.end, hide_label=True) }}</div>
+    </div>
   {% endfor %}
 {% endblock %}

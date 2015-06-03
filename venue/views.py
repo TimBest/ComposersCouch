@@ -34,7 +34,7 @@ venue_about = VenueProfileAboutView.as_view()
 
 class BiographyView(VenueProfileFormMixin, UpdateView):
     form_class = forms.BiographyForm
-    template_name = 'venue/forms_biography.html'
+    template_name = 'venue/forms/biography.html'
     model = VenueProfile
     success_url = 'venue:about'
 
@@ -49,12 +49,12 @@ biography = BiographyView.as_view()
 
 class ContactInfoView(VenueProfileFormMixin, ContactView):
     success_url = 'venue:about'
-    template_name = 'venue/forms_contact.html'
+    template_name = 'venue/forms/contact.html'
 
 contact_info = ContactInfoView.as_view()
 
 class EquipmentView(VenueProfileFormMixin, FormView):
-    template_name = 'venue/forms_equipment.html'
+    template_name = 'venue/forms/equipment.html'
     success_url = 'venue:about'
     model = models.Equipment
     form_class = forms.EquipmentForm
@@ -98,7 +98,7 @@ class EquipmentView(VenueProfileFormMixin, FormView):
 equipment = EquipmentView.as_view()
 
 class HoursView(VenueProfileFormMixin, FormView):
-    template_name = 'venue/forms_hours.html'
+    template_name = 'venue/forms/hours.html'
     model = models.Hours
     form_class = forms.HoursForm
     success_url = 'venue:about'
@@ -132,7 +132,7 @@ class HoursView(VenueProfileFormMixin, FormView):
 hours = HoursView.as_view()
 
 class PoliciesView(VenueProfileFormMixin, FormView):
-    template_name = 'venue/forms_policies.html'
+    template_name = 'venue/forms/policies.html'
     model = models.Policies
     form_class = forms.PoliciesForm
     success_url = 'venue:about'
@@ -160,7 +160,7 @@ class SeatingView(VenueProfileFormMixin, ImageFormMixin, MultipleModelFormsView)
       'seatingForm' : forms.SeatingForm,
       'seatingChartForm' : SeatingChartForm
     }
-    template_name = 'venue/forms_seating.html'
+    template_name = 'venue/forms/seating.html'
     model = models.Seating
     success_url = 'venue:about'
 
@@ -193,7 +193,7 @@ class StaffView(VenueProfileFormMixin, MultipleModelFormsView):
       'staffForm' : forms.StaffForm,
       'contactForm' : ContactForm
     }
-    template_name = 'venue/forms_staff.html'
+    template_name = 'venue/forms/staff.html'
     model = models.Staff
     success_url = 'venue:about'
     staff_id=None

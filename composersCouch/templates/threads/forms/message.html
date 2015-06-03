@@ -1,0 +1,17 @@
+{% extends "threads/forms/compose.html" %}
+{% from "utils/form_macros.html" import non_field_errors, field %}
+
+
+{% block message %}active{% endblock %}
+
+{% block form %}
+  {{ non_field_errors(form) }}
+  {{ field(form.recipients) }}
+  {{ field(form.subject) }}
+  {{ field(form.body) }}
+{% endblock %}
+
+
+{% macro date_form(form) -%}
+
+{%- endmacro %}

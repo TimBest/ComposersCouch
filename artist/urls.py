@@ -12,6 +12,10 @@ urlpatterns = patterns(view_location,
         url(r'^photos/$', 'artist_photos', name='photos'),
     ))),
 
+)
+
+view_location = 'social_links.views'
+urlpatterns += patterns(view_location,
     # Forms
     url(r'^about/links/edit/$', 'artist_social_links', name='socialLinksForm'),
     url(r'^photos/links/edit/$', 'artist_photo_links', name='photoLinksForm'),

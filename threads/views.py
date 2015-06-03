@@ -72,7 +72,7 @@ class ComposeView(threadMixin, FormView):
     """
     form_class=ComposeForm
     success_url='threads:sent'
-    template_name='threads/message.html'
+    template_name='threads/forms/message.html'
 
     def form_valid(self, form):
         form.save(sender=self.request.user)

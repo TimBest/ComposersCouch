@@ -2,21 +2,11 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 
-from crispy_forms.bootstrap import FormActions
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, HTML, Layout
-
 from venue.models import VenueProfile
 from annoying.functions import get_object_or_None
 from venue import models
 
 class BiographyForm(forms.ModelForm):
-
-    def __init__(self, *args, **kw):
-        super(BiographyForm, self).__init__(*args, **kw)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout('biography',)
 
     class Meta:
         model = VenueProfile
@@ -32,20 +22,6 @@ class HoursForm(forms.ModelForm):
     end = forms.TimeField(label=_("Close"), required=False,
                           widget=forms.TimeInput(format='%I:%M %p'),
                           input_formats=['%I:%M %p'])
-    def __init__(self, *args, **kw):
-      super(HoursForm, self).__init__(*args, **kw)
-      self.fields['start'].label = False
-      self.fields['end'].label = False
-      self.helper = FormHelper()
-      self.helper.form_tag = False
-      self.helper.layout = Layout(
-        Div(
-          HTML ("<div class='col-sm-2 left'>{{ day }}</div>"),
-          Div('start',css_class='col-sm-5 center',),
-          Div('end',css_class='col-sm-5 right',),
-          css_class='row no-gutter',
-        ),
-      )
 
     class Meta:
         model = models.Hours

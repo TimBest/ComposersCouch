@@ -93,7 +93,7 @@ class VenueProfileView(ProfileMixin, TemplateView):
         return context
 
 class ProfileEdit(ImageFormMixin, MultipleFormsView):
-    template_name = 'profile/forms_edit_profile.html',
+    template_name = 'profile/forms/edit_profile.html',
     success_url = 'redirectToProfile'
 
     def get_forms(self):

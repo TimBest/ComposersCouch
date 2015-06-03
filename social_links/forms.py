@@ -5,8 +5,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from autocomplete_light.forms import ModelForm
 from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Field, Layout
-
 from social_links.models import MusicLinks, SocialLinks
 
 
@@ -22,16 +20,6 @@ def clean_url(url):
     return url
 
 class SocialLinksForm(forms.ModelForm):
-
-    def __init__(self, *args, **kw):
-      super(SocialLinksForm, self).__init__(*args, **kw)
-      self.helper = FormHelper()
-      self.helper.form_tag = False
-      self.helper.layout = Layout(
-        'facebook',
-        'google_plus',
-        'twitter',
-      )
 
     def clean_facebook(self):
         url = clean_url(self.cleaned_data.get("facebook", ""))
@@ -55,15 +43,6 @@ class SocialLinksForm(forms.ModelForm):
 
 class PhotoLinksForm(forms.ModelForm):
 
-    def __init__(self, *args, **kw):
-      super(PhotoLinksForm, self).__init__(*args, **kw)
-      self.helper = FormHelper()
-      self.helper.form_tag = False
-      self.helper.layout = Layout(
-        'instagram',
-        'tumblr',
-      )
-
     def clean_instagram(self):
         url = clean_url(self.cleaned_data.get("instagram", ""))
         if url and "instagram.com" not in url:
@@ -82,15 +61,6 @@ class PhotoLinksForm(forms.ModelForm):
 
 class VideoLinksForm(forms.ModelForm):
 
-    def __init__(self, *args, **kw):
-      super(VideoLinksForm, self).__init__(*args, **kw)
-      self.helper = FormHelper()
-      self.helper.form_tag = False
-      self.helper.layout = Layout(
-        'youtube',
-        'vimeo',
-      )
-
     def clean_youtube(self):
         url = clean_url(self.cleaned_data.get("youtube", ""))
         if url and "youtube.com" not in url:
@@ -108,17 +78,6 @@ class VideoLinksForm(forms.ModelForm):
 
 
 class MusicLinksForm(forms.ModelForm):
-
-    def __init__(self, *args, **kw):
-      super(MusicLinksForm, self).__init__(*args, **kw)
-      self.helper = FormHelper()
-      self.helper.form_tag = False
-      self.helper.layout = Layout(
-        'bandcamp',
-        'itunes',
-        'spotify',
-        'soundcloud',
-      )
 
     def clean_bandcamp(self):
         url = clean_url(self.cleaned_data.get("bandcamp", ""))

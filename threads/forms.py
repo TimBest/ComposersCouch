@@ -1,16 +1,13 @@
 from django import forms
-from django.conf import settings
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
 from autocomplete_light import ModelForm
 from autocomplete_light import MultipleChoiceWidget
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Field, Layout
 
-from .models import *
-from .utils import reply_to_thread, now
-from .signals import message_composed
+from threads.models import *
+from threads.utils import reply_to_thread, now
+from threads.signals import message_composed
 
 
 WRAP_WIDTH = 55
@@ -29,16 +26,6 @@ class ComposeForm(ModelForm):
         widgets = {
             'body': forms.Textarea(attrs={'cols': WRAP_WIDTH, 'rows': 3}),
         }
-
-    def __init__(self, *args, **kwargs):
-        super(ComposeForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            'recipients',
-            'subject',
-            'body',
-        )
 
     def save(self, sender, send=True):
         recipients = self.cleaned_data['recipients']
@@ -69,13 +56,6 @@ class ReplyForm(forms.Form):
     """
     body = forms.CharField(label=_(u"Reply"),
         widget=forms.Textarea(attrs={'rows': '4', 'cols': '55'}))
-
-    def __init__(self, instance=None, *args, **kwargs):
-        super(ReplyForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout('body',)
-        self.fields['body'].label = False
 
     def save(self, sender, thread):
         body = self.cleaned_data['body']

@@ -11,7 +11,10 @@ urlpatterns = patterns(view_location,
         url(r'^shows/(?P<year>\d{4})/$','venue_shows',name='shows'),
         url(r'^photos/$', 'venue_photos', name='photos'),
     ))),
+)
 
+view_location = 'social_links.views'
+urlpatterns += patterns(view_location,
     # Forms
     url(r'^about/links/edit/$', 'venue_social_links', name='socialLinksForm'),
     url(r'^photos/links/edit/$', 'venue_photo_links', name='photoLinksForm'),

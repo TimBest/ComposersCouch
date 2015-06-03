@@ -10,7 +10,7 @@ from contact.models import Zipcode, ContactInfo
 class ContactView(ProfileFormMixin, MultipleFormsView):
     locationForm = LocationForm
     contactForm = ContactForm
-    template_name = 'profile/forms_contact.html',
+    template_name = 'profile/forms/contact.html',
     success_url = 'redirectToProfile'
 
     def get_contact_info(self):
