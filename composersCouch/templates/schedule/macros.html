@@ -1,4 +1,13 @@
+{% from "utils/form_macros.html" import non_field_errors, field %}
 
+
+{% macro date_form(form) -%}
+  {{ non_field_errors(form) }}
+  <div class="row no-gutter">
+    <div class="col-sm-6 left">{{ field(form.start) }}</div>
+    <div class="col-sm-6 right">{{ field(form.end) }}</div>
+  </div>
+{%- endmacro %}
 
 {% macro day_calendar(start, end) -%}
   <div class="date-time">

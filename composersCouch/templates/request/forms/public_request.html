@@ -1,18 +1,16 @@
 {% extends "threads/compose.html" %}
 
 
-
-
-
 {% block title %}
   {% block formTitle %}Post Public Request{% endblock %}
 {% endblock %}
+
 {% block public_request %}active{% endblock %}
 
 {% block formID %}publicRequestForm{% endblock %}
 
 {% block form %}
-    {{ render_form(dateForm) }}
+    {{ render_date_form(dateForm) }}
     {% if numApplicantsForm %}
       {{ render_form(numApplicantsForm) }}
     {% endif %}
@@ -20,5 +18,7 @@
 {% endblock %}
 
 {% block submit %}
-  <button type="submit" onclick="this.form.onsubmit(); return false; " class="btn btn-primary">Post</button>
+  <button type="submit" onclick="this.form.onsubmit(); return false;" class="btn btn-primary">
+    Post
+  </button>
 {% endblock %}

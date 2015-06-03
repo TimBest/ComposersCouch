@@ -11,7 +11,7 @@ from request.models import Application, NumberOfApplicants
 
 
 class FormTests(TestCase):
-    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
                  'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates']
 
@@ -68,7 +68,7 @@ class FormTests(TestCase):
         user.profile.save()
         invalid_data_dicts = [
             # Request must be in the future
-            {'data': {"user": "",
+            {'data': {"participant": "",
                       "email": "",
                       "name": "Devendra",},
              'error': ('__all__', [_(u'A user or email is required.')])},
@@ -82,13 +82,13 @@ class FormTests(TestCase):
 
         # Test a valid form.
         valid_data_dicts = [
-            {"user": 3,
+            {"participant": 3,
              "email": "",
              "name": "",},
-            {"user": "",
+            {"participant": "",
              "email": "bob.belcher@example.com",
              "name": "Bob Belcher",},
-            {"user": "",
+            {"participant": "",
              "email": "bob@example.com",
              "name": "",},
         ]
@@ -104,13 +104,13 @@ class FormTests(TestCase):
 
         # Test a valid form.
         valid_data_dicts = [
-            {"user": 3,
+            {"participant": 3,
              "email": "",
              "name": "",},
-            {"user": "",
+            {"participant": "",
              "email": "bob.belcher@example.com",
              "name": "Bob Belcher",},
-            {"user": "",
+            {"participant": "",
              "email": "bob@example.com",
              "name": "",},
         ]

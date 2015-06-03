@@ -1,11 +1,12 @@
 {% extends 'venue/forms_about_modal.html' %}
-{% from "utils/form_macros.html" import form as render_form %}
 {% from "profile/macros.html" import location_form %}
 
 
 {% block contactClass %}active{% endblock %}
 
-{% block title %}{% block formTitle %}Edit Contact Info{% endblock %}{% endblock %}
+{% block title %}
+  {% block formTitle %}Edit Contact Info{% endblock %}
+{% endblock %}
 {% block formID %}contactForm{% endblock %}
 {% block form %}
   {{ render_form(contactForm) }}

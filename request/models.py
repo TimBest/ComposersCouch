@@ -70,8 +70,8 @@ class NumberOfApplicants(models.Model):
     public_request = models.OneToOneField(PublicRequest, primary_key=True,
                                           verbose_name=_("public_request"),
                                           related_name='applicants',)
-    left = models.PositiveSmallIntegerField(verbose_name=_("total_bands"))
-    total = models.PositiveSmallIntegerField(verbose_name=_("number_of_bands"))
+    left = models.PositiveSmallIntegerField(verbose_name=_("total bands"))
+    total = models.PositiveSmallIntegerField(verbose_name=_("number of bands"))
 
     def save(self, public_request=None, *args, **kwargs):
         if public_request:

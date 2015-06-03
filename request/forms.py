@@ -6,8 +6,6 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from autocomplete_light import ModelForm, ChoiceWidget
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Div, Field, Layout
 
 from . import models
 from accounts.utils import create_user_profile
@@ -20,15 +18,6 @@ class DateForm(DateForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(DateForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout(
-            Div(
-              Div('start',css_class='col-xs-6 left',),
-              Div('end',css_class='col-xs-6 right',css_id='end-div',),
-              css_class='row no-gutter',
-            ),
-        )
 
     def clean(self):
         start = self.cleaned_data['start']
@@ -46,9 +35,6 @@ class MessageForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(MessageForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout('body',)
 
 class ParticipantFormSet(BaseFormSet):
     def __init__(self, *args, **kwargs):
@@ -57,7 +43,7 @@ class ParticipantFormSet(BaseFormSet):
 
     def clean(self):
         cleaned_data = self.forms[0].cleaned_data
-        if not cleaned_data.get('email') and not cleaned_data.get('user'):
+        if not cleaned_data.get('email') and not cleaned_data.get('participant'):
             raise forms.ValidationError(_(u"At least one user or email is required"))
 
     @cached_property
@@ -70,29 +56,18 @@ class ParticipantFormSet(BaseFormSet):
         return forms
 
 class ParticipantForm(forms.Form):
-    user = forms.ModelChoiceField(User.objects.all(), required=False,
-                widget=ChoiceWidget('UserAutocomplete',))
+    participant = forms.ModelChoiceField(User.objects.all(), label=_("Venue"),
+                required=False, widget=ChoiceWidget('UserAutocomplete',))
     email = forms.EmailField(required=False)
     name = forms.CharField(max_length=64, required=False)
 
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user')
         super(ParticipantForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.form_show_labels = False
-        self.helper.layout = Layout(
-            'user',
-            Div(
-              Div(Field('name',placeholder='Name'),css_class='col-xs-6 left',),
-              Div(Field('email',placeholder='Email'),css_class='col-xs-6 right',),
-              css_class='row no-gutter',
-            ),
-        )
 
     def clean(self):
         email = self.cleaned_data.get('email')
-        user = self.cleaned_data.get('user')
+        user = self.cleaned_data.get('participant')
         if not email and not user:
             raise forms.ValidationError(_(u"A user or email is required."))
         if email and not user:
@@ -103,11 +78,11 @@ class ParticipantForm(forms.Form):
                     name = email
                 user = create_user_profile(name=name, email=email,
                             profile_type='v', creator=self.user)
-            self.cleaned_data['user']=user
+            self.cleaned_data['participant']=user
             return self.cleaned_data
 
     def save(self, thread, sender, role='o'):
-        participant, created = Participant.objects.get_or_create(user=self.cleaned_data['user'],thread=thread)
+        participant, created = Participant.objects.get_or_create(user=self.cleaned_data['participant'],thread=thread)
         participant.save()
         request_paticipant = models.RequestParticipant(participant=participant, role=role)
         if participant.user == sender:
@@ -119,15 +94,15 @@ class ParticipantForm(forms.Form):
         return participant
 
 class ArtistParticipantForm(ParticipantForm):
-    user = forms.ModelChoiceField(User.objects.all(), required=False,
-                widget=ChoiceWidget('UserArtistAutocomplete',))
+    participant = forms.ModelChoiceField(User.objects.all(), label=_("Artist"),
+                required=False, widget=ChoiceWidget('UserArtistAutocomplete',))
 
     def __init__(self, *args, **kwargs):
         super(ArtistParticipantForm, self).__init__(*args, **kwargs)
 
     def clean(self):
         email = self.cleaned_data.get('email')
-        user = self.cleaned_data.get('user')
+        user = self.cleaned_data.get('participant')
         if email and not user:
             user = get_object_or_None(User, email=email)
             if not user:
@@ -136,26 +111,24 @@ class ArtistParticipantForm(ParticipantForm):
                     name = email
                 user = create_user_profile(name=name, email=email,
                             profile_type='m', creator=self.user)
-            self.cleaned_data['user']=user
+            self.cleaned_data['participant']=user
             return self.cleaned_data
 
 class PublicRequestForm(ModelForm):
     date_format = '%m/%d/%Y'
     accept_by = forms.DateField(label=_("Application deadline"),
                                 widget=forms.DateInput(format=date_format))
+
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(PublicRequestForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_tag = False
-        self.helper.layout = Layout('zip_code','details','accept_by',)
 
     class Meta:
         model = models.PublicRequest
         widgets = {
           'details' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
         }
-        fields = ('accept_by','details', 'zip_code',)
+        fields = ('zip_code','details', 'accept_by',)
 
     def clean_accept_by(self):
         accept_by = self.cleaned_data['accept_by']
@@ -163,13 +136,10 @@ class PublicRequestForm(ModelForm):
             raise forms.ValidationError(_(u"There must be time to accept the request."))
         return accept_by
 
-class NumberOfApplicantsForm(PublicRequestForm):
+class NumberOfApplicantsForm(ModelForm):
 
     def __init__(self, *args, **kw):
       super(NumberOfApplicantsForm, self).__init__(*args, **kw)
-      self.helper = FormHelper()
-      self.helper.form_tag = False
-      self.helper.layout = Layout('total',)
 
     class Meta:
         model = models.NumberOfApplicants

@@ -1,0 +1,33 @@
+{% extends "threads/compose.html" %}
+{% from "utils/form_macros.html" import form as render_form, non_field_errors, field %}
+
+
+{% block title %}{% block formTitle %}Send Private Request{% endblock %}{% endblock %}
+{% block private_request %}active{% endblock %}
+
+{% block formID %}privateRequestForm{% endblock %}
+
+{% block form %}
+  {{ render_date_form(dateForm) }}
+  {{ ArtistFormset.management_form }}
+  {% if ArtistFormset.non_form_errors() %}
+    <div class="alert alert-danger" role="alert">
+      {{ ArtistFormset.non_form_errors() }}
+    </div>
+  {% endif %}
+  {% for form in ArtistFormset %}
+    {{ non_field_errors(form) }}
+    <div class="row no-gutter">
+      <div class="col-sm-6 left">{{ field(form.name) }}</div>
+      <div class="col-sm-6 right">{{ field(form.email) }}</div>
+    </div>
+    {{ field(form.participant) }}
+  {% endfor %}
+  {{ non_field_errors(venueForm) }}
+  <div class="row no-gutter">
+    <div class="col-sm-6 left">{{ field(venueForm.name) }}</div>
+    <div class="col-sm-6 right">{{ field(venueForm.email) }}</div>
+  </div>
+  {{ field(venueForm.participant) }}
+  {{ render_form(messageForm) }}
+{% endblock %}

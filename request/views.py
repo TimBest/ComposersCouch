@@ -125,7 +125,7 @@ class RequestFormView(MultipleFormsView):
     }
     model = Participant
     form_class = forms.ArtistParticipantForm
-    template_name = 'request/forms_private_request.html'
+    template_name = 'request/forms/private_request.html'
     success_url = 'sent_private_requests'
     artist = {}
 
@@ -210,7 +210,7 @@ class RequestEditFormView(MultipleModelFormsView):
     form_classes = {
       'dateForm': forms.DateForm,
     }
-    template_name = 'request/forms_edit_request.html'
+    template_name = 'request/forms/edit_private_request.html'
     success_url = 'sent_private_requests'
 
     def dispatch(self, *args, **kwargs):
@@ -243,7 +243,7 @@ class PublicRequestFormView(MultipleFormsView):
       'dateForm': forms.DateForm,
       'requestForm': forms.PublicRequestForm,
     }
-    template_name = 'request/publicrequest_form.html'
+    template_name = 'request/forms/public_request.html'
     success_url = 'public_requests'
 
     def forms_valid(self, forms):
@@ -260,7 +260,7 @@ class PublicBandRequestFormView(PublicRequestFormView):
       'requestForm': forms.PublicRequestForm,
       'numApplicantsForm': forms.NumberOfApplicantsForm,
     }
-    template_name = 'request/publicrequest_form.html'
+    template_name = 'request/forms/public_request.html'
     success_url = 'home'
 
     def forms_valid(self, forms):
@@ -277,7 +277,7 @@ public_band_request_form = login_required(PublicBandRequestFormView.as_view())
 class ApplyFormView(FormView):
     form_class = forms.MessageForm
     success_url = 'public_requests'
-    template_name = 'request/apply_form.html'
+    template_name = 'request/forms/apply.html'
 
     def dispatch(self, *args, **kwargs):
         request_id = self.kwargs.get('request_id', None)
