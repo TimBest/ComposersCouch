@@ -6,36 +6,38 @@
 
 {% block panelBody %}
   <div class="music">
-    <div class="row no-gutter page-header">
-      <a class="{{isEditable}} btn btn-success" href="{{ url('artist:albumForm') }}">
-        <span class="fa fa-plus"></span> Add Album
-      </a>
-      <div class="pull-right social-links">
-        <a href="{{ url('artist:musicLinksForm') }}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
-        {% if artist_profile.music_links  %}
-          {% with music=artist_profile.music_links %}
-            {% if music.bandcamp %}
-              <a href="{{ music.bandcamp }}" target="_blank" class="btn btn-bandcamp">
-                bc
-              </a>
-            {% endif %}
-            {% if music.itunes %}
-              <a href="{{ music.itunes }}" target="_blank" class="btn btn-itunes">
-                <span class="fa fa-apple"></span>
-              </a>
-            {% endif %}
-            {% if music.spotify %}
-              <a href="{{ music.spotify }}" target="_blank" class="btn btn-spotify">
-                <span class="fa fa-spotify"></span>
-              </a>
-            {% endif %}
-            {% if music.soundcloud %}
-              <a href="{{ music.soundcloud }}" target="_blank" class="btn btn-soundcloud">
-                <span class="fa fa-soundcloud"></span>
-              </a>
-            {% endif %}
-          {% endwith %}
-        {% endif %}
+    <div class="row profile-page-header">
+      <div class="col-xs-6">
+        <a class="{{ isEditable }} btn btn-success" href="{{ url('artist:albumForm') }}">
+          <span class="fa fa-plus"></span> Add Album
+        </a>
+      </div>
+      <div class="col-xs-6 social-links text-right">
+        <a href="{{ url('artist:musicLinksForm') }}" class="{{ isEditable }}">Edit<span class="hidden-xs"> Links</span></a>
+          {% if artist_profile.music_links  %}
+            {% with music=artist_profile.music_links %}
+              {% if music.bandcamp %}
+                <a href="{{ music.bandcamp }}" target="_blank" class="btn btn-bandcamp">
+                  bc
+                </a>
+              {% endif %}
+              {% if music.itunes %}
+                <a href="{{ music.itunes }}" target="_blank" class="btn btn-itunes">
+                  <span class="fa fa-apple"></span>
+                </a>
+              {% endif %}
+              {% if music.spotify %}
+                <a href="{{ music.spotify }}" target="_blank" class="btn btn-spotify">
+                  <span class="fa fa-spotify"></span>
+                </a>
+              {% endif %}
+              {% if music.soundcloud %}
+                <a href="{{ music.soundcloud }}" target="_blank" class="btn btn-soundcloud">
+                  <span class="fa fa-soundcloud"></span>
+                </a>
+              {% endif %}
+            {% endwith %}
+          {% endif %}
       </div>
     </div>
     {% for album in artist_profile.albums.all() %}
@@ -105,12 +107,12 @@
             </div>
             <div class="row no-gutter">
               <div class="col-sm-2 left">
-                <a class="text-primary {{isEditable}}" href="{{ url('artist:editAlbumForm', kwargs={'album_id':album.id}) }}">
+                <a class="text-primary {{ isEditable }}" href="{{ url('artist:editAlbumForm', kwargs={'album_id':album.id}) }}">
                   <span class="fa fa-pencil"> Edit Album</span>
                 </a>
               </div>
               <div class="col-sm-10 right">
-                <a class="text-primary {{isEditable}}" href="{{ url('artist:tracksForm', kwargs={'album_id':album.id}) }}">
+                <a class="text-primary {{ isEditable }}" href="{{ url('artist:tracksForm', kwargs={'album_id':album.id}) }}">
                   <span class="fa fa-pencil"> Edit Tracks</span>
                 </a>
               </div>

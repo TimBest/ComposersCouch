@@ -8,7 +8,7 @@
       <div class="panel-body">
         <div class="nametagImg">
           <a href="{% if profile.mugshot %}{{ profile.mugshot.image.url }}{% endif %}">
-            {{ mugshot(profile=profile, width=100, height=100, class="verticalAlign center-block") }}
+            {{ mugshot(profile=profile, width=100, height=100) }}
           </a>
         </div>
         <div class="nametagInfo">
@@ -27,7 +27,7 @@
           </div>
           <div class="row">
             {% block editNametag %}
-              <a href="{{ url('profile_edit') }}" class="{{isEditable}} edit-profile pull-right">
+              <a href="{{ url('profile_edit') }}" class="{{ isEditable }} edit-profile pull-right">
                 Edit
               </a>
             {% endblock %}

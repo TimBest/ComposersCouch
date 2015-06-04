@@ -6,12 +6,14 @@
 {% block dropdownTitle %}Photos{% endblock %}
 
 {% block panelBody %}
-  <div class="row no-gutter page-header">
-    <a class="{{isEditable}} btn btn-success" href="{{ url('photos:upload') }}">
-      <span class="fa fa-plus"></span> Add Photo
-    </a>
-    <div class="pull-right social-links">
-      <a href="{{ url('artist:photoLinksForm') }}" class="{{isEditable}}">Edit<span class="hidden-xs"> Links</span></a>
+  <div class="row profile-page-header">
+    <div class="col-xs-6">
+      <a class="{{ isEditable }} btn btn-success" href="{{ url('photos:upload') }}">
+        <span class="fa fa-plus"></span> Add Photo
+      </a>
+    </div>
+    <div class="col-xs-6 social-links text-right">
+      <a href="{{ url('artist:photoLinksForm') }}" class="{{ isEditable }}">Edit<span class="hidden-xs"> Links</span></a>
       {% if profile.social_links %}
         {% with social=profile.social_links %}
           {% if social.instagram %}<a href="{{ social.instagram }}" target="_blank" class="btn btn-instagram"><span class="fa fa-instagram"></span></a>{% endif %}
@@ -20,8 +22,8 @@
       {% endif %}
     </div>
   </div>
-  <div class="{% if not images %}{{isEditable}}{% endif %}">
-    {{ photos(request=request, images=images) }}
+  <div class="{% if not images %}{{ isEditable }}{% endif %}">
+    {{ photos(request=request, images=images, isEditable=isEditable) }}
   </div>
 
 {% endblock %}

@@ -52,7 +52,7 @@
       <select class="image-picker imageselectwidget form-control" id="id_{{ id }}" name="{{ id }}">
         <option value="" selected="selected">---------</option>
         {% for image in images %}
-            <option value="{{ image.id }}" data-img-src="{{ MEDIA_URL }}{{ image.image }}">{{ image.title }}</option>
+          <option value="{{ image.id }}" data-img-src="{{ MEDIA_URL }}{{ image.image }}">{{ image.title }}</option>
         {% endfor %}
       </select>
       {{ paginate(request=request, page=images) }}

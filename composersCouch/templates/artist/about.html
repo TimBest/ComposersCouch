@@ -7,15 +7,15 @@
 
 {% block panelBody %}
   <div class='about'>
-    <div class="row no-gutter page-header">
-      <span>
+    <div class="row profile-page-header">
+      <div class="col-xs-6">
         {% for genre in profile.genre.all() %}
           {% if loop.first %}Genres:{% else %},{% endif %}
           <span> {{ genre }}</span>
         {% endfor %}
-      </span>
-      <div class="pull-right social-links">
-        <a href="{{ url('artist:socialLinksForm') }}" class="{{isEditable}}">Edit <span class="hidden-xs">Social Media Links</span></a>
+      </div>
+      <div class="col-xs-6 social-links text-right">
+        <a href="{{ url('artist:socialLinksForm') }}" class="{{ isEditable }}">Edit <span class="hidden-xs">Social Media Links</span></a>
         {% if profile.social_links %}
           {% with social=profile.social_links %}
             {% if social.facebook %}<a href="{{ social.facebook }}" target="_blank" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>{% endif %}
@@ -32,7 +32,7 @@
         </div>
         <div class="panel-body">
           <p>{{ artist_profile.biography|urlize|linebreaks|replace("&lt;br /&gt;", "<br/>")|safe }}</p>
-          <a class="{{isEditable}} editMusicianBiography" href="{{ url('artist:biographyForm') }}">
+          <a class="{{ isEditable }} editMusicianBiography" href="{{ url('artist:biographyForm') }}">
             Edit
           </a>
         </div>
@@ -51,7 +51,7 @@
           </p>
         </div>
       {% endfor %}
-      <a class="{{isEditable}} editMusicianMembers" href="{{ url('artist:memberForm') }}">
+      <a class="{{ isEditable }} editMusicianMembers" href="{{ url('artist:memberForm') }}">
         Edit
       </a>
       </div>
@@ -72,7 +72,7 @@
             </div>
             <div class="panel-body">
               {{ contact(contact_info=profile.contact_info) }}
-              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:userContactForm') }}">Edit</a>
+              <a class="editMusicianContact {{ isEditable }}" href="{{ url('artist:userContactForm') }}">Edit</a>
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@
             </div>
             <div class="panel-body">
               {{ contact(contact_info=artist_profile.booking_contact) }}
-              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':'booking'}) }}">Edit</a>
+              <a class="editMusicianContact {{ isEditable }}" href="{{ url('artist:contactForm', kwargs={'contact_type':'booking'}) }}">Edit</a>
             </div>
           </div>
         </div>
@@ -94,7 +94,7 @@
             </div>
             <div class="panel-body">
               {{ contact(contact_info=artist_profile.label_contact) }}
-              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':'label'}) }}">Edit</a>
+              <a class="editMusicianContact {{ isEditable }}" href="{{ url('artist:contactForm', kwargs={'contact_type':'label'}) }}">Edit</a>
             </div>
           </div>
         </div>
@@ -105,7 +105,7 @@
             </div>
             <div class="panel-body">
               {{ contact(contact_info=artist_profile.management_contact) }}
-              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':'management'}) }}">Edit</a>
+              <a class="editMusicianContact {{ isEditable }}" href="{{ url('artist:contactForm', kwargs={'contact_type':'management'}) }}">Edit</a>
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@
             </div>
             <div class="panel-body">
               {{ contact(contact_info=artist_profile.press_contact) }}
-              <a class="editMusicianContact {{isEditable}}" href="{{ url('artist:contactForm', kwargs={'contact_type':'press'}) }}">Edit</a>
+              <a class="editMusicianContact {{ isEditable }}" href="{{ url('artist:contactForm', kwargs={'contact_type':'press'}) }}">Edit</a>
             </div>
           </div>
         </div>

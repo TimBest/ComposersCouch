@@ -6,5 +6,5 @@
 {% block dropdownTitle %}Shows{% endblock %}
 
 {% block panelBody %}
-  {{ shows(current_year=currentYear, year=year, request=request, slug=artist_profile.profile.user.calendar.slug, name=artist_profile, events=events) }}
+  {{ shows(current_year=currentYear, year=year, request=request, slug=artist_profile.profile.user.calendar.slug, name=artist_profile, events=events, isEditable=isEditable) }}
 {% endblock %}

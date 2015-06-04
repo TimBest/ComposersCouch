@@ -6,9 +6,12 @@
 
 {% block panelBody %}
   <div class="videos">
-    <div class="row no-gutter page-header">
-      <div class="pull-right social-links">
-        <a href="{{ url('artist:videoLinksForm') }}" class="{{isEditable}}">
+    <div class="row profile-page-header">
+      <div class="col-xs-6">
+
+      </div>
+      <div class="col-xs-6 social-links text-right">
+        <a href="{{ url('artist:videoLinksForm') }}" class="{{ isEditable }}">
           Edit<span class="hidden-xs"> Links</span>
         </a>
         {% if profile.social_links %}
@@ -36,11 +39,7 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-sm-2">
-                <div id="image-thumbnails">
-                  <div class='image-preview'>
-                    <img width="120" height="120" alt="{{ album.title }} Album Art" src="{{media_url}}{{ album.album_art.image }}">
-                  </div>
-                </div>
+                <img width="120" height="120" alt="{{ album.title }} Album Art" src="{{media_url}}{{ album.album_art.image }}">
               </div>
               <div class="col-sm-10">
                 <div class="jp-playlist">
@@ -71,12 +70,12 @@
             </div>
             <div class="row">
               <div class="col-sm-2">
-                <a class="text-primary {{isEditable}}" href="{{ url('artist:video_edit_album', kwargs={'album_id':album.id}) }}">
+                <a class="text-primary {{ isEditable }}" href="{{ url('artist:video_edit_album', kwargs={'album_id':album.id}) }}">
                   <span class="fa fa-pencil"> Edit Album</span>
                 </a>
               </div>
               <div class="col-sm-10">
-                <a class="text-primary {{isEditable}}" href="{{ url('artist:video_tracks_form', kwargs={'album_id':album.id}) }}">
+                <a class="text-primary {{ isEditable }}" href="{{ url('artist:video_tracks_form', kwargs={'album_id':album.id}) }}">
                   <span class="fa fa-pencil"> Edit Tracks</span>
                 </a>
               </div>
@@ -86,7 +85,7 @@
       </div>
     {% else %}
       <p>This artist has not added any videos yet.</p>
-      <p class="{{isEditable}}">Videos must be attached to an album. <a href="{{ url('artist:albumForm') }}">Add an album</a> to get started.</p>
+      <p class="{{ isEditable }}">Videos must be attached to an album. <a href="{{ url('artist:albumForm') }}">Add an album</a> to get started.</p>
     {% endfor %}
   </div>
 {% endblock %}

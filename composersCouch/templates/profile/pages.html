@@ -33,7 +33,7 @@
 </div>
 {%- endmacro %}
 
-{% macro photos(request, images) -%}
+{% macro photos(request, images, isEditable='hidden') -%}
   <div class="photos">
     <div class="panel panel-default">
       <div class="panel-body">
@@ -57,7 +57,7 @@
             <p>
               <span>No photos.</span>
               {% if request.user.is_authenticated() %}
-                <a class="{{isEditable}}" href="{{ url('photos:upload') }}">
+                <a class="{{ isEditable }}" href="{{ url('photos:upload') }}">
                   Add a photo
                 </a>
                 <span> to get started.</span>
@@ -71,16 +71,11 @@
   {{ paginate(request=request, page=images) }}
 {%- endmacro %}
 
-{% macro shows(current_year, year, request, slug, name, events) -%}
-  <div class="row no-gutter page-header">
-    <div class="col-xs-12 center">
-      {% if currentYear %}
-        <h3>Upcoming shows</h3>
-      {% else %}
-        <h3>Shows in {{year}}</h3>
-      {% endif %}
+{% macro shows(current_year, year, request, slug, name, events, isEditable='hidden') -%}
+  <div class="row profile-page-header">
+    <div class="col-xs-12">
       <a href="{{ url('calendar_create_event') }}?next={{ url('redirectToProfile', kwargs={'username':name.profile.user.username, 'tab':'shows'}) }}"
-         class="{{isEditable}} btn btn-success" role="button">
+         class="{{ isEditable }} btn btn-success" role="button">
         <span class="fa fa-plus"></span> Add Show
       </a>
     </div>

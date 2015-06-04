@@ -8,15 +8,15 @@
 
 {% block panelBody %}
   <div class='about'>
-    <div class="row no-gutter page-header">
-      <span>
+    <div class="row profile-page-header">
+      <div class="col-xs-6">
         {% for genre in profile.genre.all() %}
           {% if loop.first %}Genres:{% else %},{% endif %}
           <span> {{ genre }}</span>
         {% endfor %}
-      </span>
-      <div class="pull-right social-links">
-        <a href="{{ url('venue:socialLinksForm') }}" class="{{isEditable}}">Edit <span class="hidden-xs">Social Media Links</span></a>
+      </div>
+      <div class="col-xs-6 social-links text-right">
+        <a href="{{ url('artist:socialLinksForm') }}" class="{{ isEditable }}">Edit <span class="hidden-xs">Social Media Links</span></a>
         {% if profile.social_links %}
           {% with social=profile.social_links %}
             {% if social.facebook %}<a href="{{ social.facebook }}" target="_blank" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>{% endif %}
@@ -44,7 +44,7 @@
                   {% endif %}
                 </div>
               {% endfor %}
-              <a class="{{isEditable}} editHours" href="{{ url('venue:hoursForm') }}">Edit</a>
+              <a class="{{ isEditable }} editHours" href="{{ url('venue:hoursForm') }}">Edit</a>
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@
             </div>
             <div class="panel-body">
               {{ contact(contact_info=profile.contact_info) }}
-              <a class="{{isEditable}} editContact" href="{{ url('venue:contactForm') }}">Edit</a>
+              <a class="{{ isEditable }} editContact" href="{{ url('venue:contactForm') }}">Edit</a>
             </div>
           </div>
         </div>
@@ -78,15 +78,13 @@
             <div class="panel-body">
               {% if venueProfile.seating %}
                 {% with image=venueProfile.seating.seating_chart %}
-                  <div class='image-preview'>
-                    <a class="thumb" rel='gallery-image[ilist]' href="{{ image.image.url }}">
-                      <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ image.image.url }}" width="120" height="120">
-                    </a>
-                  </div>
+                  <a class="thumb" rel='gallery-image[ilist]' href="{{ image.image.url }}">
+                    <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ image.image.url }}" width="120" height="120">
+                  </a>
                 {% endwith %}
                 <p>Capacity: {{venueProfile.seating.capacity}}</p>
               {% endif %}
-              <a class="{{isEditable}} editSeating" href="{{ url('venue:seatingForm') }}">Edit</a>
+              <a class="{{ isEditable }} editSeating" href="{{ url('venue:seatingForm') }}">Edit</a>
             </div>
           </div>
         </div>
@@ -113,7 +111,7 @@
               {{ render_equipment(accessories) }}
             </div>
           </div>
-          <a class="{{isEditable}} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'sound'}) }}">Edit</a>
+          <a class="{{ isEditable }} editEquipment" href="{{ url('venue:equipmentForm', kwargs={'category':'sound'}) }}">Edit</a>
         </div>
       </div>
     </div>
@@ -131,7 +129,7 @@
               <tr>
             {% endfor %}
           </table>
-          <a class="{{isEditable}} editPolicies" href="{{ url('venue:policiesForm') }}">Edit</a>
+          <a class="{{ isEditable }} editPolicies" href="{{ url('venue:policiesForm') }}">Edit</a>
         </div>
       </div>
     </div>
@@ -142,7 +140,7 @@
         </div>
         <div class="panel-body">
           <p>{{ venueProfile.biography|urlize|linebreaks|replace("&lt;br /&gt;", "<br/>")|safe }}</p>
-          <a class="{{isEditable}} editBiography" href="{{ url('venue:biographyForm') }}">Edit</a>
+          <a class="{{ isEditable }} editBiography" href="{{ url('venue:biographyForm') }}">Edit</a>
         </div>
       </div>
     <div class='staff'>
@@ -158,7 +156,7 @@
             <p>{{person.contact.email}}</p>
             <p>{{person.contact.phone}}</p>
           {% endfor %}
-          <a class="{{isEditable}} editStaff" href="{{ url('venue:staffForm') }}">Edit</a>
+          <a class="{{ isEditable }} editStaff" href="{{ url('venue:staffForm') }}">Edit</a>
         </div>
       </div>
     </div>

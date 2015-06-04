@@ -6,12 +6,14 @@
 {% block dropdownTitle %}Photos{% endblock %}
 
 {% block panelBody %}
-  <div class="row no-gutter page-header">
-    <a class="{{isEditable}} btn btn-success" href="{{ url('photos:upload') }}">
-      <span class="fa fa-plus"></span> Add Photo
-    </a>
+  <div class="row no-gutter profile-page-header">
+    <div class="col-xs-12">
+      <a class="{{ isEditable }} btn btn-success" href="{{ url('photos:upload') }}">
+        <span class="fa fa-plus"></span> Add Photo
+      </a>
+    </div>
   </div>
-  <div class="{% if not images %}{{isEditable}}{% endif %}">
-    {{ photos(request=request, images=images) }}
+  <div class="{% if not images %}{{ isEditable }}{% endif %}">
+    {{ photos(request=request, images=images, isEditable=isEditable) }}
   </div>
 {% endblock %}
