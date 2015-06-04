@@ -71,10 +71,10 @@
   {{ paginate(request=request, page=images) }}
 {%- endmacro %}
 
-{% macro shows(current_year, year, request, slug, name, events, isEditable='hidden') -%}
+{% macro shows(current_year, year, request, user, events, isEditable='hidden') -%}
   <div class="row profile-page-header">
     <div class="col-xs-12">
-      <a href="{{ url('calendar_create_event') }}?next={{ url('redirectToProfile', kwargs={'username':name.profile.user.username, 'tab':'shows'}) }}"
+      <a href="{{ url('calendar_create_event') }}?next={{ url('redirectToProfile', kwargs={'username':user.username, 'tab':'shows'}) }}"
          class="{{ isEditable }} btn btn-success" role="button">
         <span class="fa fa-plus"></span> Add Show
       </a>
@@ -94,25 +94,24 @@
   <div class="panel panel-default">
     <div class="panel-body">
       <div class="row">
-        <div class="col-xs-4">
-          {% if currentYear  %}
-            <a href="{{ request.path }}?year={{ year }}">Past Shows</a>
-          {% else %}
-            <a href="{{ request.path }}?year={{ year - 1 }}">Shows in {{ year - 1 }}</a>
-          {% endif %}
-        </div>
-        {% if not currentYear %}
+        {% if currentYear  %}
+          <div class="col-xs-6">
+            <a href="{{ request.path }}?year={{ year|int }}">Past Shows</a>
+          </div>
+          <div class="col-xs-6 text-right">
+            <a href="{{ request.path }}?year={{ year|int + 1 }}">Shows in {{ year|int + 1 }}</a>
+          </div>
+        {% else %}
+          <div class="col-xs-4">
+            <a href="{{ request.path }}?year={{ year|int - 1 }}">Shows in {{ year|int - 1 }}</a>
+          </div>
           <div class="col-xs-4 text-center">
             <a  href="{{ request.path }}">Upcoming shows</a>
           </div>
-          <div class="col-xs-4">
-        {% else %}
-          <div class="col-xs-offset-4 col-xs-4">
-        {% endif %}
-          <div class="pull-right">
-            <a href="{{ request.path }}?year={{ year + 1 }}">Shows in {{ year + 1 }}</a>
+          <div class="col-xs-4 text-right">
+            <a href="{{ request.path }}?year={{ year|int + 1 }}">Shows in {{ year|int + 1 }}</a>
           </div>
-        </div>
+        {% endif %}
       </div>
     </div>
   </div>
