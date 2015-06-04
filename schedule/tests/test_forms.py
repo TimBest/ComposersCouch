@@ -14,7 +14,7 @@ class TestScheduleForms(TestCase):
     fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
                 'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
-                'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
+                'albums', 'artists', 'tracks', 'calendars', 'info',
                 'shows', 'events']
 
     def test_date_form(self):

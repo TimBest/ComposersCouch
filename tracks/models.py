@@ -53,15 +53,22 @@ def validate_file_extension(value):
     if not ext in valid_extensions:
         raise ValidationError(u'File type not supported')
 
-class Media(models.Model):
-    title = models.CharField(_('Title'), max_length=128)
+class Track(models.Model):
+    album = models.ForeignKey(Album, related_name='track_set')
+    title = models.CharField(_('Title'), max_length=128, default="untitled")
     video = EmbedVideoField(_('Video Link'), null=True, blank=True,
                             help_text="Link to youtube or vimeo")
     audio = AudioField(_("Audio file"), upload_to=get_audio_upload_path,
                        ext_whitelist=('.mp3','.ogg'),
                        help_text="Currently supports mp3 and ogg",
                        null=True, blank=True)
-    live = models.BooleanField(default=False)
+    order = models.PositiveSmallIntegerField(verbose_name=_("order"))
+
+    class Meta:
+        ordering = ['order']
+
+    def __unicode__(self):
+        return '%s'% self.id
 
     def set_upload_to_info(self, username, track_type, album_title=None):
         """
@@ -70,14 +77,3 @@ class Media(models.Model):
             album_title = if album whats its title
         """
         self.upload_to_info = (username, track_type, album_title)
-
-class Track(models.Model):
-    album = models.ForeignKey(Album, related_name='track_set')
-    order = models.PositiveSmallIntegerField(verbose_name=_("order"))
-    media = models.OneToOneField(Media, related_name='album_track')
-
-    class Meta:
-        ordering = ['order']
-
-    def __unicode__(self):
-        return '%s'% self.id

@@ -6,10 +6,10 @@ from tracks.utils import json_playlist
 
 
 class PrivateRequestModelTest(TestCase):
-    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
                  'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
-                'albums', 'artists', 'tracks', 'media']
+                'albums', 'artists', 'tracks']
 
     def test_json_playlist(self):
         # TODO: add assertion

@@ -14,7 +14,7 @@ from annoying.functions import get_object_or_None
 from artist.models import ArtistProfile
 from social_links.forms import clean_url
 from embed_video.fields import EmbedVideoFormField
-from tracks.models import Album, Track, Media
+from tracks.models import Album, Track
 
 
 class TracksForm(ModelForm):
@@ -37,17 +37,15 @@ class TracksForm(ModelForm):
                     if metadata and metadata.get('title'):
                         title=metadata.get('title')[0]
                 except:
-                    title = ""
-                media = Media(audio=file, title=title)
+                    title = "untitled"
                 try:
-                    media.full_clean()
-                    media.set_upload_to_info(
+                    track = Track(audio=file, title=title, order=tracks_on_album, album=self.instance)
+                    track.full_clean()
+                    track.set_upload_to_info(
                         username=self.instance.artist_profile.profile.user.username,
                         track_type="albums",
                         album_title=self.instance.title
                     )
-                    media.save()
-                    track = Track(media=media, order=tracks_on_album, album=self.instance)
                     tracks_on_album += 1
                     track.save()
                 except ValidationError as e:
@@ -75,7 +73,7 @@ class AlbumAudioForm(ModelForm):
         super(AlbumAudioForm, self).__init__(*args, **kwargs)
         track = kwargs.get('instance', None)
         if track:
-            self.fields['title'].initial = track.media.title
+            self.fields['title'].initial = track.title
 
     def save(self, commit=False):
         remove = self.cleaned_data.get('DELETE', False)
@@ -83,7 +81,6 @@ class AlbumAudioForm(ModelForm):
         if remove:
             track = get_object_or_None(Track, id=formData.id)
             if track:
-                track.media.delete()
                 track.delete()
             return None
         return formData
@@ -99,9 +96,9 @@ class AlbumVideoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         super(AlbumVideoForm, self).__init__(*args, **kwargs)
         track = kwargs.get('instance', None)
-        if hasattr(track, 'media'):
-            self.fields['title'].initial = track.media.title
-            self.fields['video'].initial = track.media.video
+        if track:
+            self.fields['title'].initial = track.title
+            self.fields['video'].initial = track.video
 
     class Meta:
         model = Track
@@ -118,13 +115,12 @@ class AlbumVideoForm(ModelForm):
         track = super(AlbumVideoForm, self).save(commit=False)
         title = self.cleaned_data.get('title')
         video = self.cleaned_data.get('video')
-        if hasattr(track, 'media'):
-            track.media.title = title
-            track.media.video = video
-            track.media.save()
+        if track:
+            track.title = title
+            track.video = video
+            track.save()
         else:
-            media = Media(title=title, video=video)
-            media.save()
-            track.media = media
+            track.title = title
+            track.video = video
             track.save()
         return track

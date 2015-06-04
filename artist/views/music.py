@@ -12,7 +12,7 @@ from photos.models import Image
 from photos.forms import AlbumArtForm
 from photos.views import ImageFormMixin
 from tracks.forms import AlbumForm, AlbumAudioForm, TracksForm
-from tracks.models import Album, Media, Track
+from tracks.models import Album, Track
 from tracks.utils import json_playlist
 
 
@@ -27,7 +27,7 @@ class AlbumView(ArtistProfileFormMixin, ImageFormMixin, MultipleModelFormsView):
       'albumArtForm' : AlbumArtForm
     }
     album_id=None
-    template_name = 'artist/forms_album.html'
+    template_name = 'artist/forms/album.html'
     success_url = 'artist:tracksForm'
 
     def get_objects(self, queryset=None):
@@ -63,7 +63,7 @@ class TracksView(ArtistProfileFormMixin, UpdateView):
     inline_model = Track
     object = None
     album_id = None
-    template_name = 'artist/forms_track.html'
+    template_name = 'artist/forms/track.html'
     success_url = 'artist:music'
 
     def get_object(self, queryset=None):
@@ -104,8 +104,8 @@ class TracksView(ArtistProfileFormMixin, UpdateView):
                 cleaned_data = form.cleaned_data
                 if cleaned_data:
                     track = cleaned_data['id']
-                    track.media.title = cleaned_data['title']
-                    track.media.save()
+                    track.title = cleaned_data['title']
+                    track.save()
                     form.save()
             if request.FILES.getlist('tracks'):
                 context['tracks_form'].save(request=self.request)

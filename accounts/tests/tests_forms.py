@@ -10,7 +10,7 @@ class SignupFormTests(TestCase):
     fixtures = ['site', 'users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
                  'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
-                'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
+                'albums', 'artists', 'tracks', 'calendars', 'info',
                 'shows', 'events']
 
     def test_signup_form(self):
@@ -89,7 +89,7 @@ class EmailFormTests(TestCase):
     fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
                  'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
-                'albums', 'artists', 'tracks', 'media', 'calendars', 'info',
+                'albums', 'artists', 'tracks', 'calendars', 'info',
                 'shows', 'events']
 
     def test_signin_email_form(self):

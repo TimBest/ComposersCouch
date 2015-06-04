@@ -47,20 +47,20 @@
                   <ul class="jp-track-list">
                     {% for track in album.track_set.all() %}
                       <li>
-                        {% if track.media.video %}
+                        {% if track.video %}
                           <h5 class="video-title">
                             <a data-toggle="collapse" href="#{{ track.id }}" aria-expanded="false" aria-controls="{{ track.id }}">
-                              {{ track.media.title }}
+                              {{ track.title }}
                             </a>
                           </h5>
                           <div class="collapse" id="{{ track.id }}">
                             <div class="album-video" >
-                              {{ embed(track.media.video, 'tiny') }}
+                              {{ embed(track.video, 'tiny') }}
                             </div>
                           </div>
                         {% else %}
                         <h5 class="video-title">
-                          {{ track.media.title }}
+                          {{ track.title }}
                         </h5>
                         {% endif %}
                       </li>

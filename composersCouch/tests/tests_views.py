@@ -6,7 +6,7 @@ class TemplateViewsTests(TestCase):
     """  """
     fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',
                 'profiles', 'artists', 'members', 'calendars', 'albums',
-                'media', 'tracks','genres']
+                'tracks','genres']
 
     def test_about_view(self):
         url_names = [

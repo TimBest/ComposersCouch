@@ -13,7 +13,7 @@ class TestTemplateTags(TestCase):
                 'profiles', 'applications', 'publicRequests', 'numApplicants',
                 'privateRequests', 'requestParticipants', 'threads', 'messages',
                 'participants', 'dates', 'genres', 'albums', 'artists',
-                'tracks', 'media', 'calendars', 'info', 'shows', 'events',
+                'tracks', 'calendars', 'info', 'shows', 'events',
                 'venues']
 
     def test_querystring_for_datetime(self):

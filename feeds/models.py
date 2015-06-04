@@ -12,7 +12,6 @@ class Post(models.Model):
     target = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='target_posts')
     message = models.TextField()
     photo = models.ForeignKey('photos.Image',blank=True, null=True)
-    track = models.ForeignKey('tracks.Media',blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     local_votes = models.PositiveIntegerField(default=1)
     site_votes = models.PositiveIntegerField(default=1)
