@@ -3,18 +3,22 @@
     "pk": 1,
     "model": "tracks.track",
     "fields": {
+      "title": "Intro",
+      "video": "https://www.youtube.com/watch?v=BpkOuLp2Alw&list=TLuezgr9BxcQc",
+      "audio": "",
       "album": 1,
-      "order": 1,
-      "media": 1
+      "order": 1
     }
   },
   {
     "pk": 2,
     "model": "tracks.track",
     "fields": {
+      "title": "He's Not Mine",
+      "video": "https://vimeo.com/36525519",
+      "audio": "",
       "album": 1,
-      "order": 2,
-      "media": 2
+      "order": 2
     }
   }
 ]
