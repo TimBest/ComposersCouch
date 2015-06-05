@@ -4,7 +4,7 @@
 
 
 {% block publicClass %}active{% endblock %}
-{% block messageType %}Public Requests{% endblock %}
+{% block messageType %} > {% block messageTypeDropdown %}Public Requests{% endblock %}{% endblock %}
 
 {% block send_message %}
   {% if request.user.profile.profile_type == 'm' %}

@@ -1,6 +1,8 @@
 {% extends "threads/view.html" %}
+{% from "request/macros.html" import private_request %}
+
 
 {% block from %}{% endblock %}
 {% block card %}
-  {% from "request/macros.html" import private_request %}  {{ private_request(request=request, private_request=thread.request) }}
+  {{ private_request(request=request, private_request=thread.request) }}
 {% endblock %}

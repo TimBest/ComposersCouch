@@ -6166,6 +6166,470 @@ input[type="checkbox"]:disabled:checked:after,
 .jumbotron {
   margin-bottom: 0;
 }
+.bootstrap-datetimepicker-widget {
+  top: 0;
+  left: 0;
+  width: 250px;
+  padding: 4px;
+  margin-top: 1px;
+  z-index: 99999 !important;
+  border-radius: 4px;
+}
+.bootstrap-datetimepicker-widget.timepicker-sbs {
+  width: 600px;
+}
+.bootstrap-datetimepicker-widget.bottom:before {
+  content: '';
+  display: inline-block;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: -7px;
+  left: 7px;
+}
+.bootstrap-datetimepicker-widget.bottom:after {
+  content: '';
+  display: inline-block;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid white;
+  position: absolute;
+  top: -6px;
+  left: 8px;
+}
+.bootstrap-datetimepicker-widget.top:before {
+  content: '';
+  display: inline-block;
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-top: 7px solid #ccc;
+  border-top-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: -7px;
+  left: 6px;
+}
+.bootstrap-datetimepicker-widget.top:after {
+  content: '';
+  display: inline-block;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 6px solid white;
+  position: absolute;
+  bottom: -6px;
+  left: 7px;
+}
+.bootstrap-datetimepicker-widget .dow {
+  width: 14.2857%;
+}
+.bootstrap-datetimepicker-widget.pull-right:before {
+  left: auto;
+  right: 6px;
+}
+.bootstrap-datetimepicker-widget.pull-right:after {
+  left: auto;
+  right: 7px;
+}
+.bootstrap-datetimepicker-widget > ul {
+  list-style-type: none;
+  margin: 0;
+}
+.bootstrap-datetimepicker-widget .timepicker-hour,
+.bootstrap-datetimepicker-widget .timepicker-minute,
+.bootstrap-datetimepicker-widget .timepicker-second {
+  width: 100%;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+.bootstrap-datetimepicker-widget table[data-hour-format="12"] .separator {
+  width: 4px;
+  padding: 0;
+  margin: 0;
+}
+.bootstrap-datetimepicker-widget .datepicker > div {
+  display: none;
+}
+.bootstrap-datetimepicker-widget .picker-switch {
+  text-align: center;
+}
+.bootstrap-datetimepicker-widget table {
+  width: 100%;
+  margin: 0;
+}
+.bootstrap-datetimepicker-widget td,
+.bootstrap-datetimepicker-widget th {
+  text-align: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+.bootstrap-datetimepicker-widget td.day:hover,
+.bootstrap-datetimepicker-widget td.hour:hover,
+.bootstrap-datetimepicker-widget td.minute:hover,
+.bootstrap-datetimepicker-widget td.second:hover {
+  background: #ebebeb;
+  cursor: pointer;
+}
+.bootstrap-datetimepicker-widget td.old,
+.bootstrap-datetimepicker-widget td.new {
+  color: #999999;
+}
+.bootstrap-datetimepicker-widget td.today {
+  position: relative;
+}
+.bootstrap-datetimepicker-widget td.today:before {
+  content: '';
+  display: inline-block;
+  border-left: 7px solid transparent;
+  border-bottom: 7px solid #2063a9;
+  border-top-color: rgba(0, 0, 0, 0.2);
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+}
+.bootstrap-datetimepicker-widget td.active,
+.bootstrap-datetimepicker-widget td.active:hover {
+  background-color: #2063a9;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.bootstrap-datetimepicker-widget td.active.today:before {
+  border-bottom-color: #fff;
+}
+.bootstrap-datetimepicker-widget td.disabled,
+.bootstrap-datetimepicker-widget td.disabled:hover {
+  background: none;
+  color: #999999;
+  cursor: not-allowed;
+}
+.bootstrap-datetimepicker-widget td span {
+  display: block;
+  width: 47px;
+  height: 54px;
+  line-height: 54px;
+  float: left;
+  margin: 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.bootstrap-datetimepicker-widget td span:hover {
+  background: #ebebeb;
+}
+.bootstrap-datetimepicker-widget td span.active {
+  background-color: #2063a9;
+  color: #fff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+.bootstrap-datetimepicker-widget td span.old {
+  color: #999999;
+}
+.bootstrap-datetimepicker-widget td span.disabled,
+.bootstrap-datetimepicker-widget td span.disabled:hover {
+  background: none;
+  color: #999999;
+  cursor: not-allowed;
+}
+.bootstrap-datetimepicker-widget th.switch {
+  width: 145px;
+}
+.bootstrap-datetimepicker-widget th.next,
+.bootstrap-datetimepicker-widget th.prev {
+  font-size: 21px;
+}
+.bootstrap-datetimepicker-widget th.disabled,
+.bootstrap-datetimepicker-widget th.disabled:hover {
+  background: none;
+  color: #999999;
+  cursor: not-allowed;
+}
+.bootstrap-datetimepicker-widget thead tr:first-child th {
+  cursor: pointer;
+}
+.bootstrap-datetimepicker-widget thead tr:first-child th:hover {
+  background: #ebebeb;
+}
+.input-group.date .input-group-addon span {
+  display: block;
+  cursor: pointer;
+  width: 16px;
+  height: 16px;
+}
+.bootstrap-datetimepicker-widget.left-oriented:before {
+  left: auto;
+  right: 6px;
+}
+.bootstrap-datetimepicker-widget.left-oriented:after {
+  left: auto;
+  right: 7px;
+}
+.bootstrap-datetimepicker-widget ul.list-unstyled li div.timepicker div.timepicker-picker table.table-condensed tbody > tr > td {
+  padding: 0px !important;
+}
+ul.thumbnails.image_picker_selector {
+  overflow: auto;
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+ul.thumbnails.image_picker_selector ul {
+  overflow: auto;
+  list-style-image: none;
+  list-style-position: outside;
+  list-style-type: none;
+  padding: 0px;
+  margin: 0px;
+}
+ul.thumbnails.image_picker_selector li.group_title {
+  float: none;
+}
+ul.thumbnails.image_picker_selector li {
+  margin: 0px 12px 12px 0px;
+  float: left;
+}
+ul.thumbnails.image_picker_selector li .thumbnail {
+  padding: 6px;
+  border: 1px solid #dddddd;
+  margin-bottom: 0px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+ul.thumbnails.image_picker_selector li .thumbnail img {
+  width: 100px;
+  height: 100px;
+  -webkit-user-drag: none;
+}
+ul.thumbnails.image_picker_selector li .thumbnail.selected {
+  background: #3e79b5;
+  color: #ffffff;
+}
+/*
+* Skin for jPlayer Plugin (jQuery JavaScript Library)
+* http://www.jplayer.org
+*
+* Skin Name: Composers Couch
+*            (responsive bootstrap/fontawsome version of Blue Monday)
+*
+* Copyright (c) 2010-2014 Happyworm Ltd
+* Licensed under the MIT license.
+*  - http://www.opensource.org/licenses/mit-license.php
+*
+* Author: Silvia Benvenuti
+* Skin Version: 4.4 (jPlayer 2.6.0)
+* Date: 1st April 2014
+*/
+.jplayer-controls {
+  min-height: 25px;
+  /* control buttons (volume/play/pause/etc.) */
+  /* Seek Bar */
+}
+.jplayer-controls .jp-controls .jp-button {
+  padding: 5px;
+  color: #303030;
+}
+.jplayer-controls .jp-controls .jp-button:hover {
+  color: #2063a9;
+}
+.jplayer-controls .jp-progress {
+  overflow: hidden;
+  background-color: #ddd;
+  width: 100%;
+  height: 20px;
+  /* The seeking class is added/removed inside jPlayer */
+}
+.jplayer-controls .jp-progress .jp-seek-bar {
+  background-color: #dddddd;
+  width: 0px;
+  height: 100%;
+  cursor: pointer;
+}
+.jplayer-controls .jp-progress .jp-play-bar {
+  background-color: #2063a9;
+  width: 0px;
+  height: 100%;
+}
+.jplayer-controls .jp-progress .jp-seeking-bg {
+  -webkit-animation: progress-bar-stripes 2s linear infinite;
+  animation: progress-bar-stripes 2s linear infinite;
+}
+.jp-playlist .jp-track-list {
+  list-style-type: none;
+}
+.jp-playlist .jp-track-list li {
+  border-bottom: 1px solid silver;
+}
+.jp-playlist .jp-track-list .jp-playlist-current .jp-playlist-item {
+  color: #2063a9;
+}
+.jp-playlist .jp-track-list .jp-playlist-item {
+  color: #303030;
+}
+.jp-playlist .jp-track-list .jp-playlist-item:hover {
+  color: #2063a9;
+}
+.jp-playlist .jp-track-list .jp-playlist-item.no-mp3 {
+  color: #999999;
+}
+.jp-playlist .jp-track-list .jp-playlist-item.no-mp3:hover {
+  color: #999999;
+}
+.jp-playlist .jp-track-list .jp-playlist-item.no-mp3:hover:before {
+  content: '';
+}
+/*
+ * Admin specific styling are prefixed with body.change-form.
+ */
+.yourlabs-autocomplete {
+  position: absolute;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+}
+.yourlabs-autocomplete .hilight {
+  color: #ffffff !important;
+  text-decoration: none;
+  background-color: #0081c2;
+  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
+  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
+  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
+  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
+  background-repeat: repeat-x;
+  outline: 0;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
+}
+.yourlabs-autocomplete .choice,
+.yourlabs-autocomplete [data-value],
+.yourlabs-autocomplete em {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  font-weight: normal;
+  line-height: 20px;
+  color: #333333;
+  white-space: nowrap;
+  color: black;
+  cursor: pointer;
+}
+/*
+ * You should use the "block" class because the "div" class is deprecated since
+ * 2.0. However, the "div" class is still supported for backward compatibility.
+ */
+.block,
+.div {
+  display: block;
+}
+.autocomplete-light-widget {
+  /* for the add-another image */
+  vertical-align: middle;
+}
+.autocomplete-light-widget input,
+.autocomplete-light-widget input:focus {
+  margin: 0;
+  outline: 0;
+}
+input.autocomplete {
+  position: relative;
+  vertical-align: top;
+}
+input.autocomplete.xhr-pending {
+  background-image: url('../autocomplete_light/xhr-pending.gif');
+  background-repeat: no-repeat;
+  background-position: right;
+}
+.autocomplete-light-widget.modern-style {
+  border: 1px solid lightgrey;
+  padding: 4px 4px 3px 4px;
+}
+.autocomplete-light-widget.modern-style input,
+.autocomplete-light-widget.modern-style input:focus {
+  border: 0;
+  margin: 2px 0;
+}
+.autocomplete-light-widget.modern-style .deck [data-value],
+.autocomplete-light-widget.modern-style .deck .choice {
+  border: 1px solid lightgrey;
+  border-radius: 4px;
+}
+.autocomplete-light-widget.yourlabs-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 100;
+}
+.autocomplete-light-widget .deck [data-value],
+.autocomplete-light-widget .deck .choice {
+  list-style-type: none;
+  padding-top: 3px;
+  padding-right: 3px;
+}
+.autocomplete-light-widget .deck [data-value] .remove {
+  background-image: url('../autocomplete_light/delete.png');
+  color: #fff;
+  cursor: pointer;
+  text-indent: -999px;
+  height: 16px;
+  width: 16px;
+  display: inline-block;
+  background-position-y: -1px;
+  background-repeat: no-repeat;
+}
+.autocomplete-light-widget .deck [data-value] .remove:hover {
+  background-position: -15px 0;
+}
+.yourlabs-autocomplete .choice-detail,
+.yourlabs-autocomplete .choice-update {
+  display: none;
+}
+/* These lines are important to avoid style change to the underlying divs */
+.autocomplete-light-clearfix:before,
+.autocomplete-light-clearfix:after {
+  content: " ";
+  display: table;
+}
+.autocomplete-light-clearfix:after {
+  clear: both;
+}
+.autocomplete-light-clearfix {
+  *zoom: 1;
+}
+/* grappelli specific */
+fieldset.grp-module .grp-row {
+  overflow: visible !important;
+}
+/* credit: http://www.csslab.cl/2008/01/30/ventana-modal-solo-con-css/ */
+#yourlabs_overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #000;
+  z-index: 1001;
+  opacity: .75;
+  -moz-opacity: 0.75;
+  filter: alpha(opacity=75);
+}
 /* remove padding on grid system columns
  * credit to: Skelly*/
 .no-gutter .left {
@@ -6404,9 +6868,6 @@ h1 {
 .navigation {
   margin-bottom: 15px;
 }
-.sub-nav {
-  background-color: #C5C5C5;
-}
 .sub-nav .row .btn {
   margin-top: 5px;
   margin-bottom: 5px;
@@ -6416,22 +6877,22 @@ h1 {
   margin-bottom: 7px;
 }
 .sub-nav .nav li a {
-  color: #555555;
+  color: #dddddd;
 }
 .sub-nav .nav li a:hover,
 .sub-nav .nav li a:focus {
   background-color: rgba(0, 0, 0, 0.1);
   border-bottom: 3px solid rgba(0, 0, 0, 0.01);
   border-radius: 0px;
-  color: #303030;
+  color: #ffffff;
 }
 .sub-nav .nav li.active a,
 .sub-nav .nav li.active a:focus,
 .sub-nav .nav li.active a:hover {
   background-color: transparent;
   border-radius: 0px;
-  border-bottom: 3px solid #2063a9;
-  color: #000;
+  border-bottom: 3px solid #FFF;
+  color: #FFF;
 }
 .header .container-fluid {
   padding-left: 15px;
@@ -6547,206 +7008,6 @@ h1 {
 #footer .container {
   padding-left: 15px;
   padding-right: 15px;
-}
-.bootstrap-datetimepicker-widget {
-  top: 0;
-  left: 0;
-  width: 250px;
-  padding: 4px;
-  margin-top: 1px;
-  z-index: 99999 !important;
-  border-radius: 4px;
-}
-.bootstrap-datetimepicker-widget.timepicker-sbs {
-  width: 600px;
-}
-.bootstrap-datetimepicker-widget.bottom:before {
-  content: '';
-  display: inline-block;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-bottom: 7px solid #ccc;
-  border-bottom-color: rgba(0, 0, 0, 0.2);
-  position: absolute;
-  top: -7px;
-  left: 7px;
-}
-.bootstrap-datetimepicker-widget.bottom:after {
-  content: '';
-  display: inline-block;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid white;
-  position: absolute;
-  top: -6px;
-  left: 8px;
-}
-.bootstrap-datetimepicker-widget.top:before {
-  content: '';
-  display: inline-block;
-  border-left: 7px solid transparent;
-  border-right: 7px solid transparent;
-  border-top: 7px solid #ccc;
-  border-top-color: rgba(0, 0, 0, 0.2);
-  position: absolute;
-  bottom: -7px;
-  left: 6px;
-}
-.bootstrap-datetimepicker-widget.top:after {
-  content: '';
-  display: inline-block;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-top: 6px solid white;
-  position: absolute;
-  bottom: -6px;
-  left: 7px;
-}
-.bootstrap-datetimepicker-widget .dow {
-  width: 14.2857%;
-}
-.bootstrap-datetimepicker-widget.pull-right:before {
-  left: auto;
-  right: 6px;
-}
-.bootstrap-datetimepicker-widget.pull-right:after {
-  left: auto;
-  right: 7px;
-}
-.bootstrap-datetimepicker-widget > ul {
-  list-style-type: none;
-  margin: 0;
-}
-.bootstrap-datetimepicker-widget .timepicker-hour,
-.bootstrap-datetimepicker-widget .timepicker-minute,
-.bootstrap-datetimepicker-widget .timepicker-second {
-  width: 100%;
-  font-weight: bold;
-  font-size: 1.2em;
-}
-.bootstrap-datetimepicker-widget table[data-hour-format="12"] .separator {
-  width: 4px;
-  padding: 0;
-  margin: 0;
-}
-.bootstrap-datetimepicker-widget .datepicker > div {
-  display: none;
-}
-.bootstrap-datetimepicker-widget .picker-switch {
-  text-align: center;
-}
-.bootstrap-datetimepicker-widget table {
-  width: 100%;
-  margin: 0;
-}
-.bootstrap-datetimepicker-widget td,
-.bootstrap-datetimepicker-widget th {
-  text-align: center;
-  width: 20px;
-  height: 20px;
-  border-radius: 4px;
-}
-.bootstrap-datetimepicker-widget td.day:hover,
-.bootstrap-datetimepicker-widget td.hour:hover,
-.bootstrap-datetimepicker-widget td.minute:hover,
-.bootstrap-datetimepicker-widget td.second:hover {
-  background: #ebebeb;
-  cursor: pointer;
-}
-.bootstrap-datetimepicker-widget td.old,
-.bootstrap-datetimepicker-widget td.new {
-  color: #999999;
-}
-.bootstrap-datetimepicker-widget td.today {
-  position: relative;
-}
-.bootstrap-datetimepicker-widget td.today:before {
-  content: '';
-  display: inline-block;
-  border-left: 7px solid transparent;
-  border-bottom: 7px solid #2063a9;
-  border-top-color: rgba(0, 0, 0, 0.2);
-  position: absolute;
-  bottom: 4px;
-  right: 4px;
-}
-.bootstrap-datetimepicker-widget td.active,
-.bootstrap-datetimepicker-widget td.active:hover {
-  background-color: #2063a9;
-  color: #fff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-}
-.bootstrap-datetimepicker-widget td.active.today:before {
-  border-bottom-color: #fff;
-}
-.bootstrap-datetimepicker-widget td.disabled,
-.bootstrap-datetimepicker-widget td.disabled:hover {
-  background: none;
-  color: #999999;
-  cursor: not-allowed;
-}
-.bootstrap-datetimepicker-widget td span {
-  display: block;
-  width: 47px;
-  height: 54px;
-  line-height: 54px;
-  float: left;
-  margin: 2px;
-  cursor: pointer;
-  border-radius: 4px;
-}
-.bootstrap-datetimepicker-widget td span:hover {
-  background: #ebebeb;
-}
-.bootstrap-datetimepicker-widget td span.active {
-  background-color: #2063a9;
-  color: #fff;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-}
-.bootstrap-datetimepicker-widget td span.old {
-  color: #999999;
-}
-.bootstrap-datetimepicker-widget td span.disabled,
-.bootstrap-datetimepicker-widget td span.disabled:hover {
-  background: none;
-  color: #999999;
-  cursor: not-allowed;
-}
-.bootstrap-datetimepicker-widget th.switch {
-  width: 145px;
-}
-.bootstrap-datetimepicker-widget th.next,
-.bootstrap-datetimepicker-widget th.prev {
-  font-size: 21px;
-}
-.bootstrap-datetimepicker-widget th.disabled,
-.bootstrap-datetimepicker-widget th.disabled:hover {
-  background: none;
-  color: #999999;
-  cursor: not-allowed;
-}
-.bootstrap-datetimepicker-widget thead tr:first-child th {
-  cursor: pointer;
-}
-.bootstrap-datetimepicker-widget thead tr:first-child th:hover {
-  background: #ebebeb;
-}
-.input-group.date .input-group-addon span {
-  display: block;
-  cursor: pointer;
-  width: 16px;
-  height: 16px;
-}
-.bootstrap-datetimepicker-widget.left-oriented:before {
-  left: auto;
-  right: 6px;
-}
-.bootstrap-datetimepicker-widget.left-oriented:after {
-  left: auto;
-  right: 7px;
-}
-.bootstrap-datetimepicker-widget ul.list-unstyled li div.timepicker div.timepicker-picker table.table-condensed tbody > tr > td {
-  padding: 0px !important;
 }
 .landing-page {
   margin-bottom: 0px;
@@ -7007,46 +7268,6 @@ h1 {
 .post form .dropdown-menu {
   top: 0px;
 }
-ul.thumbnails.image_picker_selector {
-  overflow: auto;
-  list-style-image: none;
-  list-style-position: outside;
-  list-style-type: none;
-  padding: 0px;
-  margin: 0px;
-}
-ul.thumbnails.image_picker_selector ul {
-  overflow: auto;
-  list-style-image: none;
-  list-style-position: outside;
-  list-style-type: none;
-  padding: 0px;
-  margin: 0px;
-}
-ul.thumbnails.image_picker_selector li.group_title {
-  float: none;
-}
-ul.thumbnails.image_picker_selector li {
-  margin: 0px 12px 12px 0px;
-  float: left;
-}
-ul.thumbnails.image_picker_selector li .thumbnail {
-  padding: 6px;
-  border: 1px solid #dddddd;
-  margin-bottom: 0px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-}
-ul.thumbnails.image_picker_selector li .thumbnail img {
-  width: 100px;
-  height: 100px;
-  -webkit-user-drag: none;
-}
-ul.thumbnails.image_picker_selector li .thumbnail.selected {
-  background: #3e79b5;
-  color: #ffffff;
-}
 .navigation.thread {
   margin-bottom: 0px;
 }
@@ -7221,74 +7442,8 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 .social-links .btn {
   margin-left: 5px;
 }
-#privateRequestForm #div_id_form-0-start:before,
-#privateRequestForm #div_id_form-0-end:before,
-#privateRequestForm #div_id_form-1-start:before,
-#privateRequestForm #div_id_form-1-end:before,
-#privateRequestForm #div_id_form-2-start:before,
-#privateRequestForm #div_id_form-2-end:before {
-  content: " ";
-}
-#privateRequestForm #div_id_form-0-start:after,
-#privateRequestForm #div_id_form-0-end:after,
-#privateRequestForm #div_id_form-1-start:after,
-#privateRequestForm #div_id_form-1-end:after,
-#privateRequestForm #div_id_form-2-start:after,
-#privateRequestForm #div_id_form-2-end:after {
-  content: " ";
-  clear: both;
-}
-#privateRequestForm #div_id_form-0-start .dateinput,
-#privateRequestForm #div_id_form-0-end .dateinput,
-#privateRequestForm #div_id_form-1-start .dateinput,
-#privateRequestForm #div_id_form-1-end .dateinput,
-#privateRequestForm #div_id_form-2-start .dateinput,
-#privateRequestForm #div_id_form-2-end .dateinput,
-#privateRequestForm #div_id_form-0-start .timeinput,
-#privateRequestForm #div_id_form-0-end .timeinput,
-#privateRequestForm #div_id_form-1-start .timeinput,
-#privateRequestForm #div_id_form-1-end .timeinput,
-#privateRequestForm #div_id_form-2-start .timeinput,
-#privateRequestForm #div_id_form-2-end .timeinput {
-  position: relative;
-  min-height: 1px;
-  margin-right: 1%;
-  margin-left: 1%;
-  float: left;
-  width: 48%;
-}
-#privateRequestForm #div_id_form-0-start .controls,
-#privateRequestForm #div_id_form-0-end .controls,
-#privateRequestForm #div_id_form-1-start .controls,
-#privateRequestForm #div_id_form-1-end .controls,
-#privateRequestForm #div_id_form-2-start .controls,
-#privateRequestForm #div_id_form-2-end .controls {
-  margin-right: -1%;
-  margin-left: -1%;
-  padding-bottom: 15px;
-}
-#privateRequestForm #div_id_form-0-user,
-#privateRequestForm #div_id_form-1-user,
-#privateRequestForm #div_id_form-2-user {
-  margin-bottom: 25px;
-}
 .messages .panel {
   border: 0px;
-}
-.messages .nav-tabs {
-  border-top: 1px solid #ffffff;
-}
-.messages .nav-tabs > li > a {
-  border-right: 1px solid #ffffff;
-  border-radius: 0;
-  margin-right: 0px;
-}
-.messages .nav-tabs > li.active > a,
-.messages .nav-tabs > li.active > a:hover,
-.messages .nav-tabs > li.active > a:focus {
-  background-color: #ffffff;
-  border-top: 1px solid transparent;
-  border-left: 1px solid transparent;
 }
 .request {
   text-align: left;
@@ -7678,79 +7833,6 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
   .event {
     text-align: center;
   }
-}
-/*
-* Skin for jPlayer Plugin (jQuery JavaScript Library)
-* http://www.jplayer.org
-*
-* Skin Name: Composers Couch
-*            (responsive bootstrap/fontawsome version of Blue Monday)
-*
-* Copyright (c) 2010-2014 Happyworm Ltd
-* Licensed under the MIT license.
-*  - http://www.opensource.org/licenses/mit-license.php
-*
-* Author: Silvia Benvenuti
-* Skin Version: 4.4 (jPlayer 2.6.0)
-* Date: 1st April 2014
-*/
-.jplayer-controls {
-  min-height: 25px;
-  /* control buttons (volume/play/pause/etc.) */
-  /* Seek Bar */
-}
-.jplayer-controls .jp-controls .jp-button {
-  padding: 5px;
-  color: #303030;
-}
-.jplayer-controls .jp-controls .jp-button:hover {
-  color: #2063a9;
-}
-.jplayer-controls .jp-progress {
-  overflow: hidden;
-  background-color: #ddd;
-  width: 100%;
-  height: 20px;
-  /* The seeking class is added/removed inside jPlayer */
-}
-.jplayer-controls .jp-progress .jp-seek-bar {
-  background-color: #dddddd;
-  width: 0px;
-  height: 100%;
-  cursor: pointer;
-}
-.jplayer-controls .jp-progress .jp-play-bar {
-  background-color: #2063a9;
-  width: 0px;
-  height: 100%;
-}
-.jplayer-controls .jp-progress .jp-seeking-bg {
-  -webkit-animation: progress-bar-stripes 2s linear infinite;
-  animation: progress-bar-stripes 2s linear infinite;
-}
-.jp-playlist .jp-track-list {
-  list-style-type: none;
-}
-.jp-playlist .jp-track-list li {
-  border-bottom: 1px solid silver;
-}
-.jp-playlist .jp-track-list .jp-playlist-current .jp-playlist-item {
-  color: #2063a9;
-}
-.jp-playlist .jp-track-list .jp-playlist-item {
-  color: #303030;
-}
-.jp-playlist .jp-track-list .jp-playlist-item:hover {
-  color: #2063a9;
-}
-.jp-playlist .jp-track-list .jp-playlist-item.no-mp3 {
-  color: #999999;
-}
-.jp-playlist .jp-track-list .jp-playlist-item.no-mp3:hover {
-  color: #999999;
-}
-.jp-playlist .jp-track-list .jp-playlist-item.no-mp3:hover:before {
-  content: '';
 }
 /* FONT PATH
  * -------------------------- */
@@ -9402,155 +9484,4 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected {
 }
 .fa-medium:before {
   content: "\f23a";
-}
-/*
- * Admin specific styling are prefixed with body.change-form.
- */
-.yourlabs-autocomplete {
-  position: absolute;
-  left: 0;
-  z-index: 1000;
-  display: none;
-  float: left;
-  min-width: 160px;
-  padding: 5px 0;
-  margin: 2px 0 0;
-  list-style: none;
-  background-color: #ffffff;
-  border: 1px solid #ccc;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  border-radius: 6px;
-  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
-  -webkit-background-clip: padding-box;
-  -moz-background-clip: padding;
-  background-clip: padding-box;
-}
-.yourlabs-autocomplete .hilight {
-  color: #ffffff !important;
-  text-decoration: none;
-  background-color: #0081c2;
-  background-image: -moz-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3);
-  background-image: -o-linear-gradient(top, #0088cc, #0077b3);
-  background-image: linear-gradient(to bottom, #0088cc, #0077b3);
-  background-repeat: repeat-x;
-  outline: 0;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0);
-}
-.yourlabs-autocomplete .choice,
-.yourlabs-autocomplete [data-value],
-.yourlabs-autocomplete em {
-  display: block;
-  padding: 3px 20px;
-  clear: both;
-  font-weight: normal;
-  line-height: 20px;
-  color: #333333;
-  white-space: nowrap;
-  color: black;
-  cursor: pointer;
-}
-/*
- * You should use the "block" class because the "div" class is deprecated since
- * 2.0. However, the "div" class is still supported for backward compatibility.
- */
-.block,
-.div {
-  display: block;
-}
-.autocomplete-light-widget {
-  /* for the add-another image */
-  vertical-align: middle;
-}
-.autocomplete-light-widget input,
-.autocomplete-light-widget input:focus {
-  margin: 0;
-  outline: 0;
-}
-input.autocomplete {
-  position: relative;
-  vertical-align: top;
-}
-input.autocomplete.xhr-pending {
-  background-image: url('../autocomplete_light/xhr-pending.gif');
-  background-repeat: no-repeat;
-  background-position: right;
-}
-.autocomplete-light-widget.modern-style {
-  border: 1px solid lightgrey;
-  padding: 4px 4px 3px 4px;
-}
-.autocomplete-light-widget.modern-style input,
-.autocomplete-light-widget.modern-style input:focus {
-  border: 0;
-  margin: 2px 0;
-}
-.autocomplete-light-widget.modern-style .deck [data-value],
-.autocomplete-light-widget.modern-style .deck .choice {
-  border: 1px solid lightgrey;
-  border-radius: 4px;
-}
-.autocomplete-light-widget.yourlabs-autocomplete {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: 100;
-}
-.autocomplete-light-widget .deck [data-value],
-.autocomplete-light-widget .deck .choice {
-  list-style-type: none;
-  padding-top: 3px;
-  padding-right: 3px;
-}
-.autocomplete-light-widget .deck [data-value] .remove {
-  background-image: url('../autocomplete_light/delete.png');
-  color: #fff;
-  cursor: pointer;
-  text-indent: -999px;
-  height: 16px;
-  width: 16px;
-  display: inline-block;
-  background-position-y: -1px;
-  background-repeat: no-repeat;
-}
-.autocomplete-light-widget .deck [data-value] .remove:hover {
-  background-position: -15px 0;
-}
-.yourlabs-autocomplete .choice-detail,
-.yourlabs-autocomplete .choice-update {
-  display: none;
-}
-/* These lines are important to avoid style change to the underlying divs */
-.autocomplete-light-clearfix:before,
-.autocomplete-light-clearfix:after {
-  content: " ";
-  display: table;
-}
-.autocomplete-light-clearfix:after {
-  clear: both;
-}
-.autocomplete-light-clearfix {
-  *zoom: 1;
-}
-/* grappelli specific */
-fieldset.grp-module .grp-row {
-  overflow: visible !important;
-}
-/* credit: http://www.csslab.cl/2008/01/30/ventana-modal-solo-con-css/ */
-#yourlabs_overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #000;
-  z-index: 1001;
-  opacity: .75;
-  -moz-opacity: 0.75;
-  filter: alpha(opacity=75);
 }

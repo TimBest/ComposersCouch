@@ -4,7 +4,7 @@
 
 
 {% block privateClass %}active{% endblock %}
-{% block messageType %}Private Requests{% endblock %}
+{% block messageType %} > {% block messageTypeDropdown %}Private Requests{% endblock %}{% endblock %}
 
 {% block send_message %}
   <a href="{{ url('request_write') }}" class="btn btn-primary">Send Private Request</a>

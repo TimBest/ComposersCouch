@@ -1,54 +1,45 @@
 {% extends "base.html" %}
 
 
-{% block title %}Messages{% endblock %}
-
 {% block headerClass %}dark-blue{% endblock %}
 
 {% block header%}
-  <div class="page-header text-white">
-    <h2>{% block messageType %}Messages{% endblock %}</h2>
+  <div class="text-white">
+    <h2>Messages {% block messageType %}{% endblock %}</h2>
   </div>
-{% endblock %}
-
-{% block navigation %}
-  <div class="navigation sub-nav thread">
-    <div class="container-fluid">
-      <div class="row no-gutter">
-        <div class="col-sm-4 col-xs-6 left">
-          {% block send_message %}
-            <a href="{{ url('threads:compose') }}" class="btn btn-primary">Send message</a>
-          {% endblock %}
-        </div>
-        <div class="col-sm-4 col-sm-push-4 col-xs-6 right">
-          <div class="btn-group pull-right">
-            <a href="{{ url('threads:inbox') }}" class="{% block messageClass %}{% endblock %} btn btn-sm btn-default">
-              All
-            </a>
-            <a href="{{ url('private_requests') }}" class="{% block privateClass %}{% endblock %} btn btn-sm btn-default">
-              Private Requests
-            </a>
-            <a href="{{ url('public_requests') }}" class="{% block publicClass %}{% endblock %} btn btn-sm btn-default">
-              Public Requests
-            </a>
-          </div>
-        </div>
-        <div class="col-sm-4 col-sm-pull-4 col-xs-12 center">
-          <ul class="nav nav-pills nav-centered" role="tablist">
-            {% block center_nav %}
-              <li class="{% block inboxClass %}{% endblock %}">
-                <a href="{{ url('threads:inbox') }}"><span class="fa fa-inbox"></span> Inbox <strong>({{ inbox_count(request.user) }})</strong></a>
-              </li>
-              <li class="{% block sentClass %}{% endblock %}">
-                <a href="{{ url('threads:sent') }}"><span class="fa fa-send"></span> Sent</a>
-              </li>
-              <li class="{% block trashClass %}{% endblock %}">
-                <a href="{{ url('threads:trash') }}"><span class="fa fa-trash-o"></span> Trash</a>
-              </li>
-            {% endblock %}
-          </ul>
-        </div>
-      </div>
+  <div class="row no-gutter">
+    <div class="col-xs-6 left sub-nav">
+      <ul class="nav nav-pills " role="tablist">
+        <li class="{% block inboxClass %}{% endblock %}">
+          {% set unread = inbox_count(request.user)  %}
+          <a href="{{ url('threads:inbox') }}"><span class="fa fa-inbox"></span> Inbox {% if unread %}<strong>({{ unread }})</strong>{% endif %}</a>
+        </li>
+        <li class="{% block sentClass %}{% endblock %}">
+          <a href="{{ url('threads:sent') }}"><span class="fa fa-send"></span> Sent</a>
+        </li>
+        <li class="{% block trashClass %}{% endblock %}">
+          <a href="{{ url('threads:trash') }}"><span class="fa fa-trash-o"></span> Trash</a>
+        </li>
+      </ul>
+    </div>
+    <div class="col-xs-6 right text-right">
+      <span class="dropdown text-left">
+        <a class="btn btn-transparent-dropdown dropdown-toggle"
+           data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
+           <span class="dotted-bottom">{% block title %}{% block messageTypeDropdown %}All Messages{% endblock %}{% endblock %}</span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+            <li class="{% block messageClass %}{% endblock %}">
+              <a href="{{ url('threads:inbox') }}">All Messages</a>
+            </li>
+            <li class="{% block privateClass %}{% endblock %}">
+              <a href="{{ url('private_requests') }}">Private Requests</a>
+            </li>
+            <li class="{% block publicClass %}{% endblock %}">
+              <a href="{{ url('public_requests') }}">Public Requests</a>
+            </li>
+        </ul>
+      </span>
     </div>
   </div>
 {% endblock %}
@@ -60,9 +51,11 @@
         To receive notifications for show requests please <a href="{{ url('profile_edit') }}">Add an Email</a> to your profile.
       </div>
     {% endif %}
-
     <form action="{{ url('threads:batch_update') }}" method="post">
       <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+      {% block send_message %}
+        <a href="{{ url('threads:compose') }}" class="btn btn-primary">Send message</a>
+      {% endblock %}
       <div class="btn-group request-folder-actions">
         {% block markAsRead %}
         <button type="submit" onclick="this.form.onsubmit(); return false; " name="action" value="read" class="btn btn-default">

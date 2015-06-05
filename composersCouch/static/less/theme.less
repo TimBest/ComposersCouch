@@ -1,48 +1,48 @@
 // Core variables and mixins
 @import "variables.less";
-@import "bootstrap/mixins.less";
+@import "includes/bootstrap/mixins.less";
 
 // Reset
-@import "bootstrap/normalize.less";
-@import "bootstrap/print.less";
+@import "includes/bootstrap/normalize.less";
+@import "includes/bootstrap/print.less";
 
 // Core CSS
-@import "bootstrap/scaffolding.less";
-@import "bootstrap/type.less";
-@import "bootstrap/grid.less";
-@import "bootstrap/tables.less";
-@import "bootstrap/forms.less";
-@import "bootstrap/buttons.less";
+@import "includes/bootstrap/scaffolding.less";
+@import "includes/bootstrap/type.less";
+@import "includes/bootstrap/grid.less";
+@import "includes/bootstrap/tables.less";
+@import "includes/bootstrap/forms.less";
+@import "includes/bootstrap/buttons.less";
 
 // Components
-@import "bootstrap/component-animations.less";
-@import "bootstrap/dropdowns.less";
-@import "bootstrap/button-groups.less";
-@import "bootstrap/input-groups.less";
-@import "bootstrap/navs.less";
-@import "bootstrap/navbar.less";
-@import "bootstrap/pagination.less";
-@import "bootstrap/pager.less";
-@import "bootstrap/labels.less";
-@import "bootstrap/badges.less";
-@import "bootstrap/jumbotron.less";
-@import "bootstrap/thumbnails.less";
-@import "bootstrap/alerts.less";
-@import "bootstrap/progress-bars.less";
-@import "bootstrap/media.less";
-@import "bootstrap/list-group.less";
-@import "bootstrap/panels.less";
-@import "bootstrap/wells.less";
-@import "bootstrap/close.less";
+@import "includes/bootstrap/component-animations.less";
+@import "includes/bootstrap/dropdowns.less";
+@import "includes/bootstrap/button-groups.less";
+@import "includes/bootstrap/input-groups.less";
+@import "includes/bootstrap/navs.less";
+@import "includes/bootstrap/navbar.less";
+@import "includes/bootstrap/pagination.less";
+@import "includes/bootstrap/pager.less";
+@import "includes/bootstrap/labels.less";
+@import "includes/bootstrap/badges.less";
+@import "includes/bootstrap/jumbotron.less";
+@import "includes/bootstrap/thumbnails.less";
+@import "includes/bootstrap/alerts.less";
+@import "includes/bootstrap/progress-bars.less";
+@import "includes/bootstrap/media.less";
+@import "includes/bootstrap/list-group.less";
+@import "includes/bootstrap/panels.less";
+@import "includes/bootstrap/wells.less";
+@import "includes/bootstrap/close.less";
 
 // Components w/ JavaScript
-@import "bootstrap/modals.less";
-@import "bootstrap/tooltip.less";
-@import "bootstrap/popovers.less";
+@import "includes/bootstrap/modals.less";
+@import "includes/bootstrap/tooltip.less";
+@import "includes/bootstrap/popovers.less";
 
 // Utility classes
-@import "bootstrap/utilities.less";
-@import "bootstrap/responsive-utilities.less";
+@import "includes/bootstrap/utilities.less";
+@import "includes/bootstrap/responsive-utilities.less";
 
 // Bootsrtap overwrites
 @import "overwrites/buttons.less";
@@ -53,33 +53,25 @@
 @import "overwrites/panels.less";
 @import "overwrites/jumbotron.less";
 
+// Misc. Includes
+@import "includes/bootstrap-datetimepicker.less";
+@import "includes/image-picker.less";
+@import "includes/jplayer.less";
+@import "includes/autocomplete_light.less";
+
 // Main Pages
 @import "utils.less";
 @import "base.less";
-@import "bootstrap-datetimepicker.less";
 @import "landing-page.less";
 @import "static.less";
 @import "learn.less";
 
-// Account Pages
 @import "accounts/authentication.less";
-
-// Feed Pages
 @import "feeds/feed.less";
 @import "feeds/post.less";
-
-// Photos
-@import "image-picker.less";
-
-// Postman Pages
 @import "threads/messages.less";
-
-// Profile Pages
 @import "profile.less";
-
-// requests
-@import "request/forms.less";
-@import "request/inbox.less";
+@import "request.less";
 
 // Utils
 @import "utils/date_time.less";
@@ -93,14 +85,8 @@
 @import "schedule/schedule.less";
 @import "schedule/shows.less";
 
-// jplayer
-@import "jplayer/jplayer.less";
-
-// font-awesome
-@import "fontawesome/variables.less";
-@import "fontawesome/path.less";
-@import "fontawesome/core.less";
-@import "fontawesome/icons.less";
-
-//autocomplete_light
-@import "autocomplete_light.less";
+// Font-awesome
+@import "includes/fontawesome/variables.less";
+@import "includes/fontawesome/path.less";
+@import "includes/fontawesome/core.less";
+@import "includes/fontawesome/icons.less";
