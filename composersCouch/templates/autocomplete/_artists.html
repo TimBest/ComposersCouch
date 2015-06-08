@@ -1,6 +1,6 @@
 
 
-<span id="{{ widget.html_id }}-deck" class="deck" >
+<span class="deck" >
   {% for choice in choices %}
     {{ autocomplete.choice_html(choice)|safe }}
   {% endfor %}

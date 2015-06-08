@@ -7271,6 +7271,9 @@ h1 {
 .content .messages {
   margin-top: 15px;
 }
+.content .messages .unread {
+  font-weight: bold;
+}
 @media (min-width: 768px) {
   .content .message-thread {
     padding: 0px 30px;

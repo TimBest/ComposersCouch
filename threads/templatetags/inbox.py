@@ -8,7 +8,8 @@ from django.template import Node
 from django.template import TemplateSyntaxError
 from django.template import Library
 from django.template.defaultfilters import date
-from django.utils import six
+from django.utils import six, timezone
+from django.utils.timezone import localtime
 from django.utils.encoding import force_text
 from django.utils.translation import ugettext_lazy as _
 
@@ -18,7 +19,7 @@ from django.template import Library, Node, TemplateSyntaxError
 from threads.models import cached_inbox_count_for
 
 
-def compact_date(value, same_day, same_year, other):
+def compact_date(value, same_day, same_year, other, timezone_active=True):
     """
     Output a date as short as possible.
 
@@ -26,7 +27,8 @@ def compact_date(value, same_day, same_year, other):
     Typical usage: |compact_date("G:i,j b,j/n/y")
 
     """
-
+    if timezone_active:
+        value = localtime(value)
     today = datetime.date.today()
     if value.date() == today:
         return date(value, same_day)

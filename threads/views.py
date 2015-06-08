@@ -21,6 +21,7 @@ from .utils import fill_count_cache, now
 class threadMixin(object):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
+        print dir(self.request)
         return super(threadMixin, self).dispatch(*args, **kwargs)
 
 class InboxView(threadMixin, TemplateView):

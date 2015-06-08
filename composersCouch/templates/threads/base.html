@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% from "utils/macros.html" import paginate %}
 
 
 {% block headerClass %}dark-blue{% endblock %}
@@ -91,7 +92,7 @@
         <table class="table table-hover">
           <tbody>
             {% for message in message_list %}
-              <tr class="message {% if message.new %}unread{% endif %}">
+              <tr class="message {% if message.new() %}unread{% endif %}">
                 <td><input class="request-folder-checkbox" name="batchupdateids" type="checkbox" value="{{message.thread.pk}}" /></td>
                 <td>
                   {% for participant in message.others() %}
@@ -102,23 +103,21 @@
                   {% endfor %}
                 </td>
                 <td>
-                  <a href="{{ message.thread.get_absolute_url() }}">{% if message.new %}<b>{% endif %}
-                  {% with truncated_subject = message.thread.subject|truncate(50) %}
-                    <span class="text-black">{{ truncated_subject }}</span>
-                    {% with subject_len = truncated_subject|length %}
-                      {% with len = 100 - subject_len %}
-                        {% if message.thread.latest_msg.body %}
-                         <span class="text-muted"> - {{ message.thread.latest_msg.body|truncate(len)|safe }}</span>
-                        {% endif %}
+                  <a href="{{ message.thread.get_absolute_url() }}">
+                    {% with truncated_subject = message.thread.subject|truncate(50) %}
+                      <span class="text-black">{{ truncated_subject }}</span>
+                      {% with subject_len = truncated_subject|length %}
+                        {% with len = 100 - subject_len %}
+                          {% if message.thread.latest_msg.body %}
+                           <span class="text-muted"> - {{ message.thread.latest_msg.body|truncate(len)|safe }}</span>
+                          {% endif %}
+                        {% endwith %}
                       {% endwith %}
                     {% endwith %}
-                  {% endwith %}
-                  {% if message.new %}</b>{% endif %}</a>
+                  </a>
                 </td>
                 <td>
-                  {#{% localtime on %}#}
-                    <span class="date pull-right">{{ compact_date(message.thread.latest_msg.sent_at, "g:i A","M j","n/j/y") }}</span>
-                  {#{% endlocaltime %}#}
+                  <span class="date pull-right">{{ compact_date(message.thread.latest_msg.sent_at, "g:i A","M j","n/j/y") }}</span>
                 </td>
               </tr>
             {% else %}
@@ -130,7 +129,6 @@
         </table>
       </div>
     </form>
-    {% from "utils/macros.html" import paginate %}
-{{ paginate(request=request, page=thread_list) }}
+    {{ paginate(request=request, page=thread_list) }}
   </div>
 {% endblock %}
