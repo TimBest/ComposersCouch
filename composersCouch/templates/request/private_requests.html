@@ -4,7 +4,10 @@
 
 
 {% block privateClass %}active{% endblock %}
-{% block messageType %} > {% block messageTypeDropdown %}Private Requests{% endblock %}{% endblock %}
+{% block messageType %}
+  <a href="{{ url('threads:inbox') }}" class=" text-white disabled">Messages</a>
+  <span> > {% block messageTypeDropdown %}Private Requests{% endblock %}</span>
+{% endblock %}
 
 {% block send_message %}
   <a href="{{ url('request_write') }}" class="btn btn-primary">Send Private Request</a>

@@ -4,7 +4,10 @@
 
 
 {% block publicClass %}active{% endblock %}
-{% block messageType %} > {% block messageTypeDropdown %}Public Requests{% endblock %}{% endblock %}
+{% block messageType %}
+  <a href="{{ url('threads:inbox') }}" class=" text-white disabled">Messages</a>
+  <span> > {% block messageTypeDropdown %}Public Requests{% endblock %}</span>
+{% endblock %}
 
 {% block send_message %}
   {% if request.user.profile.profile_type == 'm' %}
