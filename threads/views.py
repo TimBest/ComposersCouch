@@ -21,7 +21,6 @@ from .utils import fill_count_cache, now
 class threadMixin(object):
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        print dir(self.request)
         return super(threadMixin, self).dispatch(*args, **kwargs)
 
 class InboxView(threadMixin, TemplateView):
@@ -185,5 +184,4 @@ def message_ajax_reply(request, thread_id, success_url='threads:inbox'):
 
             return render_to_response('threads/_message.html', {'message':new_message,'user':request.user})
         else:
-            print form.errors
             return HttpResponse(status=400, content="Invalid Form")

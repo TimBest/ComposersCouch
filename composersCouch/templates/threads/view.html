@@ -32,6 +32,7 @@
         {% endfor %}
       </div>
       <form action="{{ url('threads:reply', kwargs={'thread_id':thread.pk}) }}?next={{ request.path }}" class="reply-form" method="post">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
         {{ render_form(form) }}
         <button type="submit" class="btn btn-primary">
           <span class="fa fa-send" ></span> Send
