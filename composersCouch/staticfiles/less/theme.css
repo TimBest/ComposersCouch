@@ -7751,8 +7751,6 @@ h1 {
 }
 .calendar-header {
   padding: 8px 0px 8px 0px;
-  background-color: #009262;
-  color: #ffffff;
 }
 .calendar-header a {
   color: #ffffff;
@@ -7766,24 +7764,38 @@ h1 {
 .calendar-header .preiod-name {
   font-size: 36px;
 }
+.calendar-navigation.sub-nav .nav li a {
+  color: #555555;
+}
+.calendar-navigation.sub-nav .nav li a:hover,
+.calendar-navigation.sub-nav .nav li a:focus {
+  color: #303030;
+}
+.calendar-navigation.sub-nav .nav li.active a,
+.calendar-navigation.sub-nav .nav li.active a:focus,
+.calendar-navigation.sub-nav .nav li.active a:hover {
+  border-bottom: 3px solid #2063a9;
+  color: #303030;
+}
 .more-dropdown {
   margin-left: 5px;
 }
-.dropdown-menu {
-  margin-left: 5px;
-}
-.dropdown-menu .dropdown-item .btn-link {
-  color: #303030;
-  margin: 0px;
-  border: 0px;
-  padding: 0px;
-  width: 100%;
-  text-align: left;
-}
-.dropdown-menu .dropdown-item .btn-link:hover,
-.dropdown-menu .dropdown-item .btn-link:focus {
-  text-decoration: none;
-}
+/*.dropdown-menu {
+  .dropdown-item {
+    .btn-link {
+      color: @black;
+      margin: 0px;
+      border: 0px;
+      padding: 0px;
+      width: 100%;
+      text-align: left;
+      &:hover, &:focus {
+        text-decoration: none;
+      }
+    }
+  }
+  margin-left:5px;
+}*/
 .calendar-wrapper {
   text-align: center;
   position: relative;

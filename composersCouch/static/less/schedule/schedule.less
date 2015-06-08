@@ -1,7 +1,5 @@
 .calendar-header {
   padding: 8px 0px 8px 0px;
-  background-color: @dark-green;
-  color: @white;
   a {
     color: @white;
     &:hover, &:focus, &:active,.active {
@@ -10,6 +8,25 @@
   }
   .preiod-name {
     font-size:36px;
+  }
+}
+
+.calendar-navigation.sub-nav {
+  .nav {
+    li {
+      a {
+        color: @gray;
+        &:hover, &:focus {
+          color: @black;
+        }
+      }
+      &.active {
+        a, a:focus, a:hover  {
+          border-bottom: 3px solid @blue;
+          color: @black;
+        }
+      }
+    }
   }
 }
 .more-dropdown {
