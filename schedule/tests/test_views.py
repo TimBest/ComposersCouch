@@ -17,8 +17,7 @@ class ViewsTests(TestCase):
                 'profiles', 'applications', 'publicRequests', 'numApplicants',
                 'privateRequests', 'requestParticipants', 'threads', 'messages',
                 'participants', 'dates', 'genres', 'albums', 'artists',
-                'tracks', 'media', 'calendars', 'info', 'shows', 'events',
-                'venues']
+                'tracks', 'calendars', 'info', 'shows', 'events', 'venues']
 
     def test_calendar_views(self):
         """ test views where login is required """

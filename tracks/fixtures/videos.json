@@ -1,0 +1,18 @@
+[
+  {
+    "pk": 1,
+    "model": "tracks.video",
+    "fields": {
+      "user": 1,
+      "video": "https://www.youtube.com/watch?v=BpkOuLp2Alw&list=TLuezgr9BxcQc"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "tracks.video",
+    "fields": {
+      "user": 1,
+      "video": "https://vimeo.com/36525519"
+    }
+  }
+]

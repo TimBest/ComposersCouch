@@ -33,7 +33,7 @@
       </div>
     </div>
     <div class="row">
-      {% for video in request.user.videos.all() %}
+      {% for video in artist_profile.user.videos.all() %}
         {% if (loop.index - 1) is divisibleby(4) %}
           </div>
           <div class="row">

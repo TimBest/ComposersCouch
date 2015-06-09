@@ -8,10 +8,10 @@ from tracks import forms
 
 
 class FormTests(TestCase):
-    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',  
+    fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',
                  'applications', 'publicRequests', 'numApplicants',
                 'threads', 'messages', 'participants', 'dates', 'genres',
-                'albums', 'artists', 'tracks', 'media']
+                'albums', 'artists', 'tracks', 'videos']
 
     def setUp(self):
         self.mp3_file = open(os.path.join(os.path.dirname(__file__), 'files/thriftyTale.mp3'))
@@ -56,19 +56,18 @@ class FormTests(TestCase):
             self.failUnless(form.is_valid())
 
     def test_album_video_form(self):
-        """invalid_data_dicts = [
+        invalid_data_dicts = [
             #test an invalid url
             {'data': {"album": 1,
                       "title":"Overseas Then Under",
                       "video": "http://www.composerscouch.com/",
                       "order": 1,},
-            'error': ('video', [_(u'Must be a Youtube or Vimeo URL.')])},
+             'error': ('video', [_(u'URL could not be recognized.')])},
         ]
         for invalid_dict in invalid_data_dicts:
             form = forms.AlbumVideoForm(data=invalid_dict['data'])
             self.failIf(form.is_valid())
-            self.assertEqual(form.errors[invalid_dict['error'][0]],
-                             invalid_dict['error'][1])"""
+            self.assertEqual(form.errors[invalid_dict['error'][0]], invalid_dict['error'][1])
         # Test a valid form.
         valid_data_dicts = [
             {"album": 1,
@@ -82,4 +81,26 @@ class FormTests(TestCase):
         ]
         for valid_dict in valid_data_dicts:
             form = forms.AlbumVideoForm(data=valid_dict)
+            self.failUnless(form.is_valid())
+
+    def test_video_form(self):
+        invalid_data_dicts = [
+            #test an invalid url
+            {'data': {"user": 1,
+                      "video": "http://www.composerscouch.com/",},
+             'error': ('video', [_(u'URL could not be recognized.')])},
+        ]
+        for invalid_dict in invalid_data_dicts:
+            form = forms.VideoForm(data=invalid_dict['data'])
+            self.failIf(form.is_valid())
+            self.assertEqual(form.errors[invalid_dict['error'][0]], invalid_dict['error'][1])
+        # Test a valid form.
+        valid_data_dicts = [
+            {"user": 1,
+             "video": "https://vimeo.com/38489428",},
+            {"user": 1,
+             "video": "https://www.youtube.com/watch?v=pquhYpGHrlw",},
+        ]
+        for valid_dict in valid_data_dicts:
+            form = forms.VideoForm(data=valid_dict)
             self.failUnless(form.is_valid())

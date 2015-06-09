@@ -32,7 +32,7 @@ class photosTest(TestCase):
         'profiles', 'applications', 'publicRequests', 'numApplicants',
         'privateRequests', 'requestParticipants', 'threads', 'messages',
         'participants', 'dates', 'genres', 'albums', 'artists', 'tracks',
-        'media', 'calendars', 'info', 'shows', 'events', 'venues', 'fans',
+        'calendars', 'info', 'shows', 'events', 'venues', 'fans',
     ]
 
     def setUp(self):

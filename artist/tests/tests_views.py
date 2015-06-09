@@ -28,7 +28,7 @@ class ViewsTests(TestCase):
     """  """
     fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes',
                 'profiles', 'artists', 'members', 'calendars', 'albums',
-                'media', 'tracks','genres']
+                'tracks','genres']
 
     def _test_only_viewable_by_artist(self, url_name, kwargs):
         # Anonymous user is redirected to login
