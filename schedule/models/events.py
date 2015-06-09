@@ -12,7 +12,7 @@ from django.core.urlresolvers import reverse
 from django.template.defaultfilters import date
 from django.utils.translation import ugettext, ugettext_lazy as _
 
-from sorl.thumbnail import ImageField
+from photos.fields import ImageField
 from artist.models import ArtistProfile
 from contact.models import Location
 from photos.models import Image

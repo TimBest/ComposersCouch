@@ -9,15 +9,14 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.forms import ValidationError
 
-from sorl.thumbnail import ImageField, get_thumbnail
-from sorl.thumbnail.helpers import ThumbnailError
-
+from photos.fields import ImageField
 try:
     import Image as PILImage
 except ImportError:
     from PIL import Image as PILImage
 
 from photos.utils import get_file_path, get_model_string
+
 
 def validate_file_extension(value):
     if value.name.endswith('.eps'):
@@ -46,14 +45,3 @@ class BaseImage(models.Model):
 
     def __unicode__(self):
         return '%s'% self.id
-
-    def admin_thumbnail(self):
-        try:
-            return '<img src="%s">' % get_thumbnail(self.image, '100x100', crop='center').url
-        except IOError:
-            return 'IOError'
-        except ThumbnailError, ex:
-            return 'ThumbnailError, %s' % ex.message
-
-    admin_thumbnail.short_description = _('Thumbnail')
-    admin_thumbnail.allow_tags = True

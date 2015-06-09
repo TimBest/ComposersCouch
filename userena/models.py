@@ -8,8 +8,7 @@ from django.db import models
 from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
-from sorl.thumbnail import ImageField, get_thumbnail
-from sorl.thumbnail.helpers import ThumbnailError
+from photos.fields import ImageField
 from photos.models import Image
 from userena import settings as userena_settings
 from userena.managers import UserenaManager, UserenaBaseProfileManager

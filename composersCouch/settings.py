@@ -69,7 +69,6 @@ INSTALLED_APPS = (
     'schedule',
     'search',
     'social_links',
-    'sorl.thumbnail',
     'threads',
     'tracks',
     'userena',
@@ -299,13 +298,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 ABSOLUTE_URL_OVERRIDES = {
     'auth.user': lambda u: "/redirect/%s/" % u.username,
 }
-
-
-#sorl.thumbnail
-THUMBNAIL_DEBUG = DEBUG
-THUMBNAIL_BACKEND = 'sorl.thumbnail.base.ThumbnailBackend'
-THUMBNAIL_PRESERVE_FORMAT=True
-THUMBNAIL_FORMAT = 'PNG'
 
 # feedly
 CELERY_ALWAYS_EAGER = True
