@@ -50,27 +50,28 @@ def create_or_update_line(sender, instance, **kwargs):
             start = prev_event.show.date.start,
         )
     else:"""
+    # TODO: rather inificent to rewrite all the events each time. find a better way to do this
     events = calendar.events.filter(approved=True)
     events = events.order_by('show__date__start')
-    prev_line = None
+    prev_event = None
     for event in events:
-        update_line(prev_line, calendar, event)
-        prev_line = event.line
-    update_line(prev_line, calendar)
+        update_line(prev_event, calendar, event)
+        prev_event = event
+    update_line(prev_event, calendar)
 
-def update_line(line, calendar, next_event=None):
-    if line:
+def update_line(event, calendar, next_event=None):
+    if event:
         if next_event:
-            line.next = next_event
-            line.line = LineString(
-                line.current.get_location().zip_code.point,
+            event.line.next = next_event
+            event.line.line = LineString(
+                event.get_location().zip_code.point,
                 next_event.get_location().zip_code.point
             )
-        elif not line.next:
-            line.line = LineString(
-                line.current.get_location().zip_code.point,
+        elif not event.line.next:
+            event.line.line = LineString(
+                event.get_location().zip_code.point,
                 calendar.owner.profile.contact_info.location.zip_code.point
             )
-        line.save()
+        event.line.save()
 
 post_save.connect(create_or_update_line, sender=Event, dispatch_uid="create_or_update_line")

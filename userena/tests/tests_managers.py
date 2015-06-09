@@ -5,8 +5,6 @@ from django.contrib.auth.models import User
 from userena.models import UserenaSignup
 from userena import settings as userena_settings
 
-from guardian.shortcuts import get_perms
-
 import datetime, re
 
 User = User
@@ -67,10 +65,6 @@ class UserenaManagerTests(TestCase):
 
         # The user should now be active.
         self.failUnless(active_user.is_active)
-
-        # The user should have permission to view and change its profile
-        self.failUnless('view_profile' in get_perms(active_user, active_user.profile))
-        self.failUnless('change_profile' in get_perms(active_user, active_user.profile))
 
         # The activation key should be the same as in the settings
         self.assertEqual(active_user.userena_signup.activation_key,

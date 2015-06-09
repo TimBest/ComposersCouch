@@ -10,7 +10,6 @@ from django.utils.translation import ugettext_lazy as _
 
 from sorl.thumbnail import ImageField, get_thumbnail
 from sorl.thumbnail.helpers import ThumbnailError
-from guardian.shortcuts import get_perms
 from photos.models import Image
 from userena import settings as userena_settings
 from userena.managers import UserenaManager, UserenaBaseProfileManager
@@ -179,51 +178,6 @@ class UserenaBaseProfile(models.Model):
             else:
                 name = "%(email)s" % {'email': user.email}
         return name.strip()
-
-    def can_view_profile(self, user):
-        """
-        Can the :class:`User` view this profile?
-
-        Returns a boolean if a user has the rights to view the profile of this
-        user.
-
-        Users are divided into four groups:
-
-            ``Open``
-                Everyone can view your profile
-
-            ``Closed``
-                Nobody can view your profile.
-
-            ``Registered``
-                Users that are registered on the website and signed
-                in only.
-
-            ``Admin``
-                Special cases like superadmin and the owner of the profile.
-
-        Through the ``privacy`` field a owner of an profile can define what
-        they want to show to whom.
-
-        :param user:
-            A Django :class:`User` instance.
-
-        """
-        # Simple cases first, we don't want to waste CPU and DB hits.
-        # Everyone.
-        if self.privacy == 'open':
-            return True
-        # Registered users.
-        elif self.privacy == 'registered' \
-        and isinstance(user, User):
-            return True
-
-        # Checks done by guardian for owner and admins.
-        elif 'view_profile' in get_perms(user, self):
-            return True
-
-        # Fallback to closed profile.
-        return False
 
 
 class UserenaLanguageBaseProfile(UserenaBaseProfile):

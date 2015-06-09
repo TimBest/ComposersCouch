@@ -24,7 +24,6 @@ from userena.utils import signin_redirect
 from userena import signals as userena_signals
 from userena import settings as userena_settings
 
-from guardian.decorators import permission_required_or_403
 
 import warnings
 
@@ -279,7 +278,6 @@ def signout(request, next_page=userena_settings.USERENA_REDIRECT_ON_SIGNOUT,
     return Signout(request, next_page, template_name, *args, **kwargs)
 
 @secure_required
-@permission_required_or_403('change_user', (User, 'username', 'username'))
 def password_change(request, username, template_name='accounts/password_form.html',
                     pass_form=PasswordChangeForm, success_url=None, extra_context=None):
     """ Change password of user.

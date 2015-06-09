@@ -100,30 +100,3 @@ class BaseProfileModelTest(TestCase):
         self.failUnlessEqual(profile.get_full_name_or_username(),
                              "john@example.com")
         userena_settings.USERENA_WITHOUT_USERNAMES = False
-
-    def test_can_view_profile(self):
-        """ Test if the user can see the profile with three type of users. """
-        anon_user = AnonymousUser()
-        super_user = User.objects.get(pk=1)
-        reg_user = User.objects.get(pk=2)
-
-        profile = Profile.objects.get(pk=1)
-
-        # All users should be able to see a ``open`` profile.
-        profile.privacy = 'open'
-        self.failUnless(profile.can_view_profile(anon_user))
-        self.failUnless(profile.can_view_profile(super_user))
-        self.failUnless(profile.can_view_profile(reg_user))
-
-        # Registered and super users should be able to see a ``registered``
-        # profile.
-        profile.privacy = 'registered'
-        self.failIf(profile.can_view_profile(anon_user))
-        self.failUnless(profile.can_view_profile(super_user))
-        self.failUnless(profile.can_view_profile(reg_user))
-
-        # Only superusers can see a closed profile.
-        profile.privacy = 'closed'
-        self.failIf(profile.can_view_profile(anon_user))
-        self.failUnless(profile.can_view_profile(super_user))
-        self.failIf(profile.can_view_profile(reg_user))

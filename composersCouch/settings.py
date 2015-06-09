@@ -61,7 +61,6 @@ INSTALLED_APPS = (
     'fan',
     'feeds',
     'genres',
-    'guardian',
     'photos',
     'pipeline',
     'progressbarupload',
@@ -278,7 +277,6 @@ AUTHENTICATION_BACKENDS = (
     'social_auth.backends.twitter.TwitterBackend',
     'social_auth.backends.facebook.FacebookBackend',
     'userena.backends.UserenaAuthenticationBackend',
-    'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 

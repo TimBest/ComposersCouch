@@ -10,8 +10,6 @@ from userena import settings as userena_settings
 from userena.utils import generate_sha1, get_datetime_now
 from userena import signals as userena_signals
 
-from guardian.shortcuts import assign_perm, get_perms
-
 
 import re, datetime
 
@@ -67,14 +65,6 @@ class UserenaManager(UserManager):
         except Profile.DoesNotExist:
             new_profile = Profile(user=new_user)
             new_profile.save(using=self._db)
-
-        # Give permissions to view and change profile
-        for perm in ASSIGNED_PERMISSIONS['profile']:
-            assign_perm(perm[0], new_user, new_profile)
-
-        # Give permissions to view and change itself
-        for perm in ASSIGNED_PERMISSIONS['user']:
-            assign_perm(perm[0], new_user, new_user)
 
         return new_user
 
@@ -224,60 +214,6 @@ class UserenaManager(UserManager):
                 deleted_users.append(user)
                 user.delete()
         return deleted_users
-
-    def check_permissions(self):
-        """
-        Checks that all permissions are set correctly for the users.
-
-        :return: A set of users whose permissions was wrong.
-
-        """
-        # Variable to supply some feedback
-        changed_permissions = []
-        changed_users = []
-        warnings = []
-        from accounts.models import Profile
-
-        # Check that all the permissions are available.
-        for model, perms in ASSIGNED_PERMISSIONS.items():
-            if model == 'profile':
-                model_obj = Profile
-            else: model_obj = User
-
-            model_content_type = ContentType.objects.get_for_model(model_obj)
-
-            for perm in perms:
-                try:
-                    Permission.objects.get(codename=perm[0],
-                                           content_type=model_content_type)
-                except Permission.DoesNotExist:
-                    changed_permissions.append(perm[1])
-                    Permission.objects.create(name=perm[1],
-                                              codename=perm[0],
-                                              content_type=model_content_type)
-
-        # it is safe to rely on settings.ANONYMOUS_USER_ID since it is a
-        # requirement of django-guardian
-        for user in User().objects.exclude(id=settings.ANONYMOUS_USER_ID):
-            try:
-                user_profile = user.profile
-            except ObjectDoesNotExist:
-                warnings.append(_("No profile found for %(username)s") \
-                                    % {'username': user.username})
-            else:
-                all_permissions = get_perms(user, user_profile) + get_perms(user, user)
-
-                for model, perms in ASSIGNED_PERMISSIONS.items():
-                    if model == 'profile':
-                        perm_object = user.profile()
-                    else: perm_object = user
-
-                    for perm in perms:
-                        if perm[0] not in all_permissions:
-                            assign_perm(perm[0], user, perm_object)
-                            changed_users.append(user)
-
-        return (changed_permissions, changed_users, warnings)
 
 class UserenaBaseProfileManager(models.Manager):
     """ Manager for :class:`UserenaProfile` """

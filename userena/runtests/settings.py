@@ -85,10 +85,8 @@ MIDDLEWARE_CLASSES = (
     'userena.middleware.UserenaLocaleMiddleware',
 )
 
-# Add the Guardian and userena authentication backends
 AUTHENTICATION_BACKENDS = (
     'userena.backends.UserenaAuthenticationBackend',
-    'guardian.backends.ObjectPermissionBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -116,7 +114,6 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
-    'guardian',
     'south',
     'userena',
 )
@@ -145,7 +142,6 @@ LOGGING = {
     }
 }
 
-# Needed for Django guardian
 ANONYMOUS_USER_ID = -1
 
 # Test runner
