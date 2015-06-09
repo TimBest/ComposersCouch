@@ -1,0 +1,18 @@
+{% extends 'utils/form.html' %}
+{% from "utils/form_macros.html" import non_field_errors, field %}
+
+
+{% block title %}
+  {% block formTitle %}Add Tracks{% endblock %}
+{% endblock %}
+
+{% block formID %}tracks-form{% endblock %}
+
+{% block form %}
+  {{ form.management_form }}
+  {% for f in form %}
+    {{ non_field_errors(f) }}
+    {{ field(f.id) }}
+    {{ field(f.video) }}
+  {% endfor %}
+{% endblock %}

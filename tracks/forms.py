@@ -2,19 +2,16 @@ import mutagen
 from django import forms
 from django.conf import settings
 from django.contrib import messages
-from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from django.forms import ModelChoiceField, ModelMultipleChoiceField, Textarea
 from django.utils.translation import ugettext_lazy as _
 
 from autocomplete_light import ModelForm
 from multiupload.fields import MultiFileField
 
 from annoying.functions import get_object_or_None
-from artist.models import ArtistProfile
 from social_links.forms import clean_url
 from embed_video.fields import EmbedVideoFormField
-from tracks.models import Album, Track
+from tracks.models import Album, Track, Video
 
 
 class TracksForm(ModelForm):
@@ -61,7 +58,7 @@ class AlbumForm(TracksForm):
     class Meta:
         model = Album
         widgets = {
-            'description' : Textarea(attrs={'rows': 2, 'cols': 19}),
+            'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
         }
         fields = ['title', 'year', 'genre', 'description']
 
@@ -124,3 +121,9 @@ class AlbumVideoForm(ModelForm):
             track.video = video
             track.save()
         return track
+
+class VideoForm(ModelForm):
+
+    class Meta:
+        model = Video
+        fields = ['video',]

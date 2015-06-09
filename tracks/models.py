@@ -77,3 +77,8 @@ class Track(models.Model):
             album_title = if album whats its title
         """
         self.upload_to_info = (username, track_type, album_title)
+
+
+class Video(models.Model):
+    user = models.ForeignKey(User, related_name='videos')
+    video = EmbedVideoField(_('Video Link'), help_text="Link to youtube or vimeo")
