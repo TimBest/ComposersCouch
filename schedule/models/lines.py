@@ -34,9 +34,9 @@ def create_or_update_line(sender, instance, **kwargs):
         if line:
             line.delete()
 
-    next_event = calendar.get_next_event(in_datetime=instance.show.date.start)
+    """next_event = calendar.get_next_event(in_datetime=instance.show.date.start)
     prev_event = calendar.get_prev_event(in_datetime=instance.show.date.start)
-    """if next_event and prev_event:
+    if next_event and prev_event:
         events = calendar.get_events_in_range(
             start = prev_event.show.date.start,
             end   = next_event.show.date.start,

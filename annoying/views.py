@@ -21,7 +21,7 @@ class MultipleFormsView(FormView):
                 return False
         return True
 
-    def forms_valid(self, forms):
+    def forms_valid(self, forms, **kwargs):
         return get_success_url(self, **kwargs)
 
     def forms_invalid(self, forms):
@@ -77,7 +77,7 @@ class MultipleFormsView(FormView):
     def post(self, request, **kwargs):
         forms = self.get_forms()
         if self.are_forms_valid(forms):
-            return self.forms_valid(forms)
+            return self.forms_valid(forms, **kwargs)
         else:
             return self.forms_invalid(forms)
 

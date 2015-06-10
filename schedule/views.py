@@ -155,9 +155,9 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
         return {'poster_form':{},'date_form':date_data,'event_form':{},'show_info_form':show_data,}
 
     def forms_valid(self, forms):
-        poster_form = forms['poster_form']
-        date  = forms['date_form'].save()
-        info  = forms['show_info_form'].save(commit=False)
+        forms['poster_form'].save()
+        date = forms['date_form'].save()
+        info = forms['show_info_form'].save(commit=False)
 
         if self.request.FILES.get('image'):
             info.poster, created = Image.objects.get_or_create(
@@ -226,7 +226,7 @@ class EditEventFormView(EventFormView):
     def forms_valid(self, forms):
         date  = forms['date_form'].save()
         self.show.date = date
-        poster_form = forms['poster_form']
+        forms['poster_form'].save()
         info  = forms['show_info_form'].save(commit=False)
 
         if self.request.FILES.get('image'):

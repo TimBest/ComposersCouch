@@ -1,11 +1,14 @@
-from datetime import datetime
-from datetime import timedelta
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import resolve, reverse
+from django.http import Http404
 from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.decorators import method_decorator
+from django.utils.translation import ugettext_lazy as _
 from django.views.generic import ListView
+
+from datetime import datetime
+from datetime import timedelta
 
 from annoying.functions import get_object_or_None
 from composersCouch.utils import get_page

@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.utils import timezone
 
-from schedule.models import Event, Calendar, DateRange
+from schedule.models import Show, Event, Calendar, DateRange
 
 class TestCalendar(TestCase):
     fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',

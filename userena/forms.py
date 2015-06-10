@@ -48,7 +48,7 @@ class SignupForm(forms.Form):
 
         """
         try:
-            user = User.objects.get(username__iexact=self.cleaned_data['username'])
+            User.objects.get(username__iexact=self.cleaned_data['username'])
         except User.DoesNotExist:
             pass
         else:

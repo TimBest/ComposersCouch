@@ -10,8 +10,7 @@ from django.core.exceptions import PermissionDenied
 from django.utils.translation import ugettext as _
 from django.http import HttpResponseRedirect
 
-from userena.forms import (SignupForm, SignupFormOnlyEmail, AuthenticationForm,
-                           ChangeEmailForm, EditProfileForm)
+from userena.forms import SignupForm, SignupFormOnlyEmail, AuthenticationForm
 from userena.models import UserenaSignup
 from userena.decorators import secure_required
 from userena.utils import signin_redirect

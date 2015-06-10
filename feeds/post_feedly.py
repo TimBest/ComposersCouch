@@ -26,7 +26,6 @@ class PostFeedly(Manager):
     def create_and_add_post(self, user, target, message):
         post = Post(user=user, target=target, message=message)
         post.save()
-        zip_code = user.profile.contact_info.location.zip_code
         self.add_post(post=post)
         return post
 

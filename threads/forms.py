@@ -5,7 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from autocomplete_light import ModelForm
 from autocomplete_light import MultipleChoiceWidget
 
-from threads.models import *
+from threads.models import Message, Participant, Thread
 from threads.utils import reply_to_thread, now
 from threads.signals import message_composed
 

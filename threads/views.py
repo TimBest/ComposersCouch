@@ -8,10 +8,10 @@ from django.views.generic import FormView, TemplateView
 from django.core.urlresolvers import reverse
 from django.utils.decorators import method_decorator
 
-from .models import *
-from .decorators import is_participant
-from .forms import ComposeForm, ReplyForm
-from .utils import fill_count_cache, now
+from threads.models import Participant, Thread
+from threads.decorators import is_participant
+from threads.forms import ComposeForm, ReplyForm
+from threads.utils import fill_count_cache, now
 
 
 class threadMixin(object):
@@ -122,7 +122,7 @@ class MessageView(threadMixin, FormView):
         return context
 
     def get_success_url(self, **kwargs):
-        return reverse(success_url, args=(self.thread.id,))
+        return reverse(self.success_url, args=(self.thread.id,))
 
 view = MessageView.as_view()
 

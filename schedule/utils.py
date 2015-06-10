@@ -58,5 +58,5 @@ def export(request, events, year):
     if year:
         response['Content-Disposition'] = 'attachment; filename=%ss-calendar-%s.ics' % (slugify(request.user.profile), year)
     else:
-        response['Content-Disposition'] = 'attachment; filename=%s.ics' % slugify(s[0])
+        response['Content-Disposition'] = 'attachment; filename=%s.ics' % slugify(events[0])
     return response

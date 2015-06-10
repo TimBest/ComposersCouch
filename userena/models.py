@@ -8,8 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from photos.models import Image
 from userena import settings as userena_settings
 from userena.managers import UserenaManager, UserenaBaseProfileManager
-from userena.utils import get_gravatar, generate_sha1, get_protocol, \
-    get_datetime_now, user_model_label
+from userena.utils import generate_sha1, get_datetime_now, user_model_label
 
 
 PROFILE_PERMISSIONS = (

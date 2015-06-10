@@ -70,7 +70,6 @@ class TracksView(ArtistProfileFormMixin, UpdateView):
         return album
 
     def get_formset(self):
-        initial_list = []
         inline_formset = inlineformset_factory(self.model,
                                                self.inline_model,
                                                form=self.form_class,)

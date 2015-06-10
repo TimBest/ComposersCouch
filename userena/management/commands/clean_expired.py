@@ -10,4 +10,4 @@ class Command(NoArgsCommand):
     """
     help = 'Deletes expired users.'
     def handle_noargs(self, **options):
-        users = UserenaSignup.objects.delete_expired_users()
+        UserenaSignup.objects.delete_expired_users()

@@ -78,7 +78,6 @@ class ViewsTests(TestCase):
 
     def test_show_forms_views(self):
         """ test views where login is required """
-        user = User.objects.get(pk=1)
         url_names = [
             ['edit_event',                {'show_id':1}],
             ['calendar_request_to_event', {'request_id':1}],
@@ -98,7 +97,6 @@ class ViewsTests(TestCase):
 
     def test_show_views(self):
         """ test views where login is required """
-        user = User.objects.get(pk=1)
         url_names = [
             ['show', {'show_id':1}],
         ]

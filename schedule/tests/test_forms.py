@@ -6,7 +6,6 @@ from django.test import TestCase
 from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from schedule.models import DateRange
 from schedule import forms
 
 
@@ -18,7 +17,6 @@ class TestScheduleForms(TestCase):
                 'shows', 'events']
 
     def test_date_form(self):
-        date_range = DateRange(start=timezone.now(), end=timezone.now())
         # test field errors
         invalid_data_dicts = [
             # end date cant be before the start

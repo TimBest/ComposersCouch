@@ -11,7 +11,7 @@ class ViewsTests(TestCase):
 
     def setUp(self):
         # create user and log them in
-       self.client.post(reverse('login'),
+        self.client.post(reverse('login'),
                                     data={'identification': 'john@example.com',
                                           'password': 'blowfish'})
         self.user = User.objects.get(email='john@example.com')

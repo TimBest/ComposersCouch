@@ -12,7 +12,7 @@ class Command(NoArgsCommand):
 
         print "checking for existing data ..."
         try:
-            cal = Calendar.objects.get(name="yml_cal")
+            Calendar.objects.get(name="yml_cal")
             print "It looks like you already have loaded the sample data, quitting."
             import sys
             sys.exit(1)

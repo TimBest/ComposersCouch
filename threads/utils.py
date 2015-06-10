@@ -4,10 +4,10 @@ import re
 from django.conf import settings
 from django.core.cache import cache
 from django.template import Context
-from django.template.loader import get_template
+from django.template.loader import get_template, render_to_string
 from django.utils.timezone import now
 
-from . import settings as tm_settings
+from threads import settings as tm_settings
 
 
 # favour django-mailer but fall back to django.core.mail
@@ -15,7 +15,6 @@ if tm_settings.MESSAGES_USE_SENDGRID:
     pass
 
 from django.core.mail import send_mail
-
 
 
 def fill_count_cache(user):
@@ -63,9 +62,9 @@ def create_thread(participants, sender, subject, body):
     thread.save()
     for user in participants:
         if user != sender:
-            participant = Participant.objects.create(thread=thread, user=user)
+            Participant.objects.create(thread=thread, user=user)
         else:
-            participant = Participant.objects.create(
+            Participant.objects.create(
                             thread=thread,
                             user=user,
                             read_at=now(),

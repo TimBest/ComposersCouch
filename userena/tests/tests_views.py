@@ -43,7 +43,7 @@ class UserenaViewsTests(TestCase):
         ``REMEMBER_ME_DAYS``.
 
         """
-        response = self.client.post(reverse('login'),
+        self.client.post(reverse('login'),
                                     data={'identification': 'john@example.com',
                                           'password': 'blowfish',
                                           'remember_me': True})
@@ -56,7 +56,7 @@ class UserenaViewsTests(TestCase):
         remembered.
 
         """
-        response = self.client.post(reverse('login'),
+        self.client.post(reverse('login'),
                                     data={'identification': 'john@example.com',
                                           'password': 'blowfish'})
 

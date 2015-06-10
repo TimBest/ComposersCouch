@@ -47,14 +47,12 @@ class UserenaManager(UserManager):
         :return: :class:`User` instance representing the new user.
 
         """
-        now = get_datetime_now()
-
         new_user = User.objects.create_user(
             username, email, password)
         new_user.is_active = active
         new_user.save()
 
-        userena_profile = self.create_userena_profile(new_user)
+        self.create_userena_profile(new_user)
 
         # All users have an empty profile
         from accounts.models import Profile
