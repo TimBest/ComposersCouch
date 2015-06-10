@@ -22,8 +22,8 @@ $(".messages .reply-form").submit(function(e) {
         type: "POST",
         data : postData,
         success:function(data, textStatus, jqXHR) {
-            $('.reply-form').removeClass("ajax-form-disabled")
-            $('.message-list').append(data)
+            $('.reply-form').removeClass("ajax-form-disabled");
+            $('.message-list').append(data);
             $(".reply-form")[0].reset();
             updateScroll();
          },

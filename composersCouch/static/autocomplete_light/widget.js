@@ -40,9 +40,9 @@ override Widget.getValue() to implement your own logic.
 */
 
 // Our class will live in the yourlabs global namespace.
-if (window.yourlabs == undefined) window.yourlabs = {};
+if (window.yourlabs === undefined) window.yourlabs = {};
 
-$.ajaxSettings.traditional = true
+$.ajaxSettings.traditional = true;
 
 /*
 Instanciate a Widget.
@@ -58,10 +58,10 @@ yourlabs.Widget = function(widget) {
     // The number of choices that the user may select with this widget. Set 0
     // for no limit. In the case of a foreign key you want to set it to 1.
     this.maximumValues = 0;
-    
+
     // Clear input when choice made? 1 for yes, 0 for no
     this.clearInputOnSelectChoice = "1";
-}
+};
 
 // When a choice is selected from the autocomplete of this widget,
 // getValue() is called to add and select the option in the select.
@@ -71,7 +71,7 @@ yourlabs.Widget.prototype.getValue = function(choice) {
 
 // The widget is in charge of managing its Autocomplete.
 yourlabs.Widget.prototype.initializeAutocomplete = function() {
-    this.autocomplete = this.input.yourlabsAutocomplete()
+    this.autocomplete = this.input.yourlabsAutocomplete();
 
     // Add a class to ease css selection of autocompletes for widgets
     this.autocomplete.box.addClass('autocomplete-light-widget');
@@ -103,7 +103,7 @@ yourlabs.Widget.prototype.selectChoice = function(choice) {
     this.freeDeck();
     this.addToDeck(choice, value);
     this.addToSelect(choice, value);
-    
+
     var index = $(':input:visible').index(this.input);
     this.resetDisplay();
 
@@ -116,7 +116,7 @@ yourlabs.Widget.prototype.selectChoice = function(choice) {
 
     if (this.clearInputOnSelectChoice === "1")
         this.input.val('');
-}
+};
 
 // Unselect a value if the maximum number of selected values has been
 // reached.
@@ -129,7 +129,7 @@ yourlabs.Widget.prototype.freeDeck = function() {
 
         this.deselectChoice(choice);
     }
-}
+};
 
 // Empty the search input and hide it if maximumValues has been reached.
 yourlabs.Widget.prototype.resetDisplay = function() {
@@ -145,7 +145,7 @@ yourlabs.Widget.prototype.resetDisplay = function() {
 
     // Also fix the position if the autocomplete is shown.
     if (this.autocomplete.box.is(':visible')) this.autocomplete.fixPosition();
-}
+};
 
 yourlabs.Widget.prototype.deckChoiceHtml = function(choice, value) {
     var deckChoice = choice.clone();
@@ -153,11 +153,11 @@ yourlabs.Widget.prototype.deckChoiceHtml = function(choice, value) {
     this.addRemove(deckChoice);
 
     return deckChoice;
-}
+};
 
 yourlabs.Widget.prototype.optionChoice = function(option) {
     var optionChoice = this.choiceTemplate.clone();
-    
+
     var target = optionChoice.find('.append-option-html');
 
     if (target.length) {
@@ -167,7 +167,7 @@ yourlabs.Widget.prototype.optionChoice = function(option) {
     }
 
     return optionChoice;
-}
+};
 
 yourlabs.Widget.prototype.addRemove = function(choices) {
     var removeTemplate = this.widget.find('.remove:last')
@@ -180,8 +180,8 @@ yourlabs.Widget.prototype.addRemove = function(choices) {
     } else {
         // Add the remove icon to each choice
         choices.prepend(removeTemplate);
-    } 
-}
+    }
+};
 
 // Add a selected choice of a given value to the deck.
 yourlabs.Widget.prototype.addToDeck = function(choice, value) {
@@ -197,7 +197,7 @@ yourlabs.Widget.prototype.addToDeck = function(choice, value) {
 
         this.deck.append(deckChoice);
     }
-}
+};
 
 // Add a selected choice of a given value to the deck.
 yourlabs.Widget.prototype.addToSelect = function(choice, value) {
@@ -213,7 +213,7 @@ yourlabs.Widget.prototype.addToSelect = function(choice, value) {
 
     this.select.trigger('change');
     this.updateAutocompleteExclude();
-}
+};
 
 // Called when the user clicks .remove in a deck choice.
 yourlabs.Widget.prototype.deselectChoice = function(choice) {
@@ -224,7 +224,7 @@ yourlabs.Widget.prototype.deselectChoice = function(choice) {
 
     choice.remove();
 
-    if (this.deck.children().length == 0) {
+    if (this.deck.children().length === 0) {
         this.deck.hide();
     }
 
@@ -236,10 +236,10 @@ yourlabs.Widget.prototype.updateAutocompleteExclude = function() {
     var widget = this;
     var choices = this.deck.find(this.autocomplete.choiceSelector);
 
-    this.autocomplete.data['exclude'] = $.map(choices, function(choice) { 
-        return widget.getValue($(choice)); 
+    this.autocomplete.data['exclude'] = $.map(choices, function(choice) {
+        return widget.getValue($(choice));
     });
-}
+};
 
 yourlabs.Widget.prototype.initialize = function() {
     this.initializeAutocomplete();
@@ -259,14 +259,14 @@ yourlabs.Widget.prototype.initialize = function() {
     this.resetDisplay();
 
     this.bindSelectChoice();
-    this.clearBoth()
-}
+    this.clearBoth();
+};
 
 // Add an empty div with clear:both after the widget's container.
 // This is meant to support django-responsive-admin templates.
 yourlabs.Widget.prototype.clearBoth = function() {
     this.widget.parent().append('<div style="clear: both"></div>');
-}
+};
 
 // Destroy the widget. Takes a widget element because a cloned widget element
 // will be dirty, ie. have wrong .input and .widget properties.
@@ -274,13 +274,13 @@ yourlabs.Widget.prototype.destroy = function(widget) {
     widget.find('input')
         .unbind('selectChoice')
         .yourlabsAutocomplete('destroy');
-}
+};
 
 // Get or create or destroy a widget instance.
 //
 // On first call, yourlabsWidget() will instanciate a widget applying all
 // passed overrides.
-// 
+//
 // On later calls, yourlabsWidget() will return the previously created widget
 // instance, which is stored in widget.data('widget').
 //
@@ -299,7 +299,7 @@ $.fn.yourlabsWidget = function(overrides) {
         return
     }
 
-    if (widget == undefined) {
+    if (widget === undefined) {
         // Instanciate the widget
         var widget = new yourlabs.Widget(this);
 
@@ -326,7 +326,7 @@ $.fn.yourlabsWidget = function(overrides) {
     }
 
     return widget;
-}
+};
 
 $(document).ready(function() {
     $('body').on('initialize', '.autocomplete-light-widget[data-widget-bootstrap=normal]', function() {
@@ -371,7 +371,7 @@ $(document).ready(function() {
         modal or popup).
 
         For this, we listen to DOMNodeInserted and intercept insert of <option> nodes.
-        
+
         The reason for that is that change is not triggered when options are
         added like this:
 
@@ -419,7 +419,7 @@ $(document).ready(function() {
             widget.trigger('initialize');
         }
     });
-    
+
     var ie = yourlabs.getInternetExplorerVersion();
     if (ie != -1 && ie < 9) {
         observe = [

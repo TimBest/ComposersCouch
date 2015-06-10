@@ -74,8 +74,8 @@ function saveForm(url, modalForm, deleteTriger){
                           }
                       });
                   }
-                  if (addMore == true) {
-                      getForm(url, modalForm, deleteTriger)
+                  if (addMore === true) {
+                      getForm(url, modalForm, deleteTriger);
                   } else {
                       document.open();
                       document.write(response);
@@ -109,7 +109,7 @@ function deleteObject(url, modalForm, deleteTriger) {
 }
 function getCookie(name) {
     var cookieValue = null;
-    if (document.cookie && document.cookie != '') {
+    if (document.cookie && document.cookie !== '') {
         var cookies = document.cookie.split(';');
         for (var i = 0; i < cookies.length; i++) {
             var cookie = jQuery.trim(cookies[i]);

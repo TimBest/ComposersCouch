@@ -2,7 +2,7 @@ function expand_day() {
     $(".expanded-day").hide();
     prev = null;
     $(".expand-day").click(function(e) {
-        if (prev != null && prev.is($(this))) {
+        if (prev !== null && prev.is($(this))) {
             $(this).closest(".week").find(".expanded-day").toggle();
         } else {
             prev = $(this);
@@ -35,12 +35,11 @@ function show_participants(id, choice_class, plural) {
     }).input.bind('selectChoice', function(e, choice, autocomplete) {
         var value = $("#div_"+id+"_text .hilight").attr("data-value");
         // if no selection then add on else remove old selection then add new one
-        if (plural == true) {
-            var value = $("#div_"+id+"_text .hilight").attr("data-value");
+        if (plural === true) {
             // if no selection then add on
             $("#"+id).append("<option value='"+value+"' selected='selected'>"+value+"</option>");
         } else {
-            if ($("#"+id+" option:selected").length==0) {
+            if ($("#"+id+" option:selected").length===0) {
                 $("#"+id+"").append("<option value='"+value+"' selected='selected'>"+value+"</option>");
             } else {
                 $("#"+id+" option").replaceWith("<option value='"+value+"' selected='selected'>"+value+"</option>");
@@ -52,14 +51,14 @@ function show_participants(id, choice_class, plural) {
         // display to user whom they selected
         $("#div_"+id+"_text .controls").prepend(
           "<div class='"+choice_class+"' data-value="+value+">"+
-            "<button class='btn btn-link remove' type='button'><span class='fa fa-times-circle text-muted'></span></button>"
-            +$(choice).html()+
+            "<button class='btn btn-link remove' type='button'><span class='fa fa-times-circle text-muted'></span></button>"+
+            $(choice).html()+
           "</div>"
         );
     });
     // remove selection display and value
     $("#div_"+id+"_text").on("click", ".remove", function() {
-      if (plural == true) {
+      if (plural === true) {
           value = $(this).parent().attr("data-value");
           $("#"+id+" option[value="+value+"]").remove();
           name = $(this).parent().find(".artist-name").text();
