@@ -1,4 +1,4 @@
-from django.conf.urls import *
+from django.conf.urls import patterns, url
 from django.contrib.auth import views as auth_views
 
 from userena import settings as userena_settings

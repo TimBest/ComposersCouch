@@ -16,7 +16,7 @@ class ViewsTests(TestCase):
 
     def test_calendar_views(self):
         """ test views where login is required """
-        user = User.objects.get(pk=1)
+        User.objects.get(pk=1)
         url_names = [
             ['calendar', {}],
             ['calendar_create_event', {}],

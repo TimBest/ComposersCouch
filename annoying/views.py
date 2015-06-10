@@ -21,8 +21,8 @@ class MultipleFormsView(FormView):
                 return False
         return True
 
-    def forms_valid(self, forms, **kwargs):
-        return get_success_url(self, **kwargs)
+    def forms_valid(self, forms):
+        return self.get_success_url(self)
 
     def forms_invalid(self, forms):
         context = self.get_context_data()
@@ -65,19 +65,19 @@ class MultipleFormsView(FormView):
             initial[key] = {}
         return initial
 
-    def get_success_url(self, **kwargs):
+    def get_success_url(self):
         try:
             next = self.request.POST['next']
             if next:
                 return HttpResponseRedirect(next)
         except:
             pass
-        return redirect(self.success_url, **kwargs)
+        return redirect(self.success_url)
 
     def post(self, request, **kwargs):
         forms = self.get_forms()
         if self.are_forms_valid(forms):
-            return self.forms_valid(forms, **kwargs)
+            return self.forms_valid(forms)
         else:
             return self.forms_invalid(forms)
 

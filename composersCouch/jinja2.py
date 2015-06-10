@@ -6,16 +6,21 @@ from django.core.urlresolvers import reverse
 from django.utils import timezone
 from django.template.defaultfilters import linebreaks, date, time, timesince
 
+from embed_video.templatetags.embed_video_tags import VideoNode
 from jinja2 import Environment
 
 from annoying.templatetags.annoying import AnnoyingGlobals
-from embed_video.templatetags.embed_video_tags import EmbedVideoGlobals
 from feeds.templatetags.ext import FeedGlobals
 from schedule.templatetags.ext import ScheduleGlobals
 from progressbarupload.templatetags.progress_bar import ProgressBarGlobals
 from threads.templatetags.inbox import InboxGlobals
 from request.templatetags.request import RequestGlobals
 
+
+def embed(backend, size='small'):
+    return VideoNode.embed(backend, size)
+
+EmbedVideoGlobals = {'embed': embed,}
 
 def field_attrs(field_inst, **kwargs):
     """Adds html attributes to django form fields"""
