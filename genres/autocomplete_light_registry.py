@@ -9,6 +9,7 @@ class GenreAutocomplete(autocomplete_light.AutocompleteModelBase):
         'placeholder': '',
     }
     order_by = ['name']
+    limit_choices = 5
 
     def choices_for_request(self):
         """

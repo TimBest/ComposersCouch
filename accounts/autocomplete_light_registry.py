@@ -11,12 +11,12 @@ class ArtistProfileAutocomplete(autocomplete_light.AutocompleteModelTemplate):
         'placeholder': '',
     }
     search_fields = ['^name',]
+    limit_choices = 5
 
 autocomplete_light.register(
     ArtistProfile,
     ArtistProfileAutocomplete,
-    choice_template='autocomplete/_artist.html',
-    autocomplete_template='autocomplete/_artists.html',
+    choice_template='autocomplete/artist.html',
 )
 
 class UserAutocomplete(autocomplete_light.AutocompleteModelTemplate):
@@ -25,6 +25,7 @@ class UserAutocomplete(autocomplete_light.AutocompleteModelTemplate):
         'placeholder': '',
     }
     search_fields = ['^profile__artist_profile__name','^profile__venueProfile__name','^first_name','^last_name',]
+    limit_choices = 5
 
     def choices_for_request(self):
         self.choices = self.choices.exclude(id=-1)
@@ -33,8 +34,7 @@ class UserAutocomplete(autocomplete_light.AutocompleteModelTemplate):
 autocomplete_light.register(
     User,
     UserAutocomplete,
-    choice_template='autocomplete/_user.html',
-    autocomplete_template='autocomplete/_users.html',
+    choice_template='autocomplete/user.html',
 )
 
 class UserArtistAutocomplete(autocomplete_light.AutocompleteModelTemplate):
@@ -43,6 +43,7 @@ class UserArtistAutocomplete(autocomplete_light.AutocompleteModelTemplate):
         'placeholder': '',
     }
     search_fields = ['^profile__artist_profile__name',]
+    limit_choices = 5
 
 
     def choices_for_request(self):
@@ -52,6 +53,5 @@ class UserArtistAutocomplete(autocomplete_light.AutocompleteModelTemplate):
 autocomplete_light.register(
     User,
     UserArtistAutocomplete,
-    choice_template='autocomplete/_user.html',
-    autocomplete_template='autocomplete/_users.html',
+    choice_template='autocomplete/user.html',
 )
