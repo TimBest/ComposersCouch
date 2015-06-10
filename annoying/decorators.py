@@ -8,8 +8,8 @@ from django.conf import settings
 
 import os, datetime, json
 
-__all__ = ['render_to', 'signals', 'ajax_request', 'autostrip']
 
+__all__ = ['render_to', 'signals', 'ajax_request', 'autostrip']
 
 try:
     from functools import wraps

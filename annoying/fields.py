@@ -6,7 +6,6 @@ from django.db.models.fields.related import SingleRelatedObjectDescriptor
 import json
 
 
-
 class AutoSingleRelatedObjectDescriptor(SingleRelatedObjectDescriptor):
     def __get__(self, instance, instance_type=None):
         try:
