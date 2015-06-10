@@ -1,10 +1,6 @@
 from django.core.urlresolvers import reverse
 from django.test import TestCase
-from django.contrib.auth.models import User
 
-from accounts.models import Profile
-from artist.models import ArtistProfile
-from artist.views import MusicianContactsView
 
 
 class ViewsTests(TestCase):

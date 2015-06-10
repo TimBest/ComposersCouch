@@ -12,9 +12,7 @@
 #
 
 from django.db.models.fields.files import FileField
-from django.db.models import signals
 from django.conf import settings
-from django.core.files.storage import Storage, default_storage
 from django.core.files.storage import FileSystemStorage
 from django.utils.translation import ugettext_lazy as _
 from django import forms

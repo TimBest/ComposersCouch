@@ -7,10 +7,8 @@ from artist.models import ArtistProfile
 from fan.models import FanProfile
 from venue.models import VenueProfile
 from accounts.models import Profile
-from annoying.functions import get_object_or_None
-from contact.models import ContactInfo, Contact, Location, Zipcode
+from contact.models import ContactInfo, Contact
 from schedule.models import Calendar
-import userena.managers
 
 
 def getProfileDetails(request, backend, user, social_user, is_new=False, new_association=False, *args, **kwargs):
@@ -21,19 +19,16 @@ def getProfileDetails(request, backend, user, social_user, is_new=False, new_ass
         @social_user - UserSocialAuth object
     """
     request.session['backend'] = backend.name
-    try:
-        profile = user.profile
-    except:
+    if not hasattr(user, 'profile'):
         return redirect('/signup/social/', user=user)
-    return None
+    else:
+        return None
 
 def createProfile(request, backend, user, social_user, is_new=False, new_association=False, *args, **kwargs):
     """
         if user has profile skip else create new profile
     """
-    try:
-        profile = user.profile
-    except:
+    if not hasattr(user, 'profile'):
         user.profile = Profile(user=user)
         user.profile.save()
         # TODO: remove this call to get profile type?
@@ -93,7 +88,7 @@ def create_profile(user, profile_type, location, first_name=None, last_name=None
     Contact_info.save()
     user.profile.contact_info = Contact_info
     user.profile.save()
-    calendar = Calendar.objects.get_or_create_calendar(user, name=user.username)
+    Calendar.objects.get_or_create_calendar(user, name=user.username)
     return user
 
 

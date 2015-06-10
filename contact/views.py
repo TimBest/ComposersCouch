@@ -1,10 +1,9 @@
 from django.shortcuts import redirect
 
-from annoying.functions import get_object_or_None
 from annoying.views import MultipleFormsView
 from customProfile.views import ProfileFormMixin
 from contact.forms import LocationForm, ContactForm
-from contact.models import Zipcode, ContactInfo
+from contact.models import ContactInfo
 
 
 class ContactView(ProfileFormMixin, MultipleFormsView):

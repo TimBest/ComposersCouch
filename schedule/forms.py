@@ -1,16 +1,12 @@
 from django import forms
-from django.contrib.auth.models import User
-from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 import autocomplete_light
 from autocomplete_light import ModelForm
 
-from annoying.functions import get_object_or_None
-from artist.models import ArtistProfile
-from contact.models import Location
-from photos.models import Image
-from schedule.models import DateRange, Event, Show, Info
+from schedule.models import DateRange
+from schedule.models import Event
+from schedule.models import Info
 
 
 class DateForm(ModelForm):

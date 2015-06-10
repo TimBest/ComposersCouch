@@ -5,7 +5,7 @@ from django.db.models import Q
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 
-from sorl.thumbnail import default
+from photos import default
 
 
 __all__ = ('ImageField', 'ImageFormField')

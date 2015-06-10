@@ -2,8 +2,6 @@ from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.contrib.auth.models import User
 
-from accounts.models import Profile
-
 
 class ViewsTests(TestCase):
     """  """
@@ -28,7 +26,6 @@ class ViewsTests(TestCase):
 
 
     def test_form_permissions_views(self):
-        user = User.objects.get(pk=3)
         url_names = [
             ['venue:socialLinksForm', {}],
             ['venue:photoLinksForm',  {}],

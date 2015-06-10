@@ -1,5 +1,4 @@
 import os
-from django.contrib.auth.models import User
 from django.core.files.uploadedfile import SimpleUploadedFile
 from django.test import TestCase
 from django.utils.translation import ugettext_lazy as _

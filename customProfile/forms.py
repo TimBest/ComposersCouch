@@ -4,7 +4,6 @@ from autocomplete_light import ModelForm
 
 from accounts.models import Profile
 from artist.models import ArtistProfile
-from genres.models import Genre
 from venue.models import VenueProfile
 
 

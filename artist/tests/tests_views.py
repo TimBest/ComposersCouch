@@ -7,7 +7,6 @@ from django.contrib.auth.models import User
 from jinja2 import Template as Jinja2Template
 import os
 
-from accounts.models import Profile
 from artist.models import ArtistProfile, Member
 from artist.views import MusicianContactsView
 from tracks.models import Album

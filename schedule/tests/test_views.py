@@ -1,13 +1,8 @@
-import pytz
-import datetime
 
 from django.contrib.auth.models import User
-from django.test.utils import override_settings
 from django.test import TestCase
 from django.core.urlresolvers import reverse
-from django.test import Client
 
-from schedule.models import Calendar, Event
 from schedule.views import PERIODS, FILTER
 
 

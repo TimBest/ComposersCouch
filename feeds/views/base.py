@@ -1,7 +1,8 @@
-from datetime import datetime, timedelta, time
+from datetime import datetime
+from datetime import timedelta
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import resolve, reverse
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView

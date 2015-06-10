@@ -2,9 +2,7 @@ import pytz
 from django.conf import settings
 from django.db import models
 from django.utils.timezone import make_naive
-from django.utils.translation import ugettext as _
 
-from accounts.models import Profile
 
 
 class Post(models.Model):
@@ -32,4 +30,3 @@ class Follow(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='following_set')
     target = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='follower_set')
 
-from feeds import verbs

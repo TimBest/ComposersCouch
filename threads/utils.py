@@ -12,7 +12,7 @@ from . import settings as tm_settings
 
 # favour django-mailer but fall back to django.core.mail
 if tm_settings.MESSAGES_USE_SENDGRID:
-    import sendgrid_parse_api
+    pass
 
 from django.core.mail import send_mail
 

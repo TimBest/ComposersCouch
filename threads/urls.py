@@ -1,5 +1,5 @@
-from django.conf.urls import include, patterns, url
-from django.views.generic.base import RedirectView
+from django.conf.urls import patterns
+from django.conf.urls import url
 
 
 urlpatterns = patterns('threads.views',

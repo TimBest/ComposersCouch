@@ -1,17 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
 from django.contrib.gis.measure import D
 from django.db.models import Q
-from django.shortcuts import render_to_response
-from django.template.context import RequestContext
 from django.utils import timezone
 from django.utils.decorators import method_decorator
 
 from accounts.views import SignupEmailView, LoginView
 from contact.utils import get_location
-from feeds.models import Follow
 from feeds.post_feed import LocalFeed
-from feeds.views import FeedMixin, GenreMixin
+from feeds.views import FeedMixin
 from schedule.models import Show
 
 

@@ -3,29 +3,22 @@ from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout, REDIRECT_FIELD_NAME
 from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.views import logout as Signout
 from django.views.generic import TemplateView
-from django.template.context import RequestContext
-from django.views.generic.list import ListView
-from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.utils.translation import ugettext as _
-from django.http import Http404, HttpResponseRedirect
+from django.http import HttpResponseRedirect
 
-from accounts.models import Profile
 from userena.forms import (SignupForm, SignupFormOnlyEmail, AuthenticationForm,
                            ChangeEmailForm, EditProfileForm)
 from userena.models import UserenaSignup
 from userena.decorators import secure_required
-from userena.backends import UserenaAuthenticationBackend
 from userena.utils import signin_redirect
 from userena import signals as userena_signals
 from userena import settings as userena_settings
 
 
-import warnings
 
 class ExtraContextTemplateView(TemplateView):
     """ Add extra context to a simple template view """

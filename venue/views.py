@@ -1,6 +1,6 @@
 from datetime import datetime
 from django.core.urlresolvers import reverse
-from django.forms.models import formset_factory, modelformset_factory
+from django.forms.models import modelformset_factory
 from django.http import Http404
 from django.shortcuts import redirect
 from django.views.generic import FormView, UpdateView

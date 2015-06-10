@@ -3,7 +3,9 @@ import logging
 import requests
 from collections import defaultdict
 
-from django.template import Library, Node, TemplateSyntaxError, Variable
+from django.template import Node
+from django.template import TemplateSyntaxError
+from django.template import Variable
 from django.utils.safestring import mark_safe
 from django.utils.encoding import smart_str
 

@@ -145,7 +145,6 @@ class ClaimProfileFormTests(TestCase):
         """form = forms.ClaimProfileForm(data={'password1': 'foobar',
                                      'password2': 'foobar'})
         self.failUnless(form.is_valid())"""
-        pass
 
 class LoginFormTests(TestCase):
     """ Test the ``ChangeEmailForm`` """

@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 """
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os, urlparse
+import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'k$s+jts3d$349yo&ojfqo1wvs!f##2w!p&h$4&qd$uz_5&a7%q')
@@ -46,6 +46,8 @@ INSTALLED_APPS = (
     'jinja2',
     'pagination',
     'social_auth',
+    # depricated: will be removed after production database is migrated and migrations are reset
+    #'sorl.tumbnails'
     'storages',
     'stream_framework',
     'test_without_migrations',

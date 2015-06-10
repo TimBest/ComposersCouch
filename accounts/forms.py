@@ -5,13 +5,9 @@ from django.core.urlresolvers import reverse
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
 
-from accounts.pipeline import create_profile
 from accounts.models import PROFILE_TYPE_CHOICES, Profile
 from annoying.functions import get_object_or_None
-from contact.forms import ZipcodeForm
-from fan.models import FanProfile
 from userena.forms import SignupFormOnlyEmail
-from venue.models import VenueProfile
 
 
 class SignupForm(forms.ModelForm):

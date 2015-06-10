@@ -1,8 +1,6 @@
 from django.test import TestCase
-from django.utils.translation import ugettext_lazy as _
 
 from customProfile import forms
-from genres.models import Genre
 
 class EditProfileFormTests(TestCase):
     """ Test the edit profile forms. """

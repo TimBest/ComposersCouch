@@ -1,15 +1,11 @@
 # -*- coding:utf-8 -*-
 import logging
-from django.contrib.auth import login
 from django.http import HttpResponseRedirect, HttpResponse
 from django.shortcuts import render_to_response, get_object_or_404
 from django.contrib.auth.models import User
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.views.generic import FormView, TemplateView
-from django.utils.translation import ugettext as _
 from django.core.urlresolvers import reverse
-from django.db.models import Q
 from django.utils.decorators import method_decorator
 
 from .models import *

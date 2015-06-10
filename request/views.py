@@ -13,7 +13,7 @@ from django.views.generic.base import TemplateView
 from annoying.functions import get_object_or_None
 from composersCouch.utils import get_page
 from annoying.views import MultipleFormsView, MultipleModelFormsView
-from customProfile.decorators import is_venue, is_artist
+from customProfile.decorators import is_artist
 from request import forms
 from request.decorators import is_participant as is_request_participant
 from request.models import Application, PrivateRequest, PublicRequest, RequestParticipant
@@ -93,7 +93,6 @@ class RequestView(MessageView):
 
     def get_context_data(self, **kwargs):
         context = super(RequestView, self).get_context_data(**kwargs)
-        events = None
         context['calendar'] = calendar = self.request.user.calendar
         private_request = self.thread.request
         padding = datetime.timedelta(days=1)
@@ -295,7 +294,7 @@ class ApplyFormView(FormView):
         if thread:
             return redirect('application_view', thread_id=thread.id)
         else:
-            return redirect(success_url)
+            return redirect(self.success_url)
 
     def get_users(self):
         users = [self.public_request.requester,]

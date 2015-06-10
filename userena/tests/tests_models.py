@@ -1,15 +1,11 @@
-from django.contrib.auth.models import AnonymousUser
-from django.contrib.sites.models import Site
-from django.core import mail
-from django.conf import settings
 from django.test import TestCase
 from django.contrib.auth.models import User
 
-from accounts.models import Profile
 from userena.models import UserenaSignup
 from userena import settings as userena_settings
 
-import datetime, hashlib, re
+import datetime
+import re
 
 User = User
 
@@ -25,7 +21,6 @@ class UserenaSignupModelTests(TestCase):
 
     def test_change_email(self):
         """ TODO """
-        pass
 
     def test_activation_expired_account(self):
         """
@@ -66,7 +61,6 @@ class BaseProfileModelTest(TestCase):
 
     def test_mugshot_url(self):
         """TODO: The user has uploaded it's own mugshot. This should be returned. """
-        pass
 
     def test_get_mugshot_url_without_gravatar(self):
         """
@@ -74,7 +68,6 @@ class BaseProfileModelTest(TestCase):
         ``USERENA_MUGSHOT_GRAVATAR`` is set to ``False``.
 
         """
-        pass
 
 
     def test_get_full_name_or_username(self):

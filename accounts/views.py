@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordResetForm
 from django.contrib.auth.models import User
 from django.contrib.auth.tokens import default_token_generator
+from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, redirect, resolve_url
 from django.template.response import TemplateResponse
@@ -24,7 +25,6 @@ from contact.utils import get_location
 from userena.decorators import secure_required
 from userena.forms import AuthenticationForm
 from userena.signals import signup_complete
-from userena.views import signin
 from userena.utils import signin_redirect
 from userena import settings as userena_settings
 
@@ -62,7 +62,6 @@ class SignupView(MultipleFormsView):
 class SignupAuthView(SignupView):
 
     def dispatch(self, *args, **kwargs):
-        username = self.kwargs.get('username', None)
         if self.request.user.is_authenticated():
             return redirect(self.request.user.profile.get_absolute_url())
         return super(SignupAuthView, self).dispatch(*args, **kwargs)
@@ -92,7 +91,7 @@ class SignupEmailView(SignupAuthView):
         )
         # A new signed user should logout the old one.
         if self.request.user.is_authenticated():
-            logout(request)
+            logout(self.request)
         signup_complete.send(sender=None, user=user)
         user = authenticate(username=user.username, password=info['password'])
         login(self.request, user)

@@ -36,6 +36,5 @@ class UtilsTests(TestCase):
         self.assertEqual(get_location(request),
                          user.profile.contact_info.location.zip_code.code)
         # user and code
-        from annoying.functions import get_object_or_None
         self.assertEqual(get_location(request, "01225"),'01225')
         # ask for code by sttribute

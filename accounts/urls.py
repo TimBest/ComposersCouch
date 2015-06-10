@@ -1,8 +1,6 @@
-from django.conf.urls import include, patterns, url
-from django.contrib.auth.views import password_reset_confirm
+from django.conf.urls import patterns, url
 
-from .forms import ClaimProfileForm
-from userena.compat import auth_views_compat_quirks, password_reset_uid_kwarg
+from userena.compat import password_reset_uid_kwarg
 
 
 urlpatterns = patterns('accounts.views',

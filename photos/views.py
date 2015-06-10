@@ -1,12 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-from django.db.models import Q
-from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView, DetailView, DeleteView, UpdateView
 
 from .models import Image
 from .forms import ImageForm
-from annoying.functions import get_object_or_None
 from accounts.views import loginredirect
 from composersCouch.utils import get_page
 
@@ -14,16 +11,6 @@ from composersCouch.utils import get_page
 def get_images_queryset(self):
     images = Image.objects.all()
     self.e_context = dict()
-    if 'tag' in self.kwargs:
-        tag_instance = get_tag(self.kwargs['tag'])
-        if tag_instance is None:
-            raise Http404(_('No Tag found matching "%s".') % self.kwargs['tag'])
-        self.e_context['tag'] = tag_instance
-        images = TaggedItem.objects.get_by_model(images, tag_instance)
-    if 'username' in self.kwargs:
-        user = get_object_or_404(**{'klass': User, username_field: self.kwargs['username']})
-        self.e_context['view_user'] = user
-        images = images.filter(user=user)
     return images
 
 class ImageView(DetailView):
@@ -37,39 +24,6 @@ class ImageView(DetailView):
 
         context = self.get_context_data(object=self.object)
         return self.render_to_response(context)
-
-    def get_context_data(self, **kwargs):
-        context = super(ImageView, self).get_context_data(**kwargs)
-        image = context['image']
-
-        base_qs = self.get_queryset()
-        count = base_qs.count()
-        img_pos = base_qs.filter(
-            Q(order__lt=image.order)|
-            Q(id__lt=image.id, order=image.order)
-        ).count()
-        next = None
-        previous = None
-        if count - 1 > img_pos:
-            try:
-                next = base_qs.filter(
-                    Q(order__gt=image.order)|
-                    Q(id__gt=image.id, order=image.order)
-                )[0]
-            except IndexError:
-                pass
-        if img_pos > 0:
-            try:
-                previous = base_qs.filter(
-                    Q(order__lt=image.order)|
-                    Q(id__lt=image.id, order=image.order)
-                ).order_by('-order', '-id')[0]
-            except IndexError:
-                pass
-        context['next'] = next
-        context['previous'] = previous
-        context.update(self.e_context)
-        return context
 
 veiw_image = ImageView.as_view()
 

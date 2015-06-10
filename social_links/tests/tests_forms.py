@@ -13,7 +13,7 @@ class LinksFormTests(TestCase):
                       ['example.com','http://www.example.com']
         ]
         for url in valid_urls:
-            cleaned_url = clean_url(url[0])
+            cleaned_url = forms.clean_url(url[0])
             self.assertEqual(cleaned_url, url[1])
 
     def test_socail_form(self):

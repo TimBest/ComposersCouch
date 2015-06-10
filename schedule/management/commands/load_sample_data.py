@@ -1,6 +1,5 @@
 from django.core.management.base import NoArgsCommand
 
-from django.core.management.color import no_style
 
 class Command(NoArgsCommand):
     help = "Load some sample data into the db"

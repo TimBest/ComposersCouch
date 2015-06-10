@@ -1,6 +1,4 @@
-import mutagen
 from django.conf import settings
-from django.contrib import messages
 from django.forms.models import inlineformset_factory
 from django.shortcuts import render, redirect
 from django.views.generic import UpdateView
@@ -13,7 +11,6 @@ from photos.forms import AlbumArtForm
 from photos.views import ImageFormMixin
 from tracks.forms import AlbumForm, AlbumAudioForm, TracksForm
 from tracks.models import Album, Track
-from tracks.utils import json_playlist
 
 
 class MusicView(ArtistProfileView):

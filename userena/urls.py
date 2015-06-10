@@ -1,7 +1,6 @@
 from django.conf.urls import *
 from django.contrib.auth import views as auth_views
 
-from userena import views as userena_views
 from userena import settings as userena_settings
 from userena.compat import auth_views_compat_quirks, password_reset_uid_kwarg
 

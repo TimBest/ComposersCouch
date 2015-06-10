@@ -152,4 +152,3 @@ class ChangeEmailFormTests(TestCase):
 
 class EditAccountFormTest(TestCase):
     """ Test the ``EditAccountForm`` """
-    pass

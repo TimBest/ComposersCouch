@@ -2,7 +2,6 @@ from django.contrib.auth.models import User
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext as _
 
-from artist.models import ArtistProfile
 from annoying.functions import get_object_or_None
 from contact.models import Zipcode
 from threads.models import Thread, Participant

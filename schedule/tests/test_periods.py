@@ -3,8 +3,7 @@ import pytz
 
 from django.test import TestCase
 
-from schedule.conf.settings import FIRST_DAY_OF_WEEK
-from schedule.models import Event, Calendar
+from schedule.models import Event
 from schedule.periods import Period, Month, Day, Year, Week
 
 class TestPeriod(TestCase):
@@ -168,7 +167,6 @@ class TestAwareDay(TestCase):
 
     def test_day_range(self):
         # TODO: fix this
-        pass
         """start = datetime.datetime(2008, 2, 6, 23, 0, tzinfo=pytz.utc)
         end = datetime.datetime(2008, 2, 7, 23, 59, 59, 999999, tzinfo=pytz.utc)
 

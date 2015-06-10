@@ -1,4 +1,3 @@
-import os
 
 
 ANONYMOUS_USER_ID = -1

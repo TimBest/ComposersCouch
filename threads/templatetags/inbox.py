@@ -2,16 +2,12 @@ from __future__ import unicode_literals
 import datetime
 
 from django import VERSION
-from django.contrib.auth.models import User
 from django.http import QueryDict
 from django.template import Node
 from django.template import TemplateSyntaxError
 from django.template import Library
 from django.template.defaultfilters import date
-from django.utils import six, timezone
 from django.utils.timezone import localtime
-from django.utils.encoding import force_text
-from django.utils.translation import ugettext_lazy as _
 
 register = Library()
 

@@ -1,7 +1,5 @@
-from datetime import timedelta
 from django.test import TestCase
 from django.utils import timezone
-from django.utils.translation import ugettext_lazy as _
 
 from venue import forms
 

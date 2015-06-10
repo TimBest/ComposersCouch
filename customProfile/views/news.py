@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.shortcuts import redirect
-from django.views.generic import FormView
 
 from annoying.views import MultipleFormsView
 from customProfile.views import ProfileMixin

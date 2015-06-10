@@ -1,20 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-import datetime, os
+import datetime
 from django.conf import settings
-from django.contrib.sites.models import Site
-from django.contrib.auth.models import User
 from django.db import models
-from django.template.loader import render_to_string
 from django.utils.translation import ugettext_lazy as _
 
-from photos.fields import ImageField
 from photos.models import Image
 from userena import settings as userena_settings
 from userena.managers import UserenaManager, UserenaBaseProfileManager
 from userena.utils import get_gravatar, generate_sha1, get_protocol, \
     get_datetime_now, user_model_label
-from .mail import send_mail
 
 
 PROFILE_PERMISSIONS = (

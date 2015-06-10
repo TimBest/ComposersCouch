@@ -1,4 +1,5 @@
-from django.conf.urls import patterns, url, include
+from django.conf.urls import include
+from django.conf.urls import patterns
 from django.conf import settings
 
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns

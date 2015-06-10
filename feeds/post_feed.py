@@ -1,6 +1,4 @@
-from stream_framework.aggregators.base import RecentVerbAggregator
 from stream_framework.feeds.redis import RedisFeed
-from stream_framework.feeds.aggregated_feed.redis import RedisAggregatedFeed
 
 """ User Feeds """
 # The feed containing posts by those you follow

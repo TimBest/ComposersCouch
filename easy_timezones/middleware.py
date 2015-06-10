@@ -2,7 +2,6 @@ import pytz
 import pygeoip
 from django.core.exceptions import ImproperlyConfigured
 from django.conf import settings
-from django.contrib.auth import get_user_model
 from django.utils import timezone
 
 from easy_timezones.utils import get_ip_address_from_request

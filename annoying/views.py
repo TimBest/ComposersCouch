@@ -1,9 +1,8 @@
 from django.db import connection
 from django.http import HttpResponseRedirect
-from django.shortcuts import render, render_to_response, redirect
-from django.template.context import RequestContext
+from django.shortcuts import redirect
+from django.shortcuts import render
 from django.views.generic import FormView
-from django.views.generic.base import TemplateView
 
 
 def load_template(request, template_name, extra_context=None):

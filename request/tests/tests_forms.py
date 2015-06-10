@@ -5,9 +5,7 @@ from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from contact.models import ContactInfo
-from schedule.models import DateRange
 from request import forms
-from request.models import Application, NumberOfApplicants
 
 
 class FormTests(TestCase):
@@ -16,7 +14,6 @@ class FormTests(TestCase):
                 'threads', 'messages', 'participants', 'dates']
 
     def test_date_form(self):
-        date_range = DateRange(start=timezone.now(), end=timezone.now())
         # test field errors
         invalid_data_dicts = [
             # Request must be in the future
@@ -159,7 +156,6 @@ class FormTests(TestCase):
 
     def test_approve_applicant_form(self):
         # TODO: apparnently models are being reset some how
-        pass
         """left = NumberOfApplicants.objects.get(pk=1).left
         # Accept an applicatant
         form = forms.ApproveForm(data={})

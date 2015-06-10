@@ -23,24 +23,20 @@ from .settings import EMBED_VIDEO_BACKENDS, EMBED_VIDEO_TIMEOUT
 
 class EmbedVideoException(Exception):
     """ Parental class for all embed_video exceptions """
-    pass
 
 
 class VideoDoesntExistException(EmbedVideoException):
     """ Exception thrown if video doesn't exist """
-    pass
 
 
 class UnknownBackendException(EmbedVideoException):
     """ Exception thrown if video backend is not recognized. """
-    pass
 
 
 class UnknownIdException(VideoDoesntExistException):
     """
     Exception thrown if backend is detected, but video ID cannot be parsed.
     """
-    pass
 
 
 def detect_backend(url):

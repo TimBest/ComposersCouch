@@ -3,7 +3,6 @@ from django.test import TestCase
 from django.contrib.auth.models import User
 
 from accounts.models import Profile
-from artist.models import ArtistProfile
 
 
 class ViewsTests(TestCase):
@@ -12,7 +11,7 @@ class ViewsTests(TestCase):
 
     def setUp(self):
         # create user and log them in
-        response = self.client.post(reverse('login'),
+       self.client.post(reverse('login'),
                                     data={'identification': 'john@example.com',
                                           'password': 'blowfish'})
         self.user = User.objects.get(email='john@example.com')

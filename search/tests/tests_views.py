@@ -1,11 +1,6 @@
-from django.contrib.auth.models import User
-from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 
-from accounts.models import Profile
-from request.models import PublicRequest
-from threads.models import Thread
 
 
 class SearchViewsTests(TestCase):

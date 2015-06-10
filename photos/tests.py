@@ -4,14 +4,13 @@ from __future__ import absolute_import  # Python 2 only
 
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
-from django.db import models
 from django.test import signals, TestCase
 from django.test.client import Client
 
 from jinja2 import Template as Jinja2Template
 import os
 
-from photos.models import *
+from photos.models import Image
 
 #note - this code can be run only once
 ORIGINAL_JINJA2_RENDERER = Jinja2Template.render
@@ -87,19 +86,3 @@ class photosTest(TestCase):
         self.client.post(reverse('photos:update-image', kwargs={'pk': image_id}), values, follow=True)
         self.assertEqual(response.status_code, 200)
         self.assertTrue(Image.objects.get(user__pk=1).title == 'changed title')
-
-    def test_prev_next_with_ordering(self):
-        for i in range(1, 6):
-            self._upload_test_image()
-            img = Image.objects.order_by('-id')[0]
-            img.order = i
-            img.save()
-        # Swap two id's
-        im1 = Image.objects.get(order=2)
-        im2 = Image.objects.get(order=4)
-        im1.order, im2.order = 4, 2
-        im1.save()
-        im2.save()
-        response = self.client.get(Image.objects.get(order=3).get_absolute_url())
-        self.assertEqual(response.context['next'], im1)
-        self.assertEqual(response.context['previous'], im2)

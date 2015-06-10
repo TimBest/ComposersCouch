@@ -1,4 +1,5 @@
-from django.conf.urls import include, patterns, url
+from django.conf.urls import patterns
+from django.conf.urls import url
 
 
 urlpatterns = patterns('customProfile.views',

@@ -1,10 +1,7 @@
 from django.http import HttpRequest
 from django.test import TestCase
-from django.utils.importlib import import_module
-from django.conf import settings
 from django.contrib.auth.models import User
 
-from accounts.models import Profile
 from userena.middleware import UserenaLocaleMiddleware
 from userena import settings as userena_settings
 
@@ -31,7 +28,6 @@ class UserenaLocaleMiddlewareTests(TestCase):
 
     def test_without_profile(self):
         """TODO: Middleware should do nothing when a user has no profile """
-        pass
 
     def test_without_language_field(self):
         """ Middleware should do nothing if the profile has no language field """

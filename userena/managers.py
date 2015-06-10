@@ -1,17 +1,15 @@
 from django.db import models
 from django.db.models import Q
-from django.core.exceptions import ObjectDoesNotExist
-from django.contrib.auth.models import UserManager, Permission, AnonymousUser, User
-from django.contrib.contenttypes.models import ContentType
-from django.utils.translation import ugettext as _
-from django.conf import settings
+from django.contrib.auth.models import AnonymousUser
+from django.contrib.auth.models import User
+from django.contrib.auth.models import UserManager
 
 from userena import settings as userena_settings
 from userena.utils import generate_sha1, get_datetime_now
 from userena import signals as userena_signals
 
 
-import re, datetime
+import re
 
 SHA1_RE = re.compile('^[a-f0-9]{40}$')
 

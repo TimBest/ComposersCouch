@@ -1,14 +1,10 @@
-import datetime
-from django.core.urlresolvers import reverse
-from django.test.utils import override_settings
-import pytz
 
 from django.test import TestCase
-from django.utils import timezone
 from django.contrib.auth.models import User
 
 from contact.models import Location
-from schedule.models import Event, Calendar, Show
+from schedule.models import Event
+from schedule.models import Show
 
 
 class TestEvent(TestCase):

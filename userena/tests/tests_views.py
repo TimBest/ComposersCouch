@@ -1,15 +1,9 @@
-import re
 
-from datetime import datetime, timedelta
 from django.core.urlresolvers import reverse
 from django.core import mail
-from django.contrib.auth.forms import PasswordChangeForm
-from django.conf import settings
 from django.test import TestCase
-from django.test.utils import override_settings
 from django.contrib.auth.models import User
 
-from userena import forms
 from userena import settings as userena_settings
 
 User = User
@@ -21,7 +15,6 @@ class UserenaViewsTests(TestCase):
 
     def test_signup_view(self):
         """TODO: A ``GET`` to the ``signup`` view """
-        pass
 
     def test_signup_view_success(self):
         """
@@ -29,7 +22,6 @@ class UserenaViewsTests(TestCase):
         the user should be logged in and redirected to the signup success page.
 
         """
-        pass
 
     def test_signup_view_with_signin(self):
         """
@@ -37,7 +29,6 @@ class UserenaViewsTests(TestCase):
         the user should be logged in and redirected to the signup success page.
 
         """
-        pass
 
     '''def test_signin_view(self):
         """ A ``GET`` to the signin view should render the correct form """
@@ -78,7 +69,6 @@ class UserenaViewsTests(TestCase):
         redirect to ``next``.
 
         """
-        pass
 
 
     def test_signout_view(self):
@@ -121,4 +111,3 @@ class UserenaViewsTests(TestCase):
                                           'new_password2': 'pass',})
         self.assertEqual(response.status_code, 302)
         self.assertIn(reverse('userena_password_reset_complete'), str(response))"""
-        pass

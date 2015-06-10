@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
-from django.conf.urls import patterns, url, include
+from django.conf.urls import patterns
+from django.conf.urls import url
 from views import upload_progress
 
 urlpatterns = patterns('',

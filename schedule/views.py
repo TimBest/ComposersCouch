@@ -5,7 +5,6 @@ from django.utils import decorators, timezone
 from django.views.decorators.http import require_POST
 from django.views.generic import TemplateView
 
-from datetime import datetime
 
 from annoying.functions import get_object_or_None
 from annoying.views import MultipleModelFormsView
@@ -18,7 +17,8 @@ from photos.views import ImageFormMixin
 from request.decorators import is_participant
 from request.models import PrivateRequest
 from schedule.forms import DateForm, EventForm, ShowInfoForm
-from schedule.models import Calendar, Event, Show
+from schedule.models import Event
+from schedule.models import Show
 from schedule.periods import Year, Month, Week, Day
 from schedule.utils import coerce_date_dict, export
 from schedule.decorators import view_show, edit_show

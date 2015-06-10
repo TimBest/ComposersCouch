@@ -3,15 +3,13 @@ from datetime import datetime, time
 from django.contrib.auth.decorators import login_required
 from django.contrib.gis.measure import D
 from django.contrib.gis.geos import LineString
-from django.shortcuts import render_to_response
-from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
 from django.utils.timezone import utc
 
 from accounts.views import SignupEmailView, LoginView
-from composersCouch.utils import get_page
 from contact.utils import get_location
-from feeds.views import AvailabilityMixin, FeedMixin, GenreMixin
+from feeds.views import AvailabilityMixin
+from feeds.views import FeedMixin
 from feeds.post_feed import LocalFeed
 from venue.models import VenueProfile
 

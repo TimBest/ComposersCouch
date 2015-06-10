@@ -5,19 +5,15 @@ from django.shortcuts import redirect, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 
-from accounts.models import Profile
 from accounts.utils import update_profile_weight
 from annoying.functions import get_object_or_None
-from artist.models import ArtistProfile
 from annoying.views import MultipleFormsView
 from customProfile import forms as profile_forms
 from customProfile.decorators import is_artist, is_venue, is_fan
-from fan.models import FanProfile
-from feeds.models import Follow, Post
+from feeds.models import Follow
 from photos.models import Image
 from photos.forms import MugshotForm
 from photos.views import ImageFormMixin
-from venue.models import VenueProfile
 
 
 

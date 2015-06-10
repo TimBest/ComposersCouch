@@ -71,7 +71,6 @@ class ViewsTests(TestCase):
     def test_claim_profile_confirm_view(self):
         """        """
         # TODO: generate token and test this
-        pass
 
     def test_login_view(self):
         """        """

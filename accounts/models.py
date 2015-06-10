@@ -2,8 +2,6 @@ from django.contrib.gis.db import models
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext as _
 
-from photos.fields import ImageField
-
 from contact.models import ContactInfo
 from genres.models import Genre
 from userena.models import UserenaBaseProfile

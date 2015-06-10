@@ -4,7 +4,6 @@ from django.test import TestCase
 from django.utils import timezone
 
 from schedule.models import Event, Calendar, DateRange
-from schedule.periods import Period, Day
 
 class TestCalendar(TestCase):
     fixtures = ['users', 'contactInfos', 'contacts', 'locations', 'zipcodes', 'profiles',

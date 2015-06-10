@@ -1,21 +1,11 @@
 from django.db import models
 from django.db.models import permalink
 from django.utils.translation import ugettext_lazy as _
-from django.conf import settings
-from django.contrib.auth.models import Permission
-from django.db.models.signals import post_save
-from django.contrib.contenttypes.models import ContentType
 from django.contrib.auth.models import User
-from django.core.exceptions import ObjectDoesNotExist
 from django.forms import ValidationError
 
 from photos.fields import ImageField
-try:
-    import Image as PILImage
-except ImportError:
-    from PIL import Image as PILImage
-
-from photos.utils import get_file_path, get_model_string
+from photos.utils import get_file_path
 
 
 def validate_file_extension(value):

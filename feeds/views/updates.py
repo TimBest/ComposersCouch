@@ -1,7 +1,4 @@
 from django.contrib.auth.decorators import login_required
-from django.contrib.gis.measure import D
-from django.shortcuts import render_to_response
-from django.template.context import RequestContext
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView
 

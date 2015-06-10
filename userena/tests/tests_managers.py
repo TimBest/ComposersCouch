@@ -1,5 +1,4 @@
 from django.test import TestCase
-from django.core import mail
 from django.contrib.auth.models import User
 
 from userena.models import UserenaSignup

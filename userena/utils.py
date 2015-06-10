@@ -1,5 +1,4 @@
 from django.conf import settings
-from django.db.models import get_model
 
 try:
     from hashlib import sha1 as sha_constructor, md5 as md5_constructor
@@ -151,4 +150,3 @@ def get_datetime_now():
 
 user_model_label = getattr(settings, 'AUTH_USER_MODEL', 'auth.User')
 
-from django.contrib.auth.models import User

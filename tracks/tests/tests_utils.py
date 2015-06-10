@@ -1,5 +1,6 @@
-from django.contrib.auth.models import User
 from django.test import TestCase
+
+import ast
 
 from tracks.models import Album, Track
 from tracks.utils import json_playlist
@@ -12,10 +13,9 @@ class PrivateRequestModelTest(TestCase):
                 'albums', 'artists', 'tracks']
 
     def test_json_playlist(self):
-        # TODO: add assertion
         album = Album.objects.get(pk=1)
         tracks = Track.objects.all()
         tracks_playlist = json_playlist(tracks)
-        #self.assertEqual(len(list(tracks_playlist)), len(tracks))
+        self.assertEqual(len(ast.literal_eval(tracks_playlist)), len(tracks))
         album_playlist = json_playlist(tracks, album=album)
-        #self.assertEqual(len(list(album_playlist)), len(album.tracks.all()))
+        self.assertEqual(len(ast.literal_eval(album_playlist)), len(album.track_set.all()))
