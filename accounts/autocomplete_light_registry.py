@@ -1,11 +1,11 @@
 from django.contrib.auth.models import User
 
-import autocomplete_light
+import autocomplete_light as al
 
 from artist.models import ArtistProfile
 
 
-class ArtistProfileAutocomplete(autocomplete_light.AutocompleteModelTemplate):
+class ArtistProfileAutocomplete(al.AutocompleteModelTemplate):
     model = ArtistProfile
     attrs = {
         'placeholder': '',
@@ -13,13 +13,13 @@ class ArtistProfileAutocomplete(autocomplete_light.AutocompleteModelTemplate):
     search_fields = ['^name',]
     limit_choices = 5
 
-autocomplete_light.register(
+al.register(
     ArtistProfile,
     ArtistProfileAutocomplete,
     choice_template='autocomplete/artist.html',
 )
 
-class UserAutocomplete(autocomplete_light.AutocompleteModelTemplate):
+class UserAutocomplete(al.AutocompleteModelTemplate):
     model = User
     attrs = {
         'placeholder': '',
@@ -31,13 +31,13 @@ class UserAutocomplete(autocomplete_light.AutocompleteModelTemplate):
         self.choices = self.choices.exclude(id=-1)
         return super(UserAutocomplete, self).choices_for_request()
 
-autocomplete_light.register(
+al.register(
     User,
     UserAutocomplete,
     choice_template='autocomplete/user.html',
 )
 
-class UserArtistAutocomplete(autocomplete_light.AutocompleteModelTemplate):
+class UserArtistAutocomplete(al.AutocompleteModelTemplate):
     model = User
     attrs = {
         'placeholder': '',
@@ -50,7 +50,7 @@ class UserArtistAutocomplete(autocomplete_light.AutocompleteModelTemplate):
         self.choices = self.choices.filter(profile__profile_type='m')
         return super(UserArtistAutocomplete, self).choices_for_request()
 
-autocomplete_light.register(
+al.register(
     User,
     UserArtistAutocomplete,
     choice_template='autocomplete/user.html',

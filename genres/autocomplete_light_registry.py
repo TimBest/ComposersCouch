@@ -1,9 +1,9 @@
-import autocomplete_light
+import autocomplete_light as al
 
 from .models import Genre
 
 
-class GenreAutocomplete(autocomplete_light.AutocompleteModelBase):
+class GenreAutocomplete(al.AutocompleteModelBase):
     search_fields = ['^name','^categories__name']
     attrs = {
         'placeholder': '',
@@ -25,4 +25,4 @@ class GenreAutocomplete(autocomplete_light.AutocompleteModelBase):
         return self.order_choices(self.choices.filter(
             conditions).exclude(pk__in=exclude).distinct())[0:self.limit_choices]
 
-autocomplete_light.register(Genre, GenreAutocomplete,  distinct=True)
+al.register(Genre, GenreAutocomplete,  distinct=True)

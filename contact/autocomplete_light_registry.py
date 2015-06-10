@@ -1,9 +1,9 @@
-import autocomplete_light
+import autocomplete_light as al
 
 from models import Location, Zipcode
 
 
-class LocationAutocomplete(autocomplete_light.AutocompleteModelBase):
+class LocationAutocomplete(al.AutocompleteModelBase):
     model = Location
     attrs = {
         'placeholder': '',
@@ -11,9 +11,9 @@ class LocationAutocomplete(autocomplete_light.AutocompleteModelBase):
     search_fields = ['^address_1', 'address_2', 'city', 'state',]
     limit_choices = 5
 
-autocomplete_light.register(Location ,LocationAutocomplete)
+al.register(Location ,LocationAutocomplete)
 
-class ZipcodeAutocomplete(autocomplete_light.AutocompleteModelBase):
+class ZipcodeAutocomplete(al.AutocompleteModelBase):
     model = Zipcode
     attrs = {
         'placeholder': '',
@@ -21,4 +21,4 @@ class ZipcodeAutocomplete(autocomplete_light.AutocompleteModelBase):
     search_fields = ['^code',]
     limit_choices = 5
 
-autocomplete_light.register(Zipcode ,ZipcodeAutocomplete)
+al.register(Zipcode ,ZipcodeAutocomplete)

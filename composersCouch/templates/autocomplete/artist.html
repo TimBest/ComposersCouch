@@ -1,7 +1,7 @@
 {% from "profile/macros.html" import mugshot %}
 
 
-<div class="artist-autocomplete" data-value="{% if pk %}{{pk}}{% else %}{{ choice.pk }}{% endif %}">
+<span class="artist-autocomplete" data-value="{% if pk %}{{pk}}{% else %}{{ choice.pk }}{% endif %}">
   {{ mugshot(profile=choice.profile, width=45, height=45) }}
   <span class="artist-name">{{ choice.name }}</span>
-</div>
+</span>

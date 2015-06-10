@@ -1,18 +1,16 @@
 {% if registry|length %}
-    <h2>List of your {{ registry_items|length }} registered autocompletes</h2>
+  <h2>List of your {{ registry_items|length }} registered autocompletes</h2>
 
-    <table>
+  <table>
     {% for name, autocomplete in registry_items %}
-        <tr>
-            <td>
-                {{ name }}
-            </td>
-            <td>
-                <a href="{{ autocomplete.get_absolute_url }}">{{ autocomplete.get_absolute_url }}</a>
-            </td>
-        </tr>
+      <tr>
+        <td>{{ name }}</td>
+        <td>
+          <a href="{{ autocomplete.get_absolute_url }}">{{ autocomplete.get_absolute_url }}</a>
+        </td>
+      </tr>
     {% endfor %}
-    </table>
+  </table>
 {% else %}
-    <p>You have not registered any autocomplete</p>
+  <p>You have not registered any autocomplete</p>
 {% endif %}
