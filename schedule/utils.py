@@ -24,7 +24,7 @@ def coerce_date_dict(date_dict):
             pass
     return timezone.now()
 
-def export(request, events, year):
+def export(request, events, year=None):
     cal = iCalendar()
     site = Site.objects.get_current()
 
