@@ -27,10 +27,12 @@ function show_participants(id, choice_class, plural) {
     $("#div_"+id+" ."+choice_class+" .remove").replaceWith(
         "<button class='btn btn-link remove' type='button'><span class='fa fa-times-circle text-muted'></span></button>"
     );
-    $("#div_"+id+"_text .controls").prepend(
+    $("#div_"+id+"_text div").prepend(
         $("#div_"+id+" #"+id+"-deck").html()
     );
-
+    if(plural === false && $("#"+id+" option:selected").length !== 0 ) {
+      $("input#"+id+"_text").hide();
+    }
     $("#"+id+"_text").yourlabsAutocomplete({
     }).input.bind('selectChoice', function(e, choice, autocomplete) {
         var value = $("#div_"+id+"_text .hilight").attr("data-value");
@@ -46,16 +48,18 @@ function show_participants(id, choice_class, plural) {
                 $("#"+id+" option[data-value="+value+"]").remove();
                 $("#div_"+id+"_text ."+choice_class).remove();
             }
+            $("input#"+id+"_text").hide();
         }
 
-        // display to user whom they selected
-        $("#div_"+id+"_text .controls").prepend(
-          "<div class='"+choice_class+"' data-value="+value+">"+
+        // display selected choice
+        $("#div_"+id+"_text div").prepend(
+          "<span class='"+choice_class+"' data-value="+value+">"+
             "<button class='btn btn-link remove' type='button'><span class='fa fa-times-circle text-muted'></span></button>"+
             $(choice).html()+
-          "</div>"
+          "</span>"
         );
     });
+
     // remove selection display and value
     $("#div_"+id+"_text").on("click", ".remove", function() {
       if (plural === true) {
@@ -71,6 +75,8 @@ function show_participants(id, choice_class, plural) {
           $("#"+id+" option").remove();
           $(this).parent().remove();
           $("#"+id+"_text").val('');
+          $("input#"+id+"_text").show();
+
       }
     });
 }

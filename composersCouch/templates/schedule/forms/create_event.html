@@ -1,6 +1,7 @@
 {% extends "utils/form.html" %}
 {% from "schedule/macros.html" import date_form as render_date_fom %}
 {% from "utils/macros.html" import image_select %}
+{% from "utils/form_macros.html" import non_field_errors, field %}
 
 
 {% block title %}
@@ -11,31 +12,47 @@
 {% block enctype %}multipart/form-data{% endblock %}
 {% block form %}
   <div id="poster-form">
-    {{ render_form(poster_form) }}
-    {% if images %}
-      {{ image_select(request=request, images=images, id="poster", label="Poster") }}
-    {% endif %}
-    <script>
-      {# variables for image select #}
-      var selectorId = "#id_poster";
-      var selectDiv  = "#div_id_poster";
-      var uploadDiv  = "#div_id_image";
-      {% if images %}
-        var images = true;
-      {% else %}
-        var images = false;
-      {% endif %}
-    </script>
+    <div class="row">
+      <div class="col-xs-12">
+        {{ render_form(poster_form) }}
+        {% if images %}
+          {{ image_select(request=request, images=images, id="poster", label="Poster") }}
+        {% endif %}
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-sm-6">
-      {{ render_form(show_info_form) }}
+      {{ non_field_errors(show_info_form) }}
+      {{ field(show_info_form.title) }}
+      {{ field(show_info_form.headliner) }}
+      {{ field(show_info_form.headliner_text) }}
+      {{ field(show_info_form.openers) }}
+      {{ field(show_info_form.openers_text) }}
+      {{ field(show_info_form.venue) }}
+      {{ field(show_info_form.venue_text) }}
     </div>
     <div class="col-sm-6">
       {{ render_date_fom(date_form) }}
       {{ render_form(event_form) }}
     </div>
   </div>
+  <div class="row">
+    <div class="col-xs-12">
+      {{ field(show_info_form.description) }}
+    </div>
+  </div>
+  <script>
+    {# variables for image select #}
+    var selectorId = "#id_poster";
+    var selectDiv  = "#div_id_poster";
+    var uploadDiv  = "#div_id_image";
+    {% if images %}
+      var images = true;
+    {% else %}
+      var images = false;
+    {% endif %}
+  </script>
 {% endblock %}
 
 {% block extraSubmit %}
