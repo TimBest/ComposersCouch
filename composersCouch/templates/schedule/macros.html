@@ -56,15 +56,17 @@
               {% if info.title %}
                 <h3>{{ info.title }}</h3>
               {% endif %}
-              {{ info.headliner }}
-              {{ info.headliner_text }}
-              {{ info.headliner_test }}
-              {{ info.headliner_test_text }}
-              {#{% if info.headliner_test %}
-                <h4><a class="text-black" href="{{ url('artist:news', kwargs={'username':info.headliner_test.user.username}) }}" >{{ info.headliner_test }}</a></h4>
-              {% elif info.headliner_test_text %}
-                <h4>{{ info.headliner_test_text }}</h4>
-              {% endif %}#}
+              {% if info.headliner %}
+                <h4>
+                  {% if info.headliner_object %}
+                    <a class="text-black" href="{{ url('artist:news', kwargs={'username':info.headliner.user.username}) }}">
+                      {{ info.headliner }}
+                    </a>
+                  {% else %}
+                    {{ info.headliner }}
+                  {% endif %}
+                </h4>
+              {% endif %}
               <div class="openers">
                 {# {% if info.opener.first %}
                   {% for opener in info.openers.all() %}
@@ -79,10 +81,12 @@
             <div>
               <p>
                 <span class="fa fa-map-marker text-muted"></span>
-                {% if info.venue %}
-                  <a class="text-black" href="{{ url('redirectToProfile', kwargs={'username':info.venue.username, 'tab':'about'}) }}">{{ info.venue.profile }}</a>
+                {% if info.venue_object %}
+                  <a class="text-black" href="{{ url('redirectToProfile', kwargs={'username':info.venue.username, 'tab':'about'}) }}">
+                    {{ info.venue.profile }}
+                  </a>
                 {% else %}
-                  {{ info.venue_text }}
+                  {{ info.venue }}
                 {% endif %}
               </p>
             </div>

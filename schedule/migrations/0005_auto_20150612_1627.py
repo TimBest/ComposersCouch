@@ -16,8 +16,8 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='info',
-            name='headliner_test',
-            field=models.ForeignKey(related_name='shows_headlining_test', verbose_name='headliner_test', blank=True, to='artist.ArtistProfile', null=True),
+            name='headliner_test_object',
+            field=models.ForeignKey(related_name='shows_headlining_test_object', verbose_name='headliner_test_object', blank=True, to='artist.ArtistProfile', null=True),
         ),
         migrations.AddField(
             model_name='info',
@@ -26,8 +26,8 @@ class Migration(migrations.Migration):
         ),
         migrations.AddField(
             model_name='info',
-            name='venue_test',
-            field=models.ForeignKey(related_name='shows_hosting', verbose_name='venue_test', blank=True, to=settings.AUTH_USER_MODEL, null=True),
+            name='venue_test_object',
+            field=models.ForeignKey(related_name='shows_hosting_object', verbose_name='venue_test_object', blank=True, to=settings.AUTH_USER_MODEL, null=True),
         ),
         migrations.AddField(
             model_name='info',

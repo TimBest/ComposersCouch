@@ -61,7 +61,7 @@ class ShowInfoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(ShowInfoForm, self).__init__(*args, **kwargs)
-        self.fields['headliner'].required = False
+        self.fields['headliner_object'].required = False
         self.fields['headliner_text'].label = "Headliner"
         self.fields['openers_text'].help_text = "Separate artists by commas"
         self.fields['openers_text'].label = "Openers"
@@ -71,11 +71,11 @@ class ShowInfoForm(ModelForm):
         # user must be a participant in the evnet or request
         isParticipant = False
         try:
-            if self.cleaned_data.get('headliner').profile.user == self.user:
+            if self.cleaned_data.get('headliner_object').profile.user == self.user:
                 isParticipant = True
         except:
             pass
-        if self.cleaned_data.get('venue') == self.user:
+        if self.cleaned_data.get('venue_object') == self.user:
             isParticipant = True
         else:
             for o in self.cleaned_data.get('openers'):
@@ -91,8 +91,8 @@ class ShowInfoForm(ModelForm):
 
     class Meta:
         model = Info
-        fields = ('title', 'headliner_text', 'headliner', 'openers_text',
-                  'openers', 'venue', 'venue_text','description',)
+        fields = ('title', 'headliner_text', 'headliner_object', 'openers_text',
+                  'openers', 'venue_object', 'venue_text','description',)
         widgets = {
             'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
             'headliner_text' : autocomplete_light.TextWidget('ArtistProfileAutocomplete'),

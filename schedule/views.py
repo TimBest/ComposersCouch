@@ -148,10 +148,10 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
         date_data = {"start": coerce_date_dict(self.request.GET),}
         if self.request.user.profile.profile_type == "m":
             show_data['headliner_text'] = self.request.user.profile
-            show_data['headliner'] = self.request.user.profile.artist_profile
+            show_data['headliner_object'] = self.request.user.profile.artist_profile
         else:
             show_data['venue_text'] = self.request.user.profile
-            show_data['venue'] = self.request.user
+            show_data['venue_object'] = self.request.user
         return {'poster_form':{},'date_form':date_data,'event_form':{},'show_info_form':show_data,}
 
     def forms_valid(self, forms):

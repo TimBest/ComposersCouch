@@ -4,7 +4,8 @@ from django.utils.translation import ugettext as _
 
 from artist.models import ArtistProfile
 from contact.models import Location
-from object_or_text.models import ForgienKeyOrCharField
+from object_or_text.fields import ObjectOrTextField
+from object_or_text.model_fields import ObjectOrTextField as ObjectOrTextFieldTemp
 from photos.models import Image
 
 
@@ -22,17 +23,19 @@ class Info(models.Model):
                                null=True, blank=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length = 255, null=True, blank=True,)
     description = models.TextField(null=True, blank=True)
-    headliner = models.ForeignKey(ArtistProfile, null=True, blank=True,
-                                  related_name='shows_headlining')
-    headliner_text = models.CharField(max_length=255, null=True, blank=True,)
-    headliner_test = ForgienKeyOrCharField(ArtistProfile, verbose_name=_("headliner_test"), null=True, blank=True, max_length=255, related_name='shows_headlining_test')
+    headliner = ObjectOrTextField(ArtistProfile,
+                                  verbose_name=_("headliner"),
+                                  related_name='shows_headlining',
+                                  null=True, blank=True, max_length=255)
+    #headliner_temp = ObjectOrTextFieldTemp(blank=True, null=True,
+    #                                       verbose_name=_("headliner_temp"), max_length=255)
     openers = models.ManyToManyField(ArtistProfile, blank=True,
                                      related_name='shows_opening')
     openers_text = models.CharField(max_length=255, null=True, blank=True,)
-    venue = models.ForeignKey(User, null=True, blank=True)
-    venue_text = models.CharField(max_length=255, null=True, blank=True,)
-    venue_test = ForgienKeyOrCharField(User, verbose_name=_("venue_test"), null=True, blank=True, max_length=255, related_name='shows_hosting')
-
+    venue = ObjectOrTextField(User, verbose_name=_("venue"),
+                              related_name='shows_hosting',
+                              null=True, blank=True, max_length=255)
+    #venue_temp = ObjectOrTextFieldTemp(verbose_name=_("venue_temp"), default="No Venue Listed", max_length=255)
     location = models.ForeignKey(Location, null=True, blank=True,
                                 related_name='event_location')
     objects = models.GeoManager()
