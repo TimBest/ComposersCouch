@@ -4,6 +4,7 @@ from django.utils.translation import ugettext as _
 
 from artist.models import ArtistProfile
 from contact.models import Location
+from object_or_text.models import ForgienKeyOrCharField
 from photos.models import Image
 
 
@@ -24,11 +25,14 @@ class Info(models.Model):
     headliner = models.ForeignKey(ArtistProfile, null=True, blank=True,
                                   related_name='shows_headlining')
     headliner_text = models.CharField(max_length=255, null=True, blank=True,)
+    headliner_test = ForgienKeyOrCharField(ArtistProfile, verbose_name=_("headliner_test"), null=True, blank=True, max_length=255, related_name='shows_headlining_test')
     openers = models.ManyToManyField(ArtistProfile, blank=True,
                                      related_name='shows_opening')
     openers_text = models.CharField(max_length=255, null=True, blank=True,)
     venue = models.ForeignKey(User, null=True, blank=True)
     venue_text = models.CharField(max_length=255, null=True, blank=True,)
+    venue_test = ForgienKeyOrCharField(User, verbose_name=_("venue_test"), null=True, blank=True, max_length=255, related_name='shows_hosting')
+
     location = models.ForeignKey(Location, null=True, blank=True,
                                 related_name='event_location')
     objects = models.GeoManager()
