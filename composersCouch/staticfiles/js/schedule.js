@@ -87,8 +87,8 @@ $(document).ready(function() {
     // copy autocomplete field data into/outof the text field
     var eventForm = $("#eventForm");
     if (eventForm.length > 0) {
-      show_participants("id_headliner", "artist-autocomplete", false);
-      show_participants("id_venue", "user-autocomplete", false);
+      //show_participants("id_headliner", "artist-autocomplete", false);
+      //show_participants("id_venue", "user-autocomplete", false);
       show_participants("id_openers", "artist-autocomplete", true);
     }
 });

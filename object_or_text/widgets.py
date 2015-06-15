@@ -1,43 +1,51 @@
 from __future__ import unicode_literals
 
-"""
-The provided widgets are meant to rely on an Autocomplete class.
+from django.forms.widgets import MultiWidget, CheckboxInput
 
-- :py:class:`ChoiceWidget` :py:class:`django:django.forms.Select`
-
-ChoiceWidget is intended to work as a replacement for django's Select widget,
-and MultipleChoiceWidget for django's SelectMultiple,
-
-Constructing a widget needs an Autocomplete class or registered autocomplete
-name.
-
-The choice autocomplete widget renders from autocomplete_light/widget.html
-template.
-"""
-
-from django import forms
-
-from autocomplete_light.widgets import WidgetBase, TextWidget
-
+from autocomplete_light.widgets import TextWidget
 
 
 __all__ = ['ObjectOrTextWidget',]
 
-
-class ObjectOrTextWidget(TextWidget):
+class ObjectOrTextWidget(MultiWidget):
     """
     Widget that just adds an autocomplete to fill a text input.
 
     Note that it only renders an ``<input>``, so attrs and widget_attrs are
     merged together.
     """
+    def __init__(self, attrs=None, autocomplete=None, widget_js_attributes=None,
+            autocomplete_js_attributes=None, extra_context=None, registry=None,
+            widget_template=None, widget_attrs=None):
+        widgets = (
+            TextWidget(
+                autocomplete, widget_js_attributes,
+                autocomplete_js_attributes, extra_context,
+                registry, widget_template, widget_attrs,
+            ),
+            CheckboxInput(attrs=attrs),
+        )
+        super(ObjectOrTextWidget, self).__init__(widgets, attrs)
 
-    def __init__(self, autocomplete=None, widget_js_attributes=None,
+    def decompress(self, value):
+        if value:
+            return [value.day, value.month]
+        return [None, None]
+
+    def format_output(self, rendered_widgets):
+        return u''.join(rendered_widgets)
+
+    '''def __init__(self, autocomplete=None, widget_js_attributes=None,
             autocomplete_js_attributes=None, extra_context=None, registry=None,
             widget_template=None, widget_attrs=None, *args,
             **kwargs):
 
+        widgets = (
+            forms.TextInput(),
+            forms.CheckboxInput()
+        )
         forms.TextInput.__init__(self, *args, **kwargs)
+        #forms.CheckboxInput.__init__(self, *args, **kwargs)
 
         WidgetBase.__init__(self, autocomplete, widget_js_attributes,
                 autocomplete_js_attributes, extra_context, registry,
@@ -63,4 +71,4 @@ class ObjectOrTextWidget(TextWidget):
         attrs['data-widget-bootstrap'] = 'text'
         attrs['class'] += ' autocomplete-light-text-widget'
 
-        return attrs
+        return attrs'''

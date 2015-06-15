@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 import autocomplete_light
 from autocomplete_light import ModelForm
 
+from object_or_text.widgets import ObjectOrTextWidget
 from schedule.models import DateRange
 from schedule.models import Event
 from schedule.models import Info
@@ -91,7 +92,7 @@ class ShowInfoForm(ModelForm):
                   'openers', 'venue','description',)
         widgets = {
             'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
-            'headliner' : autocomplete_light.TextWidget('ArtistProfileAutocomplete'),
+            'headliner' : ObjectOrTextWidget(autocomplete='ArtistProfileAutocomplete'),
             'openers_text' : autocomplete_light.TextWidget('ArtistProfileAutocomplete'),
-            'venue' : autocomplete_light.TextWidget('UserAutocomplete'),
+            'venue' : ObjectOrTextWidget(autocomplete='UserAutocomplete'),
         }

@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from django.db import models
-from django.forms import CharField
-from django.utils.translation import ugettext_lazy as _
+from django import forms
 
 from annoying.functions import get_object_or_None
 from object_or_text.widgets import ObjectOrTextWidget
@@ -41,7 +40,7 @@ class ObjectOrTextField(models.Field):
     def formfield(self, **kwargs):
         """ Specify form field and widget to be used on the forms """
         defaults = {
-            'form_class': CharField,
+            'form_class': ObjectOrTextFormField,
             'widget': ObjectOrTextWidget,
         }
         kwargs.update(defaults)
@@ -64,6 +63,19 @@ class ObjectOrTextFieldCreator(object):
 
     def __set__(self, obj, value):
         obj.__dict__[self.field.name] = self.field.to_python(value)
+
+
+class ObjectOrTextFormField(forms.MultiValueField):
+
+    def __init__(self, *args, **kwargs):
+        super(ObjectOrTextFormField, self).__init__(*args, **kwargs)
+        fields = (
+            forms.BooleanField(),
+            forms.CharField()
+        )
+
+    def compress(self, data_list):
+        return ' '.join(data_list)
 
 """
 class MultiKeyOrCharField(Field):

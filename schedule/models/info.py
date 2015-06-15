@@ -4,7 +4,7 @@ from django.utils.translation import ugettext as _
 
 from artist.models import ArtistProfile
 from contact.models import Location
-from object_or_text.model_fields import ObjectOrTextField
+from object_or_text.fields import ObjectOrTextField
 from photos.models import Image
 
 
