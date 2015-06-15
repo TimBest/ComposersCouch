@@ -61,11 +61,7 @@ class ShowInfoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(ShowInfoForm, self).__init__(*args, **kwargs)
-        self.fields['headliner_object'].required = False
-        self.fields['headliner_text'].label = "Headliner"
         self.fields['openers_text'].help_text = "Separate artists by commas"
-        self.fields['openers_text'].label = "Openers"
-        self.fields['venue_text'].label = "Venue"
 
     def clean(self):
         # user must be a participant in the evnet or request
@@ -91,11 +87,11 @@ class ShowInfoForm(ModelForm):
 
     class Meta:
         model = Info
-        fields = ('title', 'headliner_text', 'headliner_object', 'openers_text',
-                  'openers', 'venue_object', 'venue_text','description',)
+        fields = ('title', 'headliner', 'openers_text',
+                  'openers', 'venue','description',)
         widgets = {
             'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
-            'headliner_text' : autocomplete_light.TextWidget('ArtistProfileAutocomplete'),
+            'headliner' : autocomplete_light.TextWidget('ArtistProfileAutocomplete'),
             'openers_text' : autocomplete_light.TextWidget('ArtistProfileAutocomplete'),
-            'venue_text' : autocomplete_light.TextWidget('UserAutocomplete'),
+            'venue' : autocomplete_light.TextWidget('UserAutocomplete'),
         }

@@ -4,8 +4,7 @@ from django.utils.translation import ugettext as _
 
 from artist.models import ArtistProfile
 from contact.models import Location
-from object_or_text.fields import ObjectOrTextField
-from object_or_text.model_fields import ObjectOrTextField as ObjectOrTextFieldTemp
+from object_or_text.model_fields import ObjectOrTextField
 from photos.models import Image
 
 
@@ -23,19 +22,11 @@ class Info(models.Model):
                                null=True, blank=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length = 255, null=True, blank=True,)
     description = models.TextField(null=True, blank=True)
-    headliner = ObjectOrTextField(ArtistProfile,
-                                  verbose_name=_("headliner"),
-                                  related_name='shows_headlining',
-                                  null=True, blank=True, max_length=255)
-    #headliner_temp = ObjectOrTextFieldTemp(blank=True, null=True,
-    #                                       verbose_name=_("headliner_temp"), max_length=255)
+    headliner = ObjectOrTextField(model=ArtistProfile, blank=True, null=True, max_length=255)
     openers = models.ManyToManyField(ArtistProfile, blank=True,
                                      related_name='shows_opening')
     openers_text = models.CharField(max_length=255, null=True, blank=True,)
-    venue = ObjectOrTextField(User, verbose_name=_("venue"),
-                              related_name='shows_hosting',
-                              null=True, blank=True, max_length=255)
-    #venue_temp = ObjectOrTextFieldTemp(verbose_name=_("venue_temp"), default="No Venue Listed", max_length=255)
+    venue = ObjectOrTextField(model=User, default="No Venue Listed", max_length=255)
     location = models.ForeignKey(Location, null=True, blank=True,
                                 related_name='event_location')
     objects = models.GeoManager()

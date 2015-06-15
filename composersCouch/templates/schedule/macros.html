@@ -58,7 +58,7 @@
               {% endif %}
               {% if info.headliner %}
                 <h4>
-                  {% if info.headliner_object %}
+                  {% if info.headliner_is_model %}
                     <a class="text-black" href="{{ url('artist:news', kwargs={'username':info.headliner.user.username}) }}">
                       {{ info.headliner }}
                     </a>
@@ -81,7 +81,7 @@
             <div>
               <p>
                 <span class="fa fa-map-marker text-muted"></span>
-                {% if info.venue_object %}
+                {% if info.venue_is_model %}
                   <a class="text-black" href="{{ url('redirectToProfile', kwargs={'username':info.venue.username, 'tab':'about'}) }}">
                     {{ info.venue.profile }}
                   </a>
@@ -185,7 +185,7 @@
                           {% if event.show.info.title %}
                             {{ event.show.info.title }}
                           {% else %}
-                            {{ event.show.info.headliner_text }}
+                            {{ event.show.info.headliner }}
                           {% endif %}
                         </span>
                       </a>
@@ -196,7 +196,7 @@
                         {% if event.show.info.title %}
                           {{ event.show.info.title }}
                         {% else %}
-                          {{ event.show.info.headliner_text }}
+                          {{ event.show.info.headliner }}
                         {% endif %}
                       </a></li>
                     </div>
