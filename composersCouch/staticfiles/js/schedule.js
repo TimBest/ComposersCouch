@@ -81,6 +81,67 @@ function show_participants(id, choice_class, plural) {
     });
 }
 
+//Show Participants
+function object_or_text() {
+    //$(".object-or-text").hide();
+    // get initial data
+    $("#div_"+id+" ."+choice_class+" .remove").replaceWith(
+        "<button class='btn btn-link remove' type='button'><span class='fa fa-times-circle text-muted'></span></button>"
+    );
+    $("#div_"+id+"_text div").prepend(
+        $("#div_"+id+" #"+id+"-deck").html()
+    );
+    if(plural === false && $("#"+id+" option:selected").length !== 0 ) {
+      $("input#"+id+"_text").hide();
+    }
+    $("#"+id+"_text").yourlabsAutocomplete({
+    }).input.bind('selectChoice', function(e, choice, autocomplete) {
+        var value = $("#div_"+id+"_text .hilight").attr("data-value");
+        // if no selection then add on else remove old selection then add new one
+        if (plural === true) {
+            // if no selection then add on
+            $("#"+id).append("<option value='"+value+"' selected='selected'>"+value+"</option>");
+        } else {
+            if ($("#"+id+" option:selected").length===0) {
+                $("#"+id+"").append("<option value='"+value+"' selected='selected'>"+value+"</option>");
+            } else {
+                $("#"+id+" option").replaceWith("<option value='"+value+"' selected='selected'>"+value+"</option>");
+                $("#"+id+" option[data-value="+value+"]").remove();
+                $("#div_"+id+"_text ."+choice_class).remove();
+            }
+            $("input#"+id+"_text").hide();
+        }
+
+        // display selected choice
+        $("#div_"+id+"_text div").prepend(
+          "<span class='"+choice_class+"' data-value="+value+">"+
+            "<button class='btn btn-link remove' type='button'><span class='fa fa-times-circle text-muted'></span></button>"+
+            $(choice).html()+
+          "</span>"
+        );
+    });
+
+    // remove selection display and value
+    $("#div_"+id+"_text").on("click", ".remove", function() {
+      if (plural === true) {
+          value = $(this).parent().attr("data-value");
+          $("#"+id+" option[value="+value+"]").remove();
+          name = $(this).parent().find(".artist-name").text();
+          choices = $("#"+id+"_text").val();
+          choices = choices.replace(name, "");
+          $("#"+id+"_text").val(choices);
+          $(this).parent().remove();
+      } else {
+          // remove selection display and value
+          $("#"+id+" option").remove();
+          $(this).parent().remove();
+          $("#"+id+"_text").val('');
+          $("input#"+id+"_text").show();
+
+      }
+    });
+}
+
 $(document).ready(function() {
     // Allows day events to be show with more info below the current week
     expand_day();

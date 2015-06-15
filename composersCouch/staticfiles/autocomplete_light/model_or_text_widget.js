@@ -99,6 +99,8 @@ jQuery.fn.getCursorWordPositions = function() {
 // TextWidget ties an input with an autocomplete.
 yourlabs.TextWidget = function(input) {
     this.input = input;
+    this.checkbox = input.closest('.form-group').find('input[type=checkbox]');
+    this.deck = input.closest('.form-group').find('.deck');
     this.autocompleteOptions = {
         getQuery: function() {
             return this.input.getCursorWord();
@@ -110,10 +112,9 @@ yourlabs.TextWidget = function(input) {
 yourlabs.TextWidget.prototype.initializeAutocomplete = function() {
     this.autocomplete = this.input.yourlabsAutocomplete(
         this.autocompleteOptions);
-
     // Add a class to ease css selection of autocompletes for widgets
     this.autocomplete.box.addClass(
-        'autocomplete-light-text-widget');
+        'autocomplete-light-model-or-text-widget');
 };
 
 // Bind Autocomplete.selectChoice signal to TextWidget.selectChoice()
@@ -128,21 +129,16 @@ yourlabs.TextWidget.prototype.bindSelectChoice = function() {
 
 // Called when a choice is selected from the Autocomplete.
 yourlabs.TextWidget.prototype.selectChoice = function(choice) {
-    var inputValue = this.input.val();
     var choiceValue = this.getValue(choice);
-    var positions = this.input.getCursorWordPositions();
-
-    var newValue = inputValue.substring(0, positions[0]);
-    newValue += choiceValue;
-    newValue += inputValue.substring(positions[1]);
-
-    this.input.val(newValue);
+    this.input.val(choiceValue);
     this.input.focus();
+    this.deck.append(choice);
+    this.checkbox.attr('checked', true);
 }
 
 // Return the value of an HTML choice, used to fill the input.
 yourlabs.TextWidget.prototype.getValue = function(choice) {
-    return $.trim(choice.html().replace(/(<([^>]+)>)/ig,""));
+    return choice.attr('data-value');
 }
 
 // Initialize the widget.
@@ -245,15 +241,15 @@ $(document).ready(function() {
     //      });
     $(document).trigger('yourlabsTextWidgetReady');
 
-    $('.autocomplete-light-text-widget:not([id*="__prefix__"])').each(function() {
+    $('.autocomplete-light-model-or-text-widget:not([id*="__prefix__"])').each(function() {
         $(this).trigger('initialize');
     });
 
     $(document).bind('DOMNodeInserted', function(e) {
-        var widget = $(e.target).find('.autocomplete-light-text-widget');
+        var widget = $(e.target).find('.autocomplete-light-model-or-text-widget');
 
         if (!widget.length) {
-            widget = $(e.target).is('.autocomplete-light-text-widget') ? $(e.target) : false;
+            widget = $(e.target).is('.autocomplete-light-model-or-text-widget') ? $(e.target) : false;
 
             if (!widget) {
                 return;
