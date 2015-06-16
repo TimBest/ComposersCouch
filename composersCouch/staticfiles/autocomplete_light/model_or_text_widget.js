@@ -33,20 +33,20 @@ jQuery.fn.getSelectionStart = function(){
             var r = document.selection.createRange().duplicate();
             r.moveEnd('character', input.value.length);
         }
-        if (r.text == '')
+        if (r.text === '')
             pos = input.value.length;
         pos = input.value.lastIndexOf(r.text);
     } else if(typeof(input.selectionStart)!="undefined")
     pos = input.selectionStart;
  
     return pos;
-}
+};
 
 jQuery.fn.getCursorPosition = function(){
     // Written by jQuery4U
-    if(this.lengh == 0) return -1;
+    if(this.lengh === 0) return -1;
     return $(this).getSelectionStart();
-}
+};
 
 // Return the word on which the cursor is on.
 //
@@ -60,7 +60,7 @@ jQuery.fn.getCursorWord = function() {
     var value = $(this).val();
     var positions = $(this).getCursorWordPositions();
     return value.substring(positions[0], positions[1]);
-}
+};
 
 // Return the offsets of the word on which the cursor is on.
 //
@@ -94,19 +94,20 @@ jQuery.fn.getCursorWordPositions = function() {
     while(value[end] == ',' || value[end] == ' ') end--;
 
     return [start, end + 1];
-}
+};
 
 // TextWidget ties an input with an autocomplete.
 yourlabs.TextWidget = function(input) {
+    this.widget = input.closest('.form-group');
     this.input = input;
-    this.checkbox = input.closest('.form-group').find('input[type=checkbox]');
-    this.deck = input.closest('.form-group').find('.deck');
+    this.checkbox = this.widget.find('input[type=checkbox]');
+    this.deck = this.widget.find('.deck');
     this.autocompleteOptions = {
         getQuery: function() {
             return this.input.getCursorWord();
         }
-    }
-}
+    };
+};
 
 // The widget is in charge of managing its Autocomplete.
 yourlabs.TextWidget.prototype.initializeAutocomplete = function() {
@@ -121,7 +122,7 @@ yourlabs.TextWidget.prototype.initializeAutocomplete = function() {
 yourlabs.TextWidget.prototype.bindSelectChoice = function() {
     this.input.bind('selectChoice', function(e, choice) {
         if (!choice.length)
-            return // placeholder: create choice here
+            return; // placeholder: create choice here
 
         $(this).yourlabsTextWidget().selectChoice(choice);
     });
@@ -129,23 +130,61 @@ yourlabs.TextWidget.prototype.bindSelectChoice = function() {
 
 // Called when a choice is selected from the Autocomplete.
 yourlabs.TextWidget.prototype.selectChoice = function(choice) {
-    var choiceValue = this.getValue(choice);
-    this.input.val(choiceValue);
+    var value = this.getValue(choice);
+    this.input.val(value);
+    this.addToDeck(choice, value);
     this.input.focus();
-    this.deck.append(choice);
     this.checkbox.attr('checked', true);
-}
+};
 
 // Return the value of an HTML choice, used to fill the input.
 yourlabs.TextWidget.prototype.getValue = function(choice) {
     return choice.attr('data-value');
-}
+};
+
+// Add a selected choice of a given value to the deck.
+yourlabs.TextWidget.prototype.addToDeck = function(choice, value) {
+    var existing_choice = this.deck.find('[data-value="'+value+'"]');
+
+    // Avoid duplicating choices in the deck.
+    if (!existing_choice.length) {
+        var deckChoice = this.deckChoiceHtml(choice);
+
+        // In case getValue() actually **created** the value, for example
+        // with a post request.
+        deckChoice.attr('data-value', value);
+
+        this.deck.append(deckChoice);
+    }
+};
+
+yourlabs.TextWidget.prototype.deckChoiceHtml = function(choice, value) {
+    var deckChoice = choice.clone();
+
+    this.addRemove(deckChoice);
+
+    return deckChoice;
+};
+
+yourlabs.TextWidget.prototype.addRemove = function(choices) {
+    var removeTemplate = this.widget.find('.remove:last')
+        .clone().css('display', 'inline-block');
+
+    var target = choices.find('.prepend-remove');
+
+    if (target.length) {
+        target.prepend(removeTemplate);
+    } else {
+        // Add the remove icon to each choice
+        choices.prepend(removeTemplate);
+    }
+};
 
 // Initialize the widget.
 yourlabs.TextWidget.prototype.initialize = function() {
     this.initializeAutocomplete();
     this.bindSelectChoice();
-}
+};
 
 // Destroy the widget. Takes a widget element because a cloned widget element
 // will be dirty, ie. have wrong .input and .widget properties.
@@ -217,7 +256,7 @@ $.fn.yourlabsTextWidget = function(overrides) {
     }
 
     return this.data('widget');
-}
+};
 
 $(document).ready(function() {
     $('body').on('initialize', 'input[data-widget-bootstrap=text]', function() {

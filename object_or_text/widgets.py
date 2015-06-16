@@ -75,4 +75,4 @@ class ObjectOrTextWidget(forms.MultiWidget):
         return [None, None]
 
     def format_output(self, rendered_widgets):
-        return u'<span class="deck"></span>'.join(rendered_widgets)
+        return u'<span class="deck"></span><span style="display:none" class="remove fa fa-times-circle"></span><span style="display:none" class="choice-template"><span class="choice prepend-remove append-option-html"></span></span></span>'.join(rendered_widgets)
