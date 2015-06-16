@@ -103,6 +103,9 @@ yourlabs.TextWidget = function(input) {
     this.checkbox = this.widget.find('input[type=checkbox]');
     this.checkbox.hide();
     this.deck = this.widget.find('.deck');
+    if (this.deck.find('.hilight').length !== 0) {
+      this.input.hide();
+    }
     this.autocompleteOptions = {
         getQuery: function() {
             return this.input.getCursorWord();

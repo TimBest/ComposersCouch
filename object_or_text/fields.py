@@ -40,7 +40,7 @@ class ObjectOrTextField(models.Field):
     def formfield(self, **kwargs):
         """ Specify form field and widget to be used on the forms """
         defaults = {
-            'form_class': ObjectOrTextFormField,
+            'form_class': forms.MultiValueField,
             'widget': ObjectOrTextWidget,
         }
         kwargs.update(defaults)
@@ -63,19 +63,6 @@ class ObjectOrTextFieldCreator(object):
 
     def __set__(self, obj, value):
         obj.__dict__[self.field.name] = self.field.to_python(value)
-
-
-class ObjectOrTextFormField(forms.MultiValueField):
-
-    def __init__(self, *args, **kwargs):
-        super(ObjectOrTextFormField, self).__init__(*args, **kwargs)
-        fields = (
-            forms.BooleanField(),
-            forms.CharField()
-        )
-
-    def compress(self, data_list):
-        return ' '.join(data_list)
 
 """
 class MultiKeyOrCharField(Field):
