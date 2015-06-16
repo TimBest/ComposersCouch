@@ -62,17 +62,21 @@ class ShowInfoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(ShowInfoForm, self).__init__(*args, **kwargs)
+        self.fields['openers_text'].label = "Openers"
         self.fields['openers_text'].help_text = "Separate artists by commas"
 
     def clean(self):
         # user must be a participant in the evnet or request
         isParticipant = False
         try:
-            if self.cleaned_data.get('headliner_object').profile.user == self.user:
+            if self.cleaned_data.get('headliner').profile.user == self.user:
                 isParticipant = True
         except:
             pass
-        if self.cleaned_data.get('venue_object') == self.user:
+        print self.cleaned_data
+        #print self.cleaned_data.get('venue')
+        #print self.user.pk
+        if self.cleaned_data.get('venue') == self.user:
             isParticipant = True
         else:
             for o in self.cleaned_data.get('openers'):
@@ -82,7 +86,7 @@ class ShowInfoForm(ModelForm):
             raise forms.ValidationError(_(u"You must be a participant in this show."))
         if not self.cleaned_data.get('title') and not self.cleaned_data.get('headliner_text'):
             raise forms.ValidationError(_(u"A Title or a Headliner is required."))
-        if not self.cleaned_data.get('venue_text'):
+        if not self.cleaned_data.get('venue'):
             raise forms.ValidationError(_(u"A Venue is required."))
         return self.cleaned_data
 

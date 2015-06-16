@@ -4,6 +4,7 @@ from django import forms
 from django.contrib.staticfiles.storage import staticfiles_storage
 
 from autocomplete_light.widgets import WidgetBase
+from autocomplete_light import registry as default_registry
 
 
 __all__ = ['ObjectOrTextWidget',]
@@ -67,10 +68,17 @@ class ObjectOrTextWidget(forms.MultiWidget):
             ),
             forms.CheckboxInput(attrs=attrs),
         )
+
+        self.registry = default_registry if registry is None else registry
+        self.autocomplete = self.registry.get_autocomplete_from_arg(
+            autocomplete
+        )
+
         super(ObjectOrTextWidget, self).__init__(widgets, attrs)
 
     def decompress(self, value):
         self.value = value
+
         if value and isinstance(value, basestring):
             return [value, False]
         elif value:
@@ -78,9 +86,14 @@ class ObjectOrTextWidget(forms.MultiWidget):
         else:
             return ["", False]
 
+    """def compress(self, data_list):
+        print "compress"
+        print self.autocomplete.model
+
+        return data_list"""
+
     def format_output(self, rendered_widgets):
-        deck = u'<span class="deck autocomplete-light-model-or-text-widget"></span>'
-        if self.value:
+        try:
             # TODO: replace this with something that used the declared choice template
             try:
                 mugshot = self.value.profile.mugshot.image.url
@@ -93,7 +106,25 @@ class ObjectOrTextWidget(forms.MultiWidget):
                             <span >%s</span>\
                        </span>\
                       <span>' % (self.value.pk, mugshot, self.value.profile)
+        except:
+            deck = u'<span class="deck autocomplete-light-model-or-text-widget"></span>'
+
         return (u'%s<a href="#" style="display:none" class="remove text-muted fa fa-times-circle"></a>\
                  <span style="display:none" class="choice-template">\
                  <span class="choice prepend-remove append-option-html">\
                  </span></span></span>' % deck).join(rendered_widgets)
+
+
+    """def value_from_datadict(self, data, files, name):
+        list = [
+            widget.value_from_datadict(data, files, name + '_%s' % i)
+            for i, widget in enumerate(self.widgets)]
+        try:
+            if list[1]:
+                model_or_text = self.autocomplete.model.objects.get(pk=list[0]).profile
+            else:
+                model_or_text = list[0]
+        except ValueError:
+            return ''
+        else:
+            return model_or_text"""
