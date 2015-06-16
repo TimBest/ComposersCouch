@@ -101,6 +101,7 @@ yourlabs.TextWidget = function(input) {
     this.widget = input.closest('.form-group');
     this.input = input;
     this.checkbox = this.widget.find('input[type=checkbox]');
+    this.checkbox.hide();
     this.deck = this.widget.find('.deck');
     this.autocompleteOptions = {
         getQuery: function() {
@@ -133,7 +134,7 @@ yourlabs.TextWidget.prototype.selectChoice = function(choice) {
     var value = this.getValue(choice);
     this.input.val(value);
     this.addToDeck(choice, value);
-    this.input.focus();
+    this.input.hide();
     this.checkbox.attr('checked', true);
 };
 
@@ -156,6 +157,22 @@ yourlabs.TextWidget.prototype.addToDeck = function(choice, value) {
 
         this.deck.append(deckChoice);
     }
+};
+
+// Called when the user clicks .remove in a deck choice.
+yourlabs.TextWidget.prototype.deselectChoice = function(choice) {
+    //var value = this.getValue(choice);
+    choice.remove();
+    this.input.val("");
+    this.input.show();
+    this.checkbox.attr('checked', false);
+
+    /*if (this.deck.children().length === 0) {
+        this.deck.hide();
+    }
+
+    this.updateAutocompleteExclude();
+    this.resetDisplay();*/
 };
 
 yourlabs.TextWidget.prototype.deckChoiceHtml = function(choice, value) {
@@ -259,7 +276,7 @@ $.fn.yourlabsTextWidget = function(overrides) {
 };
 
 $(document).ready(function() {
-    $('body').on('initialize', 'input[data-widget-bootstrap=text]', function() {
+    $('body').on('initialize', '.autocomplete-light-model-or-text-widget[data-widget-bootstrap=text]', function() {
         /*
         Only setup autocompletes on inputs which have
         data-widget-bootstrap=text, if you want to initialize some
@@ -267,6 +284,16 @@ $(document).ready(function() {
         data-widget-boostrap=yourbootstrap or something like that.
         */
         $(this).yourlabsTextWidget();
+    });
+    // Call Widget.deselectChoice when .remove is clicked
+    $('body').on('click', '.autocomplete-light-model-or-text-widget.deck .remove', function() {
+        widget = $(this).closest('.form-group').find(
+                '.autocomplete-light-model-or-text-widget[data-widget-bootstrap=text]'
+            ).yourlabsTextWidget();
+
+        var choice = $(this).parent('.hilight');
+
+        widget.deselectChoice(choice);
     });
 
     // Solid initialization, usage::
@@ -306,4 +333,4 @@ $(document).ready(function() {
 
         widget.trigger('initialize');
     });
-})
+});
