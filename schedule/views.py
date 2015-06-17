@@ -168,7 +168,7 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
             info.poster = get_object_or_None(Image, id=imageId)
 
         if not info.location:
-            if info.venue:
+            if info.venue_is_model:
                 info.location = info.venue.profile.contact_info.location
             else:
                 info.location = self.request.user.profile.contact_info.location

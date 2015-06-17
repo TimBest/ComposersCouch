@@ -73,9 +73,6 @@ class ShowInfoForm(ModelForm):
                 isParticipant = True
         except:
             pass
-        print self.cleaned_data
-        #print self.cleaned_data.get('venue')
-        #print self.user.pk
         if self.cleaned_data.get('venue') == self.user:
             isParticipant = True
         else:
@@ -84,10 +81,11 @@ class ShowInfoForm(ModelForm):
                     isParticipant = True
         if not isParticipant:
             raise forms.ValidationError(_(u"You must be a participant in this show."))
-        if not self.cleaned_data.get('title') and not self.cleaned_data.get('headliner_text'):
+        if not self.cleaned_data.get('title') and not self.cleaned_data.get('headliner'):
             raise forms.ValidationError(_(u"A Title or a Headliner is required."))
         if not self.cleaned_data.get('venue'):
             raise forms.ValidationError(_(u"A Venue is required."))
+
         return self.cleaned_data
 
     class Meta:

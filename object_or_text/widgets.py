@@ -116,6 +116,7 @@ class ObjectOrTextWidget(forms.MultiWidget):
 
 
     """def value_from_datadict(self, data, files, name):
+
         list = [
             widget.value_from_datadict(data, files, name + '_%s' % i)
             for i, widget in enumerate(self.widgets)]

@@ -39,14 +39,14 @@ def export(request, events, year=None):
         show = event.show
         ical_event = iEvent()
         ical_event.add('summary', show.info.get_title())
-        description = "Headliner: " + show.info.headliner_text + "\n"
+        description = "Headliner: " + show.info.headliner + "\n"
         if show.info.openers_text:
             description += "Openers: " + show.info.openers_text + "\n"
-        description += "Venue: " + show.info.venue_text + "\n"
+        description += "Venue: " + show.info.venue + "\n"
         if show.info.openers_text:
             description += "Description: " + show.info.description + "\n"
         ical_event.add('description', description)
-        ical_event.add('location', show.info.venue_text)
+        ical_event.add('location', show.info.venue)
         ical_event.add('dtstart', show.date.start)
         ical_event.add('dtend', show.date.end and show.date.end or show.date.start)
         ical_event.add('dtstamp', show.date.end and show.date.end or show.date.start)
