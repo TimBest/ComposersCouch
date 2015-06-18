@@ -281,11 +281,9 @@ class RequestToEventFormView(EventFormView):
             openers.append(artist.participant.user)
             openers_text = openers_text + str(artist.participant.user.profile) + ","
         show_data = {
-            "headliner_text": headliner.participant.user.profile if headliner else None,
             "headliner": headliner.participant.user if headliner else None,
             "openers"  : openers,
             "openers_text"  : openers_text,
-            "venue_text": venue.participant.user.profile if venue else None,
             "venue": venue.participant.user if venue else None,
         }
         return {'poster_form':{},'date_form':{},'event_form':{},'show_info_form':show_data,}

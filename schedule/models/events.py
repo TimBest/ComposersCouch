@@ -87,7 +87,7 @@ class Event(models.Model):
         if self.show.info.title:
             return u'%s' % (self.show.info.title,)
         else:
-            return u'%s at %s' % (self.show.info.headliner_text, self.show.info.venue_text)
+            return u'%s at %s' % (self.show.info.headliner, self.show.info.venue)
 
     def get_absolute_url(self):
         return reverse('show', kwargs={'show_id':self.show.id})

@@ -60,12 +60,17 @@ class CharField(models.CharField):
         defaults.update(kwargs)
         return super(CharField, self).formfield(**defaults)
 
-
     def to_python(self, value):
         if isinstance(value, six.string_types) or value is None:
             return "[u'%s', False]" % smart_text(value)
         else:
             return "[u'%s', True]" % smart_text(value.pk)
+
+    def get_prep_value(self, value):
+        if isinstance(value, six.string_types) or value is None:
+            return smart_text(value)
+        else:
+            return smart_text(value.pk)
 
 class ObjectOrTextField(models.Field):
 
