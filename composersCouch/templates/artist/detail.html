@@ -1,11 +1,9 @@
 {% extends 'profile/detail.html' %}
 
 
-
-{% block title %}{{ artist_profile.name}}{% endblock %}
-{% block content_title %}<h2>{{ artist_profile.name }}</h2>{% endblock %}
-
-{% block name %}{{ artist_profile.name }}{% endblock %}
+{% block title %}
+  {% block name %}{{ artist_profile.name }}{% endblock %}
+{% endblock %}
 
 {% block tabs %}
   {% block dropdownTabs %}

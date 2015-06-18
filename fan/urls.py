@@ -10,9 +10,11 @@ urlpatterns = patterns(view_location,
         url(r'^photos/$', 'fan_photos', name='photos'),
     ))),
 )
-"""
+
 view_location = 'fan.views'
 urlpatterns += patterns(view_location,
+    url(r'^(?P<username>[-\w]+)/', include(patterns(view_location,
+        url(r'^about/$', 'about', name='about'),
+    ))),
 
 )
-"""

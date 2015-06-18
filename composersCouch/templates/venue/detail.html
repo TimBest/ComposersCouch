@@ -1,11 +1,9 @@
 {% extends 'profile/detail.html' %}
 
 
-
-{% block title %}{{ venueProfile.name}}{% endblock %}
-{% block content_title %}<h2>{{ venueProfile.name}}</h2>{% endblock %}
-
-{% block name %}{{ venueProfile.name}} {% endblock %}
+{% block title %}
+  {% block name %}{{ venueProfile.name }}{% endblock %}
+{% endblock %}
 
 {% block tabs %}
   {% block dropdownTabs %}

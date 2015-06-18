@@ -17,8 +17,9 @@ class AboutView(ArtistProfileView):
 
     def get_context_data(self, **kwargs):
         context = super(AboutView, self).get_context_data(**kwargs)
-        artist_profile = context['artist_profile']
-        context['members'] = artist_profile.members.filter(current_member=True)
+        context['members'] = context['artist_profile'].members.filter(
+            current_member=True
+        )
         return context
 
 about = AboutView.as_view()

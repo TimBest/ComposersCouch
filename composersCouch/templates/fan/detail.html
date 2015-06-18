@@ -1,16 +1,20 @@
 {% extends 'profile/detail.html' %}
 
 
-{% block title %}{{ profile.user.get_full_name() }}{% endblock %}
-{% block content_title %}<h2>{{ profile.user.get_full_name() }}</h2>{% endblock %}
+{% block title %}
+  {% block name %}{{ profile.user.get_full_name() }}{% endblock %}
+{% endblock %}
 
-{% block name %}{{ profile.user.get_full_name() }}{% endblock %}
-
-{% block tabs %}{% block dropdownTabs %}
-  <li class="{% block newsClass %}{% endblock %}">
-    <a href="{{ url('fan:news', kwargs={'username':username}) }}">News</a>
-  </li>
-  <li class="{% block photosClass %}{% endblock %}">
-    <a href="{{ url('fan:photos', kwargs={'username':username}) }}">Photos</a>
-  </li>
-{% endblock %}{% endblock %}
+{% block tabs %}
+  {% block dropdownTabs %}
+    <li class="{% block aboutClass %}{% endblock %}">
+      <a href="{{ url('fan:about', kwargs={'username':username}) }}">About</a>
+    </li>
+    <li class="{% block newsClass %}{% endblock %}">
+      <a href="{{ url('fan:news', kwargs={'username':username}) }}">News</a>
+    </li>
+    <li class="{% block photosClass %}{% endblock %}">
+      <a href="{{ url('fan:photos', kwargs={'username':username}) }}">Photos</a>
+    </li>
+  {% endblock %}
+{% endblock %}

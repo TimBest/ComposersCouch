@@ -11,7 +11,6 @@ urlpatterns = patterns(view_location,
         url(r'^shows/(?P<year>\d{4})/$','shows',name='shows'),
         url(r'^photos/$', 'artist_photos', name='photos'),
     ))),
-
 )
 
 view_location = 'social_links.views'
