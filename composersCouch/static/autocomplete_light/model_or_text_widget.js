@@ -99,11 +99,13 @@ jQuery.fn.getCursorWordPositions = function() {
 // TextWidget ties an input with an autocomplete.
 yourlabs.TextWidget = function(input) {
     this.widget = input.closest('.form-group');
-    this.input = input;
+    this.input = this.widget.find('input[type=text]');
     this.checkbox = this.widget.find('input[type=checkbox]');
     this.checkbox.hide();
     this.deck = this.widget.find('.deck');
-    if (this.deck.find('.hilight').length !== 0) {
+    if (this.deck.find('span').length !== 0) {
+      this.input.val(this.deck.find('span[data-value]').attr('data-value'));
+      this.checkbox.prop('checked', true);
       this.input.hide();
     }
     this.autocompleteOptions = {
@@ -138,7 +140,8 @@ yourlabs.TextWidget.prototype.selectChoice = function(choice) {
     this.input.val(value);
     this.addToDeck(choice, value);
     this.input.hide();
-    this.checkbox.attr('checked', true);
+    this.checkbox.prop('checked', true);
+
 };
 
 // Return the value of an HTML choice, used to fill the input.
@@ -149,7 +152,6 @@ yourlabs.TextWidget.prototype.getValue = function(choice) {
 // Add a selected choice of a given value to the deck.
 yourlabs.TextWidget.prototype.addToDeck = function(choice, value) {
     var existing_choice = this.deck.find('[data-value="'+value+'"]');
-
     // Avoid duplicating choices in the deck.
     if (!existing_choice.length) {
         var deckChoice = this.deckChoiceHtml(choice);
@@ -164,18 +166,10 @@ yourlabs.TextWidget.prototype.addToDeck = function(choice, value) {
 
 // Called when the user clicks .remove in a deck choice.
 yourlabs.TextWidget.prototype.deselectChoice = function(choice) {
-    //var value = this.getValue(choice);
     choice.remove();
     this.input.val("");
     this.input.show();
-    this.checkbox.attr('checked', false);
-
-    /*if (this.deck.children().length === 0) {
-        this.deck.hide();
-    }
-
-    this.updateAutocompleteExclude();
-    this.resetDisplay();*/
+    this.checkbox.prop('checked', false);
 };
 
 yourlabs.TextWidget.prototype.deckChoiceHtml = function(choice, value) {
@@ -294,7 +288,7 @@ $(document).ready(function() {
                 '.autocomplete-light-model-or-text-widget[data-widget-bootstrap=text]'
             ).yourlabsTextWidget();
 
-        var choice = $(this).parent('.hilight');
+        var choice = $(this).parent();
 
         widget.deselectChoice(choice);
     });

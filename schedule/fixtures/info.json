@@ -5,10 +5,12 @@
     "fields": {
       "poster": null,
       "title": "Concrt",
-      "headliner": 2,
+      "headliner": "2",
+      "headliner_is_model": true,
       "openers": "",
       "openers_text": "",
-      "venue": 3,
+      "venue": "3",
+      "venue_is_model": true,
       "location": 1
     }
   }

@@ -28,14 +28,11 @@ class TextWidget(WidgetBase, forms.TextInput):
                 autocomplete_js_attributes, extra_context, registry,
                 widget_template, widget_attrs)
 
-    def render(self, name, value, attrs=None):
-        """ Proxy Django's TextInput.render() """
-        return forms.TextInput.render(self, name, value, attrs)
-
     def build_attrs(self, extra_attrs=None, **kwargs):
+        max_values = extra_attrs.get('data-widget-maximum-values', 1)
+        extra_attrs['data-widget-maximum-values'] =  max_values
         attrs = super(TextWidget, self).build_widget_attrs()
-        attrs.update(super(TextWidget, self).build_attrs(
-            extra_attrs, **kwargs))
+        attrs.update(super(TextWidget, self).build_attrs(extra_attrs, **kwargs))
 
         def update_attrs(source, prefix=''):
             for key, value in source.items():
@@ -59,7 +56,7 @@ class ObjectOrTextWidget(forms.MultiWidget):
     """
     def __init__(self, attrs={}, autocomplete=None, widget_js_attributes=None,
             autocomplete_js_attributes=None, extra_context=None, registry=None,
-            widget_template=None, widget_attrs=None):
+            widget_template="autocomplete_light/model_or_object_widget.html", widget_attrs=None):
         widgets = (
             TextWidget(
                 autocomplete, widget_js_attributes,
@@ -85,47 +82,3 @@ class ObjectOrTextWidget(forms.MultiWidget):
             return[value.pk, True]
         else:
             return ["", False]
-
-    """def compress(self, data_list):
-        print "compress"
-        print self.autocomplete.model
-
-        return data_list"""
-
-    def format_output(self, rendered_widgets):
-        try:
-            # TODO: replace this with something that used the declared choice template
-            try:
-                mugshot = self.value.profile.mugshot.image.url
-            except:
-                mugshot = staticfiles_storage.url('img/mugshot.png')
-            deck = u'<span class="deck autocomplete-light-model-or-text-widget">\
-                        <span class="hilight" data-value="%s">\
-                            <a href="#" style="display: inline-block;" class="remove text-muted fa fa-times-circle"></a>\
-                            <img class="mugshot" src="%s" alt="Profile mugshot" height="45" width="45">\
-                            <span >%s</span>\
-                       </span>\
-                      <span>' % (self.value.pk, mugshot, self.value.profile)
-        except:
-            deck = u'<span class="deck autocomplete-light-model-or-text-widget"></span>'
-
-        return (u'%s<a href="#" style="display:none" class="remove text-muted fa fa-times-circle"></a>\
-                 <span style="display:none" class="choice-template">\
-                 <span class="choice prepend-remove append-option-html">\
-                 </span></span></span>' % deck).join(rendered_widgets)
-
-
-    """def value_from_datadict(self, data, files, name):
-
-        list = [
-            widget.value_from_datadict(data, files, name + '_%s' % i)
-            for i, widget in enumerate(self.widgets)]
-        try:
-            if list[1]:
-                model_or_text = self.autocomplete.model.objects.get(pk=list[0]).profile
-            else:
-                model_or_text = list[0]
-        except ValueError:
-            return ''
-        else:
-            return model_or_text"""
