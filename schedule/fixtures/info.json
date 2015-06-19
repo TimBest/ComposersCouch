@@ -6,11 +6,26 @@
       "poster": null,
       "title": "Concrt",
       "headliner": "2",
-      "headliner_is_model": true,
+      "headliner_is_model": false,
       "openers": "",
       "openers_text": "",
       "venue": "3",
-      "venue_is_model": true,
+      "venue_is_model": false,
+      "location": 3
+    }
+  },
+  {
+    "pk": 2,
+    "model": "schedule.info",
+    "fields": {
+      "poster": null,
+      "title": "Concrt",
+      "headliner": "Not Mouse Rat",
+      "headliner_is_model": false,
+      "openers": "",
+      "openers_text": "",
+      "venue": "Not Gasworks",
+      "venue_is_model": false,
       "location": 1
     }
   }

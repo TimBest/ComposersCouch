@@ -64,7 +64,8 @@ class TestScheduleForms(TestCase):
                       "headliner": "",
                       "openers_text": "Mouse Rat",
                       "openers": [2,],
-                      "venue": 3,
+                      "venue_0": 3,
+                      "venue_1": True,
                       "description": "Were putting a show on. tickets are 5 bucks.",},
              'error': ('__all__', [_(u'A Title or a Headliner is required.')]),
              'user' : user,},
@@ -95,10 +96,12 @@ class TestScheduleForms(TestCase):
         # Test a valid form.
         valid_data_dicts = [
             {"title": "Concert Title",
-             "headliner": 2,
+             "headliner_0": 2,
+             "headliner_1": True,
              "openers_text": "Mouse Rat",
              "openers": [2,],
-             "venue": 3,
+             "venue_0": 3,
+             "venue_1": True,
              "description": "Were putting a show on. tickets are 5 bucks.",},
         ]
 
