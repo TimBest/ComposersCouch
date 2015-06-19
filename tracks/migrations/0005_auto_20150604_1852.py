@@ -14,6 +14,16 @@ def copy_media(apps, schema_editor):
         track.video = track.media.video
         track.save()
 
+def reverse_copy_media(apps, schema_editor):
+    # We can't import the Person model directly as it may be a newer
+    # version than this migration expects. We use the historical version.
+    Track = apps.get_model("tracks", "Track")
+    for track in Track.objects.all():
+        track.media.title = track.title
+        track.media.audio = track.audio
+        track.media.video = track.video
+        track.save()
+
 class Migration(migrations.Migration):
 
     dependencies = [
@@ -21,5 +31,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RunPython(copy_media),
+        migrations.RunPython(copy_media, reverse_copy_media),
     ]
