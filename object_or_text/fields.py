@@ -7,6 +7,7 @@ from django.utils.encoding import smart_text
 import ast
 
 from annoying.functions import get_object_or_None
+from object_or_text.lookup import Model
 
 
 _field_name = lambda name: ("%s" % name)
@@ -54,6 +55,10 @@ class ObjectOrTextFieldCreator(object):
 
 class CharField(models.CharField):
 
+    def __init__(self, object_model, *args, **kwargs):
+        super(CharField, self).__init__(*args, **kwargs)
+        self.object_model = object_model
+
     def formfield(self, **kwargs):
         #defaults = {'form_class': ObjectOrTextFormField,}
         defaults = {'form_class': ObjectOrTextFormField,}
@@ -72,11 +77,14 @@ class CharField(models.CharField):
         else:
             return smart_text(value.pk)
 
+CharField.register_lookup(Model)
+
+
 class ObjectOrTextField(models.Field):
 
-    def __init__(self, model, blank=False, null=True, max_length=254, *args, **kwargs):
+    def __init__(self, object_model, blank=False, null=True, max_length=254, *args, **kwargs):
         super(ObjectOrTextField, self).__init__(*args, **kwargs)
-        self.model = model
+        self.model = object_model
         self.blank = blank
         self.null = null
         self.max_length = max_length
@@ -85,6 +93,7 @@ class ObjectOrTextField(models.Field):
         self.name = name
         CharField(
             max_length=self.max_length,
+            object_model = self.model,
             blank=self.blank,
             null=self.null,
             ).contribute_to_class(cls, _field_name(name))

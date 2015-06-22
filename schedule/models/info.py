@@ -22,11 +22,11 @@ class Info(models.Model):
                                null=True, blank=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length = 255, null=True, blank=True,)
     description = models.TextField(null=True, blank=True)
-    headliner = ObjectOrTextField(model=ArtistProfile, blank=True, null=True, max_length=255)
+    headliner = ObjectOrTextField(object_model=ArtistProfile, blank=True, null=True, max_length=255)
     openers = models.ManyToManyField(ArtistProfile, blank=True,
                                      related_name='shows_opening')
     openers_text = models.CharField(max_length=255, null=True, blank=True,)
-    venue = ObjectOrTextField(model=User, default="No Venue Listed", max_length=255)
+    venue = ObjectOrTextField(object_model=User, default="No Venue Listed", max_length=255)
     location = models.ForeignKey(Location, null=True, blank=True,
                                 related_name='event_location')
     objects = models.GeoManager()

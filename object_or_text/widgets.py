@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 
 from django import forms
-from django.contrib.staticfiles.storage import staticfiles_storage
 
 from autocomplete_light.widgets import WidgetBase
 from autocomplete_light import registry as default_registry
