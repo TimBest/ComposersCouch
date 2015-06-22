@@ -12,24 +12,24 @@
 {% macro day_calendar(start, end) -%}
   <div class="date-time">
     <div class="top">
-      {{ start|date("l") }}
+      {{ local_time(start, "l") }}
     </div>
     <div class="middle">
       {% if start.month == end.month %}
-        <span class="month">{{ start|date("F") }}</span>
+        <span class="month">{{ local_time(start, "F") }}</span>
       {% else %}
-        <span class="months">{{ start|date("F") }} - {{ end|date("F") }}</span>
+        <span class="months">{{ local_time(start, "F") }} - {{ local_time(end, "F") }}</span>
       {% endif %}
       {% if start.year != now.year %}
-        <span class="year">{{ start|date("Y") }}</span>
+        <span class="year">{{ local_time(start, "Y") }}</span>
       {% endif %}
-      <p class="day">{{ start|date("j") }}</p>
+      <p class="day">{{ local_time(start, "j") }}</p>
     </div>
     <div class="bottom">
       {% if start.time == end.time %}
-        <p class="time">{{ start|time("fA") }}</p>
+        <p class="time">{{ local_time(start, "fA") }}</p>
       {% else %}
-        <p class="time">{{ start|time("f") }} - {{ end|time("fA") }}</p>
+        <p class="time">{{ local_time(start, "f") }} - {{ local_time(end, "fA") }}</p>
       {% endif %}
     </div>
   </div>
@@ -179,9 +179,9 @@
                   {% if filter == 'shows' %}
                     <div class="center-block cal-event">
                       <a href="{{ url('show', kwargs={'show_id':event.show.id}) }}">
-                        <span class="visible-xs">{{ event.show.date.start|date('g:i') }}</span>
+                        <span class="visible-xs">{{ local_time(event.show.date.start,'g:i') }}</span>
                         <span class="hidden-xs">
-                          <b>{{ event.show.date.start|date('fA') }}:</b>
+                          <b>{{ local_time(event.show.date.start,'fA') }}:</b>
                           {% if event.show.info.title %}
                             {{ event.show.info.title }}
                           {% else %}
@@ -192,7 +192,7 @@
                     </div>
                     <div class="hidden">
                       <li class="events"><a class="show-title" href="{{ url('show', kwargs={'show_id':event.show.id}) }}">
-                        <b>{{ event.show.date.start|date('fA') }}:</b>
+                        <b>{{ local_time(event.show.date.start,'fA') }}:</b>
                         {% if event.show.info.title %}
                           {{ event.show.info.title }}
                         {% else %}
@@ -204,9 +204,9 @@
                     {% with private_request=event.thread.request %}
                       <div class="center-block cal-event">
                         <a href="{{ url('request_detail', kwargs={'thread_id':private_request.thread.id}) }}">
-                          <span class="visible-xs">{{ private_request.date.start|date('g:i') }}</span>
+                          <span class="visible-xs">{{ local_time(private_request.date.start,'g:i') }}</span>
                           <span class="hidden-xs">
-                            <b>{{ private_request.date.start|date('fA') }}:</b>
+                            <b>{{ local_time(private_request.date.start,'fA') }}:</b>
                             {% if request.user.profile.profile_type == 'v' %}
                               {{ private_request.headliner().participant.user.profile }}
                             {% else %}
@@ -217,7 +217,7 @@
                       </div>
                       <div class="hidden">
                         <li class="events"><a class="show-title" href="{{ url('request_detail', kwargs={'thread_id':private_request.thread.id}) }}">
-                          <b>{{ private_request.date.start|date('fA') }}:</b>
+                          <b>{{ local_time(private_request.date.start,'fA') }}:</b>
                           {% if request.user.profile.profile_type == 'v' %}
                             {{ private_request.headliner().participant.user.profile }}
                           {% else %}

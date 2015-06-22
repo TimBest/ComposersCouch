@@ -3,8 +3,8 @@
 {% from "request/macros.html" import private_request %}
 
 {% block periodName %}
-  <span class="hidden-xs">{{ date|date("l, F j") }}</span>
-  <span class="visible-xs">{{ date|date("D, M j") }}</span>
+  <span class="hidden-xs">{{ local_time(date,"l, F j") }}</span>
+  <span class="visible-xs">{{ local_time(date,"D, M j") }}</span>
 {% endblock %}
 
 {% block dropdownTitle %}Day{% endblock %}
@@ -20,7 +20,7 @@
   {% else %}
     <div class="panel panel-default">
       <div class="panel-body">
-        <p class="text-left">No {{ filter }} scheduled for {{ date|date("SHORT_DATE_FORMAT") }}</p>
+        <p class="text-left">No {{ filter }} scheduled for {{ local_time(date,"SHORT_DATE_FORMAT") }}</p>
       </div>
     </div>
   {% endfor %}

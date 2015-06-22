@@ -25,8 +25,16 @@ def compact_date(value, same_day, same_year, other, timezone_active=True):
     else:
         return date(value, other)
 
+def local_time(value, format):
+    """
+    Output a date as localtime
+    """
+    value = localtime(value)
+    return date(value, format)
+
 
 InboxGlobals = {
     'inbox_count': cached_inbox_count_for,
     'compact_date': compact_date,
+    'local_time': local_time,
 }

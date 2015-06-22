@@ -134,19 +134,19 @@
             <p>
               {% with start=private_request.date.start, end=private_request.date.end %}
                 {% if start.year == end.year %}
-                  {{ start|date("l") }},
+                  {{ local_time(start,"l") }},
                   {% if start.month == end.month %}
-                    {{ start|date("F") }}
+                    {{ local_time(start,"F") }}
                     {% if start.day == end.day %}
-                      {{ start|date("d, Y: P") }} - {{ end|date("P") }}
+                      {{ local_time(start,"d, Y: P") }} - {{ local_time(end,"P") }}
                     {% else %}
-                      {{ start|date("d P") }} - {{ end|date("d P, Y") }}
+                      {{ local_time(start,"d P") }} - {{ local_time(end,"d P, Y") }}
                     {% endif %}
                   {% else %}
-                    {{ start|date("F d, Y: P") }} - {{ end|date("F d: P") }}
+                    {{ local_time(start,"F d, Y: P") }} - {{ local_time(end,"F d: P") }}
                   {% endif %}
                 {% else %}
-                  {{ start|date("l, F d, Y: P") }} - {{ end|date("l, F d, Y: P") }}
+                  {{ local_time(start,"l, F d, Y: P") }} - {{ local_time(end,"l, F d, Y: P") }}
                 {% endif %}
               {% endwith %}
             </p>
@@ -154,10 +154,10 @@
               {% for event in events %}
               {% if event.show.date.start.day != previous_day %}
                 {% set previous_day = event.show.date.start.day %}
-                <p><b>{{ event.show.date.start|date('N j') }}</b></p>
+                <p><b>{{ local_time(event.show.date.start,'N j') }}</b></p>
               {% endif %}
               <p>
-                {{ event.show.date.start|date('fA') }} - {{ event.show.info.title }} {{ event.show.info.headliner }}
+                {{ local_time(event.show.date.start,'fA') }} - {{ event.show.info.title }} {{ event.show.info.headliner }}
                 {% if event.approved == None %}
                 <span class="label label-warning">pending</span>
                 {% endif %}

@@ -152,7 +152,7 @@
         <span class="dropdown">
           <a class="btn btn-transparent-dropdown dropdown-toggle"
              data-toggle="dropdown" href="javascript:void(0)" aria-expanded="false">
-             <span class="dotted-bottom text-white">{% if date %}{{ date|date("n/j/y") }}{% else %}Date{% endif %}</span>
+             <span class="dotted-bottom text-white">{% if date %}{{ local_time(date,"n/j/y") }}{% else %}Date{% endif %}</span>
           </a>
           <ul class="dropdown-menu dropdown-form" role="menu">
             <li>

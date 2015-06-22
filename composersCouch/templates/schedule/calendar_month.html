@@ -3,8 +3,8 @@
 
 
 {% block periodName %}
-  <span class="hidden-xs">{{ date|date("F") }}</span>
-  <span class="visible-xs">{{ date|date("M") }}</span>
+  <span class="hidden-xs">{{ local_time(date,"F") }}</span>
+  <span class="visible-xs">{{ local_time(date,"M") }}</span>
 {% endblock %}
 
 {% block dropdownTitle %}Month{% endblock %}

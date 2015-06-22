@@ -10,7 +10,7 @@ from threads.models import Thread
 
 class DateRange(models.Model):
     start = models.DateTimeField(_("start"))
-    end = models.DateTimeField(_("end"),help_text=_("The end time must be later than the start time."))
+    end = models.DateTimeField(_("end"), help_text=_("The end time must be later than the start time."))
 
     class Meta:
         verbose_name = _('dateRange')
