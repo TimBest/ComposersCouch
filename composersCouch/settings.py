@@ -319,6 +319,7 @@ PIPELINE_JS = {
             'js/includes/bootstrap-datetimepicker.min.js',
             'autocomplete_light/autocomplete.js',
             'autocomplete_light/model_or_text_widget.js',
+            'autocomplete_light/text_widget.js',
             'autocomplete_light/widget.js',
             'js/includes/jquery.jplayer.min.js',
             'js/includes/jplayer.playlist.js',

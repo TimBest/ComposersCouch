@@ -1,5 +1,5 @@
 /*
-This script enables TextWidget, a widget for CharField that supports
+This script enables ModelOrTextWidget, a widget for CharField that supports
 autocomplete for comma-separated values.
 
 It's organization is not final, there are a couple of things that are also used
@@ -11,10 +11,10 @@ For now, the script is composed of these parts:
 
 - a handful of jQuery extensions to ease treatment of comma separated values in
   an input,
-- yourlabs.TextWidget is stripped version of yourlabs.Widget, to handle the
+- yourlabs.ModelOrTextWidget is stripped version of yourlabs.Widget, to handle the
   behavior of a comma separated autocompleted input,
-- yourlabsTextWidget jQuery extension which role is to manage TextWidget instances,
-- yourlabsTextWidget initialization system, which supports dynamically added
+- yourlabsModelOrTextWidget jQuery extension which role is to manage ModelOrTextWidget instances,
+- yourlabsModelOrTextWidget initialization system, which supports dynamically added
   autocompletes (ie. admin inlines)
 */
 
@@ -96,8 +96,8 @@ jQuery.fn.getCursorWordPositions = function() {
     return [start, end + 1];
 };
 
-// TextWidget ties an input with an autocomplete.
-yourlabs.TextWidget = function(input) {
+// ModelOrTextWidget ties an input with an autocomplete.
+yourlabs.ModelOrTextWidget = function(input) {
     this.widget = input.closest('.form-group');
     this.input = this.widget.find('input[type=text]');
     this.checkbox = this.widget.find('input[type=checkbox]');
@@ -116,7 +116,7 @@ yourlabs.TextWidget = function(input) {
 };
 
 // The widget is in charge of managing its Autocomplete.
-yourlabs.TextWidget.prototype.initializeAutocomplete = function() {
+yourlabs.ModelOrTextWidget.prototype.initializeAutocomplete = function() {
     this.autocomplete = this.input.yourlabsAutocomplete(
         this.autocompleteOptions);
     // Add a class to ease css selection of autocompletes for widgets
@@ -124,18 +124,18 @@ yourlabs.TextWidget.prototype.initializeAutocomplete = function() {
         'autocomplete-light-model-or-text-widget');
 };
 
-// Bind Autocomplete.selectChoice signal to TextWidget.selectChoice()
-yourlabs.TextWidget.prototype.bindSelectChoice = function() {
+// Bind Autocomplete.selectChoice signal to ModelOrTextWidget.selectChoice()
+yourlabs.ModelOrTextWidget.prototype.bindSelectChoice = function() {
     this.input.bind('selectChoice', function(e, choice) {
         if (!choice.length)
             return; // placeholder: create choice here
 
-        $(this).yourlabsTextWidget().selectChoice(choice);
+        $(this).yourlabsModelOrTextWidget().selectChoice(choice);
     });
 };
 
 // Called when a choice is selected from the Autocomplete.
-yourlabs.TextWidget.prototype.selectChoice = function(choice) {
+yourlabs.ModelOrTextWidget.prototype.selectChoice = function(choice) {
     var value = this.getValue(choice);
     this.input.val(value);
     this.addToDeck(choice, value);
@@ -145,12 +145,12 @@ yourlabs.TextWidget.prototype.selectChoice = function(choice) {
 };
 
 // Return the value of an HTML choice, used to fill the input.
-yourlabs.TextWidget.prototype.getValue = function(choice) {
+yourlabs.ModelOrTextWidget.prototype.getValue = function(choice) {
     return choice.attr('data-value');
 };
 
 // Add a selected choice of a given value to the deck.
-yourlabs.TextWidget.prototype.addToDeck = function(choice, value) {
+yourlabs.ModelOrTextWidget.prototype.addToDeck = function(choice, value) {
     var existing_choice = this.deck.find('[data-value="'+value+'"]');
     // Avoid duplicating choices in the deck.
     if (!existing_choice.length) {
@@ -165,14 +165,14 @@ yourlabs.TextWidget.prototype.addToDeck = function(choice, value) {
 };
 
 // Called when the user clicks .remove in a deck choice.
-yourlabs.TextWidget.prototype.deselectChoice = function(choice) {
+yourlabs.ModelOrTextWidget.prototype.deselectChoice = function(choice) {
     choice.remove();
     this.input.val("");
     this.input.show();
     this.checkbox.prop('checked', false);
 };
 
-yourlabs.TextWidget.prototype.deckChoiceHtml = function(choice, value) {
+yourlabs.ModelOrTextWidget.prototype.deckChoiceHtml = function(choice, value) {
     var deckChoice = choice.clone();
 
     this.addRemove(deckChoice);
@@ -180,7 +180,7 @@ yourlabs.TextWidget.prototype.deckChoiceHtml = function(choice, value) {
     return deckChoice;
 };
 
-yourlabs.TextWidget.prototype.addRemove = function(choices) {
+yourlabs.ModelOrTextWidget.prototype.addRemove = function(choices) {
     var removeTemplate = this.widget.find('.remove:last')
         .clone().css('display', 'inline-block');
 
@@ -195,21 +195,21 @@ yourlabs.TextWidget.prototype.addRemove = function(choices) {
 };
 
 // Initialize the widget.
-yourlabs.TextWidget.prototype.initialize = function() {
+yourlabs.ModelOrTextWidget.prototype.initialize = function() {
     this.initializeAutocomplete();
     this.bindSelectChoice();
 };
 
 // Destroy the widget. Takes a widget element because a cloned widget element
 // will be dirty, ie. have wrong .input and .widget properties.
-yourlabs.TextWidget.prototype.destroy = function(input) {
+yourlabs.ModelOrTextWidget.prototype.destroy = function(input) {
     input
         .unbind('selectChoice')
         .yourlabsAutocomplete('destroy');
 };
 
-// TextWidget factory, registry and destroyer, as jQuery extension.
-$.fn.yourlabsTextWidget = function(overrides) {
+// ModelOrTextWidget factory, registry and destroyer, as jQuery extension.
+$.fn.yourlabsModelOrTextWidget = function(overrides) {
     var overrides = overrides ? overrides : {};
 
     if (overrides == 'destroy') {
@@ -223,7 +223,7 @@ $.fn.yourlabsTextWidget = function(overrides) {
 
     if (this.data('widget') === undefined) {
         // Instanciate the widget
-        var widget = new yourlabs.TextWidget(this);
+        var widget = new yourlabs.ModelOrTextWidget(this);
 
         // Pares data-*
         var data = this.data();
@@ -280,13 +280,13 @@ $(document).ready(function() {
         autocompletes with custom code, then set
         data-widget-boostrap=yourbootstrap or something like that.
         */
-        $(this).yourlabsTextWidget();
+        $(this).yourlabsModelOrTextWidget();
     });
     // Call Widget.deselectChoice when .remove is clicked
     $('body').on('click', '.autocomplete-light-model-or-text-widget.deck .remove', function() {
         widget = $(this).closest('.form-group').find(
                 '.autocomplete-light-model-or-text-widget[data-widget-bootstrap=text]'
-            ).yourlabsTextWidget();
+            ).yourlabsModelOrTextWidget();
 
         var choice = $(this).parent();
 
@@ -295,14 +295,14 @@ $(document).ready(function() {
 
     // Solid initialization, usage::
     //
-    //      $(document).bind('yourlabsTextWidgetReady', function() {
+    //      $(document).bind('yourlabsModelOrTextWidgetReady', function() {
     //          $('body').on('initialize', 'input[data-widget-bootstrap=text]', function() {
-    //              $(this).yourlabsTextWidget({
+    //              $(this).yourlabsModelOrTextWidget({
     //                  yourCustomArgs: // ...
     //              })
     //          });
     //      });
-    $(document).trigger('yourlabsTextWidgetReady');
+    $(document).trigger('yourlabsModelOrTextWidgetReady');
 
     $('.autocomplete-light-model-or-text-widget:not([id*="__prefix__"])').each(function() {
         $(this).trigger('initialize');
