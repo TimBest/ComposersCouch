@@ -58,7 +58,7 @@
               {% endif %}
               {% if info.headliner %}
                 <h4>
-                  {% if info.headliner_is_model %}
+                  {% if info.headliner_id %}
                     <a class="text-black" href="{{ url('artist:news', kwargs={'username':info.headliner.user.username}) }}">
                       {{ info.headliner }}
                     </a>
@@ -81,7 +81,7 @@
             <div>
               <p>
                 <span class="fa fa-map-marker text-muted"></span>
-                {% if info.venue_is_model %}
+                {% if info.venue_id %}
                   <a class="text-black" href="{{ url('redirectToProfile', kwargs={'username':info.venue.username, 'tab':'about'}) }}">
                     {{ info.venue.profile }}
                   </a>

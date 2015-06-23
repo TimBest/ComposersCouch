@@ -22,20 +22,20 @@ class Info(models.Model):
                                null=True, blank=True, on_delete=models.SET_NULL)
     title = models.CharField(max_length = 255, null=True, blank=True,)
     description = models.TextField(null=True, blank=True)
-    headliner = ObjectOrTextField(object_model=ArtistProfile, blank=True, null=True, max_length=255)
+    headliner = ObjectOrTextField(related_model=ArtistProfile, blank=True, null=True, max_length=255)
     openers = models.ManyToManyField(ArtistProfile, blank=True,
                                      related_name='shows_opening')
     openers_text = models.CharField(max_length=255, null=True, blank=True,)
-    venue = ObjectOrTextField(object_model=User, default="No Venue Listed", max_length=255)
+    venue = ObjectOrTextField(related_model=User, default="No Venue Listed", max_length=255)
     location = models.ForeignKey(Location, null=True, blank=True,
                                 related_name='event_location')
     objects = models.GeoManager()
 
     def participants(self):
         participants = []
-        if self.venue_is_model:
+        if self.venue_id:
             participants.append(self.venue)
-        if self.headliner_is_model:
+        if self.headliner_id:
             participants.append(self.headliner.profile.user)
         for opener in self.openers.all():
             participants.append(opener.profile.user)

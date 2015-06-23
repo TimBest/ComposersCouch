@@ -168,7 +168,7 @@ class EventFormView(ImageFormMixin, MultipleModelFormsView):
             info.poster = get_object_or_None(Image, id=imageId)
 
         if not info.location:
-            if info.venue_is_model:
+            if info.venue_id:
                 info.location = info.venue.profile.contact_info.location
             else:
                 info.location = self.request.user.profile.contact_info.location
@@ -239,6 +239,19 @@ class EditEventFormView(EventFormView):
 
         if not info.location:
             info.location = info.venue.profile.contact_info.location
+
+        from django.utils import six
+        from django.utils.encoding import smart_text
+        if isinstance(info.headliner, six.string_types) or info.headliner is None:
+            info.headliner = "[u'%s', False]" % smart_text(info.headliner)
+        else:
+            info.headliner = "[u'%s', True]" % smart_text(info.headliner.pk)
+        if isinstance(info.venue, six.string_types) or info.venue is None:
+            info.venue = "[u'%s', False]" % smart_text(info.venue)
+        else:
+            info.venue = "[u'%s', True]" % smart_text(info.venue.pk)
+        #info.headliner = [str(info.headliner.pk), True]
+        #info.venue = [str(info.venue.pk), True]
         info.save()
         forms['show_info_form'].save_m2m()
         participants = info.participants()

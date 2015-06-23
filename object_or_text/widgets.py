@@ -54,14 +54,15 @@ class TextWidget(WidgetBase, forms.TextInput):
         self.html_id = attrs.pop('id', name)
 
         autocomplete = self.autocomplete(values=value)
+        print name
+        print value
+        print attrs
         try:
-            choices = autocomplete.choices_for_values()
+            choices = [] #autocomplete.choices_for_values()
+            #values = [autocomplete.choice_value(c) for c in choices]
         except:
             choices = []
-        if choices:
-            values = [autocomplete.choice_value(c) for c in choices]
-        else:
-            values = str(value)
+        values = str(value)
         context = {
             'name': name,
             'values': values,
