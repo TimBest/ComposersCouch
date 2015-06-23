@@ -41,6 +41,7 @@ class EasyTimezoneMiddleware(object):
                 tz = db.time_zone_by_addr(ip)
             else:
                 tz = pytz.timezone('US/Eastern')
+                tz = pytz.timezone('US/Central')
         if tz:
             timezone.activate(tz)
         else:

@@ -219,7 +219,7 @@ class EditEventFormView(EventFormView):
             'show_info_form'  : info,
         }
     def get_initial_data(self):
-        return {'poster_form':{},'date_form':{},'event_form':{},'show_info_form':{},}
+        return {'poster_form': {}, 'date_form': {}, 'event_form': {}, 'show_info_form': {},}
 
     def forms_valid(self, forms):
         date  = forms['date_form'].save()

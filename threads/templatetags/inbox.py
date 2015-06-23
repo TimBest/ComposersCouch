@@ -25,7 +25,7 @@ def compact_date(value, same_day, same_year, other, timezone_active=True):
     else:
         return date(value, other)
 
-def local_time(value, format):
+def local_time(value, format, location=None):
     """
     Output a date as localtime
     """

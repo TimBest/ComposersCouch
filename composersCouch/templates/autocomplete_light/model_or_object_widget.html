@@ -17,7 +17,7 @@
 
 {% block input %}
   {# a text input, that is the 'autocomplete input' #}
-  <input type="text" name="{{ name }}" id="{{ widget.html_id }}" value="" {{ attrs }} />
+  <input type="text" name="{{ name }}" id="{{ widget.html_id }}" value="{{ values }}" {{ attrs }} />
 {% endblock %}
 
 {% block remove_template %}

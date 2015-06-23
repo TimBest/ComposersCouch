@@ -1,6 +1,9 @@
 from __future__ import unicode_literals
 
 from django import forms
+from django.forms.util import flatatt
+from django.template.loader import render_to_string
+from django.utils import safestring
 
 from autocomplete_light.widgets import WidgetBase
 from autocomplete_light import registry as default_registry
@@ -44,6 +47,35 @@ class TextWidget(WidgetBase, forms.TextInput):
         attrs['data-widget-bootstrap'] = 'text'
         attrs['class'] += ' autocomplete-light-model-or-text-widget'
         return attrs
+
+    def render(self, name, value, attrs=None):
+        widget_attrs = self.build_widget_attrs(name)
+        attrs = self.build_attrs(attrs)
+        self.html_id = attrs.pop('id', name)
+
+        autocomplete = self.autocomplete(values=value)
+        try:
+            choices = autocomplete.choices_for_values()
+        except:
+            choices = []
+        if choices:
+            values = [autocomplete.choice_value(c) for c in choices]
+        else:
+            values = str(value)
+        context = {
+            'name': name,
+            'values': values,
+            'choices': choices,
+            'widget': self,
+            'attrs': safestring.mark_safe(flatatt(attrs)),
+            'widget_attrs': safestring.mark_safe(flatatt(widget_attrs)),
+            'autocomplete': autocomplete,
+        }
+        context.update(self.extra_context)
+
+        template = getattr(autocomplete, 'widget_template',
+                self.widget_template)
+        return safestring.mark_safe(render_to_string(template, context))
 
 
 class ObjectOrTextWidget(forms.MultiWidget):

@@ -1,5 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
+from django.utils.timezone import localtime
 
 import autocomplete_light
 from autocomplete_light import ModelForm
@@ -30,7 +31,7 @@ class DateForm(ModelForm):
         # when dates are equal end datetime is not shown in forms and templates
         start = self.cleaned_data.get('start')
         end = self.cleaned_data.get('end')
-        if (start and end) and end < start:
+        if end and end < start:
             raise forms.ValidationError(_(u"The end time must be later than start time."))
         return self.cleaned_data
 
