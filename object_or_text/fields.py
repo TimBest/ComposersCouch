@@ -16,6 +16,7 @@ _text_name = lambda name: ("%s_text" % name)
 class ObjectOrTextFormField(forms.CharField):
 
     def clean(self, value):
+        print value
         if value:
             if value[1]:
                 return self.widget.autocomplete.model.objects.get(pk=value[0])

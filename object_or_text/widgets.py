@@ -34,11 +34,11 @@ class ModelWidget(ChoiceWidget):
         update_attrs(self.widget_js_attributes, 'widget-')
         update_attrs(self.autocomplete_js_attributes, 'autocomplete-')
 
-        attrs['data-widget-bootstrap'] = 'text'
-        attrs['class'] += ' autocomplete-light-model-or-text-widget'
+        attrs['title'] = "model-or-text-widget-model-input"
+        #attrs['class'] += ' autocomplete-light-model-or-text-widget'
         return attrs
 
-    def render(self, name, value, attrs=None):
+        """    def render(self, name, value, attrs=None):
         widget_attrs = self.build_widget_attrs(name)
         attrs = self.build_attrs(attrs)
         self.html_id = attrs.pop('id', name)
@@ -66,7 +66,7 @@ class ModelWidget(ChoiceWidget):
 
         template = getattr(autocomplete, 'widget_template',
                 self.widget_template)
-        return safestring.mark_safe(render_to_string(template, context))
+        return safestring.mark_safe(render_to_string(template, context))"""
 
 
 class ObjectOrTextWidget(forms.MultiWidget):
@@ -78,7 +78,8 @@ class ObjectOrTextWidget(forms.MultiWidget):
     """
     def __init__(self, attrs={}, autocomplete=None, widget_js_attributes=None,
             autocomplete_js_attributes=None, extra_context=None, registry=None,
-            widget_template="autocomplete_light/model_or_object_widget.html", widget_attrs=None):
+            widget_template="autocomplete_light/widget.html", widget_attrs={}):
+        attrs['title'] = "model-or-text-widget-text-input"
         widgets = (
             ModelWidget(
                 autocomplete, widget_js_attributes,
