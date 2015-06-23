@@ -5,13 +5,12 @@ from django.forms.util import flatatt
 from django.template.loader import render_to_string
 from django.utils import safestring
 
-from autocomplete_light.widgets import WidgetBase
-from autocomplete_light import registry as default_registry
+from autocomplete_light import ChoiceWidget, registry as default_registry
 
 
 __all__ = ['ObjectOrTextWidget',]
 
-class TextWidget(WidgetBase, forms.TextInput):
+class ModelWidget(ChoiceWidget):
     """
     Widget that just adds an autocomplete to fill a text input.
 
@@ -19,22 +18,13 @@ class TextWidget(WidgetBase, forms.TextInput):
     merged together.
     """
 
-    def __init__(self, autocomplete=None, widget_js_attributes=None,
-            autocomplete_js_attributes=None, extra_context=None, registry=None,
-            widget_template=None, widget_attrs=None, *args,
-            **kwargs):
 
-        forms.TextInput.__init__(self, *args, **kwargs)
-
-        WidgetBase.__init__(self, autocomplete, widget_js_attributes,
-                autocomplete_js_attributes, extra_context, registry,
-                widget_template, widget_attrs)
 
     def build_attrs(self, extra_attrs=None, **kwargs):
         max_values = extra_attrs.get('data-widget-maximum-values', 1)
         extra_attrs['data-widget-maximum-values'] =  max_values
-        attrs = super(TextWidget, self).build_widget_attrs()
-        attrs.update(super(TextWidget, self).build_attrs(extra_attrs, **kwargs))
+        attrs = super(ModelWidget, self).build_widget_attrs()
+        attrs.update(super(ModelWidget, self).build_attrs(extra_attrs, **kwargs))
 
         def update_attrs(source, prefix=''):
             for key, value in source.items():
@@ -54,15 +44,15 @@ class TextWidget(WidgetBase, forms.TextInput):
         self.html_id = attrs.pop('id', name)
 
         autocomplete = self.autocomplete(values=value)
-        print name
-        print value
-        print attrs
         try:
-            choices = [] #autocomplete.choices_for_values()
+            choices = autocomplete.choices_for_values()
             #values = [autocomplete.choice_value(c) for c in choices]
         except:
             choices = []
-        values = str(value)
+        if value:
+            values = str(value)
+        else:
+            values = ""
         context = {
             'name': name,
             'values': values,
@@ -90,27 +80,24 @@ class ObjectOrTextWidget(forms.MultiWidget):
             autocomplete_js_attributes=None, extra_context=None, registry=None,
             widget_template="autocomplete_light/model_or_object_widget.html", widget_attrs=None):
         widgets = (
-            TextWidget(
+            ModelWidget(
                 autocomplete, widget_js_attributes,
                 autocomplete_js_attributes, extra_context,
                 registry, widget_template, widget_attrs,
             ),
-            forms.CheckboxInput(attrs=attrs),
+            forms.TextInput(attrs=attrs),
         )
 
         self.registry = default_registry if registry is None else registry
         self.autocomplete = self.registry.get_autocomplete_from_arg(
             autocomplete
         )
-
+        #self.model = autocomplete.model
         super(ObjectOrTextWidget, self).__init__(widgets, attrs)
 
     def decompress(self, value):
         self.value = value
-
         if value and isinstance(value, basestring):
-            return [value, False]
-        elif value:
-            return[value.pk, True]
+            return [value, value]
         else:
-            return ["", False]
+            return[value, value]
