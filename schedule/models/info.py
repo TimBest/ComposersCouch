@@ -33,9 +33,9 @@ class Info(models.Model):
 
     def participants(self):
         participants = []
-        if self.venue_id:
+        if self.venue_model:
             participants.append(self.venue)
-        if self.headliner_id:
+        if self.headliner_model:
             participants.append(self.headliner.profile.user)
         for opener in self.openers.all():
             participants.append(opener.profile.user)

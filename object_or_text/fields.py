@@ -10,30 +10,28 @@ from annoying.functions import get_object_or_None
 #from object_or_text.lookup import Model
 
 
-_model_name = lambda name: ("%s" % name)
-_text_name = lambda name: ("%s_text" % name)
+_model_name = lambda name: ("%s_model" % name)
+_text_name = lambda name: ("%s" % name)
 
 class ObjectOrTextFormField(forms.CharField):
 
     def clean(self, value):
-        print value
-        if value:
-            if value[1]:
-                return self.widget.autocomplete.model.objects.get(pk=value[0])
-            else:
-                return value[0]
-        else:
-            return None
+        try:
+            return self.widget.autocomplete.model.objects.get(pk=value[0])
+        except:
+            return value[1]
 
 class ObjectOrTextFieldCreator(object):
     def __init__(self, field):
         self.field = field
+        self._model_name = _model_name(self.field.name)
+        self._model_id_name = ("%s_id" % self._model_name)
         self._text_name = _text_name(self.field.name)
 
     def __get__(self, obj, type=None):
         if obj is None:
             raise AttributeError('Can only be accessed via an instance.')
-        model = obj.__dict__.get(("%s_id" % self.field.name), None)
+        model = obj.__dict__.get(self._model_id_name, None)
         text = obj.__dict__.get(self._text_name, None)
         if model:
             return get_object_or_None(self.field.related_model, pk=model)
@@ -41,22 +39,28 @@ class ObjectOrTextFieldCreator(object):
             return text
 
     def __set__(self, obj, value):
-        if value:
+        print "__set__ %s" % value
+        if isinstance(value, (long,int)):
+            obj.__dict__[self._model_id_name] = value
+            obj.__dict__[self._text_name] = value
+            #print "pk of model: %s" % value
+            print "pk of model: %s" % obj.__dict__.get(self._model_id_name, None)
+        else:
             try:
-                list = ast.literal_eval(value)
-                obj.__dict__[self.field.name] = list[0]
-                obj.__dict__[self.is_model_field_name] = list[1]
-                print "LIST: %s" % value
-            except:
-                if isinstance(value, six.string_types) or value is None:
-                    print "TEXT: %s" % value
-                    obj.__dict__[self.field.name] = value
-                    obj.__dict__[self.is_model_field_name] = False
-                else:
-                    print "MODEL: %s" % value
-                    obj.__dict__[self.field.name] = value.pk
-                    obj.__dict__[self.is_model_field_name] = True
+                obj.__dict__[self._model_id_name] = int(value.pk)
+                obj.__dict__[self._text_name] = int(value.pk)
+                #print "model: %s" % value
+                print "model: %s" % obj.__dict__.get(self._model_id_name, None)
 
+            except AttributeError:
+                obj.__dict__[self._model_name] = None
+                obj.__dict__[self._text_name] = value
+                #print "text: %s" % value
+                print "text: %s" % obj.__dict__.get(self._text_name, None)
+
+
+
+# keeping for migrations
 class ModelOrTextField(models.Field):
 
     def __init__(self, related_model=None, *args, **kwargs):
@@ -64,33 +68,34 @@ class ModelOrTextField(models.Field):
         self.related_model = related_model
 
     def formfield(self, **kwargs):
-        #defaults = {'form_class': ObjectOrTextFormField,}
         defaults = {'form_class': ObjectOrTextFormField,}
         defaults.update(kwargs)
         return super(ModelOrTextField, self).formfield(**defaults)
 
-    #def from_db_value(self, value, expression, connection, context):
-    #    if isinstance(value, six.string_types) or value is None:
-    #        return smart_text(value)
-    #    else:
-    #        return smart_text(value.pk)
+    def db_type(self, connection):
+        return 'CharField'
 
-    #def to_python(self, value):
-    #    if isinstance(value, six.string_types) or value is None:
-    #        return "[u'%s', False]" % smart_text(value)
-    #    else:
-    #        return "[u'%s', True]" % smart_text(value.pk)
+class ModelField(models.ForeignKey):
 
-    #def get_prep_value(self, value):
-    #    print value
-    #    if isinstance(value, six.string_types) or value is None:
-    #        return smart_text(value)
-    #    else:
-    #        return smart_text(value.pk)
+    def formfield(self, **kwargs):
+        defaults = {'form_class': ObjectOrTextFormField,}
+        defaults.update(kwargs)
+        return super(ModelField, self).formfield(**defaults)
 
-    #def get_internal_type(self):
-    #    return 'CharField'
+    """def from_db_value(self, value, expression, connection, context):
+        print "from_db_value %s" % value
+        return value
 
+    def to_python(self, value):
+        print "TO PYTHON %s" % value
+        return value
+
+    def get_prep_value(self, value):
+        print "get_prep_value %s" % value
+        return value"""
+
+    def db_type(self, connection):
+        return 'ForeignKey'
 
 #ModelOrTextField.register_lookup(Model)
 
@@ -108,11 +113,10 @@ class ObjectOrTextField(models.Field):
         self.name = name
         ModelOrTextField(
             max_length=self.max_length,
-            related_model = self.related_model,
             blank=self.blank,
             null=self.null,
             ).contribute_to_class(cls, _text_name(name))
-        models.ForeignKey(
+        ModelField(
             self.related_model,
             blank=True,
             null=True,
@@ -120,6 +124,11 @@ class ObjectOrTextField(models.Field):
         # when accessing the field by original model field name,
         # we'll manage tuples of country code, area code, and number
         setattr(cls, self.name, ObjectOrTextFieldCreator(self))
+
+    def formfield(self, **kwargs):
+        defaults = {'form_class': ObjectOrTextFormField,}
+        defaults.update(kwargs)
+        return super(ObjectOrTextField, self).formfield(**defaults)
 
 """
 class MultiKeyOrCharField(Field):
