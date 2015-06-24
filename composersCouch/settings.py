@@ -63,7 +63,6 @@ INSTALLED_APPS = (
     'fan',
     'feeds',
     'genres',
-    'object_or_text',
     'photos',
     'pipeline',
     'progressbarupload',

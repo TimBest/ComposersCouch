@@ -23,26 +23,11 @@ def shows(request, scope='any-distance', *args, **kwargs):
 
 class ShowViewAuth(FeedMixin):
     model = Show
-    path_to_genre = 'info__venue__model__profile__genre__slug'
-
-    #path_to_genre = 'events__calendar__user__profile__genre__slug'
+    path_to_genre = 'info__venue__profile__genre__slug'
     template_name = 'feeds/shows_shows.html'
     feedType = 'shows'
     default_order = "upcoming"
     # TODO: expand to also match with those preforming
-
-    def filter_by_genre(self, genres, qs):
-        """print "FISFGSERGERGHSREH"
-        if genres:
-            genre_qs = []
-            for i, genre in enumerate(genres):
-                if i==0:
-                    genre_qs = self.model.objects.filter(**{self.path_to_genre:genre.slug})
-                else:
-                    genre_qs = genre_qs | self.model.objects.filter(**{self.path_to_genre:genre.slug})
-            return qs.distinct() & genre_qs.distinct()
-        else:"""
-        return qs
 
     def get_posts(self, **kwargs):
         return self.model.objects.filter(visible=True)
@@ -68,7 +53,6 @@ class LocalViewAuth(ShowViewAuth):
     def get_posts(self, **kwargs):
         posts = super(LocalViewAuth, self).get_posts(**kwargs)
         location = get_location(self.request, self.kwargs.get('zipcode'), 'point')
-
         if location:
             return posts.filter(
                 info__location__zip_code__point__distance_lte=(location, D(m=LocalFeed.distance))
@@ -80,7 +64,6 @@ class LocalView(LocalViewAuth, SignupEmailView, LoginView):
     pass
 
 class FollowingView(ShowViewAuth):
-    #TODO: make this a redis view
     template_name = 'feeds/shows_following.html'
 
     @login_required_m
@@ -90,10 +73,8 @@ class FollowingView(ShowViewAuth):
     def get_posts(self,**kwargs):
         posts = super(FollowingView, self).get_posts(**kwargs)
         following = self.request.user.following_set.values_list('target')
-
         return posts.filter(
-        #    Q(info__openers__profile__user__pk__in=following) | Q(info__headliner__profile__user__pk__in=following) | Q(info__venue__in=following)
-            Q(info__openers__profile__user__pk__in=following)
+            Q(info__openers__profile__user__pk__in=following) | Q(info__headliner__profile__user__pk__in=following) | Q(info__venue__pk__in=following)
         )
 
 AUTH_VIEWS = {

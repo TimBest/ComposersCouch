@@ -1,8 +1,10 @@
-from django.contrib.auth.models import User
+
 from django.test import TestCase
+from django.contrib.auth.models import User
 
 from contact.models import Location
-from schedule.models import Event, Info, Show
+from schedule.models import Event
+from schedule.models import Show
 
 
 class TestEvent(TestCase):
@@ -25,14 +27,10 @@ class TestEvent(TestCase):
         event.show.info.save()
         self.assertEqual(event.get_location(),location)
         # if there is no location return the venues loaction
-
-        user = User.objects.get(pk=3)
         event.show.info.location = None
-        #event.show.info.venue = user
-        #event.show.info.venue_is_model = True
         event.show.info.save()
-        # TODO: is_model cant be set to true but it works in test_form.py 
-        #self.assertEqual(event.get_location(),user.profile.contact_info.location)
+        user = User.objects.get(pk=3)
+        self.assertEqual(event.get_location(),user.profile.contact_info.location)
         # if there is no show location and no venue location return the users loaction
         event.show.info.venue = None
         event.show.info.save()

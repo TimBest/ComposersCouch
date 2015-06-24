@@ -4,7 +4,6 @@ from django.utils.translation import ugettext as _
 
 from artist.models import ArtistProfile
 from contact.models import Location
-from object_or_text.fields import ObjectOrTextField
 from photos.models import Image
 
 
@@ -18,24 +17,29 @@ class Info(models.Model):
     This model stores meta data for a date.  You can relate this data to many
     other models.
     '''
-    poster = models.ForeignKey(Image, related_name='event_poster',
-                               null=True, blank=True, on_delete=models.SET_NULL)
+    poster = models.ForeignKey(Image, related_name='event_poster',null=True, blank=True, on_delete=models.SET_NULL)
+
     title = models.CharField(max_length = 255, null=True, blank=True,)
     description = models.TextField(null=True, blank=True)
-    headliner = ObjectOrTextField(related_model=ArtistProfile, blank=True, null=True, max_length=255)
-    openers = models.ManyToManyField(ArtistProfile, blank=True,
-                                     related_name='shows_opening')
+
+    headliner = models.ForeignKey(ArtistProfile, null=True, blank=True, related_name='shows_headlining')
+    headliner_text = models.CharField(max_length=255, null=True, blank=True,)
+
+    openers = models.ManyToManyField(ArtistProfile, blank=True, related_name='shows_opening')
     openers_text = models.CharField(max_length=255, null=True, blank=True,)
-    venue = ObjectOrTextField(related_model=User, default="No Venue Listed", max_length=255)
-    location = models.ForeignKey(Location, null=True, blank=True,
-                                related_name='event_location')
+
+    venue = models.ForeignKey(User, null=True, blank=True, related_name='shows_hosting')
+    venue_text = models.CharField(max_length=255, null=True, blank=True,)
+
+    location = models.ForeignKey(Location, null=True, blank=True,related_name='event_location')
+
     objects = models.GeoManager()
 
     def participants(self):
         participants = []
-        if self.venue_model:
+        if self.venue_id:
             participants.append(self.venue)
-        if self.headliner_model:
+        if self.headliner_id:
             participants.append(self.headliner.profile.user)
         for opener in self.openers.all():
             participants.append(opener.profile.user)
@@ -57,6 +61,8 @@ class Info(models.Model):
             return self.title
         elif self.headliner:
             return self.headliner.profile
+        elif self.headliner_text:
+            return self.headliner_text
         return "Show"
 
     class Meta:

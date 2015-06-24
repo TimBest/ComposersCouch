@@ -37,20 +37,30 @@ def export(request, events, year=None):
 
     for event in events:
         show = event.show
+
+        description = ""
+        if show.info.headliner:
+            description += "Headliner: %s\n" % show.info.headliner
+        elif show.info.headliner_text:
+            description += "Headliner: %s\n" % show.info.headliner_text
+        if show.info.openers_text:
+            description += "Openers: %s\n" % show.info.openers_text
+        if show.info.venue:
+            description += "Venue: %s\n" % show.info.venue
+        else:
+            description += "Venue: %s\n" % show.info.venue_text
+        if show.info.description:
+            description += "Description: %s\n" % show.info.description
+
         ical_event = iEvent()
         ical_event.add('summary', show.info.get_title())
-        description = "Headliner: " + show.info.headliner + "\n"
-        if show.info.openers_text:
-            description += "Openers: " + show.info.openers_text + "\n"
-        description += "Venue: " + show.info.venue + "\n"
-        if show.info.openers_text:
-            description += "Description: " + show.info.description + "\n"
         ical_event.add('description', description)
         ical_event.add('location', show.info.venue)
         ical_event.add('dtstart', show.date.start)
         ical_event.add('dtend', show.date.end and show.date.end or show.date.start)
         ical_event.add('dtstamp', show.date.end and show.date.end or show.date.start)
         ical_event['uid'] = '%d.event.events.%s' % (show.id, site_token)
+
         cal.add_component(ical_event)
 
     response = HttpResponse(cal.to_ical(), content_type="text/calendar")

@@ -1,11 +1,9 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from django.utils.timezone import localtime
 
 import autocomplete_light
 from autocomplete_light import ModelForm
 
-from object_or_text.widgets import ObjectOrTextWidget
 from schedule.models import DateRange
 from schedule.models import Event
 from schedule.models import Info
@@ -63,18 +61,21 @@ class ShowInfoForm(ModelForm):
     def __init__(self, *args, **kwargs):
         self.user = kwargs.pop('user', None)
         super(ShowInfoForm, self).__init__(*args, **kwargs)
-        self.fields['openers_text'].label = "Openers"
+        self.fields['headliner'].required = False
+        self.fields['headliner_text'].label = "Headliner"
         self.fields['openers_text'].help_text = "Separate artists by commas"
+        self.fields['openers_text'].label = "Openers"
+        self.fields['venue_text'].label = "Venue"
 
     def clean(self):
         # user must be a participant in the evnet or request
         isParticipant = False
         try:
-            if self.cleaned_data.get('headliner').profile.user == self.user:
+            if self.cleaned_data.get('headliner_object').profile.user == self.user:
                 isParticipant = True
         except:
             pass
-        if self.cleaned_data.get('venue') == self.user:
+        if self.cleaned_data.get('venue_object') == self.user:
             isParticipant = True
         else:
             for o in self.cleaned_data.get('openers'):
@@ -82,20 +83,19 @@ class ShowInfoForm(ModelForm):
                     isParticipant = True
         if not isParticipant:
             raise forms.ValidationError(_(u"You must be a participant in this show."))
-        if not self.cleaned_data.get('title') and not self.cleaned_data.get('headliner'):
+        if not self.cleaned_data.get('title') and not self.cleaned_data.get('headliner_text'):
             raise forms.ValidationError(_(u"A Title or a Headliner is required."))
-        if not self.cleaned_data.get('venue'):
+        if not self.cleaned_data.get('venue_text'):
             raise forms.ValidationError(_(u"A Venue is required."))
-
         return self.cleaned_data
 
     class Meta:
         model = Info
-        fields = ('title', 'headliner', 'openers_text',
-                  'openers', 'venue','description',)
+        fields = ('title', 'headliner_text', 'headliner', 'openers_text',
+                  'openers', 'venue', 'venue_text','description',)
         widgets = {
             'description' : forms.Textarea(attrs={'rows': 2, 'cols': 19}),
-            'headliner' : ObjectOrTextWidget(autocomplete='ArtistProfileAutocomplete'),
+            'headliner_text' : autocomplete_light.TextWidget('ArtistProfileAutocomplete'),
             'openers_text' : autocomplete_light.TextWidget('ArtistProfileAutocomplete'),
-            'venue' : ObjectOrTextWidget(autocomplete='UserAutocomplete'),
+            'venue_text' : autocomplete_light.TextWidget('UserAutocomplete'),
         }
