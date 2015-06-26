@@ -180,8 +180,10 @@
                           <b>{{ local_time(event.show.date.start,'fA') }}:</b>
                           {% if event.show.info.title %}
                             {{ event.show.info.title }}
-                          {% else %}
+                          {% elif event.show.info.headliner %}
                             {{ event.show.info.headliner }}
+                          {% else %}
+                            {{ event.show.info.headliner_text }}
                           {% endif %}
                         </span>
                       </a>
@@ -191,8 +193,10 @@
                         <b>{{ local_time(event.show.date.start,'fA') }}:</b>
                         {% if event.show.info.title %}
                           {{ event.show.info.title }}
-                        {% else %}
+                        {% elif event.show.info.headliner %}
                           {{ event.show.info.headliner }}
+                        {% else %}
+                          {{ event.show.info.headliner_text }}
                         {% endif %}
                       </a></li>
                     </div>
