@@ -12,7 +12,7 @@
 
 {% block header %}
   <div class="calendar-wrapper">
-    <h4>{% block toptitle %}{{ local_time(date,"Y") }}{% endblock %}</h4>
+    <h4>{% block toptitle %}{{ date|date("Y") }}{% endblock %}</h4>
     <div class="preiod-name">
       <div class="row no-gutter">
         <div class="col-xs-1 left">

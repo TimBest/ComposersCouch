@@ -1,4 +1,5 @@
 from django.core.urlresolvers import reverse
+from django.utils import timezone
 
 from annoying.functions import get_object_or_None
 from schedule.models import Event
@@ -51,6 +52,9 @@ def hide_deny(show, user):
         pass
     return None
 
+def make_naive(date):
+    return timezone.make_naive(date)
+
 ScheduleGlobals = {
     'querystring_for_date': querystring_for_date,
     'prev_url': prev_url,
@@ -58,4 +62,5 @@ ScheduleGlobals = {
     'has_event_for_show': has_event_for_show,
     'hide_confirm': hide_confirm,
     'hide_deny': hide_deny,
+    'make_naive': make_naive,
 }

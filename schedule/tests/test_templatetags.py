@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 
 from schedule.models import Show
-from schedule.templatetags.scheduletags import querystring_for_date, has_event_for_show
+from schedule.templatetags.ext import querystring_for_date, has_event_for_show
 
 
 class TestTemplateTags(TestCase):
