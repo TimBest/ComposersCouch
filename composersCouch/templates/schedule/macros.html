@@ -56,16 +56,12 @@
               {% if info.title %}
                 <h3>{{ info.title }}</h3>
               {% endif %}
-              {% if info.headliner %}
-                <h4>
-                  {% if info.headliner_id %}
-                    <a class="text-black" href="{{ url('artist:news', kwargs={'username':info.headliner.user.username}) }}">
-                      {{ info.headliner }}
-                    </a>
-                  {% else %}
-                    {{ info.headliner_text }}
-                  {% endif %}
-                </h4>
+              {% if info.headliner_id %}
+                <a class="text-black" href="{{ url('artist:news', kwargs={'username':info.headliner.user.username}) }}">
+                  <h4>{{ info.headliner }}</h4>
+                </a>
+              {% elif info.headliner_text %}
+                <h4>{{ info.headliner_text }}</h4>
               {% endif %}
               <div class="openers">
                 {# {% if info.opener.first %}
