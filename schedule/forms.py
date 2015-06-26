@@ -71,11 +71,11 @@ class ShowInfoForm(ModelForm):
         # user must be a participant in the evnet or request
         isParticipant = False
         try:
-            if self.cleaned_data.get('headliner_object').profile.user == self.user:
+            if self.cleaned_data.get('headliner').profile.user == self.user:
                 isParticipant = True
         except:
             pass
-        if self.cleaned_data.get('venue_object') == self.user:
+        if self.cleaned_data.get('venue') == self.user:
             isParticipant = True
         else:
             for o in self.cleaned_data.get('openers'):
