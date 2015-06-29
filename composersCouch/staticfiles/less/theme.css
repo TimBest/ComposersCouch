@@ -6905,6 +6905,14 @@ h1 {
     padding-right: 65px;
   }
 }
+.header.logged-out .container-fluid {
+  padding-right: 15px;
+}
+@media (min-width: 992px) {
+  .header.logged-out .container-fluid {
+    padding-right: 35px;
+  }
+}
 .navigation .container-fluid {
   padding-left: 15px;
 }

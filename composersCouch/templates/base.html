@@ -91,7 +91,7 @@
       </div>
     {% endif %}
     {% block overwriteHeader %}
-      <div class="header {% block headerClass %}{% endblock %}">
+      <div class="header {% if not request.user.is_authenticated() %} logged-out {% endif %} {% block headerClass %}{% endblock %}">
         <div class="container-fluid">
           {% block header %}{% endblock %}
         </div>
