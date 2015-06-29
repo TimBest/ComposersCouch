@@ -41,9 +41,9 @@
               {% endfor %}
             </p>
             {% if biography %}
-              {% with biography=biography|urlize|linebreaks|replace("&lt;br /&gt;", "<br/>")|safe %}
+              {% with biography=biography|urlize|linebreaks|replace("&lt;br /&gt;", "<br/>") %}
                 <p>
-                  {{ biography|truncate(455) }}
+                  {{ biography|truncate(455)|safe }}
                   {% if biography|truncate(455)|length != biography|truncate(456)|length %}
                     <a href="{{ url('artist:about', kwargs={'username':artist.profile.user.username}) }}#biography">Continue reading </a>
                     {% endif %}
