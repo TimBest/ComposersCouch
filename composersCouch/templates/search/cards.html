@@ -15,9 +15,36 @@
             </div>
           </div>
           <div class="col-sm-6">
-            <h3><a class="text-black" href="{{ home }}">
-              {{ name }}
-            </a></h3>
+            <h3>
+              <a class="text-black" href="{{ home }}">
+                {{ name }}
+              </a>
+            </h3>
+            <p>
+              {% for genre in profile.genre.all() %}
+                {% if loop.first %}<b>Genres</b>:{% else %},{% endif %}
+                <span> {{ genre }}</span>
+              {% endfor %}
+            </p>
+            {% if biography %}
+              {% with biography=biography|urlize|linebreaks|replace("&lt;br /&gt;", "<br/>") %}
+                <p>
+                  {{ biography|truncate(455)|safe }}
+                  {% if biography|truncate(455)|length != biography|truncate(460)|length %}
+                    <a href="{{ url('artist:about', kwargs={'username':profile.user.username}) }}#biography">
+                      Continue reading
+                    </a>
+                  {% endif %}
+                </p>
+              {% endwith %}
+            {% endif %}
+          </div>
+          <div class="col-sm-3">
+            {{ contact(contact_info=profile.contact_info) }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
             <div class="btn-group">
               <form method="POST" action="{{ url('follow') }}">
                 {% block csrf_token %}
@@ -32,27 +59,10 @@
               </form>
             </div>
             <div class="btn-group">
-              <a href="{{ url('request_write', kwargs={'username': profile.user.username}) }}" class="btn btn-sm btn-default">Request</a>
+              <a href="{{ url('request_write', kwargs={'username': profile.user.username}) }}" class="btn btn-sm btn-default">
+                Request
+              </a>
             </div>
-            <p>
-              {% for genre in profile.genre.all() %}
-                {% if loop.first %}Genres:{% else %},{% endif %}
-                <span> {{ genre }}</span>
-              {% endfor %}
-            </p>
-            {% if biography %}
-              {% with biography=biography|urlize|linebreaks|replace("&lt;br /&gt;", "<br/>") %}
-                <p>
-                  {{ biography|truncate(455)|safe }}
-                  {% if biography|truncate(455)|length != biography|truncate(456)|length %}
-                    <a href="{{ url('artist:about', kwargs={'username':artist.profile.user.username}) }}#biography">Continue reading </a>
-                    {% endif %}
-                </p>
-              {% endwith %}
-            {% endif %}
-          </div>
-          <div class="col-sm-3">
-            {{ contact(contact_info=profile.contact_info) }}
           </div>
         </div>
       </div>
