@@ -1,14 +1,13 @@
-{% autoescape off %}{% if request.date.start.day == request.date.end.day %}Request to play a show on {{ request.date.start|date:"F d" }}.{% else %}Request to play a show between {{ request.date.start|date:"D, F d" }} and {{ request.date.start|date:"F d" }}{% endifequal %}
+{% autoescape off %}{% if request.date.start.day == request.date.end.day %}Request to play a show on {{ request.date.start|date("F d") }}.{% else %}Request to play a show between {{ request.date.start|date("D, F d") }} and {{ request.date.start|date("F d") }}{% endif %}
 
 At:
-  {{ request.venue.participant.user.profile }} ({{ domain }}{{ request.venue.participant.user.profile.get_absolute_url }})
+  {{ request.venue().participant.user.profile }} ({{ domain }}{{ request.venue().participant.user.profile.get_absolute_url() }})
 
 With:
-  {% if request.headliner %}{{ request.headliner.participant.user.profile }} ({{ domain }}{{ request.participant.headliner.user.profile.get_absolute_url }}), {% endif %}{% for opener in request.openers %}{{ opener.participant.user.profile }} ({{ domain }}{{ opener.participant.user.profile.get_absolute_url }}){% endfor %}
+  {% if request.headliner() %}{{ request.headliner().participant.user.profile }} ({{ domain }}{{ request.participant.headliner().user.profile.get_absolute_url() }}), {% endif %}{% for opener in request.openers() %}{{ opener.participant.user.profile }} ({{ domain }}{{ opener.participant.user.profile.get_absolute_url() }}){% endfor %}
 
 
 {{ request.thread.latest_msg.body }}
-
 
 Sincerely,
 {{ request.thread.latest_msg.sender.profile }}{% endautoescape %}
