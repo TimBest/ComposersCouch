@@ -13,7 +13,7 @@
     {% if is_development %}
       {% stylesheet 'less' %}
     {% else %}
-      <link rel="stylesheet" href="{{ STATIC_URL }}css/style.min.css" >
+      <link rel="stylesheet" href="{{ static('css/style.min.css') }}" >
     {% endif %}
   </head>
   <body>
