@@ -1,6 +1,6 @@
 {% from "profile/macros.html" import mugshot %}
 {% from "schedule/macros.html" import day_calendar %}
-{% from "search/cards.html" import artist_card, venue_card %}
+{% from "search/cards.html" import artist_card, venue_card, fan_card %}
 
 
 {% macro public_request(request, publicRequest) -%}
@@ -46,37 +46,39 @@
   <div class="application">
     {% if application.applicant.profile.profile_type == 'm' %}
       {{ artist_card(request=request, artist=application.applicant.profile.artist_profile) }}
-    {% else %}
+    {% elif application.applicant.profile.profile_type == 'v' %}
       {{ venue_card(request=request, venue=application.applicant.profile.venueProfile) }}
+    {% else %}
+      {{ fan_card(request=request, fan=application.applicant.profile.fanProfile) }}
     {% endif %}
     {% if user == application.public_request.requester %}
-    <div class="row">
-      <div class="col-xs-6">
-        <a href="{{ url('application_view', kwargs={'thread_id':application.thread.id}) }}">
-          View Application
-        </a>
-      </div>
-      <div class="col-xs-6">
-        <div class="text-right">
-          <form method="POST" class="accept-form inline-block {% if application.approved %}hidden{% endif %}" action="{{ url('approve_public_request') }}">
-            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-            <input type="hidden" name="application" value="{{ application.id }}">
-            <button class="btn btn-success" type="submit">
-              <span class="fa fa-check" ></span> Accept
-            </button>
-          </form>
-          <form method="POST" class="decline-form inline-block {% if application.approved %}{% elif application.approved != None %}hidden{% endif %}" action="{{ url('deny_public_request') }}">
-            <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-            <input type="hidden" name="application" value="{{ application.id }}">
-            <button class="btn btn-danger" type="submit">
-              <span class="fa fa-ban" ></span> Decline
-            </button>
-          </form>
+      <div class="row">
+        <div class="col-xs-6">
+          <a href="{{ url('application_view', kwargs={'thread_id':application.thread.id}) }}">
+            View Application
+          </a>
+        </div>
+        <div class="col-xs-6">
+          <div class="text-right">
+            <form method="POST" class="accept-form inline-block {% if application.approved %}hidden{% endif %}" action="{{ url('approve_public_request') }}">
+              <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+              <input type="hidden" name="application" value="{{ application.id }}">
+              <button class="btn btn-success" type="submit">
+                <span class="fa fa-check" ></span> Accept
+              </button>
+            </form>
+            <form method="POST" class="decline-form inline-block {% if application.approved %}{% elif application.approved != None %}hidden{% endif %}" action="{{ url('deny_public_request') }}">
+              <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+              <input type="hidden" name="application" value="{{ application.id }}">
+              <button class="btn btn-danger" type="submit">
+                <span class="fa fa-ban" ></span> Decline
+              </button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
-  {% endif %}
-</div>
+    {% endif %}
+  </div>
 {%- endmacro %}
 
 {% macro accepted(is_accepted) -%}
@@ -193,5 +195,4 @@
       </div>
     </div>
   </div>
-
 {%- endmacro %}
