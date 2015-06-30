@@ -38,7 +38,7 @@
                 <div class="row no-gutter {% if today == loop.counter0 %}text-bold{% endif %}">
                   <div class="col-xs-4 left">{{ day }}</div>
                   {% if day.start and day.end %}
-                    <div class="col-xs-8 right">{{ day.start }} - {{ day.end }}</div>
+                    <div class="col-xs-8 right">{{ day.start|time('P') }} - {{ day.end|time('P') }}</div>
                   {% else %}
                     <div class="col-xs-8 right">Closed</div>
                   {% endif %}

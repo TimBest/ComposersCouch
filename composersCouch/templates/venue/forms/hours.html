@@ -19,6 +19,7 @@
   </div>
   {% for day, form in forms %}
     {{ non_field_errors(form) }}
+    <div style='display:none;'>{{ field(form.id) }}</div>
     <div class="row no-gutter">
       <div class="col-sm-2 left">{{ day }}</div>
       <div class="col-sm-5 left">{{ field(form.start, hide_label=True) }}</div>
