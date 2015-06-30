@@ -3,7 +3,7 @@
 {% from "utils/form_macros.html" import form as render_form %}
 
 
-{% macro news(post_form, photo_form) -%}
+{% macro news(post_form, photo_form, csrf_token) -%}
 <div class="panel panel-default">
   <form  method="post" id="post-form" enctype="multipart/form-data">
     <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
