@@ -1,7 +1,7 @@
 from annoying.functions import get_object_or_None
 from contact.models import Zipcode
-from easy_timezones.utils import get_ip_address_from_request
-from easy_timezones import middleware
+from timezones import middleware
+from timezones.utils import get_ip_address_from_request
 
 
 def get_location(request, code=None, attr='code'):

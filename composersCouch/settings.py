@@ -57,7 +57,7 @@ INSTALLED_APPS = (
     'audiofield',
     'contact',
     'customProfile',
-    'easy_timezones',
+    'timezones',
     'embed_video',
     'fan',
     'feeds',
@@ -85,7 +85,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'audiofield.middleware.threadlocals.ThreadLocals',
-    'easy_timezones.middleware.EasyTimezoneMiddleware',
+    'timezones.middleware.EasyTimezoneMiddleware',
     'pipeline.middleware.MinifyHTMLMiddleware',
 )
 

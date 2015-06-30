@@ -4,7 +4,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.conf import settings
 from django.utils import timezone
 
-from easy_timezones.utils import get_ip_address_from_request
+from timezones.utils import get_ip_address_from_request
 
 
 GEOIP_DATABASE = getattr(settings, 'GEOIP_DATABASE', None)
