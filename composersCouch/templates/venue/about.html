@@ -16,7 +16,7 @@
         {% endfor %}
       </div>
       <div class="col-xs-6 social-links text-right">
-        <a href="{{ url('artist:socialLinksForm') }}" class="{{ isEditable }}">Edit <span class="hidden-xs">Social Media Links</span></a>
+        <a href="{{ url('venue:socialLinksForm') }}" class="{{ isEditable }}">Edit <span class="hidden-xs">Social Media Links</span></a>
         {% if profile.social_links %}
           {% with social=profile.social_links %}
             {% if social.facebook %}<a href="{{ social.facebook }}" target="_blank" class="btn btn-facebook"><span class="fa fa-facebook"></span></a>{% endif %}
