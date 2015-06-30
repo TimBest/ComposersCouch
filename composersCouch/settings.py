@@ -47,7 +47,8 @@ INSTALLED_APPS = (
     'pagination',
     'social_auth',
     # depricated: will be removed after production database is migrated and migrations are reset
-    #'sorl.tumbnails'
+    'sorl.tumbnails',
+    'request',
     'storages',
     'stream_framework',
     'test_without_migrations',
@@ -66,7 +67,6 @@ INSTALLED_APPS = (
     'photos',
     'pipeline',
     'progressbarupload',
-    'request',
     'robots',
     'schedule',
     'search',
