@@ -46,8 +46,6 @@ INSTALLED_APPS = (
     'jinja2',
     'pagination',
     'social_auth',
-    # depricated: will be removed after production database is migrated and migrations are reset
-    'sorl.tumbnails',
     'request',
     'storages',
     'stream_framework',
