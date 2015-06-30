@@ -2,6 +2,7 @@
 {% from "schedule/macros.html" import show %}
 {% from "request/macros.html" import private_request %}
 
+
 {% block periodName %}
   <span class="hidden-xs">{{ date|date("l, F j") }}</span>
   <span class="visible-xs">{{ date|date("D, M j") }}</span>
@@ -15,7 +16,7 @@
     {% if filter == 'shows' %}
       {{ show(request=request, show=event.show) }}
     {% else %}
-      {{ private_request(request=request, private_request=event.thread.request) }}
+      {{ private_request(request=request, private_request=event.thread.request, csrf_token=csrf_token) }}
     {% endif %}
   {% else %}
     <div class="panel panel-default">

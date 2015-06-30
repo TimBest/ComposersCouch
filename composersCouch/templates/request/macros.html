@@ -42,7 +42,7 @@
   </div>
 {%- endmacro %}
 
-{% macro render_application(request, application) -%}
+{% macro render_application(request, application, csrf_token) -%}
   <div class="application">
     {% if application.applicant.profile.profile_type == 'm' %}
       {{ artist_card(request=request, artist=application.applicant.profile.artist_profile) }}
@@ -87,7 +87,7 @@
   {% endif %}
 {%- endmacro %}
 
-{% macro private_request(request, private_request) -%}
+{% macro private_request(request, private_request, csrf_token) -%}
   <div class="request">
     <div class="panel panel-default">
       <div class="panel-body">
@@ -174,14 +174,14 @@
         <div class="pull-right">
           <form method="POST" class="accept-form inline-block {{ hide_accept(private_request, request.user) }}" action="{{ url('request_accept') }}">
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-            <input type="hidden" name="private_request" value="{{ request.id }}">
+            <input type="hidden" name="private_request" value="{{ private_request.id }}">
             <button class="btn btn-success" type="submit">
               <span class="fa fa-check" ></span> Accept
             </button>
           </form>
           <form method="POST" class="decline-form inline-block {{ hide_decline(private_request, request.user) }}" action="{{ url('request_decline') }}">
             <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-            <input type="hidden" name="private_request" value="{{ request.id }}">
+            <input type="hidden" name="private_request" value="{{ private_request.id }}">
             <button class="btn btn-danger-inv" type="submit">
               <span class="fa fa-ban" ></span> Decline
             </button>

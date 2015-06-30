@@ -10,7 +10,7 @@
       {{ public_request(request=request, publicRequest=publicRequest) }}
       <div class="panel-footer">
         <h4>Applicant:</h4>
-        {{ render_application(request=request, application=application) }}
+        {{ render_application(request=request, application=application, csrf_token=csrf_token) }}
       </div>
     </div>
   </div>

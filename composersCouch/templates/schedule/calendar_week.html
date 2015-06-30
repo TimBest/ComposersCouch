@@ -27,7 +27,7 @@
             {% if filter == 'shows' %}
               {{ show(request=request, show=event.show) }}
             {% else %}
-              {{ private_request(request=request, private_request=event.thread.request) }}
+              {{ private_request(request=request, private_request=event.thread.request, csrf_token=csrf_token) }}
             {% endif %}
           {% else %}
             <p class="text-left">No {{ filter }}</p>

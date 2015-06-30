@@ -26,7 +26,7 @@
   <div class="messages">
     {% for p in participants %}
       <a href="{{ p.thread.get_absolute_url() }}" class="btn btn-link pull-right" >Veiw messages</a>
-      {{ private_request(request=request, private_request=p.thread.request) }}
+      {{ private_request(request=request, private_request=p.thread.request, csrf_token=csrf_token) }}
     {% else %}
       <div class="panel panel-default">
         <div class="panel-body">

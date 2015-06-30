@@ -3,6 +3,7 @@
 
 
 {% block from %}{% endblock %}
+
 {% block card %}
-  {{ private_request(request=request, private_request=thread.request) }}
+  {{ private_request(request=request, private_request=thread.request, csrf_token=csrf_token) }}
 {% endblock %}
