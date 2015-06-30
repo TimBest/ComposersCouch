@@ -1,15 +1,19 @@
 {% extends 'venue/forms/about_modal.html' %}
 
 
-
-{% block title %}Edit Seating{% endblock %}
+{% block formTitle %}
+  {% block title %}Edit Seating{% endblock %}
+{% endblock %}
 {% block seatingClass %}active{% endblock %}
 
 {% block formID %}seatingForm{% endblock %}
-{% block formTitle %}Edit Seating{% endblock %}
 {% block enctype %}multipart/form-data{% endblock %}
+
 {% block form %}
-    {{ render_form(seatingChartForm) }}
-    {{ render_form(seatingForm) }}
+  {{ render_form(seatingChartForm) }}
+  {{ render_form(seatingForm) }}
 {% endblock %}
-{% block extraSubmit %}{{ progress_bar() }}{% endblock %}
+
+{% block extraSubmit %}
+  {{ progress_bar() }}
+{% endblock %}
