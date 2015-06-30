@@ -1,29 +1,10 @@
 {% extends 'venue/detail.html' %}
 {% from "profile/pages.html" import news %}
-{% from "search/cards.html" import post_card %}
 
 
 {% block newsClass %}active{% endblock %}
 {% block dropdownTitle %}News{% endblock %}
 
 {% block panelBody %}
-  {% if request.user.is_authenticated() %}
-    {{ news(post_form=post_form, photo_form=photo_form, csrf_token=csrf_token) }}
-    <script>
-      {# variables for image select #}
-      var selectorId = "#id_photo";
-      var selectDiv  = "#div_id_photo";
-      var uploadDiv  = "#div_id_image";
-      {% if images %}
-        var images = true;
-      {% else %}
-        var images = false;
-      {% endif %}
-    </script>
-  {% endif %}
-  {% for activity in activities %}
-    {{ post_card(request=request, post=activity.post) }}
-  {% else %}
-    <p>No news to display.</p>
-  {% endfor %}
+  {{ news(request=request, post_form=post_form, photo_form=photo_form, images=images, csrf_token=csrf_token, activities=activities) }}
 {% endblock %}

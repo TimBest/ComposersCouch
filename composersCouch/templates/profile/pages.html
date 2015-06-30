@@ -1,37 +1,56 @@
 {% from "schedule/macros.html" import show %}
+{% from "search/cards.html" import post_card %}
 {% from "utils/macros.html" import image_select, paginate %}
 {% from "utils/form_macros.html" import form as render_form %}
 
 
-{% macro news(post_form, photo_form, csrf_token) -%}
-<div class="panel panel-default">
-  <form  method="post" id="post-form" enctype="multipart/form-data">
-    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
-    <div class="panel-body">
-      {{ render_form(post_form) }}
-      <div id="attach-photo-form">
-        {{ render_form(photo_form) }}
-        {% if images %}
-          {{ image_select(request=request, images=images, id="photo", label="Photo") }}
-        {% endif %}
-      </div>
-    </div>
-    <div class="panel-footer">
-      <div class="row no-gutter" >
-        <div class="col-xs-12 center" >
-          <button type="button" id="attach-photo" class="btn btn-default">
-            <span class='fa fa-camera'></span> Add Photo
-          </button>
-          <div class="pull-right">
-            <button type="submit" onclick="this.form.onsubmit(); return false; " class="btn btn-primary">
-              Post
-            </button>
+{% macro news(request, post_form, photo_form, images, csrf_token, activities) -%}
+  {% if request.user.is_authenticated() %}
+    <div class="panel panel-default">
+      <form  method="post" id="post-form" enctype="multipart/form-data">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+        <div class="panel-body">
+          {{ render_form(post_form) }}
+          <div id="attach-photo-form">
+            {{ render_form(photo_form) }}
+            {% if images %}
+              {{ image_select(request=request, images=images, id="photo", label="Photo") }}
+            {% endif %}
+          <script>
+            {# variables for image select #}
+            var selectorId = "#id_photo";
+            var selectDiv  = "#div_id_photo";
+            var uploadDiv  = "#div_id_image";
+            {% if images %}
+              var images = true;
+            {% else %}
+              var images = false;
+            {% endif %}
+          </script>
           </div>
         </div>
-      </div>
+        <div class="panel-footer">
+          <div class="row no-gutter" >
+            <div class="col-xs-12 center" >
+              <button type="button" id="attach-photo" class="btn btn-default">
+                <span class='fa fa-camera'></span> Add Photo
+              </button>
+              <div class="pull-right">
+                <button type="submit" onclick="this.form.onsubmit(); return false; " class="btn btn-primary">
+                  Post
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-  </form>
-</div>
+  {% endif %}
+  {% for activity in activities %}
+    {{ post_card(request=request, post=activity.post) }}
+  {% else %}
+    <p>No news to display.</p>
+  {% endfor %}
 {%- endmacro %}
 
 {% macro photos(request, images, isEditable='hidden') -%}
