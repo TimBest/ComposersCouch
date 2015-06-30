@@ -5,5 +5,5 @@
 {% block title %}{{ show.info.get_title }}{% endblock %}
 
 {% block header %}
-  {{ show(request=request, show=show) }}
+  {{ show(request=request, show=show, csrf_token=csrf_token) }}
 {% endblock %}

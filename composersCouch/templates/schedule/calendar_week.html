@@ -25,7 +25,7 @@
           </h4>
           {% for event in day.get_event_partials() %}
             {% if filter == 'shows' %}
-              {{ show(request=request, show=event.show) }}
+              {{ show(request=request, show=event.show, csrf_token=csrf_token) }}
             {% else %}
               {{ private_request(request=request, private_request=event.thread.request, csrf_token=csrf_token) }}
             {% endif %}

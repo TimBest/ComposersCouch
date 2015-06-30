@@ -1,4 +1,8 @@
 {% extends "threads/view.html" %}
+{% from "schedule/macros.html" import show %}
+
 
 {% block from %}{% endblock %}
-{% block card %}{% from "schedule/macros.html" import show %}{{ show(request=request, show=thread.show) }}{% endblock %}
+{% block card %}
+  {{ show(request=request, show=thread.show, csrf_token=csrf_token) }}
+{% endblock %}

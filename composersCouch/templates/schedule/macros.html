@@ -35,7 +35,7 @@
   </div>
 {%- endmacro %}
 
-{% macro show(show, request) -%}
+{% macro show(show, request, csrf_token) -%}
   {% with info=show.info %}
   <div class="show cards">
     <div class="panel panel-default">

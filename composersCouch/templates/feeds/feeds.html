@@ -70,7 +70,7 @@
     {% for s in shows %}
       {# hack to until show clean up is ensured #}
       {% if s.events.first %}
-        {{ show(request=request, show=s) }}
+        {{ show(request=request, show=s, csrf_token=csrf_token) }}
       {% endif %}
     {% else %}
       {{ empty_feed(request=request, feed_type="shows", following=following) }}
