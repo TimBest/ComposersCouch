@@ -78,9 +78,11 @@
             <div class="panel-body">
               {% if venueProfile.seating %}
                 {% with image=venueProfile.seating.seating_chart %}
+                  {% if image %}
                   <a class="thumb" rel='gallery-image[ilist]' href="{{ image.image.url }}">
                     <img class="preview" {% if image.title %} alt="{{ image.title }}" {% endif %} src="{{ image.image.url }}" width="120" height="120">
                   </a>
+                  {% endif %}
                 {% endwith %}
                 <p>Capacity: {{venueProfile.seating.capacity}}</p>
               {% endif %}
